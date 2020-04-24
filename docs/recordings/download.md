@@ -1,25 +1,11 @@
 # Download CDRs and Recordings
 
+## Request CDR Report
 
-Tee
-
-adoption rate within account.
-2000 useeer account. are 3 peoplee using Google Chrome.
-
-2-3 times.
-
-
-
-
-
-## Request
-
-1600 user accoount
-
-### General
+### Overview
 
 ```
-POST /api/v1/admin/accounts/15300001/json
+POST /api/v1/admin/accounts/{accountId}/json
 Authorization: bearer <myAccessToken>
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
@@ -94,15 +80,15 @@ Accept: application/json
 ```json
 [
   {
-    "uii":"202004220959490132100000055248",
+    "uii":"111111111111",
     "sourceType":"ACD-INBOUND",
-    "sourceGroupId":52532,
+    "sourceGroupId":22222,
     "sourceGroupName":"Demo Queues",
-    "sourceId":72870,
-    "sourceName":"Demo VF",
+    "sourceId":33333,
+    "sourceName":"Demo Source",
     "sourceDescription":null,
-    "ani":"6502700813",
-    "dnis":"4154948797",
+    "ani":"6505550100",
+    "dnis":"4155550100",
     "callStatus":"COMPLETE",
     "callResult":"CONNECTED",
     "queueTime":"4",
@@ -112,15 +98,15 @@ Accept: application/json
     "billingCode":null,
     "callNotes":null,
     "connectId":1364236,
-    "connectedName":"Smelik, Alex",
-    "connectedRoute":"16506662168*102",
+    "connectedName":"Smith, John",
+    "connectedRoute":"16505550100*102",
     "connectedDuration":15,
     "connectedDisposition":null,
     "finalDisposition":null,
-    "connectedTermParty":"Smelik Alex (shmeltex+15444@gmail.com)",
+    "connectedTermParty":"John Smith (john.smith@example.com)",
     "connectedTermReason":"EOC",
     "connectedExternId":"",
-    "recordingUrl":"https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?v=1&accountId=15300001&bucket=c02-recordings&region=us-east-1&compliance=false&file=15300001/202004/22/202004220959490132100000055248-1.WAV",
+    "recordingUrl":"https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?v=1&accountId=444444444444&bucket=c02-recordings&region=us-east-1&compliance=false&file=15300001/202004/22/11111111111111111111-1.WAV",
     "dialType":"N/A",
     "jsonResult":"",
     "callStartDts":"2020-04-22T13:59:49.000+0000",
