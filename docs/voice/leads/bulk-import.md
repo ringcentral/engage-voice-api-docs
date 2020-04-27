@@ -1,4 +1,4 @@
-# Batch Load Leads
+# Bulk Lead Import
 
 The Engage Voice API allows you to load one or multiple leads at a time. You can also load loads for immediate dialing at the top of the dialer cache or in normal priority.
 
@@ -30,7 +30,6 @@ Each load in the `uploadLeads` array consists of a lead with the following notab
 * `leadPhone`: this can be a single phone number or a pipe-deliminted field of multiple phone numbers. For US numbers, this is a 10 digit format including area code.
 
 The following is a full example:
-
 ```
 POST {baseURL}/api/admin/accounts/{accountId}/campaigns/{campaignId}/loader/direct
 Authorization: Bearer <yourAccessToken>
