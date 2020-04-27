@@ -1,0 +1,53 @@
+site_name: RingCentral Engage Developer Guide
+site_url: https://engage-api-docs.rtfd.org
+site_favicon: favicon.ico
+repo_url: https://github.com/ringcentral/engage-api-docs
+docs_dir: docs
+theme:
+  name: moonstone
+  custom_dir: 'theme/'
+  fluid_layout: True
+  suppress_nextprev: true
+  shortcuts:
+    - foo
+
+plugins:
+  - git-committers:
+      repository: ringcentral/engage-voice-api-docs
+      branch: master
+  - bootstrap-tables
+
+markdown_extensions:
+  - markdown.extensions.admonition
+  - pymdownx.details
+  - pymdownx.keys
+  - pymdownx.superfences
+  - codehilite:
+      linenums: "None"
+
+#extra_css: [extra.css]
+#extra_javascript: [fonts.js]
+pages:
+- 'Primary':
+  - 'Agents':
+    - 'Overview': voice/calls-recordings/index.md
+    - 'Getting Started':
+      - 'Ruby': voice/calls-recordings/quick-start/ruby.md
+  - 'Campaigns and Leads':
+    - 'Leads':
+      - 'Bulk Import Leads': voice/leads/bulk-import.md
+      - 'Searching Leads': voice/leads/quick-start/search-leads.md
+  - 'Call Details and Recordings':
+    - 'Overview': voice/reports/recordings.md
+  - 'Routing':
+    - 'Overview': digital/routing/index.md
+    - 'Getting Started':
+      - 'Node JS': digital/routing/quick-start/node.md
+      - 'PHP': digital/routing/quick-start/php.md
+      - 'Python': digital/routing/quick-start/python.md
+      - 'Ruby': digital/routing/quick-start/ruby.md
+- 'Secondary':
+  - 'Using the API':
+    - 'Obtaining a Token': voice/basics/auth-ringcentral.md
+    - 'Legacy Tokens': voice/basics/auth-legacy.md
+  - 'Embeddable': voice/embeddable/get-started.md
