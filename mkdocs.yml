@@ -29,23 +29,12 @@ markdown_extensions:
 #extra_javascript: [fonts.js]
 pages:
 - 'Primary':
-  - 'Agents':
-    - 'Overview': voice/calls-recordings/index.md
-    - 'Getting Started':
-      - 'Ruby': voice/calls-recordings/quick-start/ruby.md
   - 'Campaigns and Leads':
     - 'Leads':
       - 'Bulk Import Leads': voice/leads/bulk-import.md
-      - 'Searching Leads': voice/leads/quick-start/search-leads.md
+      - 'Searching Leads': voice/leads/search.md
   - 'Call Details and Recordings':
     - 'Overview': voice/reports/recordings.md
-  - 'Routing':
-    - 'Overview': digital/routing/index.md
-    - 'Getting Started':
-      - 'Node JS': digital/routing/quick-start/node.md
-      - 'PHP': digital/routing/quick-start/php.md
-      - 'Python': digital/routing/quick-start/python.md
-      - 'Ruby': digital/routing/quick-start/ruby.md
 - 'Secondary':
   - 'Using the API':
     - 'Obtaining a Token': voice/basics/auth-ringcentral.md
