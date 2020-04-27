@@ -14,8 +14,8 @@ If you would like to contribute to the RingCentral documentation effort, fork th
 ### Running ReadTheDocs Locally
 
 ```
-% git clone https://github.com/ringcentral/ringcentral-voice-api-docs.git
-% cd ringcentral-api-docs
+% git clone https://github.com/ringcentral/engage-voice-api-docs.git
+% cd engage-voice-api-docs
 % pip install mkdocs
 % pip install mkdocs-ringcentral
 % mkdocs serve
