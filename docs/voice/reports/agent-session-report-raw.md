@@ -4,7 +4,7 @@
 
 The agent Session Raw Report is available at the following endpoint:
 
-`accounts/{accountId}/reportsStreaming`
+`api/v1/admin/accounts/{accountId}/reportsStreaming`
 
 It takes a JSON request body with the following notable parameters. See the example below for more.
 
