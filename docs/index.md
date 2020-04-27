@@ -9,7 +9,8 @@ no_breadcrumb: true
   <p>The following Quick Start Guides have been created to assist developers in getting started in each of our major APIs:</p>
   <ul>
     <li><a href="./voice/leads/bulk-import/">Bulk Import and Sync Leads</a> using our <strong>Leads API</strong>.</li> 
-    <li><a href="./voice/reports/recordings/">Download Recordings</a> using our <strong>Call Details Report API</strong>.</li> 
+    <li><a href="./voice/reports/global-call-type-detail-report/">Download Call Details and Recordings</a> using our <strong>Reports API</strong>.</li> 
+    <li><a href="./voice/reports/agent-session-report-raw/">Agent Session Info</a> using our <strong>Reports API</strong>.</li> 
   </ul>
   <!--<p>Not a programmer? <a href="./basics/explorer/">Try out the API with no programming</a>.</p>-->
 </div>
