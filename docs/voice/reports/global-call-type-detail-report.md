@@ -2,7 +2,7 @@
 
 Call detail records (CDRs) and recordings are available via the Reports API, which contains URLs for call recordings in each call detail record.
 
-## Call Detail Records Request
+## Call Detail Records Report Request
 
 The call detail report a number of request properties that allow filtering results:
 

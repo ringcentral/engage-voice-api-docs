@@ -33,8 +33,9 @@ pages:
     - 'Leads':
       - 'Bulk Import Leads': voice/leads/bulk-import.md
       - 'Searching Leads': voice/leads/search.md
-  - 'Call Details and Recordings':
-    - 'Overview': voice/reports/recordings.md
+  - 'Reports':
+    - 'Agent Sessions': voice/reports/agent-session-report-raw.md
+    - 'Calls and Recordings': voice/reports/global-call-type-detail-report.md
 - 'Secondary':
   - 'Using the API':
     - 'Obtaining a Token': voice/basics/auth-ringcentral.md
