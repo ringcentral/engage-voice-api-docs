@@ -1,6 +1,6 @@
 # Call Details and Recordings
 
-Call detail records (CDRs) and recordings are available via the Reports API, which contains URLs for call recordings in each call detail record.
+Call detail records (CDRs) and recordings are available via the Global Call Type Detail Report which provides complete real-time data for all calls in Engage Voice. When recordings are available, media URL is proivded in the call detail record.
 
 ## Call Detail Records Report Request
 
