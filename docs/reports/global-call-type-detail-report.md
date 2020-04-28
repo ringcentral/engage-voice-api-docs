@@ -8,9 +8,9 @@ The call detail report a number of request properties that allow filtering resul
 
 | Property | Description |
 |-|-|
-| **reportType** | set this to `GLOBAL_CALL_TYPE_EXCEL`. This corresponds to the Global Call Type Detail real-time report in the analytics console. |
-| **startDate** | a start date is required. This should be in ISO-8601 format such as: `2020-04-22T00:00:00.000-0000`. |
-| **endDate** | field is optional and usess the same format as `startDate`. |
+| **`reportType`** | set this to `GLOBAL_CALL_TYPE_EXCEL`. This corresponds to the Global Call Type Detail real-time report in the analytics console. |
+| **`startDate`** | a start date is required. This should be in ISO-8601 format such as: `2020-04-22T00:00:00.000-0000`. |
+| **`endDate`** | field is optional and usess the same format as `startDate`. |
 
 Make an API request to the `accounts/{accountId}/json` endpoint as follows:
 
@@ -89,9 +89,9 @@ The call detail record provides 3 times for the call, and can be used to calcula
 
 | Property | Description |
 |-|-|
-| **callStartDts** | time when the call started |
-| **callEndDts** | time when call ended |
-| **connectedDts** | time when an agent was connected |
+| **`callStartDts`** | time when the call started |
+| **`callEndDts`** | time when call ended |
+| **`connectedDts`** | time when an agent was connected |
 
 Calculate the difference between `callStartDts` and `connectedDts` for the caller wait time.
 
@@ -101,8 +101,8 @@ Detailed phone number information also provided in the Call Detail Record includ
 
 | Property | Description |
 |-|-|
-| **ani** | (Automatic Number Identification - ANI): This indicates the caller's phone number. |
-| **dnis** | (Dialed Number Identification Service - DNIS): This number identifies the number dialed by the caller which can be used to identify the number when the agent is responding to calls on multiple numbers. |
+| **`ani`** | (Automatic Number Identification - ANI): This indicates the caller's phone number. |
+| **`dnis`** | (Dialed Number Identification Service - DNIS): This number identifies the number dialed by the caller which can be used to identify the number when the agent is responding to calls on multiple numbers. |
 
 ## Call Recordings
 
