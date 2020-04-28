@@ -16,13 +16,11 @@ It takes a JSON request body with the following notable parameters. See the exam
 | **`reportTypeName`** | set to `Agent_Session_Report_Raw`. |
 | **`reportCriteria.startTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
 | **`reportCriteria.endTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
-| **`reportCriteria.returnTypes`** | this sets the return report format. By default, CSV is returned. You can set this explicitly by using `CSV` and `XML` options. |
 
 ```bash tab="HTTP"
 POST /api/v1/admin/accounts/{accountId}/reportsStreaming
 Authorization: bearer <myAccessToken>
 Content-Type: application/json;charset=UTF-8
-Accept: application/json
 
 {
   "reportId":null,
@@ -48,7 +46,6 @@ Accept: application/json
     "timezoneName":"US/Arizona",
     "criteriaType":"CASPER_CRITERIA",
     "reportName":"Agent_Session_Report_Raw",
-    "returnType":"CSV",
     "schedule":{
       "repeatOption":"ONCE"
     },
