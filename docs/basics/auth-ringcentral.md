@@ -16,6 +16,8 @@ https://developers.ringcentral.com/guide/authentication
 
 Once you have a RingCentral Access Token, call the following Engage API to receive an Engage Bearer access token.
 
+=== "Request"
+
 ```http tab="Request"
 POST https://engage.ringcentral.com/api/auth/login/rc/accesstoken
 Content-Type: application/x-www-form-urlencoded
@@ -23,10 +25,14 @@ Content-Type: application/x-www-form-urlencoded
 rcAccessToken=<rcAccessToken>&rcTokenType=Bearer
 ```
 
+=== "cURL"
+
 ```bash tab="cURL"
 $ curl -XPOST https://engage.ringcentral.com/api/auth/login/rc/accesstoken \
 -d 'rcAccessToken=<rcAccessToken>'  -d 'rcTokenType=Bearer'
 ```
+
+=== Go
 
 ```go tab="Go"
 package main
