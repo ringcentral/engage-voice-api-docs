@@ -17,44 +17,45 @@ It takes a JSON request body with the following notable parameters. See the exam
 | **`reportCriteria.startTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
 | **`reportCriteria.endTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
 
-```bash tab="HTTP"
-POST /api/v1/admin/accounts/{accountId}/reportsStreaming
-Authorization: bearer <myAccessToken>
-Content-Type: application/json;charset=UTF-8
+=== "HTTP"
+    ```bash
+    POST /api/v1/admin/accounts/{accountId}/reportsStreaming
+    Authorization: bearer <myAccessToken>
+    Content-Type: application/json;charset=UTF-8
 
-{
-  "reportId":null,
-  "destination":null,
-  "delimiter":"COMMA",
-  "reportType":"CASPER_REPORT",
-  "cciReport":true,
-  "reportTypeName":"Agent_Session_Report_Raw",
-  "reportCriteria":{
-    "rollupAgent":"",
-    "agentTeams":[
+    {
+      "reportId":null,
+      "destination":null,
+      "delimiter":"COMMA",
+      "reportType":"CASPER_REPORT",
+      "cciReport":true,
+      "reportTypeName":"Agent_Session_Report_Raw",
+      "reportCriteria":{
+        "rollupAgent":"",
+        "agentTeams":[
 
-    ],
-    "secureAgentGroupIds":"",
-    "agentGroupIds":[
+        ],
+        "secureAgentGroupIds":"",
+        "agentGroupIds":[
 
-    ],
-    "secureAgentIds":"",
-    "agentIds":[
+        ],
+        "secureAgentIds":"",
+        "agentIds":[
 
-    ],
+        ],
 
-    "timezoneName":"US/Arizona",
-    "criteriaType":"CASPER_CRITERIA",
-    "reportName":"Agent_Session_Report_Raw",
-    "schedule":{
-      "repeatOption":"ONCE"
-    },
-    "accountIds":[
+        "timezoneName":"US/Arizona",
+        "criteriaType":"CASPER_CRITERIA",
+        "reportName":"Agent_Session_Report_Raw",
+        "schedule":{
+          "repeatOption":"ONCE"
+        },
+        "accountIds":[
 
-    ]
-  }
-}
-```
+        ]
+      }
+    }
+    ```
 
 ## Report Response
 

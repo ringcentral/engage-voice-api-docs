@@ -34,7 +34,8 @@ Each load in the `uploadLeads` array consists of a lead with the following notab
 | **leadPhone** | this can be a single phone number or a pipe-deliminted field of multiple phone numbers. For US numbers, this is a 10 digit format including area code. |
 
 The following is a full example:
-```
+
+```http
 POST {baseURL}/api/admin/accounts/{accountId}/campaigns/{campaignId}/loader/direct
 Authorization: Bearer <yourAccessToken>
 
@@ -84,8 +85,8 @@ Leads are uploaded per Campaign which requires a `campaignId`. The following two
 
 1. Call the Get Dial Groups API to gete a list of dial groups. Each dial group will have a `dialGroupId` property.
 
-`GET /api/admin/accounts/{accountId}/dialGroups`
+     `GET /api/admin/accounts/{accountId}/dialGroups`
 
 2. For the Dial Group of interest, call the Get Dial Group Campaigns API:
 
-`GET /api/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns`
+     `GET /api/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns`
