@@ -1,8 +1,8 @@
-# Agent Session Report Raw
+# Agent Session Report
 
 ## Report Request
 
-The agent Session Raw Report is available at the following endpoint:
+The Agent Sessions Report is a realtime report that is available at the following endpoint:
 
 `api/v1/admin/accounts/{accountId}/reportsStreaming`
 
@@ -10,11 +10,11 @@ It takes a JSON request body with the following notable parameters. See the exam
 
 | Property | Description |
 |-|-|
-| **reportType** | set this to `CASPER_REPORT`. |
-| **reportTypeName** | set this to `Agent_Session_Report_Raw`. |
-| **reportCriteria.startTimestamp** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
-| **reportCriteria.endTimestamp** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
-| **reportCriteria.returnTypes** | this sets the return report format. By default, CSV is returned. You can set this explicitly by using `CSV` and `XML` options. |
+| **`reportType`** | set to `CASPER_REPORT`. |
+| **`reportTypeName`** | set to `Agent_Session_Report_Raw`. |
+| **`reportCriteria.startTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
+| **`reportCriteria.endTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
+| **`reportCriteria.returnTypes`** | this sets the return report format. By default, CSV is returned. You can set this explicitly by using `CSV` and `XML` options. |
 
 ```bash tab="HTTP"
 POST /api/v1/admin/accounts/{accountId}/reportsStreaming

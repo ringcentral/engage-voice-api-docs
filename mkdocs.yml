@@ -34,7 +34,7 @@ pages:
       - 'Bulk Import Leads': voice/leads/bulk-import.md
       - 'Searching Leads': voice/leads/search.md
   - 'Reports':
-    - 'Agent Sessions': voice/reports/agent-session-report-raw.md
+    - 'Agent Sessions': voice/reports/agent-session-report.md
     - 'Calls and Recordings': voice/reports/global-call-type-detail-report.md
 - 'Secondary':
   - 'Using the API':
