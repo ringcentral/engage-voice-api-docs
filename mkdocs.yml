@@ -31,13 +31,13 @@ pages:
 - 'Primary':
   - 'Campaigns and Leads':
     - 'Leads':
-      - 'Bulk Import Leads': voice/leads/bulk-import.md
-      - 'Searching Leads': voice/leads/search.md
+      - 'Bulk Import Leads': leads/bulk-import.md
+      - 'Searching Leads': leads/search.md
   - 'Reports':
-    - 'Agent Sessions': voice/reports/agent-session-report.md
-    - 'Calls and Recordings': voice/reports/global-call-type-detail-report.md
+    - 'Agent Sessions': reports/agent-session-report.md
+    - 'Calls and Recordings': reports/global-call-type-detail-report.md
 - 'Secondary':
   - 'Using the API':
-    - 'Obtaining a Token': voice/basics/auth-ringcentral.md
-    - 'Legacy Tokens': voice/basics/auth-legacy.md
-  - 'Embeddable': voice/embeddable/get-started.md
+    - 'Obtaining a Token': basics/auth-ringcentral.md
+    - 'Legacy Tokens': basics/auth-legacy.md
+  - 'Embeddable': embeddable/get-started.md
