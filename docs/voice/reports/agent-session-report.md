@@ -2,7 +2,9 @@
 
 ## Report Request
 
-The Agent Sessions Report is a realtime report that is available at the following endpoint:
+The Agent Sessios Report provides an overview of agent activity for each agent logged in during the date range selected.
+
+It is available at the following endpoint:
 
 `api/v1/admin/accounts/{accountId}/reportsStreaming`
 
