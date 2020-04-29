@@ -11,7 +11,7 @@ To generate the API token, you would either use your own login, or create an "AP
 
 Get AuthToken for the user you would like to generate API token for (one time operation)
 
-```
+```http
 POST https://portal.vacd.biz/api/v1/auth/login
 Content-Type: application/x-www-form-urlencoded
 
@@ -30,7 +30,7 @@ In the result, you will see an authToken property. This is what you will use to 
 
 Generate a permanent API token using the following API call. Every time you run the method below, another API token will be created and returned.
 
-```
+```http
 POST https://portal.vacd.biz/api/v1/admin/token
 X-Auth-Token: {token}
 ```
@@ -49,7 +49,7 @@ If you lose track, you can always retrieve all of the permanent API tokens for a
 
 To list all existing API Tokens for a user:
 
-```
+```http
 GET https://portal.vacd.biz/api/v1/admin/token
 X-Auth-Token: {authOrApiToken}
 ```
@@ -58,7 +58,7 @@ X-Auth-Token: {authOrApiToken}
 
 If you are done with an API Token and no longer need it, or you feel it may have been compromised, you can delete an existing token as follows.
 
-```
+```http
 DELETE https://portal.vacd.biz/api/v1/admin/token/{apiToken}
 X-Auth-Token: {authTokenOrApiToken}
 ```
@@ -71,7 +71,7 @@ In the above request, you may use the auth token or API token the `X-Auth-Token`
 
 The following is an example Engage Voice API Call using a RingCentral Engage Access Token.
 
-```
+```http
 GET https://portal.vacd.biz/api/v1/admin/users
 X-Auth-Token: <rcEngageAPIToken>
 ```

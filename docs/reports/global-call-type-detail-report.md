@@ -14,27 +14,28 @@ The call detail report a number of request properties that allow filtering resul
 
 Make an API request to the `accounts/{accountId}/json` endpoint as follows:
 
-```bash tab="HTTP"
-POST /api/v1/admin/accounts/{accountId}/json
-Authorization: bearer <myAccessToken>
-Content-Type: application/json;charset=UTF-8
-Accept: application/json
+=== "HTTP"
+    ```bash
+    POST /api/v1/admin/accounts/{accountId}/json
+    Authorization: bearer <myAccessToken>
+    Content-Type: application/json;charset=UTF-8
+    Accept: application/json
 
-{
-	"reportType":"GLOBAL_CALL_TYPE_EXCEL",
-	"reportCriteria":{
-		"criteriaType":"GLOBAL_CALL_TYPE_CRITERIA",
-		"startDate":"2020-04-22T00:00:00.000-0000",
-		"containGates":true,
-		"containCampaigns":true,
-		"containIvrStudios":true,
-		"containCloudProfiles":true,
-		"containTracNumbers":true,
-		"containAgents":true,
-		"includeNoAnswers":false
-	}
-}
-```
+    {
+    	"reportType":"GLOBAL_CALL_TYPE_EXCEL",
+    	"reportCriteria":{
+    		"criteriaType":"GLOBAL_CALL_TYPE_CRITERIA",
+    		"startDate":"2020-04-22T00:00:00.000-0000",
+    		"containGates":true,
+    		"containCampaigns":true,
+    		"containIvrStudios":true,
+    		"containCloudProfiles":true,
+    		"containTracNumbers":true,
+    		"containAgents":true,
+    		"includeNoAnswers":false
+    	}
+    }
+    ```
 
 ## Call Detail Records Report Response
 
@@ -112,14 +113,15 @@ The call recording URLs can be secured using basic auth or accessible anonymousl
 
 An example recording media request follows:
 
-```tab="HTTP"
-GET https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?... \
-&file=.../11111111111111111111-1.WAV
-Authorization: Basic <base64-encoded-userrname-password>
-```
-
-```tab="cURL"
-curl https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?... \
-&file=.../11111111111111111111-1.WAV
--u {username}:{password}
-```
+=== "HTTP"
+    ```http
+    GET https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?... \
+    &file=.../11111111111111111111-1.WAV
+    Authorization: Basic <base64-encoded-userrname-password>
+    ```
+=== "cURL"
+    ```bash
+    > curl https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?... \
+         &file=.../11111111111111111111-1.WAV
+         -u {username}:{password}
+    ```

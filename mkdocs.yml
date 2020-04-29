@@ -21,9 +21,10 @@ markdown_extensions:
   - markdown.extensions.admonition
   - pymdownx.details
   - pymdownx.keys
-  - pymdownx.superfences
-  - codehilite:
-      linenums: "None"
+  - pymdownx.tabbed
+  - pymdownx.superfences:
+       disable_indented_code_blocks: true
+  - pymdownx.highlight
 
 #extra_css: [extra.css]
 #extra_javascript: [fonts.js]
