@@ -1,5 +1,5 @@
-site_name: RingCentral Engage Developer Guide
-site_url: https://engage-api-docs.rtfd.org
+site_name: RingCentral Engage Voice Developer Guide
+site_url: https://engage-voice-api-docs.rtfd.org
 site_favicon: favicon.ico
 repo_url: https://github.com/ringcentral/engage-voice-api-docs
 docs_dir: docs
