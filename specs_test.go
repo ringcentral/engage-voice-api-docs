@@ -22,7 +22,8 @@ func TestSpecs(t *testing.T) {
 		} else if tt.title != spec.Info.Title {
 			t.Errorf("openapi3.ReadAndValidateFile('%s') Want [%s] Got [%s]", tt.filepath, tt.title, spec.Info.Title)
 		} else {
-			t.Logf("SPEC_IS_VALID [%s] TITLE [%s]\n", tt.filepath, spec.Info.Title)
+			specmore := openapi3.SpecMore{Spec: spec}
+			t.Logf("SPEC_IS_VALID [%s] TITLE [%s] OP_COUNT [%d]\n", tt.filepath, spec.Info.Title, specmore.OperationsCount())
 		}
 	}
 }
