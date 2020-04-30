@@ -142,9 +142,9 @@ function list_campaigns(dialGroupId){
 ```
 
 ```python tab="Python"
-/****** In stall Python SDK wrapper **
-$ pip install engagevoice-sdk-wrapper
-*************************************/
+#### In stall Python SDK wrapper ####
+# $ pip install engagevoice-sdk-wrapper
+#####################################
 
 from engagevoice.sdk_wrapper import *
 
@@ -166,7 +166,7 @@ def list_campaigns(dialGroupId):
         endpoint = 'admin/accounts/~/dialGroups/%s/campaigns' % (dialGroupId)
         response = ev.get(endpoint)
         jsonObj = json.loads(response)
-        print (response)
+        print (jsonObj)
     except Exception as e:
         print (e)
 
@@ -181,9 +181,9 @@ except Exception as e:
 ```
 
 ```php tab="PHP"
-/****** In stall PHP SDK wrapper **
+/************ In stall PHP SDK wrapper **************
 $ composer require engagevoice-sdk-wrapper:dev-master
-*************************************/
+*****************************************************/
 
 <?php
 require('vendor/autoload.php');
