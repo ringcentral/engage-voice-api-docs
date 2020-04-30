@@ -1,6 +1,6 @@
 # Bulk Lead Import
 
-The Engage Voice API allows you to load one or multiple leads at a time. You can also load loads for immediate dialing at the top of the dialer cache or in normal priority.
+The Engage Voice API allows you to load one or multiple leads at a time. You can also load leads for immediate dialing at the top of the dialer cache or in normal priority.
 
 Use the following endpoint with the JSON body described below.
 
@@ -81,12 +81,143 @@ Authorization: Bearer <yourAccessToken>
 
 ## Enumerating Campaigns
 
-Leads are uploaded per Campaign which requires a `campaignId`. The following two API calls will enable enumerating the account's campign list.
+Leads are uploaded per Campaign which requires a `campaignId`. The following two API calls will enable enumerating the account's campaign list.
 
-1. Call the Get Dial Groups API to gete a list of dial groups. Each dial group will have a `dialGroupId` property.
+1. Call the Get Dial Groups API to get a list of dial groups. Each dial group will have a `dialGroupId` property.
 
      `GET /api/admin/accounts/{accountId}/dialGroups`
 
 2. For the Dial Group of interest, call the Get Dial Group Campaigns API:
 
      `GET /api/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns`
+
+## Sample Code: Enumerating Campaigns
+
+The following code sample shows how to list all campaigns of a dial group.
+
+```javascript tab="Node JS"
+/****** In stall Node JS SDK wrapper *******
+$ npm install engagevoice-sdk-wrapper --save
+*******************************************/
+
+const EngageVoice = require('engagevoice-sdk-wrapper')
+
+var ev = new EngageVoice.RestClient()
+
+ev.login("legacy-username", "legacy-password", "", function(err, response){
+    if (err)
+      console.log(err)
+    else{
+      list_account_dial_groups()
+    }
+})
+
+function list_account_dial_groups(){
+    var endpoint = 'admin/accounts/~/dialGroups'
+    ev.get(endpoint, null, function(err, response){
+        if (err){
+            console.log(err)
+        }else {
+            var jsonObj = JSON.parse(response)
+            for (var item of jsonObj){
+              console.log(item)
+              console.log("======")
+              list_campaigns(item.dialGroupId)
+            }
+        }
+    })
+}
+
+function list_campaigns(dialGroupId){
+    var endpoint = `admin/accounts/~/dialGroups/${dialGroupId}/campaigns`
+    ev.get(endpoint, null, function(err, response){
+        if (err){
+            console.log(err)
+        }else {
+            var jsonObj = JSON.parse(response)
+            console.log(jsonObj)
+        }
+    })
+}
+```
+
+```python tab="Python"
+/****** In stall Python SDK wrapper **
+$ pip install engagevoice-sdk-wrapper
+*************************************/
+
+from engagevoice.sdk_wrapper import *
+
+def list_account_dial_groups():
+    try:
+        endpoint = "admin/accounts/~/dialGroups"
+        response = ev.get(endpoint)
+        jsonObj = json.loads(response)
+        for item in jsonObj:
+            print (item)
+            print ("======")
+            list_campaigns(item['dialGroupId'])
+    except Exception as e:
+        print (e)
+
+
+def list_campaigns(dialGroupId):
+    try:
+        endpoint = 'admin/accounts/~/dialGroups/%s/campaigns' % (dialGroupId)
+        response = ev.get(endpoint)
+        jsonObj = json.loads(response)
+        print (response)
+    except Exception as e:
+        print (e)
+
+
+ev = RestClient()
+try:
+    resp = ev.login("legacy-username", "legacy-password")
+    if resp:
+        list_account_dial_groups()
+except Exception as e:
+    print (e)
+```
+
+```php tab="PHP"
+/****** In stall PHP SDK wrapper **
+$ composer require engagevoice-sdk-wrapper:dev-master
+*************************************/
+
+<?php
+require('vendor/autoload.php');
+
+$ev = new EngageVoiceSDKWrapper\RestClient();
+try{
+    $ev->login("john.wang@ringcentral.com", "gZjEBp8drrmPQden", null, function($response){
+      list_account_dial_groups();
+    });
+}catch (Exception $e) {
+    print $e->getMessage();
+}
+
+function list_account_dial_groups(){
+    global $ev;
+    $endpoint = "admin/accounts/~/dialGroups";
+    try{
+        $resp = $ev->get($endpoint);
+        $jsonObj = json_decode($resp);
+        foreach ($jsonObj as $item){
+          print(json_encode($item)."\r\n");
+          print ("======\r\n");
+          list_campaigns($item->dialGroupId);
+          print ("======\r\n");
+        }
+    }catch (Exception $e) {
+        print $e->getMessage();
+    }
+}
+
+function list_campaigns($dialGroupId){
+    global $ev;
+    $endpoint = 'admin/accounts/~/dialGroups/'.$dialGroupId.'/campaigns';
+    $resp = $ev->get($endpoint);
+    print ($resp."\r\n");
+}
+```
