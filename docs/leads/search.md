@@ -22,7 +22,7 @@ Use the Search Leads APIs to search leads.
 
 ```javascript tab="Node JS"
 
-    /****** In stall Node JS SDK wrapper *******
+    /****** Install Node JS SDK wrapper *******
     $ npm install engagevoice-sdk-wrapper --save
     *******************************************/
 
@@ -55,7 +55,7 @@ Use the Search Leads APIs to search leads.
 ```
 
 ```python tab="Python"
-    /****** In stall Python SDK wrapper **
+    /****** Install Python SDK wrapper **
     $ pip install engagevoice-sdk-wrapper
     *************************************/
 
@@ -81,7 +81,7 @@ Use the Search Leads APIs to search leads.
 ```
 
 ```php tab="PHP"
-    /****** In stall PHP SDK wrapper **
+    /****** Install PHP SDK wrapper **
     $ composer require engagevoice-sdk-wrapper:dev-master
     *************************************/
 

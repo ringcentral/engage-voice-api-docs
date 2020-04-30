@@ -96,7 +96,7 @@ Leads are uploaded per Campaign which requires a `campaignId`. The following two
 The following code sample shows how to list all campaigns of a dial group.
 
 ```javascript tab="Node JS"
-/****** In stall Node JS SDK wrapper *******
+/****** Install Node JS SDK wrapper *******
 $ npm install engagevoice-sdk-wrapper --save
 *******************************************/
 
@@ -142,7 +142,7 @@ function list_campaigns(dialGroupId){
 ```
 
 ```python tab="Python"
-#### In stall Python SDK wrapper ####
+#### Install Python SDK wrapper ####
 # $ pip install engagevoice-sdk-wrapper
 #####################################
 
@@ -181,7 +181,7 @@ except Exception as e:
 ```
 
 ```php tab="PHP"
-/************ In stall PHP SDK wrapper **************
+/************ Install PHP SDK wrapper **************
 $ composer require engagevoice-sdk-wrapper:dev-master
 *****************************************************/
 
@@ -190,7 +190,7 @@ require('vendor/autoload.php');
 
 $ev = new EngageVoiceSDKWrapper\RestClient();
 try{
-    $ev->login("john.wang@ringcentral.com", "gZjEBp8drrmPQden", null, function($response){
+    $ev->login("legacy-username", "legacy-password", null, function($response){
       list_account_dial_groups();
     });
 }catch (Exception $e) {
