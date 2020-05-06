@@ -117,7 +117,7 @@ An example recording media request follows:
     ```http
     GET https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?... \
     &file=.../11111111111111111111-1.WAV
-    Authorization: Basic <base64-encoded-userrname-password>
+    Authorization: Basic <base64-encoded-username-password>
     ```
 === "cURL"
     ```bash
