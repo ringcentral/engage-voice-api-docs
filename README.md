@@ -45,5 +45,5 @@ If you wish to change the specs being tested edit the [specs_test.go](specs_test
  [docs-status-link]: https://readthedocs.org/projects/engage-voice-api-docs/builds/
  [specs-status-svg]: https://travis-ci.com/ringcentral/engage-voice-api-docs.svg?branch=master
  [specs-status-link]: https://travis-ci.com/ringcentral/engage-voice-api-docs
- [docs-svg]: https://img.shields.io/badge/docs-readthedocs-blue.svg
+ [docs-svg]: https://img.shields.io/badge/docs-preview-blue.svg
  [docs-link]: https://engage-voice-api-docs.readthedocs.io/
