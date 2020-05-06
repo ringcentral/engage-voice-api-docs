@@ -5094,6 +5094,10 @@
         "in": "header",
         "name": "X-Auth-Token",
         "type": "apiKey"
+      },
+      "BearerAuth": {
+        "scheme": "bearer",
+        "type": "http"
       }
     }
   },
@@ -6030,7 +6034,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Creates a manual agent call",
         "tags": [
           "Active Call"
@@ -6134,7 +6145,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Returns a listing of current active calls for a given product on an account",
         "tags": [
           "Active Call"
@@ -6208,7 +6226,14 @@
             "description": "Internal Server Error"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Provides support for adding sessions to an active call.",
         "tags": [
           "Active Call"
@@ -6292,7 +6317,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Sets the call disposition for either INBOUND or OUTBOUND calls and releases the agent from PD state",
         "tags": [
           "Active Call"
@@ -6340,7 +6372,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Terminates an active call",
         "tags": [
           "Active Call"
@@ -6397,7 +6436,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Terminates an active session",
         "tags": [
           "Active Call"
@@ -6454,7 +6500,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Provides support for toggling call recording on/off for an active call",
         "tags": [
           "Active Call"
@@ -6530,7 +6583,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Returns a listing of agent groups for an account",
         "tags": [
           "Agent"
@@ -6581,7 +6641,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Creates a single new agent group for an account",
         "tags": [
           "Agent"
@@ -6627,7 +6694,14 @@
             "description": "Forbidden"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Deletes an agent group for an account",
         "tags": [
           "Agent"
@@ -6688,7 +6762,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Returns a listing of agent groups for an account",
         "tags": [
           "Agent"
@@ -6752,7 +6833,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Updates an agent group for an account",
         "tags": [
           "Agent"
@@ -6808,7 +6896,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Returns a listing of agents for an agent group",
         "tags": [
           "Agent"
@@ -6872,7 +6967,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Creates a single agent for an agent group",
         "tags": [
           "Agent"
@@ -6939,7 +7041,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Updates a listing of agents for an agent group",
         "tags": [
           "Agent"
@@ -6995,7 +7104,14 @@
             "description": "Forbidden"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Deletes an agent for an agent group",
         "tags": [
           "Agent"
@@ -7059,7 +7175,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Returns a single agent for an agent group",
         "tags": [
           "Agent"
@@ -7136,7 +7259,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Updates a single agent for an agent group",
         "tags": [
           "Agent"
@@ -7206,6 +7336,11 @@
             "description": "Success"
           }
         },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Search Leads",
         "tags": [
           "Campaign Lead"
@@ -7241,6 +7376,11 @@
             "description": "Success"
           }
         },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Get Lead States",
         "tags": [
           "Campaign Lead"
@@ -7276,6 +7416,11 @@
             "description": "Success"
           }
         },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Get Systems Dispositions",
         "tags": [
           "Campaign Lead"
@@ -7371,6 +7516,11 @@
             "description": "Success"
           }
         },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Patch Campaign Lead",
         "tags": [
           "Campaign"
@@ -7464,6 +7614,11 @@
             "description": "Success"
           }
         },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Update Campaign Lead",
         "tags": [
           "Campaign"
@@ -7514,6 +7669,11 @@
             "description": "Success"
           }
         },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Upload Leads",
         "tags": [
           "Campaign"
@@ -7549,6 +7709,11 @@
             "description": "Success"
           }
         },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Get Available Countries",
         "tags": [
           "Country"
@@ -7614,7 +7779,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Returns a listing of dial groups for an account",
         "tags": [
           "Outbound"
@@ -7665,7 +7837,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Creates a dial group for an account",
         "tags": [
           "Outbound"
@@ -7741,7 +7920,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Returns a listing of dial groups with associated campaigns for an account",
         "tags": [
           "Outbound"
@@ -7787,7 +7973,14 @@
             "description": "Forbidden"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Deletes a dial group for an account",
         "tags": [
           "Outbound"
@@ -7838,7 +8031,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Returns a dial group for an account",
         "tags": [
           "Outbound"
@@ -7902,7 +8102,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Updates a dial group for an account",
         "tags": [
           "Outbound"
@@ -7968,7 +8175,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Assigns a listing of agents to a dial group",
         "tags": [
           "Outbound"
@@ -8044,7 +8258,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Returns a listing of all agents assigned to a dial group",
         "tags": [
           "Outbound"
@@ -8120,7 +8341,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Returns a listing of campaigns for a dial group",
         "tags": [
           "Outbound"
@@ -8181,7 +8409,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Returns a campaign for a dial group",
         "tags": [
           "Outbound"
@@ -8237,7 +8472,14 @@
             "description": "Forbidden"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Deletes a campaign for a dial group",
         "tags": [
           "Outbound"
@@ -8298,7 +8540,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Returns a campaign for a dial group",
         "tags": [
           "Outbound"
@@ -8372,7 +8621,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Updates a campaign for a dial group",
         "tags": [
           "Outbound"
@@ -8428,6 +8684,11 @@
             "description": "Created"
           }
         },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Clear Campaign Cache",
         "tags": [
           "Dial Group"
@@ -8472,7 +8733,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "getAgentStates",
         "tags": [
           "Real Time Reporting"
@@ -8517,7 +8785,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "getChatStats",
         "tags": [
           "Real Time Reporting"
@@ -8562,7 +8837,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "getAcdStats",
         "tags": [
           "Real Time Reporting"
@@ -8607,7 +8889,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "getIvrStats",
         "tags": [
           "Real Time Reporting"
@@ -8652,7 +8941,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "getOutboundStats",
         "tags": [
           "Real Time Reporting"
@@ -8701,7 +8997,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Streams back an excel or csv file",
         "tags": [
           "Reporting"
@@ -8755,7 +9058,14 @@
             "description": "Not Found"
           }
         },
-        "security": [],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Returns a report critera definition for a report type",
         "tags": [
           "Reporting"
@@ -8885,6 +9195,11 @@
             "description": "Success"
           }
         },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
         "summary": "Get Users",
         "tags": [
           "User"
@@ -9012,6 +9327,58 @@
     },
     {
       "name": "User"
+    }
+  ],
+  "x-tag-groups": [
+    {
+      "name": "Calls",
+      "popular": true,
+      "tags": [
+        "Active Call",
+        "Dial Group",
+        "Outbound"
+      ]
+    },
+    {
+      "name": "Campaigns",
+      "popular": true,
+      "tags": [
+        "Campaign",
+        "Campaign Lead"
+      ]
+    },
+    {
+      "name": "Reports",
+      "popular": true,
+      "tags": [
+        "Reporting",
+        "Real Time Reporting"
+      ]
+    },
+    {
+      "name": "Authentication",
+      "popular": false,
+      "tags": [
+        "Authentication",
+        "Password Reset",
+        "Token",
+        "OAuth"
+      ]
+    },
+    {
+      "name": "Account",
+      "popular": false,
+      "tags": [
+        "Agent",
+        "User"
+      ]
+    },
+    {
+      "name": "Utilities",
+      "popular": false,
+      "tags": [
+        "Country"
+      ]
     }
   ]
 }
