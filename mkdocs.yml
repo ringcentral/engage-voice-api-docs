@@ -32,6 +32,10 @@ pages:
 - 'Primary':
   - 'Campaigns and Leads':
     - 'Leads':
+      - 'Quick start':
+        - 'Node JS': leads/quick-start/node.md
+        - 'Python': leads/quick-start/python.md
+        - 'PHP': leads/quick-start/php.md
       - 'Bulk Import Leads': leads/bulk-import.md
       - 'Searching Leads': leads/search.md
   - 'Reports':
