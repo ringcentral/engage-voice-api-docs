@@ -12,7 +12,7 @@ The call detail report a number of request properties that allow filtering resul
 | **`startDate`** | a start date is required. This should be in ISO-8601 format such as: `2020-04-22T00:00:00.000-0000`. |
 | **`endDate`** | field is optional and usess the same format as `startDate`. |
 
-Make an API request to the `accounts/{accountId}/json` endpoint as follows:
+Make an API request to the `api/v1/admin/accounts/{accountId}/json` endpoint as follows:
 
 === "HTTP"
     ```bash
