@@ -13,9 +13,11 @@ Managing agents and automatically syncing them with your user management tools c
 * `GET /voice/api/v1/admin/accounts/{accountId}/ringcentral/extensions`
 * `GET /voice/api/v1/admin/accounts/{accountId}/auxStates/?activeOnly=true`
 
-### UI to API Property Mapping
+### API to UI Property Mapping
 
-| UI Category | UI Property | API Property | Description |
+The following API properties are displayed in the Create Agent form in the Engage Voice Admin Console.
+
+| API Property | UI Category | UI Property | Description |
 |-|-|-|-|
 | **`firstName`** | Agent Information | First Name | |
 | **`lastName`** | Agent Information | Last Name | |
