@@ -29,7 +29,9 @@ markdown_extensions:
 #extra_css: [extra.css]
 #extra_javascript: [fonts.js]
 pages:
-- 'Primary':
+- 'Primary'
+  - 'Agents':
+    - 'Agent Basics': agents/agent-basics.md
   - 'Campaigns and Leads':
     - 'Leads':
       - 'Quick start':
