@@ -8,7 +8,7 @@ Managing agents and automatically syncing them with your user management tools c
 
 * `POST /voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents`
 
-Supporting APIs
+#### Supporting APIs
 
 * `GET /voice/api/v1/admin/accounts/{accountId}/ringcentral/extensions`
 * `GET /voice/api/v1/admin/accounts/{accountId}/auxStates/?activeOnly=true`
@@ -17,31 +17,31 @@ Supporting APIs
 
 | UI Category | UI Property | API Property | Description |
 |-|-|-|-|
-| Agent Information | First Name | **`firstName`** | |
-| Agent Information | Last Name | **`lastName`** | |
-| Agent Information | Email | **`email`** | |
-| Agent Information | External Agent ID | **`externalAgentId`** | |
-| Agent Information | Location | **`location`** | |
-| Agent Information | Team | **`team`** | |
-| Agent Information | RC Office extension | **`rcUserId`** | Office extensionId. Retrieve a list using `/api/v1/admin/accounts/{accountId}/ringcentral/extensions` |
-| Login Settings | Allow Login | **`allowLoginControl`** | `true` |
-| Login Settings | Allow Login | **`allowLoginUpdates`** | `true` |
-| Login Settings | Username | **`username`** | |
-| Login Settings | Password | **`password`** | |
-| Login Settings | Agent Type | **`agentType`** | |
-| Login Settings | Agent Rank | **`agentRank`** | `0` - Lowest |
-| Login Settings | Initial State | **`initLoginBaseState`** | `AVAILABLE` |
-| Login Settings | Initial State | **`initLoginBaseStateId`** | `11786` |
-| Login Settings | Ghost RNA Action | **`ghostRnaAction`** | `AVAILABLE` |
-| Login Settings | Default Dial Group | **`dialGroupAssignments`** | |
-| Login Settings | Manual Outbound Default Queue Assignment | **`manualOutboundDefaultGate`** | `{id: 72899}` |
-| Phone Settings | Enable Softphone | **`enableSoftphone`** | `true` |
-| Phone Settings | Default Route | **`defaultLoginDest`** | |
-| Phone Settings | Alt. Default Route | **`altDefaultLoginDest`** | |
-| Phone Settings | Phone Login PIN | **`phoneLoginPin`** | |
-| Phone Settings | Direct Dial Extension | **`directAgentExtension`** | |
-| Phone Settings | Manual Outbound Default Caller ID | **`manualOutboundDefaultCallerId`** | |
-| Chat Settings | Max Number of Concurrent Chats | **`maxChats`** | |
+| **`firstName`** | Agent Information | First Name | |
+| **`lastName`** | Agent Information | Last Name | |
+| **`email`** | Agent Information | Email | |
+| **`externalAgentId`** | Agent Information | External Agent ID | |
+| **`location`** | Agent Information | Location | |
+| **`team`** | Agent Information | Team | |
+| **`rcUserId`** | Agent Information | RC Office extension | Office extensionId. Retrieve a list using `/api/v1/admin/accounts/{accountId}/ringcentral/extensions` |
+| **`allowLoginControl`** | Login Settings | Allow Login | `true` |
+| **`allowLoginUpdates`** | Login Settings | Allow Login | `true` |
+| **`username`** | Login Settings | Username | |
+| **`password`** | Login Settings | Password | |
+| **`agentType`** | Login Settings | Agent Type | |
+| **`agentRank`** | Login Settings | Agent Rank | `0` - Lowest |
+| **`initLoginBaseState`** | Login Settings | Initial State | `AVAILABLE` |
+| **`initLoginBaseStateId`** | Login Settings | Initial State | `11786` |
+| **`ghostRnaAction`** | Login Settings | Ghost RNA Action | `AVAILABLE` |
+| **`dialGroupAssignments`** | Login Settings | Default Dial Group | |
+| **`manualOutboundDefaultGate`** | Login Settings | Manual Outbound Default Queue Assignment | `{id: 72899}` |
+| **`enableSoftphone`** | Phone Settings | Enable Softphone | `true` |
+| **`defaultLoginDest`** | Phone Settings | Default Route | |
+| **`altDefaultLoginDest`** | Phone Settings | Alt. Default Route | |
+| **`phoneLoginPin`** | Phone Settings | Phone Login PIN | |
+| **`directAgentExtension`** | Phone Settings | Direct Dial Extension | |
+| **`manualOutboundDefaultCallerId`** | Phone Settings | Manual Outbound Default Caller ID | |
+| **`maxChats`** | Chat Settings | Max Number of Concurrent Chats | |
 
 ### Example Request
 
