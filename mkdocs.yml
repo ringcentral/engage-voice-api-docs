@@ -53,12 +53,22 @@ pages:
       - 'Searching Leads': dialing/leads/search.md
   - 'Users':
     - 'Agents':
-      - 'Agents': users/agents/index.md
+      - 'Overview': users/agents/index.md
+      - 'Agents': users/agents/agents.md
       - 'Agent Groups': users/agents/agent-groups.md
 
 - 'Secondary':
   - 'Using the API':
-    - 'Obtaining a Token': basics/auth-ringcentral.md
-    - 'Legacy Tokens': basics/auth-legacy.md
+    - 'Fundamentals':
+      - 'Methods, endpoints and parameters': 'basics/uris.md'
+      #- 'App permissions': 'basics/permissions.md'
+      #- 'Rate limits': 'basics/rate-limits.md'
+    #- 'Obtaining a Token': basics/auth-ringcentral.md
+    #- 'Legacy Tokens': basics/auth-legacy.md
+  - 'Authentication':
+    - 'Overview': authentication/index.md
+    - 'RingCentral Office Token': authentication/auth-ringcentral.md
+    - 'Legacy': authentication/auth-legacy.md
+  - 'SDKs': sdks/index.md
   - 'Embeddable':
     - 'Getting Started': embeddable/get-started.md
