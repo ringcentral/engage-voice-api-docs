@@ -1,8 +1,8 @@
 # Agent Basics
 
-Managing agents and automatically syncing them with your user management tools can be automated via the API. This article covers the basics oof creating, reading, updating deleting Agents.
+Managing agents and automatically syncing them with your user management tools can be automated via the API. This article covers the basics of creating, reading, updating deleting Agents.
 
-Of note, Agents must be associated with an Agent Group so yuo neeed to have at least one Agent Group configured before managing Agents. See [Agent Groups](../agent-groups) for more.
+Of note, Agents must be associated with an Agent Group so you need to have at least one Agent Group configured before managing Agents. See [Agent Groups](../agent-groups) for more.
 
 ## Create Agent
 
@@ -109,7 +109,7 @@ The following propereties can also be set. Default values used by the UI are pre
 | **`allowManualPass`** | `true` | |
 | **`allowEndcallforeveryone`** | `true` | |
 | **`allowHistoricalDialing`** | `true` | |
-  
+
 ### Example Request
 
 Be sure to sure the proper `BASE_URL` and authorization header for your deployment.
