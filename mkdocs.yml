@@ -35,6 +35,9 @@ pages:
       - 'Agent Session': analytics/reports/agent-session-report.md
       - 'Global Call Type Detail': analytics/reports/global-call-type-detail-report.md
   - 'Dialing':
+    # - 'Active Calls':
+    # - 'Campaigns':
+    #   - 'Queues':
     - 'Leads':
       - 'Quick start':
         - 'Node JS': dialing/leads/quick-start/node.md
