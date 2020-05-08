@@ -37,11 +37,11 @@ pages:
   - 'Dialing':
     - 'Leads':
       - 'Quick start':
-        - 'Node JS': leads/quick-start/node.md
-        - 'Python': leads/quick-start/python.md
-        - 'PHP': leads/quick-start/php.md
-      - 'Bulk Import Leads': leads/bulk-import.md
-      - 'Searching Leads': leads/search.md
+        - 'Node JS': dialing/leads/quick-start/node.md
+        - 'Python': dialing/leads/quick-start/python.md
+        - 'PHP': dialing/leads/quick-start/php.md
+      - 'Bulk Import Leads': dialing/leads/bulk-import.md
+      - 'Searching Leads': dialing/leads/search.md
   - 'Users':
     - 'Agents':
       - 'Agents': users/agents.md
