@@ -157,7 +157,7 @@ PUT api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId
 Content-Type: application/json
 
 {
-    "firstName":"My New First Name"
+    "groupName":"My New First Name"
     ...
 }
 ```
