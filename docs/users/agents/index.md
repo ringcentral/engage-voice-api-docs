@@ -156,10 +156,6 @@ Content-Type: application/json
 }
 ```
 
-```html tab="HTTP"
-PUT api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}`
-```
-
 ## Delete Agent
 
 ```html tab="HTTP"
