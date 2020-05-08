@@ -30,9 +30,11 @@ markdown_extensions:
 #extra_javascript: [fonts.js]
 pages:
 - 'Primary':
-  - 'Agents':
-    - 'Agent Basics': agents/agent-basics.md
-  - 'Campaigns and Leads':
+  - 'Analytics':
+    - 'Realtime Reports':
+      - 'Agent Session': analytics/reports/agent-session-report.md
+      - 'Global Call Type Detail': analytics/reports/global-call-type-detail-report.md
+  - 'Dialing':
     - 'Leads':
       - 'Quick start':
         - 'Node JS': leads/quick-start/node.md
@@ -40,11 +42,14 @@ pages:
         - 'PHP': leads/quick-start/php.md
       - 'Bulk Import Leads': leads/bulk-import.md
       - 'Searching Leads': leads/search.md
-  - 'Reports':
-    - 'Agent Sessions': reports/agent-session-report.md
-    - 'Calls and Recordings': reports/global-call-type-detail-report.md
+  - 'Users':
+    - 'Agents':
+      - 'Agents': users/agents.md
+      - 'Agent Groups': users/agents/agent-groups.md
+
 - 'Secondary':
   - 'Using the API':
     - 'Obtaining a Token': basics/auth-ringcentral.md
     - 'Legacy Tokens': basics/auth-legacy.md
-  - 'Embeddable': embeddable/get-started.md
+  - 'Embeddable':
+    - 'Getting Started': embeddable/get-started.md
