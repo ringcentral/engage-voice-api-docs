@@ -44,7 +44,7 @@ pages:
       - 'Searching Leads': dialing/leads/search.md
   - 'Users':
     - 'Agents':
-      - 'Agents': users/agents.md
+      - 'Agents': users/agents/index.md
       - 'Agent Groups': users/agents/agent-groups.md
 
 - 'Secondary':
