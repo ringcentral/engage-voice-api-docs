@@ -1,8 +1,6 @@
-# Agents Overview
+# Engage Voice Reports APIs
 
-Managing agents and automatically syncing them with your user management tools can be automated via the API. This article covers the basics of creating, reading, updating deleting Agents.
-
-Of note, Agents must be associated with an Agent Group so you need to have at least one Agent Group configured before managing Agents. See [Agent Groups](../agent-groups) for more.
+Overview and Description
 
 ## Popular Use Cases and Documentation
 

@@ -35,11 +35,13 @@ pages:
       - 'Agent Session': analytics/reports/agent-session-report.md
       - 'Global Call Type Detail': analytics/reports/global-call-type-detail-report.md
   - 'Dialing':
-    # - 'Active Calls':
-    #   - 'Quick start':
-    #     - 'Node JS': dialing/active-calls/quick-start/node.md
-    #     - 'Python': dialing/active-calls/quick-start/python.md
-    #     - 'PHP': dialing/active-calls/quick-start/php.md
+    - 'Active Calls':
+      - 'Overview': dialing/activecalls/index.md
+      - 'Getting Started':
+        - 'Node JS': dialing/activecalls/quick-start/node.md
+        - 'PHP': dialing/activecalls/quick-start/php.md
+        - 'Python': dialing/activecalls/quick-start/python.md
+      - 'List Active Calls': dialing/activecalls/list-activecalls.md
     # - 'Campaigns':
     #   - 'Queues':
     - 'Leads':
@@ -51,12 +53,22 @@ pages:
       - 'Searching Leads': dialing/leads/search.md
   - 'Users':
     - 'Agents':
-      - 'Agents': users/agents/index.md
+      - 'Overview': users/agents/index.md
+      - 'Agents': users/agents/agents.md
       - 'Agent Groups': users/agents/agent-groups.md
 
 - 'Secondary':
   - 'Using the API':
-    - 'Obtaining a Token': basics/auth-ringcentral.md
-    - 'Legacy Tokens': basics/auth-legacy.md
+    - 'Fundamentals':
+      - 'Methods, endpoints and parameters': 'basics/uris.md'
+      #- 'App permissions': 'basics/permissions.md'
+      #- 'Rate limits': 'basics/rate-limits.md'
+    #- 'Obtaining a Token': basics/auth-ringcentral.md
+    #- 'Legacy Tokens': basics/auth-legacy.md
+  - 'Authentication':
+    - 'Overview': authentication/index.md
+    - 'RingCentral Office Token': authentication/auth-ringcentral.md
+    - 'Legacy': authentication/auth-legacy.md
+  - 'SDKs': sdks/index.md
   - 'Embeddable':
     - 'Getting Started': embeddable/get-started.md

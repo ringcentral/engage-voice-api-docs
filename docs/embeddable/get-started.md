@@ -8,7 +8,7 @@ Engage Voice Embeddable is an out-of-the-box embeddable web application that hel
 
 Visit GitHub pages: [https://ringcentral.github.io/engage-voice-embeddable](https://ringcentral.github.io/engage-voice-embeddable/)
 
-![demo](./demo.png)
+![demo](demo.png)
 
 ## Inject into Web app
 
