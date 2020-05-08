@@ -42,10 +42,8 @@ The following API properties are displayed in the Create Agent form in the Engag
 | **`initLoginBaseState`** | Login Settings | Initial State | Example: `AVAILABLE`. For a list, call `api/v1/admin/accounts/{accountId}/auxStates/?activeOnly=true` and use the values in `baseAgentState.colKey`. |
 | **`initLoginBaseStateId`** | Login Settings | Initial State | Example: `11786` For a list, call `api/v1/admin/accounts/{accountId}/auxStates/?activeOnly=true` and use the values in `stateId`. |
 | **`ghostRnaAction`** | Login Settings | Ghost RNA Action | Example: `AVAILABLE` |
-| **`dialGroupAssignments`** | Login Settings | Default Dial Group | Example: `{"id":111111}`. For a list of values, call
-`api/v1/admin/accounts/{accountId}/dialGroups` and use a `dialGroupId` value as the `dialGroupAssignments.id`. |
-| **`manualOutboundDefaultGate`** | Login Settings | Manual Outbound Default Queue Assignment | `{id: 222222}`, For a list, call
-`api/v1/admin/accounts/{accountId}/gateGroups/withChildren`. Each `gateGroup` will contain a list of gates with a `gateId` can be used as the `manualOutboundDefaultGate.id` value in this request. |
+| **`dialGroupAssignments`** | Login Settings | Default Dial Group | Example: `{"id":111111}`. For a list of values, use the `api/v1/admin/accounts/{accountId}/dialGroups` API and use a `dialGroupId` value as the `dialGroupAssignments.id`. |
+| **`manualOutboundDefaultGate`** | Login Settings | Manual Outbound Default Queue Assignment | `{id: 222222}`, For a list, use the `api/v1/admin/accounts/{accountId}/gateGroups/withChildren` API. Each `gateGroup` will contain a list of gates with a `gateId` can be used as the `manualOutboundDefaultGate.id` value in this request. |
 | **`enableSoftphone`** | Phone Settings | Enable Softphone | `true` |
 | **`defaultLoginDest`** | Phone Settings | Default Route | |
 | **`altDefaultLoginDest`** | Phone Settings | Alt. Default Route | |
@@ -59,7 +57,7 @@ The following API properties are displayed in the Create Agent form in the Engag
 The following propereties can also be set. Default values used by the UI are presented below.
 
 | API Property | UI Default | Description |
-|-|-|-|-|
+|-|-|-|
 | **`allowInbound`** | `true` | |
 | **`allowOutbound`** | `false` | |
 | **`allowExternalChat`** | `false` | |
