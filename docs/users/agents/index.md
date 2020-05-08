@@ -6,22 +6,28 @@ Of note, Agents must be associated with an Agent Group so yuo neeed to have at l
 
 ## Create Agent
 
-Before starting, make sure yuo have an Agent Group created and the `agentGroupId` of the group you wish to assign the Agent to.
+Before starting, make sure you have an Agent Group created and the `agentGroupId` of the group you wish to assign the Agent to.
 
-### API Endpoints
+### API Endpoint
+
+To create an agent, send an API request to the following URL with a JSON encoded body as described and shown below.
 
 * `POST /voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents`
 
 #### Supporting APIs
+
+The following APIs can be used to retrieve information to populate various properties in the requests.
 
 * `GET api/v1/admin/accounts/{accountId}/auxStates/?activeOnly=true`
 * `GET api/v1/admin/accounts/{accountId}/dialGroup`
 * `GET api/v1/admin/accounts/{accountId}/gateGroups/withChildren`
 * `GET api/v1/admin/accounts/{accountId}/ringcentral/extensions`
 
-### API to UI Property Mapping
+### Primary Properties
 
-The following API properties are displayed in the Create Agent form in the Engage Voice Admin Console.
+All properties for the agent are submitted in a JSON object in the request body.
+
+The following API properties are primary properetiess to create an agent and are alos displayed in the Create Agent form in the Engage Voice Admin Console. The UI category section and property name is provided in the table below for easy mapping. Some supporting properties not visible in the UI are provided as well.
 
 | API Property | UI Category | UI Property | Description |
 |-|-|-|-|
