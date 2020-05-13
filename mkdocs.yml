@@ -34,6 +34,11 @@ pages:
     - 'Realtime Reports':
       - 'Agent Session': analytics/reports/agent-session-report.md
       - 'Global Call Type Detail': analytics/reports/global-call-type-detail-report.md
+  - 'Routing':
+    - 'Queues':
+      - 'Overview': routing/queues/index.md
+      - 'Queues': routing/queues/queues.md
+      - 'Queue Groups': routing/queues/queue-groups.md
   - 'Dialing':
     - 'Active Calls':
       - 'Overview': dialing/activecalls/index.md
