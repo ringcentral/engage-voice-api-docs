@@ -10,7 +10,7 @@ var specTests = []struct {
 	filepath string
 	title    string
 }{
-	{"specs/engage-voice_openapi3.json", "RingCentral Engage Voice API"},
+	{"engage-voice_openapi3.json", "RingCentral Engage Voice API"},
 }
 
 // TestSpecs test reading specs.
