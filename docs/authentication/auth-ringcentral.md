@@ -10,7 +10,7 @@ To access Engage Voice APIs, you need to request an Engage Access Token. This is
 
 First retrieve a RingCentral access token using the following instructions:
 
-[RingCentral Authenticaion](https://developers.ringcentral.com/guide/authentication)
+[RingCentral Authentication](https://developers.ringcentral.com/guide/authentication)
 
 ## Retrieve RingCentral Engage Access Token
 
