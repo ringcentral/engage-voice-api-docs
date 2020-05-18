@@ -5109,6 +5109,301 @@
   },
   "openapi": "3.0.0",
   "paths": {
+    "/api/auth/login": {
+      "get": {
+        "deprecated": false,
+        "operationId": "getAccessTokenUserDetails",
+        "parameters": [
+          {
+            "description": "Authorization",
+            "in": "header",
+            "name": "Authorization",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenUserDetails"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Retrieves User Information based on a pre-defined Engage Access Token",
+        "tags": [
+          "Authentication"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
+    "/api/auth/login/admin": {
+      "post": {
+        "deprecated": false,
+        "operationId": "loginAdmin",
+        "parameters": [
+          {
+            "description": "password",
+            "in": "query",
+            "name": "password",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "platformId",
+            "in": "query",
+            "name": "platformId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "username",
+            "in": "query",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenUserDetails"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Logs in an Admin user",
+        "tags": [
+          "Authentication"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
+    "/api/auth/login/agent": {
+      "post": {
+        "deprecated": false,
+        "operationId": "loginAgent",
+        "parameters": [
+          {
+            "description": "password",
+            "in": "query",
+            "name": "password",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "platformId",
+            "in": "query",
+            "name": "platformId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "username",
+            "in": "query",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenUserDetails"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Logs in an Agent user",
+        "tags": [
+          "Authentication"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
+    "/api/auth/login/agent/hashcode": {
+      "post": {
+        "deprecated": false,
+        "operationId": "authenticateAgentLoginByHashcodeAndAgentId",
+        "parameters": [
+          {
+            "description": "agentId",
+            "in": "query",
+            "name": "agentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "loginHashcode",
+            "in": "query",
+            "name": "loginHashcode",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "platformId",
+            "in": "query",
+            "name": "platformId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "rcAccountId",
+            "in": "query",
+            "name": "rcAccountId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenUserDetails"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Validate agent login and get new refresh token based on the agent loginHashcode",
+        "tags": [
+          "Authentication"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
+    "/api/auth/login/code": {
+      "post": {
+        "deprecated": false,
+        "operationId": "loginWithEngageAuthCode",
+        "parameters": [
+          {
+            "description": "code",
+            "in": "query",
+            "name": "code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenUserDetails"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Log in a user via a one-time use Engage AuthCode",
+        "tags": [
+          "Authentication"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
     "/api/auth/login/rc/accesstoken": {
       "post": {
         "deprecated": false,
@@ -5164,15 +5459,534 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Logs in an RC user via their access token issued by the RC API server",
         "tags": [
           "RingCentral Auth"
-        ]
+        ],
+        "x-doc-level": "Public"
+      }
+    },
+    "/api/auth/login/tenfold/accesstoken": {
+      "post": {
+        "deprecated": false,
+        "operationId": "loginWithTenfoldAccessToken",
+        "parameters": [
+          {
+            "description": "token",
+            "in": "query",
+            "name": "token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenUserDetails"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Logs in an RC Tenfold user via their access token issued by the RC API server",
+        "tags": [
+          "Authentication"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
+    "/api/auth/logout/{refreshToken}": {
+      "delete": {
+        "deprecated": false,
+        "operationId": "logoutEngageAuthUser",
+        "parameters": [
+          {
+            "description": "refreshToken",
+            "in": "path",
+            "name": "refreshToken",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [],
+        "summary": "Logs out a user and deletes the platform cookie from the user's client",
+        "tags": [
+          "Authentication"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
+    "/api/auth/password/internal/requestreset": {
+      "post": {
+        "deprecated": false,
+        "operationId": "internalRequestPasswordReset",
+        "parameters": [
+          {
+            "description": "internalJwt",
+            "in": "query",
+            "name": "internalJwt",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Get password reset url",
+        "tags": [
+          "Password Reset"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
+    "/api/auth/password/requestreset": {
+      "post": {
+        "deprecated": false,
+        "operationId": "requestPasswordReset",
+        "parameters": [
+          {
+            "description": "platformId",
+            "in": "query",
+            "name": "platformId",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "username",
+            "in": "query",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Get password reset url for a specified platform",
+        "tags": [
+          "Password Reset"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
+    "/api/auth/token/claims": {
+      "get": {
+        "deprecated": false,
+        "operationId": "getClaimsForAccessToken",
+        "parameters": [
+          {
+            "description": "Bearer Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Get Claims for Access Token",
+        "tags": [
+          "Token"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
+    "/api/auth/token/digitaljwt": {
+      "get": {
+        "deprecated": false,
+        "operationId": "getDigitalJwt",
+        "parameters": [
+          {
+            "description": "Bearer Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Get Digital SSO JWT based on the RC Account Id",
+        "tags": [
+          "Token"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
+    "/api/auth/token/refresh": {
+      "post": {
+        "deprecated": false,
+        "operationId": "refreshAccessToken",
+        "parameters": [
+          {
+            "description": "X-Auth-Token",
+            "in": "query",
+            "name": "X-Auth-Token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "refresh_token",
+            "in": "query",
+            "name": "refresh_token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenUserDetails"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Get Refresh Access Token",
+        "tags": [
+          "Token"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
+    "/api/auth/token/validate": {
+      "get": {
+        "deprecated": false,
+        "operationId": "verifyAccessToken",
+        "parameters": [
+          {
+            "description": "Bearer Token",
+            "in": "header",
+            "name": "Authorization",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Validate Access Token",
+        "tags": [
+          "Token"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
+    "/oauthcallback": {
+      "get": {
+        "deprecated": false,
+        "operationId": "defaultOAuthCallback",
+        "parameters": [
+          {
+            "description": "code",
+            "in": "query",
+            "name": "code",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "state",
+            "in": "query",
+            "name": "state",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RedirectView"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Get SSO Callback",
+        "tags": [
+          "OAuth"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
+    "/oauthredirect": {
+      "get": {
+        "deprecated": false,
+        "operationId": "loadSsoLogin",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Prepare page that will redirect user to SSO login",
+        "tags": [
+          "OAuth"
+        ],
+        "x-doc-level": "Internal"
+      }
+    },
+    "/password/reset/{platformId}/{passwordResetToken}": {
+      "get": {
+        "deprecated": false,
+        "operationId": "resetPasswordCallback",
+        "parameters": [
+          {
+            "description": "passwordResetToken",
+            "in": "path",
+            "name": "passwordResetToken",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "platformId",
+            "in": "path",
+            "name": "platformId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RedirectView"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [],
+        "summary": "Get Redirect to Reset Password",
+        "tags": [
+          "Password Reset"
+        ],
+        "x-doc-level": "Internal"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/activeCalls/createManualAgentCall": {
@@ -5250,15 +6064,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Creates a manual agent call",
         "tags": [
           "Active Calls"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/activeCalls/list": {
@@ -5364,15 +6176,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Returns a listing of current active calls for a given product on an account",
         "tags": [
           "Active Calls"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/addSessionToCall": {
@@ -5448,15 +6258,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Provides support for adding sessions to an active call.",
         "tags": [
           "Active Calls"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/dispositionCall": {
@@ -5542,15 +6350,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Sets the call disposition for either INBOUND or OUTBOUND calls and releases the agent from PD state",
         "tags": [
           "Active Calls"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/hangupCall": {
@@ -5600,15 +6406,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Terminates an active call",
         "tags": [
           "Active Calls"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/hangupSession": {
@@ -5667,15 +6471,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Terminates an active session",
         "tags": [
           "Active Calls"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/toggleCallRecording": {
@@ -5734,15 +6536,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Provides support for toggling call recording on/off for an active call",
         "tags": [
           "Active Calls"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/agentGroups": {
@@ -5820,15 +6620,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Returns a listing of agent groups for an account",
         "tags": [
           "Agent Groups"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "post": {
         "description": "Permissions: CREATE on Account",
@@ -5881,15 +6679,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Creates a single new agent group for an account",
         "tags": [
           "Agent Groups"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}": {
@@ -5937,15 +6733,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Deletes an agent group for an account",
         "tags": [
           "Agent Groups"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "get": {
         "description": "Permissions: READ on Gate Group",
@@ -6008,15 +6802,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Returns a listing of agent groups for an account",
         "tags": [
           "Agent Groups"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "put": {
         "description": "Permissions: UPDATE on Agent Group",
@@ -6082,15 +6874,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Updates an agent group for an account",
         "tags": [
           "Agent Groups"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents": {
@@ -6148,15 +6938,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Returns a listing of agents for an agent group",
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "post": {
         "description": "Permissions: CREATE on Agent Group",
@@ -6222,15 +7010,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Creates a single agent for an agent group",
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "put": {
         "description": "Permissions: UPDATE on Agent Group",
@@ -6299,15 +7085,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Updates a listing of agents for an agent group",
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}": {
@@ -6365,15 +7149,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Deletes an agent for an agent group",
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "get": {
         "description": "Permissions: READ on Agent",
@@ -6439,15 +7221,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Returns a single agent for an agent group",
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "put": {
         "description": "Permissions: UPDATE on Agent",
@@ -6526,15 +7306,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Updates a single agent for an agent group",
         "tags": [
           "Agents"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch": {
@@ -6603,15 +7381,13 @@
         "security": [
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Search Leads",
         "tags": [
           "Leads"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadStates": {
@@ -6646,15 +7422,13 @@
         "security": [
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Get Lead States",
         "tags": [
           "Leads"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/campaignLeads/systemDispositions": {
@@ -6689,15 +7463,13 @@
         "security": [
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Get Systems Dispositions",
         "tags": [
           "Leads"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/campaignLeads/{leadId}": {
@@ -6792,15 +7564,13 @@
         "security": [
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Patch Campaign Lead",
         "tags": [
           "Leads"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "put": {
         "description": "Allows updating of a campaign lead, updating entire lead including fields not passed in.\n\nPermissions: READ on Account (Permission Override), UPDATE on Campaign",
@@ -6893,15 +7663,13 @@
         "security": [
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Update Campaign Lead",
         "tags": [
           "Leads"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct": {
@@ -6951,15 +7719,13 @@
         "security": [
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Upload Leads",
         "tags": [
           "Leads"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/countries/available": {
@@ -6994,15 +7760,13 @@
         "security": [
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Get Available Countries",
         "tags": [
           "Countries"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/dialGroups": {
@@ -7070,15 +7834,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Returns a listing of dial groups for an account",
         "tags": [
           "Dial Groups"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "post": {
         "description": "Permissions: CREATE on Account",
@@ -7131,15 +7893,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Creates a dial group for an account",
         "tags": [
           "Dial Groups"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/dialGroups/withChildren": {
@@ -7217,15 +7977,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Returns a listing of dial groups with associated campaigns for an account",
         "tags": [
           "Dial Groups"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}": {
@@ -7273,15 +8031,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Deletes a dial group for an account",
         "tags": [
           "Dial Groups"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "get": {
         "description": "Permissions: READ on Dial Group",
@@ -7334,15 +8090,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Returns a dial group for an account",
         "tags": [
           "Dial Groups"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "put": {
         "description": "Permissions: UPDATE on Dial Group",
@@ -7408,15 +8162,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Updates a dial group for an account",
         "tags": [
           "Dial Groups"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/assignAgents": {
@@ -7484,15 +8236,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Assigns a listing of agents to a dial group",
         "tags": [
           "Dial Groups"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/assignedAgents": {
@@ -7570,15 +8320,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Returns a listing of all agents assigned to a dial group",
         "tags": [
           "Dial Groups"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns": {
@@ -7656,15 +8404,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Returns a listing of campaigns for a dial group",
         "tags": [
           "Campaigns"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "post": {
         "description": "Permissions: UPDATE on Dial Group (Permission Override)",
@@ -7727,15 +8473,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Returns a campaign for a dial group",
         "tags": [
           "Campaigns"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}": {
@@ -7793,15 +8537,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Deletes a campaign for a dial group",
         "tags": [
           "Campaigns"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "get": {
         "description": "Permissions: READ on Campaign",
@@ -7864,15 +8606,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Returns a campaign for a dial group",
         "tags": [
           "Campaigns"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "put": {
         "description": "Permissions: UPDATE on Campaign",
@@ -7948,15 +8688,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Updates a campaign for a dial group",
         "tags": [
           "Campaigns"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}/clearCache": {
@@ -8011,15 +8749,13 @@
         "security": [
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Clear Campaign Cache",
         "tags": [
           "Campaigns"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/realTimeData/agent": {
@@ -8066,15 +8802,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "getAgentStates",
         "tags": [
           "Reporting"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/realTimeData/chat": {
@@ -8121,15 +8855,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "getChatStats",
         "tags": [
           "Reporting"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/realTimeData/inbound": {
@@ -8176,15 +8908,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "getAcdStats",
         "tags": [
           "Reporting"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/realTimeData/ivr": {
@@ -8231,15 +8961,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "getIvrStats",
         "tags": [
           "Reporting"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/realTimeData/outbound": {
@@ -8286,15 +9014,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "getOutboundStats",
         "tags": [
           "Reporting"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/reportsStreaming": {
@@ -8345,15 +9071,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Streams back an excel or csv file",
         "tags": [
           "Reporting"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/reports/{reportType}": {
@@ -8409,15 +9133,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Returns a report critera definition for a report type",
         "tags": [
           "Reporting"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/token": {
@@ -8454,15 +9176,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Retrieves all Api Tokens for AuthenticatedUser",
         "tags": [
           "Legacy Auth"
-        ]
+        ],
+        "x-doc-level": "Public"
       },
       "post": {
         "description": "Permissions: Authenticated User",
@@ -8497,15 +9217,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Creates a new 'Api Token' based AuthenticatedUser that does not expire",
         "tags": [
           "Legacy Auth"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/token/{token}": {
@@ -8543,15 +9261,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Removes an api token",
         "tags": [
           "Legacy Auth"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/admin/users": {
@@ -8576,15 +9292,13 @@
         "security": [
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Get Users",
         "tags": [
           "Users"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     },
     "/voice/api/v1/auth/login": {
@@ -8654,15 +9368,13 @@
           },
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
         "summary": "Application login to authenticate and receive an X-Auth-Token",
         "tags": [
           "Legacy Auth"
-        ]
+        ],
+        "x-doc-level": "Public"
       }
     }
   },
@@ -8677,6 +9389,18 @@
     }
   ],
   "tags": [
+    {
+      "name": "Authentication"
+    },
+    {
+      "name": "Password Reset"
+    },
+    {
+      "name": "Token"
+    },
+    {
+      "name": "OAuth"
+    },
     {
       "name": "Active Calls"
     },
