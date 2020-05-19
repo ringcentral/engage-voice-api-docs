@@ -1,5 +1,7 @@
 # Engage Voice Active Call APIs
 
+Active Call APIs allow you to programmatically manage agents' active calls. This includes a capability to make a new call programatically. read agents' active call data and . Active calls can be read based on a category called "Product".
+
 Managing agents and automatically syncing them with your user management tools can be automated via the API. This article covers the basics of creating, reading, updating deleting Agents.
 
 
