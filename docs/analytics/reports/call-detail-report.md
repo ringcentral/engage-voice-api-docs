@@ -35,7 +35,7 @@ It takes a JSON request body with the following notable parameters. See the exam
 | **`reportCriteria.cloudDestinationIds`** | Set if `groupBy` is set to `DESTINATION`. If you want all groups, inclde all values.  Corresponds to "Cloud Destinations" in the Admin UI. Populate with an integer array of profile `groupId` values. Call the `GET api/v1/admin/accounts/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_DESTINATION` endpoint. Populate with the selected group children `objId` values. The objId valuess musts correspond with `groupId` values in the `cloudProfileGroupIds` properties. |
 | **`reportCriteria.startTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
 | **`reportCriteria.endTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
-| **`reportCriteria.timezoneName`** | Use the "TZ database name" from the [tz database](https://en.wikipedia.org/wiki/Tz_database)]. For example, `US/Pacific`.|
+| **`reportCriteria.timezoneName`** | Use the "TZ database name" from the [tz database](https://en.wikipedia.org/wiki/Tz_database). For example, `US/Pacific`.|
 | **`reportCriteria.criteriaType`** | set to `CASPER_CRITERIA`. |
 | **`reportCriteria.reportName`** | set to `Cloud_Call_Detail_Download`. |
 | **`reportCriteria.returnType`** | set to `CSV`. |
