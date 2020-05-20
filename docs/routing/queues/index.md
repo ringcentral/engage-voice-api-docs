@@ -16,7 +16,7 @@ Beyond that, there are routing rules which can be configured by IVRs. And then r
 Before using *Queues*, make sure to configure your test Agent (User) with the right priority and permissions.  Your Agent should have a high enough priority so the inbound call is routed to them first.  Also, the permission for the Agent should be "Allow inbound calls" to give the Agent the right to receive inbound calls.
 
 ## Getting Started
-You must first create a Queue Group before creating Queues. Start with a simple [Queue Groups](../queue-groups) and then create your first [Queues](../queues).
+You must first create a Queue Group before creating Queues. Start with a simple [Queue Groups](./queue-groups) and then create your first [Queues](./queues).
 
 ## Popular Use Cases and Documentation
 

@@ -8069,6 +8069,9 @@
           },
           {
             "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
           }
         ],
         "summary": "getAgentStates",
@@ -8124,6 +8127,9 @@
           },
           {
             "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
           }
         ],
         "summary": "getChatStats",
@@ -8179,6 +8185,9 @@
           },
           {
             "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
           }
         ],
         "summary": "getAcdStats",
@@ -8234,6 +8243,9 @@
           },
           {
             "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
           }
         ],
         "summary": "getIvrStats",
@@ -8289,6 +8301,9 @@
           },
           {
             "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
           }
         ],
         "summary": "getOutboundStats",
@@ -8348,6 +8363,9 @@
           },
           {
             "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
           }
         ],
         "summary": "Streams back an excel or csv file",
@@ -8412,6 +8430,9 @@
           },
           {
             "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
           }
         ],
         "summary": "Returns a report critera definition for a report type",
@@ -8673,7 +8694,10 @@
   ],
   "servers": [
     {
-      "url": "https://engage.ringcentral.com"
+      "url": "https://portal.vacd.biz"
+    },
+    {
+      "url": "https://portal.virtualacd.biz"
     }
   ],
   "tags": [

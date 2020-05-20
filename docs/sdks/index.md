@@ -28,7 +28,7 @@ Some of these integrations may be incomplete. Feedback and bugs should be direct
 
 ### Python
 
-* [engagevoice-sdk-wrapper](https://github.com/pacovu/engagevoice-sdkwrapper-python) - A simple SDK wrapper to login RingCentral platform (using Password Flow authentication) and exchange for an Engage Voice access token.
+* [engagevoice-sdk-wrapper](https://github.com/pacovu/engagevoice-sdk-wrapper-python) - A simple SDK wrapper to login RingCentral platform (using Password Flow authentication) and exchange for an Engage Voice access token.
 
 
 !!! warning "Disclaimer"
