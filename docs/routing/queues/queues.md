@@ -72,6 +72,7 @@ One of the **Agent Settings** is available in a nested object. This setting incl
 | **`afterCallState.description`** | Optional | Post Call State | *empty* | Choose the agent state you would like to place agents in once they finish a call. Options in this dropdown menu will populate according to the agent states you configure via the Agent States at the account level. Retrieve a list of states using `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/auxStates/?activeOnly=true` |
 
 ### Request
+
 === "HTTP"
     ```html
     POST {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates
