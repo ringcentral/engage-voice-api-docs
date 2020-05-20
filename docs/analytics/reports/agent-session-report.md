@@ -2,7 +2,7 @@
 
 ## Report Request
 
-The Agent Sessios Report provides an overview of agent activity for each agent logged in during the date range selected.
+The Agent Session Report provides an overview of agent activity for each agent logged in during the date range selected.
 
 It is available at the following endpoint:
 

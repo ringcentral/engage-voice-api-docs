@@ -31,6 +31,8 @@ markdown_extensions:
 pages:
 - 'Primary':
   - 'Analytics':
+    - 'Cloud Reports':
+      - 'Call Detail': analytics/reports/call-detail-report.md
     - 'Realtime Reports':
       - 'Agent Session': analytics/reports/agent-session-report.md
       - 'Global Call Type Detail': analytics/reports/global-call-type-detail-report.md
