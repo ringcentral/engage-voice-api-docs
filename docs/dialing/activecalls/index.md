@@ -1,6 +1,6 @@
 # Engage Voice Active Call APIs
 
-Active Call APIs allow you to programmatically manage agents' active calls such as reading agent's active call metadata, adding a supervision session to a call or terminating an active call etc. This includes a capability to make a new outbound call programatically.
+Active Call APIs allow you to programmatically manage agents' active calls. You can read agent's active calls and each call metadata, adding a supervision session to a call or terminating an active call etc. This includes a capability to make a new outbound call programatically.
 
 ### Get a list of active calls
 Read agents' active call data and . Active calls can be read based on a category called "Product".
