@@ -1,4 +1,5 @@
 # Get a list of active calls
+Active calls can be listed based on a category called "Product". Each product must be identified by a product id. For example, to list all active calls 
 
 To get a list of active calls, make an HTTP GET request to the `activeCall/list` endpoint
 
