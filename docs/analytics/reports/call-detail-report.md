@@ -14,10 +14,10 @@ The Call Detail Report can be downloaded at the following endpoint:
 
 The following API endpoints are used to populate API properties.
 
-* `GET api/v1/admin/accounts`
-* `GET api/v1/admin/users`
-* `GET api/v1/admin/accounts/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_PROFILE`
-* `GET api/v1/admin/accounts/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_DESTINATION`
+* `GET api/v1/admin/accounts` - populate `accountId`
+* `GET api/v1/admin/users` - populate `userId`
+* `GET api/v1/admin/accounts/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_PROFILE` - populate `cloudProfileGroupIds` and `cloudProfileIds`
+* `GET api/v1/admin/accounts/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_DESTINATION` - populate `cloudDestinationGroupIds` and `cloudDestinationIds`
 
 ### Request Properties
 
