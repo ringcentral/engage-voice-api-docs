@@ -3,9 +3,42 @@ Active Call APIs allow you to manage agents' active calls. One of the essential 
 
 
 ### Get a list of active calls
-You can list agents' active calls with useful call's metadata. This API is essential as it returns the unique call id `uii` of each active call, so that you can use the `uii` to manage that particular call with other APIs.
+You can read agents' active calls to retrieve useful call's metadata. This API is essential as it returns the unique call id `uii` of each active call, and you can use the `uii` value in other APIs to manage that particular call.
 
-<a href="list-activecalls" class="btn btn-light qs-link">See details &raquo;</a>
+Active calls can be listed based on a criteria called "Product". Each product must be identified by a product id. For example, to list all active calls under an account, you must obtain the account id and specify it in the request body.
+
+To get a list of active calls, make an HTTP GET request to the `activeCall/list` endpoint with the query parameter shown below:
+
+`GET /api/v1/admin/accounts/{accountId}/activeCall/list`
+
+| Parameter | Description |
+|-|-|
+| **product** | The name of a product, which can be one of the following criteria:</br>`"ACCOUNT"` - `"ACD"` - `"AGENT"` - `"CHAT_QUEUE"` - `"OUTBOUND"` - `"VISUAL_IVR"` - `"CLOUD_PROFILE"` - `"CLOUD_DESTINATION"` - `"TRAC_NUMBER"` - `"HTTP_SERVICES"` - `"SCRIPTING"` - `"TN_MANAGER"` - `"SURVEY"` - `"DNIS"` - `"TEAMS"` - `"KNOWLEDGE_BASE"` - `"UTILITIES"` |
+| **productId** | The identifier of a selected product. E.g. if the **product** is `"ACCOUNT"`, the **productId** is the account id. |
+| **page** | Number of page per request. |
+| **maxRows** | Max number of items per page. |
+
+
+```http
+`GET {baseURL}/api/v1/admin/accounts/{accountId}/activeCalls/list?product=ACCOUNT&productId=12440001`
+```
+
+
+Example response
+```json
+[ { uii: "202005081040440132050000019657",
+    accountId: "12440001",
+    ani: "6501234567",
+    dnis: "8661234567",
+    enqueueTime: "2020-05-08T14:40:47.000+0000",
+    dequeueTime: null,
+    callState: "ACTIVE",
+    archive: false,
+    agentFirstName: "Paco",
+    agentLastName: "Vu",
+    destinationName: null } ]
+```  
+
 
 ### Create a manual agent call
 Instead of manually dialing from a phone dial pad, an outbound call from an agent's phone number can be made programmatically using this API. This requires the agent to be online and available so that the call can be initiated from the associated phone (e.g. the Integrated softphone) that the agent selects when logging in his Agent dashboard.

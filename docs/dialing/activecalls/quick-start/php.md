@@ -84,7 +84,7 @@ function list_account_active_calls($accountId){
 You are almost done. Now run your script.
 
 ```bash
-$ node list-active-calls.js
+$ node list-active-calls.php
 ```
 
 ## Need Help?
