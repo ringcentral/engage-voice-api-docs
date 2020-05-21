@@ -328,19 +328,44 @@ Update the details for a single Queue Group using the `gateGroups` endpoint. Sev
 # Retrieve the entire Queue Group JSON object
 GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}
 
-# Modify the groupName and send the entire JSON response backward
+# Modify the groupName
 PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}
 Content-Type: application/json
     {
-      "startDate":"2020-04-18T01:49:32.000+0000",
-      "billingKey":null,
-      "createdOn":"2020-04-18T01:49:32.000+0000",
-      "groupName":"Platform-New",
-      "groupSkills":null,
-      "endDate":null,
-      "gateGroupId":52653,
-      "permissions": []
+      "groupName":"My New Queue Group Name - Updated",
     }
+```
+
+```javascript tab="Node JS"
+const EngageVoice = require('engagevoice-sdk-wrapper')
+
+// Instantiate the SDK wrapper object with your RingCentral app credentials
+var ev = new EngageVoice.RestClient("RC_CLIENT_ID", "RC_CLIENT_SECRET")
+
+// Login your account with your RingCentral Office user credentials
+ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER", function(err, response){
+  if (!err){
+    var endpoint = 'admin/accounts/~/gateGroups'
+    ev.get(endpoint, null, function(err, response){
+      if (!err){
+        var jsonObj = JSON.parse(response)
+        for (var group of jsonObj){
+          if (group.groupName == "My New Queue Group"){
+            endpoint = 'admin/accounts/~/gateGroups/' + group.gateGroupId
+            var params = {
+              "groupName": group.groupName + " - Update"
+            }
+            ev.put(endpoint, params, function(err, response){
+              if (!err){
+                console.log (response)
+              }
+            })
+          }
+        }
+      }
+    })
+  }
+})        
 ```
 
 ```python tab="Python"
@@ -358,7 +383,7 @@ try:
         if (group['groupName'] == "My New Queue Group"):
             endpoint = 'admin/accounts/~/gateGroups/%i' % (group['gateGroupId'])
             params = {
-              "groupName": group['groupName'] + " - Updated",
+              "groupName": group['groupName'] + " - Updated"
             }
             response = ev.put(endpoint, params)
             print (response)
@@ -367,13 +392,38 @@ except Exception as e:
     print (e)
 ```
 
+```php tab="PHP"
+<?php
+require('vendor/autoload.php');
+
+// Instantiate the SDK wrapper object with your RingCentral app credentials
+$ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
+try{
+    // Login your account with your RingCentral Office user credentials
+    $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+    $endpoint = "admin/accounts/~/gateGroups";
+    $response = $ev->get($endpoint);
+    $jsonObj = json_decode($response);
+    foreach ($jsonObj as $group){
+        if ($group->groupName == "My New Queue Group"){
+            $endpoint = 'admin/accounts/~/gateGroups/' . $group->gateGroupId;
+            $params = array ( "groupName" => $group->groupName . " - Updated" );
+            $response = $ev.put($endpoint, $params);
+            print ($response);
+        }
+    }
+}catch (Exception $e) {
+    print $e->getMessage();
+}
+```
+
 ### Response
 ```json
 {
   "startDate":"2020-04-18T01:49:32.000+0000",
   "billingKey":null,
   "createdOn":"2020-04-18T01:49:32.000+0000",
-  "groupName":"Platform-New",
+  "groupName":"My New Queue Group - Update",
   "groupSkills":null,
   "endDate":null,
   "gateGroupId":52653,
