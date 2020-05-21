@@ -13,6 +13,12 @@ no_breadcrumb: true
     <li><a href="./reports/agent-session-report/">Agent Session Info</a> using our <strong>Reports API</strong>.</li>
   </ul>
   <!--<p>Not a programmer? <a href="./basics/explorer/">Try out the API with no programming</a>.</p>-->
+  <hr class="my-4">
+  If you are a customer, get started ussing the APIs with your account below.
+
+  If you are a partner, fill out the following form to sign up for accesss.
+
+  <a class="btn btn-primary" href="https://docs.google.com/forms/d/1f4fxmM2maXyXtKbhDWd5ZQDAdYOzcEQUVytU96bUa-c">Partner Signup &raquo;</a>
 </div>
 
 Welcome RingCentral Engage Voice Developer! Here you have access to all the resources necessary to build an app successfully on the RingCentral Engage Voice Platform. Here are some specific resources and guides to help you get started.
