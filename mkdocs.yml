@@ -41,11 +41,11 @@ pages:
       - 'Queue Groups': routing/queues/queue-groups.md
   - 'Dialing':
     - 'Active Calls':
-      - 'Overview': dialing/activecalls/index.md
+      - 'Overview': dialing/active-calls/index.md
       - 'Getting Started':
-        - 'Node JS': dialing/activecalls/quick-start/node.md
-        - 'PHP': dialing/activecalls/quick-start/php.md
-        - 'Python': dialing/activecalls/quick-start/python.md
+        - 'Node JS': dialing/active-calls/quick-start/node.md
+        - 'PHP': dialing/active-calls/quick-start/php.md
+        - 'Python': dialing/active-calls/quick-start/python.md
       #- 'List Active Calls': dialing/activecalls/list-activecalls.md
     # - 'Campaigns':
     #   - 'Queues':
