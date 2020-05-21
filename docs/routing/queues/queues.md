@@ -368,7 +368,7 @@ The following parameters are optional.
 
 ## Retrieve a Single Queue
 
-Retrieving details for a single Queue  using the `gates` endpoint.
+Retrieve details for a single Queue using the `gates` endpoint.
 
 ### Request
 
