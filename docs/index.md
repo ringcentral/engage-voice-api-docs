@@ -14,11 +14,11 @@ no_breadcrumb: true
   </ul>
   <!--<p>Not a programmer? <a href="./basics/explorer/">Try out the API with no programming</a>.</p>-->
   <hr class="my-4">
-  If you are a customer, get started ussing the APIs with your account below.
+  <p>If you are a customer, you already have access via your account.</p>
 
-  If you are a partner, fill out the following form to sign up for accesss.
+  <p>If you are a partner, fill out the following form to sign up for accesss.</p>
 
-  <a class="btn btn-primary" href="https://docs.google.com/forms/d/1f4fxmM2maXyXtKbhDWd5ZQDAdYOzcEQUVytU96bUa-c">Partner Signup &raquo;</a>
+  <p><a class="btn btn-primary" href="https://docs.google.com/forms/d/1f4fxmM2maXyXtKbhDWd5ZQDAdYOzcEQUVytU96bUa-c">Partner Signup &raquo;</a></p>
 </div>
 
 Welcome RingCentral Engage Voice Developer! Here you have access to all the resources necessary to build an app successfully on the RingCentral Engage Voice Platform. Here are some specific resources and guides to help you get started.
