@@ -93,87 +93,7 @@ The following API is used to retrieve predefined values for the groups skills.
       "eventRank":10,
       "queueEvent":"PLAY-AUDIO:holdmusic;SKILL-ROUTE:1455;",
       "eventDuration":120,
-      "enableDtmf":0,
-      "gate":
-        {
-          "permissions":[],
-          "gateId":73001,
-          "gateName":"My Queue (Spanish)",
-          "gateDesc":"A Spanish version of the My Queue Group",
-          "billingCode":null,
-          "dequeueDelay":0,
-          "maxQueueLimit":-1,
-          "maxQueueEvent":null,
-          "noAgentEvent":null,
-          "specialAniEvent":null,
-          "gateClosedEvent":null,
-          "throttlingAniEvent":null,
-          "throttleCalls":0,
-          "throttleDays":0,
-          "monSched":"08002100",
-          "tueSched":"08002100",
-          "wedSched":"08002100",
-          "thuSched":"08002100",
-          "friSched":"08002100",
-          "satSched":"00000000",
-          "sunSched":"00000000",
-          "agentPopMessage":null,
-          "whisperMessage":null,
-          "onHoldMessage":null,
-          "blockedAniMessage":null,
-          "gatePriority":0,
-          "recordCall":1,
-          "stopRecordingOnTransfer":false,
-          "recordingInConference":false,
-          "revMatch":false,
-          "appUrl":null,
-          "backupAppUrl":null,
-          "surveyPopType":"FLASH",
-          "createdOn":"2020-05-18T19:22:12.000+0000",
-          "shortAbandonTime":30,
-          "shortCallTime":30,
-          "longCallTime":300,
-          "acceptTime":30,
-          "ttAccept":false,
-          "requeueType":"ADVANCED",
-          "slaTime":30,
-          "afterCallBaseState":null,
-          "hangupOnDisposition":false,
-          "wrapTime":8,
-          "endCallMessage":null,
-          "outboundCallerId":"ani",
-          "transferCallerId":null,
-          "manualCallerId":null,
-          "syncQueueWait":10,
-          "enableGlobalPhoneBook":false,
-          "fifoDisabled":true,
-          "pauseRecordingSec":30,
-          "isActive":true,
-          "observeDst":true,
-          "enableIvrTokens":false,
-          "dispositionTimeout":60,
-          "gateGroup":
-            {
-              "id":52676,
-              "description":"My Queue Group"
-            },
-          "afterCallState":null,
-          "postCallSoapService":null,
-          "dequeueSoapService":null,
-          "agentConnSoapService":null,
-          "postDispSoapService":null,
-          "transferTermSoapService":null,
-          "agentTermSoapService":null,
-          "callbackCampaign":null,
-          "abandonCampaign":null,
-          "resultFileDestination":null,
-          "survey":null,
-          "gatePriorityGroup":null,
-          "script":null,
-          "gateQueueEvents":null,
-          "agentGateAccess":null,
-          "gateOpen":true
-        }
+      "enableDtmf":0
     }
     ```
 
@@ -276,7 +196,7 @@ Now that you’ve created a group skill and added that skill to a queue, you can
     The agent you choose in the example below must also be assigned to the queue to which the group skill was added.
 
 ### Primary Parameters
-Only `gateName` is a required parameter to create a Queue. All other parameters are optional.
+Only `profileName` is a required parameter to create a skill profile. All other parameters are optional.
 
 | API Property |  | UI Display | UI Default | Description |
 |-|-|-|-|-|
