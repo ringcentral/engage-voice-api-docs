@@ -113,7 +113,7 @@ try{
 
 ## Retrieve Queue Groups
 
-Retrieving a list of Queue Groups using the `gateGroups` endpoint.
+Retrieve a list of Queue Groups using the `gateGroups` endpoint.
 
 ### Optional Parameters
 The following parameters are optional.
@@ -221,7 +221,7 @@ try{
 
 ## Retrieve a Single Queue Group
 
-Retrieving details for a single Queue Group using the `gateGroups` endpoint.
+Retrieve details for a single Queue Group using the `gateGroups` endpoint.
 
 ### Request
 
