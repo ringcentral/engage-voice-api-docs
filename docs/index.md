@@ -14,7 +14,7 @@ no_breadcrumb: true
   </ul>
   <!--<p>Not a programmer? <a href="./basics/explorer/">Try out the API with no programming</a>.</p>-->
   <hr class="my-4">
-  <p>If you are a customer, you already have access via your account.</p>
+  <p>If you are a customer, get started as you already have access via your account.</p>
 
   <p>If you are a partner, fill out the following form to sign up for accesss.</p>
 
