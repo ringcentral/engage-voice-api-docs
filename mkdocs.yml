@@ -50,7 +50,7 @@ pages:
         - 'Node JS': dialing/activecalls/quick-start/node.md
         - 'PHP': dialing/activecalls/quick-start/php.md
         - 'Python': dialing/activecalls/quick-start/python.md
-      - 'List Active Calls': dialing/activecalls/list-activecalls.md
+      #- 'List Active Calls': dialing/activecalls/list-activecalls.md
     # - 'Campaigns':
     #   - 'Queues':
     - 'Leads':

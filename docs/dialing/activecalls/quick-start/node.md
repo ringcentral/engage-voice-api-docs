@@ -93,7 +93,7 @@ var evsdk = new engagevoice.EngageVoice(RINGCENTRAL_CLIENTID, RINGCENTRAL_CLIENT
 You are almost done. Now run your script.
 
 ```bash
-$ node list-agent-groups.js
+$ node list-active-calls.js
 ```
 
 ## Need Help?

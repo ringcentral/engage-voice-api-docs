@@ -12,7 +12,7 @@ Primary inbound routing components consist of the Inbound Queue Groups and the I
 
 Beyond that, there are routing rules which can be configured by IVRs. And then routing priorities determine where a call will route to first.
 
-## Prerequiste
+## Prerequisite
 Before using *Queues*, make sure to configure your test Agent (User) with the right priority and permissions.  Your Agent should have a high enough priority so the inbound call is routed to them first.  Also, the permission for the Agent should be "Allow inbound calls" to give the Agent the right to receive inbound calls.
 
 ## Getting Started
