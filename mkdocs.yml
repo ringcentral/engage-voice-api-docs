@@ -31,6 +31,8 @@ markdown_extensions:
 pages:
 - 'Primary':
   - 'Analytics':
+    - 'Cloud Reports':
+      - 'Call Detail': analytics/reports/call-detail-report.md
     - 'Realtime Reports':
       - 'Agent Session': analytics/reports/agent-session-report.md
       - 'Global Call Type Detail': analytics/reports/global-call-type-detail-report.md
@@ -38,7 +40,9 @@ pages:
     - 'Queues':
       - 'Overview': routing/queues/index.md
       - 'Queues': routing/queues/queues.md
+      - 'Queue Events': routing/queues/queue-events.md
       - 'Queue Groups': routing/queues/queue-groups.md
+      - 'Group Skills': routing/queues/group-skills.md
   - 'Dialing':
     - 'Active Calls':
       - 'Overview': dialing/active-calls/index.md
@@ -61,7 +65,7 @@ pages:
       - 'Overview': users/agents/index.md
       - 'Agents': users/agents/agents.md
       - 'Agent Groups': users/agents/agent-groups.md
-
+      - 'Skill Profiles': users/agents/skill-profile.md
 - 'Secondary':
   - 'Using the API':
     - 'Fundamentals':
