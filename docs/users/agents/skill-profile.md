@@ -64,9 +64,9 @@ Content-Type: application/json
 ```
 
 ## Adding group skills to a queue event
-Once you’ve created a group skill, you can assign that skill to a [Queue](../../routing/queues/queues), so long as the queue has been created under the queue group in which the group skill was created.
+Once you’ve created a group skill, you can assign that skill to a [Queue](../../../routing/queues/queues), so long as the queue has been created under the queue group in which the group skill was created.
 
-In the example below, we’ll show you how you can add this group skill to a queue via the Queue Events setting, but if you’d like to learn more about Queue Events, including how to create a queue event, please visit [Queue Events](../../routing/queues/queue-events).
+In the example below, we’ll show you how you can add this group skill to a queue via the Queue Events setting, but if you’d like to learn more about Queue Events, including how to create a queue event, please visit [Queue Events](../../../routing/queues/queue-events).
 
 !!! alert "Please Note"
     If you do not assign this skill to the "Route to Agent" event type, the system will be unable to successfully route the skill-specific calls

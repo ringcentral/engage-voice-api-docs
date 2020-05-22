@@ -12,8 +12,8 @@ Overview and description
       <h6 class="card-subtitle mb-2 text-muted">Messaging API</h6>
       <p class="card-text">Use RingCentral to send and receive SMS and MMS.</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./messaging/sms/sending-sms/" class="card-link">Send an SMS</a></li>
-      <li><a href="./messaging/sms/sending-images/" class="card-link">Sending MMS</a></li>
+      <li><a href="https://developers.ringcentral.com/guide/messaging/sms/sending-sms/" class="card-link">Send an SMS</a></li>
+      <li><a href="https://developers.ringcentral.com/guide/messaging/sms/sending-images/" class="card-link">Sending MMS</a></li>
       </ul>
     </div>
   </div>
@@ -24,8 +24,8 @@ Overview and description
       <h6 class="card-subtitle mb-2 text-muted">Messaging API</h6>
       <p class="card-text">Use RingCentral to manage the faxes your company sends and receives.</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./messaging/fax/sending-faxes/" class="card-link">Send a Fax</a></li>
-      <li><a href="./messaging/fax/receiving-faxes/" class="card-link">Receive a Fax</a></li>
+      <li><a href="https://developers.ringcentral.com/guide/messaging/fax/sending-faxes/" class="card-link">Send a Fax</a></li>
+      <li><a href="https://developers.ringcentral.com/guide/messaging/fax/receiving-faxes/" class="card-link">Receive a Fax</a></li>
       </ul>
     </div>
   </div>
@@ -36,9 +36,9 @@ Overview and description
       <h6 class="card-subtitle mb-2 text-muted">Voice API</h6>
       <p class="card-text">Use RingCentral to enable a "click-to-dial" experience, and to manage calls in progress.</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./voice/ringout/" class="card-link">RingOut</a></li>
-      <li><a href="./voice/call-control/" class="card-link">Active Call Control</a></li>
-      <li><a href="./voice/call-log/recordings/" class="card-link">Call Recordings</a></li>
+      <li><a href="https://developers.ringcentral.com/guide/voice/ringout/" class="card-link">RingOut</a></li>
+      <li><a href="https://developers.ringcentral.com/guide/voice/call-control/" class="card-link">Active Call Control</a></li>
+      <li><a href="https://developers.ringcentral.com/guide/voice/call-log/recordings/" class="card-link">Call Recordings</a></li>
       </ul>
     </div>
   </div>
@@ -52,8 +52,8 @@ Overview and description
       <h6 class="card-subtitle mb-2 text-muted">Auth API</h6>
       <p class="card-text">The first step in making any API call is authenticating to the platform.</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./authentication/auth-code-flow/" class="card-link">OAuth, a.k.a. 3-legged auth</a></li>
-      <li><a href="./authentication/password-flow/" class="card-link">Password Auth</a></li>
+      <li><a href="https://developers.ringcentral.com/guide/authentication/auth-code-flow/" class="card-link">OAuth, a.k.a. 3-legged auth</a></li>
+      <li><a href="https://developers.ringcentral.com/guide/authentication/password-flow/" class="card-link">Password Auth</a></li>
       </ul>
     </div>
   </div>
@@ -64,8 +64,8 @@ Overview and description
       <h6 class="card-subtitle mb-2 text-muted">Subscription API</h6>
       <p class="card-text">Receive notifications when events of interest occur within your account to create more responsive applications.</p>
       <ul>
-      <li><a href="./notifications/manual/webhooks/" class="card-link">Webhooks</a></li>
-      <li><a href="./notifications/manual/pubnub/" class="card-link">Mobile Push Notifications</a></li>
+      <li><a href="https://developers.ringcentral.com/guide/notifications/manual/webhooks/" class="card-link">Webhooks</a></li>
+      <li><a href="https://developers.ringcentral.com/guide/notifications/manual/pubnub/" class="card-link">Mobile Push Notifications</a></li>
       </ul>
     </div>
   </div>

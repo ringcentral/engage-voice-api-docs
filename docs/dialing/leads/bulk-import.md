@@ -12,7 +12,7 @@ The `baseURL` for your server is one of the following:
 * `https://portal.vacd.biz/`
 * `https://portal.virtualacd.biz/`
 
-See the [authentication pages](../basics/authentication) for the [current system API](../basics/auth-ringcentral) and [legacy system API](../basics/auth-legacy) for more.
+See the [authentication pages](../../../authentication) for the [current system API](../../../authentication/auth-ringcentral) and [legacy system API](../../../authentication/auth-legacy) for more.
 
 > Note: to enumerate a list of Campaigns for the `campaignId` path property, section "Enumerating Campaigns" below.
 
