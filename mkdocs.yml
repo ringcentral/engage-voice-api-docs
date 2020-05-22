@@ -51,8 +51,8 @@ pages:
         - 'PHP': dialing/active-calls/quick-start/php.md
         - 'Python': dialing/active-calls/quick-start/python.md
       #- 'List Active Calls': dialing/activecalls/list-activecalls.md
-    # - 'Campaigns':
-    #   - 'Queues':
+    - 'Campaigns':
+      - 'Dial Groups': dialing/dial-groups.md
     - 'Leads':
       - 'Quick start':
         - 'Node JS': dialing/leads/quick-start/node.md
