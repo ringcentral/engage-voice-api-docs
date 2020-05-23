@@ -1,18 +1,28 @@
 # Call Details and Recordings
 
-Call detail records (CDRs) and recordings are available via the Global Call Type Detail Report which provides complete real-time data for all calls in Engage Voice. When recordings are available, media URL is proivded in the call detail record.
+Call detail records (CDRs) and recordings are available via the Global Call Type Detail Report which provides complete real-time data for all calls in Engage Voice. When recordings are available, media URL is provided in the call detail record.
 
-## Call Detail Records Report Request
+## Report Request
 
-The call detail report a number of request properties that allow filtering results:
+### API Endpoint
+
+The Call Detail Report can be downloaded at the following endpoint:
+
+`api/v1/admin/accounts/{accountId}/reportsStreaming`
+
+### Request Properties
+
+The call detail report has a number of request properties that allow filtering results:
 
 | Property | Description |
 |-|-|
 | **`reportType`** | set this to `GLOBAL_CALL_TYPE_EXCEL`. This corresponds to the Global Call Type Detail real-time report in the analytics console. |
 | **`startDate`** | a start date is required. This should be in ISO-8601 format such as: `2020-04-22T00:00:00.000-0000`. |
-| **`endDate`** | field is optional and usess the same format as `startDate`. |
+| **`endDate`** | field is optional and uses the same format as `startDate`. |
 
-Make an API request to the `api/v1/admin/accounts/{accountId}/json` endpoint as follows:
+### Example Request
+
+Be sure to set the proper `BASE_URL` and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
     ```bash
@@ -107,7 +117,7 @@ Detailed phone number information also provided in the Call Detail Record includ
 
 ## Call Recordings
 
-If a recording is available the report CDR will include the `recordingUrl` property with a URL to the recoridng file. Call recordings are provided in WAV format.
+If a recording is available the report CDR will include the `recordingUrl` property with a URL to the recording file. Call recordings are provided in WAV format.
 
 The call recording URLs can be secured using basic auth or accessible anonymously without authentication.
 

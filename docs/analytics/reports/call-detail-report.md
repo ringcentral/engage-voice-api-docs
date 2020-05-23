@@ -8,7 +8,7 @@ The Call Detail Report provides cloud routing data for your cloud-based unified 
 
 The Call Detail Report can be downloaded at the following endpoint:
 
-`GET api/v1/admin/accounts/{accountId}/reportsStreaming`
+`api/v1/admin/accounts/{accountId}/reportsStreaming`
 
 #### Supporting APIs
 
@@ -29,10 +29,10 @@ It takes a JSON request body with the following notable parameters. See the exam
 | **`reportTypeName`** | set to `Cloud_Call_Detail_Download`. |
 | **`reportCriteria.accountIds`** | This is a string array. To retrieve a list of possible values, call the `/v1/admin/accounts` endpoint and use the `accountId` properties.
 | **`reportCriteria.groupBy`** | Either `PROFILE` or `DESTINATION`. If using `PROFILE`, set the `reportCriteria.cloudProfileGroupIds` and `reportCriteria.cloudProfileIds` properties. If using `DESTINATION`, set the `reportCriteria.cloudDestinationGroupIds` and `reportCriteria.cloudDestinationIds` properties. |
-| **`reportCriteria.cloudProfileGroupIds`** | Set if `groupBy` is set to `PROFILE`. If you want all groups, inclde all values, including `null`. Corresponds to "Cloud Profile Groups" in the Admin UI. Populate with an integer array of profile `groupId` values. Call the `GET api/v1/admin/accounts/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_PROFILE` endpoint. Populate with the selected `groupId` values. |
-| **`reportCriteria.cloudProfileIds`** | Set if `groupBy` is set to `PROFILE`. If you want all groups, inclde all values. Corresponds to "Cloud Profiles" in the Admin UI. Populate with an integer array of profile `groupId` values. Call the `GET api/v1/admin/accounts/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_PROFILE` endpoint. Populate with the selected group children `objId` values. The objId valuess musts correspond with `groupId` values in the `cloudProfileGroupIds` properties. |
-| **`reportCriteria.cloudDestinationGroupIds`** | Set if `groupBy` is set to `DESTINATION`. If you want all groups, inclde all values, including `null`. Corresponds to "Cloud Destination Groups" in the Admin UI. Populate with an integer array of profile `groupId` values. Call the `GET api/v1/admin/accounts/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_DESTINATION` endpoint. Populate with the selected `groupId` values. |
-| **`reportCriteria.cloudDestinationIds`** | Set if `groupBy` is set to `DESTINATION`. If you want all groups, inclde all values.  Corresponds to "Cloud Destinations" in the Admin UI. Populate with an integer array of profile `groupId` values. Call the `GET api/v1/admin/accounts/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_DESTINATION` endpoint. Populate with the selected group children `objId` values. The objId valuess musts correspond with `groupId` values in the `cloudProfileGroupIds` properties. |
+| **`reportCriteria.cloudProfileGroupIds`** | Set if `groupBy` is set to `PROFILE`. If you want all groups, include all values, including `null`. Corresponds to "Cloud Profile Groups" in the Admin UI. Populate with an integer array of profile `groupId` values. Call the `GET api/v1/admin/accounts/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_PROFILE` endpoint. Populate with the selected `groupId` values. |
+| **`reportCriteria.cloudProfileIds`** | Set if `groupBy` is set to `PROFILE`. If you want all groups, include all values. Corresponds to "Cloud Profiles" in the Admin UI. Populate with an integer array of profile `groupId` values. Call the `GET api/v1/admin/accounts/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_PROFILE` endpoint. Populate with the selected group children `objId` values. The objId values musts correspond with `groupId` values in the `cloudProfileGroupIds` properties. |
+| **`reportCriteria.cloudDestinationGroupIds`** | Set if `groupBy` is set to `DESTINATION`. If you want all groups, include all values, including `null`. Corresponds to "Cloud Destination Groups" in the Admin UI. Populate with an integer array of profile `groupId` values. Call the `GET api/v1/admin/accounts/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_DESTINATION` endpoint. Populate with the selected `groupId` values. |
+| **`reportCriteria.cloudDestinationIds`** | Set if `groupBy` is set to `DESTINATION`. If you want all groups, include all values.  Corresponds to "Cloud Destinations" in the Admin UI. Populate with an integer array of profile `groupId` values. Call the `GET api/v1/admin/accounts/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_DESTINATION` endpoint. Populate with the selected group children `objId` values. The objId values musts correspond with `groupId` values in the `cloudProfileGroupIds` properties. |
 | **`reportCriteria.startTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
 | **`reportCriteria.endTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
 | **`reportCriteria.timezoneName`** | Use the "TZ database name" from the [tz database](https://en.wikipedia.org/wiki/Tz_database). For example, `US/Pacific`.|
@@ -43,11 +43,11 @@ It takes a JSON request body with the following notable parameters. See the exam
 
 ### Example Request
 
-Be sure to sure the proper `BASE_URL` and authorization header for your deployment.
+Be sure to set the proper `BASE_URL` and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
 ```bash
-POST {BASE_URL}api/v1/admin/accounts/{accountId}/reportsStreaming
+POST {BASE_URL}/api/v1/admin/accounts/{accountId}/reportsStreaming
 Authorization: bearer <myAccessToken>
 Content-Type: application/json;charset=UTF-8
 

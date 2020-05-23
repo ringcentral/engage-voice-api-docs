@@ -1,12 +1,16 @@
 # Agent Session Report
 
+The Agent Session Report provides an overview of agent activity for each agent logged in during the date range selected. Data is accurate up to the second the report is run, but this report only provides access to the last 90 days worth of data.
+
 ## Report Request
 
-The Agent Session Report provides an overview of agent activity for each agent logged in during the date range selected.
+### API Endpoint
 
-It is available at the following endpoint:
+The Agent Session Report can be downloaded at the following endpoint:
 
 `api/v1/admin/accounts/{accountId}/reportsStreaming`
+
+### Request Properties
 
 It takes a JSON request body with the following notable parameters. See the example below for more.
 
@@ -17,9 +21,13 @@ It takes a JSON request body with the following notable parameters. See the exam
 | **`reportCriteria.startTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
 | **`reportCriteria.endTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
 
+### Example Request
+
+Be sure to set the proper `BASE_URL` and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+
 === "HTTP"
     ```bash
-    POST /api/v1/admin/accounts/{accountId}/reportsStreaming
+    POST {BASE_URL}/api/v1/admin/accounts/{accountId}/reportsStreaming
     Authorization: bearer <myAccessToken>
     Content-Type: application/json;charset=UTF-8
 

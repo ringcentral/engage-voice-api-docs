@@ -31,7 +31,7 @@ You can also use analytics to help identify the high or low points in customer a
   <div class="card" style="width: 18rem;">
     <div class="card-body pt-0 pb-0">
       <h5 class="card-title">Cloud Reports</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Reports API</h6>
+      <h6 class="card-subtitle mb-2 text-muted">Reports Streaming API</h6>
       <p class="card-text">The Cloud Reports category provides cloud routing data for your cloud-based unified queues. The reports in this category include:</p>
       <ul class="pl-0 ml-4">
       <li><a href="./reports/call-detail-report" class="card-link">Call Detail</a></li>
