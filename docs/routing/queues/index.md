@@ -21,7 +21,6 @@ You must first create a Queue Group before creating Queues. Start with a simple 
 ## Popular Use Cases and Documentation
 
 <div class="card-deck">
-
   <div class="card" style="width: 18rem;">
     <div class="card-body pt-0 pb-0">
       <h5 class="card-title">Queue Group</h5>
@@ -40,6 +39,30 @@ You must first create a Queue Group before creating Queues. Start with a simple 
       <p class="card-text">Use RingCentral Queues to route customers to Agents based upon the Agent's experience and priority.</p>
       <ul class="pl-0 ml-4">
       <li><a href="./queues/" class="card-link">Create a Queue</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body pt-0 pb-0">
+      <h5 class="card-title">Queue Events</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Queue Events API</h6>
+      <p class="card-text">Create a specific experience you want each caller to have while waiting for an agent to take their call.</p>
+      <ul class="pl-0 ml-4">
+      <li><a href="./queue-events/" class="card-link">Create Queue Events</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="card-deck">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body pt-0 pb-0">
+      <h5 class="card-title">Group Skills</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Skills API</h6>
+      <p class="card-text">The first step in assigning skills to agents. Create a Group Skill so you have skills that can be bound to Agents..</p>
+      <ul class="pl-0 ml-4">
+      <li><a href="./group-skills/" class="card-link">Create Group Skills</a></li>
       </ul>
     </div>
   </div>
