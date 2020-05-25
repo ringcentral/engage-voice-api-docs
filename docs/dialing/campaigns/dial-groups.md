@@ -12,7 +12,7 @@ While you can create multiple dial groups — each of which can use a different 
 Campaigns live within a dial group, which means you must set up and configure a dial group before you create your first campaign.  Dial groups provide a pool of campaigns an agent can log into and dial from.
 
 ### Dial Mode
-Dial groups are differentiated by dial mode. Each dial group will only dial via one particular dialing mode at a time. Two dial modes in particular are important here: Predictive dialing and Preivew dialing.
+Dial groups are differentiated by dial mode. Each dial group will only dial via one particular dialing mode at a time. Two dial modes in particular are important here: Predictive dialing and Preview dialing.
 
 -   **Predictive Dialing**
 
@@ -74,9 +74,9 @@ Content-Type: application/json
 
 {
   "dialGroupId": 0,
-  "dialGroupName":"My Dial Group - Predictive",
-  "dialGroupDesc":"A test dial group with predictive dial mode",
-  "dialMode":"PREDICTIVE",
+  "dialGroupName": "My Dial Group - Predictive",
+  "dialGroupDesc": "A test dial group with predictive dial mode",
+  "dialMode": "PREDICTIVE",
   "isActive": true,
 }
 ```
@@ -92,11 +92,11 @@ try:
     ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER")
     endpoint = 'admin/accounts/~/dialGroups'
     params = {
-      "dialGroupId":0,
-      "dialGroupName":"My Dial Group - Predictive",
-      "dialGroupDesc":"A test dial group with predictive dial mode",
-      "dialMode":"PREDICTIVE",
-      "isActive":True
+      "dialGroupId": 0,
+      "dialGroupName": "My Dial Group - Predictive",
+      "dialGroupDesc": "A test dial group with predictive dial mode",
+      "dialMode": "PREDICTIVE",
+      "isActive": True
     }
     response = ev.post(endpoint, params)
     print (response)        
@@ -211,16 +211,16 @@ PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}
   "dialGroupId": 115793,
   "dialGroupName":"My Dial Group - Predictive",
   "dialGroupDesc":"A test dial group with predictive dial mode",
-  "dialMode":"PREDICTIVE",
+  "dialMode": "PREDICTIVE",
   "isActive": true,
   "hciEnabled": "DISABLED",
   "agentDialGroupMembers": null,
-  "enableAbsolutePriority":true,
-  "enableAgentFilter":true,
-  "enableListPriority":true,
-  "allowLeadSearch":"YES",
-  "enableCallbacksAfterMaxpass":true,
-  "enableCallbacksAfterMaxDailyPass":true
+  "enableAbsolutePriority": true,
+  "enableAgentFilter": true,
+  "enableListPriority": true,
+  "allowLeadSearch": "YES",
+  "enableCallbacksAfterMaxpass": true,
+  "enableCallbacksAfterMaxDailyPass": true
 }
 ```
 
@@ -235,20 +235,20 @@ try:
     ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER")
     endpoint = 'admin/accounts/~/dialGroups/'
     params = {
-      "permissions":[],
-      "dialGroupId":115793,
-      "dialGroupName":"My Dial Group - Predictive",
-      "dialGroupDesc":"A test dial group with predictive dial mode",
-      "dialMode":"PREDICTIVE",
-      "isActive":True,
+      "permissions": [],
+      "dialGroupId": 115793,
+      "dialGroupName": "My Dial Group - Predictive",
+      "dialGroupDesc": "A test dial group with predictive dial mode",
+      "dialMode": "PREDICTIVE",
+      "isActive": True,
       "hciEnabled": "DISABLED",
-      "agentDialGroupMembers":None,
-      "enableAbsolutePriority":True,
-      "enableAgentFilter":True,
-      "enableListPriority":True,
-      "allowLeadSearch":"YES",
-      "enableCallbacksAfterMaxpass":True,
-      "enableCallbacksAfterMaxDailyPass":True
+      "agentDialGroupMembers": None,
+      "enableAbsolutePriority": True,
+      "enableAgentFilter": True,
+      "enableListPriority": True,
+      "allowLeadSearch": "YES",
+      "enableCallbacksAfterMaxpass": True,
+      "enableCallbacksAfterMaxDailyPass": True
     }
     resp = ev.get(endpoint)
     for group in resp:

@@ -38,6 +38,7 @@ pages:
       - 'Agent Session': analytics/reports/agent-session-report.md
       - 'Global Call Type Detail': analytics/reports/global-call-type-detail-report.md
   - 'Routing':
+    - 'Overview': routing/index.md
     - 'Queues':
       - 'Overview': routing/queues/index.md
       - 'Queues': routing/queues/queues.md
@@ -45,6 +46,17 @@ pages:
       - 'Queue Groups': routing/queues/queue-groups.md
       - 'Group Skills': routing/queues/group-skills.md
   - 'Dialing':
+    - 'Overview': dialing/index.md
+    - 'Campaigns':
+      - 'Dial Groups': dialing/campaigns/dial-groups.md
+    - 'Leads':
+      #- 'Overview': dialing/leads/index.md
+      - 'Quick start':
+        - 'Node JS': dialing/leads/quick-start/node.md
+        - 'Python': dialing/leads/quick-start/python.md
+        - 'PHP': dialing/leads/quick-start/php.md
+      - 'Bulk Import Leads': dialing/leads/bulk-import.md
+      - 'Searching Leads': dialing/leads/search.md
     - 'Active Calls':
       - 'Overview': dialing/active-calls/index.md
       - 'Getting Started':
@@ -52,15 +64,6 @@ pages:
         - 'PHP': dialing/active-calls/quick-start/php.md
         - 'Python': dialing/active-calls/quick-start/python.md
       #- 'List Active Calls': dialing/activecalls/list-activecalls.md
-    - 'Campaigns':
-      - 'Dial Groups': dialing/dial-groups.md
-    - 'Leads':
-      - 'Quick start':
-        - 'Node JS': dialing/leads/quick-start/node.md
-        - 'Python': dialing/leads/quick-start/python.md
-        - 'PHP': dialing/leads/quick-start/php.md
-      - 'Bulk Import Leads': dialing/leads/bulk-import.md
-      - 'Searching Leads': dialing/leads/search.md
   - 'Users':
     - 'Agents':
       - 'Overview': users/agents/index.md
