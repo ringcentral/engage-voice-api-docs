@@ -1,4 +1,4 @@
-# Agent Basics
+# About Agents
 
 Managing agents and automatically syncing them with your user management tools can be automated via the API. This article covers the basics of creating, reading, updating deleting Agents.
 
@@ -12,7 +12,7 @@ Before starting, make sure you have an Agent Group created and the `agentGroupId
 
 To create an agent, send an API request to the following URL with a JSON encoded body as described and shown below.
 
-* `POST /voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents`
+* `{BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents`
 
 #### Supporting APIs
 
