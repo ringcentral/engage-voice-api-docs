@@ -2,14 +2,6 @@
 
 The following SDKs provide developers with libraries that make interfacing with Engage Voice APIs easier in your language of choice.
 
-## Official SDKs
-
-* [engagevoice-csharp](https://github.com/ringcentral/engagevoice.net) - .NET library
-* [engagevoice-java](https://github.com/ringcentral/engagevoice-java) - Java library
-* [engagevoice-js](https://github.com/ringcentral/engagevoice-js) - Node JS library
-* [engagevoice-php](https://github.com/ringcentral/engagevoice-php) - PHP library
-* [engagevoice-python](https://github.com/ringcentral/engagevoice-python) - Python library
-
 ## Community SDKs and Sample Apps
 
 In addition to the official Engage Voice SDKs there are a number of unofficial libraries, plugins and sample apps for a range of languages built by amazing communities of active developers. The list below includes SDK wrappers for Engage Voice Platform APIs.
