@@ -84,5 +84,5 @@ pages:
     - 'RingCentral Office Token': authentication/auth-ringcentral.md
     - 'Legacy': authentication/auth-legacy.md
   - 'SDKs': sdks/index.md
-  - 'Embeddable':
-    - 'Getting Started': embeddable/get-started.md
+  - 'Embeddable': embeddable/get-started.md
+  - 'Postman': postman.md
