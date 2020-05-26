@@ -1,10 +1,10 @@
-# Bulk Lead Import
+# About Bulk Lead Import
 
 The Engage Voice API allows you to load one or multiple leads at a time. You can also load leads for immediate dialing at the top of the dialer cache or in normal priority.
 
 Use the following endpoint with the JSON body described below.
 
-`POST {baseURL}/api/admin/accounts/{accountId}/campaigns/{campaignId}/loader/direct`
+`{baseURL}/api/admin/accounts/{accountId}/campaigns/{campaignId}/loader/direct`
 
 The `baseURL` for your server is one of the following:
 
@@ -12,9 +12,10 @@ The `baseURL` for your server is one of the following:
 * `https://portal.vacd.biz/`
 * `https://portal.virtualacd.biz/`
 
-See the [authentication pages](../basics/authentication) for the [current system API](../basics/auth-ringcentral) and [legacy system API](../basics/auth-legacy) for more.
+See the [authentication pages](../../../basics/authentication) for the [current system API](../../../basics/auth-ringcentral) and [legacy system API](../../../basics/auth-legacy) for more.
 
-> Note: to enumerate a list of Campaigns for the `campaignId` path property, section "Enumerating Campaigns" below.
+!!! alert "Please Note"
+    To enumerate a list of Campaigns for the `campaignId` path property, please review section [Enumerating Campaigns](./#enumerating-campaigns) below.
 
 The JSON body consists of a set of options along with an array of leads in the `uploadLeads` property
 
