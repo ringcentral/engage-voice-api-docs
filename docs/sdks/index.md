@@ -2,7 +2,7 @@
 
 The following SDKs provide developers with libraries that make interfacing with Engage Voice APIs easier in your language of choice.
 
-## Community SDKs and Sample Apps
+## Community SDKs
 
 In addition to the official Engage Voice SDKs there are a number of unofficial libraries, plugins and sample apps for a range of languages built by amazing communities of active developers. The list below includes SDK wrappers for Engage Voice Platform APIs.
 
