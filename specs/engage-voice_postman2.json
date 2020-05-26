@@ -1,0 +1,5096 @@
+{
+  "info": {
+    "name": "RingCentral Engage Voice API",
+    "description": "This is a collection of API requests associated with the Basic usage plan in RingCentral Connect Platform for Sandbox Testing.\n\nPlease use a Postman environment with the following variables: RC_SERVER_HOSTNAME, RC_APP_KEY, RC_APP_SECRET, RC_USERNAME, RC_EXTENSION, RC_PASSWORD\n\nTo use these resources, you must ALWAYS start by executing one of the OAuth \"Auth\" Requests first, then you can use any other requests (for the 60 minutes that the access_token you obtained is valid).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "description": "YOU MUST UPDATE VALUES IN THE \"Pre-request Script\" section of ALL items in this folder to match your RingCentral Sandbox Account.",
+      "item": [
+        {
+          "name": "Fetch access_token",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "// Populate the Postman environment with:",
+                  "// RINGCENTRAL_SERVER_URL, RINGCENTRAL_CLIENT_ID, RINGCENTRAL_CLIENT_SECRET,",
+                  "// RINGCENTRAL_USERNAME, RINGCENTRAL_EXTENSION, RINGCENTRAL_PASSWORD",
+                  "var clientId = environment['RINGCENTRAL_CLIENT_ID'];",
+                  "var clientSecret = environment['RINGCENTRAL_CLIENT_SECRET'];",
+                  "var username = environment['RINGCENTRAL_USERNAME'];",
+                  "var extension = environment['RINGCENTRAL_EXTENSION'];",
+                  "var password = environment['RINGCENTRAL_PASSWORD'];",
+                  "var apiKey = encodeBasicAuthHeader(clientId, clientSecret);",
+                  "",
+                  "postman.setEnvironmentVariable(\"basic_auth_header\", \"Basic \".concat(apiKey));",
+                  "",
+                  "function encodeBasicAuthHeader(clientId, clientSecret) {",
+                  "    var apiKey = clientId + ':' + clientSecret;",
+                  "    return btoa(apiKey);",
+                  "}",
+                  "const rcTokenRequestInfo = {",
+                  "    url: 'https://platform.ringcentral.com/restapi/oauth/token ',",
+                  "    method: 'POST',",
+                  "    header: {",
+                  "       'Authorization': 'Basic '.concat(apiKey),",
+                  "       'Content-Type': 'application/x-www-form-urlencoded'",
+                  "    },",
+                  "    body: {",
+                  "       mode: 'raw',",
+                  "       raw: 'grant_type=password\u0026username=' + username + '\u0026extension=' + extension + '\u0026password=' + password",
+                  "    }",
+                  "};",
+                  "pm.sendRequest(rcTokenRequestInfo, function (err, res) {",
+                  "    console.log(err ? err : res.json());",
+                  "    var rcData = res.json();",
+                  "    postman.setEnvironmentVariable('rco_access_token', rcData.access_token);",
+                  "});"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "var rcEvData = JSON.parse(responseBody);",
+                  "tests['Contains an accessToken'] = rcEvData.hasOwnProperty('accessToken');",
+                  "",
+                  "tests['Status code is 200'] = responseCode.code === 200;",
+                  "",
+                  "postman.setEnvironmentVariable('rcev_access_token', rcEvData.accessToken);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "url": {
+              "raw": "https://engage.ringcentral.com/api/auth/login/rc/accesstoken",
+              "protocol": "https",
+              "host": [
+                "engage",
+                "ringcentral",
+                "com"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login",
+                "rc",
+                "accesstoken"
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded;charset=UTF-8"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "rcTokenType",
+                  "value": "Bearer",
+                  "type": "text",
+                  "enabled": true
+                },
+                {
+                  "key": "rcAccessToken",
+                  "value": "{{rco_access_token}}",
+                  "type": "text",
+                  "enabled": true
+                }
+              ]
+            },
+            "description": "Fetch access_token from Enage Voice."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Reporting"
+        },
+        {
+          "name": "Real Time Reporting"
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Agents",
+          "item": [
+            {
+              "name": "Returns a listing of agents for an agent group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "agentGroups",
+                    ":agentGroupId",
+                    "agents"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Creates a single agent for an agent group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "agentGroups",
+                    ":agentGroupId",
+                    "agents"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a listing of agents for an agent group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "agentGroups",
+                    ":agentGroupId",
+                    "agents"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a single agent for an agent group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents/:agentId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "agentGroups",
+                    ":agentGroupId",
+                    "agents",
+                    ":agentId"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a single agent for an agent group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents/:agentId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "agentGroups",
+                    ":agentGroupId",
+                    "agents",
+                    ":agentId"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Deletes an agent for an agent group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents/:agentId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "agentGroups",
+                    ":agentGroupId",
+                    "agents",
+                    ":agentId"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Assigns a listing of agents to a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/assignAgents",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "assignAgents"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a listing of assigned agents for a queue (AKA gate) ",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/assignedAgents",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "assignedAgents"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Unassigns a single agent from a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/unassignAgent/:agentId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "unassignAgent",
+                    ":agentId"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Agent Groups",
+          "item": [
+            {
+              "name": "Returns a listing of agent groups for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "agentGroups"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    },
+                    {
+                      "key": "includePermissions",
+                      "value": "\u003cboolean\u003e",
+                      "description": "includePermissions",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Creates a single new agent group for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "agentGroups"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a listing of agent groups for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "agentGroups",
+                    ":agentGroupId"
+                  ],
+                  "query": [
+                    {
+                      "key": "includePermissions",
+                      "value": "\u003cboolean\u003e",
+                      "description": "includePermissions",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates an agent group for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "agentGroups",
+                    ":agentGroupId"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Deletes an agent group for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "agentGroups",
+                    ":agentGroupId"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "Get Users",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/users",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "users"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Routing",
+      "item": [
+        {
+          "name": "Queues",
+          "item": [
+            {
+              "name": "Returns a listing of all queues (AKA gates) for a queue group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Creates a new queue (AKA gate) for a queue group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a single queue (AKA gate) for a queue group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a queue (AKA gate) for a queue group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Deletes a queue (AKA gate) for a queue group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Assigns a queue (AKA gate) to a queue priority group for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/assignGateToPriorityGroup",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "assignGateToPriorityGroup"
+                  ],
+                  "query": [
+                    {
+                      "key": "priorityGroupId",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "priorityGroupId",
+                      "disabled": true
+                    },
+                    {
+                      "key": "priorityGroupRank",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "priorityGroupRank",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Creates a clone of a queue (AKA gate) for a queue group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/clone",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "clone"
+                  ],
+                  "query": [
+                    {
+                      "key": "newGateGroupId",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "newGateGroupId",
+                      "disabled": true
+                    },
+                    {
+                      "key": "newGateName",
+                      "value": "\u003cstring\u003e",
+                      "description": "newGateName",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Move an existing queue (AKA gate) to a new existing queue group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/moveToGroup",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "moveToGroup"
+                  ],
+                  "query": [
+                    {
+                      "key": "newGateGroupId",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "newGateGroupId",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Set queue (AKA gate) active state",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/setIsActive",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "setIsActive"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Queue Groups",
+          "item": [
+            {
+              "name": "Returns a listing of queue groups (AKA gate groups) for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Create a single queue group (AKA gate group) for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a listing of queue groups (AKA gate groups) with related data for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/withChildren",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    "withChildren"
+                  ],
+                  "query": [
+                    {
+                      "key": "includePermissions",
+                      "value": "\u003cboolean\u003e",
+                      "description": "includePermissions",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a listing of queue groups (AKA gate groups) with related and additional data for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/withChildren/additionalData",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    "withChildren",
+                    "additionalData"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a single queue group (AKA gate group) for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a single queue group (AKA gate group) for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Deletes a single queue group (AKA gate group)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Agent Access",
+          "item": [
+            {
+              "name": "Returns the count of agents in an agentGroup logged into a Queue ",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/gateGroups/:gateGroupId/gates/:gateId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "agentGroups",
+                    ":agentGroupId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a listing of all agents that have access to the queue (AKA gate) - this includes data to indicate if an agent is currently logged into the queue",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateAgentAccessLogin",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "gateAgentAccessLogin"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Queue Dispositions",
+          "item": [
+            {
+              "name": "Returns a listing of dispositions for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "dispositions"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Creates a disposition for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "dispositions"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Saves a list of dispositions for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "dispositions"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a single disposition for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions/:gateDispositionId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "dispositions",
+                    ":gateDispositionId"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a single disposition for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions/:gateDispositionId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "dispositions",
+                    ":gateDispositionId"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Deletes a disposition for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions/:gateDispositionId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "dispositions",
+                    ":gateDispositionId"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Queue Events",
+          "item": [
+            {
+              "name": "Returns a listing of gate queue events for a queue",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "gateQueueEvents"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "createGateQueueEvent",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "gateQueueEvents"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Saves a list of gate queue events for a queue",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "gateQueueEvents"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a single gate queue event for a queue",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "gateQueueEvents",
+                    ":eventId"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a single gate queue event for a queue",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "gateQueueEvents",
+                    ":eventId"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Deletes a gate queue event for a queue",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "gateQueueEvents",
+                    ":eventId"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a listing of Gate Queue Dtmp Events for a Queue",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "gateQueueEvents",
+                    ":eventId",
+                    "gateQueueDtmfEvents"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Creates a new Gate Queue Dtmp Event",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "gateQueueEvents",
+                    ":eventId",
+                    "gateQueueDtmfEvents"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a listing of Gate Queue Dtmp Events",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "gateQueueEvents",
+                    ":eventId",
+                    "gateQueueDtmfEvents"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a single Gate Queue Dtmp Event",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents/:dtmfEventId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "gateQueueEvents",
+                    ":eventId",
+                    "gateQueueDtmfEvents",
+                    ":dtmfEventId"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a single Gate Queue Dtmp Event",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents/:dtmfEventId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "gateQueueEvents",
+                    ":eventId",
+                    "gateQueueDtmfEvents",
+                    ":dtmfEventId"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Deletes a Gate Queue Dtmp Event",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents/:dtmfEventId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "gateQueueEvents",
+                    ":eventId",
+                    "gateQueueDtmfEvents",
+                    ":dtmfEventId"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Queue Phone Book",
+          "item": [
+            {
+              "name": "Returns all phone book entries for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "phoneBookEntries"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Creates a phone book entry for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "phoneBookEntries"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a listing of phone book entries for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "phoneBookEntries"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a phone book entry for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries/:entryId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "phoneBookEntries",
+                    ":entryId"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Deletes a single phone book entry for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries/:entryId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "phoneBookEntries",
+                    ":entryId"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Queue Skills",
+          "item": [
+            {
+              "name": "Returns a listing of skills for a queue group (AKA gate group)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "skills"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Creates a skill for a queue group (AKA gate group)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "skills"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates an existing list of skills for a queue group (AKA gate group)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "skills"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a skill for a queue group (AKA gate group)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills/:skillId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "skills",
+                    ":skillId"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a skill for a queue group (AKA gate group)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills/:skillId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "skills",
+                    ":skillId"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Deletes a skill for a queue group (AKA gate group)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills/:skillId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "skills",
+                    ":skillId"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Requeue Shortcuts",
+          "item": [
+            {
+              "name": "Returns a listing of requeue shortcuts for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "requeueShortcuts"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a requeue shortcut for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "requeueShortcuts"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Creates a list of requeue shortcuts for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "requeueShortcuts"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a requeue shortcut for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts/:requeueShortcutId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "requeueShortcuts",
+                    ":requeueShortcutId"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a requeue shortcut for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts/:requeueShortcutId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "requeueShortcuts",
+                    ":requeueShortcutId"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a listing of requeue shortcuts for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts/:requeueShortcutId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "requeueShortcuts",
+                    ":requeueShortcutId"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Queue Schedule",
+          "item": [
+            {
+              "name": "Returns a listing of schedule overrides for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "scheduleOverrides"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Creates a schedule override for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "scheduleOverrides"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Saves a listing of schedule overrides for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "scheduleOverrides"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a schedule override for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides/:scheduleOverrideId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "scheduleOverrides",
+                    ":scheduleOverrideId"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Deletes a schedule override for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides/:scheduleOverrideId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "scheduleOverrides",
+                    ":scheduleOverrideId"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Queue Special ANI",
+          "item": [
+            {
+              "name": "Returns a listing of special anis for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/specialAnis",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "specialAnis"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "\u003cstring\u003e",
+                      "description": "type",
+                      "disabled": true
+                    },
+                    {
+                      "key": "filter",
+                      "value": "\u003cstring\u003e",
+                      "description": "filter",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Creates a special ani for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/specialAnis",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "specialAnis"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Deletes a special ani for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/specialAnis",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "specialAnis"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "\u003cstring\u003e",
+                      "description": "type",
+                      "disabled": true
+                    },
+                    {
+                      "key": "ani",
+                      "value": "\u003cstring\u003e",
+                      "description": "ani",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "*/*"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Uploads a special ani for a queue (AKA gate)",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/specialAnis/upload",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "gateGroups",
+                    ":gateGroupId",
+                    "gates",
+                    ":gateId",
+                    "specialAnis",
+                    "upload"
+                  ],
+                  "query": [
+                    {
+                      "key": "operation",
+                      "value": "\u003cstring\u003e",
+                      "description": "operation",
+                      "disabled": true
+                    },
+                    {
+                      "key": "type",
+                      "value": "\u003cstring\u003e",
+                      "description": "type",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dialing",
+      "item": [
+        {
+          "name": "Active Calls",
+          "item": [
+            {
+              "name": "Creates a manual agent call",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/accounts/:accountId/activeCalls/createManualAgentCall",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "accounts",
+                    ":accountId",
+                    "activeCalls",
+                    "createManualAgentCall"
+                  ],
+                  "query": [
+                    {
+                      "key": "username",
+                      "value": "\u003cstring\u003e",
+                      "description": "username",
+                      "disabled": true
+                    },
+                    {
+                      "key": "destination",
+                      "value": "\u003cstring\u003e",
+                      "description": "destination",
+                      "disabled": true
+                    },
+                    {
+                      "key": "ringDuration",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "ringDuration",
+                      "disabled": true
+                    },
+                    {
+                      "key": "callerId",
+                      "value": "\u003cstring\u003e",
+                      "description": "callerId",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a listing of current active calls for a given product on an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/accounts/:accountId/activeCalls/list",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "accounts",
+                    ":accountId",
+                    "activeCalls",
+                    "list"
+                  ],
+                  "query": [
+                    {
+                      "key": "product",
+                      "value": "\u003cstring\u003e",
+                      "description": "product",
+                      "disabled": true
+                    },
+                    {
+                      "key": "productId",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "productId",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Provides support for adding sessions to an active call.",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/addSessionToCall",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "accounts",
+                    ":accountId",
+                    "activeCalls",
+                    ":uii",
+                    "addSessionToCall"
+                  ],
+                  "query": [
+                    {
+                      "key": "destination",
+                      "value": "\u003cstring\u003e",
+                      "description": "destination",
+                      "disabled": true
+                    },
+                    {
+                      "key": "sessionType",
+                      "value": "\u003cstring\u003e",
+                      "description": "sessionType",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Sets the call disposition for either INBOUND or OUTBOUND calls and releases the agent from PD state",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/dispositionCall",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "accounts",
+                    ":accountId",
+                    "activeCalls",
+                    ":uii",
+                    "dispositionCall"
+                  ],
+                  "query": [
+                    {
+                      "key": "disposition",
+                      "value": "\u003cstring\u003e",
+                      "description": "disposition",
+                      "disabled": true
+                    },
+                    {
+                      "key": "callback",
+                      "value": "\u003cboolean\u003e",
+                      "description": "callback",
+                      "disabled": true
+                    },
+                    {
+                      "key": "callBackDTS",
+                      "value": "\u003cstring\u003e",
+                      "description": "callBackDTS",
+                      "disabled": true
+                    },
+                    {
+                      "key": "notes",
+                      "value": "\u003cstring\u003e",
+                      "description": "notes",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Terminates an active call",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/hangupCall",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "accounts",
+                    ":accountId",
+                    "activeCalls",
+                    ":uii",
+                    "hangupCall"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Terminates an active session",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/hangupSession",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "accounts",
+                    ":accountId",
+                    "activeCalls",
+                    ":uii",
+                    "hangupSession"
+                  ],
+                  "query": [
+                    {
+                      "key": "phone",
+                      "value": "\u003cstring\u003e",
+                      "description": "phone",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Provides support for toggling call recording on/off for an active call",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/toggleCallRecording",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "accounts",
+                    ":accountId",
+                    "activeCalls",
+                    ":uii",
+                    "toggleCallRecording"
+                  ],
+                  "query": [
+                    {
+                      "key": "record",
+                      "value": "\u003cboolean\u003e",
+                      "description": "record",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Campaigns",
+          "item": [
+            {
+              "name": "Performs a lead action against the matching campaign leads found for the given the search criteria",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/actions",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "campaignLeads",
+                    "actions"
+                  ],
+                  "query": [
+                    {
+                      "key": "leadAction",
+                      "value": "\u003cstring\u003e",
+                      "description": "leadAction",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Allows searching of campaign leads for a single campaign",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/leadSearchByPhoneList",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "campaignLeads",
+                    "leadSearchByPhoneList"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a listing of campaigns for a dial group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "dialGroups",
+                    ":dialGroupId",
+                    "campaigns"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a campaign for a dial group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "dialGroups",
+                    ":dialGroupId",
+                    "campaigns"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a campaign for a dial group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns/:campaignId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "dialGroups",
+                    ":dialGroupId",
+                    "campaigns",
+                    ":campaignId"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a campaign for a dial group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns/:campaignId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "dialGroups",
+                    ":dialGroupId",
+                    "campaigns",
+                    ":campaignId"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Deletes a campaign for a dial group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns/:campaignId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "dialGroups",
+                    ":dialGroupId",
+                    "campaigns",
+                    ":campaignId"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Clear Campaign Cache",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns/:campaignId/clearCache",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "dialGroups",
+                    ":dialGroupId",
+                    "campaigns",
+                    ":campaignId",
+                    "clearCache"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Campaign Groups"
+        },
+        {
+          "name": "Leads",
+          "item": [
+            {
+              "name": "Allows searching of campaign leads for a single campaign",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/leadSearch",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "campaignLeads",
+                    "leadSearch"
+                  ],
+                  "query": [
+                    {
+                      "key": "count",
+                      "value": "\u003cboolean\u003e",
+                      "description": "count",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a listing of all lead states for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/leadStates",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "campaignLeads",
+                    "leadStates"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a listing of all system dispositions for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/systemDispositions",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "campaignLeads",
+                    "systemDispositions"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Patch Campaign Lead",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/:leadId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "campaignLeads",
+                    ":leadId"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "\u003cinteger\u003e",
+                      "disabled": true
+                    },
+                    {
+                      "key": "listId",
+                      "value": "\u003cinteger\u003e",
+                      "disabled": true
+                    },
+                    {
+                      "key": "timezoneOption",
+                      "value": "\u003cstring\u003e",
+                      "disabled": true
+                    },
+                    {
+                      "key": "duplicateHandling",
+                      "value": "\u003cstring\u003e",
+                      "description": "`RETAIN_ALL`: Retain all records, `REMOVE_ALL_EXISTING`: Remove duplicates from all existing lists, `REMOVE_FROM_LIST`: Remove duplicates from this list",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Allows updating of a campaign lead",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/:leadId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "campaignLeads",
+                    ":leadId"
+                  ],
+                  "query": [
+                    {
+                      "key": "campaignId",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "campaignId",
+                      "disabled": true
+                    },
+                    {
+                      "key": "listId",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "listId",
+                      "disabled": true
+                    },
+                    {
+                      "key": "timezoneOption",
+                      "value": "\u003cstring\u003e",
+                      "description": "timezoneOption",
+                      "disabled": true
+                    },
+                    {
+                      "key": "duplicateHandling",
+                      "value": "\u003cstring\u003e",
+                      "description": "duplicateHandling",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Uploads a single lead or list of leads to a new or existing list",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaigns/:campaignId/leadLoader/direct",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "campaigns",
+                    ":campaignId",
+                    "leadLoader",
+                    "direct"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Dial Groups",
+          "item": [
+            {
+              "name": "Returns a listing of dial groups for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "dialGroups"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Creates a dial group for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "dialGroups"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a listing of dial groups with associated campaigns for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/withChildren",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "dialGroups",
+                    "withChildren"
+                  ],
+                  "query": [
+                    {
+                      "key": "includePermissions",
+                      "value": "\u003cboolean\u003e",
+                      "description": "includePermissions",
+                      "disabled": true
+                    },
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a dial group for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "dialGroups",
+                    ":dialGroupId"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Updates a dial group for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "dialGroups",
+                    ":dialGroupId"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Deletes a dial group for an account",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "dialGroups",
+                    ":dialGroupId"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Assigns a listing of agents to a dial group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/assignAgents",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "dialGroups",
+                    ":dialGroupId",
+                    "assignAgents"
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Returns a listing of all agents assigned to a dial group",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/assignedAgents",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "dialGroups",
+                    ":dialGroupId",
+                    "assignedAgents"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "page",
+                      "disabled": true
+                    },
+                    {
+                      "key": "maxRows",
+                      "value": "\u003cinteger.int32\u003e",
+                      "description": "maxRows",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Outbound",
+          "item": [
+            {
+              "name": "Upload new leads to a new or existing list",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaigns/:campaignId/leadLoader/preview",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "campaigns",
+                    ":campaignId",
+                    "leadLoader",
+                    "preview"
+                  ],
+                  "query": [
+                    {
+                      "key": "fileType",
+                      "value": "\u003cstring\u003e",
+                      "description": "fileType",
+                      "disabled": true
+                    },
+                    {
+                      "key": "quoteCharacter",
+                      "value": "\u003cstring\u003e",
+                      "description": "quoteCharacter",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Upload new leads to a new or existing list",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaigns/:campaignId/leadLoader/process",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "campaigns",
+                    ":campaignId",
+                    "leadLoader",
+                    "process"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Authentication"
+        },
+        {
+          "name": "Password Reset"
+        },
+        {
+          "name": "Token"
+        },
+        {
+          "name": "OAuth"
+        },
+        {
+          "name": "RingCentral Auth",
+          "item": [
+            {
+              "name": "Logs in an RC user via their access token issued by the RC API server",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/engage/api/auth/login/rc/accesstoken",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "engage",
+                    "api",
+                    "auth",
+                    "login",
+                    "rc",
+                    "accesstoken"
+                  ],
+                  "query": [
+                    {
+                      "key": "rcAccessToken",
+                      "value": "\u003cstring\u003e",
+                      "description": "rcAccessToken",
+                      "disabled": true
+                    },
+                    {
+                      "key": "rcTokenType",
+                      "value": "\u003cstring\u003e",
+                      "description": "'Bearer' for OAuth 2.0 bearer token",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Legacy Auth",
+          "item": [
+            {
+              "name": "Retrieves all Api Tokens for AuthenticatedUser",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/token",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "token"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Creates a new 'Api Token' based AuthenticatedUser that does not expire",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/token",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "token"
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Removes an api token",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/token/:token",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "token",
+                    ":token"
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  }
+                ]
+              }
+            },
+            {
+              "name": "Application login to authenticate and receive an X-Auth-Token",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/auth/login",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "auth",
+                    "login"
+                  ],
+                  "query": [
+                    {
+                      "key": "username",
+                      "value": "\u003cstring\u003e",
+                      "description": "username",
+                      "disabled": true
+                    },
+                    {
+                      "key": "password",
+                      "value": "\u003cstring\u003e",
+                      "description": "password",
+                      "disabled": true
+                    },
+                    {
+                      "key": "stayLoggedIn",
+                      "value": "\u003cboolean\u003e",
+                      "description": "stayLoggedIn",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Utilities",
+      "item": [
+        {
+          "name": "Countries",
+          "item": [
+            {
+              "name": "Get Available Countries",
+              "request": {
+                "url": {
+                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/countries/available",
+                  "protocol": "https",
+                  "host": [
+                    "engage",
+                    "ringcentral",
+                    "com"
+                  ],
+                  "path": [
+                    "voice",
+                    "api",
+                    "v1",
+                    "admin",
+                    "accounts",
+                    ":accountId",
+                    "countries",
+                    "available"
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{rcev_access_token}}"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
