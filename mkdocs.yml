@@ -49,6 +49,7 @@ pages:
     - 'Overview': dialing/index.md
     - 'Campaigns':
       - 'Dial Groups': dialing/campaigns/dial-groups.md
+      - 'Campaigns': dialing/campaigns/campaigns.md
     - 'Leads':
       #- 'Overview': dialing/leads/index.md
       - 'Quick start':
