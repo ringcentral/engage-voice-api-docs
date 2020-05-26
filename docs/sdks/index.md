@@ -4,7 +4,7 @@ The following SDKs provide developers with libraries that make interfacing with 
 
 ## Community SDKs
 
-In addition to the official Engage Voice SDKs there are a number of unofficial libraries, plugins and sample apps for a range of languages built by amazing communities of active developers. The list below includes SDK wrappers for Engage Voice Platform APIs.
+There are currently a set of unofficial client SDK libraries built the developer community. The list below includes SDK wrappers for Engage Voice Platform APIs.
 
 If you’ve built your own Engage Voice library, plugin, or open source app, please [get in touch](mailto:devsupport@ringcentral.com) and we’ll add it to this list.
 
