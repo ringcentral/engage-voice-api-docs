@@ -21,93 +21,70 @@ Use the Search Leads APIs to search leads.
 ```
 
 ```javascript tab="Node JS"
+/****** Install Node JS SDK wrapper *******
+$ npm install engagevoice-sdk-wrapper --save
+*******************************************/
 
-    /****** Install Node JS SDK wrapper *******
-    $ npm install engagevoice-sdk-wrapper --save
-    *******************************************/
+const EngageVoice = require('engagevoice-sdk-wrapper')
 
-    const EngageVoice = require('engagevoice-sdk-wrapper')
+// Instantiate the SDK wrapper object with your RingCentral app credentials
+var ev = new EngageVoice.RestClient("RC_CLIENT_ID", "RC_CLIENT_SECRET")
 
-    var ev = new EngageVoice.RestClient()
-
-    ev.login("legacy-username", "legacy-password", "", function(err, response){
-        if (err)
-          console.log(err)
-        else{
-          search_account_campaign_leads()
+// Login your account with your RingCentral Office user credentials
+ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER", function(err, response){
+  if (!err){
+    var endpoint = 'admin/accounts/~/campaignLeads/leadSearch'
+    var params = { firstName: "John" }
+    ev.post(endpoint, params, function(err, response){
+        if (!err){
+            console.log(response)
         }
     })
-
-    function search_account_campaign_leads(){
-        var endpoint = 'admin/accounts/~/campaignLeads/leadSearch'
-        var params = {
-            firstName: "John"
-        }
-        ev.post(endpoint, params, function(err, response){
-            if (err){
-                console.log(err)
-            }else {
-                var jsonObj = JSON.parse(response)
-                console.log(jsonObj)
-            }
-        })
-    }
+  }
+})
 ```
 
 ```python tab="Python"
-    /****** Install Python SDK wrapper **
-    $ pip install engagevoice-sdk-wrapper
-    *************************************/
+/****** Install Python SDK wrapper **
+$ pip install engagevoice-sdk-wrapper
+*************************************/
 
-    from engagevoice.sdk_wrapper import *
+from engagevoice.sdk_wrapper import *
 
-    def search_account_campaign_leads():
-    try:
-        endpoint = 'admin/accounts/~/campaignLeads/leadSearch'
-        params = { "firstName" : "John" }
-        response = ev.post(endpoint, params)
-        jsonObj = json.loads(response)
-        print (jsonObj)
-    except Exception as e:
-        print (e)
+# Instantiate the SDK wrapper object with your RingCentral app credentials
+ev = RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET")
 
-    ev = RestClient()
-    try:
-        resp = ev.login("legacy-username", "legacy-password")
-        if resp:
-            search_account_campaign_leads()
-    except Exception as e:
-        print (e)
+# Login your account with your RingCentral Office user credentials
+try:
+    ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER")
+    endpoint = 'admin/accounts/~/campaignLeads/leadSearch'
+    params = { "firstName" : "John" }
+    response = ev.post(endpoint, params)
+    print (response)        
+except Exception as e:
+    print (e)
 ```
 
 ```php tab="PHP"
-    /****** Install PHP SDK wrapper **
-    $ composer require engagevoice-sdk-wrapper:dev-master
-    *************************************/
+/****** Install PHP SDK wrapper **
+$ composer require engagevoice-sdk-wrapper:dev-master
+*************************************/
 
-    <?php
-    require('vendor/autoload.php');
+<?php
+require('vendor/autoload.php');
 
-    $ev = new EngageVoiceSDKWrapper\RestClient();
-    try{
-        $ev->login("legacy-username", "legacy-password", null, function($response){
-          search_account_campaign_leads();
-        });
-    }catch (Exception $e) {
-        print $e->getMessage();
-    }
-
-    function search_account_campaign_leads(){
-        global $ev;
-        $endpoint = "admin/accounts/~/campaignLeads/leadSearch";
-        $params = array ( "firstName" => "John" );
-        try{
-            $resp = $ev->post($endpoint, $params);
-            print ($resp);
-        }catch (Exception $e) {
-            print $e->getMessage();
-        }
-    }
+// Instantiate the SDK wrapper object with your RingCentral app credentials
+$ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
+try{
+  // Login your account with your RingCentral Office user credentials
+  $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+  $endpoint = "admin/accounts/~/campaignLeads/leadSearch";
+  $params = array ( "firstName" => "John" );
+  $response = $ev->post($endpoint, $params);
+  print ($response."\r\n");
+}catch (Exception $e) {
+  print $e->getMessage();
+}
 ```
 ## References
 
