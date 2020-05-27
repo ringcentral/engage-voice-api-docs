@@ -24,7 +24,7 @@ Your campaign must have name, start and end date, and valid caller ID. All other
 | **`isActive`** | Optional | Active | *unchecked* | Make the campaign active. `1` means active, `0` means inactive, and `2` means agent callbacks only. |
 | **`campaignName`** | Required | Name | *empty* | Give this campaign a name. |
 | **`campaignDesc`** | Optional | Description | *empty* | Set a short description for the new campaign. |
-| **`campaignPriority`** | Optional | Campaign Priority | Priority 1 - Average | Set a short description for the new campaign. |
+| **`campaignPriority`** | Optional | Campaign Priority | Priority 1 - Average | Set a short description for the new campaign. Use [Campaign Priority](./#campaign-priority) to retrieve valid values |
 | **`startDate`** | Required | Start Date | *empty* | Set a start date for this campaign in ISO-8601 format such as: `2020-04-22T00:00:00.000-0000`. |
 | **`endDate`** | Required | End Date | *empty* | Set an end date for this campaign in ISO-8601 format such as: `2020-04-22T00:00:00.000-0000`. |
 | **Dialer Settings** | | | | |
@@ -33,15 +33,19 @@ Your campaign must have name, start and end date, and valid caller ID. All other
 | **`callerId`** | Required | Caller Id | *empty* | Enter the Caller ID you wish to display to leads contacted via this campaign. This should be the number that leads can call to reach a customer service representative. The customer service representative must be able to put the caller on your internal DNC list. If the Caller ID number goes to an automatic responder, the responder must also provide the lead with a way to request placement on your DNC list, either by leaving a voicemail or via a touchtone entry. |
 | **`transferCallerId`** | Optional | Transfer Override Caller ID | *empty* | Enter a ten-digit phone number here (format: ##########) that the system can use to override the Caller ID number entered above if an agent transfers a lead from this campaign to another number (whether via manual transfer or disposition-based transfer). |
 | **`scrubDisconnectNoanswer`** | Optional | Disconnect Scrubbing | 0 | This setting refers to a third-party integration that looks up system dispositions of ‘no-answer’ and determines whether they’re actually no-answers or if they’re simply disconnects. Please note that disconnect scrubbing is only performed if the first pass results in a no-answer. `0` means 'No, Disabled', and `1` means 'Yes, Enabled'. |
-| **`dialLoadedOrder`** | Optional | Dial Leads In Order Loaded | Natural Sort | This setting allows you to choose the order in which leads will be dialed (we recommend you do NOT dial leads in the order in which they were loaded). Please note that before the system defaults to the order you select below, it will first respect features and settings like Quota Management, Timezone and Dial Zone Management, Custom Campaign Criteria, Lead List Priority, and Priority Requeue to determine which leads are available to dial. Once all relevant conditions have been satisfied, the system will then dial leads in the order of your choice. |
+| **`dialLoadedOrder`** | Optional | Dial Leads In Order Loaded | Natural Sort | This setting allows you to choose the order in which leads will be dialed (we recommend you do NOT dial leads in the order in which they were loaded). Please note that before the system defaults to the order you select below, it will first respect features and settings like Quota Management, Timezone and Dial Zone Management, Custom Campaign Criteria, Lead List Priority, and Priority Requeue to determine which leads are available to dial. Once all relevant conditions have been satisfied, the system will then dial leads in the order of your choice. Use [Dial Lead in Order Loaded](./#dial-lead-in-order-loaded) to determine valid values |
 | **`customDialZoneGroup`** | Optional | Custom Dial Zone Group | *empty* | Select a custom dial zone group from the dropdown if you wish to map custom timezone values for leads on this campaign. Please note that this is an advanced feature. |
 | **`trackSpeedToLead`** | Optional | Track Speed To Lead | *unchecked* | This option allows you to track (via reporting) how much time passes between the time the system receives a new lead and when it actually dials that lead. |
 | **`machineDetect`** | Optional | Voicemail Detection Enabled | *unchecked* | Check this box to direct the system not to connect to an agent if an answering machine is detected. |
 | **`campaignUnlimitedFieldGroup`** | Optional | Custom Lead Data Fields Group | *empty* | Select a group of custom lead data fields from the dropdown to add to your campaign. |
 
-Where:
+### Supporting Values and APIs
 
--   **campaignPriority** (Campaign Priority) can take on the following values:
+The following value lists and APIs are used to retrieve predefined values for certain fields. Use these values to populate the correct parameter values of fields.
+
+#### Campaign Priority
+
+The parameter `campaignPriority` can take on the following values:
 
     | Value | Description |
     |-|-|
@@ -51,7 +55,9 @@ Where:
     | **`4`** | Priority 4 - This priority is 3 level higher |
     | **`5`** | Priority 5 - High - This priority is highest priority |
 
--   **dialLoadedOrder** (Dial Leads in Order Loaded) can take on the following values:
+#### Dial Lead in Order Loaded
+
+The parameter `dialLoadedOrder` can take on the following values:
 
     | Value | Sort Name | Description |
     |-|-|-|
