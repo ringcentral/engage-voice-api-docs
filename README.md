@@ -19,6 +19,7 @@ If you would like to contribute to the RingCentral documentation effort, fork th
 % cd engage-voice-api-docs
 % pip install mkdocs
 % pip install mkdocs-ringcentral
+% pip install markdown-include
 % mkdocs serve
 ```
 
