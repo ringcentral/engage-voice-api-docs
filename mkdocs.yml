@@ -25,6 +25,8 @@ markdown_extensions:
   - pymdownx.superfences:
        disable_indented_code_blocks: true
   - pymdownx.highlight
+  - markdown_include.include:
+       base_path: docs
 
 #extra_css: [extra.css]
 #extra_javascript: [fonts.js]
@@ -49,6 +51,7 @@ pages:
     - 'Overview': dialing/index.md
     - 'Campaigns':
       - 'Dial Groups': dialing/campaigns/dial-groups.md
+      - 'Campaigns': dialing/campaigns/campaigns.md
     - 'Leads':
       #- 'Overview': dialing/leads/index.md
       - 'Quick start':
@@ -83,5 +86,5 @@ pages:
     - 'RingCentral Office Token': authentication/auth-ringcentral.md
     - 'Legacy': authentication/auth-legacy.md
   - 'SDKs': sdks/index.md
-  - 'Embeddable':
-    - 'Getting Started': embeddable/get-started.md
+  - 'Embeddable': embeddable/get-started.md
+  - 'Postman': postman.md

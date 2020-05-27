@@ -6,7 +6,7 @@ The RingCentral Engage Voice API is offered for both the current Engage Voice de
 
 The current Engage Voice system makes the API accessible at:
 
-* `https://engage.ringcentral.com/voice/api`
+* `https://engage.ringcentral.com/voice/api/`
 
 and uses the OAuth 2.0 Authorization header:
 

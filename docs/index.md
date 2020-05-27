@@ -8,9 +8,9 @@ no_breadcrumb: true
   <hr class="my-4">
   <p>The following Quick Start Guides have been created to assist developers in getting started in each of our major APIs:</p>
   <ul>
-    <li><a href="./leads/bulk-import/">Bulk Import and Sync Leads</a> using our <strong>Leads API</strong>.</li>
-    <li><a href="./reports/global-call-type-detail-report/">Download Call Details and Recordings</a> using our <strong>Reports API</strong>.</li>
-    <li><a href="./reports/agent-session-report/">Agent Session Info</a> using our <strong>Reports API</strong>.</li>
+    <li><a href="./dialing/leads/bulk-import/">Bulk Import and Sync Leads</a> using our <strong>Leads API</strong>.</li>
+    <li><a href="./analytics/reports/global-call-type-detail-report">Download Call Details and Recordings</a> using our <strong>Reports API</strong>.</li>
+    <li><a href="./analytics/reports/agent-session-report">Agent Session Info</a> using our <strong>Reports API</strong>.</li>
   </ul>
   <!--<p>Not a programmer? <a href="./basics/explorer/">Try out the API with no programming</a>.</p>-->
   <hr class="my-4">
@@ -25,13 +25,13 @@ Welcome RingCentral Engage Voice Developer! Here you have access to all the reso
 
 ## Managing Lead Lists
 
-Use the [Leads API](./voice/leads) to bulk import leads and search leads.
+Use the [Leads API](./dialing/leads) to bulk import leads and search leads.
 
 ### Getting Started with Engage Voice Embeddable
 
-<a class="btn btn-primary" href="./voice/embeddable/get-started/">Learn more about Engage Embeddable &raquo;</a>
+<a class="btn btn-primary" href="./embeddable/get-started">Learn more about Engage Embeddable &raquo;</a>
 
 ## Additional Resources
 
-* [Engage Voice API Reference](https://ringcentral.github.io/engage-api-docs/voice/)
+* [Engage Voice API Reference](https://developers.ringcentral.com/engage/voice/api-reference)
 * [Engage Voice Docs](https://docs.ringcentral.com/engage/)

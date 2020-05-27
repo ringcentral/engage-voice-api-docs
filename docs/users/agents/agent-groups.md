@@ -1,6 +1,6 @@
-# Agent Groups
+# About Agent Groups
 
-Agent groups are a the way to manage agents in Engage Voice. All agents are assigned to one and only one Agent Group.
+Agent groups are a the way to manage agents in Engage Voice. All agents are assigned to one and only one Agent Group. Agent groups can be used to organize your agents into different categories, which can be useful in situations like when you’d like to separate your agents into groups that represent the different teams in your contact center.
 
 ## Create Agent Group
 
@@ -49,6 +49,8 @@ GET api/v1/admin/accounts/{accountId}/agentGroups
 ```
 
 ## Read Agent Group
+
+To retrieve a single Agent Group, use the `agentGroups` API endpoint with a specific agent group ID.
 
 ### Request
 
