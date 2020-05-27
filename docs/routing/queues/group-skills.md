@@ -1,6 +1,6 @@
 # About Queue Group Skills
 
-Creating group skills is the first step in the process of assigning skills to your agents. After you create group skills, you’ll also need to add these skills (via Queue Events) to any queue that you assign these agents to.  First create the [Queue Group](./queue-groups) and then define the Group Skill.  Later, you will assign this Group Skill to the desired [Agent](../../users/agents/agents.md).
+Creating group skills is the first step in the process of assigning skills to your agents. After you create group skills, you’ll also need to add these skills (via Queue Events) to any queue that you assign these agents to.  First create the [Queue Group](../queue-groups) and then define the Group Skill.  Later, you will assign this Group Skill to the desired [Agent](../../users/agents/agents.md).
 
 ## Create Groups Skills
 
