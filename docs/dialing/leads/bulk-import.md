@@ -12,6 +12,7 @@ The `baseURL` for your server is one of the following:
 * `https://portal.vacd.biz/`
 * `https://portal.virtualacd.biz/`
 
+
 See the [authentication pages](../../../authentication) for the [current system API](../../../authentication/auth-ringcentral) and [legacy system API](../../../authentication/auth-legacy) for more.
 
 !!! alert "Please Note"
