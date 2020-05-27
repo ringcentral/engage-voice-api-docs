@@ -1,4 +1,4 @@
-# Creating an agent skill profile
+# Creating an Agent Skill Profile
 
 ## About agent skill profiles
 
@@ -77,9 +77,11 @@ In the example below, we’ll show you how you can add this group skill to a que
 ### Supporting APIs
 The following API is used to retrieve predefined values for the groups skills.
 
-| Request | Description |
-|-|-|
-| `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills` | Gets a list of group skills for the Queue Group under this account. |
+#### Skills
+
+Gets a list of group skills for the Queue Group under this account.
+
+  `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills`
 
 ### Request
 

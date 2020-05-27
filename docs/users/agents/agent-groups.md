@@ -6,6 +6,18 @@ Agent groups are a the way to manage agents in Engage Voice. All agents are assi
 
 Creating a new Agent Group only requires a group name.
 
+### Primary Parameters
+Only `groupName` is a required parameter to create a skill profile. All other parameters are optional.
+
+| API Property |  | UI Display | UI Default | Description |
+|-|-|-|-|-|
+| **`agentGroupId`** | Optional | *hidden* | 0 | A unique identifier for this Agent Group. |
+| **`groupName`** | Required | Name | *empty* | Give this Agent Group a name. |
+| **`isDefault`** | Optional | *hidden* | false |  |
+
+
+### Request
+
 ```html tab="HTTP"
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups
 Content-Type: application/json
