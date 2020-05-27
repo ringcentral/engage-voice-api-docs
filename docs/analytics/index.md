@@ -1,4 +1,4 @@
-# About Analytics
+# Introduction to Analytics APIs
 
 Analytics refers to the real-time, historical, and custom reporting portions of the platform in the form of stats and reports. The system collects, shares, and receives customer and call/chat information.
 

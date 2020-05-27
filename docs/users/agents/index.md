@@ -2,7 +2,8 @@
 
 Managing agents and automatically syncing them with your user management tools can be automated via the API. This article covers the basics of creating, reading, updating and deleting Agents.
 
-Of note, Agents must be associated with an Agent Group so you need to have at least one Agent Group configured before managing Agents. See [Agent Groups](../agent-groups) for more. Once you create the agent groups, add some agents and begin configuring their accounts, from providing the username and password the agent will use to log into the agent interface to assigning them to queues and dial groups.
+!!! note
+    Agents must be associated with an Agent Group so you need to have at least one Agent Group configured before managing Agents. See [Agent Groups](../agent-groups) for more.
 
 ## Popular Use Cases and Documentation
 
@@ -40,4 +41,30 @@ Of note, Agents must be associated with an Agent Group so you need to have at le
       </ul>
     </div>
   </div>
+</div>
+<div class="card-deck">
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body pt-0 pb-0">
+      <h5 class="card-title">Administrators</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Administrators API</h6>
+      <p class="card-text">Create and manage an administrator account.</p>
+      <ul class="pl-0 ml-4">
+      <li><a href="./agents/" class="card-link">Create a New Administrator</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body pt-0 pb-0">
+      <h5 class="card-title">Roles</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Roles API</h6>
+      <p class="card-text">Create and manage roles for administrators and agents.</p>
+      <ul class="pl-0 ml-4">
+      <li><a href="./agents/" class="card-link">Manage Roles</a></li>
+      </ul>
+    </div>
+  </div>
+
+
 </div>

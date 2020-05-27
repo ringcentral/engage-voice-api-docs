@@ -25,6 +25,8 @@ markdown_extensions:
   - pymdownx.superfences:
        disable_indented_code_blocks: true
   - pymdownx.highlight
+#  - markdown_include.include:
+#       base_path: docs
 
 #extra_css: [extra.css]
 #extra_javascript: [fonts.js]
@@ -40,7 +42,6 @@ pages:
   - 'Routing':
     - 'Overview': routing/index.md
     - 'Queues':
-      - 'Overview': routing/queues/index.md
       - 'Queues': routing/queues/queues.md
       - 'Queue Events': routing/queues/queue-events.md
       - 'Queue Groups': routing/queues/queue-groups.md
@@ -66,8 +67,8 @@ pages:
         - 'Python': dialing/active-calls/quick-start/python.md
       #- 'List Active Calls': dialing/activecalls/list-activecalls.md
   - 'Users':
+    - 'Overview': users/agents/index.md
     - 'Agents':
-      - 'Overview': users/agents/index.md
       - 'Agents': users/agents/agents.md
       - 'Agent Groups': users/agents/agent-groups.md
       - 'Skill Profiles': users/agents/skill-profile.md
