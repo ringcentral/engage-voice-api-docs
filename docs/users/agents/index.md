@@ -42,3 +42,29 @@ Managing agents and automatically syncing them with your user management tools c
     </div>
   </div>
 </div>
+<div class="card-deck">
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body pt-0 pb-0">
+      <h5 class="card-title">Administrators</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Administrators API</h6>
+      <p class="card-text">Create and manage an administrator account.</p>
+      <ul class="pl-0 ml-4">
+      <li><a href="./agents/" class="card-link">Create a New Administrator</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body pt-0 pb-0">
+      <h5 class="card-title">Roles</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Roles API</h6>
+      <p class="card-text">Create and manage roles for administrators and agents.</p>
+      <ul class="pl-0 ml-4">
+      <li><a href="./agents/" class="card-link">Manage Roles</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+</div>
