@@ -1,4 +1,4 @@
-# Agents Overview
+# Introduction to Agents APIs
 
 Managing agents and automatically syncing them with your user management tools can be automated via the API. This article covers the basics of creating, reading, updating and deleting Agents.
 
@@ -50,7 +50,6 @@ Managing agents and automatically syncing them with your user management tools c
       <h6 class="card-subtitle mb-2 text-muted">Administrators API</h6>
       <p class="card-text">Create and manage an administrator account.</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./agents/" class="card-link">Create a New Administrator</a></li>
       </ul>
     </div>
   </div>
@@ -61,7 +60,6 @@ Managing agents and automatically syncing them with your user management tools c
       <h6 class="card-subtitle mb-2 text-muted">Roles API</h6>
       <p class="card-text">Create and manage roles for administrators and agents.</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./agents/" class="card-link">Manage Roles</a></li>
       </ul>
     </div>
   </div>

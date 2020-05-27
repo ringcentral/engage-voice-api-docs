@@ -25,8 +25,8 @@ markdown_extensions:
   - pymdownx.superfences:
        disable_indented_code_blocks: true
   - pymdownx.highlight
-#  - markdown_include.include:
-#       base_path: docs
+  - markdown_include.include:
+       base_path: docs
 
 #extra_css: [extra.css]
 #extra_javascript: [fonts.js]
@@ -52,15 +52,14 @@ pages:
       - 'Dial Groups': dialing/campaigns/dial-groups.md
       - 'Campaigns': dialing/campaigns/campaigns.md
     - 'Leads':
-      #- 'Overview': dialing/leads/index.md
-      - 'Quick start':
+      - 'Getting Started':
         - 'Node JS': dialing/leads/quick-start/node.md
         - 'Python': dialing/leads/quick-start/python.md
         - 'PHP': dialing/leads/quick-start/php.md
       - 'Bulk Import Leads': dialing/leads/bulk-import.md
       - 'Searching Leads': dialing/leads/search.md
     - 'Active Calls':
-      - 'Overview': dialing/active-calls/index.md
+      - 'Active Calls': dialing/active-calls/index.md
       - 'Getting Started':
         - 'Node JS': dialing/active-calls/quick-start/node.md
         - 'PHP': dialing/active-calls/quick-start/php.md

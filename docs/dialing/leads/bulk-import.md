@@ -2,23 +2,12 @@
 
 The Engage Voice API allows you to load one or multiple leads at a time. You can also load leads for immediate dialing at the top of the dialer cache or in normal priority.
 
-Use the following endpoint with the JSON body described below.
-
-`{baseURL}/api/admin/accounts/{accountId}/campaigns/{campaignId}/loader/direct`
-
-The `baseURL` for your server is one of the following:
-
-* `https://engage.ringcentral.com/voice`
-* `https://portal.vacd.biz/`
-* `https://portal.virtualacd.biz/`
-
-
-See the [authentication pages](../../../authentication) for the [current system API](../../../authentication/auth-ringcentral) and [legacy system API](../../../authentication/auth-legacy) for more.
-
 !!! alert "Please Note"
     To enumerate a list of Campaigns for the `campaignId` path property, please review section [Enumerating Campaigns](./#enumerating-campaigns) below.
 
 The JSON body consists of a set of options along with an array of leads in the `uploadLeads` property
+
+## Primary parameters
 
 Some key options for the request body include:
 
@@ -35,7 +24,7 @@ Each load in the `uploadLeads` array consists of a lead with the following notab
 | **externId** | this is a required string property. |
 | **leadPhone** | this can be a single phone number or a pipe-deliminted field of multiple phone numbers. For US numbers, this is a 10 digit format including area code. |
 
-The following is a full example:
+### Request
 
 ```http
 POST {baseURL}/api/admin/accounts/{accountId}/campaigns/{campaignId}/loader/direct

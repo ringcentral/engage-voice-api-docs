@@ -1,4 +1,4 @@
-# Introduction Dialing APIs
+# Introduction to Dialing APIs
 
 <img class="img-fluid" width="100%" src="../../images/dialing-components.png">
 
