@@ -1,6 +1,6 @@
-# Searching Leads
+# About Searching for Leads
 
-Use the Search Leads APIs to search leads.
+You can search for leads using Primary Search Fields and Extended Search Fields. The Primary Search Fields can be used for performing basic searches on leads such as the campaign or list they are found in, while the Extended Search Fields provide search parameters that you can use to get more granular with your lead search.
 
 ```http tab="HTTP"
 

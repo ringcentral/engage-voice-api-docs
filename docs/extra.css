@@ -1,3 +1,6 @@
+#sidebar-nav .nav-item > a.nav-link {
+    padding-left: 0;
+}
 .wy-nav-top {
 	background-color: #fff;
 	color: #0073ae;

@@ -10,7 +10,7 @@ To reach the inbound queue, you need a number for callers to call.  This is refe
 ## Prerequisite
 Before using *Queues*, make sure to configure your test Agent (User) with the right priority and permissions.  Your Agent should have a high enough priority so the inbound call is routed to them first.  Also, the permission for the Agent should be "Allow inbound calls" to give the Agent the right to receive inbound calls.
 
-You must first create a Queue Group before creating Queues. Start with a simple [Queue Groups](./queue-groups) and then create your first [Queues](./queues).
+You must first create a Queue Group before creating Queues. Start with a simple [Queue Groups](../queue-groups) and then create your first [Queues](./queues).
 
 ## Create Queue
 Make sure you know which account and which queue group you are creating this new queue in before proceeding. Creating a new queue group initially requires very few parameters.
