@@ -25,6 +25,8 @@ markdown_extensions:
   - pymdownx.superfences:
        disable_indented_code_blocks: true
   - pymdownx.highlight
+  - markdown_include.include:
+       base_path: docs
 
 #extra_css: [extra.css]
 #extra_javascript: [fonts.js]
