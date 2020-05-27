@@ -6098,7 +6098,7 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
                   "type": "string"
                 }
@@ -6142,7 +6142,7 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
                   "type": "string"
                 }
@@ -6198,7 +6198,7 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
                   "type": "string"
                 }
@@ -6289,7 +6289,7 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
                   "type": "string"
                 }
@@ -6389,7 +6389,7 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
                   "type": "string"
                 }
@@ -6475,7 +6475,7 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
                   "type": "string"
                 }
@@ -7928,7 +7928,7 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
                   "format": "int32",
                   "type": "integer"
@@ -14403,7 +14403,7 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
                   "format": "int32",
                   "type": "integer"
@@ -14987,7 +14987,7 @@
         "responses": {
           "200": {
             "content": {
-              "application/json": {
+              "text/plain": {
                 "schema": {
                   "type": "string"
                 }
