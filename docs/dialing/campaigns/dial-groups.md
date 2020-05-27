@@ -69,11 +69,17 @@ Only `gateName` is a required parameter to create a Queue. All other parameters 
 ### Request
 
 ```html tab="HTTP"
+######################################################
+The `baseURL` for your server is one of the following:
+# `https://engage.ringcentral.com/voice`
+# `https://portal.vacd.biz/`
+# `https://portal.virtualacd.biz/`
+######################################################
+
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups
 Content-Type: application/json
 
 {
-  "dialGroupId": 0,
   "dialGroupName": "My Dial Group - Predictive",
   "dialGroupDesc": "A test dial group with predictive dial mode",
   "dialMode": "PREDICTIVE",
@@ -81,7 +87,41 @@ Content-Type: application/json
 }
 ```
 
+```javascript tab="Node JS"
+/****** Install Node JS SDK wrapper *******
+$ npm install engagevoice-sdk-wrapper --save
+*******************************************/
+
+const EngageVoice = require('engagevoice-sdk-wrapper')
+
+// Instantiate the SDK wrapper object with your RingCentral app credentials
+var ev = new EngageVoice.RestClient("RC_CLIENT_ID", "RC_CLIENT_SECRET")
+
+// Login your account with your RingCentral Office user credentials
+ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER", function(err, response){
+  if (!err){
+    var endpoint = 'admin/accounts/~/dialGroups'
+    var params = {
+      dialGroupName: "My Dial Group - Predictive",
+      dialGroupDesc: "A test dial group with predictive dial mode",
+      dialMode: "PREDICTIVE",
+      isActive: true
+    }
+    ev.post(endpoint, params, function(err, response){
+      if (!err){
+        var jsonObj = JSON.parse(response)
+        console.log (response)
+      }
+    })
+  }
+})
+```
+
 ```python tab="Python"
+#### Install Python SDK wrapper ####
+# $ pip install engagevoice-sdk-wrapper
+#####################################
+
 from engagevoice.sdk_wrapper import *
 
 # Instantiate the SDK wrapper object with your RingCentral app credentials
@@ -92,7 +132,6 @@ try:
     ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER")
     endpoint = 'admin/accounts/~/dialGroups'
     params = {
-      "dialGroupId": 0,
       "dialGroupName": "My Dial Group - Predictive",
       "dialGroupDesc": "A test dial group with predictive dial mode",
       "dialMode": "PREDICTIVE",
@@ -102,6 +141,33 @@ try:
     print (response)        
 except Exception as e:
     print (e)
+```
+
+```php tab="PHP"
+/************ Install PHP SDK wrapper **************
+$ composer require engagevoice-sdk-wrapper:dev-master
+*****************************************************/
+
+<?php
+require('vendor/autoload.php');
+
+// Instantiate the SDK wrapper object with your RingCentral app credentials
+$ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
+try{
+  // Login your account with your RingCentral Office user credentials
+  $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+  $endpoint = 'admin/accounts/~/dialGroups';
+  $params = array (
+    "dialGroupName" => "My Dial Group - Predictive",
+    "dialGroupDesc" => "A test dial group with predictive dial mode",
+    "dialMode" => "PREDICTIVE",
+    "isActive" => true
+  );
+  $response = $ev->post($endpoint, $params);
+  print ($response."\r\n");
+}catch (Exception $e) {
+  print $e->getMessage();
+}
 ```
 
 ### Response
@@ -143,10 +209,55 @@ Now let's retrieve details for the Dial Group we just created to make to make su
 ### Request
 
 ```html tab="HTTP"
+######################################################
+The `baseURL` for your server is one of the following:
+# `https://engage.ringcentral.com/voice`
+# `https://portal.vacd.biz/`
+# `https://portal.virtualacd.biz/`
+######################################################
+
 GET {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}
 ```
 
+```javascript tab="Node JS"
+/****** Install Node JS SDK wrapper *******
+$ npm install engagevoice-sdk-wrapper --save
+*******************************************/
+
+const EngageVoice = require('engagevoice-sdk-wrapper')
+
+// Instantiate the SDK wrapper object with your RingCentral app credentials
+var ev = new EngageVoice.RestClient("RC_CLIENT_ID", "RC_CLIENT_SECRET")
+
+// Login your account with your RingCentral Office user credentials
+ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER", function(err, response){
+  if (!err){
+    var endpoint = 'admin/accounts/~/dialGroups'
+    ev.get(endpoint, null, function(err, response){
+      if (!err){
+        var jsonObj = JSON.parse(response)
+        for (var group of jsonObj){
+          if (group.dialGroupName == "My Dial Group - Predictive"){
+            endpoint += '/' + group.dialGroupId
+            ev.get(endpoint, null, function(err, response){
+              if (!err){
+                console.log (response)
+              }
+            })
+            break
+          }
+        }
+      }
+    })
+  }
+})
+```
+
 ```python tab="Python"
+#### Install Python SDK wrapper ####
+# $ pip install engagevoice-sdk-wrapper
+#####################################
+
 from engagevoice.sdk_wrapper import *
 
 # Instantiate the SDK wrapper object with your RingCentral app credentials
@@ -159,11 +270,41 @@ try:
     resp = ev.get(endpoint)
     for group in resp:
     if (group['dialGroupName'] == "My Dial Group - Predictive"):
-        endpoint = 'admin/accounts/~/dialGroups/%i' % (group['dialGroupId'])
+        endpoint += '/%i' % (group['dialGroupId'])
         response = ev.get(endpoint)
-        print (response))
+        print (response)
+        break
 except Exception as e:
     print (e)
+```
+
+```php tab="PHP"
+/************ Install PHP SDK wrapper **************
+$ composer require engagevoice-sdk-wrapper:dev-master
+*****************************************************/
+
+<?php
+require('vendor/autoload.php');
+
+// Instantiate the SDK wrapper object with your RingCentral app credentials
+$ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
+try{
+  // Login your account with your RingCentral Office user credentials
+  $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+  $endpoint = 'admin/accounts/~/dialGroups';
+  $response = $ev->get($endpoint);
+  $jsonObj = json_decode($response);
+  foreach ($jsonObj as $group){
+      if ($group->dialGroupName == "My Dial Group - Predictive"){
+          $endpoint .= '/' . $group->dialGroupId;
+          $response = $ev->get($endpoint);
+          print ($response."\r\n");
+          break;
+      }
+  }
+}catch (Exception $e) {
+  print $e->getMessage();
+}
 ```
 
 ### Response
@@ -205,6 +346,13 @@ Note the `dialGroupId`. We will use that ID to update the Dial Group we created.
 ### Request
 
 ```html tab="HTTP" hl_lines="11 12 13 14 15 16"
+######################################################
+The `baseURL` for your server is one of the following:
+# `https://engage.ringcentral.com/voice`
+# `https://portal.vacd.biz/`
+# `https://portal.virtualacd.biz/`
+######################################################
+
 PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}
 {
   "permissions": [],
@@ -224,7 +372,51 @@ PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}
 }
 ```
 
-```python tab="Python" hl_lines="19 20 21 22 23 24"
+```javascript tab="Node JS" hl_lines="20-25"
+/****** Install Node JS SDK wrapper *******
+$ npm install engagevoice-sdk-wrapper --save
+*******************************************/
+
+const EngageVoice = require('engagevoice-sdk-wrapper')
+
+// Instantiate the SDK wrapper object with your RingCentral app credentials
+var ev = new EngageVoice.RestClient("RC_CLIENT_ID", "RC_CLIENT_SECRET")
+
+// Login your account with your RingCentral Office user credentials
+ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER", function(err, response){
+  if (!err){
+    var endpoint = 'admin/accounts/~/dialGroups'
+    ev.get(endpoint, null, function(err, response){
+      if (!err){
+        var jsonObj = JSON.parse(response)
+        for (var group of jsonObj){
+          if (group.dialGroupName == "My Dial Group - Predictive"){
+            endpoint += '/' + group.dialGroupId
+            group.enableAbsolutePriority = true
+            group.enableAgentFilter = true
+            group.enableListPriority = true
+            group.allowLeadSearch = "YES"
+            group.enableCallbacksAfterMaxpass = true
+            group.enableCallbacksAfterMaxDailyPass = true
+            ev.put(endpoint, group, function(err, response){
+              if (!err){
+                console.log (response)
+              }
+            })
+            break
+          }
+        }
+      }
+    })
+  }
+})
+```
+
+```python tab="Python" hl_lines="18-23"
+#### Install Python SDK wrapper ####
+# $ pip install engagevoice-sdk-wrapper
+#####################################
+
 from engagevoice.sdk_wrapper import *
 
 # Instantiate the SDK wrapper object with your RingCentral app credentials
@@ -234,35 +426,61 @@ ev = RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET")
 try:
     ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER")
     endpoint = 'admin/accounts/~/dialGroups/'
-    params = {
-      "permissions": [],
-      "dialGroupId": 115793,
-      "dialGroupName": "My Dial Group - Predictive",
-      "dialGroupDesc": "A test dial group with predictive dial mode",
-      "dialMode": "PREDICTIVE",
-      "isActive": True,
-      "hciEnabled": "DISABLED",
-      "agentDialGroupMembers": None,
-      "enableAbsolutePriority": True,
-      "enableAgentFilter": True,
-      "enableListPriority": True,
-      "allowLeadSearch": "YES",
-      "enableCallbacksAfterMaxpass": True,
-      "enableCallbacksAfterMaxDailyPass": True
-    }
     resp = ev.get(endpoint)
     for group in resp:
         if (group['dialGroupName'] == "My Dial Group - Predictive"):
-            endpoint = 'admin/accounts/~/dialGroups/%i' % (group['dialGroupId'])
-            response = ev.put(endpoint, params)
+            endpoint += '/%i' % (group['dialGroupId'])
+            group['enableAbsolutePriority'] = True
+            group['enableAgentFilter'] = True
+            group['enableListPriority'] = True
+            group['allowLeadSearch'] = "YES"
+            group['enableCallbacksAfterMaxpass'] = True
+            group['enableCallbacksAfterMaxDailyPass'] = True
+            response = ev.put(endpoint, group)
             print (response)
+            break
 except Exception as e:
     print (e)
 ```
 
+```php tab="PHP" hl_lines="19-24"
+/************ Install PHP SDK wrapper **************
+$ composer require engagevoice-sdk-wrapper:dev-master
+*****************************************************/
+
+<?php
+require('vendor/autoload.php');
+
+// Instantiate the SDK wrapper object with your RingCentral app credentials
+$ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
+try{
+  // Login your account with your RingCentral Office user credentials
+  $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+  $endpoint = 'admin/accounts/~/dialGroups';
+  $response = $ev->get($endpoint);
+  $jsonObj = json_decode($response);
+  foreach ($jsonObj as $group){
+      if ($group->dialGroupName == "My Dial Group - Predictive"){
+          $endpoint .= '/' . $group->dialGroupId;
+          $group->enableAbsolutePriority = true;
+          $group->enableAgentFilter = true;
+          $group->enableListPriority = true;
+          $group->allowLeadSearch = "YES";
+          $group->enableCallbacksAfterMaxpass = true;
+          $group->enableCallbacksAfterMaxDailyPass = true;
+          $response = $ev->put($endpoint, $group);
+          print ($response."\r\n");
+          break;
+      }
+  }
+}catch (Exception $e) {
+  print $e->getMessage();
+}
+```
+
 ### Response
 
-```json
+```json hl_lines="8-13"
 {
     "permissions": [],
     "dialGroupId": 115793,
@@ -271,23 +489,23 @@ except Exception as e:
     "dialMode": "PREDICTIVE",
     "minPredictiveAgents": 1,
     "enableAgentFilter": true,
+    "enableListPriority": true,
+    "allowLeadSearch": "YES",
+    "enableCallbacksAfterMaxpass": true,
+    "enableAbsolutePriority": true,
+    "enableCallbacksAfterMaxDailyPass": true,
+    "requireFetchedLeadsCalled": false,
     "maxPorts": 1,
-    "isActive": true,
+    "isActive": false,
     "agentsReady": 0,
     "billingKey": null,
     "outdialServerGroupId": 0,
     "realTimeAgentData": false,
-    "allowLeadSearch": "YES",
     "maxLeadsReturned": 1,
-    "enableListPriority": true,
-    "requireFetchedLeadsCalled": false,
     "allowPreviewLeadFilters": false,
     "progressiveEnabled": false,
     "progressiveCallDelay": 0,
-    "enableCallbacksAfterMaxpass": true,
-    "enableAbsolutePriority": true,
     "hciEnabled": "DISABLED",
-    "enableCallbacksAfterMaxDailyPass": true,
     "agentDialGroupMembers": null
 }
 ```

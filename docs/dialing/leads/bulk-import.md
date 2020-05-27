@@ -92,9 +92,7 @@ Leads are uploaded per Campaign which requires a `campaignId`. The following two
 
      `GET /api/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns`
 
-## Sample Code: Enumerating Campaigns
-
-The following code sample shows how to list all campaigns of a dial group.
+## Sample Code: Enumerating Campaigns and Import Leads
 
 ```javascript tab="Node JS"
 /****** Install Node JS SDK wrapper *******
@@ -103,42 +101,106 @@ $ npm install engagevoice-sdk-wrapper --save
 
 const EngageVoice = require('engagevoice-sdk-wrapper')
 
-var ev = new EngageVoice.RestClient()
+// Instantiate the SDK wrapper object with your RingCentral app credentials
+var ev = new EngageVoice.RestClient("RC_CLIENT_ID", "RC_CLIENT_SECRET")
 
-ev.login("legacy-username", "legacy-password", "", function(err, response){
-    if (err)
-      console.log(err)
-    else{
-      list_account_dial_groups()
-    }
-})
+// Login your account with your RingCentral Office user credentials
+ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER", function(err, response){
+  if (!err){
+    read_dial_groups()
+  }
+})  
 
-function list_account_dial_groups(){
-    var endpoint = 'admin/accounts/~/dialGroups'
-    ev.get(endpoint, null, function(err, response){
-        if (err){
-            console.log(err)
-        }else {
-            var jsonObj = JSON.parse(response)
-            for (var item of jsonObj){
-              console.log(item)
-              console.log("======")
-              list_campaigns(item.dialGroupId)
-            }
+// List dial groups and get a dial group id
+function read_dial_groups(){
+  var endpoint = 'admin/accounts/~/dialGroups'
+  ev.get(endpoint, null, function(err, response){
+    if (!err){
+      var jsonObj = JSON.parse(response)
+      for (var group of jsonObj){
+        if (group.dialGroupName == "My Dial Group - Predictive"){
+          read_group_campaigns(group.dialGroupId)
+          break
         }
-    })
+      }
+    }
+  })
 }
 
-function list_campaigns(dialGroupId){
-    var endpoint = `admin/accounts/~/dialGroups/${dialGroupId}/campaigns`
-    ev.get(endpoint, null, function(err, response){
-        if (err){
-            console.log(err)
-        }else {
-            var jsonObj = JSON.parse(response)
-            console.log(jsonObj)
+// List campaigns under a dial group and get a campaign id
+function read_group_campaigns(dialGroupId){
+  var endpoint = 'admin/accounts/~/dialGroups/' + dialGroupId + "/campaigns"
+  ev.get(endpoint, null, function(err, response){
+    if (!err){
+      var jsonObj = JSON.parse(response)
+      for (var campaign of jsonObj){
+        if (campaign.campaignName == "Customer Acquisition"){
+          import_campaign_leads(campaign.campaignId)
+          break
         }
-    })
+      }
+    }
+  })
+}
+
+// import leads to a campaign
+function import_campaign_leads(campaignId){
+  var endpoint = 'admin/accounts/~/campaigns/' + campaignId + "/leadLoader/direct"
+  var params = {
+    description: "Prospect customers",
+    dialPriority: "IMMEDIATE",
+    duplicateHandling: "REMOVE_FROM_LIST",
+    listState: "ACTIVE",
+    timeZoneOption: "NOT_APPLICABLE",
+    uploadLeads: [
+      {
+         leadPhone:"1111111111",
+         externId:"1",
+         title:"Dr.",
+         firstName:"Jeff",
+         midName:"John",
+         lastName:"Malfetti",
+         suffix:"Jr.",
+         address1:"3101 Fake St.",
+         address2:"Suite 120",
+         city:"Rock",
+         state:"CO",
+         zip:"80500",
+         email:"test@test.com",
+         gateKeeper:"Some one",
+         auxData1:30,
+         auxData2:"a",
+         auxData3:100,
+         auxData4:"aa",
+         auxData5:1000,
+         auxPhone:"1111111110",
+         extendedLeadData:{
+            important:"data",
+            interested:true
+         }
+      },{
+         leadPhone:"2222222222",
+         externId:"222",
+         firstName:"Jason",
+         midName:"",
+         lastName:"Black",
+         address1:"1514 Bernardo Ave",
+         city:"Newyork",
+         state:"NY",
+         zip:"10001",
+      },{
+         leadPhone:"3333333333",
+         externId:"333",
+         firstName:"Rich",
+         lastName:"Dumbard"
+      }
+    ]
+  }
+  ev.post(endpoint, params, function(err, response){
+    if (!err){
+      console.log(response)
+    }
+  })
 }
 ```
 
@@ -149,34 +211,87 @@ function list_campaigns(dialGroupId){
 
 from engagevoice.sdk_wrapper import *
 
-def list_account_dial_groups():
-    try:
-        endpoint = "admin/accounts/~/dialGroups"
-        response = ev.get(endpoint)
-        jsonObj = json.loads(response)
-        for item in jsonObj:
-            print (item)
-            print ("======")
-            list_campaigns(item['dialGroupId'])
-    except Exception as e:
-        print (e)
+# List dial groups and get a dial group id
+def read_dial_groups():
+    endpoint = 'admin/accounts/~/dialGroups'
+    resp = ev.get(endpoint)
+    for group in resp:
+        if (group['dialGroupName'] == "My Dial Group - Predictive"):
+            read_group_campaigns(group['dialGroupId'])
+            break
 
 
-def list_campaigns(dialGroupId):
-    try:
-        endpoint = 'admin/accounts/~/dialGroups/%s/campaigns' % (dialGroupId)
-        response = ev.get(endpoint)
-        jsonObj = json.loads(response)
-        print (jsonObj)
-    except Exception as e:
-        print (e)
+# List campaigns under a dial group and get a campaign id
+def read_group_campaigns(dialGroupId):
+    endpoint = 'admin/accounts/~/dialGroups/%i/campaigns/' % (dialGroupId)
+    resp = ev.get(endpoint)
+    for campaign in resp:
+        if (campaign['campaignName'] == "API Test"):
+            #import_campaign_leads(campaign['campaignId'])
+            search_campaign_leads()
+            break
 
 
-ev = RestClient()
+# import leads to a campaign
+def import_campaign_leads(campaignId):
+    endpoint = 'admin/accounts/~/campaigns/%i/leadLoader/direct' % campaignId
+    params = {
+        "description": "Prospect customers",
+        "dialPriority": "IMMEDIATE",
+        "duplicateHandling": "REMOVE_FROM_LIST",
+        "listState": "ACTIVE",
+        "timeZoneOption": "NOT_APPLICABLE",
+        "uploadLeads": [
+          {
+             "leadPhone": "1111111111",
+             "externId":"1",
+             "title":"Dr.",
+             "firstName":"Jeff",
+             "midName":"John",
+             "lastName":"Malfetti",
+             "suffix":"Jr.",
+             "address1":"3101 Fake St.",
+             "address2":"Suite 120",
+             "city":"Rock",
+             "state":"CO",
+             "zip":"80500",
+             "email":"test@test.com",
+             "gateKeeper":"Some one",
+             "auxData1":30,
+             "auxData2":"a",
+             "auxData3":100,
+             "auxData4":"aa",
+             "auxData5":1000,
+             "auxPhone":"1111111110",
+             "extendedLeadData":{
+                "important":"data",
+                "interested":true
+             }
+          },{
+             "leadPhone":"2222222222",
+             "externId":"222",
+             "firstName":"Jason",
+             "midName":"",
+             "lastName":"Black",
+             "address1":"1514 Bernardo Ave",
+             "city":"Newyork",
+             "state":"NY",
+             "zip":"10001",
+          },{
+             "leadPhone":"3333333333",
+             "externId":"333",
+             "firstName":"Rich",
+             "lastName":"Dumbard"
+          }
+        ]
+      }
+    resp = ev.post(endpoint, params)
+    print (resp)
+
+ev = RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET")
 try:
-    resp = ev.login("legacy-username", "legacy-password")
-    if resp:
-        list_account_dial_groups()
+    ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER")
+    read_dial_groups()
 except Exception as e:
     print (e)
 ```
@@ -189,36 +304,118 @@ $ composer require engagevoice-sdk-wrapper:dev-master
 <?php
 require('vendor/autoload.php');
 
-$ev = new EngageVoiceSDKWrapper\RestClient();
+require('vendor/autoload.php');
+
+// Instantiate the SDK wrapper object with your RingCentral app credentials
+$ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
 try{
-    $ev->login("legacy-username", "legacy-password", null, function($response){
-      list_account_dial_groups();
-    });
+  // Login your account with your RingCentral Office user credentials
+  $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+    read_dial_groups();
 }catch (Exception $e) {
     print $e->getMessage();
 }
 
-function list_account_dial_groups(){
-    global $ev;
-    $endpoint = "admin/accounts/~/dialGroups";
-    try{
-        $resp = $ev->get($endpoint);
-        $jsonObj = json_decode($resp);
-        foreach ($jsonObj as $item){
-          print(json_encode($item)."\r\n");
-          print ("======\r\n");
-          list_campaigns($item->dialGroupId);
-          print ("======\r\n");
-        }
-    }catch (Exception $e) {
-        print $e->getMessage();
+function read_dial_groups(){
+  global $ev;
+  $endpoint = 'admin/accounts/~/dialGroups';
+  try{
+    $resp = $ev->get($endpoint);
+    $jsonObj = json_decode($resp);
+    foreach ($jsonObj as $group){
+      if ($group->dialGroupName == "My Dial Group - Predictive"){
+        read_group_campaigns($group->dialGroupId);
+        break;
+      }
     }
+  }catch (Exception $e) {
+      print $e->getMessage();
+  }
 }
 
-function list_campaigns($dialGroupId){
-    global $ev;
-    $endpoint = 'admin/accounts/~/dialGroups/'.$dialGroupId.'/campaigns';
+function read_group_campaigns($dialGroupId){
+  global $ev;
+  $endpoint = 'admin/accounts/~/dialGroups/' . $dialGroupId . "/campaigns";
+  try{
     $resp = $ev->get($endpoint);
-    print ($resp."\r\n");
+    $jsonObj = json_decode($resp);
+    foreach ($jsonObj as $campaign){
+      if ($campaign->campaignName == "API Test"){
+          load_campaign_leads($campaign->campaignId)
+          break;
+      }
+    }
+  }catch(Exception $e) {
+      print $e->getMessage();
+  }
+}
+
+function load_campaign_leads($campaignId){
+  global $ev;
+  $endpoint = 'admin/accounts/~/campaigns/' . $campaignId . "/leadLoader/direct";
+  $params = array (
+    "description" => "Prospect customers",
+    "dialPriority" => "IMMEDIATE",
+    "duplicateHandling" => "REMOVE_FROM_LIST",
+    "listState" => "ACTIVE",
+    "timeZoneOption" => "NOT_APPLICABLE",
+    "uploadLeads" => array (
+      array (
+         "leadPhone" => "1111111111",
+         "externId" => "1",
+         "title" => "Dr.",
+         "firstName" => "Jeff",
+         "midName" => "John",
+         "lastName" => "Malfetti",
+         "suffix" => "Jr.",
+         "address1" => "3101 Fake St.",
+         "address2" => "Suite 120",
+         "city" => "Rock",
+         "state" => "CO",
+         "zip" => "80500",
+         "email" => "test@test.com",
+         "gateKeeper" => "Some one",
+         "auxData1" => 30,
+         "auxData2" => "a",
+         "auxData3" => 100,
+         "auxData4" => "aa",
+         "auxData5" => 1000,
+         "auxPhone" => "1111111110",
+         "extendedLeadData" => array (
+            "important" => "data",
+            "interested" => true
+         )
+      ),
+      array (
+         "leadPhone" => "2222222222",
+         "externId" => "222",
+         "firstName" => "Jason",
+         "midName" => "",
+         "lastName" => "Black",
+         "address1" => "1514 Bernardo Ave",
+         "city" => "Newyork",
+         "state" => "NY",
+         "zip" => "10001",
+      ),
+      array (
+         "leadPhone" => "3333333333",
+         "externId" => "333",
+         "firstName" => "Rich",
+         "lastName" => "Dumbard"
+      )
+    )
+  );
+  try{
+    $resp = $ev->post($endpoint, $params);
+    print ($resp);
+  }catch(Exception $e) {
+      print $e->getMessage();
+  }
 }
 ```
+
+## Upload Leads for a campaign
+
+To upload leads for a campaign, we will need a campaign Id. As campaigns are members of a dialing group.
+
+### Request

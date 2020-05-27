@@ -1,6 +1,6 @@
 no_breadcrumb: true
-
 # RingCentral Engage Voice Developer Guide
+<img class="img-fluid" width="100%" src="../../images/users-components.png">
 
 <div class="jumbotron pt-1">
   <h3 class="display-5">Let's Get Started!</h3>
