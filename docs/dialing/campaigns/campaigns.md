@@ -70,7 +70,6 @@ Content-Type: application/json
 
 {
   "isActive":1,
-  "campaignId":136785,
   "campaignName":"My Predictive Campaign",
   "campaignDesc":"A test predictive campaign",
   "startDate":"2020-05-26T07:00:00.000+0000",
@@ -82,6 +81,129 @@ Content-Type: application/json
 }
 ```
 
+```javascript tab="Node JS"
+/****** Install Node JS SDK wrapper *******
+$ npm install engagevoice-sdk-wrapper --save
+*******************************************/
+
+const EngageVoice = require('engagevoice-sdk-wrapper')
+
+// Instantiate the SDK wrapper object with your RingCentral app credentials
+var ev = new EngageVoice.RestClient("RC_CLIENT_ID", "RC_CLIENT_SECRET")
+
+// Login your account with your RingCentral Office user credentials
+ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER", function(err, response){
+  if (!err){
+    var endpoint = 'admin/accounts/~/dialGroups'
+    ev.get(endpoint, null, function(err, response){
+      if (!err){
+        var jsonObj = JSON.parse(response)
+        for (var group of jsonObj){
+          if (group.dialGroupName == "My Dial Group - Predictive"){
+            // create a campaign under this dial group
+            endpoint += '/' + group.dialGroupId + '/campaigns'
+            var params = {
+              isActive: 1,
+              campaignName: "My Predictive Campaign",
+              campaignDesc: "A test predictive campaign",
+              startDate: "2020-05-28T07:00:00.000+0000",
+              endDate: "2025-05-30T07:00:00.000+0000",
+              maxRingTime: 30,
+              maxRingTimeTransfer: 60,
+              callerId: "4155550123",
+              dialLoadedOrder: 0
+            }
+            ev.post(endpoint, params, function(err, response){
+              if (!err){
+                console.log (response)
+              }
+            })
+            break
+          }
+        }
+      }
+    })
+  }
+})
+```
+
+```python tab="Python"
+#### Install Python SDK wrapper ####
+# $ pip install engagevoice-sdk-wrapper
+#####################################
+
+from engagevoice.sdk_wrapper import *
+
+# Instantiate the SDK wrapper object with your RingCentral app credentials
+ev = RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET")
+
+# Login your account with your RingCentral Office user credentials
+try:
+    ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER")
+    endpoint = 'admin/accounts/~/dialGroups'
+    resp = ev.get(endpoint)
+    for group in resp:
+      if (group['dialGroupName'] == "My Dial Group - Predictive"):
+          # create a campaign under this dial group
+          endpoint += '/%i/campaigns' % (group['dialGroupId'])
+          params = {
+            "isActive": 1,
+            "campaignName": "My Predictive Campaign",
+            "campaignDesc": "A test predictive campaign",
+            "startDate": "2020-05-26T07:00:00.000+0000",
+            "endDate": "2025-05-26T07:00:00.000+0000",
+            "maxRingTime": 30,
+            "maxRingTimeTransfer": 60,
+            "callerId": "4155550123",
+            "dialLoadedOrder": 0
+          }
+          resp = ev.post(endpoint, params)
+          print (resp)
+          break      
+except Exception as e:
+    print (e)
+```
+
+```php tab="PHP"
+/************ Install PHP SDK wrapper **************
+$ composer require engagevoice-sdk-wrapper:dev-master
+*****************************************************/
+
+<?php
+require('vendor/autoload.php');
+
+// Instantiate the SDK wrapper object with your RingCentral app credentials
+$ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
+try{
+  // Login your account with your RingCentral Office user credentials
+  $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+  $endpoint = 'admin/accounts/~/dialGroups';
+  $response = $ev->get($endpoint);
+  $jsonObj = json_decode($response);
+  foreach ($jsonObj as $group){
+      if ($group->dialGroupName == "My Dial Group - Predictive"){
+          // create a campaign under this dial group
+          $endpoint .= '/' . $group->dialGroupId . '/campaigns';
+          $params = array (
+            "isActive" => 1,
+            "campaignName" => "My Predictive Campaign",
+            "campaignDesc" => "A test predictive campaign",
+            "startDate" => "2020-05-26T07:00:00.000+0000",
+            "endDate" => "2025-05-26T07:00:00.000+0000",
+            "maxRingTime" => 30,
+            "maxRingTimeTransfer" => 60,
+            "callerId" => "4155550123",
+            "dialLoadedOrder" => 0
+          );
+          $response = $ev->post($endpoint, $params);
+          print ($response."\r\n");
+          break;
+      }
+  }
+}catch (Exception $e) {
+  print $e->getMessage();
+}
+```
 
 ### Response
 
