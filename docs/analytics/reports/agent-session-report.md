@@ -1,29 +1,21 @@
-# Agent Session Report
+# About Agent Session Report
 
 The Agent Session Report provides an overview of agent activity for each agent logged in during the date range selected. Data is accurate up to the second the report is run, but this report only provides access to the last 90 days worth of data.
 
-## Report Request
-
-### API Endpoint
-
-The Agent Session Report can be downloaded at the following endpoint:
-
-`api/v1/admin/accounts/{accountId}/reportsStreaming`
-
-### Request Properties
+### Primary Parameters
 
 It takes a JSON request body with the following notable parameters. See the example below for more.
 
-| Property | Description |
+| API Property | Description |
 |-|-|
 | **`reportType`** | set to `CASPER_REPORT`. |
 | **`reportTypeName`** | set to `Agent_Session_Report_Raw`. |
 | **`reportCriteria.startTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
 | **`reportCriteria.endTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
 
-### Example Request
+### Request
 
-Be sure to set the proper `BASE_URL` and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
     ```bash
@@ -65,7 +57,7 @@ Be sure to set the proper `BASE_URL` and [authorization header](../../../authent
     }
     ```
 
-## Report Response
+### Response
 
 The Agent Session Report Raw endpoint returns data in a CSV format like the following.
 

@@ -43,6 +43,7 @@ To upload leads for a campaign, we will need a campaign Id. As campaigns are mem
 ## Enumerating Campaigns and Import Leads
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```http tab="HTTP"
 POST {baseURL}/api/admin/accounts/{accountId}/campaigns/{campaignId}/loader/direct

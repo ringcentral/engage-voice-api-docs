@@ -68,6 +68,7 @@ The parameter `dialLoadedOrder` can take on the following values:
     | **`4`** | Using Lead Priority | This option dials leads according to the priority indicated via the Loaded Lists menu option. Please note that the system assigns all leads a default priority number of 999. You can add a Lead Priority column to your lead lists and use it to assign each lead a priority number. When you upload the list via Loaded Lists, be sure to use the custom list mapping setting to map that column to the system’s Lead Priority destination. Learn more about loading [lead lists](../../leads/bulk-import)|
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
 

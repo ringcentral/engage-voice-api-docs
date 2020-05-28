@@ -67,10 +67,11 @@ Only `gateName` is a required parameter to create a Queue. All other parameters 
 | **`enableCallbacksAfterMaxDailyPass`** | Optional | Allow Scheduled Callbacks After Max Daily Passes | *unchecked* | When enabled, this setting allows agents to dial leads past the max daily pass limit (this limit can be set at the campaign level) as long as the last agent disposition selected was set to Requeue = Yes. If disabled, the lead will obey the max daily pass limit regardless of a request for a callback. |
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
 ######################################################
-The `baseURL` for your server is one of the following:
+The `BASE_URL` for your server is one of the following:
 # `https://engage.ringcentral.com/voice`
 # `https://portal.vacd.biz/`
 # `https://portal.virtualacd.biz/`
@@ -207,10 +208,11 @@ try{
 Now let's retrieve details for the Dial Group we just created to make to make sure it was created properly and to see what field were auto-populated with. This call will use the `dialGroups` endpoint.
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
 ######################################################
-The `baseURL` for your server is one of the following:
+The `BASE_URL` for your server is one of the following:
 # `https://engage.ringcentral.com/voice`
 # `https://portal.vacd.biz/`
 # `https://portal.virtualacd.biz/`
@@ -344,10 +346,11 @@ try{
 Note the `dialGroupId`. We will use that ID to update the Dial Group we created.  Let's say we want to now enable all the settings for the Predictive Dial Group using the `dialGroups` endpoint.
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP" hl_lines="11 12 13 14 15 16"
 ######################################################
-The `baseURL` for your server is one of the following:
+The `BASE_URL` for your server is one of the following:
 # `https://engage.ringcentral.com/voice`
 # `https://portal.vacd.biz/`
 # `https://portal.virtualacd.biz/`

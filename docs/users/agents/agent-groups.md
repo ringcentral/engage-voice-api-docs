@@ -6,6 +6,19 @@ Agent groups are a the way to manage agents in Engage Voice. All agents are assi
 
 Creating a new Agent Group only requires a group name.
 
+### Primary Parameters
+Only `groupName` is a required parameter to create a skill profile. All other parameters are optional.
+
+| API Property |  | UI Display | UI Default | Description |
+|-|-|-|-|-|
+| **`agentGroupId`** | Optional | *hidden* | 0 | A unique identifier for this Agent Group. |
+| **`groupName`** | Required | Name | *empty* | Give this Agent Group a name. |
+| **`isDefault`** | Optional | *hidden* | false |  |
+
+
+### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+
 ```html tab="HTTP"
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups
 Content-Type: application/json
@@ -20,9 +33,10 @@ Content-Type: application/json
 To retrieve a list of Agent Groups, use the `agentGroups` API endpoint.
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
-GET api/v1/admin/accounts/{accountId}/agentGroups
+GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups
 ```
 
 ### Response
@@ -53,9 +67,10 @@ GET api/v1/admin/accounts/{accountId}/agentGroups
 To retrieve a single Agent Group, use the `agentGroups` API endpoint with a specific agent group ID.
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
-GET api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
+GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
 ```
 
 ### Response
@@ -76,12 +91,15 @@ GET api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
 
 To Update an Agent Group's name, get the Agent Group's JSON object, modify the `groupName` and then `PUT` the JSON to back the the Agent Group's endpoint:
 
+### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+
 ```html tab="HTTP"
 # Retrieve Agent Group JSON object
-GET api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
+GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
 
 # Modify `groupName` and `PUT` JSON object
-PUT api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
+PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
 Content-Type: application/json
 
 {
@@ -94,7 +112,8 @@ Content-Type: application/json
 ## Delete Agent Group
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
-DELETE api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
+DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
 ```
