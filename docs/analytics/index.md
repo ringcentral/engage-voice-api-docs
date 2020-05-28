@@ -23,7 +23,7 @@ You can also use analytics to help identify the high or low points in customer a
       <p class="card-text">The Realtime Reports category provides data that is accurate up to the second the report is run, but these reports only provide access to the last 90 days worth of data. The reports in this category include:</p>
       <ul class="pl-0 ml-4">
       <li><a href="./reports/agent-session-report" class="card-link">Agent Session Report</a></li>
-      <li><a href="./reports/global-call-type-detail-report" class="card-link">Global Call Type Detail</a></li>
+      <li><a href="./reports/global-call-type-detail-report" class="card-link">Call Details and Recordings</a></li>
       </ul>
     </div>
   </div>

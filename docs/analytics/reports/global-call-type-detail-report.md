@@ -1,28 +1,20 @@
-# Call Details and Recordings
+# About Call Details and Recordings
 
 Call detail records (CDRs) and recordings are available via the Global Call Type Detail Report which provides complete real-time data for all calls in Engage Voice. When recordings are available, media URL is provided in the call detail record.
 
-## Report Request
-
-### API Endpoint
-
-The Call Detail Report can be downloaded at the following endpoint:
-
-`api/v1/admin/accounts/{accountId}/reportsStreaming`
-
-### Request Properties
+### Primary Parameters
 
 The call detail report has a number of request properties that allow filtering results:
 
-| Property | Description |
+| API Property | Description |
 |-|-|
 | **`reportType`** | set this to `GLOBAL_CALL_TYPE_EXCEL`. This corresponds to the Global Call Type Detail real-time report in the analytics console. |
 | **`startDate`** | a start date is required. This should be in ISO-8601 format such as: `2020-04-22T00:00:00.000-0000`. |
 | **`endDate`** | field is optional and uses the same format as `startDate`. |
 
-### Example Request
+###  Request
 
-Be sure to set the proper `BASE_URL` and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
     ```bash
@@ -47,7 +39,7 @@ Be sure to set the proper `BASE_URL` and [authorization header](../../../authent
     }
     ```
 
-## Call Detail Records Report Response
+### Response
 
 The call detail record includes a number of properties for thee call, allowing you to identify specific information regarding the call including wait times can caller ID
 
@@ -98,7 +90,7 @@ The `uii` is the unique identifier in the call in Engage.
 
 The call detail record provides 3 times for the call, and can be used to calculate the caller wait time:
 
-| Property | Description |
+| API Property | Description |
 |-|-|
 | **`callStartDts`** | time when the call started |
 | **`callEndDts`** | time when call ended |
@@ -108,9 +100,9 @@ Calculate the difference between `callStartDts` and `connectedDts` for the calle
 
 ### Phone Numbers
 
-Detailed phone number information also provided in the Call Detail Record including:
+Detailed phone number information is also provided in the Call Detail Record including:
 
-| Property | Description |
+| API Property | Description |
 |-|-|
 | **`ani`** | (Automatic Number Identification - ANI): This indicates the caller's phone number. |
 | **`dnis`** | (Dialed Number Identification Service - DNIS): This number identifies the number dialed by the caller which can be used to identify the number when the agent is responding to calls on multiple numbers. |
