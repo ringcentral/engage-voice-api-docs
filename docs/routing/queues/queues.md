@@ -1,4 +1,4 @@
-# Queues Basics
+# About Queues
 
 Queues are where calls are routed to. Be sure to make your queue active if you want calls to be routed properly, otherwise, callers to that queue will get a disconnected message.
 
@@ -15,15 +15,6 @@ You must first create a Queue Group before creating Queues. Start with a simple 
 ## Create Queue
 Make sure you know which account and which queue group you are creating this new queue in before proceeding. Creating a new queue group initially requires very few parameters.
 
-### Supporting APIs
-The following APIs are used to retrieve predefined values for certain fields. Use these values to populate the correct parameter values of fields.
-
-| Request | Description |
-|-|-|
-| `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/withChildren` | Gets a list of dial groups for campaigns created under this account. |
-| `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/scriptGroups/withChildren` | Gets a list of script groups for agents to read and communicate to callers, created under this account. |
-| `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/auxStates/?activeOnly=true` | Gets a list of post call states for an agent. Some examples include "Available", "Away", "Lunch", etc. |
-
 ### Primary Parameters
 Only `gateName` is a required parameter to create a Queue. All other parameters are optional.
 
@@ -34,8 +25,8 @@ Only `gateName` is a required parameter to create a Queue. All other parameters 
 | **`gateDesc`** | Optional | Description | *empty* | Set a short description for the new Queue. |
 | **`gatePriority`** | Optional | Queue Priority | 0 [Normal] | Specify the priority for this Queue. The higher the number, the higher the priority. 6 is the highest priority allowed from this setting. |
 | **`outboundCallerId`** | Optional | Outbound Caller ID | Inbound Callers ANI | This Automatic Number Identification (ANI) of the inbound caller's number is shown to the agent receiving the call from the Queue. |
-| **`callbackCampaign`** | Optional | Campaign Callback Mapping | *empty* | If a customer is marked as a callback in the system, pick a outbound (dial group) campaign to assign them to. Retrieve a list of campaigns using `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/withChildren` |
-| **`abandonCampaign`** | Optional | Abandon Campaign Mapping | *empty* | If a caller hangs up in the queue before reaching an agent, the caller’s number will be moved to a campaign lead list (dial group) so they can be called back via the campaign. Retrieve a list of campaigns using `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/withChildren` |
+| **`callbackCampaign`** | Optional | Campaign Callback Mapping | *empty* | If a customer is marked as a callback in the system, pick a outbound (dial group) campaign to assign them to. Retrieve a list of campaigns using [Dial Groups](./#dial-groups) |
+| **`abandonCampaign`** | Optional | Abandon Campaign Mapping | *empty* | If a caller hangs up in the queue before reaching an agent, the caller’s number will be moved to a campaign lead list (dial group) so they can be called back via the campaign. Retrieve a list of campaigns using [Dial Groups](./#dial-groups) |
 | **Call Recording Settings** | | | | |
 | **`recordCall`** | Optional | Call Recordings | Yes - Record Full Call| Values are numeric and include `0`: No-Don't Record Call, `1`: Yes-Record Full Call. |
 | **`stopRecordingOnTransfer`** | Optional | Recording on Transfer | Yes - Record on Transfer | Values are boolean and include `true`: No-Don't Record on Transfer, `false`: Yes-Record on Transfer. |
@@ -47,7 +38,7 @@ Only `gateName` is a required parameter to create a Queue. All other parameters 
 | **`longCallTime`** | Optional | Long Call Time | 300 | Enter a time (in seconds) to identify any call duration you wish to mark as a long call time. For example, if you enter 300, the system will mark calls of greater than 300 seconds as a ‘long call time’. |
 | **Agent Settings** | | | | |
 | **`surveyPopType`** | Optional | Disable Dispositions and Agent Notes | *unchecked* | Check (set value to `SUPPRESS`) this box to prevent dispositions and the Agent Notes field from appearing within the agent interface for this queue. Enable this setting (set value to `FLASH`) when you wish to provide those options within an integrated agent script or an external app instead. |
-| **`script`** | Optional | Integrated Script | None | Select an agent script for this queue. The script you choose here will be presented by default to all agents taking calls in this queue. Retrieve a list of scripts using `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/scriptGroups/withChildren` |
+| **`script`** | Optional | Integrated Script | None | Select an agent script for this queue. The script you choose here will be presented by default to all agents taking calls in this queue. Retrieve a list of scripts using [Script Groups](./#script-groups) |
 | **`ttAccept`** | Optional | TT Accept | *unchecked* | Touch Tone Accept. Check this box if you'd like to require your agents to press a key when they’re ready to accept a call. |
 | **`hangupOnDisposition`** | Optional | Hangup on Disposition | *unchecked* | Select this option to ensure agent calls are terminated immediately following disposition. This can be useful if you wish to ensure that a call is dispositioned only when the agent is ready to end the call (rather than at any other time during the call). |
 | **`enableGlobalPhoneBook`** | Optional | Enable Global Phone Book | *unchecked* | Check this box to allow agents to access your global phone book when making transfers. |
@@ -69,7 +60,28 @@ One of the **Agent Settings** is available in a nested object. This setting incl
 
 | API Property |  | UI Display | UI Default | Description |
 |-|-|-|-|-|
-| **`afterCallState.description`** | Optional | Post Call State | *empty* | Choose the agent state you would like to place agents in once they finish a call. Options in this dropdown menu will populate according to the agent states you configure via the Agent States at the account level. Retrieve a list of states using `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/auxStates/?activeOnly=true` |
+| **`afterCallState.description`** | Optional | Post Call State | *empty* | Choose the agent state you would like to place agents in once they finish a call. Options in this dropdown menu will populate according to the agent states you configure via the Agent States at the account level. Retrieve a list of states using [Post Call States](./#post-call-states) |
+
+### Supporting Values and APIs
+The following APIs are used to retrieve predefined values for certain fields. Use these values to populate the correct parameter values of fields.
+
+#### Dial Groups
+
+Gets a list of dial groups for campaigns created under this account.
+
+  `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/withChildren`
+
+#### Script Groups
+
+Gets a list of script groups for agents to read and communicate to callers, created under this account.
+
+  `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/scriptGroups/withChildren`
+
+#### Post Call States
+
+Gets a list of post call states for an agent. Some examples include "Available", "Away", "Lunch", etc.
+
+  `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/auxStates/?activeOnly=true`
 
 ### Request
 

@@ -1,4 +1,4 @@
-# Queue Groups Basics
+# About Queue Groups
 
 Queue Groups are containers for one or more groups. Queue Groups must be created before creating a queue for routing.  Once a Queue Group is created, and you set the Group Skill, create your [Queues](../queues) in the Queue Group.
 
@@ -14,13 +14,14 @@ The original terminology for a Queue Group was Gate Group. In this way, Gates an
 
 Creating a new Queue Group using the `gateGroups` endpoint. Only the Queue Group name is required.
 
-### Optional Parameters
-The following parameters are optional.
+### Primary Parameters
+Only `groupName` is a required parameter to create a Queue Group. All other parameters are optional.
 
-| API Property | UI Display | UI Default | Description |
-|-|-|-|-|
-| **`billingKey`** | Hidden | *null* | *Unknown usage* |
-| **`gateGroupId`** | Hidden | 0 | You can specify your gateGroupId, but by default, the next available ID is chosen for you. |
+| API Property | | UI Display | UI Default | Description |
+|-|-|-|-|-|
+| **`groupName`** | Required | Name | *empty* | Name for this new Queue Group |
+| **`billingKey`** | Optional | *hidden* | *null* | If you use an external billing system, you can provide the billing code from that system in the queue to easily keep track of which customers (represented by the queue) are tied to which billing code.  This setting is for reporting purposes only |
+| **`gateGroupId`** | Optional | *hidden* | 0 | You can specify your gateGroupId, but by default, the next available ID is chosen for you. |
 
 ### Request
 
