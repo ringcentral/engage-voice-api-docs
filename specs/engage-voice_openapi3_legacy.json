@@ -10886,6 +10886,14 @@
             }
           },
           {
+            "in": "path",
+            "name": "gateGroupId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "description": "gateId",
             "in": "path",
             "name": "gateId",
@@ -11692,6 +11700,38 @@
         "description": "Permissions: UPDATE on Gate (Permission Override)",
         "operationId": "deleteGateQueueDtmfEvent",
         "parameters": [
+          {
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "gateGroupId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "gateId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "eventId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "description": "dtmfEventId",
             "in": "path",
