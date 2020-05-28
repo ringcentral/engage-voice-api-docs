@@ -84,6 +84,7 @@ Gets a list of post call states for an agent. Some examples include "Available",
   `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/auxStates/?activeOnly=true`
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
 
@@ -337,6 +338,7 @@ The following parameters are optional.
 | **`maxRows`** | Integer | Hidden | ?? | You can specify the maximum number of Queues to return in a single call. |
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
 ```html
@@ -461,6 +463,7 @@ try{
 Retrieve details for a single Queue using the `gates` endpoint.
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
     GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
@@ -656,6 +659,7 @@ try{
 Update the details for a single Queue  using the `gates` endpoint. Several details need to be updated with a single `PUT` command so make sure to `GET` all details, modify the relevant fields, and then submit the entire object to update the Queue.
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html hl_lines="7 25" tab="HTTP"
 # Retrieve the entire Queue JSON object
@@ -807,6 +811,8 @@ try{
 Delete a single Queue Group using the `gates` endpoint.
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+
 ```html tab="HTTP"
 DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
 ```

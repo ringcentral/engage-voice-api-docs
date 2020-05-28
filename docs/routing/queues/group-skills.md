@@ -21,6 +21,7 @@ Only `gateName` is a required parameter to create a Queue. All other parameters 
 | **`requeueShortcut`** | Optional | **None** | *empty* | Allow agents to manually send their current call to a specific inbound queue, or to another agent with a special skill. |
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
     ```html
@@ -75,6 +76,7 @@ Only `gateName` is a required parameter to create a Queue. All other parameters 
 Retrieve a list of Group Skills using the `skills` endpoint.
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
     ```html
@@ -114,6 +116,7 @@ Retrieve a list of Group Skills using the `skills` endpoint.
     Update a list of Group Skills using the `skills` endpoint.  This `PUT` allows you to update muliple skills for the Queue Group in a single call.
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
     ```html hl_lines="7 17 32 42"
@@ -201,6 +204,7 @@ Retrieve a list of Group Skills using the `skills` endpoint.
 Retrieve details of a single Group Skill using the `skills` endpoint.
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
     ```html
@@ -228,6 +232,7 @@ Retrieve details of a single Group Skill using the `skills` endpoint.
 Update a single Group Skill using the `skills` endpoint.  This `PUT` focuses on just a single skill for the Queue Group.
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
     ```html hl_lines="6 19"
@@ -280,6 +285,8 @@ Update a single Group Skill using the `skills` endpoint.  This `PUT` focuses on 
 Delete a single Skill using the `skills` endpoint.  You can only delete a single skill at a time.
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+
     ```html tab="HTTP"
     DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}
     ```

@@ -25,6 +25,7 @@ Queue Events are actually a component of Queues and therefore do not need a `POS
 Retrieve a list of Queue Events set on this [Queue](./queues).
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
     ```html
@@ -232,6 +233,7 @@ Only `gateName` is a required parameter to create a Queue. All other parameters 
 | **`requeueShortcut`** | Optional | **None** | *empty* | Allow agents to manually send their current call to a specific inbound queue, or to another agent with a special skill. |
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
     ```html

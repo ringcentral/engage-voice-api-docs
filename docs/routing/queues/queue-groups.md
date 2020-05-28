@@ -24,6 +24,7 @@ Only `groupName` is a required parameter to create a Queue Group. All other para
 | **`gateGroupId`** | Optional | *hidden* | 0 | You can specify your gateGroupId, but by default, the next available ID is chosen for you. |
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups
@@ -125,6 +126,7 @@ The following parameters are optional.
 | **`maxRows`** | Integer | Hidden | ?? | You can specify the maximum number of Queue Groups to return in a single call. |
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
 GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups
@@ -225,6 +227,7 @@ try{
 Retrieve details for a single Queue Group using the `gateGroups` endpoint.
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
 GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}
@@ -325,6 +328,8 @@ try{
 Update the details for a single Queue Group using the `gateGroups` endpoint. Several details need to be updated with a single `PUT` command so make sure to `GET` all details, modify the relevant fields, and then submit the entire object to update the Queue Group
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+
 ```html hl_lines="11" tab="HTTP"
 # Retrieve the entire Queue Group JSON object
 GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}
@@ -436,6 +441,8 @@ try{
 Delete a single Queue Group using the `gateGroups` endpoint.
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+
 ```html tab="HTTP"
 DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}
 ```
