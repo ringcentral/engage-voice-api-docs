@@ -8287,7 +8287,7 @@
             "required": false,
             "schema": {
               "default": "false",
-              "type": "boolean"
+              "type": "string"
             }
           },
           {
@@ -9236,7 +9236,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/GateGroup"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GateGroup"
+              }
+            }
+          },
+          "description": "gateGroup",
+          "required": true
         },
         "responses": {
           "201": {
@@ -9587,7 +9595,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/GateGroup"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GateGroup"
+              }
+            }
+          },
+          "description": "gateGroup",
+          "required": true
         },
         "responses": {
           "200": {
@@ -9740,7 +9756,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Gate"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Gate"
+              }
+            }
+          },
+          "description": "gate",
+          "required": true
         },
         "responses": {
           "201": {
@@ -9959,7 +9983,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/Gate"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Gate"
+              }
+            }
+          },
+          "description": "gate",
+          "required": true
         },
         "responses": {
           "200": {
@@ -10486,7 +10518,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/GateDisposition"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GateDisposition"
+              }
+            }
+          },
+          "description": "gateDisposition",
+          "required": true
         },
         "responses": {
           "201": {
@@ -10822,7 +10862,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/GateDisposition"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GateDisposition"
+              }
+            }
+          },
+          "description": "gateDisposition",
+          "required": true
         },
         "responses": {
           "200": {
@@ -11049,7 +11097,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/GateQueueEvent"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GateQueueEvent"
+              }
+            }
+          },
+          "description": "queueEvent",
+          "required": true
         },
         "responses": {
           "201": {
@@ -11378,7 +11434,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/GateQueueEvent"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GateQueueEvent"
+              }
+            }
+          },
+          "description": "queueEvent",
+          "required": true
         },
         "responses": {
           "200": {
@@ -11551,7 +11615,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/GateQueueDtmfEvent"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GateQueueDtmfEvent"
+              }
+            }
+          },
+          "description": "postPayload",
+          "required": true
         },
         "responses": {
           "201": {
@@ -11913,7 +11985,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/GateQueueDtmfEvent"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GateQueueDtmfEvent"
+              }
+            }
+          },
+          "description": "postPayload",
+          "required": true
         },
         "responses": {
           "200": {
@@ -12170,7 +12250,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/PhoneBookEntry"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhoneBookEntry"
+              }
+            }
+          },
+          "description": "entry",
+          "required": true
         },
         "responses": {
           "201": {
@@ -12421,7 +12509,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/PhoneBookEntry"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhoneBookEntry"
+              }
+            }
+          },
+          "description": "entry",
+          "required": true
         },
         "responses": {
           "200": {
@@ -13079,7 +13175,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/GateScheduleOverride"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GateScheduleOverride"
+              }
+            }
+          },
+          "description": "scheduleOverride",
+          "required": true
         },
         "responses": {
           "200": {
@@ -13333,7 +13437,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/GateScheduleOverride"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GateScheduleOverride"
+              }
+            }
+          },
+          "description": "scheduleOverride",
+          "required": true
         },
         "responses": {
           "200": {
@@ -14042,7 +14154,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/GateGroupSkill"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GateGroupSkill"
+              }
+            }
+          },
+          "description": "skill",
+          "required": true
         },
         "responses": {
           "201": {
@@ -14338,7 +14458,15 @@
           }
         ],
         "requestBody": {
-          "$ref": "#/components/requestBodies/GateGroupSkill"
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GateGroupSkill"
+              }
+            }
+          },
+          "description": "skill",
+          "required": true
         },
         "responses": {
           "200": {
