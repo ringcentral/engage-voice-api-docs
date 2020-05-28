@@ -16,6 +16,7 @@ In the sections below, we’ll review each step you should take to create a skil
 As we discussed above, before you can create a skill profile, you must first create a group skill. In the example below, we’ll show you how to create a group skill; however, if you’d like to learn more about group skills and the settings you’ll find in that part of the platform, visit [Group Skills](../../../routing/queues/group-skills).
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
@@ -84,6 +85,7 @@ Gets a list of group skills for the Queue Group under this account.
   `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills`
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
     ```html hl_lines="7"
@@ -210,6 +212,7 @@ Only `profileName` is a required parameter to create a skill profile. All other 
 | **`chatGroupSkills`** | Optional | Chat Group Skills | *empty* | List of Chat Group Skills to assign to this Skill Profile. |
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/skillProfiles

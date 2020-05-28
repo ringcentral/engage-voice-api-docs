@@ -79,8 +79,7 @@ The parameter `agentType` can take on the following values:
     | **`SUPERVISOR`** | If you want the agent to listen in and monitor other agent calls, select this option |
 
 ### Request
-
-Be sure to sure to use the proper `BASE_URL` and authorization header for your deployment.
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents
@@ -102,26 +101,35 @@ POST {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/age
 
 ## Read Agents
 
+### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+
 ```html tab="HTTP"
-GET api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents`
+GET {BASE_URL}api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents`
 ```
 
 ## Read Agent
 
+### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+
 ```html tab="HTTP"
-GET api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}`
+GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}`
 ```
 
 ## Update Agent
 
 To Update an Agent Group's name, get the Agent Group's JSON object, modify the `groupName` and then `PUT` the JSON to back the the Agent Group's endpoint:
 
+### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+
 ```html tab="HTTP"
 # Retrieve Agent Group JSON object
-GET api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}
+GET {BASE_URL}api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}
 
 # Modify `groupName` and `PUT` JSON object
-PUT api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}
+PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}
 Content-Type: application/json
 
 {
@@ -132,6 +140,9 @@ Content-Type: application/json
 
 ## Delete Agent
 
+### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+
 ```html tab="HTTP"
-DELETE api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}`
+DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}`
 ```
