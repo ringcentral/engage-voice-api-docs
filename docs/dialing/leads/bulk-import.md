@@ -25,9 +25,10 @@ Each load in the `uploadLeads` array consists of a lead with the following notab
 | **leadPhone** | this can be a single phone number or a pipe-deliminted field of multiple phone numbers. For US numbers, this is a 10 digit format including area code. |
 
 ### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```http
-POST {baseURL}/api/admin/accounts/{accountId}/campaigns/{campaignId}/loader/direct
+POST {BASE_URL}/api/admin/accounts/{accountId}/campaigns/{campaignId}/loader/direct
 Authorization: Bearer <yourAccessToken>
 
 {
@@ -403,9 +404,3 @@ function load_campaign_leads($campaignId){
   }
 }
 ```
-
-## Upload Leads for a campaign
-
-To upload leads for a campaign, we will need a campaign Id. As campaigns are members of a dialing group.
-
-### Request

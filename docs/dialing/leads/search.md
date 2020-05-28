@@ -1,4 +1,4 @@
-# Introduction to Searching for Leads
+# About Searching for Leads
 
 You can search for leads using Primary Search Fields and Extended Search Fields. The Primary Search Fields can be used for performing basic searches on leads such as the campaign or list they are found in, while the Extended Search Fields provide search parameters that you can use to get more granular with your lead search.
 
@@ -44,45 +44,23 @@ Gets a list of the agent dispositions for this campaign
 
 The parameter `systemDispositions` can take on the following values:
 
-<a class="btn btn-primary" data-toggle="collapse" href="#detailed-params" role="button" aria-expanded="false" aria-controls="detailed-params">Show detailed values</a>
-
-<div class="collapse" id="detailed-params">
-  <table>
-    <tr>
-      <td> Value </td><td> Description </td>
-    </tr><tr>
-      <td> <strong><code>ANSWER</code></strong> </td><td> Search all calls that were answered by a lead and connected to a live agent </td>
-    </tr><tr>
-      <td> <strong><code>NOANSWER</code></strong> </td><td> Search all calls that rang without being answered by a lead </td>
-    </tr><tr>
-      <td> <strong><code>BUSY</code></strong> </td><td> Search all calls that the system dispositioned as a busy response </td>
-    </tr><tr>
-      <td> <strong><code>MACHINE</code></strong> </td><td> Search all calls that resulted in a machine answer </td>
-    </tr><tr>
-      <td> <strong><code>INTERCEPT</code></strong> </td><td> Search all calls for which the phone number was unreachable </td>
-    </tr><tr>
-      <td> <strong><code>DISCONNECT</code></strong> </td><td> Search all calls that were disconnected </td>
-    </tr><tr>
-      <td> <strong><code>ABANDON</code></strong> </td><td> Search all calls that ended because the system could not find an available agent after dialing the lead </td>
-    </tr><tr>
-      <td> <strong><code>CONGESTION</code></strong> </td><td> Search all calls that ended due to excessive network traffic or insufficient bandwidth </td>
-    </tr><tr>
-      <td> <strong><code>MANUAL_PASS</code></strong> </td><td> Search all calls that calls that had a manual pass applied to them </td>
-    </tr><tr>
-      <td> <strong><code>INBOUND_CALLBACK</code></strong> </td><td> Search all calls designated as (inbound) callbacks </td>
-    </tr><tr>
-      <td> <strong><code>APP_DNC</code></strong> </td><td> Search all calls that have been skipped due to a DNC list verification </td>
-    </tr><tr>
-      <td> <strong><code>APP_REQUEUE</code></strong> </td><td> Search all call legs that have been requeued via IVR </td>
-    </tr><tr>
-      <td> <strong><code>APP_REQUEUE_COMPLETE</code></strong> </td><td> Search all call legs that have been requeued via IVR in which the call has been received in the new queue </td>
-    </tr><tr>
-      <td> <strong><code>APP_REQUEUE_ABANDON</code></strong> </td><td> Search all call legs that have been requeued via IVR in which the call was abandoned before a connection was made </td>
-    </tr><tr>
-      <td> <strong><code>INBOUND_ABANDON</code></strong> </td><td> Search all calls where the caller abandoned the call while waiting in queue </td>
-    </tr>
-  </table>
-</div>
+| Value | Description |
+|-|-|
+| **`ANSWER`** | Search all calls that were answered by a lead and connected to a live agent |
+| **`NOANSWER`** | Search all calls that rang without being answered by a lead |
+| **`BUSY`** | Search all calls that the system dispositioned as a busy response |
+| **`MACHINE`** | Search all calls that resulted in a machine answer |
+| **`INTERCEPT`** | Search all calls for which the phone number was unreachable |
+| **`DISCONNECT`** | Search all calls that were disconnected |
+| **`ABANDON`** | Search all calls that ended because the system could not find an available agent after dialing the lead |
+| **`CONGESTION`** | Search all calls that ended due to excessive network traffic or insufficient bandwidth |
+| **`MANUAL_PASS`** | Search all calls that calls that had a manual pass applied to them |
+| **`INBOUND_CALLBACK`** | Search all calls designated as (inbound) callbacks |
+| **`APP_DNC`** | Search all calls that have been skipped due to a DNC list verification |
+| **`APP_REQUEUE`** | Search all call legs that have been requeued via IVR (this setting only applies to certain accounts. Please contact your CSM for more information) |
+| **`APP_REQUEUE_COMPLETE`** | Search all call legs that have been requeued via IVR in which the call has been received in the new queue. |
+| **`APP_REQUEUE_ABANDON`** | Search all call legs that have been requeued via IVR in which the call was abandoned before a connection was made |
+| **`INBOUND_ABANDON`** | Search all calls where the caller abandoned the call while waiting in queue |
 
 ### Lead Status
 
@@ -143,10 +121,11 @@ Get a list of states from the United States and all provinces and territories of
 `GET {BASE_URL}/api/v1/admin/states`
 
 ## Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```http tab="HTTP"
 
-    POST /api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch
+    POST {BASE_URL}/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch
     Authorization: bearer <myAccessToken>
     Content-Type: application/json;charset=UTF-8
     Accept: application/json
