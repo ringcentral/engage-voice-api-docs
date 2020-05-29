@@ -1,10 +1,10 @@
 no_breadcrumb:true
 
-# Read Dial Groups Node JS Quick Start
+# Create a Dial group - Python Quick Start
 
 Welcome to the Engage Voice Platform.
 
-In this Quick Start, we are going to read a list of dial groups from an account. Let's get started.
+In this Quick Start, we are going to create a predictive dial group for an account. Let's get started.
 
 ## Create an App
 
@@ -35,20 +35,20 @@ The first thing we need to do is create an app in the RingCentral Developer Port
 
 When you are done, you will be taken to the app's dashboard. Make note of the Client ID and Client Secret. We will be using those momentarily.
 
-## Read Dial Groups for an Engage Voice Account
+## Create a Dial Group for an Engage Voice Account
 
-### Install Engage Voice SDK Wrapper for Node JS
+### Install Engage Voice SDK Wrapper for Python
 
 ```bash
-$ npm install engagevoice-sdk-wrapper --save
+$ pip install engagevoice-sdk-wrapper
 ```
 
-### Create and Edit list-dial-groups.js
+### Create and Edit create-dial-group.py
 
-Create a file called <tt>list-dial-groups.js</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
+Create a file called <tt>create-dial-group.py</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
 
-```javascript
-const engagevoice = require('engagevoice_sdk_wrapper')
+```python
+from engagevoice.sdk_wrapper import *
 
 RINGCENTRAL_CLIENTID = '<ENTER CLIENT ID>'
 RINGCENTRAL_CLIENTSECRET = '<ENTER CLIENT SECRET>'
@@ -57,26 +57,27 @@ RINGCENTRAL_USERNAME = '<YOUR ACCOUNT PHONE NUMBER>'
 RINGCENTRAL_PASSWORD = '<YOUR ACCOUNT PASSWORD>'
 RINGCENTRAL_EXTENSION = '<YOUR EXTENSION>'
 
-var ev = new engagevoice.RestClient(RINGCENTRAL_CLIENTID, RINGCENTRAL_CLIENTSECRET)
-ev.login(RINGCENTRAL_USERNAME, RINGCENTRAL_PASSWORD, RINGCENTRAL_EXTENSION, function(err, response){
-    if (err)
-        console.log(err)
-    else{
-        list_account_dial_groups()
-    }
-})
-
-function list_account_dial_groups() {
-    var endpoint = 'admin/accounts/~/dialGroups'
-    ev.get(endpoint, null, function(err, response){
-        if (err)
-            console.log(err)
-        else {
-            var jsonObj = JSON.parse(response)
-            console.log(jsonObj)
+def create_a_dial_group():
+    try:
+        endpoint = 'admin/accounts/~/dialGroups'
+        params = {
+          "dialGroupName": "My Dial Group - Predictive",
+          "dialGroupDesc": "A test dial group with predictive dial mode",
+          "dialMode": "PREDICTIVE",
+          "isActive": True
         }
-    })
-}
+        response = ev.post(endpoint, params)
+        print (response)     
+    except Exception as e:
+        print (e)
+
+ev = RestClient(RINGCENTRAL_CLIENTID, RINGCENTRAL_CLIENTSECRET)
+try:
+    resp = ev.login(RINGCENTRAL_USERNAME, RINGCENTRAL_PASSWORD, RINGCENTRAL_EXTENSION)
+    if resp:
+        create_a_dial_group()
+except Exception as e:
+    print (e)
 ```
 
 ### Run Your Code
@@ -84,7 +85,7 @@ function list_account_dial_groups() {
 You are almost done. Now run your script.
 
 ```bash
-$ node list-dial-groups.js
+$ python create-dial-group.py
 ```
 
 ## Need Help?

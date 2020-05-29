@@ -41,6 +41,10 @@ pages:
       - 'Call Details and Recordings': analytics/reports/global-call-type-detail-report.md
   - 'Routing':
     - 'Overview': routing/index.md
+    - 'Getting Started':
+      - 'Node JS': routing/quick-start/node.md
+      - 'Python': routing/quick-start/python.md
+      - 'PHP': routing/quick-start/php.md
     - 'Queues':
       - 'Queues': routing/queues/queues.md
       - 'Queue Events': routing/queues/queue-events.md
@@ -48,14 +52,14 @@ pages:
       - 'Group Skills': routing/queues/group-skills.md
   - 'Dialing':
     - 'Overview': dialing/index.md
+    - 'Getting Started':
+      - 'Node JS': dialing/quick-start/node.md
+      - 'Python': dialing/quick-start/python.md
+      - 'PHP': dialing/quick-start/php.md
     - 'Campaigns':
       - 'Dial Groups': dialing/campaigns/dial-groups.md
       - 'Campaigns': dialing/campaigns/campaigns.md
     - 'Leads':
-      - 'Getting Started':
-        - 'Node JS': dialing/leads/quick-start/node.md
-        - 'Python': dialing/leads/quick-start/python.md
-        - 'PHP': dialing/leads/quick-start/php.md
       - 'Bulk Import Leads': dialing/leads/bulk-import.md
       - 'Searching Leads': dialing/leads/search.md
     - 'Active Calls':
