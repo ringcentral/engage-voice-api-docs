@@ -9,7 +9,7 @@
   <a href="quick-start/python/" class="btn btn-light qs-link">Python &raquo;</a>
 </div>
 
-## How do I screate and sync agents?
+## How do I create and sync agents?
 
 Agents can be created, updated and deleted via the Agent API.
 

@@ -1,10 +1,10 @@
 no_breadcrumb:true
 
-# Read Dial groups PHP Quick Start
+# Create a Queue group - PHP Quick Start
 
 Welcome to the Engage Voice Platform.
 
-In this Quick Start, we are going to read a list of dial groups from an account. Let's get started.
+In this Quick Start, we are going to create a queue group for an account. Let's get started.
 
 ## Create an App
 
@@ -35,7 +35,7 @@ The first thing we need to do is create an app in the RingCentral Developer Port
 
 When you are done, you will be taken to the app's dashboard. Make note of the Client ID and Client Secret. We will be using those momentarily.
 
-## Read Dial Groups for an Engage Voice Account
+## Create a Queue Group for an Engage Voice Account
 
 ### Install Engage Voice SDK Wrapper for PHP
 
@@ -43,9 +43,9 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
 $ composer require engagevoice-sdk-wrapper
 ```
 
-### Create and Edit list-dial-groups.php
+### Create and Edit create-queue-group.php
 
-Create a file called <tt>list-dial-groups.php</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
+Create a file called <tt>create-queue-group.php</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
 
 ```php
 <?php
@@ -61,21 +61,23 @@ const RINGCENTRAL_EXTENSION = '<YOUR EXTENSION>';
 $ev = new EngageVoiceSDKWrapper\RestClient(RINGCENTRAL_CLIENTID, RINGCENTRAL_CLIENTSECRET);
 try{
     $ev->login(RINGCENTRAL_USERNAME, RINGCENTRAL_PASSWORD, RINGCENTRAL_EXTENSION, function($response){
-      get_account_dial_groups();
+      create_a_queue_group();
     });
 }catch (Exception $e) {
     print $e->getMessage();
 }
 
-function get_account_dial_groups(){
-    global $ev;
-    $endpoint = "admin/accounts/~/dialGroups";
-    try{
-        $resp = $ev->get($endpoint);
-        print ($resp);
-    }catch (Exception $e) {
-        print $e->getMessage();
-    }
+function create_a_queue_group(){
+  global $ev;
+  try{
+    $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+    $endpoint = "admin/accounts/~/gateGroups";
+    $params = array ( 'groupName' => "My New Queue Group" );
+    $response = $ev->post($endpoint, $params);
+    print ($response."\r\n");
+  }catch (Exception $e) {
+    print $e->getMessage();
+  }
 }
 ?>
 ```
@@ -85,7 +87,7 @@ function get_account_dial_groups(){
 You are almost done. Now run your script.
 
 ```bash
-$ php list-dial-groups.php
+$ php create-dial-group.php
 ```
 
 ## Need Help?

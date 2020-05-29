@@ -24,53 +24,6 @@ Each load in the `uploadLeads` array consists of a lead with the following notab
 | **externId** | this is a required string property. |
 | **leadPhone** | this can be a single phone number or a pipe-deliminted field of multiple phone numbers. For US numbers, this is a 10 digit format including area code. |
 
-### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
-
-```http
-POST {BASE_URL}/api/admin/accounts/{accountId}/campaigns/{campaignId}/loader/direct
-Authorization: Bearer <yourAccessToken>
-
-{
-   "listState":"ACTIVE",
-   "duplicateHandling":"RETAIN_ALL",
-   "timeZoneOption":"NPA_NXX",
-   "description":"(list name goes here)",
-   "dialPriority":"IMMEDIATE",
-   "uploadLeads":[
-      {
-         "leadPhone":"8888888888",
-         "externId":"1",
-         "title":"Dr.",
-         "firstName":"Jeff",
-         "midName":"John",
-         "lastName":"Malfetti",
-         "suffix":"Jr.",
-         "address1":"3101 Fake St.",
-         "address2":"Suite 120",
-         "city":"Rock",
-         "state":"CO",
-         "zip":"80500",
-         "email":"test@test.com",
-         "gateKeeper":"Some one",
-         "auxData1":30,
-         "auxData2":"a",
-         "auxData3":100,
-         "auxData4":"aa",
-         "auxData5":1000,
-         "auxPhone":8888888888,
-         "extendedLeadData":{
-            "important":"data",
-            "interested":true
-         }
-      }
-   ],
-   "dncTags":[
-
-   ]
-}
-```
-
 ## Enumerating Campaigns
 
 Leads are uploaded per Campaign which requires a `campaignId`. The following two API calls will enable enumerating the account's campaign list.
@@ -83,7 +36,73 @@ Leads are uploaded per Campaign which requires a `campaignId`. The following two
 
      `GET /api/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns`
 
-## Sample Code: Enumerating Campaigns and Import Leads
+## Upload Leads for a campaign
+
+To upload leads for a campaign, we will need a campaign Id. As campaigns are members of a dialing group.
+
+## Enumerating Campaigns and Import Leads
+
+### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+
+```http tab="HTTP"
+POST {baseURL}/api/admin/accounts/{accountId}/campaigns/{campaignId}/loader/direct
+Authorization: Bearer <yourAccessToken>
+
+{
+    description: "Prospect customers",
+    dialPriority: "IMMEDIATE",
+    duplicateHandling: "REMOVE_FROM_LIST",
+    listState: "ACTIVE",
+    timeZoneOption: "NOT_APPLICABLE",
+    uploadLeads: [
+      {
+         leadPhone:"1111111111",
+         externId:"1",
+         title:"Dr.",
+         firstName:"Jeff",
+         midName:"John",
+         lastName:"Malfetti",
+         suffix:"Jr.",
+         address1:"3101 Fake St.",
+         address2:"Suite 120",
+         city:"Rock",
+         state:"CO",
+         zip:"80500",
+         email:"test@test.com",
+         gateKeeper:"Some one",
+         auxData1:30,
+         auxData2:"a",
+         auxData3:100,
+         auxData4:"aa",
+         auxData5:1000,
+         auxPhone:"1111111110",
+         extendedLeadData:{
+            important:"data",
+            interested:true
+         }
+      },{
+         leadPhone:"2222222222",
+         externId:"222",
+         firstName:"Jason",
+         midName:"",
+         lastName:"Black",
+         address1:"1514 Bernardo Ave",
+         city:"New York",
+         state:"NY",
+         zip:"10001",
+      },{
+         leadPhone:"3333333333",
+         externId:"333",
+         firstName:"Rich",
+         lastName:"Dunbard"
+      }
+    ],
+   "dncTags":[
+
+   ]
+}
+```
 
 ```javascript tab="Node JS"
 /****** Install Node JS SDK wrapper *******
@@ -176,14 +195,14 @@ function import_campaign_leads(campaignId){
          midName:"",
          lastName:"Black",
          address1:"1514 Bernardo Ave",
-         city:"Newyork",
+         city:"New York",
          state:"NY",
          zip:"10001",
       },{
          leadPhone:"3333333333",
          externId:"333",
          firstName:"Rich",
-         lastName:"Dumbard"
+         lastName:"Dunbard"
       }
     ]
   }
@@ -265,14 +284,14 @@ def import_campaign_leads(campaignId):
              "midName":"",
              "lastName":"Black",
              "address1":"1514 Bernardo Ave",
-             "city":"Newyork",
+             "city":"New York",
              "state":"NY",
              "zip":"10001",
           },{
              "leadPhone":"3333333333",
              "externId":"333",
              "firstName":"Rich",
-             "lastName":"Dumbard"
+             "lastName":"Dunbard"
           }
         ]
       }
@@ -384,7 +403,7 @@ function load_campaign_leads($campaignId){
          "midName" => "",
          "lastName" => "Black",
          "address1" => "1514 Bernardo Ave",
-         "city" => "Newyork",
+         "city" => "New York",
          "state" => "NY",
          "zip" => "10001",
       ),
@@ -392,7 +411,7 @@ function load_campaign_leads($campaignId){
          "leadPhone" => "3333333333",
          "externId" => "333",
          "firstName" => "Rich",
-         "lastName" => "Dumbard"
+         "lastName" => "Dunbard"
       )
     )
   );
