@@ -16,7 +16,7 @@ Active calls can be listed based on a criteria called "Product". Each product mu
 | **`maxRows`** | Max number of items per page. |
 
 ### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris/#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral) for your deployment.
 
 ```http
 GET {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/list?product=ACCOUNT&productId=12440001
