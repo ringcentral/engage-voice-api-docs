@@ -1,6 +1,5 @@
 no_breadcrumb: true
 # RingCentral Engage Voice Developer Guide
-<img class="img-fluid" width="100%" src="../../images/users-components.png">
 
 <div class="jumbotron pt-1">
   <h3 class="display-5">Let's Get Started!</h3>
@@ -9,9 +8,9 @@ no_breadcrumb: true
   <p>The following Quick Start Guides have been created to assist developers in getting started in each of our major APIs:</p>
   <ul>
     <li><a href="./dialing/leads/bulk-import/">Bulk Import and Sync Leads</a> using our <strong>Leads API</strong>.</li>
-    <li><a href="./dialing/active-calls/">Get a List of Active Calls</a> using our <strong>Active Calls API</strong>.</li>
     <li><a href="./analytics/reports/global-call-type-detail-report">Download Call Details and Recordings</a> using our <strong>Reports API</strong>.</li>
-    <li><a href="./analytics/reports/agent-session-report">Download Agent Session Info</a> using our <strong>Reports API</strong>.</li>
+    <li><a href="./dialing/active-calls/">Get a List of Active Calls</a> using our <strong>Active Calls API</strong>.</li>
+    <li><a href="./users/agents/">Provision and Sync Agents</a> using our <strong>Agent API</strong>.</li>
   </ul>
   <!--<p>Not a programmer? <a href="./basics/explorer/">Try out the API with no programming</a>.</p>-->
   <hr class="my-4">
@@ -24,63 +23,86 @@ no_breadcrumb: true
 
 Welcome RingCentral Engage Voice Developer! Here you have access to all the resources necessary to build an app successfully on the RingCentral Engage Voice Platform. Here are some specific resources and guides to help you get started.
 
-## Inbound, Outbound, and Agents
+## Popular Use Cases and Documentation
 
-There are three key elements to Engage Voice; Agents, who are your customer service representatives, Inbound Queues (Routing), where callers are routed to your Agents, and Outbound Campaigns, where your Agents dial out to contacts.
+<div class="card-deck">
+
+  <div class="card" style="width: 27rem;">
+    <div class="card-body pt-0 pb-0">
+      <h5 class="card-title">Importing & Searching Leads</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Leads API</h6>
+      <p class="card-text">Leads are contacts that are loaded into Engage for outbound dialing. You can add, update and sync leads from your apps using APIs.</p>
+      <ul class="pl-0 ml-4">
+      <li><a href="./dialing/leads/bulk-import/" class="card-link">Bulk Import Leads</a></li>
+      <li><a href="./dialing/leads/search/" class="card-link">Search Leads</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="width: 27rem;">
+    <div class="card-body pt-0 pb-0">
+      <h5 class="card-title">Call Reports & Recordings</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Reports API</h6>
+      <p class="card-text">Monitor agent activity and download recordings for agent optimization, analysis, compliance and archival.</p>
+      <ul class="pl-0 ml-4">
+      <li><a href="./analytics/reports/global-call-type-detail-report/" class="card-link">Call Details and Recordings</a></li>
+      <li><a href="./analytics/reports/agent-session-report/" class="card-link">View Agent Activity</a></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
 
 <div class="card-deck">
 
   <div class="card" style="width: 18rem;">
     <div class="card-body pt-0 pb-0">
-      <h5 class="card-title">Agents</h5>
+      <h5 class="card-title">Creating and Syncing Agents</h5>
       <h6 class="card-subtitle mb-2 text-muted">Agents API</h6>
-      <p class="card-text">Create and configure an agent account. Make sure to create Agent Groups first</p>
+      <p class="card-text">Create and configure an agent accounts. Make sure to create Agent Groups first</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./agent-groups/" class="card-link">Create a New Agent Group</a></li>
-      <li><a href="./agents/" class="card-link">Create a New Agent</a></li>
+      <li><a href="./agent-groups/" class="card-link">Create an Agent Group</a></li>
+      <li><a href="./agents/" class="card-link">Create an Agent</a></li>
       </ul>
     </div>
   </div>
 
   <div class="card" style="width: 18rem;">
     <div class="card-body pt-0 pb-0">
-      <h5 class="card-title">Inbound Queues</h5>
+      <h5 class="card-title">Skills-Based Routing</h5>
       <h6 class="card-subtitle mb-2 text-muted">Queues API</h6>
-      <p class="card-text">Use RingCentral Queues to route customers to Agents based upon the Agent's experience and priority. Make sure to create Queue Groups first.</p>
+      <p class="card-text">Use RingCentral Queues to route customers to Agents based upon the Agent's skills and priority. Make sure to create Queue Groups first.</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./queues/queue-groups/" class="card-link">Create a Queue Group</a></li>
-      <li><a href="./queues/queues/" class="card-link">Create a Queue</a></li>
+      <li><a href="./routing/queues/queue-groups/" class="card-link">Create a Queue Group</a></li>
+      <li><a href="./routing/queues/queues/" class="card-link">Create a Queue</a></li>
+      <li><a href="./routing/queues/group-skills/" class="card-link">Create Skills</a></li>
       </ul>
     </div>
   </div>
 
   <div class="card" style="width: 18rem;">
     <div class="card-body pt-0 pb-0">
-      <h5 class="card-title">Outbound Campaigns</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Campaigns API</h6>
-      <p class="card-text">Campaigns are a way to organize and manage the different types of outbound calls leaving your contact center. Create Dial Groups first to collect  and group your campaigns.</p>
+      <h5 class="card-title">Embed in CRMs</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Embeddable Web Widgets</h6>
+      <p class="card-text">Engage Voice Embeddable is an easy way to embed Engage in any web-based app. Also see our HubSpot example integration.</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./campaigns/dial-groups" class="card-link">Create Dial Groups</a></li>
-      <li><a href="./campaigns/campaigns" class="card-link">Create Campaigns</a></li>
+      <li><a href="./embeddable/get-started/" class="card-link">Getting Started</a></li>
+      <li><a href="https://github.com/ringcentral/hubspot-embeddable-engage-phone" class="card-link">HubSpot Integration</a></li>
       </ul>
     </div>
   </div>
 </div>
 
-## Managing Lead Lists
+## Getting Help
 
-Leads are typically classified as contacts who have expressed some kind of interest in your company. For our purposes, we refer to your outbound contacts in general — whether they’re end-users or existing or prospective customers — as leads.
+If on your way to building your first RingCentral Engage Voice application you encounter difficulty or need help, we are here to assist. Here are our most popular support resources available to you:
 
-Leads are arranged into lead lists and uploaded into campaigns for agents to dial on. Typically, loading and managing lead lists becomes more efficient as an automated processes. Use the [Leads API](./dialing/leads) to bulk import leads and search leads.
-
-## Getting Started with Engage Voice Embeddable
-
-Want to embed the power of Engage Voice into your own webpage?
-
-<a class="btn btn-primary" href="./embeddable/get-started">Learn more about Engage Embeddable &raquo;</a>
+* [Developer Forums](https://devcommunity.ringcentral.com/) - post a question to our support community.
+* [StackOverflow](http://stackoverflow.com/questions/tagged/ringcentral) - seek help from one of the Internet's most popular Q&A sites for developers.
+* [Live Chat](https://developer.ringcentral.com/community.html) - post your question to our public Glip Team for live, real-time support during business hours.
 
 ## Additional Resources
-
 
 <div class="card-deck">
   <div class="card">

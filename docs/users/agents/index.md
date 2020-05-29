@@ -1,5 +1,7 @@
 # Introduction to Agents APIs
 
+<img class="img-fluid" width="100%" src="../../images/users-components.png">
+
 Managing agents and automatically syncing them with your user management tools can be automated via the API. This article covers the basics of creating, reading, updating and deleting Agents.
 
 !!! note
