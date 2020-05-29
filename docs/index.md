@@ -29,7 +29,7 @@ Welcome RingCentral Engage Voice Developer! Here you have access to all the reso
 
   <div class="card" style="width: 27rem;">
     <div class="card-body pt-0 pb-0">
-      <h5 class="card-title">Importing & Searching Leads</h5>
+      <h5 class="card-title">Import & Search Leads</h5>
       <h6 class="card-subtitle mb-2 text-muted">Leads API</h6>
       <p class="card-text">Leads are contacts that are loaded into Engage for outbound dialing. You can add, update and sync leads from your apps using APIs.</p>
       <ul class="pl-0 ml-4">
@@ -41,7 +41,7 @@ Welcome RingCentral Engage Voice Developer! Here you have access to all the reso
 
   <div class="card" style="width: 27rem;">
     <div class="card-body pt-0 pb-0">
-      <h5 class="card-title">Call Reports & Recordings</h5>
+      <h5 class="card-title">Download Call Reports & Recordings</h5>
       <h6 class="card-subtitle mb-2 text-muted">Reports API</h6>
       <p class="card-text">Monitor agent activity and download recordings for agent optimization, analysis, compliance and archival.</p>
       <ul class="pl-0 ml-4">
@@ -58,7 +58,7 @@ Welcome RingCentral Engage Voice Developer! Here you have access to all the reso
 
   <div class="card" style="width: 18rem;">
     <div class="card-body pt-0 pb-0">
-      <h5 class="card-title">Creating and Syncing Agents</h5>
+      <h5 class="card-title">Create and Sync Agents</h5>
       <h6 class="card-subtitle mb-2 text-muted">Agents API</h6>
       <p class="card-text">Create and configure an agent accounts. Make sure to create Agent Groups first</p>
       <ul class="pl-0 ml-4">
