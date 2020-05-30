@@ -1,10 +1,10 @@
 no_breadcrumb:true
 
-# Read Dial groups Python Quick Start
+# Create a Dial group - Python Quick Start
 
 Welcome to the Engage Voice Platform.
 
-In this Quick Start, we are going to read a list of dial groups from an account. Let's get started.
+In this Quick Start, we are going to create a queue group for an account. Let's get started.
 
 ## Create an App
 
@@ -35,7 +35,7 @@ The first thing we need to do is create an app in the RingCentral Developer Port
 
 When you are done, you will be taken to the app's dashboard. Make note of the Client ID and Client Secret. We will be using those momentarily.
 
-## Read Dial Groups for an Engage Voice Account
+## Create a Queue Group for an Engage Voice Account
 
 ### Install Engage Voice SDK Wrapper for Python
 
@@ -43,9 +43,9 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
 $ pip install engagevoice-sdk-wrapper
 ```
 
-### Create and Edit list-dial-groups.py
+### Create and Edit create-queue-group.py
 
-Create a file called <tt>list-dial-groups.py</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
+Create a file called <tt>create-queue-group.py</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
 
 ```python
 from engagevoice.sdk_wrapper import *
@@ -57,11 +57,12 @@ RINGCENTRAL_USERNAME = '<YOUR ACCOUNT PHONE NUMBER>'
 RINGCENTRAL_PASSWORD = '<YOUR ACCOUNT PASSWORD>'
 RINGCENTRAL_EXTENSION = '<YOUR EXTENSION>'
 
-def get_account_dial_groups():
+def create_a_queue_group():
     try:
-        endpoint = "admin/accounts/~/dialGroups"
-        response = ev.get(endpoint, None, None)
-        print (response)
+        endpoint = 'admin/accounts/~/gateGroups'
+        params = { "groupName":"My New Queue Group" }
+        response = ev.post(endpoint, params)
+        print (response)        
     except Exception as e:
         print (e)
 
@@ -69,7 +70,7 @@ ev = RestClient(RINGCENTRAL_CLIENTID, RINGCENTRAL_CLIENTSECRET)
 try:
     resp = ev.login(RINGCENTRAL_USERNAME, RINGCENTRAL_PASSWORD, RINGCENTRAL_EXTENSION)
     if resp:
-        get_account_dial_groups()
+        create_a_queue_group()
 except Exception as e:
     print (e)
 ```
@@ -79,7 +80,7 @@ except Exception as e:
 You are almost done. Now run your script.
 
 ```bash
-$ python list-dial-groups.py
+$ python create-queue-group.py
 ```
 
 ## Need Help?
