@@ -27,43 +27,14 @@ Welcome RingCentral Engage Voice Developer! Here you have access to all the reso
 
 <div class="card-deck">
 
-  <div class="card" style="width: 27rem;">
-    <div class="card-body pt-0 pb-0">
-      <h5 class="card-title">Import & Search Leads</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Leads API</h6>
-      <p class="card-text">Leads are contacts that are loaded into Engage for outbound dialing. You can add, update and sync leads from your apps using APIs.</p>
-      <ul class="pl-0 ml-4">
-      <li><a href="./dialing/leads/bulk-import/" class="card-link">Bulk Import Leads</a></li>
-      <li><a href="./dialing/leads/search/" class="card-link">Search Leads</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="card" style="width: 27rem;">
-    <div class="card-body pt-0 pb-0">
-      <h5 class="card-title">Download Call Reports & Recordings</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Reports API</h6>
-      <p class="card-text">Monitor agent activity and download recordings for agent optimization, analysis, compliance and archival.</p>
-      <ul class="pl-0 ml-4">
-      <li><a href="./analytics/reports/global-call-type-detail-report/" class="card-link">Call Details and Recordings</a></li>
-      <li><a href="./analytics/reports/agent-session-report/" class="card-link">View Agent Activity</a></li>
-      </ul>
-    </div>
-  </div>
-
-</div>
-
-
-<div class="card-deck">
-
   <div class="card" style="width: 18rem;">
     <div class="card-body pt-0 pb-0">
-      <h5 class="card-title">Create and Sync Agents</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Agents API</h6>
-      <p class="card-text">Create and configure an agent accounts. Make sure to create Agent Groups first</p>
+      <h5 class="card-title">Integrate Your CRM</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Embedable</h6>
+      <p class="card-text">Integrate Engage Voice with your CRM for a seamless experience. See our open source HubSpot integration for a complete example solution.</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./agent-groups/" class="card-link">Create an Agent Group</a></li>
-      <li><a href="./agents/" class="card-link">Create an Agent</a></li>
+      <li><a href="./embeddable/get-started/" class="card-link">Getting Started</a></li>
+      <li><a href="https://github.com/ringcentral/hubspot-embeddable-engage-phone" class="card-link">HubSpot Integration</a></li>
       </ul>
     </div>
   </div>
@@ -83,15 +54,60 @@ Welcome RingCentral Engage Voice Developer! Here you have access to all the reso
 
   <div class="card" style="width: 18rem;">
     <div class="card-body pt-0 pb-0">
-      <h5 class="card-title">Embed in CRMs</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Embeddable Web Widgets</h6>
-      <p class="card-text">Engage Voice Embeddable is an easy way to embed Engage in any web-based app. Also see our HubSpot example integration.</p>
+      <h5 class="card-title">Create Outbound Campaigns</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Campaigns API</h6>
+      <p class="card-text">Campaigns are a way to organize and manage outbound calls. Create Dial Groups first to collect and group your campaigns.</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./embeddable/get-started/" class="card-link">Getting Started</a></li>
-      <li><a href="https://github.com/ringcentral/hubspot-embeddable-engage-phone" class="card-link">HubSpot Integration</a></li>
+      <li><a href="./dialing/campaigns/dial-groups" class="card-link">Create a Dial Group</a></li>
+      <li><a href="./dialing/campaigns/campaigns" class="card-link">Create a Campaign</a></li>
       </ul>
     </div>
   </div>
+
+</div>
+
+<div class="card-deck">
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body pt-0 pb-0">
+      <h5 class="card-title">Import Leads</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Leads API</h6>
+      <p class="card-text">Add, update and sync leads from your apps to automatically drive outbound dialing.</p>
+      <ul class="pl-0 ml-4">
+      <li><a href="./dialing/leads/bulk-import/" class="card-link">Bulk Import Leads</a></li>
+      <li><a href="./dialing/leads/search/" class="card-link">Search Leads</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body pt-0 pb-0">
+      <h5 class="card-title">Access Reports & Recordings</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Reports API</h6>
+      <p class="card-text">Monitor agent activity and download recordings for agent optimization, analysis, compliance and archival.</p>
+      <ul class="pl-0 ml-4">
+      <li><a href="./analytics/reports/global-call-type-detail-report/" class="card-link">Call Details and Recordings</a></li>
+      <li><a href="./analytics/reports/agent-session-report/" class="card-link">View Agent Activity</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body pt-0 pb-0">
+      <h5 class="card-title">Manage Agents</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Agents API</h6>
+      <p class="card-text">Create and configure an agent accounts. Make sure to create Agent Groups first</p>
+      <ul class="pl-0 ml-4">
+      <li><a href="./agent-groups/" class="card-link">Create an Agent Group</a></li>
+      <li><a href="./agents/" class="card-link">Create an Agent</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+
+
+
 </div>
 
 ## Getting Help
