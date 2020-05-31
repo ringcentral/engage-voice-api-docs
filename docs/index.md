@@ -31,10 +31,10 @@ Welcome RingCentral Engage Voice Developer! Here you have access to all the reso
     <div class="card-body pt-0 pb-0">
       <h5 class="card-title">Integrate Your CRM</h5>
       <h6 class="card-subtitle mb-2 text-muted">Embedable</h6>
-      <p class="card-text">Integrate Engage Voice with your CRM for a seamless experience. See our open source HubSpot integration for a complete example solution.</p>
+      <p class="card-text">Integrate Engage Voice with your CRM for a seamless agent experience. See our open source HubSpot integration for a complete code example.</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./embeddable/get-started/" class="card-link">Getting Started</a></li>
-      <li><a href="https://github.com/ringcentral/hubspot-embeddable-engage-phone" class="card-link">HubSpot Integration</a></li>
+      <li><a href="./embeddable/get-started/" class="card-link">Integrate Your CRM</a></li>
+      <li><a href="https://github.com/ringcentral/hubspot-embeddable-engage-phone" class="card-link">HubSpot Integration Example Source Code</a></li>
       </ul>
     </div>
   </div>
