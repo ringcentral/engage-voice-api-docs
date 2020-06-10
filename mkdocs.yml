@@ -50,6 +50,8 @@ pages:
       - 'Queue Events': routing/queues/queue-events.md
       - 'Queue Groups': routing/queues/queue-groups.md
       - 'Group Skills': routing/queues/group-skills.md
+    - 'Tutorials':
+      - 'IVR DNC List': https://ringcentral-tutorials.github.io/dnc-via-ivr-rest-demo
   - 'Dialing':
     - 'Overview': dialing/index.md
     - 'Getting Started':
@@ -90,3 +92,4 @@ pages:
   - 'SDKs': sdks/index.md
   - 'Embeddable': embeddable/get-started.md
   - 'Postman': postman.md
+  - 'Database Access': redshift-db.md

@@ -23,6 +23,7 @@ As you can see dialing components are comprised of several different components 
       <h6 class="card-subtitle mb-2 text-muted">Dial Groups API</h6>
       <p class="card-text">Dial groups are configurable groups of (outbound) campaigns that can be differentiated by the type of dialer you are using.</p>
       <ul class="pl-0 ml-4">
+      <li><a href="./quick-start" class="card-link">Create Dial Groups Quick Start</a></li>
       <li><a href="./campaigns/dial-groups" class="card-link">Manage Dial Groups</a></li>
       </ul>
     </div>
