@@ -1,14 +1,43 @@
 # Obtaining an Engage Access Token
 
-To access Engage Voice APIs, you need to request an Engage Access Token. This is by first requesting a RingCentral Access Token and then using an Engage API to create an Engage Access Token. Then the Engage Access Token can be used to access Engage Voice APIs.
+To access Engage Voice APIs, you need to create an Engage Voice App, and then with the client credentials, request an Engage Access Token. Once you have created an App, request a RingCentral Access Token and then using an Engage API to create an Engage Access Token. Then the Engage Access Token can be used to access Engage Voice APIs.
 
 > Note: Engage Voice APIs for Office customers are rooted at:
 >
 > `https://engage.ringcentral.com/voice/api/`
 
+## Create an App
+
+The first thing we need to do is create an app in the RingCentral Developer Portal. This can be done quickly by clicking the "Create Engage Voice App" button below. Just click the button, enter a name and description if you choose, and click the "Create" button. If you do not yet have a RingCentral account, you will be prompted to create one.
+
+<a target="new" href="https://developer.ringcentral.com/new-app?name=Engage+Voice+Quick+Start+App&desc=A+simple+app+to+demo+engage+voice+apis+access&public=false&type=ServerOther&carriers=7710,7310,3420&permissions=ReadAccounts&redirectUri=" class="btn btn-primary">Create Engage Voice App</a>
+<a class="btn-link btn-collapse" data-toggle="collapse" href="#create-app-instructions" role="button" aria-expanded="false" aria-controls="create-app-instructions">Show detailed instructions</a>
+
+<div class="collapse" id="create-app-instructions">
+<ol>
+<li><a href="https://developer.ringcentral.com/login.html#/">Login or create an account</a> if you have not done so already.</li>
+<li>Go to Console/Apps and click 'Create App' button.</li>
+<li>Give your app a name and description, then click Next.</li>
+<li>On the second page of the create app wizard enter the following:
+  <ul>
+  <li>Select 'Private' for Application Type.</li>
+  <li>Select 'Server-only (No UI)' for Platform Type.</li>
+  </ul>
+  </li>
+<li>On the third page of the create app wizard, select the following permissions:
+  <ul>
+    <li>ReadAccounts</li>
+  </ul>
+</li>
+<li>We are using Password Flow authentication, so leave "OAuth Redirect URI" blank.</li>
+</ol>
+</div>
+
+When you are done, you will be taken to the app's dashboard. Make note of the Client ID and Client Secret. We will be using those momentarily.
+
 ## Retrieve RingCentral Access Token
 
-First retrieve a RingCentral access token using the following instructions:
+Now retrieve a RingCentral access token using the following instructions:
 
 [RingCentral Authentication](https://developers.ringcentral.com/guide/authentication)
 

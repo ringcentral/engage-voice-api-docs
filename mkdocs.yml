@@ -87,7 +87,7 @@ pages:
     #- 'Legacy Tokens': basics/auth-legacy.md
   - 'Authentication':
     - 'Overview': authentication/index.md
-    - 'RingCentral Office Token': authentication/auth-ringcentral.md
+    - 'Engage Access Token': authentication/auth-ringcentral.md
     - 'Legacy': authentication/auth-legacy.md
   - 'SDKs': sdks/index.md
   - 'Embeddable': embeddable/get-started.md
