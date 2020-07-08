@@ -2,6 +2,19 @@
 
 The following SDKs provide developers with libraries that make interfacing with Engage Voice APIs easier in your language of choice.
 
+## Client SDKs
+
+Client SDKs provide a native language interface to Engage Voice REST APIs
+
+* [JavaScript Client SDK](https://github.com/ringcentral/engage-voice-js)
+* [Python Client SDK](https://github.com/ringcentral/engage-voice-python)
+
+## Agent SDKs
+
+The Agent SDK is a library to link client agent controls to the Engage Voice system. The Agent SDK also connects to a single point of entry authentication flow (also known as [Engage Access Token](../../authentication/auth-ringcentral)) and is responsible for connecting the WebSocket used for client messaging after authentication. The Agent SDK is found in npm.
+
+* [Agent SDK](https://www.npmjs.com/package/@ringcentral/engage-voice-agent)
+
 ## Community SDKs
 
 There are currently a set of unofficial client SDK libraries built the developer community. The list below includes SDK wrappers for Engage Voice Platform APIs.
