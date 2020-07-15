@@ -25,6 +25,6 @@ The base URL is either one of the following depending on your deployment:
 
 The authorization header is the following:
 
-* `X-Auth-Header: <myApiKey>`
+* `X-Auth-Token: <myApiKey>`
 
 Read more about [authorizing with the legacy system API](auth-legacy).
