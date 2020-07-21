@@ -89,6 +89,11 @@ pages:
     - 'Overview': authentication/index.md
     - 'Engage Access Token': authentication/auth-ringcentral.md
     - 'Legacy': authentication/auth-legacy.md
+  - 'Events and Notifications':
+    - 'Overview': notifications/index.md
+    - 'Workforce Management':
+      - 'Creating an Event': notifications/wfm/configure-wfm.md
+      - 'Event Payload': notifications/wfm/payload-wfm.md
   - 'SDKs': sdks/index.md
   - 'Embeddable': embeddable/get-started.md
   - 'Postman': postman.md
