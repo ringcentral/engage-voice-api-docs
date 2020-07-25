@@ -52,6 +52,11 @@ Content-Type: application/x-www-form-urlencoded
 rcAccessToken=<rcAccessToken>&rcTokenType=Bearer
 ```
 
+Where:
+
+-   **`<rcAccessToken>`** is the RingCentral Access Token you received from RingCentral Office authentication flow.
+
+
 ```bash tab="cURL"
 $ curl -XPOST https://engage.ringcentral.com/api/auth/login/rc/accesstoken \
       -d 'rcAccessToken=<rcAccessToken>' \
@@ -155,8 +160,7 @@ except Exception as e:
     raise ValueError(e)
 ```
 
-```PHP tab="PHP"
-<?php
+```php tab="PHP"
 
 $RC_ACCESS_TOKEN = "VALID-RINGCENTRAL-ACCESS-TOKEN";
 
@@ -193,14 +197,14 @@ try{
 
 ### Response
 
-The response will contain the `accessToken` property that can be used in an API call. Take note of the `accountId` property as that will be used to make future API calls.
+The response will contain the `accessToken` property that can be used in an API call, as well as the `refreshToken` property that can be used to refresh the access token when the access token expires. Make sure to save both the `accessToken` and `refreshToken` for future API calls. Take note of the `accountId` property as that will be used to make future API calls.
 
-The following is an abbreviated reponse.
+The following is an abbreviated response.
 
 ```json
 {
-  "refreshToken":null,
-  "accessToken":"<rcEngageOfficeToken>",
+  "refreshToken":"<rcEngageRefreshToken>",
+  "accessToken":"<rcEngageAccessToken>",
   "tokenType":"Bearer",
   "agentDetails":[
     {
@@ -232,4 +236,61 @@ The following is an example Engage Voice API Call using a RingCentral Engage Acc
 ```http
 GET https://engage.ringcentral.com/voice/api/v1/admin/users
 Authorization: Bearer <rcEngageAccessToken>
+```
+
+## Refresh RingCentral Engage Access Token
+
+The RingCentral Engage Access Token will only live for a few minutes (currently 5 minutes) before needing to be refreshed. If the access token is expired, the API request will respond with:
+
+```http
+401 Unauthorized
+
+Jwt is expired
+```
+
+Use the `refreshToken` to refresh the RingCentral Engage access token, by calling the following Engage API.
+
+```http tab="Request"
+POST https://engage.ringcentral.com/api/auth/token/refresh
+Content-Type: application/x-www-form-urlencoded
+
+refresh_token=<rcEngageRefreshToken>&rcTokenType=Bearer
+```
+
+Where:
+
+-   **`<rcEngageRefreshToken>`** is the RingCentral Refresh Token you received from RingCentral Engage authentication flow.
+
+### Response
+
+The response will contain the same `accessToken` property that can be used in an API call, but the `refreshToken` property will be a new refresh token that can be used to refresh the access token when the access token expires. Make sure to save the new `refreshToken` for future refresh token API calls.
+
+The following is an abbreviated response.
+
+```json
+{
+  "refreshToken":"<rcEngageRefreshToken>", //Save this as it will be new.
+  "accessToken":"<rcEngageAccessToken>",
+  "tokenType":"Bearer",
+  "agentDetails":[
+    {
+      "agentId":111111,
+      "firstName":"John",
+      "lastName":"Wang",
+      "email":"john.wang@example.com",
+      "username":"john.wang@example.com",
+      "agentType":"AGENT",
+      "rcUserId":222222,
+      "accountId":"333333",
+      "accountName":"RingForce",
+      "agentGroupId":null,
+      "allowLoginControl":true,
+      "allowLoginUpdates":true
+    }
+  ],
+  "adminId":1111,
+  "adminUrl":"/voice/admin/",
+  "agentUrl":"/voice/agent/",
+  "ssoLogin":true
+}
 ```
