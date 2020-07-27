@@ -11,7 +11,7 @@ Client SDKs provide a native language interface to Engage Voice REST APIs
 
 ## Agent SDKs
 
-The Agent SDK is a library to link client agent controls to the Engage Voice system. The Agent SDK also connects to a single point of entry authentication flow (also known as [Engage Access Token](../../authentication/auth-ringcentral)) and is responsible for connecting the WebSocket used for client messaging after authentication. The Agent SDK is found in npm.
+The Agent SDK is a library to link client agent controls to the Engage Voice system. The Agent SDK also connects to a single point of entry authentication flow (also known as [Engage Access Token](../authentication/auth-ringcentral)) and is responsible for connecting the WebSocket used for client messaging after authentication. The Agent SDK is found in npm.
 
 * [Agent SDK](https://www.npmjs.com/package/@ringcentral/engage-voice-agent)
 
