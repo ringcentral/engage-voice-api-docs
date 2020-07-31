@@ -11,5 +11,5 @@ Workforce management (WFM) is a set of processes that maximizes efficiency in th
 
 Workforce management integration consists of two steps. Start by specifying the URL you want to send events to using the web interface.  Then read on to learn more about the data being sent to your endpoint.
 
-* [Configure the workforce management integration via the web interface](./configure-wfm)
-* [Learn more about what is sent in the payload](./payload-wfm)
+* [Configure the workforce management integration via the web interface](./wfm/configure-wfm)
+* [Learn more about what is sent in the payload](./wfm/payload-wfm)
