@@ -8,6 +8,8 @@ Client SDKs provide a native language interface to Engage Voice REST APIs
 
 * [JavaScript Client SDK](https://github.com/ringcentral/engage-voice-js)
 * [Python Client SDK](https://github.com/ringcentral/engage-voice-python)
+* [EngageVoice.Net Client SDK](https://github.com/ringcentral/EngageVoice.Net)
+* [Java Client SDK](https://github.com/ringcentral/engage-voice-java)
 
 ## Agent SDKs
 
