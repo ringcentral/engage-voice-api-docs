@@ -19,16 +19,19 @@ Every entity in the Engage Voice API is represented with a certain resource iden
 
 Protocol, host and port together constitute the main entry point to access the API.
 
-### Current
-Engage Voice new server is accessible on `https://engage.ringcentral.com`. Please note that for security reasons connection is allowed using only HTTPS protocol to the default HTTPS port 443, so the port can be omitted in the URI.
+### Protocol
+There are two types or networking protocols typically available in REST: HTTP and HTTPS.  Note that for security reasons, connection is allowed using only HTTPS protocol to the default HTTPS port 443, so the port can be omitted in the URI.
+
+### Current Host
+Engage Voice is using a new host server, and is accessible on `https://engage.ringcentral.com`.
 
 * Authentication path
   `/api/auth/login`
 * API endpoint path
   `/voice/api/v1`
 
-### Legacy
-Engage Voice legacy servers are accessible on `https://portal.vacd.biz` and `https://portal.virtualacd.biz`. Please note that for security reasons connection is allowed using only HTTPS protocol to the default HTTPS port 443, so the port can be omitted in the URI.
+### Legacy Host
+Engage Voice legacy host servers are also still accessible on `https://portal.vacd.biz` and `https://portal.virtualacd.biz`.
 
 * Authentication path
   `/api/auth/login`
@@ -36,44 +39,38 @@ Engage Voice legacy servers are accessible on `https://portal.vacd.biz` and `htt
   `/api/v1`
 
 
-All of Engage Voice's  API resources are organized in a hierarchical manner. All resource paths start with `/api` followed by the version number of the API you are accessing, the currently  `/v1`. Let's consider a typical API resource URI:
+All of Engage Voice's API resources are organized by either an authentication path or a API endpoint path. All API endpoint paths start with either `/voice/api` or just the legacy method of `/api` followed by the version number of the API you are accessing.  Currently only `/v1` is publicly available. Let's consider a typical API resource URI:
 
-<code>https://platform.ringcentral.com/restapi/v1.0/account/<strong>159048008</strong>/extension/<strong>171857008</strong>/call-log?dateFrom=2012-08-26</code>
+<code>https://engage.ringcentral.com/voice/api/v1/admin/accounts/<strong>15300002</strong>/agentGroups/<strong>2025</strong>/agents/<strong>1369310</strong></code>
 
-Path parameters are commonly used in the RingCentral API to identify a particular entity belonging to a given type by its unique key. Since most of the API resources represent some objects which are owned by particular a RingCentral account (company) or user, two basic path parameters are `accountId` and `extensionId`. As you might expect, they identify the account and extension of a RingCentral user, accordingly, and are bolded in the example above.
+Path parameters are commonly used in the Engage Voice's API to identify a particular entity belonging to a given type by its unique key. Most of the API resources represent some objects (i.e. agent) which are owned by a particular Engage Voice account (company) and a subsequent group (i.e. agent group). Three example path parameters are `accountId`, `agentGroupId`, and `agentId`. As you might expect, they identify the account, the group, and the object ID. In this example, the account, agent group, and specific agent, and are bolded in the example above.
 
 !!! info "FYI"
-    RingCentral users associate an account with the company main phone number and an extension with the short extension number, but both accountId and extensionId are internal identifiers.
-
-Developers often need to access a particular resource on behalf of the user whose credentials (phone number, extension number and password) were transmitted during the authentication phase. As a shortcut, one can use the tilde symbol (~) in place of the `accountId` and/or `extensionId` to access data that belongs to the account/extension of the entity one is currently authenticated as. Considering the example above, if the user successfully authenticated to work with account "159048008" and extension "171857008" the URI to retrieve the same resource may be written as follows:
-
-`https://platform.ringcentral.com/restapi/v1.0/account/~/extension/~/call-log?dateFrom=2012-08-26`
-
-Depending upon the API, additional path parameters may exist. They are described extensively in the [API Reference](https://developers.ringcentral.com/api-docs/latest/index.html#!#APIReference.html).
+    RingCentral users associate an account with the company main phone number and an extension with the short extension number, but users (agents) are uniquely identified by their account, agent group, and unique agent ID.
 
 ### Query Parameters
 
-Another kind of parameter you will come across in the RingCentral API is a *query parameter*. Query parameters are generally used in object retrieval operations and let the consumer specify the filtering criteria, the desired level of details, etc. Query parameter values in the URL have to be encoded according to [RFC-1738: Uniform Resource Locators](https://tools.ietf.org/html/rfc1738). Query parameters support setting multiple values. It is possible to specify several values for a single query parameter, and filtering results will cover all of them. For example, this functionality is applied to retrieve or remove lists of messages and records.
+Another kind of parameter you will come across in the Engage Voice API is a *query parameter*. Query parameters are generally used in object retrieval operations and let the consumer specify the filtering criteria, the desired level of details, etc. Query parameter values in the URL have to be encoded according to [RFC-1738: Uniform Resource Locators](https://tools.ietf.org/html/rfc1738). Query parameters support setting multiple values. It is possible to specify several values for a single query parameter, and filtering results will cover all of them. For example, this functionality is applied to retrieve or remove lists of messages and records.
 
 ### Examples
 
 Let's consider the examples below to illustrate the API resources and parameters. For simplicity reasons, we will exclude protocol and host values from the URIs in the examples.
 
-* Get service plan information for RingCentral customer account (accountId will be automatically determined from authentication data):
+* Get call details for an agent under a specific account (accountId and userId must be predetermined):
 
-    `/restapi/v1.0/account/~/service-info`
+    `/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_PROFILE`
 
-* Get all SMS messages from a mailbox of account user (extensionId is specified explicitly):
+* Get a list of *active* **calls** under a specific account:
 
-    `/restapi/v1.0/account/~/extension/171857008/message-store?messageType=SMS`
+    `/api/v1/admin/accounts/{accountId}/activeCalls/list?product=ACCOUNT&productId=12440001`
 
-* Get all SMS and Pager messages from a mailbox of account user:
+* Get a list of *active* **agents** under a specific account:
 
-    `/restapi/v1.0/account/~/extension/~/message-store?messageType=SMS&messageType=Pager`
+    `/api/v1/admin/accounts/{accountId}/auxStates/?activeOnly=true`
 
 ## Methods
 
-In the RingCentral API, as in any REST API, the resources are accessible by standard HTTP methods: GET, POST, PUT and DELETE. These methods form a uniform CRUD interface expanded as "create, retrieve, update and delete".
+In the Engage Voice API, as in any REST API, the resources are accessible by standard HTTP methods: GET, POST, PUT and DELETE. These methods form a uniform CRUD interface expanded as "create, retrieve, update and delete".
 
 | Method | Description |
 |--------|-------------|
@@ -84,12 +81,12 @@ In the RingCentral API, as in any REST API, the resources are accessible by stan
 
 ### Example
 
-Let's consider a simple example of a `GET` method — retrieving the version of the RingCentral REST API.
+Let's consider a simple example of a `GET` method — retrieving details of the user you are currently logged in as from the Engage Voice REST API.
 
 ```http tab="Request"
-GET /restapi/v1.0 HTTP/1.1
+GET /api/v1/userDetail/self
 Accept: application/json
-Authorization: Bearer UExxxxxxxxMnzpdvtYYNWMSJ7CL8h0zM6q6a9ntw
+Authorization: Bearer {authToken}
 ```
 
 ```http tab="Response"
@@ -97,52 +94,51 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "uri" : "https.../restapi/",
-  "apiVersions" : [ {
-    "uri" : "https.../restapi/v1.0",
-    "versionString" : "1.0.9",
-    "releaseDate" : "2013-12-01T00:00:00.000Z",
-    "uriString" : "v1.0"
-  } ],
-  "serverVersion" : "6.1.0.846",
-  "serverRevision" : "294476"
+    "adminId": 2537,
+    "rcUserId": 3361292020,
+    "rcAccountId": "3058829020",
+    "evMainAccountId": null,
+    "digitalAccountId": null,
+    "digitalAccountApiUrl": null,
+    "digitalAccountEmbedUrl": null,
+    "agentDetails": [
+        {
+            "agentId": 1369310,
+            "firstName": "John",
+            "lastName": "Smith",
+            "email": "rc.guest@gmail.com",
+            "username": "rc.guest+15300002_1791@gmail.com",
+            "agentType": "AGENT",
+            "rcUserId": 3361292020,
+            "accountId": "15300002",
+            "accountName": "RC Platform Internal",
+            "agentGroupId": null,
+            "externalAgentId": null,
+            "location": null,
+            "team": null,
+            "allowLoginControl": true,
+            "allowLoginUpdates": true,
+            "password": null,
+            "agentRank": null,
+            "initLoginBaseState": null,
+            "ghostRnaAction": null,
+            "enableSoftphone": null,
+            "altDefaultLoginDest": null,
+            "phoneLoginPin": null,
+            "manualOutboundDefaultCallerId": null,
+            "directAgentExtension": null,
+            "maxChats": null
+        }
+    ],
+    "inboxModeEnabled": false,
+    "taskModeEnabled": false,
+    "digitalAdminEnabled": false,
+    "digitalAnalyticsEnabled": false
 }
 ```
 
 !!! alert "FYI"
-    Most RingCentral API resources do not support all of the four methods. In order to find out which resources support a particular method, please refer to the API Reference.
-
-### Method Tunneling
-
-Sometimes, due to different technical/networking limitations, API clients cannot issue all HTTP methods. In the most severe case a client may be restricted to `GET` and `POST` methods only. To work around this situation the RingCentral API provides a mechanism for masquerading (or "tunneling") `PUT` and `DELETE` methods as a `POST`. This can be achieved in two ways:
-
-#### X-HTTP-Method-Override header
-
-Using `X-HTTP-Method-Override` the client instructs the server to override the actual value of the HTTP method by one passed in this header. For example, the following request:
-
-```http
-DELETE /restapi/v1.0/account/~/extension/~/message-store/4084362008 HTTP/1.1
-```
-
-Can be alternatively sent as:
-
-```http
-POST /restapi/v1.0/account/~/extension/~/message-store/4084362008 HTTP/1.1
-X-HTTP-Method-Override: DELETE
-```
-
-#### The "_method" query parameter
-
-In really unfortunate circumstances some clients do not even support HTTP headers. Therefore, one additional way one can override the method name is via the `_method` query parameter. For example:
-
-```
-POST /restapi/v1.0/account/~/extension/~/message-store/4084362008?_method=DELETE HTTP/1.1
-```
-
-If both the override header and query parameter are specified in the HTTP request and contain different values, the server returns `HTTP 400 Bad Request` error.
-
-!!! warning "Tunneling HTTP methods should be used only when no other workaround is available."
-    Each HTTP method has its own characteristics, such as how it is cached -- which HTTP clients and intermediaries expect. When tunneling these methods through HTTP POST, those expectations can no longer be met.
+    Not all Engage Voice API resources support all of the four methods. In order to find out which resources support a particular method, please refer to the API Reference.
 
 ## Object Representation
 
@@ -171,8 +167,8 @@ We recommend using a short application name and version delimited by forward sla
 
 For example:
 
-* `RCMobile/3.6.0 (RingCentral; Android/2.6; rev.12345)`
 * `RCMobile/3.6.1 (OfficeAtHand; iOS/6.0; rev.987654)`
+* `PostmanRuntime/7.25.0`
 * `Softphone/6.2.0.11632`
 
 The `User-Agent` string format is described in <a target="_new" href="https://tools.ietf.org/html/rfc1945">RFC 1945</a> and <a target="_new" href="https://tools.ietf.org/html/rfc2068">RFC 2068</a>.
