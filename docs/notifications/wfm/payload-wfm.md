@@ -234,7 +234,7 @@ Call events can be from two types of calls: an inbound call or an outbound call.
 
 ```html tab="Answered Request Body"
 {
-  "recording_url":"https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?v=1&accountId=15300002&bucket=c02-recordings&region=us-east-1&compliance=false&file=15300002/202006/30/202006302136360132130000036446-1.WAV",
+  "recording_url":"https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?v=1&accountId=15300002&bucket=c02-recordings&region=us-east-1&compliance=false&file=15300002/202007/30/202007302136360132130000036446-1.WAV",
   "agent_id":"1369310",
   "queue_duration":"3",
   "agent_disposition":"",
