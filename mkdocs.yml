@@ -65,6 +65,7 @@ pages:
     - 'Leads':
       - 'Bulk Import Leads': dialing/leads/bulk-import.md
       - 'Searching Leads': dialing/leads/search.md
+      - 'Web2Campaign': dialing/leads/web2campaign.md
     - 'Active Calls':
       - 'Active Calls': dialing/active-calls/index.md
       - 'Getting Started':
