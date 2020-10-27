@@ -100,21 +100,174 @@ POST {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/age
 ```
 
 ## Read Agents
+To get a list of agents in this agent group, but with only basic information about each agent.
 
 ### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
-GET {BASE_URL}api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents`
+GET {BASE_URL}api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents
+```
+
+### Response
+Some sample response data shown below.
+
+```json
+[
+    {
+        "agentId": 1234567,
+        "permissions": [],
+        "firstName": "Mike",
+        "lastName": "Stowe",
+        "username": "mstowe",
+        "defaultLoginDest": "",
+        "agentType": "AGENT",
+        "allowDirectAgentTransfer": "DIRECT_TRANSFER_DISABLED",
+        "isActive": true,
+        "loadBalanceEnabled": false,
+        "location": null,
+        "team": null,
+        "agentAccountAccess": null,
+        "agentGateAccess": null,
+        "agentGateGroupAccess": null,
+        "agentChatGroupAccess": null,
+        "agentDialGroupMembers": null,
+        "agentChatQueueAccesses": null
+    },
+    {
+        "agentId": 7654321,
+        "permissions": [],
+        "firstName": "John",
+        "lastName": "Wang",
+        "username": "jwang",
+        "defaultLoginDest": "",
+        "agentType": "AGENT",
+        "allowDirectAgentTransfer": "DIRECT_TRANSFER_DISABLED",
+        "isActive": true,
+        "loadBalanceEnabled": false,
+        "location": null,
+        "team": null,
+        "agentAccountAccess": null,
+        "agentGateAccess": null,
+        "agentGateGroupAccess": null,
+        "agentChatGroupAccess": null,
+        "agentDialGroupMembers": null,
+        "agentChatQueueAccesses": null
+    }
+]
 ```
 
 ## Read Agent
+To retrieve a single agent, you can specify the agent ID and get more details about the agent.
 
 ### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```html tab="HTTP"
-GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}`
+GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}
+```
+
+### Response
+Some sample response data shown below.
+
+```json
+{
+    "agentId": 7654321,
+    "permissions": [],
+    "firstName": "John",
+    "lastName": "Wang",
+    "email": null,
+    "username": "jwang",
+    "password": "password",
+    "defaultLoginDest": "",
+    "altDefaultLoginDest": null,
+    "lastLoginDate": null,
+    "agentRank": 0,
+    "createdOn": "2020-05-06T20:57:43.000+0000",
+    "agentType": "AGENT",
+    "maxChats": 5,
+    "externalAgentId": "jw001",
+    "directAgentExtension": null,
+    "allowInbound": true,
+    "allowOutbound": false,
+    "allowExternalChat": false,
+    "allowChat": false,
+    "allowBlended": false,
+    "allowChatVoiceConcurrent": false,
+    "allowOffHook": false,
+    "allowCallControl": true,
+    "allowHold": true,
+    "allowTransfer": true,
+    "allowManualIntlTransfer": false,
+    "allowDirectAgentTransfer": "DIRECT_TRANSFER_DISABLED",
+    "allowHangup": true,
+    "allowRequeue": true,
+    "allowLoginControl": true,
+    "allowLoginUpdates": true,
+    "allowCrossGateRequeue": true,
+    "gatesControlAgentVisibility": false,
+    "allowCampStats": true,
+    "allowGateStats": true,
+    "allowAgentStats": true,
+    "allowSelfAgentStats": false,
+    "allowChatStats": true,
+    "disableSupervisorMonitoring": false,
+    "allowAgentReports": false,
+    "allowManualCalls": true,
+    "allowManualIntlCalls": false,
+    "allowInboundIntlTransfer": false,
+    "allowLeadInserts": false,
+    "allowAutoAnswer": false,
+    "defaultAutoAnswerOn": true,
+    "isActive": true,
+    "ghostRnaAction": "AVAILABLE",
+    "loadBalanceEnabled": false,
+    "transientAgent": false,
+    "parentAgentId": null,
+    "transientDelete": false,
+    "transientDeleteDate": null,
+    "phoneLoginPin": null,
+    "multiAccountAgent": false,
+    "initLoginBaseState": "AVAILABLE",
+    "initLoginBaseStateId": 11786,
+    "enableSoftphone": false,
+    "softphoneId": 0,
+    "allowFromIpAddresses": null,
+    "location": null,
+    "team": null,
+    "showLeadHistory": true,
+    "manualOutboundDefaultCallerId": "",
+    "allowManualOutboundGates": false,
+    "allowManualPass": true,
+    "allowEndcallforeveryone": true,
+    "allowHistoricalDialing": true,
+    "rcUserId": null,
+    "userManagedByRC": false,
+    "gateAssignments": null,
+    "chatQueueAssignments": null,
+    "dialGroupAssignments": null,
+    "agentAccountAccess": null,
+    "agentGateAccess": null,
+    "agentGateGroupAccess": null,
+    "agentChatGroupAccess": null,
+    "agentGroup": {
+        "id": 1234,
+        "description": "Platform Team"
+    },
+    "manualOutboundDefaultGate": null,
+    "phoneLoginDialGroup": null,
+    "agentSkillProfiles": null,
+    "agentDialGroupMembers": null,
+    "agentChatQueueAccesses": null,
+    "agentLoadBalanceMembers": null,
+    "groupId": 1234,
+    "agentLoadBalance": null,
+    "sipSafeUsername": "jwang",
+    "accountAccess": null,
+    "whereSupervisor": null,
+    "whereSupervisee": [],
+    "active": true
+}
 ```
 
 ## Update Agent
