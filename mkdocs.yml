@@ -62,6 +62,7 @@ pages:
     - 'Campaigns':
       - 'Dial Groups': dialing/campaigns/dial-groups.md
       - 'Campaigns': dialing/campaigns/campaigns.md
+      - 'DNC': dialing/dnc/dnc-list.md
     - 'Leads':
       - 'Bulk Import Leads': dialing/leads/bulk-import.md
       - 'Searching Leads': dialing/leads/search.md
