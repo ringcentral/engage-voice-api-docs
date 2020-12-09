@@ -318,3 +318,28 @@ try{
   "groupId":115801
 }
 ```
+
+## Clone Campaigns
+To create a copy of a campaign (clone), first select your desired [dial group](./dial-groups) and then clone your campaign with the following details.
+
+### Primary Parameters
+Your campaign must have name, start and end date, and valid caller ID. All other parameters are optional.
+
+| Parameter | Description |
+|-|-|
+| **Path Parameters** | |
+| **`accountId`** | The unique account identifier. |
+| **`dialGroupId`** | The unique [Dial Group](./dial-groups) identifier. |
+| **`campaignId`** | The unique [Campaign](./campaigns#response) identifier. |
+| **Query Parameters** | |
+| **`newCampaignName`** | A new name for this clone of the campaign. Use `+` for spaces. |
+| **`newCountryCode`** | The country for this campaign, with a default of `USA`. |
+
+### Request
+Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+
+```html tab="HTTP"
+
+POST {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}/clone?newCampaignName={newCampaignName}&newCountryCode=USA
+Content-Type: application/json
+```
