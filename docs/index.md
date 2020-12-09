@@ -88,6 +88,7 @@ Welcome RingCentral Engage Voice Developer! Here you have access to all the reso
       <ul class="pl-0 ml-4">
       <li><a href="./analytics/reports/global-call-type-detail-report/" class="card-link">Call Details and Recordings</a></li>
       <li><a href="./analytics/reports/agent-session-report/" class="card-link">View Agent Activity</a></li>
+      <li><a href="./analytics/reports/agent-segment-metadata-report/" class="card-link">Agent Segment Metadata</a></li>
       </ul>
     </div>
   </div>

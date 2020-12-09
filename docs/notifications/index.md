@@ -1,6 +1,6 @@
 # Introduction to Events and Notifications
 
-There are a couple ways to received events and notifications from RingCentral Engage Voice. One way is through Workforce Management integration that sends agent state events as well as call detail and the end of a call event.  Another is through Web Services that can be triggered by inbound queue events or outbound campaign events.
+There are a couple ways to receive events and notifications from RingCentral Engage Voice. One way is through Workforce Management integration that sends agent state events as well as call detail and the end of a call event.  Another is through Web Services that can be triggered by inbound queue events or outbound campaign events.
 
 
 ## Introduction to Workforce Management
@@ -13,3 +13,11 @@ Workforce management integration consists of two steps. Start by specifying the 
 
 * [Configure the workforce management integration via the web interface](./wfm/configure-wfm)
 * [Learn more about what is sent in the payload](./wfm/payload-wfm)
+
+## Introduction to Web Services
+
+Web Services allow you to custom build the action you want to take upon an event. This includes setting your own endpoint, specifying your HTTP method, or passing only the parameters that matter to you.
+
+Once you setup your Web Service, you'll need to trigger the web service from an inbound queue or outbound campaign. This is also known as [setting up webhooks](https://support.ringcentral.com/engagevoice/admin/voice-admin-set-up-webhooks.html).
+
+* [Learn how to setup web services and link them to queues or campaigns](./web-service)

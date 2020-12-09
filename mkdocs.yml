@@ -66,6 +66,7 @@ pages:
     - 'Leads':
       - 'Bulk Import Leads': dialing/leads/bulk-import.md
       - 'Searching Leads': dialing/leads/search.md
+      - 'Lead Actions': dialing/leads/actions.md
       - 'Web2Campaign': dialing/leads/web2campaign.md
     - 'Active Calls':
       - 'Active Calls': dialing/active-calls/index.md
@@ -80,6 +81,13 @@ pages:
       - 'Agents': users/agents/agents.md
       - 'Agent Groups': users/agents/agent-groups.md
       - 'Skill Profiles': users/agents/skill-profile.md
+  - 'Workforce':
+    - 'Overview': workforce/index.md
+    - 'Workforce Management':
+      - 'Creating an Event': notifications/wfm/configure-wfm.md
+      - 'Event Payload': notifications/wfm/payload-wfm.md
+    - 'Quality Management': workforce/qm/index.md
+    - 'Call Recordings': workforce/call-recording/index.md
 - 'Secondary':
   - 'Using the API':
     - 'Fundamentals':
@@ -97,6 +105,7 @@ pages:
     - 'Workforce Management':
       - 'Creating an Event': notifications/wfm/configure-wfm.md
       - 'Event Payload': notifications/wfm/payload-wfm.md
+    - 'Web Services': notifications/web-service/index.md
   - 'SDKs': sdks/index.md
   - 'Embeddable': embeddable/get-started.md
   - 'Postman': postman.md
