@@ -24,6 +24,7 @@ You can also use analytics to help identify the high or low points in customer a
       <ul class="pl-0 ml-4">
       <li><a href="./reports/agent-session-report" class="card-link">Agent Session Report</a></li>
       <li><a href="./reports/global-call-type-detail-report" class="card-link">Call Details and Recordings</a></li>
+      <li><a href="./reports/agent-segment-metadata-report" class="card-link">Agent Segment Metadata</a></li>
       </ul>
     </div>
   </div>
