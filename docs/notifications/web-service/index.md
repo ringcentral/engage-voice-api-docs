@@ -14,7 +14,7 @@ Please see the guide to [setup a web service](https://support.ringcentral.com/en
 
 Create a new Web Service group by going to **Dev tools**, and then selecting **Web services**. Within this new Web Services Group, create a **new web service**.
 
-<img class="img-fluid" width="379" src="../../../images/web-services-navi.png">
+<img class="img-fluid" width="379" src="../../images/web-services-navi.png">
 
 Since we are sending information to an endpoint, we'll want to `POST` these details to your URL endpoint. For this example, we'll put in a few common data elements to send for both inbound and outbound calls. Here are a few key settings:
 
@@ -32,10 +32,10 @@ Since we are sending information to an endpoint, we'll want to `POST` these deta
 | agent_username | The username for this agent, usually comprised of email address. |
 | ani | The number of the customer. |
 | dnis | The agent's number, or the number the customer called to reach the agent. |
-| call_start | The date and time the call was started using ANSI SQL 92 format such as `020-04-22 00:00:00.0000`. |
+| call_start | The date and time the call was started using ANSI SQL 92 format such as `2020-04-22 00:00:00.0000`. |
 | recording_url | A URL to the recording file. The file is provided in WAV format. Call recording URLs can be secured using basic authentication or accessible anonymously without authentication.
 
-<img class="img-fluid" width="800" src="../../../images/web-services-config.png">
+<img class="img-fluid" width="800" src="../../images/web-services-config.png">
 
 Alternatively, you can send a JSON body instead of form data as shown above. Be sure to surround both your name and value with double quotes when submitting a JSON body.
 
@@ -61,7 +61,7 @@ A Webhook is triggered as an event for a certain condition. For details in [sett
 <img class="img-fluid" width="800" src="../../../images/web-services-webhook.png">
 
 !!! Important Note
-    Some calls may have multiple agent sessions (legs or segments). For example, when an agent transfers a call, the agent's segment may end prior to the end of a call. In these instances, a call can be comprised of multiple agent segments. Since there is a recording per agent segment, it's better to receive each recording separately to know which agent segment the recording belongs to.
+    Some calls may have multiple agent sessions (legs or segments). For example, when an agent transfers a call, the agent's segment may end prior to the end of a call. In these instances, a call can be comprised of multiple agent segments. Since there is a recording per agent segment, it's better to receive each recording separately to know which agent segment the recording belongs to.<br>
     <img class="img-fluid" width="738" src="../../../images/web-services-agent-sessions.png">
 
 That's all! Go ahead and test your web service and webhook out by making a call to your queue. Once you hang up the call, the event will trigger and the message is sent to your endpoint.
