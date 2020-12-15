@@ -58,11 +58,11 @@ Alternatively, you can send a JSON body instead of form data as shown above. Be 
 
 A Webhook is triggered as an event for a certain condition. For details in [setting up webhooks](https://support.ringcentral.com/engagevoice/admin/voice-admin-set-up-webhooks.html), follow the instruction on the support page.  In this example, since we want the call details right after the call has ended (either by the caller or the agent), we will connect our web service to the **Agent Termination Web Service** event.  
 
-<img class="img-fluid" width="800" src="../../../images/web-services-webhook.png">
+<img class="img-fluid" width="800" src="../../images/web-services-webhook.png">
 
 !!! Important Note
     Some calls may have multiple agent sessions (legs or segments). For example, when an agent transfers a call, the agent's segment may end prior to the end of a call. In these instances, a call can be comprised of multiple agent segments. Since there is a recording per agent segment, it's better to receive each recording separately to know which agent segment the recording belongs to.<br>
-    <img class="img-fluid" width="738" src="../../../images/web-services-agent-sessions.png">
+    <img class="img-fluid" width="738" src="../../images/web-services-agent-sessions.png">
 
 That's all! Go ahead and test your web service and webhook out by making a call to your queue. Once you hang up the call, the event will trigger and the message is sent to your endpoint.
 
