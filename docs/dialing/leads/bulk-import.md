@@ -30,11 +30,11 @@ Leads are uploaded per Campaign which requires a `campaignId`. The following two
 
 1. Call the Get Dial Groups API to get a list of dial groups. Each dial group will have a `dialGroupId` property.
 
-     `GET /api/admin/accounts/{accountId}/dialGroups`
+     `GET /api/v1/admin/accounts/{accountId}/dialGroups`
 
 2. For the Dial Group of interest, call the Get Dial Group Campaigns API:
 
-     `GET /api/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns`
+     `GET /api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns`
 
 ## Upload Leads for a campaign
 
@@ -46,56 +46,56 @@ To upload leads for a campaign, we will need a campaign Id. As campaigns are mem
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 ```http tab="HTTP"
-POST {baseURL}/api/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct
+POST {baseURL}/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct
 Authorization: Bearer <yourAccessToken>
 
 {
-    description: "Prospect customers",
-    dialPriority: "IMMEDIATE",
-    duplicateHandling: "REMOVE_FROM_LIST",
-    listState: "ACTIVE",
-    timeZoneOption: "NOT_APPLICABLE",
-    uploadLeads: [
+    "description": "Prospect customers",
+    "dialPriority": "IMMEDIATE",
+    "duplicateHandling": "REMOVE_FROM_LIST",
+    "listState": "ACTIVE",
+    "timeZoneOption": "NOT_APPLICABLE",
+    "uploadLeads": [
       {
-         leadPhone:"1111111111",
-         externId:"1",
-         title:"Dr.",
-         firstName:"Jeff",
-         midName:"John",
-         lastName:"Malfetti",
-         suffix:"Jr.",
-         address1:"3101 Fake St.",
-         address2:"Suite 120",
-         city:"Rock",
-         state:"CO",
-         zip:"80500",
-         email:"test@test.com",
-         gateKeeper:"Some one",
-         auxData1:30,
-         auxData2:"a",
-         auxData3:100,
-         auxData4:"aa",
-         auxData5:1000,
-         auxPhone:"1111111110",
-         extendedLeadData:{
-            important:"data",
-            interested:true
+         "leadPhone":"1111111111",
+         "externId":"1",
+         "title":"Dr.",
+         "firstName":"Jeff",
+         "midName":"John",
+         "lastName":"Malfetti",
+         "suffix":"Jr.",
+         "address1":"3101 Fake St.",
+         "address2":"Suite 120",
+         "city":"Rock",
+         "state":"CO",
+         "zip":"80500",
+         "email":"test@test.com",
+         "gateKeeper":"Some one",
+         "auxData1":30,
+         "auxData2":"a",
+         "auxData3":100,
+         "auxData4":"aa",
+         "auxData5":1000,
+         "auxPhone":"1111111110",
+         "extendedLeadData":{
+            "important":"data",
+            "interested":true
          }
       },{
-         leadPhone:"2222222222",
-         externId:"222",
-         firstName:"Jason",
-         midName:"",
-         lastName:"Black",
-         address1:"1514 Bernardo Ave",
-         city:"New York",
-         state:"NY",
-         zip:"10001",
+         "leadPhone":"2222222222",
+         "externId":"222",
+         "firstName":"Jason",
+         "midName":"",
+         "lastName":"Black",
+         "address1":"1514 Bernardo Ave",
+         "city":"New York",
+         "state":"NY",
+         "zip":"10001",
       },{
-         leadPhone:"3333333333",
-         externId:"333",
-         firstName:"Rich",
-         lastName:"Dunbard"
+         "leadPhone":"3333333333",
+         "externId":"333",
+         "firstName":"Rich",
+         "lastName":"Dunbard"
       }
     ],
    "dncTags":[
