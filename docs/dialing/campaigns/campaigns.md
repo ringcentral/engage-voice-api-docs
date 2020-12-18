@@ -11,10 +11,10 @@ Campaigns are created for a specific period of time so a start and end date must
 Caller ID must be an accurate number for this account. This should be the number that leads can call to reach a customer service representative. The customer service representative must be able to put the caller on your internal DNC list. If the Caller ID number goes to an automatic responder, the responder must also provide the lead with a way to request placement on your DNC list, either by leaving a voicemail or via a touchtone entry.
 
 ## Prerequisite
-Once you’ve created and configured your [dial group](./dial-groups), you can begin creating campaigns within that group to segment and configure your outgoing calls. Remember that all the campaigns within any given dial group will use the dialing mode you selected in your dial group configuration settings.
+Once you’ve created and configured your [dial group](../dial-groups), you can begin creating campaigns within that group to segment and configure your outgoing calls. Remember that all the campaigns within any given dial group will use the dialing mode you selected in your dial group configuration settings.
 
 ## Create Campaigns
-To create a campaign, first select your desired [dial group](./dial-groups) and then create your campaign with the following details.
+To create a campaign, first select your desired [dial group](../dial-groups) and then create your campaign with the following details.
 
 ### Primary Parameters
 Your campaign must have name, start and end date, and valid caller ID. All other parameters are optional.
@@ -320,7 +320,7 @@ try{
 ```
 
 ## Clone Campaigns
-To create a copy of a campaign (clone), first select your desired [dial group](./dial-groups) and then clone your campaign with the following details.
+To create a copy of a campaign (clone), first select your desired [dial group](../dial-groups) and then clone your campaign with the following details.
 
 ### Primary Parameters
 Your campaign must have name, start and end date, and valid caller ID. All other parameters are optional.
@@ -329,8 +329,8 @@ Your campaign must have name, start and end date, and valid caller ID. All other
 |-|-|
 | **Path Parameters** | |
 | **`accountId`** | The unique account identifier. |
-| **`dialGroupId`** | The unique [Dial Group](./dial-groups) identifier. |
-| **`campaignId`** | The unique [Campaign](./campaigns#response) identifier. |
+| **`dialGroupId`** | The unique [Dial Group](../dial-groups) identifier. |
+| **`campaignId`** | The unique [Campaign](../campaigns#response) identifier. |
 | **Query Parameters** | |
 | **`newCampaignName`** | A new name for this clone of the campaign. Use `+` for spaces. |
 | **`newCountryCode`** | The country for this campaign, with a default of `USA`. |
