@@ -100,6 +100,9 @@
             "format": "int32",
             "type": "integer"
           },
+          "adminPasswordReset": {
+            "type": "boolean"
+          },
           "adminUrl": {
             "type": "string"
           },
@@ -112,8 +115,14 @@
           "agentUrl": {
             "type": "string"
           },
+          "analyticsUrl": {
+            "type": "string"
+          },
           "iqUrl": {
             "type": "string"
+          },
+          "isAdminPasswordReset": {
+            "type": "boolean"
           },
           "loginHashcode": {
             "type": "string"
@@ -5667,33 +5676,37 @@
     }
   },
   "info": {
-    "description": "",
     "termsOfService": "https://developers.ringcentral.com",
     "title": "RingCentral Engage Voice API",
     "version": "1.0"
   },
   "openapi": "3.0.0",
   "paths": {
-    "/engage/api/auth/login/rc/accesstoken": {
+    "/api/auth/login/rc/accesstoken": {
       "post": {
-        "deprecated": false,
         "operationId": "loginWithRcAccessToken",
         "parameters": [
           {
-            "description": "rcAccessToken",
+            "description": "Includes the refresh token along with the Engage Access Token.",
             "in": "query",
-            "name": "rcAccessToken",
-            "required": true,
+            "name": "includeRefresh",
             "schema": {
               "type": "string"
             }
           },
           {
-            "allowEmptyValue": false,
-            "description": "'Bearer' for OAuth 2.0 bearer token",
+            "description": "To acquire an Engage Access Token, you will need to first [retrieve a Ring Central Access Token](https://developers.ringcentral.com/engage/voice/guide/authentication/auth-ringcentral#retrieve-ringcentral-access-token).",
+            "in": "query",
+            "name": "rcAccessToken",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The Ring Central Token Type is a 'Bearer' type using the [OAuth 2.0](https://developers.ringcentral.com/api-reference/authentication) bearer token.",
+            "example": "Bearer",
             "in": "query",
             "name": "rcTokenType",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -5734,9 +5747,315 @@
             "BearerAuth": []
           }
         ],
-        "summary": "Logs in an RC user via their access token issued by the RC API server",
+        "summary": "Logs in an RC user via their access token issued by the RC API server. Returns Engage access token and user details",
         "tags": [
           "RingCentral Auth"
+        ]
+      }
+    },
+    "/api/auth/token/refresh": {
+      "post": {
+        "operationId": "refreshAccessToken",
+        "parameters": [
+          {
+            "description": "To acquire the X-Auth-Token of a simulated user, you can use the authToken obtained from the [legacy authentication flow](https://developers.ringcentral.com/engage/voice/guide/authentication/auth-legacy).",
+            "in": "query",
+            "name": "X-Auth-Token",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "You will need to retrieve and save a Ring Central Refresh Token by first [obtaining a Ring Central Access Token](https://developers.ringcentral.com/engage/voice/guide/authentication/auth-ringcentral#retrieve-ringcentral-access-token) with the the includeRefresh parameter set to true.",
+            "in": "query",
+            "name": "refresh_token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenUserDetails"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Renew the user's Engage Access Token using the Engage Refresh Token acquired during initial login. If acting on behalf of another user, the X-Auth-Token of the simulated user will also be required.",
+        "tags": [
+          "RingCentral Auth"
+        ]
+      }
+    },
+    "/api/v1/admin/token": {
+      "get": {
+        "description": "Permissions: Authenticated User",
+        "operationId": "getApiTokensForLoggedInUser",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "https://portal.vacd.biz"
+          },
+          {
+            "url": "https://portal.virtualacd.biz"
+          }
+        ],
+        "summary": "Retrieves all Api Tokens for AuthenticatedUser",
+        "tags": [
+          "Legacy Auth"
+        ]
+      },
+      "post": {
+        "description": "Permissions: Authenticated User",
+        "operationId": "createApiTokenForLoggedInUser",
+        "responses": {
+          "200": {
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "https://portal.vacd.biz"
+          },
+          {
+            "url": "https://portal.virtualacd.biz"
+          }
+        ],
+        "summary": "Creates a new 'Api Token' based AuthenticatedUser that does not expire",
+        "tags": [
+          "Legacy Auth"
+        ]
+      }
+    },
+    "/api/v1/admin/token/{token}": {
+      "delete": {
+        "description": "Permissions: Anonymous User",
+        "operationId": "removeApiToken",
+        "parameters": [
+          {
+            "description": "token",
+            "in": "path",
+            "name": "token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "https://portal.vacd.biz"
+          },
+          {
+            "url": "https://portal.virtualacd.biz"
+          }
+        ],
+        "summary": "Removes an api token",
+        "tags": [
+          "Legacy Auth"
+        ]
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "description": "Permissions: Anonymous User",
+        "operationId": "doLogin",
+        "parameters": [
+          {
+            "description": "username",
+            "in": "query",
+            "name": "username",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "password",
+            "in": "query",
+            "name": "password",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "stayLoggedIn",
+            "in": "query",
+            "name": "stayLoggedIn",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/UserLoginView"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          },
+          {
+            "BearerAuth": []
+          }
+        ],
+        "servers": [
+          {
+            "url": "https://portal.vacd.biz"
+          },
+          {
+            "url": "https://portal.virtualacd.biz"
+          }
+        ],
+        "summary": "Application login to authenticate and receive an X-Auth-Token",
+        "tags": [
+          "Legacy Auth"
         ]
       }
     },
@@ -5882,7 +6201,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -5892,7 +6210,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -6069,7 +6386,6 @@
             "description": "callBackDTS",
             "in": "query",
             "name": "callBackDTS",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -6078,7 +6394,6 @@
             "description": "notes",
             "in": "query",
             "name": "notes",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -6328,7 +6643,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -6338,7 +6652,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -6348,7 +6661,6 @@
             "description": "includePermissions",
             "in": "query",
             "name": "includePermissions",
-            "required": false,
             "schema": {
               "default": false,
               "type": "boolean"
@@ -6539,7 +6851,6 @@
             "description": "includePermissions",
             "in": "query",
             "name": "includePermissions",
-            "required": false,
             "schema": {
               "default": false,
               "type": "boolean"
@@ -7295,7 +7606,6 @@
             "description": "count",
             "in": "query",
             "name": "count",
-            "required": false,
             "schema": {
               "default": false,
               "type": "boolean"
@@ -7305,7 +7615,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -7315,7 +7624,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -7392,7 +7700,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -7402,7 +7709,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -7415,8 +7721,7 @@
               "schema": {}
             }
           },
-          "description": "leadPhoneNumbersFile",
-          "required": false
+          "description": "leadPhoneNumbersFile"
         },
         "responses": {
           "200": {
@@ -7644,7 +7949,6 @@
           {
             "in": "query",
             "name": "listId",
-            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -7652,7 +7956,6 @@
           {
             "in": "query",
             "name": "timezoneOption",
-            "required": false,
             "schema": {
               "enum": [
                 "NPA_NXX",
@@ -7667,7 +7970,6 @@
             "description": "`RETAIN_ALL`: Retain all records, `REMOVE_ALL_EXISTING`: Remove duplicates from all existing lists, `REMOVE_FROM_LIST`: Remove duplicates from this list",
             "in": "query",
             "name": "duplicateHandling",
-            "required": false,
             "schema": {
               "default": "RETAIN_ALL",
               "enum": [
@@ -7751,7 +8053,6 @@
             "description": "listId",
             "in": "query",
             "name": "listId",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -7761,7 +8062,6 @@
             "description": "timezoneOption",
             "in": "query",
             "name": "timezoneOption",
-            "required": false,
             "schema": {
               "enum": [
                 "NPA_NXX",
@@ -7776,7 +8076,6 @@
             "description": "duplicateHandling",
             "in": "query",
             "name": "duplicateHandling",
-            "required": false,
             "schema": {
               "default": "RETAIN_ALL",
               "enum": [
@@ -7960,7 +8259,6 @@
             "description": "quoteCharacter",
             "in": "query",
             "name": "quoteCharacter",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -8153,7 +8451,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -8163,7 +8460,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -8290,7 +8586,6 @@
             "description": "includePermissions",
             "in": "query",
             "name": "includePermissions",
-            "required": false,
             "schema": {
               "default": "false",
               "type": "string"
@@ -8300,7 +8595,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -8310,7 +8604,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -8653,7 +8946,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -8663,7 +8955,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -8739,7 +9030,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -8749,7 +9039,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -9170,7 +9459,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -9180,7 +9468,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -9308,7 +9595,6 @@
             "description": "includePermissions",
             "in": "query",
             "name": "includePermissions",
-            "required": false,
             "schema": {
               "default": false,
               "type": "boolean"
@@ -9318,7 +9604,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -9328,7 +9613,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -9394,7 +9678,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -9404,7 +9687,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -9680,7 +9962,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -9690,7 +9971,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -10264,7 +10544,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -10274,7 +10553,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -10934,11 +11212,13 @@
             }
           },
           {
+            "description": "gateGroupId",
             "in": "path",
             "name": "gateGroupId",
             "required": true,
             "schema": {
-              "type": "string"
+              "format": "int32",
+              "type": "integer"
             }
           },
           {
@@ -11773,6 +12053,7 @@
         "operationId": "deleteGateQueueDtmfEvent",
         "parameters": [
           {
+            "description": "accountId",
             "in": "path",
             "name": "accountId",
             "required": true,
@@ -11781,27 +12062,33 @@
             }
           },
           {
+            "description": "gateGroupId",
             "in": "path",
             "name": "gateGroupId",
             "required": true,
             "schema": {
-              "type": "string"
+              "format": "int32",
+              "type": "integer"
             }
           },
           {
+            "description": "gateId",
             "in": "path",
             "name": "gateId",
             "required": true,
             "schema": {
-              "type": "string"
+              "format": "int32",
+              "type": "integer"
             }
           },
           {
+            "description": "eventId",
             "in": "path",
             "name": "eventId",
             "required": true,
             "schema": {
-              "type": "string"
+              "format": "int32",
+              "type": "integer"
             }
           },
           {
@@ -12164,7 +12451,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -12174,7 +12460,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -13628,7 +13913,6 @@
             "description": "ani",
             "in": "query",
             "name": "ani",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -13709,7 +13993,6 @@
             "description": "type",
             "in": "query",
             "name": "type",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -13718,7 +14001,6 @@
             "description": "filter",
             "in": "query",
             "name": "filter",
-            "required": false,
             "schema": {
               "type": "string"
             }
@@ -13727,7 +14009,6 @@
             "description": "page",
             "in": "query",
             "name": "page",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -13737,7 +14018,6 @@
             "description": "maxRows",
             "in": "query",
             "name": "maxRows",
-            "required": false,
             "schema": {
               "format": "int32",
               "type": "integer"
@@ -13905,7 +14185,6 @@
             "description": "operation",
             "in": "query",
             "name": "operation",
-            "required": false,
             "schema": {
               "default": "APPEND",
               "type": "string"
@@ -14515,62 +14794,33 @@
         ]
       }
     },
-    "/voice/api/v1/admin/token": {
-      "get": {
-        "description": "Permissions: Authenticated User",
-        "operationId": "getApiTokensForLoggedInUser",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
+    "/voice/api/v1/admin/accounts/{accountId}/reportsStreaming": {
+      "post": {
+        "description": "Permissions: READ on Account",
+        "operationId": "streamFile",
+        "parameters": [
           {
-            "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
+            "description": "accountId",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
           }
         ],
-        "summary": "Retrieves all Api Tokens for AuthenticatedUser",
-        "tags": [
-          "Legacy Auth"
-        ]
-      },
-      "post": {
-        "description": "Permissions: Authenticated User",
-        "operationId": "createApiTokenForLoggedInUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportParams"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
             "description": "OK"
           },
           "201": {
@@ -14595,41 +14845,62 @@
           },
           {
             "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
           }
         ],
-        "summary": "Creates a new 'Api Token' based AuthenticatedUser that does not expire",
+        "summary": "Streams back an excel or csv file",
         "tags": [
-          "Legacy Auth"
+          "Reporting"
         ]
       }
     },
-    "/voice/api/v1/admin/token/{token}": {
-      "delete": {
-        "description": "Permissions: Anonymous User",
-        "operationId": "removeApiToken",
+    "/voice/api/v1/admin/reports/{reportType}": {
+      "get": {
+        "description": "Permissions: Authenticated User",
+        "operationId": "getReportCriteriaTemplate",
         "parameters": [
           {
-            "description": "token",
+            "description": "reportType",
             "in": "path",
-            "name": "token",
+            "name": "reportType",
             "required": true,
             "schema": {
+              "enum": [
+                "DIALER_RESULT_DOWNLOAD",
+                "GLOBAL_CALL_TYPE_EXCEL",
+                "GLOBAL_CALL_TYPE_DELIMITED",
+                "ALL_CALLS",
+                "IVR_DETAIL",
+                "TFN_DID_MANAGER_SUPERUSER_EXCEL",
+                "TFN_DID_MANAGER_EXCEL",
+                "TFN_DID_MANAGER_DELIMITED",
+                "CASPER_REPORT"
+              ],
               "type": "string"
             }
           }
         ],
         "responses": {
           "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportCriteria"
+                }
+              }
+            },
             "description": "OK"
-          },
-          "204": {
-            "description": "No Content"
           },
           "401": {
             "description": "Unauthorized"
           },
           "403": {
             "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         },
         "security": [
@@ -14641,11 +14912,14 @@
           },
           {
             "BearerAuth": []
+          },
+          {
+            "ApiKeyAuth": []
           }
         ],
-        "summary": "Removes an api token",
+        "summary": "Returns a report critera definition for a report type",
         "tags": [
-          "Legacy Auth"
+          "Reporting"
         ]
       }
     },
@@ -14679,84 +14953,6 @@
         "summary": "Get Users",
         "tags": [
           "Users"
-        ]
-      }
-    },
-    "/voice/api/v1/auth/login": {
-      "post": {
-        "description": "Permissions: Anonymous User",
-        "operationId": "doLogin",
-        "parameters": [
-          {
-            "description": "username",
-            "in": "query",
-            "name": "username",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "password",
-            "in": "query",
-            "name": "password",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "stayLoggedIn",
-            "in": "query",
-            "name": "stayLoggedIn",
-            "required": false,
-            "schema": {
-              "default": false,
-              "type": "boolean"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "items": {
-                    "$ref": "#/components/schemas/UserLoginView"
-                  },
-                  "type": "array"
-                }
-              }
-            },
-            "description": "OK"
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
-          }
-        ],
-        "summary": "Application login to authenticate and receive an X-Auth-Token",
-        "tags": [
-          "Legacy Auth"
         ]
       }
     }
@@ -14828,6 +15024,9 @@
     },
     {
       "name": "Queues"
+    },
+    {
+      "name": "Reporting"
     },
     {
       "name": "Requeue Shortcuts"
