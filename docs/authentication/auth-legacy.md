@@ -12,7 +12,7 @@ To generate the API token, you would either use your own login, or create an "AP
 Get AuthToken for the user you would like to generate API token for (one time operation)
 
 ```http
-POST https://portal.virtualacd.biz/api/v1/auth/login
+POST https://portal.vacd.biz/api/v1/auth/login
 Content-Type: application/x-www-form-urlencoded
 
 username={email}&password={password}
@@ -20,7 +20,7 @@ username={email}&password={password}
 
 Here is an example using cURL:
 
-`curl -X POST https://portal.virtualacd.biz/api/v1/auth/login -d "username={email}&password={password}"`
+`curl -X POST https://portal.vacd.biz/api/v1/auth/login -d "username={email}&password={password}"`
 
 In the result, you will see an authToken property. This is what you will use to manually generate the API tokens in the next step. You want to copy this, it will look something like:
 
@@ -31,13 +31,13 @@ In the result, you will see an authToken property. This is what you will use to 
 Generate a permanent API token using the following API call. Every time you run the method below, another API token will be created and returned.
 
 ```http
-POST https://portal.virtualacd.biz/api/v1/admin/token
+POST https://portal.vacd.biz/api/v1/admin/token
 X-Auth-Token: {token}
 ```
 
 Here is an example cURL command:
 
-`curl -X POST https://portal.virtualacd.biz/api/v1/admin/token -H "X-Auth-Token: {token}"`
+`curl -X POST https://portal.vacd.biz/api/v1/admin/token -H "X-Auth-Token: {token}"`
 
 The token in the `X-Auth-Token` header can be a token generated using the user credentials in the step above or an existing API token for the user.
 
@@ -50,7 +50,7 @@ If you lose track, you can always retrieve all of the permanent API tokens for a
 To list all existing API Tokens for a user:
 
 ```http
-GET https://portal.virtualacd.biz/api/v1/admin/token
+GET https://portal.vacd.biz/api/v1/admin/token
 X-Auth-Token: {authOrApiToken}
 ```
 
@@ -59,11 +59,11 @@ X-Auth-Token: {authOrApiToken}
 If you are done with an API Token and no longer need it, or you feel it may have been compromised, you can delete an existing token as follows.
 
 ```http
-DELETE https://portal.virtualacd.biz/api/v1/admin/token/{apiToken}
+DELETE https://portal.vacd.biz/api/v1/admin/token/{apiToken}
 X-Auth-Token: {authTokenOrApiToken}
 ```
 
-`curl -X DELETE https://portal.virtualacd.biz/api/v1/admin/token/{API-TOKEN-FOR-DELETE} -H "x-auth-token: {AUTH TOKEN OR API TOKEN}"`
+`curl -X DELETE https://portal.vacd.biz/api/v1/admin/token/{API-TOKEN-FOR-DELETE} -H "x-auth-token: {AUTH TOKEN OR API TOKEN}"`
 
 In the above request, you may use the auth token or API token the `X-Auth-Token` header for the user who's token is getting deleted (including the token for delete itself), or that of any parent user of the user who owns the API token for delete.
 
@@ -72,6 +72,6 @@ In the above request, you may use the auth token or API token the `X-Auth-Token`
 To get a list of users use the below request
 
 ```http
-GET https://portal.virtualacd.biz/api/v1/admin/users
+GET https://portal.vacd.biz/api/v1/admin/users
 X-Auth-Token: {authTokenOrApiToken}
 ```
