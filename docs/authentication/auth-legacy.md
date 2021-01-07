@@ -67,11 +67,11 @@ X-Auth-Token: {authTokenOrApiToken}
 
 In the above request, you may use the auth token or API token the `X-Auth-Token` header for the user who's token is getting deleted (including the token for delete itself), or that of any parent user of the user who owns the API token for delete.
 
-## Example Engage Voice API Call
+## Get Users
 
-The following is an example Engage Voice API Call using a RingCentral Engage Access Token.
+To get a list of users use the below request
 
 ```http
 GET https://portal.vacd.biz/api/v1/admin/users
-X-Auth-Token: <rcEngageAPIToken>
+X-Auth-Token: {authTokenOrApiToken}
 ```
