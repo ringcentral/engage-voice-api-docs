@@ -44,7 +44,7 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 
 ### Response
 
-The call detail record includes a number of properties for thee call, allowing you to identify specific information regarding the call including wait times can caller ID
+The call detail record includes a number of properties for the call, allowing you to identify specific information regarding the call including wait times can caller ID
 
 ```json
 [
