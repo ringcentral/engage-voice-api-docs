@@ -10,8 +10,8 @@ It takes a JSON request body with the following notable parameters. See the exam
 |-|-|
 | **`reportType`** | set to `CASPER_REPORT`. |
 | **`reportTypeName`** | set to `Agent_Session_Report_Raw`. |
-| **`reportCriteria.startTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
-| **`reportCriteria.endTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
+| **`reportCriteria.startTimestamp`** | use ANSI SQL 92 `TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
+| **`reportCriteria.endTimestamp`** | use ANSI SQL 92 `TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
 
 ### Request
 
@@ -32,27 +32,21 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
       "reportTypeName":"Agent_Session_Report_Raw",
       "reportCriteria":{
         "rollupAgent":"",
-        "agentTeams":[
-
-        ],
+        "agentTeams":[],
         "secureAgentGroupIds":"",
-        "agentGroupIds":[
-
-        ],
+        "agentGroupIds":[],
         "secureAgentIds":"",
-        "agentIds":[
-
-        ],
-
-        "timezoneName":"US/Arizona",
+        "agentIds":[],
+        "endTimestamp":"2020-08-26 23:59:00",
+        "startTimestamp":"2020-08-01 00:00:00",
+        "timezoneName":"US/Eastern",
         "criteriaType":"CASPER_CRITERIA",
         "reportName":"Agent_Session_Report_Raw",
+        "returnType":"CSV",
         "schedule":{
           "repeatOption":"ONCE"
         },
-        "accountIds":[
-
-        ]
+        "accountIds":[]
       }
     }
     ```
