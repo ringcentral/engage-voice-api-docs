@@ -42,8 +42,8 @@ You can verify the specs localy with the following if you have [Go installed](ht
 
 If you wish to change the specs being tested edit the [specs_test.go](specs_test.go) file.
 
- [specs-status-svg]: https://github.com/grokify/engage-voice-api-docs/workflows/build/badge.svg?branch=master
- [specs-status-url]: https://github.com/grokify/engage-voice-api-docs/actions
+ [specs-status-svg]: https://github.com/ringcentral/engage-voice-api-docs/workflows/build/badge.svg?branch=master
+ [specs-status-url]: https://github.com/ringcentral/engage-voice-api-docs/actions
  [docs-status-svg]: https://readthedocs.org/projects/engage-voice-api-docs/badge/?version=latest
  [docs-status-url]: https://readthedocs.org/projects/engage-voice-api-docs/builds/
  [docs-svg]: https://img.shields.io/badge/docs-preview-blue.svg
