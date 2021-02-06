@@ -1,8 +1,8 @@
 # RingCentral Engage Voice API Docs
 
-[![Specs Status][specs-status-svg]][specs-status-link]
-[![Docs Status][docs-status-svg]][docs-status-link]
-[![Docs Status][docs-svg]][docs-link]
+[![Specs Status][specs-status-svg]][specs-status-url]
+[![Docs Status][docs-status-svg]][docs-status-url]
+[![Docs Status][docs-svg]][docs-url]
 
 This repository is the home of the RingCentral Engage Developer Guide: a collection of materials, and documentation to help educate developers on how to build on top of the RingCentral Engage platform.
 
@@ -42,9 +42,9 @@ You can verify the specs localy with the following if you have [Go installed](ht
 
 If you wish to change the specs being tested edit the [specs_test.go](specs_test.go) file.
 
+ [specs-status-svg]: https://github.com/grokify/engage-voice-api-docs/workflows/build/badge.svg?branch=master
+ [specs-status-url]: https://github.com/grokify/engage-voice-api-docs/actions
  [docs-status-svg]: https://readthedocs.org/projects/engage-voice-api-docs/badge/?version=latest
- [docs-status-link]: https://readthedocs.org/projects/engage-voice-api-docs/builds/
- [specs-status-svg]: https://travis-ci.com/ringcentral/engage-voice-api-docs.svg?branch=master
- [specs-status-link]: https://travis-ci.com/ringcentral/engage-voice-api-docs
+ [docs-status-url]: https://readthedocs.org/projects/engage-voice-api-docs/builds/
  [docs-svg]: https://img.shields.io/badge/docs-preview-blue.svg
- [docs-link]: https://engage-voice-api-docs.readthedocs.io/
+ [docs-url]: https://engage-voice-api-docs.readthedocs.io/
