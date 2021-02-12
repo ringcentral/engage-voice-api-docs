@@ -40,6 +40,7 @@ pages:
       - 'Agent Segment Metadata': analytics/reports/agent-segment-metadata-report.md
       - 'Agent Session': analytics/reports/agent-session-report.md
       - 'Call Details and Recordings': analytics/reports/global-call-type-detail-report.md
+      - 'Dialer Result Download': analytics/reports/dialer-result-download-report.md
   - 'Routing':
     - 'Overview': routing/index.md
     - 'Getting Started':
