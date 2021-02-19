@@ -1,6 +1,6 @@
 # Authentication
 
-The RingCentral Engage Voice API is offered for both the current Engage Voice deployment or legacy systems.
+The RingCentral Engage Voice API is offered for Engage Voice with RingCentral login, Engage Voice without RingCentral login, or legacy systems.
 
 ## Current API
 
@@ -13,6 +13,8 @@ and uses the OAuth 2.0 Authorization header:
 * `Authorization: Bearer <myAccessToken>`
 
 Read more about [authorizing with the current system API](auth-ringcentral).
+
+Or, if you do not have a RingCentral login linked to Engage Voice read more about [authorizing without a RingCentral login](auth-engage.md).
 
 ## Legacy API
 

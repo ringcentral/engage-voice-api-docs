@@ -1,4 +1,4 @@
-# Obtaining an Engage Access Token
+# Obtaining an Engage Access Token with a RingCentral Login
 
 To access Engage Voice APIs, you need to create an Engage Voice App, and then with the client credentials, request an Engage Access Token. Once you have created an App, request a RingCentral Access Token and then using an Engage API to create an Engage Access Token. Then the Engage Access Token can be used to access Engage Voice APIs.
 
@@ -45,7 +45,9 @@ Now retrieve a RingCentral access token using the following instructions:
 
 Once you have a RingCentral Access Token, call the following Engage API to receive an Engage Bearer access token.
 
-```http tab="Request"
+### Request
+
+```http
 POST https://engage.ringcentral.com/api/auth/login/rc/accesstoken
 Content-Type: application/x-www-form-urlencoded
 
@@ -250,7 +252,9 @@ Jwt is expired
 
 Use the `refreshToken` to refresh the RingCentral Engage access token, by calling the following Engage API.
 
-```http tab="Request"
+### Request
+
+```http
 POST https://engage.ringcentral.com/api/auth/token/refresh
 Content-Type: application/x-www-form-urlencoded
 

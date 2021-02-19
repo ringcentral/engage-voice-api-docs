@@ -99,7 +99,8 @@ pages:
     #- 'Legacy Tokens': basics/auth-legacy.md
   - 'Authentication':
     - 'Overview': authentication/index.md
-    - 'Engage Access Token': authentication/auth-ringcentral.md
+    - 'Engage with RingCentral Token': authentication/auth-ringcentral.md
+    - 'Engage Access Token': authentication/auth-engage.md
     - 'Legacy': authentication/auth-legacy.md
   - 'Events and Notifications':
     - 'Overview': notifications/index.md
