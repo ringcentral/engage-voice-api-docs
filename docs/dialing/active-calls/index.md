@@ -46,22 +46,15 @@ Instead of manually dialing from a phone dial pad, an outbound call from an agen
 | API Property | Description |
 |-|-|
 | **`username`** | The username of an agent who makes the call |
-| **`destinatio`n** | The phone number of a callee. |
-| **`ringDuratio`n** | The number of seconds a call should ring. |
+| **`destination`** | The phone number of a callee. |
+| **`ringDuration`** | The number of seconds a call should ring. |
 | **`callerId`** | The phone number of the caller which can be seen by a callee. |
 
 ### Request
 Be sure to set the proper [BASE_URL](../../basics/uris/#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral) for your deployment.
 
 ```http
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/createManualAgentCall
-
-{
-  username: "some.name@abc.com",
-  destination: "6501234567",
-  ringDuration: 5,
-  callerId: "1234567890"
-}
+POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/createManualAgentCall?username=some.name%40abc.com&destination=6501234567&ringDuration=5&callerId=1234567890
 ```
 
 ## Add Sessions to an Active Call.
@@ -87,12 +80,7 @@ The following value lists and APIs are used to retrieve predefined values for ce
 Be sure to set the proper [BASE_URL](../../basics/uris/#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral) for your deployment.
 
 ```http
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/addSessionToCall
-
-{
-  destination: "6501234567",
-  sessionType: "MONITOR"
-}
+POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/addSessionToCall?destination=+15554150123&sessionType=MONITOR
 ```
 
 ## Call Disposition
@@ -104,7 +92,7 @@ Sets the call disposition for either INBOUND or OUTBOUND calls and releases the 
 |-|-|
 | **`disposition`** | The name of a preconfigured disposition |
 | **`callback`** | true or false to specify the callback request |
-| **`callBackDTS`** | Callback date and time |
+| **`callBackDTS`** | Callback date and time in the following format: yyyyMMddHHmmss |
 | **`notes`** | Notes of this call disposition |
 
 ### Request
@@ -126,10 +114,6 @@ Be sure to set the proper [BASE_URL](../../basics/uris/#resources-and-parameters
 
 ```http
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/hangupCall
-
-{
-  phone: "6501234567"
-}
 ```
 
 ## Terminate an Active Session
@@ -145,11 +129,7 @@ Remove a third party from a call. This will not terminate an active call.
 Be sure to set the proper [BASE_URL](../../basics/uris/#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral) for your deployment.
 
 ```http
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/hangupSession
-
-{
-  phone: "6501234567"
-}
+POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/hangupSession?phone=6501234567
 ```
 
 ### Toggle Call Recording On/Off for an Active Call
