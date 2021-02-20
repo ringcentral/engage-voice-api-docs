@@ -10,6 +10,9 @@ To access Engage Voice APIs, you need to create an Engage Voice App, and then wi
 
 The first thing we need to do is create an app in the RingCentral Developer Portal. This can be done quickly by clicking the "Create Engage Voice App" button below. Just click the button, enter a name and description if you choose, and click the "Create" button. If you do not yet have a RingCentral account, you will be prompted to create one.
 
+!!! important
+    While you can create a RingCentral account through the Developer Portal, you will need a production account to use Engage Voice APIs at this time.  Make sure to login to your developer account using the same credentials as your production RingCentral account. The RingCentral account created via the Developer Portal will **not** work.
+
 <a target="new" href="https://developer.ringcentral.com/new-app?name=Engage+Voice+Quick+Start+App&desc=A+simple+app+to+demo+engage+voice+apis+access&public=false&type=ServerOther&carriers=7710,7310,3420&permissions=ReadAccounts&redirectUri=" class="btn btn-primary">Create Engage Voice App</a>
 <a class="btn-link btn-collapse" data-toggle="collapse" href="#create-app-instructions" role="button" aria-expanded="false" aria-controls="create-app-instructions">Show detailed instructions</a>
 
@@ -33,7 +36,9 @@ The first thing we need to do is create an app in the RingCentral Developer Port
 </ol>
 </div>
 
-When you are done, you will be taken to the app's dashboard. Make note of the Client ID and Client Secret. We will be using those momentarily.
+When you are done, you will be taken to the app's dashboard. Make note of the Client ID. This is your Client ID for the App in the Sandbox. To start using Engage APIs, you need to graduate your app to Production and use the Production Client ID and Client Secret in upcoming steps.
+
+<a target="new" href="https://docs.google.com/forms/d/e/1FAIpQLScyidt7WFb_CJrpn9yGbcZ8P_gQ42UvXz3oBBnjF0tRh7MVMw/viewform?usp=sf_link" class="btn btn-primary">Request Graduation of Engage Voice App</a>
 
 ## Retrieve RingCentral Access Token
 
