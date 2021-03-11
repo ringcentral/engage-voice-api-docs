@@ -89,3 +89,16 @@ Authorization: Bearer <accessToken>
 Here is an example cURL command:
 
 `curl -X DELETE https://engage.ringcentral.com/voice/api/v1/admin/token/{API-TOKEN-FOR-DELETE} -H "X-Auth-Token: {apiToken}"`
+
+# Get Accounts
+
+A method to try is to retrieve the accounts this user has access to. The main account is the top level account and is considered a container for the sub-accounts that most operations are performed on.
+
+```http
+GET https://engage.ringcentral.com/voice/api/v1/admin/accounts
+Authorization: Bearer <accessToken>
+```
+
+Here is an example cURL command:
+
+`curl -X GET https://engage.ringcentral.com/voice/api/v1/admin/accounts -H "Authorization: Bearer {accessToken}"`

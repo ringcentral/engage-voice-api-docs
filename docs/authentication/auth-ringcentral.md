@@ -245,6 +245,19 @@ GET https://engage.ringcentral.com/voice/api/v1/admin/users
 Authorization: Bearer <rcEngageAccessToken>
 ```
 
+## Get Accounts
+
+Another method to try is to retrieve the accounts this user has access to. The main account is the top level account and is consider a container for the sub-accounts that most operations are performed on.
+
+```http
+GET https://engage.ringcentral.com/voice/api/v1/admin/accounts
+Authorization: Bearer <rcEngageAccessToken>
+```
+
+Here is an example cURL command:
+
+`curl -X GET https://engage.ringcentral.com/voice/api/v1/admin/accounts -H "Authorization: Bearer {rcEngageAccessToken}"`
+
 ## Refresh RingCentral Engage Access Token
 
 The RingCentral Engage Access Token will only live for a few minutes (currently 5 minutes) before needing to be refreshed. If the access token is expired, the API request will respond with:
