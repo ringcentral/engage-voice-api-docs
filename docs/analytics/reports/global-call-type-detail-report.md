@@ -11,7 +11,7 @@ The call detail report has a number of request properties that allow filtering r
 
 | API Property | Description |
 |-|-|
-| **`reportType`** | set this to `GLOBAL_CALL_TYPE_EXCEL`. This corresponds to the Global Call Type Detail real-time report in the analytics console. |
+| **`reportType`** | set this to `GLOBAL_CALL_TYPE_EXCEL` to download this report in MS Excel format or set this to `GLOBAL_CALL_TYPE_DELIMITED` to download this report in comma delimited format. This corresponds to the Global Call Type Detail real-time report in the analytics console. |
 | **`startDate`** | a start date is required. This should be in ISO-8601 format such as: `2020-04-22T00:00:00.000-0000`. |
 | **`endDate`** | field is optional and uses the same format as `startDate`. |
 
@@ -21,13 +21,13 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 
 === "HTTP"
     ```bash
-    POST /api/v1/admin/accounts/{accountId}/json
+    POST /api/v1/admin/accounts/{accountId}/reportsStreaming
     Authorization: bearer <myAccessToken>
     Content-Type: application/json;charset=UTF-8
     Accept: application/json
 
     {
-    	"reportType":"GLOBAL_CALL_TYPE_EXCEL",
+    	"reportType":"GLOBAL_CALL_TYPE_DELIMITED",
     	"reportCriteria":{
     		"criteriaType":"GLOBAL_CALL_TYPE_CRITERIA",
     		"startDate":"2020-04-22T00:00:00.000-0000",
