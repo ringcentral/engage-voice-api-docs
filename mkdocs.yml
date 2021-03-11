@@ -52,6 +52,10 @@ pages:
       - 'Queue Events': routing/queues/queue-events.md
       - 'Queue Groups': routing/queues/queue-groups.md
       - 'Group Skills': routing/queues/group-skills.md
+    - 'IVR':
+      - 'Overview': routing/ivr/index.md
+      - 'WWW Node': routing/ivr/www-node.md
+      - 'Scripting Node': routing/ivr/scripting-node.md
     - 'Tutorials':
       - 'IVR DNC List': https://ringcentral-tutorials.github.io/dnc-via-ivr-rest-demo
   - 'Dialing':
@@ -82,6 +86,7 @@ pages:
       - 'Agents': users/agents/agents.md
       - 'Agent Groups': users/agents/agent-groups.md
       - 'Skill Profiles': users/agents/skill-profile.md
+      - 'Agent Scripting': users/agents/agent-script.md
   - 'Workforce':
     - 'Overview': workforce/index.md
     - 'Workforce Management':
