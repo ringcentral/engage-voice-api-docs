@@ -145,9 +145,5 @@ As the name implies, an active call recording can be easily toggled on or off us
 Be sure to set the proper [BASE_URL](../../basics/uris/#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral) for your deployment.
 
 ```http
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/toggleCallRecording
-
-{
-  record: true
-}
+POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/toggleCallRecording?record=true
 ```
