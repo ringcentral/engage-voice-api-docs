@@ -14,14 +14,12 @@ The first step to login to Engage Voice without a RingCentral Office login is to
 
 ### Request
 ```http
-POST https://engage.ringcentral.com/api/auth/login/admin
-
-username={email}&password={password}&platformId={platform ID}
+POST https://engage.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platform ID}
 ```
 
 Here is an example using cURL:
 
-`curl -X POST https://engage.ringcentral.com/api/auth/login/admin -d "username={email}&password={password}&platformId={platform ID}"`
+`curl -X POST 'https://engage.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platform ID}'`
 
 In the response, you will see a very long string for an `accessToken`. You'll want to copy and save this for your next call.  You will also see a shorter string for a `refreshToken`. Save this token as well to [refresh your access token](../auth-engage/#refresh-ringcentral-engage-access-token) when the access token expires.
 
