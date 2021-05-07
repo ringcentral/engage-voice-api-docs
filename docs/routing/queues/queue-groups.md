@@ -36,30 +36,27 @@ Content-Type: application/json
 ```
 
 ```javascript tab="Node JS"
-const EngageVoice = require('engagevoice-sdk-wrapper')
+const EngageVoice = require('ringcentral-engage-voice-client').default
 
 // Instantiate the SDK wrapper object with your RingCentral app credentials
-var ev = new EngageVoice.RestClient("RC_CLIENT_ID", "RC_CLIENT_SECRET")
+const ev = new RingCentralEngageVoice({
+  clientId: "RINGCENTRAL_CLIENTID",
+  clientSecret: "RINGCENTRAL_CLIENTSECRET"
+})
 
-// Login your account with your RingCentral Office user credentials
-ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER", function(err, response){
-  if (err)
-    console.log(err)
-  else{
-    endpoint = 'admin/accounts/~/gateGroups'
-    params = {
-                "groupName":"My New Queue Group"
-                  }
-    ev.post(endpoint, params, function(err, response){
-      if (err){
-        console.log(err)
-      }else {
-        var jsonObj = JSON.parse(response)
-        console.log(jsonObj)
-      }
-    })
-  }
-})        
+// Authorize with your RingCentral Office user credentials
+await ev.authorize({
+  username: "RINGCENTRAL_USERNAME",
+  extension: "RINGCENTRAL_EXTENSION",
+  password: "RINGCENTRAL_PASSWORD"
+})
+
+// Create a new Queue Group
+const postData = {
+  groupName: "My New Queue Group"
+}
+const response = await ev.post('/api/v1/admin/accounts/15300002/gateGroups', JSON.stringify(data))
+console.log(response);
 ```
 
 ```python tab="Python"
