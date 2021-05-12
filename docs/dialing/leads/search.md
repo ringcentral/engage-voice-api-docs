@@ -159,26 +159,40 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 
 ```javascript tab="Node JS"
 /****** Install Node JS SDK wrapper *******
-$ npm install engagevoice-sdk-wrapper --save
+$ npm install ringcentral-engage-voice-client
 *******************************************/
 
-const EngageVoice = require('engagevoice-sdk-wrapper')
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
 
-// Instantiate the SDK wrapper object with your RingCentral app credentials
-var ev = new EngageVoice.RestClient("RC_CLIENT_ID", "RC_CLIENT_SECRET")
-
-// Login your account with your RingCentral Office user credentials
-ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER", function(err, response){
-  if (!err){
-    var endpoint = 'admin/accounts/~/campaignLeads/leadSearch'
-    var params = { firstName: "John" }
-    ev.post(endpoint, params, function(err, response){
-        if (!err){
-            console.log(response)
-        }
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
     })
-  }
-})
+
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
+
+        // Search Leads with first name John
+        const endpoint = "/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch"
+        const postBody = {
+            "firstName": "John"
+        }
+        const response = await ev.post(endpoint, postBody)
+        console.log(response.data);
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+}
+
+RunRequest();
 ```
 
 ```python tab="Python"

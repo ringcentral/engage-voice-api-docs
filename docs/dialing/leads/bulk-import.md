@@ -106,112 +106,75 @@ Authorization: Bearer <yourAccessToken>
 
 ```javascript tab="Node JS"
 /****** Install Node JS SDK wrapper *******
-$ npm install engagevoice-sdk-wrapper --save
+$ npm install ringcentral-engage-voice-client
 *******************************************/
 
-const EngageVoice = require('engagevoice-sdk-wrapper')
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
 
-// Instantiate the SDK wrapper object with your RingCentral app credentials
-var ev = new EngageVoice.RestClient("RC_CLIENT_ID", "RC_CLIENT_SECRET")
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
+    })
 
-// Login your account with your RingCentral Office user credentials
-ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER", function(err, response){
-  if (!err){
-    read_dial_groups()
-  }
-})  
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
 
-// List dial groups and get a dial group id
-function read_dial_groups(){
-  var endpoint = 'admin/accounts/~/dialGroups'
-  ev.get(endpoint, null, function(err, response){
-    if (!err){
-      var jsonObj = JSON.parse(response)
-      for (var group of jsonObj){
-        if (group.dialGroupName == "My Dial Group - Predictive"){
-          read_group_campaigns(group.dialGroupId)
-          break
+        // Get Dial Groups data
+        const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+        const groupsResponse = await ev.get(groupsEndpoint)
+        for (var group of groupsResponse.data) {
+            // Select your Dial Group
+            if (group.dialGroupName == "My New Dial Group") {
+                const campaignsEndpoint = groupsEndpoint + "/" + group.dialGroupId + "/campaigns"
+                const campaignsResponse = await ev.get(campaignsEndpoint)
+                for (var campaign of campaignsResponse.data) {
+                    // Select your Campaign and import Leads
+                    if (campaign.campaignName == "My Predictive Campaign") {
+                        const leadsEndpoint = "/api/v1/admin/accounts/{accountId}/campaigns/" + campaign.campaignId + "/leadLoader/direct"
+                        const postData = {
+                            "listState": "ACTIVE",
+                            "duplicateHandling": "RETAIN_ALL",
+                            "timeZoneOption": "NPA_NXX",
+                            "description": "Lead Search Test",
+                            "dialPriority": "IMMEDIATE",
+                            "uploadLeads": [{
+                                "leadPhone": "8888888888",
+                                "externId": "222",
+                                "firstName": "Jason",
+                                "midName": "",
+                                "lastName": "Black",
+                                "address1": "1514 Bernardo Ave",
+                                "city": "New York",
+                                "state": "NY",
+                                "zip": "10001",
+                            }, {
+                                "leadPhone": "3323333333",
+                                "externId": "333",
+                                "firstName": "Rich",
+                                "lastName": "Dunbard"
+                            }
+                            ]
+                        }
+                        const leadsResponse = await ev.post(leadsEndpoint, postData)
+                        console.log(leadsResponse.data)
+                    }
+                }
+            }
         }
-      }
     }
-  })
+    catch (err) {
+        console.log(err.message)
+    }
 }
 
-// List campaigns under a dial group and get a campaign id
-function read_group_campaigns(dialGroupId){
-  var endpoint = 'admin/accounts/~/dialGroups/' + dialGroupId + "/campaigns"
-  ev.get(endpoint, null, function(err, response){
-    if (!err){
-      var jsonObj = JSON.parse(response)
-      for (var campaign of jsonObj){
-        if (campaign.campaignName == "Customer Acquisition"){
-          import_campaign_leads(campaign.campaignId)
-          break
-        }
-      }
-    }
-  })
-}
-
-// import leads to a campaign
-function import_campaign_leads(campaignId){
-  var endpoint = 'admin/accounts/~/campaigns/' + campaignId + "/leadLoader/direct"
-  var params = {
-    description: "Prospect customers",
-    dialPriority: "IMMEDIATE",
-    duplicateHandling: "REMOVE_FROM_LIST",
-    listState: "ACTIVE",
-    timeZoneOption: "NOT_APPLICABLE",
-    uploadLeads: [
-      {
-         leadPhone:"1111111111",
-         externId:"1",
-         title:"Dr.",
-         firstName:"Jeff",
-         midName:"John",
-         lastName:"Malfetti",
-         suffix:"Jr.",
-         address1:"3101 Fake St.",
-         address2:"Suite 120",
-         city:"Rock",
-         state:"CO",
-         zip:"80500",
-         email:"test@test.com",
-         gateKeeper:"Some one",
-         auxData1:30,
-         auxData2:"a",
-         auxData3:100,
-         auxData4:"aa",
-         auxData5:1000,
-         auxPhone:"1111111110",
-         extendedLeadData:{
-            important:"data",
-            interested:true
-         }
-      },{
-         leadPhone:"2222222222",
-         externId:"222",
-         firstName:"Jason",
-         midName:"",
-         lastName:"Black",
-         address1:"1514 Bernardo Ave",
-         city:"New York",
-         state:"NY",
-         zip:"10001",
-      },{
-         leadPhone:"3333333333",
-         externId:"333",
-         firstName:"Rich",
-         lastName:"Dunbard"
-      }
-    ]
-  }
-  ev.post(endpoint, params, function(err, response){
-    if (!err){
-      console.log(response)
-    }
-  })
-}
+RunRequest();
 ```
 
 ```python tab="Python"

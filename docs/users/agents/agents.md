@@ -109,6 +109,49 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 GET {BASE_URL}api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents
 ```
 
+```javascript tab="Node JS"
+/****** Install Node JS SDK wrapper *******
+$ npm install ringcentral-engage-voice-client
+*******************************************/
+
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
+
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
+    })
+
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
+
+        // Get Agent Groups data
+        const agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
+        const agentGroupsResponse = await ev.get(agentGroupsEndpoint)
+        for (var group of agentGroupsResponse.data) {
+            // Get Agents under your Agent Group
+            if (group.groupName == "My New Agent Group") {
+                const agentEndpoint = agentGroupsEndpoint + "/" + group.agentGroupId + "/agents"
+                const agentResponse = await ev.get(agentEndpoint)
+                console.log(agentResponse.data)
+                break
+            }
+        }
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+}
+
+RunRequest();
+```
+
 ### Response
 Some sample response data shown below.
 
@@ -289,6 +332,55 @@ Content-Type: application/json
     "firstName":"My New First Name"
     ...
 }
+```
+
+```javascript tab="Node JS"
+/****** Install Node JS SDK wrapper *******
+$ npm install ringcentral-engage-voice-client
+*******************************************/
+
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
+
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
+    })
+
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
+
+        // Get Agent Groups data
+        const agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
+        const agentGroupsResponse = await ev.get(agentGroupsEndpoint)
+        for (var group of agentGroupsResponse.data) {
+            // Update the Agent
+            if (group.groupName == "My New Agent Group") {
+                const agentsEndpoint = agentGroupsEndpoint + "/" + group.agentGroupId + "/agents"
+                const agentsResponse = await ev.get(agentsEndpoint)
+                for (var agent of agentsResponse.data) {
+                    if (agent.username == "{existingAgentUsername}") {
+                        const singleAgentEndpoint = agentsEndpoint + "/" + agent.agentId
+                        agent.firstName = "{agentNewUsername}"
+                        const singleAgentResponse = await ev.put(singleAgentEndpoint, agent)
+                        console.log(singleAgentResponse.data)
+                    }
+                }
+            }
+        }
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+}
+
+RunRequest();
 ```
 
 ## Delete Agent

@@ -36,32 +36,40 @@ Content-Type: application/json
 ```
 
 ```javascript tab="Node JS"
-const EngageVoice = require('ringcentral-engage-voice-client').default
+/****** Install Node JS SDK wrapper *******
+$ npm install ringcentral-engage-voice-client
+*******************************************/
 
-// Instantiate the SDK wrapper object with your RingCentral app credentials
-const ev = new EngageVoice({
-    clientId: "RINGCENTRAL_CLIENTID",
-    clientSecret: "RINGCENTRAL_CLIENTSECRET"
-})
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
 
-try{
-    // Authorize with your RingCentral Office user credentials
-    await ev.authorize({
-        username: "RINGCENTRAL_USERNAME",
-        extension: "RINGCENTRAL_EXTENSION",
-        password: "RINGCENTRAL_PASSWORD"
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
     })
 
-    // Create a new Queue Group
-    const postBody = {
-        "groupName": "My New Queue Group"
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
+
+        // Create a new Queue Group
+        const postBody = {
+            "groupName": "My New Queue Group"
+        }
+        const response = await ev.post('/api/v1/admin/accounts/{accountId}/gateGroups', postBody)
+        console.log(response);
     }
-    const response = await ev.post('/api/v1/admin/accounts/{accountId}/gateGroups', postBody)
-    console.log(response);
+    catch (err) {
+        console.log(err.message)
+    }
 }
-catch(err){
-    console.log(err.message)
-}
+
+RunRequest();
 ```
 
 ```python tab="Python"
@@ -135,30 +143,44 @@ GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups
 ```
 
 ```javascript tab="Node JS"
-const EngageVoice = require('engagevoice-sdk-wrapper')
+/****** Install Node JS SDK wrapper *******
+$ npm install ringcentral-engage-voice-client
+*******************************************/
 
-// Instantiate the SDK wrapper object with your RingCentral app credentials
-var ev = new EngageVoice.RestClient("RC_CLIENT_ID", "RC_CLIENT_SECRET")
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
 
-// Login your account with your RingCentral Office user credentials
-ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER", function(err, response){
-  if (err)
-    console.log(err)
-  else{
-    var endpoint = 'admin/accounts/~/gateGroups'
-    ev.get(endpoint, null, function(err, response){
-      if (err){
-        console.log(err)
-      }else {
-        var jsonObj = JSON.parse(response)
-        for (var group of jsonObj){
-          console.log("Queue group name: " + group.groupName)
-          console.log("Queue group id: " + group.gateGroupId)
-        }
-      }
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
     })
-  }
-})        
+
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
+
+        // Get Queue Groups data
+        const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
+        const groupsResponse = await ev.get(groupsEndpoint)
+        for (var group of groupsResponse.data) {
+            // Get Queues under your Queue Group
+            if (group.groupName == "My New Queue Group") {
+                const queueEndpoint = groupsEndpoint + "/" + group.gateGroupId + "/gates"
+                const queueResponse = await ev.get(queueEndpoint)
+                console.log(queueResponse.data);
+            }
+        }
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+}
+
+RunRequest();
 ```
 
 ```python tab="Python"
@@ -236,37 +258,50 @@ GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}
 ```
 
 ```javascript tab="Node JS"
-const EngageVoice = require('engagevoice-sdk-wrapper')
+/****** Install Node JS SDK wrapper *******
+$ npm install ringcentral-engage-voice-client
+*******************************************/
 
-// Instantiate the SDK wrapper object with your RingCentral app credentials
-var ev = new EngageVoice.RestClient("RC_CLIENT_ID", "RC_CLIENT_SECRET")
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
 
-// Login your account with your RingCentral Office user credentials
-ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER", function(err, response){
-  if (err)
-    console.log(err)
-  else{
-    var endpoint = 'admin/accounts/~/gateGroups'
-    ev.get(endpoint, null, function(err, response){
-      if (err){
-        console.log(err)
-      }else {
-        var jsonObj = JSON.parse(response)
-        for (var group of jsonObj){
-          endpoint = 'admin/accounts/~/gateGroups/' + group.gateGroupId
-          ev.get(endpoint, null, function(err, response){
-            if (err){
-              console.log(err)
-            }else {
-              print (response)
-              print ("========")
-            }
-          })
-        }
-      }
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
     })
-  }
-})        
+
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
+
+        // Get Queue Groups data
+        const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
+        const groupsResponse = await ev.get(groupsEndpoint)
+        for (var group of groupsResponse.data) {
+            // Get every single Queue under your Queue Group
+            if (group.groupName == "My New Queue Group") {
+                const queuesEndpoint = groupsEndpoint + "/" + group.gateGroupId + "/gates"
+                const queuesResponse = await ev.get(queuesEndpoint)
+                for (var queue of queuesResponse.data) {
+                    const singleQueueEndpoint = queuesEndpoint + "/" + queue.gateId
+                    const singleQueueResponse = await ev.get(singleQueueEndpoint)
+                    console.log(singleQueueResponse.data);
+                    console.log("=========")
+                }
+            }
+        }
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+}
+
+RunRequest();  
 ```
 
 ```python tab="Python"
@@ -345,35 +380,52 @@ Content-Type: application/json
 ```
 
 ```javascript tab="Node JS"
-const EngageVoice = require('engagevoice-sdk-wrapper')
+/****** Install Node JS SDK wrapper *******
+$ npm install ringcentral-engage-voice-client
+*******************************************/
 
-// Instantiate the SDK wrapper object with your RingCentral app credentials
-var ev = new EngageVoice.RestClient("RC_CLIENT_ID", "RC_CLIENT_SECRET")
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
 
-// Login your account with your RingCentral Office user credentials
-ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER", function(err, response){
-  if (!err){
-    var endpoint = 'admin/accounts/~/gateGroups'
-    ev.get(endpoint, null, function(err, response){
-      if (!err){
-        var jsonObj = JSON.parse(response)
-        for (var group of jsonObj){
-          if (group.groupName == "My New Queue Group"){
-            endpoint = 'admin/accounts/~/gateGroups/' + group.gateGroupId
-            var params = {
-              "groupName": group.groupName + " - Update"
-            }
-            ev.put(endpoint, params, function(err, response){
-              if (!err){
-                console.log (response)
-              }
-            })
-          }
-        }
-      }
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
     })
-  }
-})        
+
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
+
+        // Get Queue Groups info
+        const groupEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
+        const groupResponse = await ev.get(groupEndpoint)
+        for (var group of groupResponse.data) {
+            // Update your Queue under your Queue Group
+            if (group.groupName == "My New Queue Group") {
+                const queueEndpoint = groupEndpoint + "/" + group.gateGroupId + "/gates"
+                const queueResponse = await ev.get(queueEndpoint)
+                for (var queue of queueResponse.data) {
+                    if (queue.gateName == "My Node Queue") {
+                        const singleQueueEndpoint = queueEndpoint + "/" + queue.gateId
+                        queue.gateDesc = "An *edited* queue description for this Queue"
+                        const singleQueueResponse = await ev.put(singleQueueEndpoint, queue)
+                        console.log(singleQueueResponse.data);
+                        break
+                    }
+                }
+            }
+        }
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+}
+
+RunRequest();     
 ```
 
 ```python tab="Python"

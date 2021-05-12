@@ -39,6 +39,40 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups
 ```
 
+```javascript tab="Node JS"
+/****** Install Node JS SDK wrapper *******
+$ npm install ringcentral-engage-voice-client
+*******************************************/
+
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
+
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
+    })
+
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
+
+        // Get Agent Groups
+        const response = await ev.get("/api/v1/admin/accounts/{accountId}/agentGroups")
+        console.log(response.data);
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+}
+
+RunRequest();
+```
+
 ### Response
 
 ```json tab="Response"
@@ -107,6 +141,50 @@ Content-Type: application/json
     "groupName":"My Agent Group"
     ...
 }
+```
+
+```javascript tab="Node JS"
+/****** Install Node JS SDK wrapper *******
+$ npm install ringcentral-engage-voice-client
+*******************************************/
+
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
+
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
+    })
+
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
+
+        // Get Agent Groups data
+        const agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
+        const agentGroupsResponse = await ev.get(agentGroupsEndpoint)
+        for (var group of agentGroupsResponse.data) {
+            // Update your Agent Group
+            if (group.groupName == "My New Agent Group") {
+                const singleAgentGroupEndpoint = agentGroupsEndpoint + "/" + group.agentGroupId
+                group.groupName += " - updated"
+                const singleAgentGroupResponse = await ev.put(singleAgentGroupEndpoint, group)
+                console.log(singleAgentGroupResponse.data);
+                break
+            }
+        }
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+}
+
+RunRequest();
 ```
 
 ## Delete Agent Group

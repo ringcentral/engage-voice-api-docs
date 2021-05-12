@@ -90,48 +90,55 @@ Content-Type: application/json
 
 ```javascript tab="Node JS"
 /****** Install Node JS SDK wrapper *******
-$ npm install engagevoice-sdk-wrapper --save
+$ npm install ringcentral-engage-voice-client
 *******************************************/
 
-const EngageVoice = require('engagevoice-sdk-wrapper')
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
 
-// Instantiate the SDK wrapper object with your RingCentral app credentials
-var ev = new EngageVoice.RestClient("RC_CLIENT_ID", "RC_CLIENT_SECRET")
-
-// Login your account with your RingCentral Office user credentials
-ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER", function(err, response){
-  if (!err){
-    var endpoint = 'admin/accounts/~/dialGroups'
-    ev.get(endpoint, null, function(err, response){
-      if (!err){
-        var jsonObj = JSON.parse(response)
-        for (var group of jsonObj){
-          if (group.dialGroupName == "My Dial Group - Predictive"){
-            // create a campaign under this dial group
-            endpoint += '/' + group.dialGroupId + '/campaigns'
-            var params = {
-              isActive: 1,
-              campaignName: "My Predictive Campaign",
-              campaignDesc: "A test predictive campaign",
-              startDate: "2020-05-28T07:00:00.000+0000",
-              endDate: "2025-05-30T07:00:00.000+0000",
-              maxRingTime: 30,
-              maxRingTimeTransfer: 60,
-              callerId: "4155550123",
-              dialLoadedOrder: 0
-            }
-            ev.post(endpoint, params, function(err, response){
-              if (!err){
-                console.log (response)
-              }
-            })
-            break
-          }
-        }
-      }
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
     })
-  }
-})
+
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
+
+        // Get Dial Groups data
+        const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+        const groupsResponse = await ev.get(groupsEndpoint)
+        for (var group of groupsResponse.data) {
+            // Create a Campaign under your Dial Group
+            if (group.dialGroupName == "My New Dial Group") {
+                const campaignEndpoint = groupsEndpoint + "/" + group.dialGroupId + "/campaigns"
+                var postBody = {
+                    "isActive": 1,
+                    "campaignName": "My Predictive Campaign",
+                    "campaignDesc": "A test predictive campaign",
+                    "startDate": "2020-05-28T07:00:00.000+0000",
+                    "endDate": "2025-05-30T07:00:00.000+0000",
+                    "maxRingTime": 30,
+                    "maxRingTimeTransfer": 60,
+                    "callerId": "4155550123",
+                    "dialLoadedOrder": 0
+                }
+                const campaignResponse = await ev.post(campaignEndpoint, postBody)
+                console.log(campaignResponse.data)
+            }
+        }
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+}
+
+RunRequest();
 ```
 
 ```python tab="Python"
@@ -342,4 +349,54 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}/clone?newCampaignName={newCampaignName}&newCountryCode=USA
 Content-Type: application/json
+```
+
+```javascript tab="Node JS"
+/****** Install Node JS SDK wrapper *******
+$ npm install ringcentral-engage-voice-client
+*******************************************/
+
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
+
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
+    })
+
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
+
+        // Get Dial Groups data
+        const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+        const groupsResponse = await ev.get(groupsEndpoint)
+        for (var group of groupsResponse.data) {
+            // Find your Dial Group
+            if (group.dialGroupName == "My New Dial Group") {
+                const campaignsEndpoint = groupsEndpoint + "/" + group.dialGroupId + "/campaigns"
+                const campaignsResponse = await ev.get(campaignsEndpoint)
+                for (var campaign of campaignsResponse.data) {
+                    // Find your Campaign and clone it into another one
+                    if (campaign.campaignName == "My Predictive Campaign") {
+                        const cloneCampaignEndpoint = campaignsEndpoint + "/" + campaign.campaignId + "/clone?newCampaignName=My New Predictive Campaign&newCountryCode=USA"
+                        const cloneCampaignResponse = await ev.post(cloneCampaignEndpoint)
+                        console.log(cloneCampaignResponse.data);
+                        break
+                    }
+                }
+            }
+        }
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+}
+
+RunRequest();
 ```
