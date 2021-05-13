@@ -179,94 +179,73 @@ RunRequest();
 
 ```python tab="Python"
 #### Install Python SDK wrapper ####
-# $ pip install engagevoice-sdk-wrapper
+# $ pip3 install ringcentral_engage_voice
+#  or
+# $ pip install ringcentral_engage_voice
 #####################################
 
-from engagevoice.sdk_wrapper import *
+from ringcentral_engage_voice import RingCentralEngageVoice
 
-# List dial groups and get a dial group id
-def read_dial_groups():
-    endpoint = 'admin/accounts/~/dialGroups'
-    resp = ev.get(endpoint)
-    for group in resp:
-        if (group['dialGroupName'] == "My Dial Group - Predictive"):
-            read_group_campaigns(group['dialGroupId'])
-            break
+def import_leads():
+    try:
+        dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+        dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
+        for group in dialGroupsResponse:
+            # Select your Dial Group
+            if group['dialGroupName'] == "My New Dial Group":
+                campaignsEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}/campaigns"    # f string:https://www.python.org/dev/peps/pep-0498/
+                campaignsResponse = ev.get(campaignsEndpoint).json()
+                for campaign in campaignsResponse:
+                    # Select your Campaign and import Leads
+                    if campaign['campaignName'] == "My Predictive Campaign":
+                        leadsEndpoint = f"/api/v1/admin/accounts/{accountId}/campaigns/{campaign['campaignId']}/leadLoader/direct"
+                        postBody = {
+                          "description": "Prospect customers",
+                          "dialPriority": "IMMEDIATE",
+                          "duplicateHandling": "REMOVE_FROM_LIST",
+                          "listState": "ACTIVE",
+                          "timeZoneOption": "NPA_NXX",
+                          "uploadLeads": [{
+                               "leadPhone":"8888888888",
+                               "externId":"222",
+                               "firstName":"Jason",
+                               "midName":"",
+                               "lastName":"Black",
+                               "address1":"1514 Bernardo Ave",
+                               "city":"New York",
+                               "state":"NY",
+                               "zip":"10001",
+                            },{
+                               "leadPhone":"3323333333",
+                               "externId":"333",
+                               "firstName":"Rich",
+                               "lastName":"Dunbard"
+                            }
+                          ]
+                        }
+                        leadsResponse = ev.post(leadsEndpoint, postBody).json()
+                        print(leadsResponse)
+                        break
+    except Exception as e:
+        print(e)
 
 
-# List campaigns under a dial group and get a campaign id
-def read_group_campaigns(dialGroupId):
-    endpoint = 'admin/accounts/~/dialGroups/%i/campaigns/' % (dialGroupId)
-    resp = ev.get(endpoint)
-    for campaign in resp:
-        if (campaign['campaignName'] == "API Test"):
-            #import_campaign_leads(campaign['campaignId'])
-            search_campaign_leads()
-            break
+# Instantiate the SDK wrapper object with your RingCentral app credentials
+ev = RingCentralEngageVoice(
+    "RINGCENTRAL_CLIENTID",
+    "RINGCENTRAL_CLIENTSECRET")
 
-
-# import leads to a campaign
-def import_campaign_leads(campaignId):
-    endpoint = 'admin/accounts/~/campaigns/%i/leadLoader/direct' % campaignId
-    params = {
-        "description": "Prospect customers",
-        "dialPriority": "IMMEDIATE",
-        "duplicateHandling": "REMOVE_FROM_LIST",
-        "listState": "ACTIVE",
-        "timeZoneOption": "NOT_APPLICABLE",
-        "uploadLeads": [
-          {
-             "leadPhone": "1111111111",
-             "externId":"1",
-             "title":"Dr.",
-             "firstName":"Jeff",
-             "midName":"John",
-             "lastName":"Malfetti",
-             "suffix":"Jr.",
-             "address1":"3101 Fake St.",
-             "address2":"Suite 120",
-             "city":"Rock",
-             "state":"CO",
-             "zip":"80500",
-             "email":"test@test.com",
-             "gateKeeper":"Some one",
-             "auxData1":30,
-             "auxData2":"a",
-             "auxData3":100,
-             "auxData4":"aa",
-             "auxData5":1000,
-             "auxPhone":"1111111110",
-             "extendedLeadData":{
-                "important":"data",
-                "interested":true
-             }
-          },{
-             "leadPhone":"2222222222",
-             "externId":"222",
-             "firstName":"Jason",
-             "midName":"",
-             "lastName":"Black",
-             "address1":"1514 Bernardo Ave",
-             "city":"New York",
-             "state":"NY",
-             "zip":"10001",
-          },{
-             "leadPhone":"3333333333",
-             "externId":"333",
-             "firstName":"Rich",
-             "lastName":"Dunbard"
-          }
-        ]
-      }
-    resp = ev.post(endpoint, params)
-    print (resp)
-
-ev = RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET")
 try:
-    ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER")
-    read_dial_groups()
+    # Authorize with your RingCentral Office user credentials
+    ev.authorize(
+        username="RINGCENTRAL_USERNAME",
+        password="RINGCENTRAL_PASSWORD",
+        extension="RINGCENTRAL_EXTENSION"
+    )
+
+    import_leads()
 except Exception as e:
-    print (e)
+    print(e)
 ```
 
 ```php tab="PHP"

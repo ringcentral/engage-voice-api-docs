@@ -61,6 +61,54 @@ const RunRequest = async function () {
 RunRequest();
 ```
 
+```python tab="Python"
+#### Install Python SDK wrapper ####
+# $ pip3 install ringcentral_engage_voice
+#  or
+# $ pip install ringcentral_engage_voice
+#####################################
+
+from ringcentral_engage_voice import RingCentralEngageVoice
+
+def add_dnc_number():
+    try:
+        postBody = {
+            "dncTag":{
+              "dncTagId":0,
+              "dncTagLabel":"GLOBAL"
+            },
+            "countryCode":{
+              "id":"USA"
+            },
+            "phone":"5105550134",
+            "reason":"Did not want to be called",
+            "tag":"GLOBAL",
+            "dncTagId":0
+        }
+        response = ev.post("/api/v1/admin/accounts/{accountId}/dncLists", postBody).json()
+        print(response)
+    except Exception as e:
+        print(e)
+
+
+# Instantiate the SDK wrapper object with your RingCentral app credentials
+ev = RingCentralEngageVoice(
+    "RINGCENTRAL_CLIENTID",
+    "RINGCENTRAL_CLIENTSECRET")
+
+try:
+    # Authorize with your RingCentral Office user credentials
+    ev.authorize(
+        username="RINGCENTRAL_USERNAME",
+        password="RINGCENTRAL_PASSWORD",
+        extension="RINGCENTRAL_EXTENSION"
+    )
+
+    add_dnc_number()
+except Exception as e:
+    print(e)
+```
+
 === "Request Body"
     ```json    
     {

@@ -40,7 +40,9 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
 ### Install Engage Voice SDK Wrapper for Python
 
 ```bash
-$ pip install engagevoice-sdk-wrapper
+$ pip3 install ringcentral_engage_voice
+# or
+$ pip install ringcentral_engage_voice
 ```
 
 ### Create and Edit create-dial-group.py
@@ -48,36 +50,38 @@ $ pip install engagevoice-sdk-wrapper
 Create a file called <tt>create-dial-group.py</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
 
 ```python
-from engagevoice.sdk_wrapper import *
+from ringcentral_engage_voice import RingCentralEngageVoice
 
-RINGCENTRAL_CLIENTID = '<ENTER CLIENT ID>'
-RINGCENTRAL_CLIENTSECRET = '<ENTER CLIENT SECRET>'
-
-RINGCENTRAL_USERNAME = '<YOUR ACCOUNT PHONE NUMBER>'
-RINGCENTRAL_PASSWORD = '<YOUR ACCOUNT PASSWORD>'
-RINGCENTRAL_EXTENSION = '<YOUR EXTENSION>'
-
-def create_a_dial_group():
+def create_dial_group():
     try:
-        endpoint = 'admin/accounts/~/dialGroups'
-        params = {
-          "dialGroupName": "My Dial Group - Predictive",
+        postBody = {
+          "dialGroupName": "My New Dial Group",
           "dialGroupDesc": "A test dial group with predictive dial mode",
           "dialMode": "PREDICTIVE",
           "isActive": True
         }
-        response = ev.post(endpoint, params)
-        print (response)     
+        response = ev.post("/api/v1/admin/accounts/{accountId}/dialGroups", postBody).json()
+        print(response)
     except Exception as e:
-        print (e)
+        print(e)
 
-ev = RestClient(RINGCENTRAL_CLIENTID, RINGCENTRAL_CLIENTSECRET)
+
+# Instantiate the SDK wrapper object with your RingCentral app credentials
+ev = RingCentralEngageVoice(
+    "RINGCENTRAL_CLIENTID",
+    "RINGCENTRAL_CLIENTSECRET")
+
 try:
-    resp = ev.login(RINGCENTRAL_USERNAME, RINGCENTRAL_PASSWORD, RINGCENTRAL_EXTENSION)
-    if resp:
-        create_a_dial_group()
+    # Authorize with your RingCentral Office user credentials
+    ev.authorize(
+        username="RINGCENTRAL_USERNAME",
+        password="RINGCENTRAL_PASSWORD",
+        extension="RINGCENTRAL_EXTENSION"
+    )
+
+    create_dial_group()
 except Exception as e:
-    print (e)
+    print(e)
 ```
 
 ### Run Your Code

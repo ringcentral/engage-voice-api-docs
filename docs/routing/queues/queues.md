@@ -148,30 +148,49 @@ RunRequest();
 ```
 
 ```python tab="Python"
-from engagevoice.sdk_wrapper import *
+#### Install Python SDK wrapper ####
+# $ pip3 install ringcentral_engage_voice
+#  or
+# $ pip install ringcentral_engage_voice
+#####################################
+
+from ringcentral_engage_voice import RingCentralEngageVoice
+
+def create_queue():
+    try:
+        groupsEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
+        groupsResponse = ev.get(groupsEndpoint).json()
+        for group in groupsResponse:
+            # Create a new Queue under your Queue Group
+            if (group['groupName'] == "Ma New Queue Group"):
+                queueEndpoint = f"{groupsEndpoint}/{group['gateGroupId']}/gates"    # f string:https://www.python.org/dev/peps/pep-0498/
+                postBody = {
+                    "gateName" : "My New Queue",
+                    "gateDesc" : "An initial queue for this Queue Group",
+                    "isActive" : True
+                }
+                queueResponse = ev.post(queueEndpoint, postBody).json()
+                print(queueResponse)
+    except Exception as e:
+        print(e)
+
 
 # Instantiate the SDK wrapper object with your RingCentral app credentials
-ev = RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET")
+ev = RingCentralEngageVoice(
+    "RINGCENTRAL_CLIENTID",
+    "RINGCENTRAL_CLIENTSECRET")
 
-# Login your account with your RingCentral Office user credentials
 try:
-    ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER")
-    endpoint = 'admin/accounts/~/gateGroups'
-    # get a list of Queue Groups and find the "Platform" queue group for this user
-    response = ev.get(endpoint)
-    for group in response:
-        if group["groupName"] == "Platform":
-            # Create a new Queue for this queue group
-            endpoint = 'admin/accounts/~/gateGroups/%i/gates' % (group["gateGroupId"])
-            params = {
-                "isActive": True,
-                "gateName": "My Python Queue",
-                "gateDesc": "An initial queue for this Queue Group",
-                }
-            response = ev.post(endpoint, params)
-            print (response)
+    # Authorize with your RingCentral Office user credentials
+    ev.authorize(
+        username="RINGCENTRAL_USERNAME",
+        password="RINGCENTRAL_PASSWORD",
+        extension="RINGCENTRAL_EXTENSION"
+    )
+
+    create_queue()
 except Exception as e:
-    print (e)
+    print(e)
 ```
 
 ```php tab="PHP"
@@ -398,25 +417,44 @@ RunRequest();
 ```
 
 ```python tab="Python"
-from engagevoice.sdk_wrapper import *
+#### Install Python SDK wrapper ####
+# $ pip3 install ringcentral_engage_voice
+#  or
+# $ pip install ringcentral_engage_voice
+#####################################
+
+from ringcentral_engage_voice import RingCentralEngageVoice
+
+def retrieve_queues():
+    try:
+        groupsEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
+        groupsResponse = ev.get(groupsEndpoint).json()
+        for group in groupsResponse:
+            # Retrieve Queues under your Queue Group
+            if (group['groupName'] == "My New Queue Group"):
+                queueEndpoint = f"{groupsEndpoint}/{group['gateGroupId']}/gates"    # f string:https://www.python.org/dev/peps/pep-0498/
+                queueResponse = ev.get(queueEndpoint).json()
+                print(queueResponse)
+    except Exception as e:
+        print(e)
+
 
 # Instantiate the SDK wrapper object with your RingCentral app credentials
-ev = RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET")
+ev = RingCentralEngageVoice(
+    "RINGCENTRAL_CLIENTID",
+    "RINGCENTRAL_CLIENTSECRET")
 
-# Login your account with your RingCentral Office user credentials
 try:
-    ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER")
-    endpoint = 'admin/accounts/~/gateGroups'
-    # get a list of Queue Groups and find the "Platform" queue group for this user
-    response = ev.get(endpoint)
-    for group in response:
-        if group["groupName"] == "Platform":
-            # get a list of Queues from this "Platform" Queue Group
-            endpoint = 'admin/accounts/~/gateGroups/%i/gates' % (group["gateGroupId"])
-            response = ev.get(endpoint)
-            print (response)
+    # Authorize with your RingCentral Office user credentials
+    ev.authorize(
+        username="RINGCENTRAL_USERNAME",
+        password="RINGCENTRAL_PASSWORD",
+        extension="RINGCENTRAL_EXTENSION"
+    )
+
+    retrieve_queues()
 except Exception as e:
-    print (e)
+    print(e)
 ```
 
 ```php tab="PHP"
@@ -538,31 +576,49 @@ RunRequest();
 ```
 
 ```python tab="Python"
-from engagevoice.sdk_wrapper import *
+#### Install Python SDK wrapper ####
+# $ pip3 install ringcentral_engage_voice
+#  or
+# $ pip install ringcentral_engage_voice
+#####################################
+
+from ringcentral_engage_voice import RingCentralEngageVoice
+
+def retrieve_single_queue():
+    try:
+        groupsEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
+        groupsResponse = ev.get(groupsEndpoint).json()
+        for group in groupsResponse:
+            # Retrieve Queues under your Queue Group
+            if (group['groupName'] == "My New Queue Group"):
+                queuesEndpoint = f"{groupsEndpoint}/{group['gateGroupId']}/gates"    # f string:https://www.python.org/dev/peps/pep-0498/
+                queuesResponse = ev.get(queuesEndpoint).json()
+                for queue in queuesResponse:
+                    # Retrieve every single Queue
+                    singleQueueEndpoint = f"{queuesEndpoint}/{queue['gateId']}"
+                    singleQueueResponse = ev.get(singleQueueEndpoint).json()
+                    print(singleQueueResponse)
+                    print("==========")
+    except Exception as e:
+        print(e)
+
 
 # Instantiate the SDK wrapper object with your RingCentral app credentials
-ev = RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET")
+ev = RingCentralEngageVoice(
+    "RINGCENTRAL_CLIENTID",
+    "RINGCENTRAL_CLIENTSECRET")
 
-# Login your account with your RingCentral Office user credentials
 try:
-    ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER")
-    endpoint = 'admin/accounts/~/gateGroups'
-    # get a list of Queue Groups and find the "Platform" queue group for this user
-    response = ev.get(endpoint)
-    for group in response:
-        if group["groupName"] == "Platform":
-            # get a list of Queues from this "Platform" Queue Group
-            endpoint = 'admin/accounts/~/gateGroups/%i/gates' % (group["gateGroupId"])
-            resp = ev.get(endpoint)
-            for queue in resp:
-                if queue["gateName"] == "My Python Queue":
-                    endpoint += '/%i' % (queue['gateId'])
-                    queueInfo = ev.get(endpoint)
-                    print (queueInfo)
-                    break
-            break
+    # Authorize with your RingCentral Office user credentials
+    ev.authorize(
+        username="RINGCENTRAL_USERNAME",
+        password="RINGCENTRAL_PASSWORD",
+        extension="RINGCENTRAL_EXTENSION"
+    )
+
+    retrieve_single_queue()
 except Exception as e:
-    print (e)
+    print(e)
 ```
 
 ```php tab="PHP"
@@ -776,32 +832,51 @@ RunRequest();
 ```
 
 ```python tab="Python"
-from engagevoice.sdk_wrapper import *
+#### Install Python SDK wrapper ####
+# $ pip3 install ringcentral_engage_voice
+#  or
+# $ pip install ringcentral_engage_voice
+#####################################
+
+from ringcentral_engage_voice import RingCentralEngageVoice
+
+def update_single_queue():
+    try:
+        groupsEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
+        groupsResponse = ev.get(groupsEndpoint).json()
+        for group in groupsResponse:
+            # Retrieve Queues under your Queue Group
+            if (group['groupName'] == "My New Queue Group"):
+                queuesEndpoint = f"{groupsEndpoint}/{group['gateGroupId']}/gates"    # f string:https://www.python.org/dev/peps/pep-0498/
+                queuesResponse = ev.get(queuesEndpoint).json()
+                for queue in queuesResponse:
+                    # Update your Queue
+                    if queue['gateName'] == "My New Queue":
+                        singleQueueEndpoint = f"{queuesEndpoint}/{queue['gateId']}"
+                        queue['gateDesc'] = f"{queue['gateDesc']} - Updated"
+                        singleQueueResponse = ev.put(singleQueueEndpoint, queue).json()
+                        print(singleQueueResponse)
+                        break
+    except Exception as e:
+        print(e)
+
 
 # Instantiate the SDK wrapper object with your RingCentral app credentials
-ev = RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET")
+ev = RingCentralEngageVoice(
+    "RINGCENTRAL_CLIENTID",
+    "RINGCENTRAL_CLIENTSECRET")
 
-# Login your account with your RingCentral Office user credentials
 try:
-    ev.login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER")
-    endpoint = 'admin/accounts/~/gateGroups'
-    # get a list of Queue Groups and find the "Platform" queue group for this user
-    response = ev.get(endpoint)
-    for group in response:
-        if group["groupName"] == "Platform":
-            # get a list of Queues from this "Platform" Queue Group
-            endpoint = 'admin/accounts/~/gateGroups/%i/gates' % (group["gateGroupId"])
-            resp = ev.get(endpoint)
-            for queue in resp:
-                if queue["gateName"] == "My Python Queue":
-                    endpoint += '/%i' % (queue['gateId'])
-                    queue['gateDesc'] = "An *edited* queue description for this Queue"
-                    queueInfo = ev.put(endpoint, queue)
-                    print (queueInfo)
-                    break
-            break
+    # Authorize with your RingCentral Office user credentials
+    ev.authorize(
+        username="RINGCENTRAL_USERNAME",
+        password="RINGCENTRAL_PASSWORD",
+        extension="RINGCENTRAL_EXTENSION"
+    )
+
+    update_single_queue()
 except Exception as e:
-    print (e)
+    print(e)
 ```
 
 ```php tab="PHP"
