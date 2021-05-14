@@ -109,6 +109,91 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 GET {BASE_URL}api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents
 ```
 
+```javascript tab="Node JS"
+/****** Install Node JS SDK wrapper *******
+$ npm install ringcentral-engage-voice-client
+*******************************************/
+
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
+
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
+    })
+
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
+
+        // Get Agent Groups data
+        const agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
+        const agentGroupsResponse = await ev.get(agentGroupsEndpoint)
+        for (var group of agentGroupsResponse.data) {
+            // Get Agents under your Agent Group
+            if (group.groupName == "My New Agent Group") {
+                const agentEndpoint = agentGroupsEndpoint + "/" + group.agentGroupId + "/agents"
+                const agentResponse = await ev.get(agentEndpoint)
+                console.log(agentResponse.data)
+                break
+            }
+        }
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+}
+
+RunRequest();
+```
+
+```python tab="Python"
+#### Install Python SDK wrapper ####
+# $ pip3 install ringcentral_engage_voice
+#  or
+# $ pip install ringcentral_engage_voice
+#####################################
+
+from ringcentral_engage_voice import RingCentralEngageVoice
+
+def retrieve_agents():
+    try:
+        agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
+        agentGroupsResponse = ev.get(agentGroupsEndpoint).json()
+        for group in agentGroupsResponse:
+            # Retrieve Agents
+            if group['groupName'] == "My New Agent Group":
+                agentsEndpoint = f"{agentGroupsEndpoint}/{group['agentGroupId']}/agents"    # f string:https://www.python.org/dev/peps/pep-0498/
+                agentsResponse = ev.get(agentsEndpoint).json()
+                print(agentsResponse)
+                break
+    except Exception as e:
+        print(e)
+
+
+# Instantiate the SDK wrapper object with your RingCentral app credentials
+ev = RingCentralEngageVoice(
+    "RINGCENTRAL_CLIENTID",
+    "RINGCENTRAL_CLIENTSECRET")
+
+try:
+    # Authorize with your RingCentral Office user credentials
+    ev.authorize(
+        username="RINGCENTRAL_USERNAME",
+        password="RINGCENTRAL_PASSWORD",
+        extension="RINGCENTRAL_EXTENSION"
+    )
+
+    retrieve_agents()
+except Exception as e:
+    print(e)
+```
+
 ### Response
 Some sample response data shown below.
 
@@ -289,6 +374,103 @@ Content-Type: application/json
     "firstName":"My New First Name"
     ...
 }
+```
+
+```javascript tab="Node JS"
+/****** Install Node JS SDK wrapper *******
+$ npm install ringcentral-engage-voice-client
+*******************************************/
+
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
+
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
+    })
+
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
+
+        // Get Agent Groups data
+        const agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
+        const agentGroupsResponse = await ev.get(agentGroupsEndpoint)
+        for (var group of agentGroupsResponse.data) {
+            // Update the Agent
+            if (group.groupName == "My New Agent Group") {
+                const agentsEndpoint = agentGroupsEndpoint + "/" + group.agentGroupId + "/agents"
+                const agentsResponse = await ev.get(agentsEndpoint)
+                for (var agent of agentsResponse.data) {
+                    if (agent.username == "{existingAgentUsername}") {
+                        const singleAgentEndpoint = agentsEndpoint + "/" + agent.agentId
+                        agent.firstName = "{agentNewUsername}"
+                        const singleAgentResponse = await ev.put(singleAgentEndpoint, agent)
+                        console.log(singleAgentResponse.data)
+                    }
+                }
+            }
+        }
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+}
+
+RunRequest();
+```
+
+```python tab="Python"
+#### Install Python SDK wrapper ####
+# $ pip3 install ringcentral_engage_voice
+#  or
+# $ pip install ringcentral_engage_voice
+#####################################
+
+ffrom ringcentral_engage_voice import RingCentralEngageVoice
+
+def update_agent():
+    try:
+        agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
+        agentGroupsResponse = ev.get(agentGroupsEndpoint).json()
+        for group in agentGroupsResponse:
+            # Find your Agent Group
+            if group['groupName'] == "My New Agent Group":
+                agentsEndpoint = f"{agentGroupsEndpoint}/{group['agentGroupId']}/agents"    # f string:https://www.python.org/dev/peps/pep-0498/
+                agentsResponse = ev.get(agentsEndpoint).json()
+                for agent in agentsResponse:
+                    # Update your Agent
+                    if agent['username'] == "{existingAgentUsername}":
+                        singleAgentEndpoint = f"{agentsEndpoint}/{agent['agentId']}"
+                        agent['firstName'] = "{agentNewUsername}"
+                        singleAgentResponse = ev.put(singleAgentEndpoint, agent).json()
+                        print(singleAgentResponse)
+                        break
+    except Exception as e:
+        print(e)
+
+
+# Instantiate the SDK wrapper object with your RingCentral app credentials
+ev = RingCentralEngageVoice(
+    "RINGCENTRAL_CLIENTID",
+    "RINGCENTRAL_CLIENTSECRET")
+
+try:
+    # Authorize with your RingCentral Office user credentials
+    ev.authorize(
+        username="RINGCENTRAL_USERNAME",
+        password="RINGCENTRAL_PASSWORD",
+        extension="RINGCENTRAL_EXTENSION"
+    )
+
+    update_agent()
+except Exception as e:
+    print(e)
 ```
 
 ## Delete Agent

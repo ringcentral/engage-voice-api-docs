@@ -46,34 +46,38 @@ $ pip install engagevoice-sdk-wrapper
 Create a file called <tt>list-active-calls.py</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
 
 ```python
-from engagevoice.sdk_wrapper import *
+#### Install Python SDK wrapper ####
+# $ pip3 install ringcentral_engage_voice
+#  or
+# $ pip install ringcentral_engage_voice
+#####################################
+from ringcentral_engage_voice import RingCentralEngageVoice
 
-RINGCENTRAL_CLIENTID = '<ENTER CLIENT ID>'
-RINGCENTRAL_CLIENTSECRET = '<ENTER CLIENT SECRET>'
-
-RINGCENTRAL_USERNAME = '<YOUR ACCOUNT PHONE NUMBER>'
-RINGCENTRAL_PASSWORD = '<YOUR ACCOUNT PASSWORD>'
-RINGCENTRAL_EXTENSION = '<YOUR EXTENSION>'
-
-def list_account_active_calls(accountId):
+def list_active_calls():
     try:
-        endpoint = "admin/accounts/~/activeCalls/list"
-        params = {
-          'product': "ACCOUNT",
-          'productId': accountId
-        }
-        response = ev.get(endpoint, None, None)
-        print (response)
+        params = "product=ACCOUNT&productId={accountId}"
+        response = ev.get("/api/v1/admin/accounts/{accountId}/activeCalls/list", params).json()
+        print(response)
     except Exception as e:
-        print (e)
+        print(e)
 
-ev = RestClient(RINGCENTRAL_CLIENTID, RINGCENTRAL_CLIENTSECRET)
+
+# Instantiate the SDK wrapper object with your RingCentral app credentials
+ev = RingCentralEngageVoice(
+    "RINGCENTRAL_CLIENTID",
+    "RINGCENTRAL_CLIENTSECRET")
+
 try:
-    resp = ev.login(RINGCENTRAL_USERNAME, RINGCENTRAL_PASSWORD, RINGCENTRAL_EXTENSION)
-    if resp:
-        list_account_active_calls(resp['agentDetails'][0].accountId)
+    # Authorize with your RingCentral Office user credentials
+    ev.authorize(
+        username="RINGCENTRAL_USERNAME",
+        password="RINGCENTRAL_PASSWORD",
+        extension="RINGCENTRAL_EXTENSION"
+    )
+
+    list_active_calls()
 except Exception as e:
-    print (e)
+    print(e)
 ```
 
 ### Run Your Code
