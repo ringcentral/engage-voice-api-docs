@@ -40,7 +40,7 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
 ### Install Engage Voice SDK Wrapper for Node JS
 
 ```bash
-$ npm install engagevoice-sdk-wrapper --save
+$ npm install ringcentral-engage-voice-client
 ```
 
 ### Create and Edit create-queue-group.js
@@ -48,36 +48,36 @@ $ npm install engagevoice-sdk-wrapper --save
 Create a file called <tt>create-queue-group.js</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
 
 ```javascript
-const engagevoice = require('engagevoice_sdk_wrapper')
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
 
-RINGCENTRAL_CLIENTID = '<ENTER CLIENT ID>'
-RINGCENTRAL_CLIENTSECRET = '<ENTER CLIENT SECRET>'
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
+    })
 
-RINGCENTRAL_USERNAME = '<YOUR ACCOUNT PHONE NUMBER>'
-RINGCENTRAL_PASSWORD = '<YOUR ACCOUNT PASSWORD>'
-RINGCENTRAL_EXTENSION = '<YOUR EXTENSION>'
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
 
-var ev = new engagevoice.RestClient(RINGCENTRAL_CLIENTID, RINGCENTRAL_CLIENTSECRET)
-ev.login(RINGCENTRAL_USERNAME, RINGCENTRAL_PASSWORD, RINGCENTRAL_EXTENSION, function(err, response){
-    if (err)
-        console.log(err)
-    else{
-        create_a_queue_group()
+        // Create a new Queue Group
+        const postBody = {
+            "groupName": "My New Queue Group"
+        }
+        const response = await ev.post('/api/v1/admin/accounts/{accountId}/gateGroups', postBody)
+        console.log(response);
     }
-})
-
-function create_a_queue_group() {
-  endpoint = 'admin/accounts/~/gateGroups'
-  params = { "groupName":"My New Queue Group" }
-  ev.post(endpoint, params, function(err, response){
-    if (err){
-      console.log(err)
-    }else {
-      var jsonObj = JSON.parse(response)
-      console.log(jsonObj)
+    catch (err) {
+        console.log(err.message)
     }
-  })
 }
+
+RunRequest();
 ```
 
 ### Run Your Code
