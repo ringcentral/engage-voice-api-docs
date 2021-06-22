@@ -13940,7 +13940,7 @@
         },
         "/voice/api/v1/admin/accounts/{accountId}/activeCalls/prerouteChecks/checkQueueStatus": {
             "get": {
-                "description": "Check queue status API is primarily to be used for Cloud Routing pre-checks, where an EV Admin user can specify an API for a Cloud Destination as a pre-check, before calls are routed to that destination. More info is available in the EV Admin application, Cloud Destinations section. Returns true or false (with more info) if the queue is available to take calls based on the max queue time. Note that while this API can accurately determine if there are any available agents in a given queue, it should NOT be used to determine queue wait time.",
+                "description": "Check queue status API returns true or false (with more info) if the queue is available to take calls based on the max queue time.",
                 "operationId": "checkQueueStatus",
                 "parameters": [
                     {
@@ -14013,7 +14013,7 @@
                         "BearerAuth": []
                     }
                 ],
-                "summary": "Returns a TRUE response if the gate is open for calls.  If not, returns FALSE along with a reason.",
+                "summary": "Check queue status",
                 "tags": [
                     "Active Calls"
                 ]
@@ -14021,7 +14021,7 @@
         },
         "/voice/api/v1/admin/accounts/{accountId}/activeCalls/prerouteChecks/checkQueueThreshold": {
             "get": {
-                "description": "Check queue threshold API is primarily to be used for Cloud Routing pre-checks, where an EV Admin user can specify an API for a Cloud Destination as a pre-check, before calls are routed to that destination. More info is available in the EV Admin application, Cloud Destinations section.",
+                "description": "Check queue threshold API Returns true or false based on the current number of calls in queue and the passed in threshold value.",
                 "operationId": "checkQueueThreshold",
                 "parameters": [
                     {
@@ -14094,7 +14094,7 @@
                         "BearerAuth": []
                     }
                 ],
-                "summary": "Returns a TRUE response if the gate is open for calls.  If not, returns FALSE along with a reason.",
+                "summary": "Check queue threshold",
                 "tags": [
                     "Active Calls"
                 ]
