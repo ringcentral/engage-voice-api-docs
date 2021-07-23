@@ -84,7 +84,7 @@ Content-Type: application/json
   "dialGroupName": "My Dial Group - Predictive",
   "dialGroupDesc": "A test dial group with predictive dial mode",
   "dialMode": "PREDICTIVE",
-  "isActive": true,
+  "isActive": true
 }
 ```
 
