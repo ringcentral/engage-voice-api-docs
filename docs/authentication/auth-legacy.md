@@ -38,7 +38,7 @@ Generate a permanent API token using the following API call. Every time you run 
 ```http
 POST https://portal.vacd.biz/api/v1/admin/token
 or
-POST https://portal.virtualacd.biz/api/v1/admin/login
+POST https://portal.virtualacd.biz/api/v1/admin/token
 
 X-Auth-Token: {authTokenOrApiToken}
 ```
@@ -64,7 +64,7 @@ To list all existing API Tokens for a user:
 ```http
 GET https://portal.vacd.biz/api/v1/admin/token
 or
-GET https://portal.virtualacd.biz/api/v1/admin/login
+GET https://portal.virtualacd.biz/api/v1/admin/token
 
 X-Auth-Token: {authTokenOrApiToken}
 ```

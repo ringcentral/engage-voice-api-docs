@@ -38,7 +38,7 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
 ### Install Engage Voice SDK Wrapper for Node JS
 
 ```bash
-$ npm install engagevoice-sdk-wrapper --save
+$ npm install ringcentral-engage-voice-client
 ```
 
 ### Create and Edit list-active-calls.js
@@ -46,46 +46,34 @@ $ npm install engagevoice-sdk-wrapper --save
 Create a file called <tt>list-active-calls.js</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
 
 ```javascript
-const engagevoice = require('engagevoice_sdk_wrapper')
+const RunRequest = async function () {
+    const EngageVoice = require('ringcentral-engage-voice-client').default
 
-RINGCENTRAL_CLIENTID = '<ENTER CLIENT ID>'
-RINGCENTRAL_CLIENTSECRET = '<ENTER CLIENT SECRET>'
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    const ev = new EngageVoice({
+        clientId: "RINGCENTRAL_CLIENTID",
+        clientSecret: "RINGCENTRAL_CLIENTSECRET"
+    })
 
-RINGCENTRAL_USERNAME = '<YOUR ACCOUNT PHONE NUMBER>'
-RINGCENTRAL_PASSWORD = '<YOUR ACCOUNT PASSWORD>'
-RINGCENTRAL_EXTENSION = '<YOUR EXTENSION>'
+    try {
+        // Authorize with your RingCentral Office user credentials
+        await ev.authorize({
+            username: "RINGCENTRAL_USERNAME",
+            extension: "RINGCENTRAL_EXTENSION",
+            password: "RINGCENTRAL_PASSWORD"
+        })
 
-var evsdk = new SDK({
-      clientId: RINGCENTRAL_CLIENTID,
-      clientSecret: RINGCENTRAL_CLIENTSECRET
-  });
+        // Get Active Calls
+        const endpoint = "/api/v1/admin/accounts/{accountId}/activeCalls/list?product=ACCOUNT&productId={accountId}"
+        const response = await ev.get(endpoint)
+        console.log(response.data);
+    }
+    catch (err) {
+        console.log(err.message)
+    }
+}
 
-var evsdk = new engagevoice.EngageVoice(RINGCENTRAL_CLIENTID, RINGCENTRAL_CLIENTSECRET)
-  ev.login(RINGCENTRAL_USERNAME, RINGCENTRAL_PASSWORD, RINGCENTRAL_EXTENSION, function(err, response){
-      if (err)
-        console.log(err)
-      else{
-        var jsonObj = JSON.parse(response)
-        list_account_active_calls(jsonObj.agentDetails[0].accountId)
-      }
-
-  })
-
-  function list_account_active_calls(accountId){
-      var endpoint = 'admin/accounts/~/activeCalls/list'
-      var params = {
-        product: "ACCOUNT",
-        productId: accountId
-      }
-      ev.get(endpoint, params, function(err, response){
-          if (err){
-              console.log(err)
-          }else {
-              var jsonObj = JSON.parse(response)
-              console.log(jsonObj)
-          }
-      })
-  }
+RunRequest();
 ```
 
 ### Run Your Code
