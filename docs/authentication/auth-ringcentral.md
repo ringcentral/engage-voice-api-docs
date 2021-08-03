@@ -59,6 +59,14 @@ Content-Type: application/x-www-form-urlencoded
 rcAccessToken=<rcAccessToken>&rcTokenType=Bearer
 ```
 
+It's also a good idea to use a refresh token as the access token expires in 5 minutes.  
+```http
+POST https://engage.ringcentral.com/api/auth/login/rc/accesstoken?includeRefresh=true
+Content-Type: application/x-www-form-urlencoded
+
+rcAccessToken=<rcAccessToken>&rcTokenType=Bearer
+```
+
 Where:
 
 -   **`<rcAccessToken>`** is the RingCentral Access Token you received from RingCentral Office authentication flow.
