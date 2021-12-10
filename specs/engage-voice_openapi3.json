@@ -13635,260 +13635,405 @@
             "SubAccount": {
                 "type": "object",
                 "required": [
-                  "subAccountId",
-                  "subAccountName",
-                  "isActive"
+                    "subAccountId",
+                    "subAccountName",
+                    "isActive"
                 ],
                 "properties": {
-                  "subAccountId": {
-                    "type": "string",
-                    "description": "Engage Voice sub-account id",
-                    "example": "15910001"
-                  },
-                  "subAccountName": {
-                    "type": "string",
-                    "description": "Engage Sub-account name",
-                    "example": "Cappuccino Engage Development"
-                  },
-                  "isActive": {
-                    "type": "boolean",
-                    "description": "true if sub-account is active",
-                    "example": true
-                  }
+                    "subAccountId": {
+                        "type": "string",
+                        "description": "Engage Voice sub-account id",
+                        "example": "15910001"
+                    },
+                    "subAccountName": {
+                        "type": "string",
+                        "description": "Engage Sub-account name",
+                        "example": "Cappuccino Engage Development"
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "true if sub-account is active",
+                        "example": true
+                    }
                 }
-              },
-              "QueueWithAgents": {
+            },
+            "QueueWithAgents": {
                 "type": "object",
                 "required": [
-                  "queueId",
-                  "queueName",
-                  "gateGroupId",
-                  "isActive",
-                  "createdOn"
+                    "queueId",
+                    "queueName",
+                    "gateGroupId",
+                    "isActive",
+                    "createdOn"
                 ],
                 "properties": {
-                  "queueId": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "Unique ID for inbound queue",
-                    "example": 555
-                  },
-                  "queueName": {
-                    "type": "string",
-                    "description": "Name of inbound queue",
-                    "example": "Test queue"
-                  },
-                  "gateGroupId": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "inbound queue group ID",
-                    "example": 1009
-                  },
-                  "isActive": {
-                    "type": "boolean",
-                    "description": "true if the inbound queue is active",
-                    "example": true
-                  },
-                  "createdOn": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "Timestamp when inbound group was created",
-                    "example": "2020-07-21T17:32:28Z"
-                  },
-                  "agentIds": {
-                    "type": "array",
-                    "description": "List of agents who connected to this queue",
-                    "items": {
-                      "type": "integer",
-                      "format": "int32"
+                    "queueId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Unique ID for inbound queue",
+                        "example": 555
                     },
-                    "example": [
-                      10,
-                      20
-                    ]
-                  }
+                    "queueName": {
+                        "type": "string",
+                        "description": "Name of inbound queue",
+                        "example": "Test queue"
+                    },
+                    "gateGroupId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "inbound queue group ID",
+                        "example": 1009
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "true if the inbound queue is active",
+                        "example": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Timestamp when inbound group was created",
+                        "example": "2020-07-21T17:32:28Z"
+                    },
+                    "agentIds": {
+                        "type": "array",
+                        "description": "List of agents who connected to this queue",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": [
+                            10,
+                            20
+                        ]
+                    }
                 }
-              },
-              "HistoricalReportParams": {
+            },
+            "HistoricalReportParams": {
                 "description": "Parameters for historical reports",
                 "required": [
-                  "startDate",
-                  "timeInterval",
-                  "timeZone",
-                  "outputFormat"
+                    "startDate",
+                    "timeInterval",
+                    "timeZone",
+                    "outputFormat"
                 ],
                 "type": "object",
                 "properties": {
-                  "startDate": {
-                    "type": "string",
-                    "description": "Start date and time for the logging interval. Note: The report will be generated to the nearest minute (Seconds will not be taken into account).",
-                    "example": "2021-02-28 08:27:00"
-                  },
-                  "timeInterval": {
-                    "type": "integer",
-                    "format": "int32",
-                    "enum": [
-                      15,
-                      30,
-                      45,
-                      60
-                    ],
-                    "description": "Interval length in minutes.",
-                    "example": 60
-                  },
-                  "timeZone": {
-                    "type": "string",
-                    "description": "Timezone name which should be used for report generation",
-                    "example": "US/Eastern"
-                  },
-                  "reportType": {
-                    "type": "string",
-                    "enum": [
-                      "WEM"
-                    ],
-                    "description": "Report type which defines required input parameters",
-                    "default": "WEM",
-                    "example": "WEM"
-                  },
-                  "outputFormat": {
-                    "type": "string",
-                    "enum": [
-                      "CSV",
-                      "XML"
-                    ],
-                    "description": "Report file format",
-                    "example": "CSV"
-                  }
+                    "startDate": {
+                        "type": "string",
+                        "description": "Start date and time for the logging interval. Note: The report will be generated to the nearest minute (Seconds will not be taken into account).",
+                        "example": "2021-02-28 08:27:00"
+                    },
+                    "timeInterval": {
+                        "type": "integer",
+                        "format": "int32",
+                        "enum": [
+                            15,
+                            30,
+                            45,
+                            60
+                        ],
+                        "description": "Interval length in minutes.",
+                        "example": 60
+                    },
+                    "timeZone": {
+                        "type": "string",
+                        "description": "Timezone name which should be used for report generation",
+                        "example": "US/Eastern"
+                    },
+                    "reportType": {
+                        "type": "string",
+                        "enum": [
+                            "WEM"
+                        ],
+                        "description": "Report type which defines required input parameters",
+                        "default": "WEM",
+                        "example": "WEM"
+                    },
+                    "outputFormat": {
+                        "type": "string",
+                        "enum": [
+                            "CSV",
+                            "XML"
+                        ],
+                        "description": "Report file format",
+                        "example": "CSV"
+                    }
                 }
-              },
-              "RealtimeReportParams": {
+            },
+            "RealtimeReportParams": {
                 "description": "Parameters for realtime reports",
                 "required": [
-                  "startDate",
-                  "timeInterval",
-                  "timeZone",
-                  "outputFormat"
+                    "startDate",
+                    "timeInterval",
+                    "timeZone",
+                    "outputFormat"
                 ],
                 "type": "object",
                 "properties": {
-                  "segmentEndTime": {
-                    "type": "string",
-                    "description": "Start date and time for the logging interval",
-                    "example": "2021-02-28 08:27:15"
-                  },
-                  "timeInterval": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "Interval length in seconds. Maximum allowed length is 3600 (1 hour). Note: if your time interval start or end in the future consecutive requests may return different list of segment. Idempotent results only guaranteed for the completed intervals. Segment recording URL may be added after delay. Allow 1-2min for processing.",
-                    "example": 1800
-                  },
-                  "timeZone": {
-                    "type": "string",
-                    "description": "Timezone name which should be used for report generation",
-                    "example": "US/Eastern"
-                  },
-                  "reportType": {
-                    "type": "string",
-                    "enum": [
-                      "WEM"
-                    ],
-                    "description": "Client who requests the report",
-                    "default": "WEM",
-                    "example": "WEM"
-                  },
-                  "outputFormat": {
-                    "type": "string",
-                    "enum": [
-                      "CSV",
-                      "XML"
-                    ],
-                    "description": "Report file format",
-                    "example": "CSV"
-                  }
+                    "segmentEndTime": {
+                        "type": "string",
+                        "description": "Start date and time for the logging interval",
+                        "example": "2021-02-28 08:27:15"
+                    },
+                    "timeInterval": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Interval length in seconds. Maximum allowed length is 3600 (1 hour). Note: if your time interval start or end in the future consecutive requests may return different list of segment. Idempotent results only guaranteed for the completed intervals. Segment recording URL may be added after delay. Allow 1-2min for processing.",
+                        "example": 1800
+                    },
+                    "timeZone": {
+                        "type": "string",
+                        "description": "Timezone name which should be used for report generation",
+                        "example": "US/Eastern"
+                    },
+                    "reportType": {
+                        "type": "string",
+                        "enum": [
+                            "WEM"
+                        ],
+                        "description": "Client who requests the report",
+                        "default": "WEM",
+                        "example": "WEM"
+                    },
+                    "outputFormat": {
+                        "type": "string",
+                        "enum": [
+                            "CSV",
+                            "XML"
+                        ],
+                        "description": "Report file format",
+                        "example": "CSV"
+                    }
                 }
-              },
-              "BaseWemStateInfo": {
+            },
+            "BaseWemStateInfo": {
                 "type": "object",
                 "required": [
-                  "createdAt",
-                  "updatedAt",
-                  "version"
+                    "createdAt",
+                    "updatedAt",
+                    "version"
                 ],
                 "properties": {
-                  "createdAt": {
-                    "type": "string",
-                    "format": "datetime",
-                    "description": "Creation date and time"
-                  },
-                  "updatedAt": {
-                    "type": "string",
-                    "format": "datetime",
-                    "description": "Date and time of last update action"
-                  },
-                  "version": {
-                    "type": "integer",
-                    "description": "Version number"
-                  }
+                    "createdAt": {
+                        "type": "string",
+                        "format": "datetime",
+                        "description": "Creation date and time"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "datetime",
+                        "description": "Date and time of last update action"
+                    },
+                    "version": {
+                        "type": "integer",
+                        "description": "Version number"
+                    }
                 }
-              },
-              "MainAccountWemState": {
+            },
+            "MainAccountWemState": {
                 "description": "Main Account WEM state",
                 "type": "object",
                 "required": [
-                  "mainAccountId",
-                  "mainAccountName",
-                  "status"
+                    "mainAccountId",
+                    "mainAccountName",
+                    "status"
                 ],
                 "properties": {
-                  "mainAccountId": {
-                    "type": "string",
-                    "description": "Main Account Id",
-                    "example": "99990033"
-                  },
-                  "mainAccountName": {
-                    "type": "string",
-                    "description": "Main Account Name",
-                    "example": "Internal Account"
-                  },
-                  "status": {
-                    "type": "string",
-                    "enum": [
-                      "ACTIVE",
-                      "SUSPENDED"
-                    ],
-                    "description": "WEM feature status:\n  * `ACTIVE` - WEM feature is active for that Customer\n  * `SUSPENDED` - WEM feature is suspended for that Customer\n",
-                    "example": "ACTIVE"
-                  }
+                    "mainAccountId": {
+                        "type": "string",
+                        "description": "Main Account Id",
+                        "example": "99990033"
+                    },
+                    "mainAccountName": {
+                        "type": "string",
+                        "description": "Main Account Name",
+                        "example": "Internal Account"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "ACTIVE",
+                            "SUSPENDED"
+                        ],
+                        "description": "WEM feature status:\n  * `ACTIVE` - WEM feature is active for that Customer\n  * `SUSPENDED` - WEM feature is suspended for that Customer\n",
+                        "example": "ACTIVE"
+                    }
                 }
-              },
-              "SubAccountWemState": {
+            },
+            "SubAccountWemState": {
                 "description": "Engage Voice sub-account WEM state",
                 "type": "object",
                 "required": [
-                  "subAccountId",
-                  "status"
+                    "subAccountId",
+                    "status"
                 ],
                 "properties": {
-                  "subAccountId": {
-                    "type": "string",
-                    "description": "Engage Voice sub-account id",
-                    "example": "99990033"
-                  },
-                  "accountName": {
-                    "type": "string",
-                    "description": "Engage Voice sub-account name",
-                    "example": "Internal Account"
-                  },
-                  "status": {
-                    "type": "string",
-                    "enum": [
-                      "ACTIVE",
-                      "INACTIVE"
-                    ],
-                    "description": "WEM feature status:\n  * `ACTIVE` - WEM feature is active for that subaccount\n  * `INACTIVE` - WEM feature is inactive for that subaccount\n"
-                  }
+                    "subAccountId": {
+                        "type": "string",
+                        "description": "Engage Voice sub-account id",
+                        "example": "99990033"
+                    },
+                    "accountName": {
+                        "type": "string",
+                        "description": "Engage Voice sub-account name",
+                        "example": "Internal Account"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "ACTIVE",
+                            "INACTIVE"
+                        ],
+                        "description": "WEM feature status:\n  * `ACTIVE` - WEM feature is active for that subaccount\n  * `INACTIVE` - WEM feature is inactive for that subaccount\n"
+                    }
                 }
-              }
+            },
+            "AssignedDnisBulkUpdateDTO": {
+                "type": "object",
+                "properties": {
+                    "dnisType": {
+                        "type": "string",
+                        "enum": [
+                            "ACCOUNT",
+                            "ACD",
+                            "AGENT",
+                            "CHAT_QUEUE",
+                            "OUTBOUND",
+                            "VISUAL_IVR",
+                            "CLOUD_PROFILE",
+                            "CLOUD_DESTINATION",
+                            "TRAC_NUMBER",
+                            "HTTP_SERVICES",
+                            "SCRIPTING",
+                            "TN_MANAGER",
+                            "SURVEY",
+                            "DNIS",
+                            "TEAMS",
+                            "KNOWLEDGE_BASE",
+                            "UTILITIES"
+                        ]
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "AssignedSmsDnisBulkUpdateDTO": {
+                "type": "object",
+                "properties": {
+                    "endDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "id": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "startDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "DnisBulkUpdateRequest": {
+                "type": "object",
+                "properties": {
+                    "assignedDnis": {
+                        "$ref": "#/components/schemas/AssignedDnisBulkUpdateDTO"
+                    },
+                    "assignedSmsDnis": {
+                        "$ref": "#/components/schemas/AssignedSmsDnisBulkUpdateDTO"
+                    },
+                    "dnisPool": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DnisPoolDTO"
+                        }
+                    },
+                    "general": {
+                        "$ref": "#/components/schemas/GeneralDTO"
+                    },
+                    "mediaCodes": {
+                        "$ref": "#/components/schemas/MediaCodeDTO"
+                    }
+                }
+            },
+            "DnisPoolDTO": {
+                "type": "object",
+                "properties": {
+                    "dnis": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "reservedAccountId": {
+                        "type": "string"
+                    }
+                }
+            },
+            "GeneralDTO": {
+                "type": "object",
+                "properties": {
+                    "dnisDescription": {
+                        "type": "string"
+                    },
+                    "inboundContext": {
+                        "type": "string"
+                    },
+                    "originatingDnis": {
+                        "type": "string"
+                    },
+                    "reservedAccountId": {
+                        "type": "string"
+                    }
+                }
+            },
+            "MediaCodeDTO": {
+                "type": "object",
+                "properties": {
+                    "dnisCategory": {
+                        "type": "string"
+                    },
+                    "mediaCode": {
+                        "type": "string"
+                    },
+                    "mediaFormat": {
+                        "type": "string"
+                    },
+                    "mediaIsci": {
+                        "type": "string"
+                    },
+                    "mediaLength": {
+                        "type": "string"
+                    },
+                    "mediaMarket": {
+                        "type": "string"
+                    },
+                    "mediaNetwork": {
+                        "type": "string"
+                    },
+                    "mediaUrl": {
+                        "type": "string"
+                    },
+                    "mediaVersion": {
+                        "type": "string"
+                    },
+                    "mediaWebSourcecode": {
+                        "type": "string"
+                    }
+                }
+            }
         },
         "securitySchemes": {
             "BearerAuth": {
@@ -23543,2046 +23688,1570 @@
         },
         "/integration/v1/admin/users/{mainAccountId}": {
             "get": {
-              "tags": [
-                "User Controller"
-              ],
-              "summary": "Returns a listing of all users that a user has access to",
-              "description": "Permissions: WFO_ACCESS role",
-              "operationId": "getUserList",
-              "parameters": [
-                {
-                  "name": "mainAccountId",
-                  "in": "path",
-                  "description": "Main Account Id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990033"
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/User"
+                "tags": [
+                    "User Controller"
+                ],
+                "summary": "Returns a listing of all users that a user has access to",
+                "description": "Permissions: WFO_ACCESS role",
+                "operationId": "getUserList",
+                "parameters": [
+                    {
+                        "name": "mainAccountId",
+                        "in": "path",
+                        "description": "Main Account Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99990033"
                         }
-                      },
-                      "example": [
-                        {
-                          "rcUserId": 1009,
-                          "userId": 3289,
-                          "engageUserName": "jane.doe+wfo1@ringcentral.com",
-                          "userName": "jane.doe+wfo1+eo1@ringcentral.com",
-                          "email": "jane.doe@ringcentral.com",
-                          "firstName": "Jane",
-                          "lastName": "Doe",
-                          "parentPath": "2181.2979.2983.3064",
-                          "envID": "eo1"
-                        },
-                        {
-                          "rcUserId": 1010,
-                          "userId": 3290,
-                          "engageUserName": "joe.doe+wfo1@ringcentral.com",
-                          "userName": "joe.doe+wfo1+eo1@ringcentral.com",
-                          "email": "joe.doe@ringcentral.com",
-                          "firstName": "Joe",
-                          "lastName": "Doe",
-                          "parentPath": "2181.2979.2983.3064",
-                          "envID": "eo1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "rcUserId": 1009,
+                                        "userId": 3289,
+                                        "engageUserName": "jane.doe+wfo1@ringcentral.com",
+                                        "userName": "jane.doe+wfo1+eo1@ringcentral.com",
+                                        "email": "jane.doe@ringcentral.com",
+                                        "firstName": "Jane",
+                                        "lastName": "Doe",
+                                        "parentPath": "2181.2979.2983.3064",
+                                        "envID": "eo1"
+                                    },
+                                    {
+                                        "rcUserId": 1010,
+                                        "userId": 3290,
+                                        "engageUserName": "joe.doe+wfo1@ringcentral.com",
+                                        "userName": "joe.doe+wfo1+eo1@ringcentral.com",
+                                        "email": "joe.doe@ringcentral.com",
+                                        "firstName": "Joe",
+                                        "lastName": "Doe",
+                                        "parentPath": "2181.2979.2983.3064",
+                                        "envID": "eo1"
+                                    }
+                                ]
+                            }
                         }
-                      ]
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "The supplied data is not valid",
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/integration/v1/admin/users/99990033 - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Jwt is expired"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "details": "",
+                                    "developerMessage": "Access is denied",
+                                    "cause": "",
+                                    "requestUri": "/integration/v1/admin/users/99990033 - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "The resource you have requested does not exist",
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/integration/v1/admin/users/99990033 - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "An Internal Server Error occurred while processing this request",
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/integration/v1/admin/users/99990033 - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
                     }
-                  }
                 },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "The supplied data is not valid",
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/admin/users/99990033 - GET",
-                        "timestamp": 1611847650696
-                      }
+                "security": [
+                    {
+                        "BearerAuth": []
                     }
-                  }
-                },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
-                    }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/admin/users/99990033 - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "The resource you have requested does not exist",
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/admin/users/99990033 - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "An Internal Server Error occurred while processing this request",
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/admin/users/99990033 - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ]
+                ]
             }
-          },
-          "/integration/v1/admin/accounts/{mainAccountId}/subaccounts": {
+        },
+        "/integration/v1/admin/accounts/{mainAccountId}/subaccounts": {
             "get": {
-              "tags": [
-                "Account Controller"
-              ],
-              "summary": "Returns a listing of sub accounts by Engage Voice Main account identifier",
-              "description": "Permissions: WFO_ACCESS role",
-              "operationId": "getSubAccountsByMainAccountId",
-              "parameters": [
-                {
-                  "name": "mainAccountId",
-                  "in": "path",
-                  "description": "Main Account Id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990033"
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/SubAccount"
-                        },
-                        "example": [
-                          {
-                            "subAccountId": "15910001",
-                            "subAccountName": "Cappuccino Engage Development",
-                            "isActive": true
-                          },
-                          {
-                            "subAccountId": "15910006",
-                            "subAccountName": "Cappuccino Engage Development",
-                            "isActive": true
-                          }
-                        ]
-                      }
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "Returns a listing of sub accounts by Engage Voice Main account identifier",
+                "description": "Permissions: WFO_ACCESS role",
+                "operationId": "getSubAccountsByMainAccountId",
+                "parameters": [
+                    {
+                        "name": "mainAccountId",
+                        "in": "path",
+                        "description": "Main Account Id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99990033"
+                        }
                     }
-                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/SubAccount"
+                                    },
+                                    "example": [
+                                        {
+                                            "subAccountId": "15910001",
+                                            "subAccountName": "Cappuccino Engage Development",
+                                            "isActive": true
+                                        },
+                                        {
+                                            "subAccountId": "15910006",
+                                            "subAccountName": "Cappuccino Engage Development",
+                                            "isActive": true
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "The supplied data is not valid",
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/subaccounts - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Jwt is expired"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "details": "",
+                                    "developerMessage": "Access is denied",
+                                    "cause": "",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/subaccounts - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "The resource you have requested does not exist",
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/subaccounts - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "An Internal Server Error occurred while processing this request",
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/subaccounts - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
                 },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "The supplied data is not valid",
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/subaccounts - GET",
-                        "timestamp": 1611847650696
-                      }
+                "security": [
+                    {
+                        "BearerAuth": []
                     }
-                  }
-                },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
-                    }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/subaccounts - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "The resource you have requested does not exist",
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/subaccounts - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "An Internal Server Error occurred while processing this request",
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/subaccounts - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ]
+                ]
             }
-          },
-          "/integration/v1/admin/accounts/{subAccountId}/agentGroups/{agentGroupId}/agents": {
+        },
+        "/integration/v1/admin/accounts/{subAccountId}/agentGroups/{agentGroupId}/agents": {
             "get": {
-              "tags": [
-                "Agent Controller"
-              ],
-              "summary": "Returns a list of read only agents for an agent group",
-              "description": "Permissions: WFO_ACCESS role",
-              "operationId": "getAgentList",
-              "parameters": [
-                {
-                  "name": "subAccountId",
-                  "in": "path",
-                  "description": "Engage Voice sub-account id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990033"
-                  }
-                },
-                {
-                  "name": "agentGroupId",
-                  "in": "path",
-                  "description": "Agent Group Id",
-                  "required": true,
-                  "schema": {
-                    "type": "integer",
-                    "format": "int32",
-                    "example": 30
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/Agent"
-                        },
-                        "example": [
-                          {
-                            "rcUserId": 1009,
-                            "agentId": 1386703,
-                            "agentGroupId": 30,
-                            "firstName": "Jane",
-                            "lastName": "Doe",
-                            "engageUserName": "jane.doe+wfo1@ringcentral.com",
-                            "userName": "jane.doe+wfo1+eo1@ringcentral.com",
-                            "email": "jane.doe@ringcentral.com",
-                            "agentType": "SUPERVISOR",
-                            "isActive": true,
-                            "supervisorAgentIds": [
-                              1386605,
-                              1386600
-                            ],
-                            "superviseeAgentIds": [
-                              1386804,
-                              1386905
-                            ],
-                            "envID": "eo1"
-                          },
-                          {
-                            "rcUserId": 1010,
-                            "agentId": 1389175,
-                            "agentGroupId": 30,
-                            "firstName": "Joe",
-                            "lastName": "Doe",
-                            "userName": "Joe.D+15910001_172+eo1@c1.local",
-                            "engageUserName": "Joe.D+15910001_172@c1.local",
-                            "email": "joe.d@ringcentral.com",
-                            "agentType": "AGENT",
-                            "isActive": true,
-                            "supervisorAgentIds": [
-                              1386605
-                            ],
-                            "superviseeAgentIds": [],
-                            "envID": "eo1"
-                          }
-                        ]
-                      }
+                "tags": [
+                    "Agent Controller"
+                ],
+                "summary": "Returns a list of read only agents for an agent group",
+                "description": "Permissions: WFO_ACCESS role",
+                "operationId": "getAgentList",
+                "parameters": [
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "Engage Voice sub-account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99990033"
+                        }
+                    },
+                    {
+                        "name": "agentGroupId",
+                        "in": "path",
+                        "description": "Agent Group Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 30
+                        }
                     }
-                  }
-                },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "The supplied data is not valid",
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
-                        "timestamp": 1611847650696
-                      }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Agent"
+                                    },
+                                    "example": [
+                                        {
+                                            "rcUserId": 1009,
+                                            "agentId": 1386703,
+                                            "agentGroupId": 30,
+                                            "firstName": "Jane",
+                                            "lastName": "Doe",
+                                            "engageUserName": "jane.doe+wfo1@ringcentral.com",
+                                            "userName": "jane.doe+wfo1+eo1@ringcentral.com",
+                                            "email": "jane.doe@ringcentral.com",
+                                            "agentType": "SUPERVISOR",
+                                            "isActive": true,
+                                            "supervisorAgentIds": [
+                                                1386605,
+                                                1386600
+                                            ],
+                                            "superviseeAgentIds": [
+                                                1386804,
+                                                1386905
+                                            ],
+                                            "envID": "eo1"
+                                        },
+                                        {
+                                            "rcUserId": 1010,
+                                            "agentId": 1389175,
+                                            "agentGroupId": 30,
+                                            "firstName": "Joe",
+                                            "lastName": "Doe",
+                                            "userName": "Joe.D+15910001_172+eo1@c1.local",
+                                            "engageUserName": "Joe.D+15910001_172@c1.local",
+                                            "email": "joe.d@ringcentral.com",
+                                            "agentType": "AGENT",
+                                            "isActive": true,
+                                            "supervisorAgentIds": [
+                                                1386605
+                                            ],
+                                            "superviseeAgentIds": [],
+                                            "envID": "eo1"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "The supplied data is not valid",
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Jwt is expired"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "details": "",
+                                    "developerMessage": "Access is denied",
+                                    "cause": "",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "The resource you have requested does not exist",
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "An Internal Server Error occurred while processing this request",
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
                     }
-                  }
                 },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
+                "security": [
+                    {
+                        "BearerAuth": []
                     }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "The resource you have requested does not exist",
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "An Internal Server Error occurred while processing this request",
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ]
+                ]
             }
-          },
-          "/integration/v1/admin/accounts/{subAccountId}/agentGroups": {
+        },
+        "/integration/v1/admin/accounts/{subAccountId}/agentGroups": {
             "get": {
-              "tags": [
-                "Agent Group Controller"
-              ],
-              "summary": "Returns a list of agent groups for a sub-account",
-              "description": "Permissions: WFO_ACCESS role",
-              "operationId": "getAgentGroups",
-              "parameters": [
-                {
-                  "name": "subAccountId",
-                  "in": "path",
-                  "description": "Engage Voice sub-account id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990033"
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/AgentGroup"
-                        },
-                        "example": [
-                          {
-                            "agentGroupId": 1009,
-                            "groupName": "Team A1"
-                          },
-                          {
-                            "agentGroupId": 1010,
-                            "groupName": "Team A2"
-                          }
-                        ]
-                      }
+                "tags": [
+                    "Agent Group Controller"
+                ],
+                "summary": "Returns a list of agent groups for a sub-account",
+                "description": "Permissions: WFO_ACCESS role",
+                "operationId": "getAgentGroups",
+                "parameters": [
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "Engage Voice sub-account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99990033"
+                        }
                     }
-                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AgentGroup"
+                                    },
+                                    "example": [
+                                        {
+                                            "agentGroupId": 1009,
+                                            "groupName": "Team A1"
+                                        },
+                                        {
+                                            "agentGroupId": 1010,
+                                            "groupName": "Team A2"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "The supplied data is not valid",
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Jwt is expired"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "details": "",
+                                    "developerMessage": "Access is denied",
+                                    "cause": "",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "The resource you have requested does not exist",
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "An Internal Server Error occurred while processing this request",
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
                 },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "The supplied data is not valid",
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups - GET",
-                        "timestamp": 1611847650696
-                      }
+                "security": [
+                    {
+                        "BearerAuth": []
                     }
-                  }
-                },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
-                    }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "The resource you have requested does not exist",
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "An Internal Server Error occurred while processing this request",
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ]
+                ]
             }
-          },
-          "/integration/v1/admin/accounts/{subAccountId}/gateGroups": {
+        },
+        "/integration/v1/admin/accounts/{subAccountId}/gateGroups": {
             "get": {
-              "tags": [
-                "Gate Group Controller"
-              ],
-              "summary": "Returns a list of inbound queue groups",
-              "description": "Permissions: WFO_ACCESS role",
-              "operationId": "getGateGroups",
-              "parameters": [
-                {
-                  "name": "subAccountId",
-                  "in": "path",
-                  "description": "Engage Voice sub-account id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990033"
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/GateGroup"
-                        },
-                        "example": [
-                          {
-                            "gateGroupId": 1009,
-                            "groupName": "Queue group 1"
-                          },
-                          {
-                            "gateGroupId": 1010,
-                            "groupName": "Queue group 2"
-                          }
-                        ]
-                      }
+                "tags": [
+                    "Gate Group Controller"
+                ],
+                "summary": "Returns a list of inbound queue groups",
+                "description": "Permissions: WFO_ACCESS role",
+                "operationId": "getGateGroups",
+                "parameters": [
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "Engage Voice sub-account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99990033"
+                        }
                     }
-                  }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/GateGroup"
+                                    },
+                                    "example": [
+                                        {
+                                            "gateGroupId": 1009,
+                                            "groupName": "Queue group 1"
+                                        },
+                                        {
+                                            "gateGroupId": 1010,
+                                            "groupName": "Queue group 2"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "The supplied data is not valid",
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Jwt is expired"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "details": "",
+                                    "developerMessage": "Access is denied",
+                                    "cause": "",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "The resource you have requested does not exist",
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "An Internal Server Error occurred while processing this request",
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
                 },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "The supplied data is not valid",
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups - GET",
-                        "timestamp": 1611847650696
-                      }
+                "security": [
+                    {
+                        "BearerAuth": []
                     }
-                  }
-                },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
-                    }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "The resource you have requested does not exist",
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "An Internal Server Error occurred while processing this request",
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ]
+                ]
             }
-          },
-          "/integration/v1/admin/accounts/{subAccountId}/gateGroups/{gateGroupId}/withAgents": {
+        },
+        "/integration/v1/admin/accounts/{subAccountId}/gateGroups/{gateGroupId}/withAgents": {
             "get": {
-              "tags": [
-                "Gate Group Controller"
-              ],
-              "summary": "Returns a list of queues with agent IDs",
-              "description": "Permissions: WFO_ACCESS role",
-              "operationId": "getGateGroupsWithAgents",
-              "parameters": [
-                {
-                  "name": "subAccountId",
-                  "in": "path",
-                  "description": "Engage Voice sub-account id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990033"
-                  }
+                "tags": [
+                    "Gate Group Controller"
+                ],
+                "summary": "Returns a list of queues with agent IDs",
+                "description": "Permissions: WFO_ACCESS role",
+                "operationId": "getGateGroupsWithAgents",
+                "parameters": [
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "Engage Voice sub-account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99990033"
+                        }
+                    },
+                    {
+                        "name": "gateGroupId",
+                        "in": "path",
+                        "description": "Inbound queue group ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1009
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/QueueWithAgents"
+                                    },
+                                    "example": [
+                                        {
+                                            "queueId": 555,
+                                            "queueName": "Test queue 1",
+                                            "gateGroupId": 1009,
+                                            "isActive": true,
+                                            "createdOn": "2020-07-21T17:32:28Z",
+                                            "agentIds": [
+                                                10,
+                                                20
+                                            ]
+                                        },
+                                        {
+                                            "queueId": 556,
+                                            "queueName": "Test queue 2",
+                                            "gateGroupId": 1009,
+                                            "isActive": true,
+                                            "createdOn": "2020-07-21T17:32:28Z",
+                                            "agentId": [
+                                                30
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "The supplied data is not valid",
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Jwt is expired"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "details": "",
+                                    "developerMessage": "Access is denied",
+                                    "cause": "",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "The resource you have requested does not exist",
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "An Internal Server Error occurred while processing this request",
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
                 },
-                {
-                  "name": "gateGroupId",
-                  "in": "path",
-                  "description": "Inbound queue group ID",
-                  "required": true,
-                  "schema": {
-                    "type": "integer",
-                    "format": "int64",
-                    "example": 1009
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/QueueWithAgents"
-                        },
-                        "example": [
-                          {
-                            "queueId": 555,
-                            "queueName": "Test queue 1",
-                            "gateGroupId": 1009,
-                            "isActive": true,
-                            "createdOn": "2020-07-21T17:32:28Z",
-                            "agentIds": [
-                              10,
-                              20
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/integration/v1/admin/reports/accounts/{subAccountId}/aggAgentExtendedStats": {
+            "post": {
+                "tags": [
+                    "Integration Report Controller"
+                ],
+                "summary": "Builds Queue Extended Statistics Report in requested format",
+                "description": "Permissions: WFO_ACCESS role",
+                "operationId": "streamFileAggAgentExtendedStats",
+                "parameters": [
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "Engage Voice sub-account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99990033"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "*/*": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HistoricalReportParams"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {}
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Jwt is expired"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "details": "",
+                                    "developerMessage": "Access is denied",
+                                    "cause": "",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/integration/v1/admin/reports/accounts/{subAccountId}/interactionMetadata": {
+            "post": {
+                "tags": [
+                    "Integration Report Controller"
+                ],
+                "summary": "Builds Agent Segment Metadata Report in requested format",
+                "description": "Permissions: WFO_ACCESS role",
+                "operationId": "streamFileInteractionMetadata",
+                "parameters": [
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "Engage Voice sub-account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99990033"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "*/*": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RealtimeReportParams"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {}
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/interactionMetadata - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Jwt is expired"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "details": "",
+                                    "developerMessage": "Access is denied",
+                                    "cause": "",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/interactionMetadata - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/interactionMetadata - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/interactionMetadata - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/integration/v1/admin/reports/accounts/{subAccountId}/aggAgentStats": {
+            "post": {
+                "tags": [
+                    "Integration Report Controller"
+                ],
+                "summary": "Builds Agent statistics Report in requested format",
+                "description": "Permissions: WFO_ACCESS role",
+                "operationId": "streamFileAggAgentStats",
+                "parameters": [
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "Engage Voice sub-account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99990033"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "*/*": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HistoricalReportParams"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {}
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Jwt is expired"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "details": "",
+                                    "developerMessage": "Access is denied",
+                                    "cause": "",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/integration/v1/admin/reports/accounts/{subAccountId}/aggQueueStats": {
+            "post": {
+                "tags": [
+                    "Integration Report Controller"
+                ],
+                "summary": "Builds Inbound/Outbound queue statistics in requested format",
+                "description": "Permissions: WFO_ACCESS role",
+                "operationId": "streamFileAggQueueStats",
+                "parameters": [
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "Engage Voice sub-account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99990033"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "*/*": {
+                            "schema": {
+                                "$ref": "#/components/schemas/HistoricalReportParams"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {}
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "Jwt is expired"
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "details": "",
+                                    "developerMessage": "Access is denied",
+                                    "cause": "",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/v1/admin/utilities/tnManager/updateCustomerDnisBulk": {
+            "put": {
+                "tags": [
+                    "Tn Manager API"
+                ],
+                "summary": "Update Dnis Records in Bulk",
+                "operationId": "updateCustomerDnisBulkUsingPUT",
+                "requestBody": {
+                    "description": "request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DnisBulkUpdateRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {}
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {}
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "x-codegen-request-body-name": "request"
+            }
+        },
+        "/v1/admin/utilities/tnManager/searchDnis": {
+            "post": {
+                "tags": [
+                    "Tn Manager API"
+                ],
+                "summary": "Returns all dnis pools for Customer",
+                "description": "Permissions: READ on Account, READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "getCustomerDnisPoolListUsingPOST",
+                "requestBody": {
+                    "description": "request",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DnisListRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {}
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {}
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "x-codegen-request-body-name": "request"
+            }
+        },
+        "/v1/admin/utilities/tnManager/updateBulkDnisPool": {
+            "put": {
+                "tags": [
+                    "Tn Manager API"
+                ],
+                "summary": "Updates for bulk csv data dnis pool, will update assignments too",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "updateBulkDnisPoolListUsingPUT",
+                "requestBody": {
+                    "description": "dnisPools",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/DnisPool"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DnisBulkUpdateRespose"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {}
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {}
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "x-codegen-request-body-name": "dnisPools"
+            }
+        },
+        "/v1/admin/utilities/tnManager/uploadDnisPool": {
+            "post": {
+                "tags": [
+                    "Tn Manager API"
+                ],
+                "summary": "Creates a list of dnis pools from upload file",
+                "description": "Has Role: SUPER_USER",
+                "operationId": "previewDnisListUsingPOST",
+                "parameters": [
+                    {
+                        "name": "fileType",
+                        "in": "query",
+                        "description": "fileType",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "COMMA"
                             ]
-                          },
-                          {
-                            "queueId": 556,
-                            "queueName": "Test queue 2",
-                            "gateGroupId": 1009,
-                            "isActive": true,
-                            "createdOn": "2020-07-21T17:32:28Z",
-                            "agentId": [
-                              30
-                            ]
-                          }
-                        ]
-                      }
-                    }
-                  }
-                },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "The supplied data is not valid",
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
-                    }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "The resource you have requested does not exist",
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "details": "An Internal Server Error occurred while processing this request",
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ]
-            }
-          },
-          "/integration/v1/admin/reports/accounts/{subAccountId}/aggAgentExtendedStats": {
-            "post": {
-              "tags": [
-                "Integration Report Controller"
-              ],
-              "summary": "Builds Queue Extended Statistics Report in requested format",
-              "description": "Permissions: WFO_ACCESS role",
-              "operationId": "streamFileAggAgentExtendedStats",
-              "parameters": [
-                {
-                  "name": "subAccountId",
-                  "in": "path",
-                  "description": "Engage Voice sub-account id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990033"
-                  }
-                }
-              ],
-              "requestBody": {
-                "content": {
-                  "*/*": {
-                    "schema": {
-                      "$ref": "#/components/schemas/HistoricalReportParams"
-                    }
-                  }
-                },
-                "required": false
-              },
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {}
-                },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
-                    }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ]
-            }
-          },
-          "/integration/v1/admin/reports/accounts/{subAccountId}/interactionMetadata": {
-            "post": {
-              "tags": [
-                "Integration Report Controller"
-              ],
-              "summary": "Builds Agent Segment Metadata Report in requested format",
-              "description": "Permissions: WFO_ACCESS role",
-              "operationId": "streamFileInteractionMetadata",
-              "parameters": [
-                {
-                  "name": "subAccountId",
-                  "in": "path",
-                  "description": "Engage Voice sub-account id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990033"
-                  }
-                }
-              ],
-              "requestBody": {
-                "content": {
-                  "*/*": {
-                    "schema": {
-                      "$ref": "#/components/schemas/RealtimeReportParams"
-                    }
-                  }
-                },
-                "required": false
-              },
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {}
-                },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/interactionMetadata - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
-                    }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/interactionMetadata - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/interactionMetadata - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/interactionMetadata - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ]
-            }
-          },
-          "/integration/v1/admin/reports/accounts/{subAccountId}/aggAgentStats": {
-            "post": {
-              "tags": [
-                "Integration Report Controller"
-              ],
-              "summary": "Builds Agent statistics Report in requested format",
-              "description": "Permissions: WFO_ACCESS role",
-              "operationId": "streamFileAggAgentStats",
-              "parameters": [
-                {
-                  "name": "subAccountId",
-                  "in": "path",
-                  "description": "Engage Voice sub-account id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990033"
-                  }
-                }
-              ],
-              "requestBody": {
-                "content": {
-                  "*/*": {
-                    "schema": {
-                      "$ref": "#/components/schemas/HistoricalReportParams"
-                    }
-                  }
-                },
-                "required": false
-              },
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {}
-                },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
-                    }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ]
-            }
-          },
-          "/integration/v1/admin/reports/accounts/{subAccountId}/aggQueueStats": {
-            "post": {
-              "tags": [
-                "Integration Report Controller"
-              ],
-              "summary": "Builds Inbound/Outbound queue statistics in requested format",
-              "description": "Permissions: WFO_ACCESS role",
-              "operationId": "streamFileAggQueueStats",
-              "parameters": [
-                {
-                  "name": "subAccountId",
-                  "in": "path",
-                  "description": "Engage Voice sub-account id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990033"
-                  }
-                }
-              ],
-              "requestBody": {
-                "content": {
-                  "*/*": {
-                    "schema": {
-                      "$ref": "#/components/schemas/HistoricalReportParams"
-                    }
-                  }
-                },
-                "required": false
-              },
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {}
-                },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
-                    }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ]
-            }
-          },
-          "/integration/v1/wem/accounts/{mainAccountId}": {
-            "post": {
-              "tags": [
-                "WEM State Controller"
-              ],
-              "summary": "Updates Main Account WEM status.",
-              "description": "Permissions: SUPER_USER role",
-              "operationId": "updateMainAccountWemStatus",
-              "parameters": [
-                {
-                  "name": "mainAccountId",
-                  "in": "path",
-                  "description": "Main Account Id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990033"
-                  }
-                },
-                {
-                  "name": "newStatus",
-                  "in": "query",
-                  "description": "WEM feature status:\n  * `ACTIVE` - WEM feature is active for that Customer\n  * `SUSPENDED` - WEM feature is suspended for that Customer\n",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "enum": [
-                      "ACTIVE",
-                      "SUSPENDED"
-                    ]
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/MainAccountWemState"
-                          },
-                          {
-                            "$ref": "#/components/schemas/BaseWemStateInfo"
-                          }
-                        ]
-                      }
-                    }
-                  }
-                },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/wem/accounts/99990033 - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
-                    }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/wem/accounts/99990033 - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/wem/accounts/99990033 - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/wem/accounts/99990033 - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ]
-            },
-            "get": {
-              "tags": [
-                "WEM State Controller"
-              ],
-              "summary": "Returns Main Account WEM status.",
-              "description": "Permissions: Only admin of that main account or SUPER_USER role",
-              "operationId": "getMainAccountWemStatus",
-              "parameters": [
-                {
-                  "name": "mainAccountId",
-                  "in": "path",
-                  "description": "Main Account Id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990033"
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/MainAccountWemState"
-                          },
-                          {
-                            "$ref": "#/components/schemas/BaseWemStateInfo"
-                          }
-                        ]
-                      }
-                    }
-                  }
-                },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/wem/accounts/99990033 - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
-                    }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/wem/accounts/99990033 - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/wem/accounts/99990033 - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/wem/accounts/99990033 - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ]
-            }
-          },
-          "/integration/v1/wem/accounts/{mainAccountId}/{subAccountId}": {
-            "post": {
-              "tags": [
-                "WEM State Controller"
-              ],
-              "summary": "Updates Engage Voice sub-account WEM status.",
-              "description": "Permissions: SUPER_USER role",
-              "operationId": "updateSubAccountWemStatus",
-              "parameters": [
-                {
-                  "name": "mainAccountId",
-                  "in": "path",
-                  "description": "Main Account Id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990033"
-                  }
-                },
-                {
-                  "name": "subAccountId",
-                  "in": "path",
-                  "description": "Engage Voice sub-account id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990034"
-                  }
-                },
-                {
-                  "name": "newStatus",
-                  "in": "query",
-                  "description": "WEM feature status:\n  * `ACTIVE` - WEM feature is active for that subaccount\n  * `INACTIVE` - WEM feature is inactive for that subaccount\n",
-                  "schema": {
-                    "type": "string",
-                    "enum": [
-                      "ACTIVE",
-                      "INACTIVE"
-                    ]
-                  },
-                  "example": "ACTIVE"
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/SubAccountWemState"
-                          },
-                          {
-                            "$ref": "#/components/schemas/BaseWemStateInfo"
-                          }
-                        ]
-                      }
-                    }
-                  }
-                },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/wem/accounts/99990033/99990034 - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
-                    }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/wem/accounts/99990033/99990034 - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/wem/accounts/99990033/99990034 - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/wem/accounts/99990033/99990034 - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ]
-            },
-            "get": {
-              "tags": [
-                "WEM State Controller"
-              ],
-              "summary": "Returns Engage Voice sub-account WEM status.",
-              "description": "Permissions: Only admin of that main account or SUPER_USER role",
-              "operationId": "getSubAccountWemStatus",
-              "parameters": [
-                {
-                  "name": "mainAccountId",
-                  "in": "path",
-                  "description": "Main Account Id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990033"
-                  }
-                },
-                {
-                  "name": "subAccountId",
-                  "in": "path",
-                  "description": "Engage Voice sub-account id",
-                  "required": true,
-                  "schema": {
-                    "type": "string",
-                    "example": "99990034"
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "allOf": [
-                          {
-                            "$ref": "#/components/schemas/SubAccountWemState"
-                          },
-                          {
-                            "$ref": "#/components/schemas/BaseWemStateInfo"
-                          }
-                        ]
-                      }
-                    }
-                  }
-                },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/wem/accounts/99990033/99990034 - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
-                    }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/wem/accounts/99990033/99990034 - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/wem/accounts/99990033/99990034 - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/wem/accounts/99990033/99990034 - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              },
-              "security": [
-                {
-                  "BearerAuth": []
-                }
-              ]
-            }
-          },
-          "/integration/v1/wem/accounts": {
-            "get": {
-              "tags": [
-                "WEM State Controller"
-              ],
-              "summary": "Returns list of Main Accounts WEM states.",
-              "description": "Permissions: SUPER_USER role",
-              "operationId": "getCustomersWemStates",
-              "parameters": [
-                {
-                  "name": "page",
-                  "in": "query",
-                  "description": "Results page you want to retrieve (0..N)",
-                  "schema": {
-                    "type": "integer",
-                    "minimum": 0,
-                    "default": 0,
-                    "example": 0
-                  }
-                },
-                {
-                  "name": "size",
-                  "in": "query",
-                  "description": "Number of records per page.",
-                  "schema": {
-                    "type": "integer",
-                    "minimum": 1,
-                    "default": 10,
-                    "example": 10
-                  }
-                }
-              ],
-              "responses": {
-                "200": {
-                  "description": "OK",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "type": "array",
-                        "items": {
-                          "$ref": "#/components/schemas/MainAccountWemState"
                         }
-                      }
                     }
-                  }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "file"
+                                ],
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "description": "file",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
                 },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/wem/accounts - GET",
-                        "timestamp": 1611847650696
-                      }
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DnisListPreviewResponse"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {}
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {}
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {}
                     }
-                  }
                 },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
+                "security": [
+                    {
+                        "BearerAuth": []
                     }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/wem/accounts - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/wem/accounts - GET",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              }
+                ]
             }
-          },
-          "/integration/v1/wem/accounts/sync": {
-            "post": {
-              "tags": [
-                "WEM State Controller"
-              ],
-              "summary": "Send events with actual Engage Voice sub-account WEM states",
-              "description": "Permissions: SUPER_USER role",
-              "operationId": "syncWEMStates",
-              "responses": {
-                "200": {
-                  "description": "OK"
-                },
-                "400": {
-                  "description": "Bad request",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The supplied data is not valid",
-                        "requestUri": "/integration/v1/wem/accounts/sync - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "401": {
-                  "description": "Unauthorized",
-                  "content": {
-                    "text/plain": {
-                      "schema": {
-                        "type": "string"
-                      },
-                      "example": "Jwt is expired"
-                    }
-                  }
-                },
-                "403": {
-                  "description": "Forbidden",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "You do not have permission to access this resource",
-                        "details": "",
-                        "developerMessage": "Access is denied",
-                        "cause": "",
-                        "requestUri": "/integration/v1/wem/accounts/sync - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "404": {
-                  "description": "Not Found",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "The resource you have requested does not exist",
-                        "requestUri": "/integration/v1/wem/accounts/sync - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                },
-                "500": {
-                  "description": "Internal Server Error",
-                  "content": {
-                    "application/json": {
-                      "schema": {
-                        "$ref": "#/components/schemas/Errors"
-                      },
-                      "example": {
-                        "generalMessage": "An Internal Server Error occurred while processing this request",
-                        "requestUri": "/integration/v1/wem/accounts/sync - POST",
-                        "timestamp": 1611847650696
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+        }
     },
     "servers": [
         {
