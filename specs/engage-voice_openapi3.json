@@ -25260,13 +25260,22 @@
     ],
     "tags": [
         {
+            "name": "Account Controller"
+        },
+        {
             "name": "Active Calls"
         },
         {
             "name": "Agent Access"
         },
         {
+            "name": "Agent Controller"
+        },
+        {
             "name": "Agent Groups"
+        },
+        {
+            "name": "Agent Group Controller"
         },
         {
             "name": "Agents"
@@ -25279,6 +25288,12 @@
         },
         {
             "name": "Dial Groups"
+        },
+        {
+            "name": "Gate Group Controller"
+        },
+        {
+            "name": "Integration Report Controller"
         },
         {
             "name": "Leads"
@@ -25323,7 +25338,13 @@
             "name": "RingCentral Auth"
         },
         {
+            "name": "Tn Manager API"
+        },
+        {
             "name": "Users"
+        },
+        {
+            "name": "User Controller"
         }
     ],
     "x-tag-groups": [
