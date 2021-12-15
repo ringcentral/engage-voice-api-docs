@@ -92,6 +92,7 @@ pages:
     - 'Workforce Management':
       - 'Creating an Event': notifications/wfm/configure-wfm.md
       - 'Event Payload': notifications/wfm/payload-wfm.md
+      - 'Integration APIs': workforce/integration-api.md
     - 'Quality Management': workforce/qm/index.md
     - 'Call Recordings': workforce/call-recording/index.md
 - 'Secondary':
