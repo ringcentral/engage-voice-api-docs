@@ -23689,7 +23689,7 @@
         "/integration/v1/admin/users/{mainAccountId}": {
             "get": {
                 "tags": [
-                    "User Controller"
+                    "Integration User Controller"
                 ],
                 "summary": "Returns a listing of all users that a user has access to",
                 "description": "Permissions: WFO_ACCESS role",
@@ -23832,7 +23832,7 @@
         "/integration/v1/admin/accounts/{mainAccountId}/subaccounts": {
             "get": {
                 "tags": [
-                    "Account Controller"
+                    "Integration Account Controller"
                 ],
                 "summary": "Returns a listing of sub accounts by Engage Voice Main account identifier",
                 "description": "Permissions: WFO_ACCESS role",
@@ -23963,7 +23963,7 @@
         "/integration/v1/admin/accounts/{subAccountId}/agentGroups/{agentGroupId}/agents": {
             "get": {
                 "tags": [
-                    "Agent Controller"
+                    "Integration Agent Controller"
                 ],
                 "summary": "Returns a list of read only agents for an agent group",
                 "description": "Permissions: WFO_ACCESS role",
@@ -24133,7 +24133,7 @@
         "/integration/v1/admin/accounts/{subAccountId}/agentGroups": {
             "get": {
                 "tags": [
-                    "Agent Group Controller"
+                    "Integration Agent Group Controller"
                 ],
                 "summary": "Returns a list of agent groups for a sub-account",
                 "description": "Permissions: WFO_ACCESS role",
@@ -24262,7 +24262,7 @@
         "/integration/v1/admin/accounts/{subAccountId}/gateGroups": {
             "get": {
                 "tags": [
-                    "Gate Group Controller"
+                    "Integration Gate Group Controller"
                 ],
                 "summary": "Returns a list of inbound queue groups",
                 "description": "Permissions: WFO_ACCESS role",
@@ -24391,7 +24391,7 @@
         "/integration/v1/admin/accounts/{subAccountId}/gateGroups/{gateGroupId}/withAgents": {
             "get": {
                 "tags": [
-                    "Gate Group Controller"
+                    "Integration Gate Group Controller"
                 ],
                 "summary": "Returns a list of queues with agent IDs",
                 "description": "Permissions: WFO_ACCESS role",
@@ -25260,22 +25260,13 @@
     ],
     "tags": [
         {
-            "name": "Account Controller"
-        },
-        {
             "name": "Active Calls"
         },
         {
             "name": "Agent Access"
         },
         {
-            "name": "Agent Controller"
-        },
-        {
             "name": "Agent Groups"
-        },
-        {
-            "name": "Agent Group Controller"
         },
         {
             "name": "Agents"
@@ -25290,10 +25281,22 @@
             "name": "Dial Groups"
         },
         {
-            "name": "Gate Group Controller"
+            "name": "Integration Agent"
         },
         {
-            "name": "Integration Report Controller"
+            "name": "Integration Account"
+        },
+        {
+            "name": "Integration Agent Group"
+        },
+        {
+            "name": "Integration Gate Group"
+        },
+        {
+            "name": "Integration Report"
+        },
+        {
+            "name": "Integration User"
         },
         {
             "name": "Leads"
@@ -25342,9 +25345,6 @@
         },
         {
             "name": "Users"
-        },
-        {
-            "name": "User Controller"
         }
     ],
     "x-tag-groups": [
@@ -25378,7 +25378,8 @@
                 "Queue Skills",
                 "Requeue Shortcuts",
                 "Queue Schedule",
-                "Queue Special ANI"
+                "Queue Special ANI",
+                "Tn Manager API"
             ]
         },
         {
@@ -25410,6 +25411,18 @@
             "popular": false,
             "tags": [
                 "Countries"
+            ]
+        },
+        {
+            "name": "Integration",
+            "popular": false,
+            "tags": [
+                "Integration User Controller",
+                "Integration Account Controller",
+                "Integration Agent Controller",
+                "Integration Agent Group Controller",
+                "Integration Gate Group Controller",
+                "Integration Report Controller"
             ]
         }
     ]
