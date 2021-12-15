@@ -25012,7 +25012,7 @@
         "/v1/admin/utilities/tnManager/updateCustomerDnisBulk": {
             "put": {
                 "tags": [
-                    "Tn Manager API"
+                    "Number Management"
                 ],
                 "summary": "Update Dnis Records in Bulk",
                 "operationId": "updateCustomerDnisBulkUsingPUT",
@@ -25066,7 +25066,7 @@
         "/v1/admin/utilities/tnManager/searchDnis": {
             "post": {
                 "tags": [
-                    "Tn Manager API"
+                    "Number Management"
                 ],
                 "summary": "Returns all dnis pools for Customer",
                 "description": "Permissions: READ on Account, READ on TN_MANAGER, filter out restricted accounts",
@@ -25121,7 +25121,7 @@
         "/v1/admin/utilities/tnManager/updateBulkDnisPool": {
             "put": {
                 "tags": [
-                    "Tn Manager API"
+                    "Number Management"
                 ],
                 "summary": "Updates for bulk csv data dnis pool, will update assignments too",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
@@ -25179,7 +25179,7 @@
         "/v1/admin/utilities/tnManager/uploadDnisPool": {
             "post": {
                 "tags": [
-                    "Tn Manager API"
+                    "Number Management"
                 ],
                 "summary": "Creates a list of dnis pools from upload file",
                 "description": "Has Role: SUPER_USER",
@@ -25341,7 +25341,7 @@
             "name": "RingCentral Auth"
         },
         {
-            "name": "Tn Manager API"
+            "name": "Number Management"
         },
         {
             "name": "Users"
@@ -25378,8 +25378,7 @@
                 "Queue Skills",
                 "Requeue Shortcuts",
                 "Queue Schedule",
-                "Queue Special ANI",
-                "Tn Manager API"
+                "Queue Special ANI".
             ]
         },
         {
