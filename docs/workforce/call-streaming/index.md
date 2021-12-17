@@ -248,3 +248,6 @@ if __name__ == '__main__':
     loop.run_until_complete(start_server)
     loop.run_forever()
 ```
+
+!!!note
+    [Extra Info](https://docs.python.org/3/library/ssl.html) on running WebSocket Secure server with self-assigned SSL
