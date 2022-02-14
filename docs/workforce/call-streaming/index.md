@@ -5,8 +5,7 @@
 
 **Call Streaming** runs alongside [Call Recording](./../call-recording). It streams real-time stereo audio to your WebSocket Secure(WSS) server, which can then be used for services like Speech Analysis etc.
 
-!!!important
-    Call Streaming requires a WSS server built and run by you. The server is used to receive audio streams for further processes. A [basic sample](#sample-code) is provided below.
+**Call Streaming** requires a WSS server built and hosted by you. The server is to receive audio streams for further processing. A [basic sample](#sample-code) is provided below.
 
 ## Workflow Overview
 
@@ -14,11 +13,9 @@
 
 ## Provision Streaming Profile
 
-Call Streaming provision is per **Queue(inbound calls)/Campaign(outbound calls)**. The streaming service is activated upon the creation of a streaming profile.
+Call Streaming provision is per **Queue(inbound calls)/Campaign(outbound calls)**. The streaming service will be activated upon the creation of a streaming profile.
 
 To create a streaming profile, use HTTP POST request to `{BASE_URL}/media-distributor/product`.
-
-###  Request
 
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
@@ -28,41 +25,52 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 | **`streamingUrl`** | The url for your WSS server which should start with `wss:` **NOT** `ws:` |
 | **`secret`** | Optional. You can use it for your server side validation for incoming websocket messages. |
 
-=== "HTTP"
-    ```bash
-    POST /api/v1/media/product
-    Authorization: bearer <myAccessToken>
-    Content-Type: application/json;charset=UTF-8
-    Accept: application/json
+Sample request:
 
-    {
-        "productType": "QUEUE",
-        "productId": 0,
-        "subAccountId": "string",
-        "mainAccountId": "string",
-        "rcAccountId": "string",
-        "streamingUrl": "string",
-        "secret": "string"
-    }
-    ```
+`Authorization: bearer <myAccessToken>`
 
-### Response
+`Content-Type: application/json;charset=UTF-8`
+
+`Accept: application/json`
 
 ```json
 {
     "productType": "QUEUE",
-    "productId": 0,
-    "subAccountId": "string",
-    "mainAccountId": "string",
-    "rcAccountId": "string",
-    "streamingUrl": "string",
-    "secret": "string"
+    "productId": 1234,
+    "subAccountId": "99990001",
+    "mainAccountId": "99990000",
+    "rcAccountId": "123456789",
+    "streamingUrl": "wss://sample.com",
+    "secret": "sampleSecret"
 }
 ```
 
+Sample response:
+
+```json
+{
+    "productType": "QUEUE",
+    "productId": 1234,
+    "subAccountId": "99990001",
+    "mainAccountId": "99990000",
+    "rcAccountId": "123456789",
+    "streamingUrl": "wss://sample.com",
+    "secret": "sampleSecret"
+}
+```
+
+## Enable Streaming for Queue/Campaign
+
+Go to [Engage Voice admin console](https://engage.ringcentral.com/).
+
+- For Queue: Go to Routing -> Voice queues & skills -> Select your Queue -> Recording settings
+- For Campaign: Go to Dialing -> Campaigns -> Select your Campaign -> Recording settings
+
+<img class="img-fluid" width="100%" src="../../images/agent-segment-streaming.png">
+
 ## Streaming
 
-Now that we have a streaming profile for a Queue/Campaign. When an agent in this Queue/Campaign is connected to a call, Engage Voice server will start to send websocket messages to `streamingUrl`. There are 4 types of messages:
+Now that we have a streaming profile for a Queue/Campaign. When an agent in the Queue/Campaign is connected to a call, Engage Voice server will start to send websocket messages to `streamingUrl`. There are 4 types of messages:
 
 - [Connect](#connect-message)
 - [Start](#start-message)
@@ -143,8 +151,11 @@ Stop Message is sent at the end of the call and contains relevant metadata. We w
 
 ### Sample Code
 
-=== "python"
-```python
+```javascript tab="Nodejs"
+const test = require('test')
+```
+
+```python tab="Python"
 import argparse
 import asyncio
 import json
@@ -248,6 +259,3 @@ if __name__ == '__main__':
     loop.run_until_complete(start_server)
     loop.run_forever()
 ```
-
-!!!note
-    [Extra Info](https://docs.python.org/3/library/ssl.html) on running WebSocket Secure server with self-assigned SSL
