@@ -92,9 +92,11 @@ pages:
     - 'Workforce Management':
       - 'Creating an Event': notifications/wfm/configure-wfm.md
       - 'Event Payload': notifications/wfm/payload-wfm.md
+    - 'Call Streaming': 
+      - 'Getting Started': workforce/call-streaming/getting-started.md
+      - 'Live Transcribe': workforce/call-streaming/live-transcribe.md
     - 'Quality Management': workforce/qm/index.md
     - 'Call Recordings': workforce/call-recording/index.md
-    - 'Call Streaming': workforce/call-streaming/index.md
 - 'Secondary':
   - 'Using the API':
     - 'Fundamentals':
