@@ -37,7 +37,7 @@ WebSocket server sample code:
     const WebSocket = require("ws");
     const wss = new WebSocket.Server({
         port: 3333
-    });
+        });
 
     // Imports the Google Cloud client library
     const speech = require('@google-cloud/speech');
@@ -50,9 +50,9 @@ WebSocket server sample code:
             languageCode: 'en-US',
         },
         interimResults: false, // If you want interim results, set this to true
-    };
+        };
 
-    console.log(`Server started on port: ${wss.address().port}`);
+        console.log(`Server started on port: ${wss.address().port}`);
 
     // Handle Web Socket Connection
     wss.on("connection", function connection(ws) {
@@ -64,10 +64,10 @@ WebSocket server sample code:
           .on('data', data =>
             process.stdout.write(
               data.results[0] && data.results[0].alternatives[0]
-                ? `Transcription: ${data.results[0].alternatives[0].transcript}\n`
+                ? `========\n Transcription: ${data.results[0].alternatives[0].transcript}\n    Confidence: ${data.results[0].alternatives[0].confidence}\n`
                 : '\n\nReached transcription time limit, press Ctrl+C\n'
             )
-          );
+            );
 
         ws.on("message", function incoming(message) {
             const msg = JSON.parse(message);
@@ -78,7 +78,6 @@ WebSocket server sample code:
                     break;
                 case "Start":
                     console.log('Starting Media Stream');
-                    console.log(`Session metadata: ${JSON.stringify(msg, null, 2)}`);
                     callId = msg.metadata.callId;
                     break;
                 case "Media":
@@ -95,9 +94,17 @@ WebSocket server sample code:
                     break;
             }
         });
-    }); 
+    });
+
 ```
 
 Start the server and make a phone call. It then will take couple of seconds to connect to Google service. After that, transcribed texts will start to show in your console like in below.
 
 <img class="img-fluid" width="400px" src="../../../images/call-streaming-live-transcribe-console.png">
+
+#### Additional Notes
+
+To achieve better performance overall, you might want to look into the details on:
+
+- [Recognition Config](https://cloud.google.com/speech-to-text/docs/reference/rpc/google.cloud.speech.v1#recognitionconfig)
+- [Best Practices](https://cloud.google.com/speech-to-text/docs/best-practices)
