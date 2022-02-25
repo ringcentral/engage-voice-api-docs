@@ -177,6 +177,122 @@ Since we've already setup ngrok tunnel which will publicly open our server on lo
 
 ```
 
+```python tab="Python"
+import argparse
+import asyncio
+import json
+import logging
+import websockets
+import wave
+import audioop
+import base64
+from pathlib import Path
+
+logging.basicConfig(level=logging.INFO)
+
+streaming_sessions = {}
+
+receive = ""
+transmit = ""
+recording_directory = "./recordings/"
+ 
+def log_message(message: str) -> None:
+    logging.info(f"Message: {message}")
+
+def consume_start_message(message, streaming_session) -> None:
+    logging.info("Received a START Message for session_id " + streaming_session["id"])
+    global transmit
+    transmit = open_wav_file(message, "agent")
+    global receive
+    receive = open_wav_file(message, "conference")
+    log_message(message)
+
+def open_wav_file(message, participant_type):
+    metadata = message["metadata"]
+    file = wave.open(recording_directory
+                     + str(metadata["callId"])
+                     + "-"
+                     + str(metadata["sessionId"])
+                     + "_"
+                     + participant_type
+                     + ".wav", mode="wb")
+    file.setnchannels(1)
+    file.setsampwidth(1)  # sample size for EMD stream is always 1 byte
+    file.setframerate(metadata["sampleRateHertz"])
+    file.setcomptype("NONE", "uncompressed")
+    logging.info(f"Compression type for file {file} is {file.getcomptype()}, {file.getcompname()}")
+    if metadata["audioContentType"] != "audio/x-mulaw":
+        raise TypeError("Only 'audio/x-mulaw' is supported at this time!")
+    return file
+
+
+def consume_media_message(message, streaming_session) -> None:
+    # logging.info("Received MEDIA Message for session_id " + streaming_session["id"])
+    media = message["media"]
+    media_bytes = base64.b64decode(media)
+    # logging.info(type(media_bytes))
+    pcm_bytes = audioop.ulaw2lin(media_bytes, 1)  # python's wave module only supports writing unsigned pcm.
+    pcm_bytes = audioop.bias(pcm_bytes, 1, 128)  # convert pcm_bytes to unsigned audio
+    if message["perspective"] == "Participant":
+        transmit.writeframes(pcm_bytes)
+    if message["perspective"] == "Conference":
+        receive.writeframes(pcm_bytes)
+    # log_message(message)
+    
+def consume_stop_message(message, streaming_session) -> None:
+    logging.info("Received STOP Message for session_id " + streaming_session["id"])
+    receive.close()
+    transmit.close()
+    log_message(message)
+
+
+def build_session(message, websocket) -> None:
+    streaming_session = {"metadata": {}, "id": ""}
+    streaming_sessions[websocket] = streaming_session
+    streaming_session["metadata"] = message["metadata"]
+    streaming_session["id"] = str(streaming_session["metadata"]["callId"]) + "-" + str(streaming_session["metadata"]["sessionId"])
+
+async def handle(websocket, path):
+    logging.info("we got a message")
+    logging.info(path) 
+    async for messageStr in websocket:
+        # logging.info(messageStr)
+        message = json.loads(messageStr)
+        if message["event"] is not None and message["event"] == "Connected":
+            logging.info("Consumed ACK")
+        elif message["event"] is not None and message["event"] == "Start":
+            build_session(message=message, websocket=websocket)
+            consume_start_message(message, streaming_session=streaming_sessions[websocket])
+        elif message["event"] is not None and message["event"] == "Media":
+            consume_media_message(message, streaming_session=streaming_sessions[websocket])
+        elif message["event"] is not None and message["event"] == "Stop":
+            consume_stop_message(message, streaming_session=streaming_sessions[websocket])
+            break
+
+async def main():
+    parser = argparse.ArgumentParser(description='Starts up a SimpleWebSocket Server, will send messages to all conencted consumers')
+    parser.add_argument('--port',"-p", help='port number of the producer sending websocket data')
+    parser.add_argument('--hostname',"-n", help='hostname of the producer websocket')
+
+    args = parser.parse_args()
+
+    if args.hostname is None:
+        logging.info('No Hostname was supplied, defaulting to 127.0.0.1')
+        args.hostname = '127.0.0.1'
+
+    if args.port is None:
+        logging.info('No port was supplied, defaulting to 3333')
+        args.port = 3333
+
+    Path(recording_directory).mkdir(parents=True, exist_ok=True)    
+    logging.info("Server started on host: " + args.hostname + ":" + str(args.port))
+    async with websockets.serve(handle, args.hostname, args.port, ping_interval=1, ping_timeout=500000):
+        await asyncio.Future()  # run forever
+
+if __name__ == "__main__":  
+    asyncio.run(main())
+```
+
 ### Audio Streaming
 
 When an agent in the Queue/Campaign is connected to a call, Engage Voice server will start to send websocket messages to `streamingUrl`. There are 4 types of messages:
