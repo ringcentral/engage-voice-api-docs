@@ -1,0 +1,28 @@
+@startuml
+
+title Engage Voice Call Streaming Workflow
+
+autonumber
+
+actor "Admin" as admin
+control "Engage Voice"  as stream
+control "Your WSS server" as wss 
+control "Other services" as other
+actor "Agent" as agent
+
+group provision
+
+    admin --> stream: HTTP POST to create a streaming profile with {streamingUrl}
+    stream -->o admin: establish profile and return OK if successful
+
+end
+
+group streaming
+
+    agent --> stream: agent connected to a call
+    stream --> wss: stream call audio to {streamingUrl} in profile
+    wss ->o other: organize and send real-time data for the use from other services
+
+end
+
+@enduml
