@@ -14033,6 +14033,121 @@
                         "type": "string"
                     }
                 }
+            },
+            "CreateProductReq": {
+                "required": [
+                    "mainAccountId",
+                    "productId",
+                    "productType",
+                    "rcAccountId",
+                    "streamingUrl",
+                    "subAccountId"
+                ],
+                "type": "object",
+                "properties": {
+                    "productType": {
+                        "type": "string",
+                        "enum": [
+                            "QUEUE",
+                            "CAMPAIGN"
+                        ]
+                    },
+                    "productId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "subAccountId": {
+                        "type": "string"
+                    },
+                    "mainAccountId": {
+                        "type": "string"
+                    },
+                    "rcAccountId": {
+                        "type": "string"
+                    },
+                    "streamingUrl": {
+                        "pattern": "^$|^(wss:\\/\\/)([0-9]{1,3}(?:\\.[0-9]{1,3}){3}|(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]))(:([0-9]{1,5}))?$",
+                        "type": "string"
+                    },
+                    "secret": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ProductResponse": {
+                "required": [
+                    "mainAccountId",
+                    "productId",
+                    "productType",
+                    "subAccountId"
+                ],
+                "type": "object",
+                "properties": {
+                    "subAccountId": {
+                        "type": "string"
+                    },
+                    "mainAccountId": {
+                        "type": "string"
+                    },
+                    "productType": {
+                        "type": "string",
+                        "enum": [
+                            "QUEUE",
+                            "CAMPAIGN"
+                        ]
+                    },
+                    "productId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "rcAccountId": {
+                        "type": "string"
+                    },
+                    "streamingUrl": {
+                        "type": "string"
+                    },
+                    "secret": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UpdateProductReq": {
+                "required": [
+                    "productId",
+                    "productType",
+                    "streamingUrl",
+                    "subAccountId"
+                ],
+                "type": "object",
+                "properties": {
+                    "productType": {
+                        "type": "string",
+                        "enum": [
+                            "QUEUE",
+                            "CAMPAIGN"
+                        ]
+                    },
+                    "productId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "subAccountId": {
+                        "type": "string"
+                    },
+                    "mainAccountId": {
+                        "type": "string"
+                    },
+                    "rcAccountId": {
+                        "type": "string"
+                    },
+                    "streamingUrl": {
+                        "pattern": "^$|^(wss:\\/\\/)([0-9]{1,3}(?:\\.[0-9]{1,3}){3}|(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]))(:([0-9]{1,5}))?$",
+                        "type": "string"
+                    },
+                    "secret": {
+                        "type": "string"
+                    }
+                }
             }
         },
         "securitySchemes": {
@@ -25251,6 +25366,156 @@
                     }
                 ]
             }
+        },
+        "/media-distributor/product": {
+            "put": {
+                "tags": [
+                    "Audio Streaming"
+                ],
+                "operationId": "updateProduct",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateProductReq"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Audio Streaming"
+                ],
+                "operationId": "createProduct",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateProductReq"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/media-distributor/product/account/{subAccountId}/type/{productTypeString}/id/{productId}": {
+            "get": {
+                "tags": [
+                    "Audio Streaming"
+                ],
+                "operationId": "getProduct",
+                "parameters": [
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "productTypeString",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProductResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Audio Streaming"
+                ],
+                "operationId": "deleteProduct",
+                "parameters": [
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "productTypeString",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "servers": [
@@ -25261,6 +25526,9 @@
     "tags": [
         {
             "name": "Active Calls"
+        },
+        {
+            "name": "Audio Streaming"
         },
         {
             "name": "Agent Access"
@@ -25380,6 +25648,13 @@
                 "Queue Schedule",
                 "Queue Special ANI",
                 "Number Management"
+            ]
+        },
+        {
+            "name": "Workforce",
+            "popular": true,
+            "tags": [
+                "Audio Streaming"
             ]
         },
         {
