@@ -24,6 +24,8 @@ Overall, we want to:
 
 ### Prerequisites
 
+This guide expects you have ngrok installed and ready to run. If you need to learn more about ngrok, click the link.
+
 - [ngrok](https://ngrok.com/)
 
 ### Step.1 Start ngrok
@@ -34,13 +36,25 @@ In command line, run:
 ngrok http 3333
 ```
 
-And we'll get a https://xxxxxx.ngrok.io. Replace `https` with `wss` so to have `wss://xxxxxx.ngrok.io` as our `streamingUrl`
+This will start a server with an `http` and `https` server URL. In this instance, we want to use the secure connection so look for:
+
+```http
+https://xxxxxx.ngrok.io
+```
+
+Replace `https` with `wss` so we have 
+
+```http
+wss://xxxxxx.ngrok.io
+```
+
+This will be our `streamingUrl`.
 
 ### Step.2 Create a streaming profile
 
 For our server to know where to send audio streams to, we will need a streaming profile.
 
-Let's test with a `Queue`(incoming call streams). Here we will need:
+Let's test with a [Queue](../../../routing/queues)(incoming call streams). Here we will need:
 
 - `productId`: the id for your `Queue`
 - `mainAccountId`: get it from Engage Voice Admin Console -> Settings -> Accounts -> main account id
@@ -48,7 +62,7 @@ Let's test with a `Queue`(incoming call streams). Here we will need:
 - `rcAccountId`: `RingCentral User ID` for admin user
 
 
-Call Streaming provision is per **Queue(inbound calls)/Campaign(outbound calls)**. The streaming service will be activated upon the creation of a streaming profile. As shown by the flow chart above, audio streams will be sent to your `{streamingUrl}` where your WebSocket server can do further processes.
+Call Streaming operates per **Queue(inbound calls) or Campaign(outbound calls)**. The streaming service will be activated upon the creation of a streaming profile. As shown by the flow chart above, audio streams will be sent to your `{streamingUrl}` where your WebSocket server can do further processing.
 
 To create a streaming profile, do `HTTP POST` request to `{BASE_URL}/media-distributor/product`. (
 be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorizationToken](../../../authentication/auth-ringcentral))
@@ -101,7 +115,7 @@ Go to [Engage Voice admin console](https://engage.ringcentral.com/).
 - For Queue: Go to Routing -> Voice queues & skills -> Select your Queue -> Recording settings
 - For Campaign: Go to Dialing -> Campaigns -> Select your Campaign -> Recording settings
 
-<img class="img-fluid" width="100%" src="../../../images/agent-segment-streaming.png">
+<img class="img-fluid" width="997px" src="../../../images/agent-segment-streaming.png">
 
 ### Step.3 Host local server
 
