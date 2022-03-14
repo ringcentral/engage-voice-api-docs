@@ -192,14 +192,14 @@ Since we've already setup ngrok tunnel which will publicly open our server on lo
 ```
 
 ```python tab="Python"
+# requires ffmpeg(https://ffmpeg.org/download.html)
 import argparse
 import asyncio
 import json
 import logging
 import websockets
-import wave
-import audioop
 import base64
+import subprocess
 from pathlib import Path
 
 logging.basicConfig(level=logging.INFO)
@@ -209,54 +209,76 @@ streaming_sessions = {}
 receive = ""
 transmit = ""
 recording_directory = "./recordings/"
- 
+
+class RecordingFile:
+    def __init__(self, metadata, participant_type):
+        self.filename = recording_directory + str(metadata["callId"]) + "-" + str(
+            metadata["sessionId"]) + "_" + participant_type + ".raw"
+        self.channels = 1
+        self.sample_width = 1  # sample size for EMD stream is always 1 byte
+        self.framerate = metadata["sampleRateHertz"]
+        if metadata["audioContentType"] != "audio/x-mulaw":
+            raise TypeError("Only 'audio/x-mulaw' is supported at this time!")
+
+    def write(self, data):
+        with open(self.filename, "ab") as file:
+            file.write(data)
+
+    def get_filename(self):
+        return self.filename
+
+    def get_channels(self):
+        return self.channels
+
+    def get_sample_width(self):
+        return self.sample_width
+
+    def get_framerate(self):
+        return self.framerate
+
+    def convert_raw_to_mulaw(self):
+        proc = subprocess.Popen(
+            args=[
+                'ffmpeg',
+                '-f', 'mulaw',
+                '-ar', str(self.framerate),
+                '-ac', str(self.channels),
+                '-i', self.filename,
+                '-c:a', 'pcm_mulaw',
+                self.filename.replace(".raw", ".wav")],
+            stdout=subprocess.PIPE)
+        stdout, stderr = proc.communicate()
+
+        if stderr:
+            raise Exception('Failed to convert raw audio! Response: {response}'.format(response=stderr))
+
+
 def log_message(message: str) -> None:
     logging.info(f"Message: {message}")
 
 def consume_start_message(message, streaming_session) -> None:
     logging.info("Received a START Message for session_id " + streaming_session["id"])
     global transmit
-    transmit = open_wav_file(message, "agent")
+    transmit = RecordingFile(message["metadata"], "agent")
     global receive
-    receive = open_wav_file(message, "conference")
+    receive = RecordingFile(message["metadata"], "conference")
     log_message(message)
-
-def open_wav_file(message, participant_type):
-    metadata = message["metadata"]
-    file = wave.open(recording_directory
-                     + str(metadata["callId"])
-                     + "-"
-                     + str(metadata["sessionId"])
-                     + "_"
-                     + participant_type
-                     + ".wav", mode="wb")
-    file.setnchannels(1)
-    file.setsampwidth(1)  # sample size for EMD stream is always 1 byte
-    file.setframerate(metadata["sampleRateHertz"])
-    file.setcomptype("NONE", "uncompressed")
-    logging.info(f"Compression type for file {file} is {file.getcomptype()}, {file.getcompname()}")
-    if metadata["audioContentType"] != "audio/x-mulaw":
-        raise TypeError("Only 'audio/x-mulaw' is supported at this time!")
-    return file
-
 
 def consume_media_message(message, streaming_session) -> None:
     # logging.info("Received MEDIA Message for session_id " + streaming_session["id"])
     media = message["media"]
     media_bytes = base64.b64decode(media)
     # logging.info(type(media_bytes))
-    pcm_bytes = audioop.ulaw2lin(media_bytes, 1)  # python's wave module only supports writing unsigned pcm.
-    pcm_bytes = audioop.bias(pcm_bytes, 1, 128)  # convert pcm_bytes to unsigned audio
     if message["perspective"] == "Participant":
-        transmit.writeframes(pcm_bytes)
+        transmit.write(media_bytes)
     if message["perspective"] == "Conference":
-        receive.writeframes(pcm_bytes)
+        receive.write(media_bytes)
     # log_message(message)
     
 def consume_stop_message(message, streaming_session) -> None:
     logging.info("Received STOP Message for session_id " + streaming_session["id"])
-    receive.close()
-    transmit.close()
+    transmit.convert_raw_to_mulaw()
+    receive.convert_raw_to_mulaw()
     log_message(message)
 
 
