@@ -117,43 +117,64 @@ Go to [Engage Voice admin console](https://engage.ringcentral.com/).
 
 <img class="img-fluid" width="997px" src="../../../images/agent-segment-streaming.png">
 
-### Step.3 Host local server
+### Step.3 Host Local Server for Live Transcribe
 
-Since we've already setup ngrok tunnel which will publicly open our server on local port `3333` to `wss://xxxxxx.ngrok.io`, let's now start our server with below sample code. It receives audio streaming segments and write them into files under `recordings` folder.
+There are many live transcribe service providers. Here we use [Google Cloud Speech To Text](https://cloud.google.com/speech-to-text/docs) service as an example.
+
+#### Prerequisites
+
+- [Google Cloud Account](https://cloud.google.com/)
+- [Enable Google Speech To Text Service](https://console.cloud.google.com/speech/overview)
+- [Google Service Account](https://cloud.google.com/docs/authentication/getting-started)
+
+Since we've already setup ngrok tunnel which will publicly open our server on local port `3333` to `wss://xxxxxx.ngrok.io`, let's now start our server with below sample code. It receives audio streaming segments and applies Google Cloud Speech To Text service to convert them into texts.
+
+#### Sample Code
+
+!!!note
+    Please make sure all required packages in sample code are installed
+
+WebSocket server sample code:
 
 ```javascript tab="Nodejs"
-    // Step.1 in console, do `npm init`
-    // Step.2 `npm i wavefile ws`
-    // Step.3 `node {thisFileName}.js` to start server
-    
-    const { resolve } = require('path');
-    const fs = require('fs');
-    const WaveFile = require('wavefile').WaveFile;
+    // Note: It takes couple of seconds connecting to Google server, then the transcription will begin
 
     const WebSocket = require("ws");
+    // Imports the Google Cloud client library
+    const speech = require('@google-cloud/speech');
+
     const wss = new WebSocket.Server({
         port: 3333
-    });
+        });
 
-    const recordingDirectory = resolve(__dirname, 'recordings');
+    // Creates a client
+    const client = new speech.SpeechClient();
+    const request = {
+        config: {
+            encoding: "MULAW",
+            sampleRateHertz: 8000,
+            languageCode: 'en-US',
+        },
+        interimResults: false, // If you want interim results, set this to true
+        };
 
-    fs.mkdir(recordingDirectory, { recursive: true }, (err) => {
-        if (err) {
-            return console.error(err);
-        }
-    });
-
-    console.log(`Server started on port: ${wss.address().port}`);
-
-    const conferenceWav = new WaveFile();
-    const agentWav = new WaveFile();
-    let conferenceBuffer = Buffer.from('');
-    let agentBuffer = Buffer.from('');
-    let callId = '';
+        console.log(`Server started on port: ${wss.address().port}`);
 
     // Handle Web Socket Connection
     wss.on("connection", function connection(ws) {
         console.log("New Connection Initiated");
+        //Create a recognize stream
+        const recognizeStream = client
+          .streamingRecognize(request)
+          .on('error', console.error)
+          .on('data', data =>
+            process.stdout.write(
+              data.results[0] && data.results[0].alternatives[0]
+                ? `========\n Transcription: ${data.results[0].alternatives[0].transcript}\n    Confidence: ${data.results[0].alternatives[0].confidence}\n`
+                : '\n\nReached transcription time limit, press Ctrl+C\n'
+            )
+            );
+
         ws.on("message", function incoming(message) {
             const msg = JSON.parse(message);
             switch (msg.event) {
@@ -162,28 +183,20 @@ Since we've already setup ngrok tunnel which will publicly open our server on lo
                     console.log(msg);
                     break;
                 case "Start":
-                    console.log('Starting Media Stream and Recording');
+                    console.log('Starting Media Stream');
                     callId = msg.metadata.callId;
                     break;
                 case "Media":
                     switch (msg.perspective) {
+                        // Here we only do client side transcription
                         case 'Conference':
-                            conferenceBuffer = Buffer.concat([conferenceBuffer, Buffer.from(msg.media,  "base64")]);
-                            break;
-                        case 'Participant':
-                            agentBuffer = Buffer.concat([agentBuffer, Buffer.from(msg.media, "base64")] );
+                            recognizeStream.write(msg.media);
                             break;
                     }
                     break;
                 case "Stop":
                     console.log(`Call Has Ended`);
-                    conferenceWav.fromScratch(1, 8000, '8m', conferenceBuffer);
-                    agentWav.fromScratch(1, 8000, '8m', agentBuffer);
-                    conferenceWav.fromMuLaw();
-                    agentWav.fromMuLaw();
-                    fs.writeFileSync(`${recordingDirectory}/${callId}_conference.wav`, conferenceWav.   toBuffer());
-                    fs.writeFileSync(`${recordingDirectory}/${callId}_agent.wav`, agentWav.toBuffer());
-                    console.log(`Audio Files Created`);
+                    recognizeStream.end()
                     break;
             }
         });
@@ -192,117 +205,153 @@ Since we've already setup ngrok tunnel which will publicly open our server on lo
 ```
 
 ```python tab="Python"
-# requires ffmpeg(https://ffmpeg.org/download.html)
 import argparse
 import asyncio
 import json
 import logging
 import websockets
 import base64
-import subprocess
-from pathlib import Path
+import sys
+import re
+import threading
+from google.cloud import speech
+from six.moves import queue
 
 logging.basicConfig(level=logging.INFO)
 
-streaming_sessions = {}
+BUFFER_COUNT = 5 # to add up audio segments to 100ms as recommended by Google
 
-receive = ""
-transmit = ""
-recording_directory = "./recordings/"
+def listen_print_loop(responses):
+    """Iterates through server responses and prints them.
+    The responses passed is a generator that will block until a response
+        is provided by the server.
+    Each response may contain multiple results, and each result may contain
+    multiple alternatives; for details, see https://goo.gl/tjCPAU.  Here we
+        print only the transcription for the top alternative of the top result.
+    In this case, responses are provided for interim results as well. If the
+    response is an interim one, print a line feed at the end of it, to allow
+    the next result to overwrite it, until the response is a final one. For the
+    final one, print a newline to preserve the finalized transcription.
+    """
+    num_chars_printed = 0
+    for response in responses:
+        if not response.results:
+                continue
+        # The `results` list is consecutive. For streaming, we only care about
+        # the first result being considered, since once it's `is_final`, it
+        # moves on to considering the next utterance.
+        result = response.results[0]
+        if not result.alternatives:
+                continue
+        # Display the transcription of the top alternative.
+        transcript = result.alternatives[0].transcript
+        # Display interim results, but with a carriage return at the end of the
+        # line, so subsequent lines will overwrite them.
+        #
+        # If the previous result was longer than this one, we need to print
+        # some extra spaces to overwrite the previous result
+        overwrite_chars = " " * (num_chars_printed - len(transcript))
+        if not result.is_final:
+            sys.stdout.write(f'{transcript}{overwrite_chars}\r')
+            sys.stdout.flush()
+            num_chars_printed = len(transcript)
+        else:
+            print(transcript + overwrite_chars)
+            # Exit recognition if any of the transcribed phrases could be
+            # one of our keywords.
+            if re.search(r"\b(exit|quit)\b", transcript, re.I):
+                print("Exiting..")
+                break
+            num_chars_printed = 0
 
-class RecordingFile:
-    def __init__(self, metadata, participant_type):
-        self.filename = recording_directory + str(metadata["callId"]) + "-" + str(
-            metadata["sessionId"]) + "_" + participant_type + ".raw"
-        self.channels = 1
-        self.sample_width = 1  # sample size for EMD stream is always 1 byte
-        self.framerate = metadata["sampleRateHertz"]
-        if metadata["audioContentType"] != "audio/x-mulaw":
-            raise TypeError("Only 'audio/x-mulaw' is supported at this time!")
+class Transcoder(object):
+    """
+    Converts audio chunks to text
+    """
+    def __init__(self):
+        self.buff = queue.Queue()
+        self.closed = False
+        self.transcript = None
+        self.client = speech.SpeechClient()
+        self.config = speech.RecognitionConfig(
+            encoding=speech.RecognitionConfig.AudioEncoding.MULAW,
+            sample_rate_hertz=8000,
+            language_code="en-US",
+            max_alternatives=1,
+            model='phone_call'
+            )
+        self.streaming_config = speech.StreamingRecognitionConfig(   
+            config=self.config, interim_results=True,
+        )
+        """Start up streaming speech call"""
+        t = threading.Thread(target=self.process)
+        t.isDaemon = True
+        t.start()
+
+    
+    def process(self):
+        """
+        Audio stream recognition and result parsing
+        """
+        audio_generator = self.stream_generator()
+        requests = (speech.StreamingRecognizeRequest(audio_content=content)
+                    for content in audio_generator)
+
+        responses = self.client.streaming_recognize(self.streaming_config, requests)
+        listen_print_loop(responses)
+
+    def stream_generator(self):
+        while not self.closed:
+            chunk = self.buff.get()
+            if chunk is None:
+                return
+            data = [chunk]
+            while True:
+                try:
+                    chunk = self.buff.get(block=False)
+                    if chunk is None:
+                        return
+                    data.append(chunk)
+                except queue.Empty:
+                    break
+            yield b''.join(data)
 
     def write(self, data):
-        with open(self.filename, "ab") as file:
-            file.write(data)
-
-    def get_filename(self):
-        return self.filename
-
-    def get_channels(self):
-        return self.channels
-
-    def get_sample_width(self):
-        return self.sample_width
-
-    def get_framerate(self):
-        return self.framerate
-
-    def convert_raw_to_mulaw(self):
-        proc = subprocess.Popen(
-            args=[
-                'ffmpeg',
-                '-f', 'mulaw',
-                '-ar', str(self.framerate),
-                '-ac', str(self.channels),
-                '-i', self.filename,
-                '-c:a', 'pcm_mulaw',
-                self.filename.replace(".raw", ".wav")],
-            stdout=subprocess.PIPE)
-        stdout, stderr = proc.communicate()
-
-        if stderr:
-            raise Exception('Failed to convert raw audio! Response: {response}'.format(response=stderr))
-
+        """
+        Writes data to the buffer
+        """
+        self.buff.put(data)
+    
+    def exit(self):
+        self.closed = True
 
 def log_message(message: str) -> None:
     logging.info(f"Message: {message}")
 
-def consume_start_message(message, streaming_session) -> None:
-    logging.info("Received a START Message for session_id " + streaming_session["id"])
-    global transmit
-    transmit = RecordingFile(message["metadata"], "agent")
-    global receive
-    receive = RecordingFile(message["metadata"], "conference")
-    log_message(message)
-
-def consume_media_message(message, streaming_session) -> None:
-    # logging.info("Received MEDIA Message for session_id " + streaming_session["id"])
-    media = message["media"]
-    media_bytes = base64.b64decode(media)
-    # logging.info(type(media_bytes))
-    if message["perspective"] == "Participant":
-        transmit.write(media_bytes)
-    if message["perspective"] == "Conference":
-        receive.write(media_bytes)
-    # log_message(message)
-    
-def consume_stop_message(message, streaming_session) -> None:
-    logging.info("Received STOP Message for session_id " + streaming_session["id"])
-    transmit.convert_raw_to_mulaw()
-    receive.convert_raw_to_mulaw()
-    log_message(message)
-
-
-def build_session(message, websocket) -> None:
-    streaming_session = {"metadata": {}, "id": ""}
-    streaming_sessions[websocket] = streaming_session
-    streaming_session["metadata"] = message["metadata"]
-    streaming_session["id"] = str(streaming_session["metadata"]["callId"]) + "-" + str(streaming_session["metadata"]["sessionId"])
-
 async def handle(websocket, path):
-    logging.info("we got a message")
     logging.info(path) 
+    transcoder = Transcoder()
+    buffer_counter=0
+    buffer = b""
     async for messageStr in websocket:
         # logging.info(messageStr)
         message = json.loads(messageStr)
         if message["event"] is not None and message["event"] == "Connected":
             logging.info("Consumed ACK")
         elif message["event"] is not None and message["event"] == "Start":
-            build_session(message=message, websocket=websocket)
-            consume_start_message(message, streaming_session=streaming_sessions[websocket])
+            print("start")
         elif message["event"] is not None and message["event"] == "Media":
-            consume_media_message(message, streaming_session=streaming_sessions[websocket])
+            buffer_counter += 1
+            media = message["media"]
+            media_bytes = base64.b64decode(media)
+            if buffer_counter > BUFFER_COUNT:
+                transcoder.write(buffer)
+                buffer_counter=0
+                buffer = b""
+            else:
+                buffer = buffer + media_bytes
         elif message["event"] is not None and message["event"] == "Stop":
-            consume_stop_message(message, streaming_session=streaming_sessions[websocket])
+            transcoder.exit()
             break
 
 async def main():
@@ -320,7 +369,6 @@ async def main():
         logging.info('No port was supplied, defaulting to 3333')
         args.port = 3333
 
-    Path(recording_directory).mkdir(parents=True, exist_ok=True)    
     logging.info("Server started on host: " + args.hostname + ":" + str(args.port))
     async with websockets.serve(handle, args.hostname, args.port, ping_interval=1, ping_timeout=500000):
         await asyncio.Future()  # run forever
@@ -329,7 +377,26 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
+Start the server and make a phone call. It then will take couple of seconds to connect to Google service. After that, transcribed texts will start to show in your console like in below.
+
+- NodeJs
+
+<img class="img-fluid" width="300px" src="../../../images/call-streaming-live-transcribe-console-nodejs.png">
+
+- Python
+
+<img class="img-fluid" width="600px" src="../../../images/call-streaming-live-transcribe-console-python.png">
+
+#### Additional Notes
+
+To achieve better performance overall, you might want to look into the details on:
+
+- [Recognition Config](https://cloud.google.com/speech-to-text/docs/reference/rpc/google.cloud.speech.v1#recognitionconfig)
+- [Best Practices](https://cloud.google.com/speech-to-text/docs/best-practices)
+
 ### Audio Streaming
+
+Let's have a quick review on what the WebSocket messages look like.
 
 When an agent in the Queue/Campaign is connected to a call, Engage Voice server will start to send websocket messages to `streamingUrl`. There are 4 types of messages:
 
