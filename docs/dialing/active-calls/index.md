@@ -24,17 +24,20 @@ GET {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/list?product=ACCOUN
 
 ### Response
 ```json
-[ { uii: "202005081040440132050000019657",
-    accountId: "12440011",
-    ani: "6501234567",
-    dnis: "8661234567",
-    enqueueTime: "2020-05-08T14:40:47.000+0000",
-    dequeueTime: null,
-    callState: "ACTIVE",
-    archive: false,
-    agentFirstName: "Paco",
-    agentLastName: "Vu",
-    destinationName: null } ]
+[ { "uii": "202005081040440132050000019657",
+    "accountId": "12440011",
+    "ani": "6501234567",
+    "dnis": "8661234567",
+    "enqueueTime": "2020-05-08T14:40:47.000+0000",
+    "dequeueTime": null,
+    "callState": "ACTIVE",
+    "archive": false,
+    "agentFirstName": "Paco",
+    "agentLastName": "Vu",
+    "destinationName": null,
+    "externalId": null,
+    "cnam": null }
+]
 ```  
 
 
