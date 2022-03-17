@@ -25367,7 +25367,7 @@
                 ]
             }
         },
-        "/media-distributor/product": {
+        "/platform/api/media/product": {
             "put": {
                 "tags": [
                     "Audio Streaming"
@@ -25425,7 +25425,7 @@
                 }
             }
         },
-        "/media-distributor/product/account/{subAccountId}/type/{productTypeString}/id/{productId}": {
+        "/platform/api/media/product/account/{subAccountId}/type/{productTypeString}/id/{productId}": {
             "get": {
                 "tags": [
                     "Audio Streaming"

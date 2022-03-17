@@ -451,6 +451,9 @@ Start Message will be sent right after Connect Message. It contains the metadata
 
 Media Message is the primary message type you will receive and it will sent continuously. It contains the audio data of your stream.
 
+!!!note
+    Media stream is encoded with ulaw algorithm, with sample rate 8000Hz and depth 8-bit
+
 ```json
 { 
     "event": "Media", 
