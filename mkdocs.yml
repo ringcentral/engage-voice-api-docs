@@ -92,7 +92,9 @@ pages:
     - 'Workforce Management':
       - 'Creating an Event': notifications/wfm/configure-wfm.md
       - 'Event Payload': notifications/wfm/payload-wfm.md
-      - 'Integration APIs': workforce/integration-api.md
+    - 'Call Streaming': 
+      - 'Getting Started': workforce/call-streaming/getting-started.md
+      - 'Save To Files': workforce/call-streaming/save-to-files.md
     - 'Quality Management': workforce/qm/index.md
     - 'Call Recordings': workforce/call-recording/index.md
 - 'Secondary':
