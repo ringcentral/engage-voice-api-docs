@@ -94,6 +94,7 @@ pages:
       - 'Event Payload': notifications/wfm/payload-wfm.md
     - 'Call Streaming': 
       - 'Getting Started': workforce/call-streaming/getting-started.md
+      - 'Live Transcribe': workforce/call-streaming/live-transcribe.md
       - 'Save To Files': workforce/call-streaming/save-to-files.md
     - 'Quality Management': workforce/qm/index.md
     - 'Call Recordings': workforce/call-recording/index.md

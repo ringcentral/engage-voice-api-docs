@@ -13,42 +13,61 @@
 
 ## Quick Start Guide
 
-The following guide helps you quickly setup your local debugging environment to try out simplest Call Streaming implementation.
+The following guide helps you quickly setup your local WebSocket server to try out Call Streaming by doing live transcription.
 
 Overall, we want to:
 
-- <img class="img-fluid" width="18px" src="../../../images/icons/connection_icon.svg"> Use `ngrok` for web tunneling to open your local server to public
 - <img class="img-fluid" width="18px" src="../../../images/icons/new_file_icon.svg"> Create a streaming profile so we know where to stream call audio data to
 - <img class="img-fluid" width="18px" src="../../../images/icons/computer_icon.svg"> Host a WebSocket server locally
 - <img class="img-fluid" width="18px" src="../../../images/icons/phone_icon.svg"> Test it with an actual call
 
 ### Prerequisites
 
-This guide expects you have ngrok installed and ready to run. If you need to learn more about ngrok, click the link.
+There are many live transcribe service providers. Here we use [Google Cloud Speech To Text](https://cloud.google.com/speech-to-text/docs) service as an example.
 
-- [ngrok](https://ngrok.com/)
+- [Google Cloud Account](https://cloud.google.com/)
+- [Enable Google Speech To Text Service](https://console.cloud.google.com/speech/overview)
+- [Google Service Account](https://cloud.google.com/docs/authentication/getting-started)
 
-### Step.1 Start ngrok
+### Step.1 Start local server
 
-In command line, run:
+After above setup, you will get a JSON key file in your local drive. Copy the path(including file name) as `keyFilePath`.
 
-```bash
-ngrok http 3333
+#### Nodejs(recommended)
+
+- Create a new folder and do `npm init`
+- Install a simple test package `npm i ev-audio-streaming-transcription`
+- Create a new file `server.js` as below
+
+```
+const { default: runServer } = require('ev-audio-streaming-transcription');
+
+const port = 3333;
+// fill in value with your keyFilePath
+const keyFilePath = ;
+runServer(port, keyFilePath);
 ```
 
-This will start a server with an `http` and `https` server URL. In this instance, we want to use the secure connection so look for:
+- `node server.js`
 
-```http
-https://xxxxxx.ngrok.io
+And you will get a WSS address which will be used later as `{streamingUrl}`.
+
+#### Python
+
+- Create a new folder and install a simple test package `pip install ev_audio_streaming_transcription_py`
+- Create a new file `server.py` as below
+
+```
+from ev_audio_streaming_transcription_py import server
+import asyncio
+
+port=3333
+if __name__ == "__main__":  
+    asyncio.run(server.main(port))
 ```
 
-Replace `https` with `wss` so we have 
-
-```http
-wss://xxxxxx.ngrok.io
-```
-
-This will be our `streamingUrl`.
+- `python server.py`
+- Open another terminal and run `ngrok http 3333`. You will get a HTTPS address. Replace 'HTTPS' with 'WSS' and that is the address which will be used later as `{streamingUrl}`.
 
 ### Step.2 Create a streaming profile
 
@@ -117,284 +136,20 @@ Go to [Engage Voice admin console](https://engage.ringcentral.com/).
 
 <img class="img-fluid" width="997px" src="../../../images/agent-segment-streaming.png">
 
-### Step.3 Host Local Server for Live Transcribe
+Log in as SU(Super User) -> Settings -> Accounts -> General -> Telephony Server Group -> Change to 'emd_beta'
 
-There are many live transcribe service providers. Here we use [Google Cloud Speech To Text](https://cloud.google.com/speech-to-text/docs) service as an example.
+<img class="img-fluid" width="997px" src="../../../images/change-telephony-server-group.png">
 
-#### Prerequisites
+### Step.3 Make a call
 
-- [Google Cloud Account](https://cloud.google.com/)
-- [Enable Google Speech To Text Service](https://console.cloud.google.com/speech/overview)
-- [Google Service Account](https://cloud.google.com/docs/authentication/getting-started)
+Have an agent available in the `Queue` that you've created a streaming profile with and call the number of the `Queue`. Check local server's log. There should be logging for different types of messages. Upon the hangup of the call, the local server will wrap up audio file writing and you should be able to play the audio.
 
-Since we've already setup ngrok tunnel which will publicly open our server on local port `3333` to `wss://xxxxxx.ngrok.io`, let's now start our server with below sample code. It receives audio streaming segments and applies Google Cloud Speech To Text service to convert them into texts.
+Call streaming will work alongside call recording.
 
-#### Sample Code
+<img class="img-fluid" width="300px" src="../../../images/call-streaming-agent-call.png">
 
-!!!note
-    Please make sure all required packages in sample code are installed
 
-WebSocket server sample code:
-
-```javascript tab="Nodejs"
-    // Note: It takes couple of seconds connecting to Google server, then the transcription will begin
-
-    const WebSocket = require("ws");
-    // Imports the Google Cloud client library
-    const speech = require('@google-cloud/speech');
-
-    const wss = new WebSocket.Server({
-        port: 3333
-        });
-
-    // Creates a client
-    const client = new speech.SpeechClient();
-    const request = {
-        config: {
-            encoding: "MULAW",
-            sampleRateHertz: 8000,
-            languageCode: 'en-US',
-        },
-        interimResults: false, // If you want interim results, set this to true
-        };
-
-        console.log(`Server started on port: ${wss.address().port}`);
-
-    // Handle Web Socket Connection
-    wss.on("connection", function connection(ws) {
-        console.log("New Connection Initiated");
-        //Create a recognize stream
-        const recognizeStream = client
-          .streamingRecognize(request)
-          .on('error', console.error)
-          .on('data', data =>
-            process.stdout.write(
-              data.results[0] && data.results[0].alternatives[0]
-                ? `========\n Transcription: ${data.results[0].alternatives[0].transcript}\n    Confidence: ${data.results[0].alternatives[0].confidence}\n`
-                : '\n\nReached transcription time limit, press Ctrl+C\n'
-            )
-            );
-
-        ws.on("message", function incoming(message) {
-            const msg = JSON.parse(message);
-            switch (msg.event) {
-                case "Connected":
-                    console.log(`A new call has connected.`);
-                    console.log(msg);
-                    break;
-                case "Start":
-                    console.log('Starting Media Stream');
-                    callId = msg.metadata.callId;
-                    break;
-                case "Media":
-                    switch (msg.perspective) {
-                        // Here we only do client side transcription
-                        case 'Conference':
-                            recognizeStream.write(msg.media);
-                            break;
-                    }
-                    break;
-                case "Stop":
-                    console.log(`Call Has Ended`);
-                    recognizeStream.end()
-                    break;
-            }
-        });
-    });
-
-```
-
-```python tab="Python"
-import argparse
-import asyncio
-import json
-import logging
-import websockets
-import base64
-import sys
-import re
-import threading
-from google.cloud import speech
-from six.moves import queue
-
-logging.basicConfig(level=logging.INFO)
-
-BUFFER_COUNT = 5 # to add up audio segments to 100ms as recommended by Google
-
-def listen_print_loop(responses):
-    """Iterates through server responses and prints them.
-    The responses passed is a generator that will block until a response
-        is provided by the server.
-    Each response may contain multiple results, and each result may contain
-    multiple alternatives; for details, see https://goo.gl/tjCPAU.  Here we
-        print only the transcription for the top alternative of the top result.
-    In this case, responses are provided for interim results as well. If the
-    response is an interim one, print a line feed at the end of it, to allow
-    the next result to overwrite it, until the response is a final one. For the
-    final one, print a newline to preserve the finalized transcription.
-    """
-    num_chars_printed = 0
-    for response in responses:
-        if not response.results:
-                continue
-        # The `results` list is consecutive. For streaming, we only care about
-        # the first result being considered, since once it's `is_final`, it
-        # moves on to considering the next utterance.
-        result = response.results[0]
-        if not result.alternatives:
-                continue
-        # Display the transcription of the top alternative.
-        transcript = result.alternatives[0].transcript
-        # Display interim results, but with a carriage return at the end of the
-        # line, so subsequent lines will overwrite them.
-        #
-        # If the previous result was longer than this one, we need to print
-        # some extra spaces to overwrite the previous result
-        overwrite_chars = " " * (num_chars_printed - len(transcript))
-        if not result.is_final:
-            sys.stdout.write(f'{transcript}{overwrite_chars}\r')
-            sys.stdout.flush()
-            num_chars_printed = len(transcript)
-        else:
-            print(transcript + overwrite_chars)
-            # Exit recognition if any of the transcribed phrases could be
-            # one of our keywords.
-            if re.search(r"\b(exit|quit)\b", transcript, re.I):
-                print("Exiting..")
-                break
-            num_chars_printed = 0
-
-class Transcoder(object):
-    """
-    Converts audio chunks to text
-    """
-    def __init__(self):
-        self.buff = queue.Queue()
-        self.closed = False
-        self.transcript = None
-        self.client = speech.SpeechClient()
-        self.config = speech.RecognitionConfig(
-            encoding=speech.RecognitionConfig.AudioEncoding.MULAW,
-            sample_rate_hertz=8000,
-            language_code="en-US",
-            max_alternatives=1,
-            model='phone_call'
-            )
-        self.streaming_config = speech.StreamingRecognitionConfig(   
-            config=self.config, interim_results=True,
-        )
-        """Start up streaming speech call"""
-        t = threading.Thread(target=self.process)
-        t.isDaemon = True
-        t.start()
-
-    
-    def process(self):
-        """
-        Audio stream recognition and result parsing
-        """
-        audio_generator = self.stream_generator()
-        requests = (speech.StreamingRecognizeRequest(audio_content=content)
-                    for content in audio_generator)
-
-        responses = self.client.streaming_recognize(self.streaming_config, requests)
-        listen_print_loop(responses)
-
-    def stream_generator(self):
-        while not self.closed:
-            chunk = self.buff.get()
-            if chunk is None:
-                return
-            data = [chunk]
-            while True:
-                try:
-                    chunk = self.buff.get(block=False)
-                    if chunk is None:
-                        return
-                    data.append(chunk)
-                except queue.Empty:
-                    break
-            yield b''.join(data)
-
-    def write(self, data):
-        """
-        Writes data to the buffer
-        """
-        self.buff.put(data)
-    
-    def exit(self):
-        self.closed = True
-
-def log_message(message: str) -> None:
-    logging.info(f"Message: {message}")
-
-async def handle(websocket, path):
-    logging.info(path) 
-    transcoder = Transcoder()
-    buffer_counter=0
-    buffer = b""
-    async for messageStr in websocket:
-        # logging.info(messageStr)
-        message = json.loads(messageStr)
-        if message["event"] is not None and message["event"] == "Connected":
-            logging.info("Consumed ACK")
-        elif message["event"] is not None and message["event"] == "Start":
-            print("start")
-        elif message["event"] is not None and message["event"] == "Media":
-            buffer_counter += 1
-            media = message["media"]
-            media_bytes = base64.b64decode(media)
-            if buffer_counter > BUFFER_COUNT:
-                transcoder.write(buffer)
-                buffer_counter=0
-                buffer = b""
-            else:
-                buffer = buffer + media_bytes
-        elif message["event"] is not None and message["event"] == "Stop":
-            transcoder.exit()
-            break
-
-async def main():
-    parser = argparse.ArgumentParser(description='Starts up a SimpleWebSocket Server, will send messages to all conencted consumers')
-    parser.add_argument('--port',"-p", help='port number of the producer sending websocket data')
-    parser.add_argument('--hostname',"-n", help='hostname of the producer websocket')
-
-    args = parser.parse_args()
-
-    if args.hostname is None:
-        logging.info('No Hostname was supplied, defaulting to 127.0.0.1')
-        args.hostname = '127.0.0.1'
-
-    if args.port is None:
-        logging.info('No port was supplied, defaulting to 3333')
-        args.port = 3333
-
-    logging.info("Server started on host: " + args.hostname + ":" + str(args.port))
-    async with websockets.serve(handle, args.hostname, args.port, ping_interval=1, ping_timeout=500000):
-        await asyncio.Future()  # run forever
-
-if __name__ == "__main__":  
-    asyncio.run(main())
-```
-
-Start the server and make a phone call. It then will take couple of seconds to connect to Google service. After that, transcribed texts will start to show in your console like in below.
-
-- NodeJs
-
-<img class="img-fluid" width="300px" src="../../../images/call-streaming-live-transcribe-console-nodejs.png">
-
-- Python
-
-<img class="img-fluid" width="600px" src="../../../images/call-streaming-live-transcribe-console-python.png">
-
-#### Additional Notes
-
-To achieve better performance overall, you might want to look into the details on:
-
-- [Recognition Config](https://cloud.google.com/speech-to-text/docs/reference/rpc/google.cloud.speech.v1#recognitionconfig)
-- [Best Practices](https://cloud.google.com/speech-to-text/docs/best-practices)
-
-### Audio Streaming
+## Audio Streaming Message Data
 
 Let's have a quick review on what the WebSocket messages look like.
 
@@ -482,12 +237,3 @@ Stop Message is sent at the end of the call and contains relevant metadata. We w
     }
 } 
 ```
-
-
-### Step.4 Make a call
-
-Have an agent available in the `Queue` that you've created a streaming profile with and call the number of the `Queue`. Check local server's log. There should be logging for different types of messages. Upon the hangup of the call, the local server will wrap up audio file writing and you should be able to play the audio.
-
-Call streaming will work alongside call recording.
-
-<img class="img-fluid" width="300px" src="../../../images/call-streaming-agent-call.png">
