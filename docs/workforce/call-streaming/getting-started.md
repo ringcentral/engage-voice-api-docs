@@ -129,16 +129,20 @@ Sample response:
 
 #### Enable Streaming for Queue/Campaign
 
-Go to [Engage Voice admin console](https://engage.ringcentral.com/).
+**Go to [Engage Voice admin console](https://engage.ringcentral.com/).**
 
-- For Queue: Go to Routing -> Voice queues & skills -> Select your Queue -> Recording settings
-- For Campaign: Go to Dialing -> Campaigns -> Select your Campaign -> Recording settings
+- **For Queue: Go to Routing -> Voice queues & skills -> Select your Queue -> Recording settings**
+- **For Campaign: Go to Dialing -> Campaigns -> Select your Campaign -> Recording settings**
 
 <img class="img-fluid" width="997px" src="../../../images/agent-segment-streaming.png">
 
-Log in as SU(Super User) -> Settings -> Accounts -> General -> Telephony Server Group -> Change to 'emd_beta'
+**Log in as SU(Super User) -> Settings -> Accounts -> General -> Telephony Server Group -> Change to 'emd_beta'**
 
 <img class="img-fluid" width="997px" src="../../../images/change-telephony-server-group.png">
+
+**Log in as SU -> Channels -> Phone numbers -> Choose target phone number -> Edit -> VRU Network -> DS:5-P01 for aws80 OR DS:9-other for aws82**
+
+<img class="img-fluid" width="997px" src="../../../images/change-phone-number-vru.png">
 
 ### Step.3 Make a call
 
