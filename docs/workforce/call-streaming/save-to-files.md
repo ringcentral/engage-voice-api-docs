@@ -3,11 +3,33 @@
 !!!important
     It's assumed that you have gone through [Getting Started Guide](./../getting-started)
 
-### Step.1 Setup ngrok and streaming profile
+### Step.1 Start ngrok
 
-Please refer to [Getting Started Guide](./../getting-started) Step.1 and Step.2.
+In command line, run:
 
-### Step.2 Start Local Server
+```bash
+ngrok http 3333
+```
+
+This will start a server with an `http` and `https` server URL. In this instance, we want to use the secure connection so look for:
+
+```http
+https://xxxxxx.ngrok.io
+```
+
+Replace `https` with `wss` so we have 
+
+```http
+wss://xxxxxx.ngrok.io
+```
+
+This will be our `streamingUrl`.
+
+### Step.2 Setup streaming profile
+
+Please refer to [Getting Started Guide](./../getting-started) Step.1.
+
+### Step.3 Start Local Server
 
 Let's start our local server which receives audio streaming segments and saves them into local files.
 
