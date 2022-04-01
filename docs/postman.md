@@ -1,6 +1,6 @@
 # Using Postman to Test Engage Voice APIs
 
-For easy testing using [Postman](https://www.getpostman.com/), RingCentral provides a Postman 2.0 Collection for Engage Voice. It is based on the RingCentral Engage Voice OpenAPI 3.0 Specificaion. While Postman can import an OpenAPI 3.0 Specification directlszy, RingCentral recommends using the Collection as it provides better authorization handling using Postman variables and environments as recommended by Postman.
+For easy testing using [Postman](https://www.getpostman.com/), RingCentral provides a Postman 2.0 Collection for Engage Voice. It is based on the RingCentral Engage Voice OpenAPI 3.0 Specificaion. While Postman can import an OpenAPI 3.0 Specification directly, RingCentral recommends using the Collection as it provides better authorization handling using Postman variables and environments as recommended by Postman.
 
 The files are available here:
 
