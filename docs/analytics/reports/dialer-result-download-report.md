@@ -32,7 +32,7 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 
 #### HTTP
 ```bash
-  POST /api/v1/admin/accounts/{accountId}/json
+  POST /api/v1/admin/accounts/{accountId}/reportsStreaming
   Authorization: bearer <myAccessToken>
   Content-Type: application/json;charset=UTF-8
   Accept: application/json
