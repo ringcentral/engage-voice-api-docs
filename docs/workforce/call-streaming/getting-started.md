@@ -83,8 +83,7 @@ Let's test with a [Queue](../../../routing/queues)(incoming call streams). Here 
 
 Call Streaming operates per **Queue(inbound calls) or Campaign(outbound calls)**. The streaming service will be activated upon the creation of a streaming profile. As shown by the flow chart above, audio streams will be sent to your `{streamingUrl}` where your WebSocket server can do further processing.
 
-To create a streaming profile, do `HTTP POST` request to `{BASE_URL}/media-distributor/product`. (
-be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorizationToken](../../../authentication/auth-ringcentral))
+To create a streaming profile, do `HTTP POST` request to `{PLATFORM_BASE_URL}/media-distributor/product` (be sure to set [PLATFORM_BASE_URL](../../../basics/uris/#current-host) with `Bearer Auth Token` from [authorizationToken](../../../authentication/auth-ringcentral)).
 
 | API Property | Description |
 |-|-|
@@ -94,7 +93,7 @@ be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 
 Sample request:
 
-`POST {BASE_URL}/media-distributor/product`
+`POST https://{PLATFORM_ENDPOINT_PATH}/platform/api/media/product`
 
 `Authorization: bearer {authorizationToken}`
 
@@ -135,14 +134,6 @@ Sample response:
 - **For Campaign: Go to Dialing -> Campaigns -> Select your Campaign -> Recording settings**
 
 <img class="img-fluid" width="997px" src="../../../images/agent-segment-streaming.png">
-
-**Log in as SU(Super User) -> Settings -> Accounts -> General -> Telephony Server Group -> Change to 'emd_beta'**
-
-<img class="img-fluid" width="997px" src="../../../images/change-telephony-server-group.png">
-
-**Log in as SU -> Channels -> Phone numbers -> Choose target phone number -> Edit -> VRU Network -> DS:5-P01 for aws80 OR DS:9-other for aws82**
-
-<img class="img-fluid" width="997px" src="../../../images/change-phone-number-vru.png">
 
 ### Step.3 Make a call
 
