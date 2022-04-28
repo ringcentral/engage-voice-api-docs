@@ -25369,6 +25369,7 @@
         },
         "/platform/api/media/product": {
             "put": {
+                "summary": "Update streaming profile",
                 "tags": [
                     "Audio Streaming"
                 ],
@@ -25397,6 +25398,7 @@
                 }
             },
             "post": {
+                "summary": "Create streaming profile",
                 "tags": [
                     "Audio Streaming"
                 ],
@@ -25427,6 +25429,7 @@
         },
         "/platform/api/media/product/account/{subAccountId}/type/{productTypeString}/id/{productId}": {
             "get": {
+                "summary": "Get streaming profile",
                 "tags": [
                     "Audio Streaming"
                 ],
@@ -25472,6 +25475,7 @@
                 }
             },
             "delete": {
+                "summary": "Delete streaming profile",
                 "tags": [
                     "Audio Streaming"
                 ],

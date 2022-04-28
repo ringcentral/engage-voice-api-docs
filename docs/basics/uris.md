@@ -29,6 +29,8 @@ Engage Voice is using a new host server, and is accessible on `https://engage.ri
   `/api/auth/login`
 * API endpoint path
   `/voice/api/v1`
+* Platform base url
+  `/platform/api`
 
 ### Legacy Host
 Engage Voice legacy host servers are also still accessible on `https://portal.vacd.biz` and `https://portal.virtualacd.biz`.
