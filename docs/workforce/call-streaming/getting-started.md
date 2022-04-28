@@ -73,7 +73,7 @@ if __name__ == "__main__":
 
 For our server to know where to send audio streams to, we will need a streaming profile.
 
-Let's test with a [Queue](../../../routing/queues)(incoming call streams). Here we will need:
+Let's test with a [Queue](../../../routing/queues/queues)(incoming call streams). Here we will need:
 
 - `productId`: the id for your `Queue`
 - `mainAccountId`: get it from Engage Voice Admin Console -> Settings -> Accounts -> main account id

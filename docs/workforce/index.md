@@ -7,4 +7,4 @@ We break down Workforce Optimization into the following topics:
 * [Workforce Management](../notifications/wfm/configure-wfm)
 * [Quality Management](./qm)
 * [Call Recordings](./call-recording)
-* [Call Streaming](./call-streaming)
+* [Call Streaming](./call-streaming/getting-started)
