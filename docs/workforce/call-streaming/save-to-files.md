@@ -36,7 +36,7 @@ Let's start our local server which receives audio streaming segments and saves t
 #### Sample Code
 
 ```javascript tab="Nodejs"
-    // Step.1 in console, do `npm init`
+        // Step.1 in console, do `npm init`
     // Step.2 `npm i wavefile ws`
     // Step.3 `node {thisFileName}.js` to start server
     
@@ -59,25 +59,26 @@ Let's start our local server which receives audio streaming segments and saves t
 
     console.log(`Server started on port: ${wss.address().port}`);
 
-    const conferenceWav = new WaveFile();
-    const agentWav = new WaveFile();
-    let conferenceBuffer = Buffer.from('');
-    let agentBuffer = Buffer.from('');
-    let callId = '';
-
     // Handle Web Socket Connection
     wss.on("connection", function connection(ws) {
         console.log("New Connection Initiated");
+
+        const conferenceWav = new WaveFile();
+        const agentWav = new WaveFile();
+        let conferenceBuffer = Buffer.from('');
+        let agentBuffer = Buffer.from('');
+        let callId = '';
+
+
         ws.on("message", function incoming(message) {
             const msg = JSON.parse(message);
             switch (msg.event) {
                 case "Connected":
-                    console.log(`A new call has connected.`);
-                    console.log(msg);
+                    console.log(JSON.stringify(msg));
                     break;
                 case "Start":
-                    console.log('Starting Media Stream and Recording');
-                    callId = msg.metadata.callId;
+                    callId = `${msg.metadata.callId}-${msg.metadata.sessionId}`;
+                    console.log(`${callId}: START  ${JSON.stringify(msg)}`);
                     break;
                 case "Media":
                     switch (msg.perspective) {
@@ -90,14 +91,15 @@ Let's start our local server which receives audio streaming segments and saves t
                     }
                     break;
                 case "Stop":
-                    console.log(`Call Has Ended`);
+                    console.log(`${callId}: STOP ${JSON.stringify(msg)}`);
+
                     conferenceWav.fromScratch(1, 8000, '8m', conferenceBuffer);
                     agentWav.fromScratch(1, 8000, '8m', agentBuffer);
                     conferenceWav.fromMuLaw();
                     agentWav.fromMuLaw();
-                    fs.writeFileSync(`${recordingDirectory}/${callId}_conference.wav`, conferenceWav.   toBuffer());
+                    fs.writeFileSync(`${recordingDirectory}/${callId}_conference.wav`, conferenceWav.toBuffer());
                     fs.writeFileSync(`${recordingDirectory}/${callId}_agent.wav`, agentWav.toBuffer());
-                    console.log(`Audio Files Created`);
+                    console.log(`${callId}: Audio Files Created`);
                     break;
             }
         });
