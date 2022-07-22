@@ -14148,6 +14148,171 @@
                         "type": "string"
                     }
                 }
+            },
+            "InteractionMetadataRequest": {
+                "description": "Parameters for realtime reports",
+                "required": [
+                    "segmentEndTime",
+                    "timeInterval",
+                    "timeZone"
+                ],
+                "type": "object",
+                "properties": {
+                    "segmentEndTime": {
+                        "type": "string",
+                        "description": "Start date and time for the logging interval",
+                        "example": "2021-02-28 08:27:15"
+                    },
+                    "timeInterval": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Interval length in seconds. Maximum allowed length is 3600 (1 hour). Note: if your time interval start or end in the future consecutive requests may return different list of segment. Idempotent results only guaranteed for the completed intervals. Segment recording URL may be added after delay. Allow 1-2min for processing.",
+                        "example": 1800
+                    },
+                    "timeZone": {
+                        "type": "string",
+                        "description": "Timezone name which should be used for report generation",
+                        "example": "US/Eastern"
+                    }
+                }
+            },
+            "InteractionSegmentMetaData2Array": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/InteractionSegmentMetaData2"
+                }
+            },
+            "InteractionSegmentMetaData2": {
+                "type": "object",
+                "required": [
+                    "interactionId",
+                    "interactionStartTime",
+                    "interactionDuration",
+                    "segmentId",
+                    "segmentAgentId",
+                    "segmentContactStartTime",
+                    "segmentDuration",
+                    "segmentCallingAddress",
+                    "segmentCalledAddress",
+                    "segmentDirection",
+                    "segmentRecordingURL",
+                    "segmentAgentGroupId"
+                ],
+                "properties": {
+                    "interactionId": {
+                        "type": "string",
+                        "description": "Unique interaction ID used to connect different call segments together in transfer/conference scenarios.",
+                        "example": "20200721123305013105000001977"
+                    },
+                    "interactionStartTimeMs": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Start time of the interaction. Could be different from segment start time if customer was engaged with the IVR, waited in queue, etc before agent joined the conversation. Milliseconds precision.",
+                        "example": "2020-07-21T17:32:28.001Z"
+                    },
+                    "interactionDurationMs": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "The total duration of the interaction. Milliseconds precision.",
+                        "example": 832
+                    },
+                    "segmentID": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Unique segment sequnce ID within the interaction.",
+                        "example": 2
+                    },
+                    "segmentAgentId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "RingCentral user id.",
+                        "example": 1009
+                    },
+                    "segmentContactStartTimeMs": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Time agent joined the conversation. Milliseconds precision.",
+                        "example": "2020-07-21T17:32:40.002Z"
+                    },
+                    "segmentContactEndTimeMs": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Time agent left the conversation. Milliseconds precision.",
+                        "example": "2020-07-21T17:32:42.045Z"
+                    },
+                    "segmentDuration": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Segment duration (available even when segmentContactEndTime is not provided). Seconds.",
+                        "example": 832
+                    },
+                    "interactionCallingAddress": {
+                        "type": "string",
+                        "description": "The ANI of the interaction",
+                        "example": 4155058987
+                    },
+                    "interactionCalledAddress": {
+                        "type": "string",
+                        "description": "The DNIS of the interaction",
+                        "example": 8776239199
+                    },
+                    "interactionDirection": {
+                        "type": "string",
+                        "enum": [
+                            "INBOUND",
+                            "OUTBOUND"
+                        ],
+                        "description": "Direction of the interaction.",
+                        "example": "INBOUND"
+                    },
+                    "segmentRecordingURL": {
+                        "type": "string",
+                        "description": "URL for segment recording",
+                        "example": "https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?v=1&accountId=99990001&bucket=c02-recordings&region=us-east-1&compliance=false&file=99990001/202205/09/20220509120710013214000058679-2.WAV"
+                    },
+                    "segmentAgentGroupId": {
+                        "type": "string",
+                        "description": "Agent group Id",
+                        "example": 8
+                    },
+                    "segmentEvents": {
+                        "type": "array",
+                        "description": "Ordered list of events. Can be empty if segmentRecordingURL is empty. In other cases array start with the event `REC_START`. Events don't overlap each other.",
+                        "items": {
+                            "$ref": "#/components/schemas/InteractionSegmentEvent"
+                        }
+                    }
+                }
+            },
+            "InteractionSegmentEvent": {
+                "type": "object",
+                "required": [
+                    "eventTimeMs",
+                    "clientEventTimeMs",
+                    "eventType"
+                ],
+                "properties": {
+                    "eventTimeMs": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "event time with milliseconds precision. Server side.",
+                        "example": "2020-07-21T17:32:28.000Z"
+                    },
+                    "clientEventTimeMs": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "event time with milliseconds precision. Client side.",
+                        "example": "2020-07-21T17:32:28.000Z"
+                    },
+                    "eventType": {
+                        "type": "string",
+                        "enum": [
+                            "REC_START",
+                            "REC_STOP"
+                        ],
+                        "example": "REC_START"
+                    }
+                }
             }
         },
         "securitySchemes": {
@@ -23869,7 +24034,7 @@
                                 "example": {
                                     "details": "The supplied data is not valid",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/integration/v1/admin/users/99990033 - GET",
+                                    "requestUri": "api/integration/v1/admin/users/99990033 - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -23898,7 +24063,7 @@
                                     "details": "",
                                     "developerMessage": "Access is denied",
                                     "cause": "",
-                                    "requestUri": "/integration/v1/admin/users/99990033 - GET",
+                                    "requestUri": "api/integration/v1/admin/users/99990033 - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -23914,7 +24079,7 @@
                                 "example": {
                                     "details": "The resource you have requested does not exist",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/integration/v1/admin/users/99990033 - GET",
+                                    "requestUri": "api/integration/v1/admin/users/99990033 - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -23930,7 +24095,7 @@
                                 "example": {
                                     "details": "An Internal Server Error occurred while processing this request",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/integration/v1/admin/users/99990033 - GET",
+                                    "requestUri": "api/integration/v1/admin/users/99990033 - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24000,7 +24165,7 @@
                                 "example": {
                                     "details": "The supplied data is not valid",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/subaccounts - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/subaccounts - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24029,7 +24194,7 @@
                                     "details": "",
                                     "developerMessage": "Access is denied",
                                     "cause": "",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/subaccounts - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/subaccounts - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24045,7 +24210,7 @@
                                 "example": {
                                     "details": "The resource you have requested does not exist",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/subaccounts - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/subaccounts - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24061,7 +24226,7 @@
                                 "example": {
                                     "details": "An Internal Server Error occurred while processing this request",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/subaccounts - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/subaccounts - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24170,7 +24335,7 @@
                                 "example": {
                                     "details": "The supplied data is not valid",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24199,7 +24364,7 @@
                                     "details": "",
                                     "developerMessage": "Access is denied",
                                     "cause": "",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24215,7 +24380,7 @@
                                 "example": {
                                     "details": "The resource you have requested does not exist",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24231,7 +24396,7 @@
                                 "example": {
                                     "details": "An Internal Server Error occurred while processing this request",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/agentGroups/30/agents - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24299,7 +24464,7 @@
                                 "example": {
                                     "details": "The supplied data is not valid",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/agentGroups - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24328,7 +24493,7 @@
                                     "details": "",
                                     "developerMessage": "Access is denied",
                                     "cause": "",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/agentGroups - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24344,7 +24509,7 @@
                                 "example": {
                                     "details": "The resource you have requested does not exist",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/agentGroups - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24360,7 +24525,7 @@
                                 "example": {
                                     "details": "An Internal Server Error occurred while processing this request",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/agentGroups - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/agentGroups - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24428,7 +24593,7 @@
                                 "example": {
                                     "details": "The supplied data is not valid",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/gateGroups - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24457,7 +24622,7 @@
                                     "details": "",
                                     "developerMessage": "Access is denied",
                                     "cause": "",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/gateGroups - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24473,7 +24638,7 @@
                                 "example": {
                                     "details": "The resource you have requested does not exist",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/gateGroups - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24489,7 +24654,7 @@
                                 "example": {
                                     "details": "An Internal Server Error occurred while processing this request",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/gateGroups - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24581,7 +24746,7 @@
                                 "example": {
                                     "details": "The supplied data is not valid",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24610,7 +24775,7 @@
                                     "details": "",
                                     "developerMessage": "Access is denied",
                                     "cause": "",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24626,7 +24791,7 @@
                                 "example": {
                                     "details": "The resource you have requested does not exist",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24642,7 +24807,7 @@
                                 "example": {
                                     "details": "An Internal Server Error occurred while processing this request",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
+                                    "requestUri": "api/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24700,7 +24865,7 @@
                                 },
                                 "example": {
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
+                                    "requestUri": "api/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24729,7 +24894,7 @@
                                     "details": "",
                                     "developerMessage": "Access is denied",
                                     "cause": "",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
+                                    "requestUri": "api/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24744,7 +24909,7 @@
                                 },
                                 "example": {
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
+                                    "requestUri": "api/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24759,7 +24924,7 @@
                                 },
                                 "example": {
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
+                                    "requestUri": "api/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24773,7 +24938,7 @@
                 ]
             }
         },
-        "/integration/v1/admin/reports/accounts/{subAccountId}/interactionMetadata": {
+        "/integration/v2/admin/reports/accounts/{subAccountId}/interactionMetadata": {
             "post": {
                 "tags": [
                     "Integration Report Controller"
@@ -24797,7 +24962,7 @@
                     "content": {
                         "*/*": {
                             "schema": {
-                                "$ref": "#/components/schemas/RealtimeReportParams"
+                                "$ref": "#/components/schemas/InteractionMetadataRequest"
                             }
                         }
                     },
@@ -24806,7 +24971,13 @@
                 "responses": {
                     "200": {
                         "description": "OK",
-                        "content": {}
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/InteractionSegmentMetaData2Array"
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "description": "Bad request",
@@ -24816,8 +24987,11 @@
                                     "$ref": "#/components/schemas/Errors"
                                 },
                                 "example": {
+                                    "details": "",
+                                    "developerMessage": "Bad request",
+                                    "cause": "",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/interactionMetadata - POST",
+                                    "requestUri": "api/integration/v2/admin/reports/accounts/99990033/interactionMetadata - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24846,7 +25020,7 @@
                                     "details": "",
                                     "developerMessage": "Access is denied",
                                     "cause": "",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/interactionMetadata - POST",
+                                    "requestUri": "api/integration/v2/admin/reports/accounts/99990033/interactionMetadata - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24860,8 +25034,11 @@
                                     "$ref": "#/components/schemas/Errors"
                                 },
                                 "example": {
+                                    "details": "",
+                                    "developerMessage": "Not found",
+                                    "cause": "",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/interactionMetadata - POST",
+                                    "requestUri": "api/integration/v2/admin/reports/accounts/99990033/interactionMetadata - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24875,8 +25052,11 @@
                                     "$ref": "#/components/schemas/Errors"
                                 },
                                 "example": {
+                                    "details": "",
+                                    "developerMessage": "Internal server error",
+                                    "cause": "",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/interactionMetadata - POST",
+                                    "requestUri": "api/integration/v2/admin/reports/accounts/99990033/interactionMetadata - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24934,7 +25114,7 @@
                                 },
                                 "example": {
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
+                                    "requestUri": "api/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24963,7 +25143,7 @@
                                     "details": "",
                                     "developerMessage": "Access is denied",
                                     "cause": "",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
+                                    "requestUri": "api/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24978,7 +25158,7 @@
                                 },
                                 "example": {
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
+                                    "requestUri": "api/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24993,7 +25173,7 @@
                                 },
                                 "example": {
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
+                                    "requestUri": "api/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25051,7 +25231,7 @@
                                 },
                                 "example": {
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
+                                    "requestUri": "api/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25080,7 +25260,7 @@
                                     "details": "",
                                     "developerMessage": "Access is denied",
                                     "cause": "",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
+                                    "requestUri": "api/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25095,7 +25275,7 @@
                                 },
                                 "example": {
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
+                                    "requestUri": "api/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25110,7 +25290,7 @@
                                 },
                                 "example": {
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
+                                    "requestUri": "api/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
