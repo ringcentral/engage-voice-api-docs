@@ -50,7 +50,17 @@ runServer(port, keyFilePath);
 
 - `node server.js`
 
-And you will get a WSS address which will be used later as `{streamingUrl}`.
+You will get a WSS address "Server URI" which will be used later as `{streamingUrl}` and a HTTPS address "Client URI" which we can configure now.
+
+- Go to Engage Voice Admin
+- Go to Agent tools -> Script designer
+- Create a new group to include your Queue/Campaign
+- Go to Script Studio -> drag a `Page` component to the middle -> connect Start - Page - End
+- Edit `Page` -> Add Element -> Add `iFrame`
+- Edit `iFrame` -> In Resource Url, input 'xxxxx.ap.ngrok.io/client?callId={{model.call.uii}}' (xxxxx.ap.ngrok.io/client is the "Client URI" above)
+- Save it (may need to re-open it) and it should show a simple web page as below
+
+<img class="img-fluid" width="50%" src="../../../images/call-streaming-client-iframe.png">
 
 #### Python
 
