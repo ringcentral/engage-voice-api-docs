@@ -8,7 +8,7 @@ Have a lead or multiple leads you want to do something with? Lead actions are a 
 |-|-|
 | `RESET_LEADS` | This action resets your lead pass count to zero, sets the lead status to READY, and changes the next dial time to right now. |
 | `CANCEL_LEADS` | When you apply this action to your leads, they will not be dialed until you reverse the action. This action changes the lead status from whatever it was prior to the action to CANCELLED. Please note that once you cancel a lead, there is no way to revert to (or access information about) the lead’s status prior to being cancelled. |
-| `DELETE_LEADS` | This action completely removes leads from the system. **Please note**, when you delete a lead from the system, the system deletes all lead data (including lead name, address, and any data provided in the Leads search). The system will, however, retain call data related to the lead (including UII, the agent who spoke with the lead, agent and system dispositions, talk time, etc.) |
+| `DELETE_LEADS` | This action completely removes leads from the system. **Please note**, when you delete a lead from the system, the system deletes all lead data (including lead name, address, and any data provided in the Leads search). The system will, however, retain call data related to the lead (including UII, the agent who spoke with the lead, agent and system dispositions, talk time, etc.). [How To Delete Leads](#delete-leads) |
 | `PAUSE_LEADS` | This action functions exactly as the Cancel Leads action does — the only difference is in the name, which exists for differentiation purposes. You can categorize a lead as PAUSED if you don’t wish to dial them right now, but you would like to indicate that you might wish to dial them at some point in the future. |
 | `DIALER_REFRESH` | |
 | `READY_LEADS` | This action changes the lead’s current status to READY, making the lead available to dial. This action will not change the lead’s pass count or the lead’s next scheduled dial time. |
@@ -58,7 +58,7 @@ async function findCampaignByName (
 };
 ```
 
-### Find Exisiting Lists to Move Leads to (Optional)
+### Find Existing Lists to Move Leads to (Optional)
 
 Using the above function, we can also find the new campaign for our leads. With this new campaign ID, we can check if there is an existing list we can move our leads to. This step is not necessary as we can just create a new list, but here is how you use existing lists on your target campaign.
 
@@ -195,3 +195,23 @@ except Exception as e:
 | `LIST_NAME` | If you are creating a new list on the new campaign, enter it here. Otherwise, you can leave this parameter out. |
 | `CREATE_COPY_SETTING` | To move the original leads, set this to `false`. However, you can also make a copy of the leads so they exist in both places by setting this to `true`. A special setting will create a copy of the leads in the new campaign, but will also set the lead state to TRANSITION. Set this parameter to `TRANSITION` so the copied lead's state become TRANSITION. |
 | `DUPLICATE_ACTION_SETTING` | The target lead list may already have the lead you are trying to move/copy over. You can choose to move the lead over anyway by setting this to `MOVE`, or to not move duplicates, set this to `IGNORE`. |
+
+## Delete Leads
+
+The easiest way to delete leads in a campaign is using `externId` which is typically the lead id in your own system.
+
+`PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/campaignLeads/actions=DELETE_LEADS`
+
+#### Request Body
+
+```json
+  {
+    "campaignLeadSearchCriteria":
+    {
+        "externIds":[
+          "100000",
+          "100001"
+          ]
+    }
+  }
+```
