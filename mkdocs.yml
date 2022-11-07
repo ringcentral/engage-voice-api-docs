@@ -98,6 +98,7 @@ nav:
       - 'Save To Files': workforce/call-streaming/save-to-files.md
     - 'Quality Management': workforce/qm/index.md
     - 'Call Recordings': workforce/call-recording/index.md
+    - 'Integration APIs': workforce/integration-api.md
 - 'Secondary':
   - 'Using the API':
     - 'Fundamentals':
