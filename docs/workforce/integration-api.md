@@ -1,6 +1,6 @@
 # Unique Integration APIs
 
-When integraing workforce management with our contact center platform, you may also want to connect to our RingCentral MVP platform. For example, agents may have a need to contact other employeess who are not agents and are part of the back office. Those employees will have a RingCentral MVP account and you'll need the RingCentral user ID to lookup the address book and find contacts that are only in the back office. In those cases, you need a mapping between the RingCentral user ID and Engage Voice agent ID.
+When integrating workforce management with our contact center platform, you may also want to connect to our RingCentral MVP platform. For example, agents may have a need to contact other employees who are not agents and are part of the back office. Those employees will have a RingCentral MVP account and you'll need the RingCentral user ID to lookup the address book and find contacts that are only in the back office. In those cases, you need a mapping between the RingCentral user ID and Engage Voice agent ID.
 
 ## User List
 
@@ -12,7 +12,7 @@ Each main account has a sub-account where most customers reside. However, for pa
 
 ## Agents
 
-Most developers will want a list of agents and agent groups, but for workforce management, there are additional details that are important to know about agents.  [Agents](https://developers.ringcentral.com/engage/voice/api-reference/Agents/getAgentList) are derived from RingCentral MVP users and the RingCentral User ID will map to an agent ID in Engage Voice.  Along with this detail, you cand also retrieve the agent's supervisors as an array of agent IDs, or if the agent is a supervisor, a list of agents that the agent supervises (`superviseeAgentIds`).
+Most developers will want a list of agents and agent groups, but for workforce management, there are additional details that are important to know about agents.  [Agents](https://developers.ringcentral.com/engage/voice/api-reference/Agents/getAgentList) are derived from RingCentral MVP users and the RingCentral User ID will map to an agent ID in Engage Voice.  Along with this detail, you can also retrieve the agent's supervisors as an array of agent IDs, or if the agent is a supervisor, a list of agents that the agent supervises (`superviseeAgentIds`).
 
 ## Queue Groups
 
@@ -48,24 +48,44 @@ The report file can be in either CSV or XML format. The table below explains the
 
 Also known as the interaction metadata report, this report is broken down into call legs, or also known as segments. Each segment consists of an interaction between a single agent and client. Each client could have have multiple segments as they are transferred to different agents, but each agent has only a single segment with a client.
 
-The report file can be in either CSV or XML format. The table below explains the fields of each segment.
+`POST https://{BASE_URL}/voice/api/integration/v2/admin/reports/accounts/{subAccountId}/interactionMetadata`
+
+#### Request Body
+
+| Field | Description|
+| segmentEndTime | Start date and time for the logging interval |
+| timeInterval | Interval length in seconds. Maximum allowed length is 3600 (1 hour). Note: if your time interval start or end in the future consecutive requests may return different list of segment. Idempotent results only guaranteed for the completed intervals. Segment recording URL may be added after delay. Allow 1-2min for processing |
+| timeZone | Timezone name which should be used for report generation |
+
+Quick example: let's say we want to find the report with call start time `2022-10-20T07:47:48`, we'll have `segmentEndTime` < `2022-10-20T07:47:48` < `segmentEndTime + timeInterval` (assuming no time zone offset). So a valid set of values for request body will be:
+
+```json
+{
+    "segmentEndTime": "2022-10-20T07:40:00",
+    "timeInterval": 600,
+    "timeZone": "US/Eastern"
+}
+```
+
+#### Response
 
 | Field | Description |
 |-|-|
-| Interaction.Id | each call is uniquely identified by this ID (UII) |
-| Interaction.RecordingLocation | the entire call recording in ?single channel (mono)? format |
-| Interaction.StartTime | start time of the call in HH:MM:SS format |
-| Interaction.Duration | lenght of time of the call in ?minutes? |
-| Segment.ID | the identifier for the call leg that typically begins at `2` |
-| Segment.AgentID | the agent identifier of the agent for this call leg |
-| Segment.AgentGroupID | the agent group identifier of the agent group this agent belongs to, for this call leg |
-| Segment.ContactStartTime | the start time for a call leg in ANSI SQL 92 `TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`|
-| Segment.ContactEndTime | the end time for a call leg in ANSI SQL 92 `TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`|
-| Segment.Duration | the amount of talk time for a call leg in HH:MM:SS format |
-| Segment.CallingAddress | the phone number of the person making the call (this could be the agent or the customer) |
-| Segment.CalledAddress | the phone number of the person who is receiving thecall (this could be the agent or the customer) |
-| Segment.Direction | the direction of the call whether `INBOUND` or `OUTBOUND` |
-| Segment.RecordingURL | the call recording for this call leg (note, there could be many legs to a single call if the call is transferred) |
+| interactionId | Unique interaction ID (UII) used to connect different call segments together in transfer/conference scenarios. |
+| interactionRecordingLocation | the link for entire call recording in mono format |
+| interactionStartTimeMs | Start time of the interaction. Could be different from segment start time if customer was engaged with the IVR, waited in queue, etc before agent joined the conversation. Milliseconds precision |
+| interactionDurationMs | The total duration of the interaction. Milliseconds precision |
+| interactionCallingAddress | The ANI of the interaction. The phone number of the person making the call (this could be the agent or the customer) |
+| interactionCalledAddress | The DNIS of the interaction. The phone number of the person who is receiving the call (this could be the agent or the customer) |
+| interactionDirection | the direction of the call whether `INBOUND` or `OUTBOUND` |
+| segmentID | Unique segment sequence ID within the interaction that typically begins at `2` |
+| segmentAgentId | the agent identifier (RingCentral user id) of the agent for this call leg |
+| segmentAgentGroupId | the agent group identifier of the agent group this agent belongs to, for this call leg |
+| segmentContactStartTimeMs | Time agent joined the conversation. Milliseconds precision |
+| segmentContactEndTimeMs | Time agent left the conversation. Milliseconds precision |
+| segmentDuration | Segment duration (available even when segmentContactEndTime is not provided) seconds |
+| segmentRecordingURL | the call recording for this call leg (note, there could be many legs to a single call if the call is transferred) |
+| segmentEvents | Ordered list of events. Can be empty if segmentRecordingURL is empty. In other cases array start with the event REC_START. Events don't overlap each other. A child element has `eventTimeMs`(event time with milliseconds precision. Server side), `clientEventTimeMs`(event time with milliseconds precision. Client side) and `eventType`(can be either `REC_START` or `REC_STOP`)|
 
 ### Queue Statistics Report
 
