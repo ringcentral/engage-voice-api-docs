@@ -53,11 +53,12 @@ Also known as the interaction metadata report, this report is broken down into c
 #### Request Body
 
 | Field | Description|
+|-|-|
 | segmentEndTime | Start date and time for the logging interval |
 | timeInterval | Interval length in seconds. Maximum allowed length is 3600 (1 hour). Note: if your time interval start or end in the future consecutive requests may return different list of segment. Idempotent results only guaranteed for the completed intervals. Segment recording URL may be added after delay. Allow 1-2min for processing |
 | timeZone | Timezone name which should be used for report generation |
 
-Quick example: let's say we want to find the report with call start time `2022-10-20T07:47:48`, we'll have `segmentEndTime` < `2022-10-20T07:47:48` < `segmentEndTime + timeInterval` (assuming no time zone offset). So a valid set of values for request body will be:
+**Quick example**: let's say we want to find the report with call start time `2022-10-20T07:47:48`, we'll have `segmentEndTime` < `2022-10-20T07:47:48` < `segmentEndTime + timeInterval` (assuming no time zone offset). So a valid set of values for request body will be:
 
 ```json
 {
