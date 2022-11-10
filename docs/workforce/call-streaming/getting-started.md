@@ -5,7 +5,7 @@
 
 **Call Streaming** runs alongside [Call Recording](./../../call-recording). It streams real-time stereo audio to your WebSocket Secure(WSS) server, which can then be used for services like Speech Analysis etc.
 
-**Call Streaming** requires a WSS server built and hosted by you. The server is to receive audio streams for further processing. [Quick start guide](#quick-start-guide) and [sample code](#step.1-start-local-server) are provided below.
+**Call Streaming** requires a WSS server built and hosted by you. The server is to receive audio streams for further processing. [Quick start guide](#quick-start-guide) is provided below.
 
 ## Workflow Overview
 
