@@ -73,119 +73,120 @@ let leadList = await ev.get(
 
 Using the same JavaScript function above, you can also find the target campaign ID by name. With that campaign ID, move the leads to a new list in the new campaign.
 
-#### Javascript Example
-```javascript tab="Node JS"
-await ev.put(
-    '/voice/api/v1/admin/accounts/'+thisCampaign.account.accountId+'/campaignLeads/actions?leadAction=MOVE_TO_CAMPAIGN',    
-    {
-      "campaignLeadSearchCriteria":
-      {
-        "campaignId":thisCampaign.campaign.campaignId,
-        "listIds":[],
-        "agentDispositions":[],
-        "systemDispositions":[],
-        "leadStates":[],
-        "physicalStates":[],
-        "leadTimezones":[],
-        "campaignIds":[thisCampaign.campaign.campaignId]
-      },
-      "leadActionParams":
-      {
-        "paramMap":
+#### Examples
+=== "javascript"
+    ```javascript
+    await ev.put(
+        '/voice/api/v1/admin/accounts/'+thisCampaign.account.accountId+'/campaignLeads/actions?leadAction=MOVE_TO_CAMPAIGN',    
         {
-          "CAMPAIGN_ID":newCampaign.campaign.campaignId,
-          "LIST_ID":"0",
-          "LIST_NAME":"New Leads List",
-          "CREATE_COPY_SETTING":"false",
-          "DUPLICATE_ACTION_SETTING":"MOVE"
+          "campaignLeadSearchCriteria":
+          {
+            "campaignId":thisCampaign.campaign.campaignId,
+            "listIds":[],
+            "agentDispositions":[],
+            "systemDispositions":[],
+            "leadStates":[],
+            "physicalStates":[],
+            "leadTimezones":[],
+            "campaignIds":[thisCampaign.campaign.campaignId]
+          },
+          "leadActionParams":
+          {
+            "paramMap":
+            {
+              "CAMPAIGN_ID":newCampaign.campaign.campaignId,
+              "LIST_ID":"0",
+              "LIST_NAME":"New Leads List",
+              "CREATE_COPY_SETTING":"false",
+              "DUPLICATE_ACTION_SETTING":"MOVE"
+            }
+          }
         }
-      }
-    }
-  );
-```
+      );
+    ```
+=== "python"
+    ```python
+    #### Install Python SDK wrapper ####
+    # $ pip3 install ringcentral_engage_voice
+    #  or
+    # $ pip install ringcentral_engage_voice
+    #####################################
 
-```python tab="Python"
-#### Install Python SDK wrapper ####
-# $ pip3 install ringcentral_engage_voice
-#  or
-# $ pip install ringcentral_engage_voice
-#####################################
+    from ringcentral_engage_voice import RingCentralEngageVoice
 
-from ringcentral_engage_voice import RingCentralEngageVoice
+    def move_leads_to_campaign():
+        try:
+            # Leads are to be moved from one campaign to another
+            fromCampaignId = 0
+            toCampaignId = 0
 
-def move_leads_to_campaign():
-    try:
-        # Leads are to be moved from one campaign to another
-        fromCampaignId = 0
-        toCampaignId = 0
+            dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+            dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
+            for group in dialGroupsResponse:
+                # Find your Dial Group
+                if group['dialGroupName'] == "My New Dial Group":
+                    campaignsEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}/campaigns"    # f string:https://www.python.org/dev/peps/pep-0498/
+                    campaignsResponse = ev.get(campaignsEndpoint).json()
+                    for campaign in campaignsResponse:
+                        # Find From-Campaign and To-Campaign
+                        if campaign['campaignName'] == "My Predictive Campaign":
+                            fromCampaignId = campaign['campaignId']
+                        if campaign['campaignName'] == "My New Predictive Campaign Python":
+                            toCampaignId = campaign['campaignId']
 
-        dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-        dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
-        for group in dialGroupsResponse:
-            # Find your Dial Group
-            if group['dialGroupName'] == "My New Dial Group":
-                campaignsEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}/campaigns"    # f string:https://www.python.org/dev/peps/pep-0498/
-                campaignsResponse = ev.get(campaignsEndpoint).json()
-                for campaign in campaignsResponse:
-                    # Find From-Campaign and To-Campaign
-                    if campaign['campaignName'] == "My Predictive Campaign":
-                        fromCampaignId = campaign['campaignId']
-                    if campaign['campaignName'] == "My New Predictive Campaign Python":
-                        toCampaignId = campaign['campaignId']
-                        
-                # Validate and move Leads
-                if fromCampaignId !=0 and toCampaignId !=0:
-                    params = "leadAction=MOVE_TO_CAMPAIGN"
-                    moveLeadsEndpoint = "/api/v1/admin/accounts/{accountId}/campaignLeads/actions"
-                    putBody = {
-                        "campaignLeadSearchCriteria":
-                        {
-                            "campaignId": fromCampaignId,
-                            "listIds": [],
-                            "agentDispositions": [],
-                            "systemDispositions": [],
-                            "leadStates": [],
-                            "physicalStates": [],
-                            "leadTimezones": [],
-                            "campaignIds": [fromCampaignId]
-                        },
-                        "leadActionParams":
-                        {
-                            "paramMap":
+                    # Validate and move Leads
+                    if fromCampaignId !=0 and toCampaignId !=0:
+                        params = "leadAction=MOVE_TO_CAMPAIGN"
+                        moveLeadsEndpoint = "/api/v1/admin/accounts/{accountId}/campaignLeads/actions"
+                        putBody = {
+                            "campaignLeadSearchCriteria":
                             {
-                                "CAMPAIGN_ID": toCampaignId,
-                                "LIST_ID": "0",
-                                "LIST_NAME": "New Leads List",
-                                "CREATE_COPY_SETTING": "false",
-                                "DUPLICATE_ACTION_SETTING": "MOVE"
+                                "campaignId": fromCampaignId,
+                                "listIds": [],
+                                "agentDispositions": [],
+                                "systemDispositions": [],
+                                "leadStates": [],
+                                "physicalStates": [],
+                                "leadTimezones": [],
+                                "campaignIds": [fromCampaignId]
+                            },
+                            "leadActionParams":
+                            {
+                                "paramMap":
+                                {
+                                    "CAMPAIGN_ID": toCampaignId,
+                                    "LIST_ID": "0",
+                                    "LIST_NAME": "New Leads List",
+                                    "CREATE_COPY_SETTING": "false",
+                                    "DUPLICATE_ACTION_SETTING": "MOVE"
+                                }
                             }
                         }
-                    }
-                    moveLeadsResponse = ev.put(moveLeadsEndpoint, putBody, params).json()
-                    print(moveLeadsResponse)
-                else:
-                    print("Unable to find target campaigns")
+                        moveLeadsResponse = ev.put(moveLeadsEndpoint, putBody, params).json()
+                        print(moveLeadsResponse)
+                    else:
+                        print("Unable to find target campaigns")
+        except Exception as e:
+            print(e)
+
+
+    # Instantiate the SDK wrapper object with your RingCentral app credentials
+    ev = RingCentralEngageVoice(
+        "RINGCENTRAL_CLIENTID",
+        "RINGCENTRAL_CLIENTSECRET")
+
+    try:
+        # Authorize with your RingCentral Office user credentials
+        ev.authorize(
+            username="RINGCENTRAL_USERNAME",
+            password="RINGCENTRAL_PASSWORD",
+            extension="RINGCENTRAL_EXTENSION"
+        )
+
+        move_leads_to_campaign()
     except Exception as e:
         print(e)
-
-
-# Instantiate the SDK wrapper object with your RingCentral app credentials
-ev = RingCentralEngageVoice(
-    "RINGCENTRAL_CLIENTID",
-    "RINGCENTRAL_CLIENTSECRET")
-
-try:
-    # Authorize with your RingCentral Office user credentials
-    ev.authorize(
-        username="RINGCENTRAL_USERNAME",
-        password="RINGCENTRAL_PASSWORD",
-        extension="RINGCENTRAL_EXTENSION"
-    )
-
-    move_leads_to_campaign()
-except Exception as e:
-    print(e)
-```
+    ```
 
 #### Move Parameters
 | Parameter | Description |

@@ -85,59 +85,60 @@ In the Engage Voice API, as in any REST API, the resources are accessible by sta
 
 Let's consider a simple example of a `GET` method — retrieving details of the user you are currently logged in as from the Engage Voice REST API.
 
-```http tab="Request"
-GET /api/v1/userDetail/self
-Accept: application/json
-Authorization: Bearer {authToken}
-```
+=== "Request"
+    ```http
+    GET /api/v1/userDetail/self
+    Accept: application/json
+    Authorization: Bearer {authToken}
+    ```
+=== "Response"
+    ```http
+    HTTP/1.1 200 OK
+    Content-Type: application/json
 
-```http tab="Response"
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-    "adminId": 2537,
-    "rcUserId": 3361292020,
-    "rcAccountId": "3058829020",
-    "evMainAccountId": null,
-    "digitalAccountId": null,
-    "digitalAccountApiUrl": null,
-    "digitalAccountEmbedUrl": null,
-    "agentDetails": [
-        {
-            "agentId": 1369310,
-            "firstName": "John",
-            "lastName": "Smith",
-            "email": "rc.guest@gmail.com",
-            "username": "rc.guest+15300002_1791@gmail.com",
-            "agentType": "AGENT",
-            "rcUserId": 3361292020,
-            "accountId": "15300002",
-            "accountName": "RC Platform Internal",
-            "agentGroupId": null,
-            "externalAgentId": null,
-            "location": null,
-            "team": null,
-            "allowLoginControl": true,
-            "allowLoginUpdates": true,
-            "password": null,
-            "agentRank": null,
-            "initLoginBaseState": null,
-            "ghostRnaAction": null,
-            "enableSoftphone": null,
-            "altDefaultLoginDest": null,
-            "phoneLoginPin": null,
-            "manualOutboundDefaultCallerId": null,
-            "directAgentExtension": null,
-            "maxChats": null
-        }
-    ],
-    "inboxModeEnabled": false,
-    "taskModeEnabled": false,
-    "digitalAdminEnabled": false,
-    "digitalAnalyticsEnabled": false
-}
-```
+    {
+        "adminId": 2537,
+        "rcUserId": 3361292020,
+        "rcAccountId": "3058829020",
+        "evMainAccountId": null,
+        "digitalAccountId": null,
+        "digitalAccountApiUrl": null,
+        "digitalAccountEmbedUrl": null,
+        "agentDetails": [
+            {
+                "agentId": 1369310,
+                "firstName": "John",
+                "lastName": "Smith",
+                "email": "rc.guest@gmail.com",
+                "username": "rc.guest+15300002_1791@gmail.com",
+                "agentType": "AGENT",
+                "rcUserId": 3361292020,
+                "accountId": "15300002",
+                "accountName": "RC Platform Internal",
+                "agentGroupId": null,
+                "externalAgentId": null,
+                "location": null,
+                "team": null,
+                "allowLoginControl": true,
+                "allowLoginUpdates": true,
+                "password": null,
+                "agentRank": null,
+                "initLoginBaseState": null,
+                "ghostRnaAction": null,
+                "enableSoftphone": null,
+                "altDefaultLoginDest": null,
+                "phoneLoginPin": null,
+                "manualOutboundDefaultCallerId": null,
+                "directAgentExtension": null,
+                "maxChats": null
+            }
+        ],
+        "inboxModeEnabled": false,
+        "taskModeEnabled": false,
+        "digitalAdminEnabled": false,
+        "digitalAnalyticsEnabled": false
+    }
+    ```
 
 !!! alert "FYI"
     Not all Engage Voice API resources support all of the four methods. In order to find out which resources support a particular method, please refer to the API Reference.

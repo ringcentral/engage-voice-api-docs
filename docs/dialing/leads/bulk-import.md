@@ -45,323 +45,324 @@ To upload leads for a campaign, we will need a campaign Id. As campaigns are mem
 ### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
-```http tab="HTTP"
-POST {baseURL}/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct
-Authorization: Bearer <yourAccessToken>
+=== "HTTP"
+    ```http
+    POST {baseURL}/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct
+    Authorization: Bearer <yourAccessToken>
 
-{
-    "description": "Prospect customers",
-    "dialPriority": "IMMEDIATE",
-    "duplicateHandling": "REMOVE_FROM_LIST",
-    "listState": "ACTIVE",
-    "timeZoneOption": "NOT_APPLICABLE",
-    "uploadLeads": [
-      {
-         "leadPhone":"1111111111",
-         "externId":"1",
-         "title":"Dr.",
-         "firstName":"Jeff",
-         "midName":"John",
-         "lastName":"Malfetti",
-         "suffix":"Jr.",
-         "address1":"3101 Fake St.",
-         "address2":"Suite 120",
-         "city":"Rock",
-         "state":"CO",
-         "zip":"80500",
-         "email":"test@test.com",
-         "gateKeeper":"Some one",
-         "auxData1":30,
-         "auxData2":"a",
-         "auxData3":100,
-         "auxData4":"aa",
-         "auxData5":1000,
-         "auxPhone":"1111111110",
-         "extendedLeadData":{
-            "important":"data",
-            "interested":true
-         }
-      },{
-         "leadPhone":"2222222222",
-         "externId":"222",
-         "firstName":"Jason",
-         "midName":"",
-         "lastName":"Black",
-         "address1":"1514 Bernardo Ave",
-         "city":"New York",
-         "state":"NY",
-         "zip":"10001",
-      },{
-         "leadPhone":"3333333333",
-         "externId":"333",
-         "firstName":"Rich",
-         "lastName":"Dunbard"
-      }
-    ],
-   "dncTags":[
+    {
+        "description": "Prospect customers",
+        "dialPriority": "IMMEDIATE",
+        "duplicateHandling": "REMOVE_FROM_LIST",
+        "listState": "ACTIVE",
+        "timeZoneOption": "NOT_APPLICABLE",
+        "uploadLeads": [
+          {
+             "leadPhone":"1111111111",
+             "externId":"1",
+             "title":"Dr.",
+             "firstName":"Jeff",
+             "midName":"John",
+             "lastName":"Malfetti",
+             "suffix":"Jr.",
+             "address1":"3101 Fake St.",
+             "address2":"Suite 120",
+             "city":"Rock",
+             "state":"CO",
+             "zip":"80500",
+             "email":"test@test.com",
+             "gateKeeper":"Some one",
+             "auxData1":30,
+             "auxData2":"a",
+             "auxData3":100,
+             "auxData4":"aa",
+             "auxData5":1000,
+             "auxPhone":"1111111110",
+             "extendedLeadData":{
+                "important":"data",
+                "interested":true
+             }
+          },{
+             "leadPhone":"2222222222",
+             "externId":"222",
+             "firstName":"Jason",
+             "midName":"",
+             "lastName":"Black",
+             "address1":"1514 Bernardo Ave",
+             "city":"New York",
+             "state":"NY",
+             "zip":"10001",
+          },{
+             "leadPhone":"3333333333",
+             "externId":"333",
+             "firstName":"Rich",
+             "lastName":"Dunbard"
+          }
+        ],
+       "dncTags":[
+      
+       ]
+    }
+    ```
+=== "Node JS"
+    ```javascript
+    /****** Install Node JS SDK wrapper *******
+    $ npm install ringcentral-engage-voice-client
+    *******************************************/
 
-   ]
-}
-```
+    const RunRequest = async function () {
+        const EngageVoice = require('ringcentral-engage-voice-client').default
 
-```javascript tab="Node JS"
-/****** Install Node JS SDK wrapper *******
-$ npm install ringcentral-engage-voice-client
-*******************************************/
-
-const RunRequest = async function () {
-    const EngageVoice = require('ringcentral-engage-voice-client').default
-
-    // Instantiate the SDK wrapper object with your RingCentral app credentials
-    const ev = new EngageVoice({
-        clientId: "RINGCENTRAL_CLIENTID",
-        clientSecret: "RINGCENTRAL_CLIENTSECRET"
-    })
-
-    try {
-        // Authorize with your RingCentral Office user credentials
-        await ev.authorize({
-            username: "RINGCENTRAL_USERNAME",
-            extension: "RINGCENTRAL_EXTENSION",
-            password: "RINGCENTRAL_PASSWORD"
+        // Instantiate the SDK wrapper object with your RingCentral app credentials
+        const ev = new EngageVoice({
+            clientId: "RINGCENTRAL_CLIENTID",
+            clientSecret: "RINGCENTRAL_CLIENTSECRET"
         })
 
-        // Get Dial Groups data
-        const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-        const groupsResponse = await ev.get(groupsEndpoint)
-        for (var group of groupsResponse.data) {
-            // Select your Dial Group
-            if (group.dialGroupName == "My New Dial Group") {
-                const campaignsEndpoint = groupsEndpoint + "/" + group.dialGroupId + "/campaigns"
-                const campaignsResponse = await ev.get(campaignsEndpoint)
-                for (var campaign of campaignsResponse.data) {
-                    // Select your Campaign and import Leads
-                    if (campaign.campaignName == "My Predictive Campaign") {
-                        const leadsEndpoint = "/api/v1/admin/accounts/{accountId}/campaigns/" + campaign.campaignId + "/leadLoader/direct"
-                        const postData = {
-                            "listState": "ACTIVE",
-                            "duplicateHandling": "RETAIN_ALL",
-                            "timeZoneOption": "NPA_NXX",
-                            "description": "Lead Search Test",
-                            "dialPriority": "IMMEDIATE",
-                            "uploadLeads": [{
-                                "leadPhone": "8888888888",
-                                "externId": "222",
-                                "firstName": "Jason",
-                                "midName": "",
-                                "lastName": "Black",
-                                "address1": "1514 Bernardo Ave",
-                                "city": "New York",
-                                "state": "NY",
-                                "zip": "10001",
-                            }, {
-                                "leadPhone": "3323333333",
-                                "externId": "333",
-                                "firstName": "Rich",
-                                "lastName": "Dunbard"
+        try {
+            // Authorize with your RingCentral Office user credentials
+            await ev.authorize({
+                username: "RINGCENTRAL_USERNAME",
+                extension: "RINGCENTRAL_EXTENSION",
+                password: "RINGCENTRAL_PASSWORD"
+            })
+
+            // Get Dial Groups data
+            const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+            const groupsResponse = await ev.get(groupsEndpoint)
+            for (var group of groupsResponse.data) {
+                // Select your Dial Group
+                if (group.dialGroupName == "My New Dial Group") {
+                    const campaignsEndpoint = groupsEndpoint + "/" + group.dialGroupId + "/campaigns"
+                    const campaignsResponse = await ev.get(campaignsEndpoint)
+                    for (var campaign of campaignsResponse.data) {
+                        // Select your Campaign and import Leads
+                        if (campaign.campaignName == "My Predictive Campaign") {
+                            const leadsEndpoint = "/api/v1/admin/accounts/{accountId}/campaigns/" +     campaign.campaignId + "/leadLoader/direct"
+                            const postData = {
+                                "listState": "ACTIVE",
+                                "duplicateHandling": "RETAIN_ALL",
+                                "timeZoneOption": "NPA_NXX",
+                                "description": "Lead Search Test",
+                                "dialPriority": "IMMEDIATE",
+                                "uploadLeads": [{
+                                    "leadPhone": "8888888888",
+                                    "externId": "222",
+                                    "firstName": "Jason",
+                                    "midName": "",
+                                    "lastName": "Black",
+                                    "address1": "1514 Bernardo Ave",
+                                    "city": "New York",
+                                    "state": "NY",
+                                    "zip": "10001",
+                                }, {
+                                    "leadPhone": "3323333333",
+                                    "externId": "333",
+                                    "firstName": "Rich",
+                                    "lastName": "Dunbard"
+                                }
+                                ]
                             }
-                            ]
+                            const leadsResponse = await ev.post(leadsEndpoint, postData)
+                            console.log(leadsResponse.data)
                         }
-                        const leadsResponse = await ev.post(leadsEndpoint, postData)
-                        console.log(leadsResponse.data)
                     }
                 }
             }
         }
+        catch (err) {
+            console.log(err.message)
+        }
     }
-    catch (err) {
-        console.log(err.message)
-    }
-}
 
-RunRequest();
-```
+    RunRequest();
+    ```
+=== "Python"  
+    ```python
+    #### Install Python SDK wrapper ####
+    # $ pip3 install ringcentral_engage_voice
+    #  or
+    # $ pip install ringcentral_engage_voice
+    #####################################
 
-```python tab="Python"
-#### Install Python SDK wrapper ####
-# $ pip3 install ringcentral_engage_voice
-#  or
-# $ pip install ringcentral_engage_voice
-#####################################
+    from ringcentral_engage_voice import RingCentralEngageVoice
 
-from ringcentral_engage_voice import RingCentralEngageVoice
-
-def import_leads():
-    try:
-        dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-        dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
-        for group in dialGroupsResponse:
-            # Select your Dial Group
-            if group['dialGroupName'] == "My New Dial Group":
-                campaignsEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}/campaigns"    # f string:https://www.python.org/dev/peps/pep-0498/
-                campaignsResponse = ev.get(campaignsEndpoint).json()
-                for campaign in campaignsResponse:
-                    # Select your Campaign and import Leads
-                    if campaign['campaignName'] == "My Predictive Campaign":
-                        leadsEndpoint = f"/api/v1/admin/accounts/{accountId}/campaigns/{campaign['campaignId']}/leadLoader/direct"
-                        postBody = {
-                          "description": "Prospect customers",
-                          "dialPriority": "IMMEDIATE",
-                          "duplicateHandling": "REMOVE_FROM_LIST",
-                          "listState": "ACTIVE",
-                          "timeZoneOption": "NPA_NXX",
-                          "uploadLeads": [{
-                               "leadPhone":"8888888888",
-                               "externId":"222",
-                               "firstName":"Jason",
-                               "midName":"",
-                               "lastName":"Black",
-                               "address1":"1514 Bernardo Ave",
-                               "city":"New York",
-                               "state":"NY",
-                               "zip":"10001",
-                            },{
-                               "leadPhone":"3323333333",
-                               "externId":"333",
-                               "firstName":"Rich",
-                               "lastName":"Dunbard"
+    def import_leads():
+        try:
+            dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+            dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
+            for group in dialGroupsResponse:
+                # Select your Dial Group
+                if group['dialGroupName'] == "My New Dial Group":
+                    campaignsEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}/campaigns"    #   f   string:https://www.python.org/dev/peps/pep-0498/
+                    campaignsResponse = ev.get(campaignsEndpoint).json()
+                    for campaign in campaignsResponse:
+                        # Select your Campaign and import Leads
+                        if campaign['campaignName'] == "My Predictive Campaign":
+                            leadsEndpoint = f"/api/v1/admin/accounts/{accountId}/campaigns/{campaign    ['campaignId']}/leadLoader/direct"
+                            postBody = {
+                              "description": "Prospect customers",
+                              "dialPriority": "IMMEDIATE",
+                              "duplicateHandling": "REMOVE_FROM_LIST",
+                              "listState": "ACTIVE",
+                              "timeZoneOption": "NPA_NXX",
+                              "uploadLeads": [{
+                                   "leadPhone":"8888888888",
+                                   "externId":"222",
+                                   "firstName":"Jason",
+                                   "midName":"",
+                                   "lastName":"Black",
+                                   "address1":"1514 Bernardo Ave",
+                                   "city":"New York",
+                                   "state":"NY",
+                                   "zip":"10001",
+                                },{
+                                   "leadPhone":"3323333333",
+                                   "externId":"333",
+                                   "firstName":"Rich",
+                                   "lastName":"Dunbard"
+                                }
+                              ]
                             }
-                          ]
-                        }
-                        leadsResponse = ev.post(leadsEndpoint, postBody).json()
-                        print(leadsResponse)
-                        break
+                            leadsResponse = ev.post(leadsEndpoint, postBody).json()
+                            print(leadsResponse)
+                            break
+        except Exception as e:
+            print(e)
+
+
+    # Instantiate the SDK wrapper object with your RingCentral app credentials
+    ev = RingCentralEngageVoice(
+        "RINGCENTRAL_CLIENTID",
+        "RINGCENTRAL_CLIENTSECRET")
+
+    try:
+        # Authorize with your RingCentral Office user credentials
+        ev.authorize(
+            username="RINGCENTRAL_USERNAME",
+            password="RINGCENTRAL_PASSWORD",
+            extension="RINGCENTRAL_EXTENSION"
+        )
+
+        import_leads()
     except Exception as e:
         print(e)
-
-
-# Instantiate the SDK wrapper object with your RingCentral app credentials
-ev = RingCentralEngageVoice(
-    "RINGCENTRAL_CLIENTID",
-    "RINGCENTRAL_CLIENTSECRET")
-
-try:
-    # Authorize with your RingCentral Office user credentials
-    ev.authorize(
-        username="RINGCENTRAL_USERNAME",
-        password="RINGCENTRAL_PASSWORD",
-        extension="RINGCENTRAL_EXTENSION"
-    )
-
-    import_leads()
-except Exception as e:
-    print(e)
-```
-
-```php tab="PHP"
-/************ Install PHP SDK wrapper **************
-$ composer require engagevoice-sdk-wrapper:dev-master
-*****************************************************/
-
-<?php
-require('vendor/autoload.php');
-
-require('vendor/autoload.php');
-
-// Instantiate the SDK wrapper object with your RingCentral app credentials
-$ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-try{
-  // Login your account with your RingCentral Office user credentials
-  $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-    read_dial_groups();
-}catch (Exception $e) {
-    print $e->getMessage();
-}
-
-function read_dial_groups(){
-  global $ev;
-  $endpoint = 'admin/accounts/~/dialGroups';
-  try{
-    $resp = $ev->get($endpoint);
-    $jsonObj = json_decode($resp);
-    foreach ($jsonObj as $group){
-      if ($group->dialGroupName == "My Dial Group - Predictive"){
-        read_group_campaigns($group->dialGroupId);
-        break;
+    ```
+=== "PHP"
+    ```php
+    /************ Install PHP SDK wrapper **************
+    $ composer require engagevoice-sdk-wrapper:dev-master
+    *****************************************************/
+    
+    <?php
+    require('vendor/autoload.php');
+    
+    require('vendor/autoload.php');
+    
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
+    try{
+      // Login your account with your RingCentral Office user credentials
+      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+        read_dial_groups();
+    }catch (Exception $e) {
+        print $e->getMessage();
+    }
+    
+    function read_dial_groups(){
+      global $ev;
+      $endpoint = 'admin/accounts/~/dialGroups';
+      try{
+        $resp = $ev->get($endpoint);
+        $jsonObj = json_decode($resp);
+        foreach ($jsonObj as $group){
+          if ($group->dialGroupName == "My Dial Group - Predictive"){
+            read_group_campaigns($group->dialGroupId);
+            break;
+          }
+        }
+      }catch (Exception $e) {
+          print $e->getMessage();
       }
     }
-  }catch (Exception $e) {
-      print $e->getMessage();
-  }
-}
-
-function read_group_campaigns($dialGroupId){
-  global $ev;
-  $endpoint = 'admin/accounts/~/dialGroups/' . $dialGroupId . "/campaigns";
-  try{
-    $resp = $ev->get($endpoint);
-    $jsonObj = json_decode($resp);
-    foreach ($jsonObj as $campaign){
-      if ($campaign->campaignName == "API Test"){
-          load_campaign_leads($campaign->campaignId)
-          break;
+    
+    function read_group_campaigns($dialGroupId){
+      global $ev;
+      $endpoint = 'admin/accounts/~/dialGroups/' . $dialGroupId . "/campaigns";
+      try{
+        $resp = $ev->get($endpoint);
+        $jsonObj = json_decode($resp);
+        foreach ($jsonObj as $campaign){
+          if ($campaign->campaignName == "API Test"){
+              load_campaign_leads($campaign->campaignId)
+              break;
+          }
+        }
+      }catch(Exception $e) {
+          print $e->getMessage();
       }
     }
-  }catch(Exception $e) {
-      print $e->getMessage();
-  }
-}
-
-function load_campaign_leads($campaignId){
-  global $ev;
-  $endpoint = 'admin/accounts/~/campaigns/' . $campaignId . "/leadLoader/direct";
-  $params = array (
-    "description" => "Prospect customers",
-    "dialPriority" => "IMMEDIATE",
-    "duplicateHandling" => "REMOVE_FROM_LIST",
-    "listState" => "ACTIVE",
-    "timeZoneOption" => "NOT_APPLICABLE",
-    "uploadLeads" => array (
-      array (
-         "leadPhone" => "1111111111",
-         "externId" => "1",
-         "title" => "Dr.",
-         "firstName" => "Jeff",
-         "midName" => "John",
-         "lastName" => "Malfetti",
-         "suffix" => "Jr.",
-         "address1" => "3101 Fake St.",
-         "address2" => "Suite 120",
-         "city" => "Rock",
-         "state" => "CO",
-         "zip" => "80500",
-         "email" => "test@test.com",
-         "gateKeeper" => "Some one",
-         "auxData1" => 30,
-         "auxData2" => "a",
-         "auxData3" => 100,
-         "auxData4" => "aa",
-         "auxData5" => 1000,
-         "auxPhone" => "1111111110",
-         "extendedLeadData" => array (
-            "important" => "data",
-            "interested" => true
-         )
-      ),
-      array (
-         "leadPhone" => "2222222222",
-         "externId" => "222",
-         "firstName" => "Jason",
-         "midName" => "",
-         "lastName" => "Black",
-         "address1" => "1514 Bernardo Ave",
-         "city" => "New York",
-         "state" => "NY",
-         "zip" => "10001",
-      ),
-      array (
-         "leadPhone" => "3333333333",
-         "externId" => "333",
-         "firstName" => "Rich",
-         "lastName" => "Dunbard"
-      )
-    )
-  );
-  try{
-    $resp = $ev->post($endpoint, $params);
-    print ($resp);
-  }catch(Exception $e) {
-      print $e->getMessage();
-  }
-}
-```
+    
+    function load_campaign_leads($campaignId){
+      global $ev;
+      $endpoint = 'admin/accounts/~/campaigns/' . $campaignId . "/leadLoader/direct";
+      $params = array (
+        "description" => "Prospect customers",
+        "dialPriority" => "IMMEDIATE",
+        "duplicateHandling" => "REMOVE_FROM_LIST",
+        "listState" => "ACTIVE",
+        "timeZoneOption" => "NOT_APPLICABLE",
+        "uploadLeads" => array (
+          array (
+             "leadPhone" => "1111111111",
+             "externId" => "1",
+             "title" => "Dr.",
+             "firstName" => "Jeff",
+             "midName" => "John",
+             "lastName" => "Malfetti",
+             "suffix" => "Jr.",
+             "address1" => "3101 Fake St.",
+             "address2" => "Suite 120",
+             "city" => "Rock",
+             "state" => "CO",
+             "zip" => "80500",
+             "email" => "test@test.com",
+             "gateKeeper" => "Some one",
+             "auxData1" => 30,
+             "auxData2" => "a",
+             "auxData3" => 100,
+             "auxData4" => "aa",
+             "auxData5" => 1000,
+             "auxPhone" => "1111111110",
+             "extendedLeadData" => array (
+                "important" => "data",
+                "interested" => true
+             )
+          ),
+          array (
+             "leadPhone" => "2222222222",
+             "externId" => "222",
+             "firstName" => "Jason",
+             "midName" => "",
+             "lastName" => "Black",
+             "address1" => "1514 Bernardo Ave",
+             "city" => "New York",
+             "state" => "NY",
+             "zip" => "10001",
+          ),
+          array (
+             "leadPhone" => "3333333333",
+             "externId" => "333",
+             "firstName" => "Rich",
+             "lastName" => "Dunbard"
+          )
+        )
+      );
+      try{
+        $resp = $ev->post($endpoint, $params);
+        print ($resp);
+      }catch(Exception $e) {
+          print $e->getMessage();
+      }
+    }
+    ```

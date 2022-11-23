@@ -18,28 +18,29 @@ As we discussed above, before you can create a skill profile, you must first cre
 ### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
-```html tab="HTTP"
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
-Content-Type: application/json
+=== "HTTP"
+    ```html
+    POST {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
+    Content-Type: application/json
 
-[
-  {
-    "skillName":"Spanish Language",
-    "skillDesc":"A test skill for Spanish",
-    "active":true,
-  },
-  {
-    "skillName":"French Language",
-    "skillDesc":"A test skill for French",
-    "active":true,
-  }
-]
+    [
+      {
+        "skillName":"Spanish Language",
+        "skillDesc":"A test skill for Spanish",
+        "active":true,
+      },
+      {
+        "skillName":"French Language",
+        "skillDesc":"A test skill for French",
+        "active":true,
+      }
+    ]
 
-```
+    ```
 
 ### Response
 
-```json tab="JSON"
+```json
 [
   {
     "skillId":1455,
@@ -103,7 +104,7 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 
 ### Response
 
-```json tab="Response"
+```json
 {
   "eventId":67882,
   "eventRank":10,
@@ -214,32 +215,33 @@ Only `profileName` is a required parameter to create a skill profile. All other 
 ### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
-```html tab="HTTP"
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/skillProfiles
-Content-Type: application/json
+=== "HTTP"
+    ```html
+    POST {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/    skillProfiles
+    Content-Type: application/json
 
-{
-  "profileId":0, /* a unique ID will be created for you */
-  "profileName":"Spanish Speaker",
-  "profileDesc":"Can speak limited Spanish",
-  "isDefault":false,
-  "gateGroupSkills":
-    [
-      {
-        "skillId":1455,
-        "skillName":"Spanish Language",
-        "skillDesc":"A test skill for Spanish",
-        "active":true,
-        "whisperAudio":null,
-      }
-    ],
-  "chatGroupSkills":[]
-}
-```
+    {
+      "profileId":0, /* a unique ID will be created for you */
+      "profileName":"Spanish Speaker",
+      "profileDesc":"Can speak limited Spanish",
+      "isDefault":false,
+      "gateGroupSkills":
+        [
+          {
+            "skillId":1455,
+            "skillName":"Spanish Language",
+            "skillDesc":"A test skill for Spanish",
+            "active":true,
+            "whisperAudio":null,
+          }
+        ],
+      "chatGroupSkills":[]
+    }
+    ```
 
 ### Response
 
-```json tab="Response"
+```json
 {
   "profileId":215271,
   "profileName":"Spanish Speaker",
