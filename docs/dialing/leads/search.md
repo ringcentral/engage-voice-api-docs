@@ -123,137 +123,138 @@ Get a list of states from the United States and all provinces and territories of
 ## Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
-```http tab="HTTP"
+=== "HTTP"
+        ```http
 
-    POST {BASE_URL}/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch
-    Authorization: bearer <myAccessToken>
-    Content-Type: application/json;charset=UTF-8
-    Accept: application/json
+            POST {BASE_URL}/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch
+            Authorization: bearer <myAccessToken>
+            Content-Type: application/json;charset=UTF-8
+            Accept: application/json
 
 
-    {
-      "firstName":"Jon",
-      "campaignId":136785,
-      "listIds":[],
-      "agentDispositions":[],
-      "systemDispositions":[],
-      "leadStates":[],
-      "physicalStates":[],
-      "leadTimezones":
-      	[
-      		{"name":"CST"},
-      		{"name":"PST"}
-      	],
-      "suppressed":"ALL",
-      "campaignIds":[136785]
-    }
-```
+            {
+              "firstName":"Jon",
+              "campaignId":136785,
+              "listIds":[],
+              "agentDispositions":[],
+              "systemDispositions":[],
+              "leadStates":[],
+              "physicalStates":[],
+              "leadTimezones":
+              	[
+              		{"name":"CST"},
+              		{"name":"PST"}
+              	],
+              "suppressed":"ALL",
+              "campaignIds":[136785]
+            }
+        ```
+=== "cURLs"
+        ```bash
 
-```bash tab="cURLs"
+            curl -XPOST 'https://engage.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/        campaignLeads/leadSearch' \
+               -H 'Authorization: Bearer {myAccessToken}' \
+               -d '{"firstName":"John"}' \
+               -H 'Content-Type: application/json'
+        ```
+=== "Node JS"
+        ```javascript
+        /****** Install Node JS SDK wrapper *******
+        $ npm install ringcentral-engage-voice-client
+        *******************************************/
 
-    curl -XPOST 'https://engage.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch' \
-       -H 'Authorization: Bearer {myAccessToken}' \
-       -d '{"firstName":"John"}' \
-       -H 'Content-Type: application/json'
-```
+        const RunRequest = async function () {
+            const EngageVoice = require('ringcentral-engage-voice-client').default
 
-```javascript tab="Node JS"
-/****** Install Node JS SDK wrapper *******
-$ npm install ringcentral-engage-voice-client
-*******************************************/
+            // Instantiate the SDK wrapper object with your RingCentral app credentials
+            const ev = new EngageVoice({
+                clientId: "RINGCENTRAL_CLIENTID",
+                clientSecret: "RINGCENTRAL_CLIENTSECRET"
+            })
 
-const RunRequest = async function () {
-    const EngageVoice = require('ringcentral-engage-voice-client').default
+            try {
+                // Authorize with your RingCentral Office user credentials
+                await ev.authorize({
+                    username: "RINGCENTRAL_USERNAME",
+                    extension: "RINGCENTRAL_EXTENSION",
+                    password: "RINGCENTRAL_PASSWORD"
+                })
 
-    // Instantiate the SDK wrapper object with your RingCentral app credentials
-    const ev = new EngageVoice({
-        clientId: "RINGCENTRAL_CLIENTID",
-        clientSecret: "RINGCENTRAL_CLIENTSECRET"
-    })
-
-    try {
-        // Authorize with your RingCentral Office user credentials
-        await ev.authorize({
-            username: "RINGCENTRAL_USERNAME",
-            extension: "RINGCENTRAL_EXTENSION",
-            password: "RINGCENTRAL_PASSWORD"
-        })
-
-        // Search Leads with first name John
-        const endpoint = "/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch"
-        const postBody = {
-            "firstName": "John"
+                // Search Leads with first name John
+                const endpoint = "/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch"
+                const postBody = {
+                    "firstName": "John"
+                }
+                const response = await ev.post(endpoint, postBody)
+                console.log(response.data);
+            }
+            catch (err) {
+                console.log(err.message)
+            }
         }
-        const response = await ev.post(endpoint, postBody)
-        console.log(response.data);
-    }
-    catch (err) {
-        console.log(err.message)
-    }
-}
 
-RunRequest();
-```
+        RunRequest();
+        ```
+=== "Python"
+        ```python
+        #### Install Python SDK wrapper ####
+        # $ pip3 install ringcentral_engage_voice
+        #  or
+        # $ pip install ringcentral_engage_voice
+        #####################################
 
-```python tab="Python"
-#### Install Python SDK wrapper ####
-# $ pip3 install ringcentral_engage_voice
-#  or
-# $ pip install ringcentral_engage_voice
-#####################################
+        from ringcentral_engage_voice import RingCentralEngageVoice
 
-from ringcentral_engage_voice import RingCentralEngageVoice
+        def search_leads():
+            try:
+                postBody = {
+                    "firstName": "John"
+                }
+                response = ev.post("/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch", postBody).        json()
+                print(response)
+            except Exception as e:
+                print(e)
 
-def search_leads():
-    try:
-        postBody = {
-            "firstName": "John"
+
+        # Instantiate the SDK wrapper object with your RingCentral app credentials
+        ev = RingCentralEngageVoice(
+            "RINGCENTRAL_CLIENTID",
+            "RINGCENTRAL_CLIENTSECRET")
+
+        try:
+            # Authorize with your RingCentral Office user credentials
+            ev.authorize(
+                username="RINGCENTRAL_USERNAME",
+                password="RINGCENTRAL_PASSWORD",
+                extension="RINGCENTRAL_EXTENSION"
+            )
+
+            search_leads()
+        except Exception as e:
+            print(e)
+        ```
+=== "PHP"
+        ```php
+        /****** Install PHP SDK wrapper **
+        $ composer require engagevoice-sdk-wrapper:dev-master
+        *************************************/
+
+        <?php
+        require('vendor/autoload.php');
+
+        // Instantiate the SDK wrapper object with your RingCentral app credentials
+        $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
+        try{
+          // Login your account with your RingCentral Office user credentials
+          $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+          $endpoint = "admin/accounts/~/campaignLeads/leadSearch";
+          $params = array ( "firstName" => "John" );
+          $response = $ev->post($endpoint, $params);
+          print ($response."\r\n");
+        }catch (Exception $e) {
+          print $e->getMessage();
         }
-        response = ev.post("/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch", postBody).json()
-        print(response)
-    except Exception as e:
-        print(e)
-
-
-# Instantiate the SDK wrapper object with your RingCentral app credentials
-ev = RingCentralEngageVoice(
-    "RINGCENTRAL_CLIENTID",
-    "RINGCENTRAL_CLIENTSECRET")
-
-try:
-    # Authorize with your RingCentral Office user credentials
-    ev.authorize(
-        username="RINGCENTRAL_USERNAME",
-        password="RINGCENTRAL_PASSWORD",
-        extension="RINGCENTRAL_EXTENSION"
-    )
-
-    search_leads()
-except Exception as e:
-    print(e)
-```
-
-```php tab="PHP"
-/****** Install PHP SDK wrapper **
-$ composer require engagevoice-sdk-wrapper:dev-master
-*************************************/
-
-<?php
-require('vendor/autoload.php');
-
-// Instantiate the SDK wrapper object with your RingCentral app credentials
-$ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-try{
-  // Login your account with your RingCentral Office user credentials
-  $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-  $endpoint = "admin/accounts/~/campaignLeads/leadSearch";
-  $params = array ( "firstName" => "John" );
-  $response = $ev->post($endpoint, $params);
-  print ($response."\r\n");
-}catch (Exception $e) {
-  print $e->getMessage();
-}
-```
+        ```
 ## References
 
 * [Web console documentation: Using the Leads search](https://docs.ringcentral.com/engage/article/voice-admin-use-lead-search)

@@ -287,6 +287,7 @@ Delete a single Skill using the `skills` endpoint.  You can only delete a single
 ### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
-    ```html tab="HTTP"
+=== "HTTP"
+    ```html
     DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}
     ```

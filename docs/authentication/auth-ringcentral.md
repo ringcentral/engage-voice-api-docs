@@ -71,144 +71,147 @@ Where:
 
 -   **`<rcAccessToken>`** is the RingCentral Access Token you received from RingCentral Office authentication flow.
 
+=== "cURL"
+    ```bash
+    $ curl -XPOST https://engage.ringcentral.com/api/auth/login/rc/accesstoken \
+          -d 'rcAccessToken=<rcAccessToken>' \
+          -d 'rcTokenType=Bearer'
+    ```
+    
+=== "Go"
+    ```go
+    package main
 
-```bash tab="cURL"
-$ curl -XPOST https://engage.ringcentral.com/api/auth/login/rc/accesstoken \
-      -d 'rcAccessToken=<rcAccessToken>' \
-      -d 'rcTokenType=Bearer'
-```
+    import(
+          "fmt"
+          "encoding/json"
+          "io/ioutil"
+          "net/url"
+        )
 
-```go tab="Go"
-package main
-
-import(
-      "fmt"
-      "encoding/json"
-      "io/ioutil"
-      "net/url"
-    )
-
-// EngageToken is an example and does not cover all the
-// properties in the API response.
-type EngageToken struct {
-    	AccessToken string `json:"accessToken"`
-    	TokenType   string `json:"tokenType"`
-}
-
-func RcToEvToken(rctoken string) (string, error) {
-  	res, err := http.PostForm(
-    		"https://engage.ringcentral.com/api/auth/login/rc/accesstoken",
-    		url.Values{"rcAccessToken": {rctoken}, "rcTokenType": {"Bearer"}})
-    if err != nil {
-    		return "", err
+    // EngageToken is an example and does not cover all the
+    // properties in the API response.
+    type EngageToken struct {
+        	AccessToken string `json:"accessToken"`
+        	TokenType   string `json:"tokenType"`
     }
-    if res.StatusCode >= 300 {
-    		return "", fmt.Errorf("Invalid Token Response [%v]", res.StatusCode)
-    }
-    engageToken := EngageToken{}
-    bytes, err := ioutil.ReadAll(res.Body)
-    if err != nil {
-    		return "", err
-    }
-    err = json.Unmarshal(bytes, &engageToken)
-    return engageToken.AccessToken, err
-}
 
-func main() {
-  	rctoken := "myRcToken"
-
-  	evtoken, err := RcToEvToken(rctoken)
-  	if err != nil {
-    		log.Fatal(err)
-    }
-    fmt.Println(evtoken)
-}
-```
-
-```javascript tab="Node JS"
-var https = require('https')
-
-var RC_ACCESS_TOKEN = "VALID-RINGCENTRAL-ACCESS-TOKEN"
-
-var url = "engage.ringcentral.com"
-var path = '/api/auth/login/rc/accesstoken'
-var body = 'rcAccessToken=' + RC_ACCESS_TOKEN + "&rcTokenType=Bearer"
-var headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
-
-var options = {host: url, path: path, method: 'POST', headers: headers};
-var post_req = https.request(options, function(res) {
-      var response = ""
-      res.on('data', function (chunk) {
-          response += chunk
-      }).on("end", function(){
-          if (res.statusCode == 200){
-              var tokensObj = JSON.parse(response)
-              console.log(tokensObj.accessToken)
-          }else{
-              console.log(response)
-          }
-      });
-    }).on('error', function (e) {
-        console.log(e)
-    })
-post_req.write(body);
-post_req.end();
-```
-
-```python tab="Python"
-import requests
-
-RC_ACCESS_TOKEN = "VALID-RINGCENTRAL-ACCESS-TOKEN"
-url = "https://engage.ringcentral.com/api/auth/login/rc/accesstoken"
-body = "rcAccessToken=%s&rcTokenType=Bearer" % (RC_ACCESS_TOKEN)
-headers = {
-              'Content-Type': 'application/x-www-form-urlencoded'
-          }
-try:
-    res = requests.post(url, headers=headers, data=body)
-    if res.status_code == 200:
-        jsonObj = json.loads(res._content)
-        print (jsonObj['accessToken'])
-    else:
-        print (res._content)
-except Exception as e:
-    raise ValueError(e)
-```
-
-```php tab="PHP"
-
-$RC_ACCESS_TOKEN = "VALID-RINGCENTRAL-ACCESS-TOKEN";
-
-$url = "https://engage.ringcentral.com/api/auth/login/rc/accesstoken";
-$body = 'rcAccessToken=' . $RC_ACCESS_TOKEN . "&rcTokenType=Bearer";
-$headers = array ('Content-Type: application/x-www-form-urlencoded');
-
-try{
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-    curl_setopt($ch, CURLOPT_POST, TRUE);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 600);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
-    $strResponse = curl_exec($ch);
-    $curlErrno = curl_errno($ch);
-    if ($curlErrno) {
-        throw new \Exception($curlErrno);
-    } else {
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-        if ($httpCode == 200) {
-            $tokensObj = json_decode($strResponse);
-            print ($tokensObj->accessToken);
-        }else{
-            print ($strResponse);
+    func RcToEvToken(rctoken string) (string, error) {
+      	res, err := http.PostForm(
+        		"https://engage.ringcentral.com/api/auth/login/rc/accesstoken",
+        		url.Values{"rcAccessToken": {rctoken}, "rcTokenType": {"Bearer"}})
+        if err != nil {
+        		return "", err
         }
+        if res.StatusCode >= 300 {
+        		return "", fmt.Errorf("Invalid Token Response [%v]", res.StatusCode)
+        }
+        engageToken := EngageToken{}
+        bytes, err := ioutil.ReadAll(res.Body)
+        if err != nil {
+        		return "", err
+        }
+        err = json.Unmarshal(bytes, &engageToken)
+        return engageToken.AccessToken, err
     }
-}catch (\Exception $e) {
-    throw $e;
-}
-```
+
+    func main() {
+      	rctoken := "myRcToken"
+
+      	evtoken, err := RcToEvToken(rctoken)
+      	if err != nil {
+        		log.Fatal(err)
+        }
+        fmt.Println(evtoken)
+    }
+    ```
+=== "Node JS"
+    ```javascript
+    var https = require('https')
+
+    var RC_ACCESS_TOKEN = "VALID-RINGCENTRAL-ACCESS-TOKEN"
+
+    var url = "engage.ringcentral.com"
+    var path = '/api/auth/login/rc/accesstoken'
+    var body = 'rcAccessToken=' + RC_ACCESS_TOKEN + "&rcTokenType=Bearer"
+    var headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
+
+    var options = {host: url, path: path, method: 'POST', headers: headers};
+    var post_req = https.request(options, function(res) {
+          var response = ""
+          res.on('data', function (chunk) {
+              response += chunk
+          }).on("end", function(){
+              if (res.statusCode == 200){
+                  var tokensObj = JSON.parse(response)
+                  console.log(tokensObj.accessToken)
+              }else{
+                  console.log(response)
+              }
+          });
+        }).on('error', function (e) {
+            console.log(e)
+        })
+    post_req.write(body);
+    post_req.end();
+    ```
+
+=== "Python"
+    ```python 
+    import requests
+
+    RC_ACCESS_TOKEN = "VALID-RINGCENTRAL-ACCESS-TOKEN"
+    url = "https://engage.ringcentral.com/api/auth/login/rc/accesstoken"
+    body = "rcAccessToken=%s&rcTokenType=Bearer" % (RC_ACCESS_TOKEN)
+    headers = {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              }
+    try:
+        res = requests.post(url, headers=headers, data=body)
+        if res.status_code == 200:
+            jsonObj = json.loads(res._content)
+            print (jsonObj['accessToken'])
+        else:
+            print (res._content)
+    except Exception as e:
+        raise ValueError(e)
+    ```
+
+=== "PHP"
+    ```php
+    <?php
+    $RC_ACCESS_TOKEN = "VALID-RINGCENTRAL-ACCESS-TOKEN";
+
+    $url = "https://engage.ringcentral.com/api/auth/login/rc/accesstoken";
+    $body = 'rcAccessToken=' . $RC_ACCESS_TOKEN . "&rcTokenType=Bearer";
+    $headers = array ('Content-Type: application/x-www-form-urlencoded');
+
+    try{
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 600);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
+        $strResponse = curl_exec($ch);
+        $curlErrno = curl_errno($ch);
+        if ($curlErrno) {
+            throw new \Exception($curlErrno);
+        } else {
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            curl_close($ch);
+            if ($httpCode == 200) {
+                $tokensObj = json_decode($strResponse);
+                print ($tokensObj->accessToken);
+            }else{
+                print ($strResponse);
+            }
+        }
+    }catch (\Exception $e) {
+        throw $e;
+    }
+    ```
 
 ### Response
 

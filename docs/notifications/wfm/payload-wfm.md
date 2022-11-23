@@ -23,20 +23,21 @@ The following payload is created and sent to the URL destination specified.
 | **`username`** | The username provided for login. This is usually the given email address combined with the unique account ID |
 | **`source_ip`** | IP Address where the agent is logging in from |
 
-```html tab="Login Request Body"
-{
-  "external_agent_id":null,
-  "duration":"0",
-  "agent_login_id":"612730076",
-  "account_id":"15300002",
-  "event_type":"LOGIN",
-  "agent_id":"1369310",
-  "date_time":"2020-06-25 14:36:49",
-  "agent_phone":"16505550100*1212@RC_SOFTPHONE",
-  "username":"rc.guest+15300002_1791@gmail.com",
-  "source_ip":"192.168.0.100"
-}
-```
+=== "Login Request Body"
+    ```html
+    {
+      "external_agent_id":null,
+      "duration":"0",
+      "agent_login_id":"612730076",
+      "account_id":"15300002",
+      "event_type":"LOGIN",
+      "agent_id":"1369310",
+      "date_time":"2020-06-25 14:36:49",
+      "agent_phone":"16505550100*1212@RC_SOFTPHONE",
+      "username":"rc.guest+15300002_1791@gmail.com",
+      "source_ip":"192.168.0.100"
+    }
+    ```
 
 ## Agent Logoff Events
 
@@ -59,21 +60,21 @@ The following payload is created and sent to the URL destination specified.
 | **`username`** | The username of the user logging off. This is usually the given email address combined with the unique account ID |
 | **`source_ip`** | IP Address where the agent is logging off from |
 
-
-```html tab="Logoff Request Body"
-{
-  "external_agent_id":null,
-  "duration":"24",
-  "agent_login_id":"612960320",
-  "account_id":"15300002",
-  "event_type":"LOGOUT",
-  "agent_id":"1369310",
-  "date_time":"2020-07-16 19:21:19",
-  "agent_phone":"16505550100*1212@RC_SOFTPHONE",
-  "username":"rc.guest+15300002_1791@gmail.com",
-  "source_ip":"192.168.0.100"
-}
-```
+=== "Logoff Request Body"
+    ```html
+    {
+      "external_agent_id":null,
+      "duration":"24",
+      "agent_login_id":"612960320",
+      "account_id":"15300002",
+      "event_type":"LOGOUT",
+      "agent_id":"1369310",
+      "date_time":"2020-07-16 19:21:19",
+      "agent_phone":"16505550100*1212@RC_SOFTPHONE",
+      "username":"rc.guest+15300002_1791@gmail.com",
+      "source_ip":"192.168.0.100"
+    }
+    ```
 
 ## Agent State Events
 
@@ -105,86 +106,87 @@ When an agent first logs in, the state events are unique. Two state events are f
 | **`dnis`** | The number called to be put in the queue and eventually routed to the agent. This applies to ACD calls only |
 | **`call_type`** | The type of call this is, whether inbound dialed calls (`ACD`) or outbound lead calls (`VPD`) |
 
-```html tab="Initial Request Body"
-{
-  "agent_id":"1369310",
-  "prev_state":"LOGIN",
-  "prev_aux_state":"",
-  "agent_phone":"16505550100*1212@RC_SOFTPHONE",
-  "source_ip":"192.168.0.100",
-  "external_agent_id":null,
-  "duration":"0",
-  "agent_login_id":"612829048",
-  "account_id":"15300002",
-  "event_type":"AVAILABLE",
-  "event_aux_type":"",
-  "date_time":"2020-06-30 19:44:01",
-  "pending_disp":"0",
-  "username":"rc.guest+15300002_1791@gmail.com"
-}
-```
-
-```html tab="Available Request Body" hl_lines="3 11 12"
-{
-  "agent_id":"1369310",
-  "prev_state":"AVAILABLE",
-  "prev_aux_state":"",
-  "agent_phone":"16505550100*1212@RC_SOFTPHONE",
-  "source_ip":"192.168.0.100",
-  "external_agent_id":null,
-  "duration":"1",
-  "agent_login_id":"612829048",
-  "account_id":"15300002",
-  "event_type":"AVAILABLE",
-  "event_aux_type":"Available",
-  "date_time":"2020-06-30 19:44:02",
-  "pending_disp":"0",
-  "username":"rc.guest+15300002_1791@gmail.com"
-}
-```
-
-```html tab="Transition Request Body" hl_lines="3 4 11 12"
-{
-  "agent_id":"1369310",
-  "prev_state":"AVAILABLE",
-  "prev_aux_state":"Available"
-  "agent_phone":"16505550100*1212@RC_SOFTPHONE",
-  "source_ip":"192.168.0.100",
-  "external_agent_id":null,
-  "duration":"17",
-  "agent_login_id":"612829048",
-  "account_id":"15300002",
-  "event_type":"TRANSITION",
-  "event_aux_type":"",
-  "date_time":"2020-06-30 19:44:30",
-  "pending_disp":"0",
-  "username":"rc.guest+15300002_1791@gmail.com"
-}
-```
-
-```html tab="Engaged Request Body" hl_lines="3 11 12"
-{
-  "agent_id":"1369310",
-  "prev_state":"TRANSITION",
-  "prev_aux_state":"",
-  "agent_phone":"16505550100*1212@RC_SOFTPHONE",
-  "source_ip":"192.168.0.100",
-  "external_agent_id":null,
-  "duration":"0",
-  "agent_login_id":"612829048",
-  "account_id":"15300002",
-  "event_type":"ENGAGED",
-  "event_aux_type":"",
-  "date_time":"2020-06-30 19:44:30",
-  "pending_disp":"0",
-  "username":"rc.guest+15300002_1791@gmail.com",
-  "call_id":"202008281319380132120000030797",
-  "call_source_id":"72992",
-  "call_source_name":"My Queue",
-  "dnis":"2095550101",
-  "call_type":"ACD"
-}
-```
+=== "Initial Request Body"
+    ```html
+    {
+      "agent_id":"1369310",
+      "prev_state":"LOGIN",
+      "prev_aux_state":"",
+      "agent_phone":"16505550100*1212@RC_SOFTPHONE",
+      "source_ip":"192.168.0.100",
+      "external_agent_id":null,
+      "duration":"0",
+      "agent_login_id":"612829048",
+      "account_id":"15300002",
+      "event_type":"AVAILABLE",
+      "event_aux_type":"",
+      "date_time":"2020-06-30 19:44:01",
+      "pending_disp":"0",
+      "username":"rc.guest+15300002_1791@gmail.com"
+    }
+    ```
+=== "Available Request Body"
+    ```html
+    {
+      "agent_id":"1369310",
+      "prev_state":"AVAILABLE",
+      "prev_aux_state":"",
+      "agent_phone":"16505550100*1212@RC_SOFTPHONE",
+      "source_ip":"192.168.0.100",
+      "external_agent_id":null,
+      "duration":"1",
+      "agent_login_id":"612829048",
+      "account_id":"15300002",
+      "event_type":"AVAILABLE",
+      "event_aux_type":"Available",
+      "date_time":"2020-06-30 19:44:02",
+      "pending_disp":"0",
+      "username":"rc.guest+15300002_1791@gmail.com"
+    }
+    ```
+=== "Transition Request Body"
+    ```html
+    {
+      "agent_id":"1369310",
+      "prev_state":"AVAILABLE",
+      "prev_aux_state":"Available"
+      "agent_phone":"16505550100*1212@RC_SOFTPHONE",
+      "source_ip":"192.168.0.100",
+      "external_agent_id":null,
+      "duration":"17",
+      "agent_login_id":"612829048",
+      "account_id":"15300002",
+      "event_type":"TRANSITION",
+      "event_aux_type":"",
+      "date_time":"2020-06-30 19:44:30",
+      "pending_disp":"0",
+      "username":"rc.guest+15300002_1791@gmail.com"
+    }
+    ```
+=== "Engaged Request Body"
+    ```html
+    {
+      "agent_id":"1369310",
+      "prev_state":"TRANSITION",
+      "prev_aux_state":"",
+      "agent_phone":"16505550100*1212@RC_SOFTPHONE",
+      "source_ip":"192.168.0.100",
+      "external_agent_id":null,
+      "duration":"0",
+      "agent_login_id":"612829048",
+      "account_id":"15300002",
+      "event_type":"ENGAGED",
+      "event_aux_type":"",
+      "date_time":"2020-06-30 19:44:30",
+      "pending_disp":"0",
+      "username":"rc.guest+15300002_1791@gmail.com",
+      "call_id":"202008281319380132120000030797",
+      "call_source_id":"72992",
+      "call_source_name":"My Queue",
+      "dnis":"2095550101",
+      "call_type":"ACD"
+    }
+    ```
 
 After the initial state event, a subsequent state event fires to change the aux state to a state the agent will be able to read.  For example, the aux state today shows "Available" to the agent, but that can be customized to read "Ready for Calls".
 
@@ -214,41 +216,42 @@ Call events can be from two types of calls: an inbound call or an outbound call.
 | **`dnis`** | Dialed Number Identification Service - this is the number the caller dialed |
 | **`ani`** | Automatic Number Identification - this is the caller's number |
 
-```html tab="Unanswered Request Body"
-{
-  "recording_url":"",
-  "queue_duration":"0",
-  "agent_disposition":"",
-  "gate_name":"My Queue",
-  "call_state":"DEFLECTED",
-  "call_duration":"1",
-  "call_id":"202006302131470132090000083238",
-  "account_id":"15300002",
-  "event_type":"ACD-CALL",
-  "gate_id":"72992",
-  "call_start":"2020-06-30 21:31:47",
-  "dnis":"4155550110",
-  "ani":"5105550111"
-}
-```
-
-```html tab="Answered Request Body"
-{
-  "recording_url":"https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?v=1&accountId=15300002&bucket=c02-recordings&region=us-east-1&compliance=false&file=15300002/202007/30/202007302136360132130000036446-1.WAV",
-  "agent_id":"1369310",
-  "queue_duration":"3",
-  "agent_disposition":"",
-  "gate_name":"My Queue",
-  "call_state":"ANSWERED",
-  "call_duration":"18",
-  "call_id":"202006302136360132130000036446",
-  "external_agent_id":null,
-  "account_id":"15300002",
-  "event_type":"ACD-CALL",
-  "gate_id":"72992",
-  "call_start":"2020-06-30 21:36:37",
-  "dnis":"4155550110",
-  "ani":"5105550111",
-  "username":"rc.guest+15300002_1791@gmail.com"
-}
-```
+=== "Unanswered Request Body"
+    ```html
+    {
+      "recording_url":"",
+      "queue_duration":"0",
+      "agent_disposition":"",
+      "gate_name":"My Queue",
+      "call_state":"DEFLECTED",
+      "call_duration":"1",
+      "call_id":"202006302131470132090000083238",
+      "account_id":"15300002",
+      "event_type":"ACD-CALL",
+      "gate_id":"72992",
+      "call_start":"2020-06-30 21:31:47",
+      "dnis":"4155550110",
+      "ani":"5105550111"
+    }
+    ```
+=== "Answered Request Body"
+    ```html
+    {
+      "recording_url":"https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?v=1&    accountId=15300002&bucket=c02-recordings&region=us-east-1&compliance=false&file=15300002/202007/30/   202007302136360132130000036446-1.WAV",
+      "agent_id":"1369310",
+      "queue_duration":"3",
+      "agent_disposition":"",
+      "gate_name":"My Queue",
+      "call_state":"ANSWERED",
+      "call_duration":"18",
+      "call_id":"202006302136360132130000036446",
+      "external_agent_id":null,
+      "account_id":"15300002",
+      "event_type":"ACD-CALL",
+      "gate_id":"72992",
+      "call_start":"2020-06-30 21:36:37",
+      "dnis":"4155550110",
+      "ani":"5105550111",
+      "username":"rc.guest+15300002_1791@gmail.com"
+    }
+    ```
