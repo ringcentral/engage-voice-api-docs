@@ -197,7 +197,7 @@ Where:
         $strResponse = curl_exec($ch);
         $curlErrno = curl_errno($ch);
         if ($curlErrno) {
-            throw new \Exception($curlErrno);
+            throw new Exception($curlErrno);
         } else {
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             curl_close($ch);
@@ -208,7 +208,7 @@ Where:
                 print ($strResponse);
             }
         }
-    }catch (\Exception $e) {
+    }catch (Exception $e) {
         throw $e;
     }
     ```
