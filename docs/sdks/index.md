@@ -15,7 +15,7 @@ Client SDKs provide a native language interface to Engage Voice REST APIs
 
 The following Mobile Framework was built to show how a developer could build an agent experience on a mobile device to integrate with Engage Voice. This example utilizes the [Engage Voice Embeddable](https://github.com/ringcentral/engage-voice-embeddable) within Cordova, a mobile development framework. Since the Embeddable uses standard web technologies, this makes Cordova a great fit for packaging the Embeddable for distribution across iOS and Android app stores. A separate Web Server is expected to host the static web components including the HTML page and JavaScript code. That JavaScript code then communicates to the Engage Voice platform in the cloud.
 
-<img class="img-fluid" width="732" src="../../../images/sdk-mobile-framework-diagram.png">
+<img class="img-fluid" width="732" src="../images/sdk-mobile-framework-diagram.png">
 
 To keep things local to a single development environment, Ngrok is used to tunnel web requests (to the Embeddable page) to a local web server. This way, your Embeddable's interface is presented by Cordova. We also deploy Cordova on a local simulator that can communicate to your local web server (running Embeddable) which then communicates to Engage Voice. Now you can customize your app to use Engage Voice services either by creating a different web technology experience via you web server or by customizing the Embeddable to integrate with other applications like CRMs.
 
