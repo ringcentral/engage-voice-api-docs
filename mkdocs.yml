@@ -22,11 +22,11 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.keys
   - pymdownx.tabbed
-  - pymdownx.superfences:
-       disable_indented_code_blocks: true
-  - pymdownx.highlight
-  - markdown_include.include:
-       base_path: docs
+  - pymdownx.highlight:
+      linenums_style: pymdownx-inline
+#      linenums: true
+  - pymdownx.superfences
+  - mdx_include
 
 #extra_css: [extra.css]
 #extra_javascript: [fonts.js]
