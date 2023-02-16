@@ -1,5 +1,5 @@
 # Introduction to Routing APIs
-<img class="img-fluid" width="100%" src="../../images/routing-components.png">
+<img class="img-fluid" width="100%" src="../images/routing-components.png">
 
 In a contact center, inbound calls are normally routed to a queue and agent based on a set of preconfigured rules and priorities. Routing rules and priorities are set based on agent skills, languages, ranking systems, schedules and a few other components.
 
