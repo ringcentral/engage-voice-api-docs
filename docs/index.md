@@ -99,8 +99,8 @@ Welcome RingCentral Engage Voice Developer! Here you have access to all the reso
       <h6 class="card-subtitle mb-2 text-muted">Agents API</h6>
       <p class="card-text">Create and configure an agent accounts. Make sure to create Agent Groups first</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./agent-groups/" class="card-link">Create an Agent Group</a></li>
-      <li><a href="./agents/" class="card-link">Create an Agent</a></li>
+      <li><a href="./users/agents/agent-groups/" class="card-link">Create an Agent Group</a></li>
+      <li><a href="./users/agents/agents/" class="card-link">Create an Agent</a></li>
       </ul>
     </div>
   </div>

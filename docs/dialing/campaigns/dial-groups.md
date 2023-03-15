@@ -36,7 +36,7 @@ Dial groups are differentiated by dial mode. Each dial group will only dial via 
 If you’d like for your agent to be able to make outbound calls, you’ll need to assign that agent user to an outbound dial group.
 
 !!! alert "Helpful hint"
-    If you’d like your agents to make outbound calls, in addition to assigning your agent to an outbound dial group, you must also enable 'Allow Outbound Calls' via the [Agent](../../users/agents/agents).
+    If you’d like your agents to make outbound calls, in addition to assigning your agent to an outbound dial group, you must also enable 'Allow Outbound Calls' via the [Agent](../../users/agents/agents.md).
 
 ## Creating Dial Groups
 Let's start with a new dial group to contain all our campaigns.
