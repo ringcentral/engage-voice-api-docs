@@ -1,6 +1,6 @@
 # About Queue Events
 
-In Creating an inbound [Queue](./queue), we discussed that inbound queues can be configured to provide the specific experience you want each caller to have while waiting for an agent to take their call. This experience can be configured by creating [Queue Events](./queue-events), a series of sequential events that the customer will experience once they are routed to the queue.
+In Creating an inbound [Queue](./queues.md), we discussed that inbound queues can be configured to provide the specific experience you want each caller to have while waiting for an agent to take their call. This experience can be configured by creating [Queue Events](./queue-events), a series of sequential events that the customer will experience once they are routed to the queue.
 
 You can configure queue events to be as simple or complex as you like, from providing hold music for the caller while they wait to providing DTMF input options that the caller can choose from to determine the destination they’d like to route to.
 
