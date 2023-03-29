@@ -47,194 +47,194 @@ The following value lists and APIs are used to retrieve predefined values for ce
 
 The parameter `campaignPriority` can take on the following values:
 
-    | Value | Description |
-    |-|-|
-    | **`1`** | Priority 1 - Average - This is average priority |
-    | **`2`** | Priority 2 - This priority is 1 level higher |
-    | **`3`** | Priority 3 - This priority is 2 level higher |
-    | **`4`** | Priority 4 - This priority is 3 level higher |
-    | **`5`** | Priority 5 - High - This priority is highest priority |
+| Value | Description |
+|-|-|
+| **`1`** | Priority 1 - Average - This is average priority |
+| **`2`** | Priority 2 - This priority is 1 level higher |
+| **`3`** | Priority 3 - This priority is 2 level higher |
+| **`4`** | Priority 4 - This priority is 3 level higher |
+| **`5`** | Priority 5 - High - This priority is highest priority |
 
 #### Dial Lead in Order Loaded
 
 The parameter `dialLoadedOrder` can take on the following values:
 
-    | Value | Sort Name | Description |
-    |-|-|-|
-    | **`0`** | Natural Sort | This option will prioritize leads based on pass count (leads with zero passes will be dialed before leads that have already been called once or more). If all lead pass counts are identical, the system will default to dialing leads from the most recently loaded lists firsts. |
-    | **`1`** | Natural Sort, Randomized | This option dials leads with the lowest pass count in random order. |
-    | **`2`** | Yes — Ascending Order (Not Recommended!) | This option dials leads from first to last based on the order in which they were loaded. |
-    | **`3`** | Yes — Descending Order (Not Recommended!) | This option dials leads from last to first based on the order in which they were loaded. Please note: We recommend against dialing leads in the order loaded because lead lists usually contain phone numbers from the same geographical area. If thousands of agents suddenly start dialing into the same geographical area, they can overwhelm the associated telecommunications central office, causing network disruptions. |
-    | **`4`** | Using Lead Priority | This option dials leads according to the priority indicated via the Loaded Lists menu option. Please note that the system assigns all leads a default priority number of 999. You can add a Lead Priority column to your lead lists and use it to assign each lead a priority number. When you upload the list via Loaded Lists, be sure to use the custom list mapping setting to map that column to the system’s Lead Priority destination. Learn more about loading [lead lists](../../leads/bulk-import)|
+| Value | Sort Name | Description |
+|-|-|-|
+| **`0`** | Natural Sort | This option will prioritize leads based on pass count (leads with zero passes will be dialed before leads that have already been called once or more). If all lead pass counts are identical, the system will default to dialing leads from the most recently loaded lists firsts. |
+| **`1`** | Natural Sort, Randomized | This option dials leads with the lowest pass count in random order. |
+| **`2`** | Yes — Ascending Order (Not Recommended!) | This option dials leads from first to last based on the order in which they were loaded. |
+| **`3`** | Yes — Descending Order (Not Recommended!) | This option dials leads from last to first based on the order in which they were loaded. Please note: We recommend against dialing leads in the order loaded because lead lists usually contain phone numbers from the same geographical area. If thousands of agents suddenly start dialing into the same geographical area, they can overwhelm the associated telecommunications central office, causing network disruptions. |
+| **`4`** | Using Lead Priority | This option dials leads according to the priority indicated via the Loaded Lists menu option. Please note that the system assigns all leads a default priority number of 999. You can add a Lead Priority column to your lead lists and use it to assign each lead a priority number. When you upload the list via Loaded Lists, be sure to use the custom list mapping setting to map that column to the system’s Lead Priority destination. Learn more about loading [lead lists](../../leads/bulk-import)|
 
 ### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
-        ```html
+    ```html
 
-        POST {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns
-        Content-Type: application/json
+    POST {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns
+    Content-Type: application/json
 
-        {
-          "isActive":1,
-          "campaignName":"My Predictive Campaign",
-          "campaignDesc":"A test predictive campaign",
-          "startDate":"2020-05-26T07:00:00.000+0000",
-          "endDate":"2025-05-26T07:00:00.000+0000",
-          "maxRingTime":30,
-          "maxRingTimeTransfer":60,
-          "callerId":"4155550123",
-          "dialLoadedOrder":0
-        }
-        ```
+    {
+      "isActive":1,
+      "campaignName":"My Predictive Campaign",
+      "campaignDesc":"A test predictive campaign",
+      "startDate":"2020-05-26T07:00:00.000+0000",
+      "endDate":"2025-05-26T07:00:00.000+0000",
+      "maxRingTime":30,
+      "maxRingTimeTransfer":60,
+      "callerId":"4155550123",
+      "dialLoadedOrder":0
+    }
+    ```
 === "Node JS"
-        ```javascript
-        /****** Install Node JS SDK wrapper *******
-        $ npm install ringcentral-engage-voice-client
-        *******************************************/
+    ```javascript
+    /****** Install Node JS SDK wrapper *******
+    $ npm install ringcentral-engage-voice-client
+    *******************************************/
 
-        const RunRequest = async function () {
-            const EngageVoice = require('ringcentral-engage-voice-client').default
-
-            // Instantiate the SDK wrapper object with your RingCentral app credentials
-            const ev = new EngageVoice({
-                clientId: "RINGCENTRAL_CLIENTID",
-                clientSecret: "RINGCENTRAL_CLIENTSECRET"
-            })
-
-            try {
-                // Authorize with your RingCentral Office user credentials
-                await ev.authorize({
-                    username: "RINGCENTRAL_USERNAME",
-                    extension: "RINGCENTRAL_EXTENSION",
-                    password: "RINGCENTRAL_PASSWORD"
-                })
-
-                // Get Dial Groups data
-                const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-                const groupsResponse = await ev.get(groupsEndpoint)
-                for (var group of groupsResponse.data) {
-                    // Create a Campaign under your Dial Group
-                    if (group.dialGroupName == "My New Dial Group") {
-                        const campaignEndpoint = groupsEndpoint + "/" + group.dialGroupId + "/campaigns"
-                        var postBody = {
-                            "isActive": 1,
-                            "campaignName": "My Predictive Campaign",
-                            "campaignDesc": "A test predictive campaign",
-                            "startDate": "2020-05-28T07:00:00.000+0000",
-                            "endDate": "2025-05-30T07:00:00.000+0000",
-                            "maxRingTime": 30,
-                            "maxRingTimeTransfer": 60,
-                            "callerId": "4155550123",
-                            "dialLoadedOrder": 0
-                        }
-                        const campaignResponse = await ev.post(campaignEndpoint, postBody)
-                        console.log(campaignResponse.data)
-                    }
-                }
-            }
-            catch (err) {
-                console.log(err.message)
-            }
-        }
-
-        RunRequest();
-        ```
-=== "Python"
-        ```python
-        #### Install Python SDK wrapper ####
-        # $ pip3 install ringcentral_engage_voice
-        #  or
-        # $ pip install ringcentral_engage_voice
-        #####################################
-
-        from ringcentral_engage_voice import RingCentralEngageVoice
-
-        def create_campaign():
-            try:
-                dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-                dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
-                for group in dialGroupsResponse:
-                    # Create a new Campaign under your Dial Group
-                    if group['dialGroupName'] == "My New Dial Group":
-                        campaignEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}/campaigns"    # f      string:https://www.python.org/dev/peps/pep-0498/
-                        postBody = {
-                          "isActive": 1,
-                          "campaignName": "My Predictive Campaign",
-                          "campaignDesc": "A test predictive campaign",
-                          "startDate": "2020-05-26T07:00:00.000+0000",
-                          "endDate": "2025-05-26T07:00:00.000+0000",
-                          "maxRingTime": 30,
-                          "maxRingTimeTransfer": 60,
-                          "callerId": "4155550123",
-                          "dialLoadedOrder": 0
-                        }
-                        campaignResponse = ev.post(campaignEndpoint, postBody).json()
-                        print(campaignResponse)
-                        break
-            except Exception as e:
-                print(e)
-
-
-        # Instantiate the SDK wrapper object with your RingCentral app credentials
-        ev = RingCentralEngageVoice(
-            "RINGCENTRAL_CLIENTID",
-            "RINGCENTRAL_CLIENTSECRET")
-
-        try:
-            # Authorize with your RingCentral Office user credentials
-            ev.authorize(
-                username="RINGCENTRAL_USERNAME",
-                password="RINGCENTRAL_PASSWORD",
-                extension="RINGCENTRAL_EXTENSION"
-            )
-
-            create_campaign()
-        except Exception as e:
-            print(e)
-        ```
-=== "PHP"
-        ```php
-        /************ Install PHP SDK wrapper **************
-        $ composer require engagevoice-sdk-wrapper:dev-master
-        *****************************************************/
-
-        <?php
-        require('vendor/autoload.php');
+    const RunRequest = async function () {
+        const EngageVoice = require('ringcentral-engage-voice-client').default
 
         // Instantiate the SDK wrapper object with your RingCentral app credentials
-        $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-        try{
-          // Login your account with your RingCentral Office user credentials
-          $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-          $endpoint = 'admin/accounts/~/dialGroups';
-          $response = $ev->get($endpoint);
-          $jsonObj = json_decode($response);
-          foreach ($jsonObj as $group){
-              if ($group->dialGroupName == "My Dial Group - Predictive"){
-                  // create a campaign under this dial group
-                  $endpoint .= '/' . $group->dialGroupId . '/campaigns';
-                  $params = array (
-                    "isActive" => 1,
-                    "campaignName" => "My Predictive Campaign",
-                    "campaignDesc" => "A test predictive campaign",
-                    "startDate" => "2020-05-26T07:00:00.000+0000",
-                    "endDate" => "2025-05-26T07:00:00.000+0000",
-                    "maxRingTime" => 30,
-                    "maxRingTimeTransfer" => 60,
-                    "callerId" => "4155550123",
-                    "dialLoadedOrder" => 0
-                  );
-                  $response = $ev->post($endpoint, $params);
-                  print ($response."\r\n");
-                  break;
-              }
-          }
-        }catch (Exception $e) {
-          print $e->getMessage();
+        const ev = new EngageVoice({
+            clientId: "RINGCENTRAL_CLIENTID",
+            clientSecret: "RINGCENTRAL_CLIENTSECRET"
+        })
+
+        try {
+            // Authorize with your RingCentral Office user credentials
+            await ev.authorize({
+                username: "RINGCENTRAL_USERNAME",
+                extension: "RINGCENTRAL_EXTENSION",
+                password: "RINGCENTRAL_PASSWORD"
+            })
+
+            // Get Dial Groups data
+            const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+            const groupsResponse = await ev.get(groupsEndpoint)
+            for (var group of groupsResponse.data) {
+                // Create a Campaign under your Dial Group
+                if (group.dialGroupName == "My New Dial Group") {
+                    const campaignEndpoint = groupsEndpoint + "/" + group.dialGroupId + "/campaigns"
+                    var postBody = {
+                        "isActive": 1,
+                        "campaignName": "My Predictive Campaign",
+                        "campaignDesc": "A test predictive campaign",
+                        "startDate": "2020-05-28T07:00:00.000+0000",
+                        "endDate": "2025-05-30T07:00:00.000+0000",
+                        "maxRingTime": 30,
+                        "maxRingTimeTransfer": 60,
+                        "callerId": "4155550123",
+                        "dialLoadedOrder": 0
+                    }
+                    const campaignResponse = await ev.post(campaignEndpoint, postBody)
+                    console.log(campaignResponse.data)
+                }
+            }
         }
-        ```
+        catch (err) {
+            console.log(err.message)
+        }
+    }
+
+    RunRequest();
+    ```
+=== "Python"
+    ```python
+    #### Install Python SDK wrapper ####
+    # $ pip3 install ringcentral_engage_voice
+    #  or
+    # $ pip install ringcentral_engage_voice
+    #####################################
+
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    def create_campaign():
+        try:
+            dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+            dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
+            for group in dialGroupsResponse:
+                # Create a new Campaign under your Dial Group
+                if group['dialGroupName'] == "My New Dial Group":
+                    campaignEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}/campaigns"    # f      string:https://www.python.org/dev/peps/pep-0498/
+                    postBody = {
+                      "isActive": 1,
+                      "campaignName": "My Predictive Campaign",
+                      "campaignDesc": "A test predictive campaign",
+                      "startDate": "2020-05-26T07:00:00.000+0000",
+                      "endDate": "2025-05-26T07:00:00.000+0000",
+                      "maxRingTime": 30,
+                      "maxRingTimeTransfer": 60,
+                      "callerId": "4155550123",
+                      "dialLoadedOrder": 0
+                    }
+                    campaignResponse = ev.post(campaignEndpoint, postBody).json()
+                    print(campaignResponse)
+                    break
+        except Exception as e:
+            print(e)
+
+
+    # Instantiate the SDK wrapper object with your RingCentral app credentials
+    ev = RingCentralEngageVoice(
+        "RINGCENTRAL_CLIENTID",
+        "RINGCENTRAL_CLIENTSECRET")
+
+    try:
+        # Authorize with your RingCentral Office user credentials
+        ev.authorize(
+            username="RINGCENTRAL_USERNAME",
+            password="RINGCENTRAL_PASSWORD",
+            extension="RINGCENTRAL_EXTENSION"
+        )
+
+        create_campaign()
+    except Exception as e:
+        print(e)
+    ```
+=== "PHP"
+    ```php
+    /************ Install PHP SDK wrapper **************
+    $ composer require engagevoice-sdk-wrapper:dev-master
+    *****************************************************/
+
+    <?php
+    require('vendor/autoload.php');
+
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
+    try{
+      // Login your account with your RingCentral Office user credentials
+      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+      $endpoint = 'admin/accounts/~/dialGroups';
+      $response = $ev->get($endpoint);
+      $jsonObj = json_decode($response);
+      foreach ($jsonObj as $group){
+          if ($group->dialGroupName == "My Dial Group - Predictive"){
+              // create a campaign under this dial group
+              $endpoint .= '/' . $group->dialGroupId . '/campaigns';
+              $params = array (
+                "isActive" => 1,
+                "campaignName" => "My Predictive Campaign",
+                "campaignDesc" => "A test predictive campaign",
+                "startDate" => "2020-05-26T07:00:00.000+0000",
+                "endDate" => "2025-05-26T07:00:00.000+0000",
+                "maxRingTime" => 30,
+                "maxRingTimeTransfer" => 60,
+                "callerId" => "4155550123",
+                "dialLoadedOrder" => 0
+              );
+              $response = $ev->post($endpoint, $params);
+              print ($response."\r\n");
+              break;
+          }
+      }
+    }catch (Exception $e) {
+      print $e->getMessage();
+    }
+    ```
 
 ### Response
 
@@ -363,109 +363,109 @@ Your campaign must have name, start and end date, and valid caller ID. All other
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
-        ```html
+    ```html
 
-        POST {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}/clone?newCampaignName={newCampaignName}&newCountryCode=USA
-        Content-Type: application/json
-        ```
+    POST {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}/clone?newCampaignName={newCampaignName}&newCountryCode=USA
+    Content-Type: application/json
+    ```
 === "Node JS"
-        ```javascript
-        /****** Install Node JS SDK wrapper *******
-        $ npm install ringcentral-engage-voice-client
-        *******************************************/
+    ```javascript
+    /****** Install Node JS SDK wrapper *******
+    $ npm install ringcentral-engage-voice-client
+    *******************************************/
 
-        const RunRequest = async function () {
-            const EngageVoice = require('ringcentral-engage-voice-client').default
+    const RunRequest = async function () {
+        const EngageVoice = require('ringcentral-engage-voice-client').default
 
-            // Instantiate the SDK wrapper object with your RingCentral app credentials
-            const ev = new EngageVoice({
-                clientId: "RINGCENTRAL_CLIENTID",
-                clientSecret: "RINGCENTRAL_CLIENTSECRET"
+        // Instantiate the SDK wrapper object with your RingCentral app credentials
+        const ev = new EngageVoice({
+            clientId: "RINGCENTRAL_CLIENTID",
+            clientSecret: "RINGCENTRAL_CLIENTSECRET"
+        })
+
+        try {
+            // Authorize with your RingCentral Office user credentials
+            await ev.authorize({
+                username: "RINGCENTRAL_USERNAME",
+                extension: "RINGCENTRAL_EXTENSION",
+                password: "RINGCENTRAL_PASSWORD"
             })
 
-            try {
-                // Authorize with your RingCentral Office user credentials
-                await ev.authorize({
-                    username: "RINGCENTRAL_USERNAME",
-                    extension: "RINGCENTRAL_EXTENSION",
-                    password: "RINGCENTRAL_PASSWORD"
-                })
-
-                // Get Dial Groups data
-                const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-                const groupsResponse = await ev.get(groupsEndpoint)
-                for (var group of groupsResponse.data) {
-                    // Find your Dial Group
-                    if (group.dialGroupName == "My New Dial Group") {
-                        const campaignsEndpoint = groupsEndpoint + "/" + group.dialGroupId + "/campaigns"
-                        const campaignsResponse = await ev.get(campaignsEndpoint)
-                        for (var campaign of campaignsResponse.data) {
-                            // Find your Campaign and clone it into another one
-                            if (campaign.campaignName == "My Predictive Campaign") {
-                                const cloneCampaignEndpoint = campaignsEndpoint + "/" + campaign.campaignId         + "/clone?newCampaignName=My New Predictive Campaign&newCountryCode=USA"
-                                const cloneCampaignResponse = await ev.post(cloneCampaignEndpoint)
-                                console.log(cloneCampaignResponse.data);
-                                break
-                            }
+            // Get Dial Groups data
+            const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+            const groupsResponse = await ev.get(groupsEndpoint)
+            for (var group of groupsResponse.data) {
+                // Find your Dial Group
+                if (group.dialGroupName == "My New Dial Group") {
+                    const campaignsEndpoint = groupsEndpoint + "/" + group.dialGroupId + "/campaigns"
+                    const campaignsResponse = await ev.get(campaignsEndpoint)
+                    for (var campaign of campaignsResponse.data) {
+                        // Find your Campaign and clone it into another one
+                        if (campaign.campaignName == "My Predictive Campaign") {
+                            const cloneCampaignEndpoint = campaignsEndpoint + "/" + campaign.campaignId         + "/clone?newCampaignName=My New Predictive Campaign&newCountryCode=USA"
+                            const cloneCampaignResponse = await ev.post(cloneCampaignEndpoint)
+                            console.log(cloneCampaignResponse.data);
+                            break
                         }
                     }
                 }
             }
-            catch (err) {
-                console.log(err.message)
-            }
         }
+        catch (err) {
+            console.log(err.message)
+        }
+    }
 
-        RunRequest();
-        ```
+    RunRequest();
+    ```
 === "Python"
-        ```python
-        #### Install Python SDK wrapper ####
-        # $ pip3 install ringcentral_engage_voice
-        #  or
-        # $ pip install ringcentral_engage_voice
-        #####################################
+    ```python
+    #### Install Python SDK wrapper ####
+    # $ pip3 install ringcentral_engage_voice
+    #  or
+    # $ pip install ringcentral_engage_voice
+    #####################################
 
-        from ringcentral_engage_voice import RingCentralEngageVoice
+    from ringcentral_engage_voice import RingCentralEngageVoice
 
-        def clone_campaign():
-            try:
-                dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-                dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
-                for group in dialGroupsResponse:
-                    # Find your Dial Group
-                    if group['dialGroupName'] == "My New Dial Group":
-                        campaignsEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}/campaigns"    # f         string:https://www.python.org/dev/peps/pep-0498/
-                        campaignsResponse = ev.get(campaignsEndpoint).json()
-                        for campaign in campaignsResponse:
-                            # Clone your Campaign into another one
-                            if campaign['campaignName'] == "My Predictive Campaign":
-                                cloneCampaignEndpoint = f"{campaignsEndpoint}/{campaign['campaignId']}/clone"
-                                params = {
-                                    "newCampaignName" : "My New Predictive Campaign",
-                                    "newCountryCode" : "USA"
-                                }
-                                cloneCampaignResponse = ev.post(cloneCampaignEndpoint, params=params).json()
-                                print(cloneCampaignResponse)
-                                break
-            except Exception as e:
-                print(e)
-
-
-        # Instantiate the SDK wrapper object with your RingCentral app credentials
-        ev = RingCentralEngageVoice(
-            "RINGCENTRAL_CLIENTID",
-            "RINGCENTRAL_CLIENTSECRET")
-
+    def clone_campaign():
         try:
-            # Authorize with your RingCentral Office user credentials
-            ev.authorize(
-                username="RINGCENTRAL_USERNAME",
-                password="RINGCENTRAL_PASSWORD",
-                extension="RINGCENTRAL_EXTENSION"
-            )
-
-            clone_campaign()
+            dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+            dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
+            for group in dialGroupsResponse:
+                # Find your Dial Group
+                if group['dialGroupName'] == "My New Dial Group":
+                    campaignsEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}/campaigns"    # f         string:https://www.python.org/dev/peps/pep-0498/
+                    campaignsResponse = ev.get(campaignsEndpoint).json()
+                    for campaign in campaignsResponse:
+                        # Clone your Campaign into another one
+                        if campaign['campaignName'] == "My Predictive Campaign":
+                            cloneCampaignEndpoint = f"{campaignsEndpoint}/{campaign['campaignId']}/clone"
+                            params = {
+                                "newCampaignName" : "My New Predictive Campaign",
+                                "newCountryCode" : "USA"
+                            }
+                            cloneCampaignResponse = ev.post(cloneCampaignEndpoint, params=params).json()
+                            print(cloneCampaignResponse)
+                            break
         except Exception as e:
             print(e)
-        ```
+
+
+    # Instantiate the SDK wrapper object with your RingCentral app credentials
+    ev = RingCentralEngageVoice(
+        "RINGCENTRAL_CLIENTID",
+        "RINGCENTRAL_CLIENTSECRET")
+
+    try:
+        # Authorize with your RingCentral Office user credentials
+        ev.authorize(
+            username="RINGCENTRAL_USERNAME",
+            password="RINGCENTRAL_PASSWORD",
+            extension="RINGCENTRAL_EXTENSION"
+        )
+
+        clone_campaign()
+    except Exception as e:
+        print(e)
+    ```

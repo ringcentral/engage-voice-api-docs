@@ -26,19 +26,19 @@ The `BASE_DIAL_GROUP_URL` is `{BASE_URL}/api/v1/admin/accounts/{accountId}/dialG
 
 Gets a list of dial groups with associated campaigns created under this account. Campaigns are contained within Dial Groups and this call will retrieve both.
 
-  `GET {BASE_DIAL_GROUP_URL}/withChildren`
+`GET {BASE_DIAL_GROUP_URL}/withChildren`
 
 ### Leads List
 
 Gets a list of leads that are part of this campaign. Multiple lead lists can be linked to a campaign and this command returns list IDs for each lead list.
 
-  `GET {BASE_DIAL_GROUP_URL}/{dialGroupId}/campaigns/{campaignId}/lists`
+`GET {BASE_DIAL_GROUP_URL}/{dialGroupId}/campaigns/{campaignId}/lists`
 
 ### Campaign Dispositions
 
 Gets a list of the agent dispositions for this campaign
 
-  `GET {BASE_DIAL_GROUP_URL}/{dialGroupId}/campaigns/{campaignId}/campaignDispositions`
+`GET {BASE_DIAL_GROUP_URL}/{dialGroupId}/campaigns/{campaignId}/campaignDispositions`
 
 ### System Dispositions
 
@@ -66,53 +66,53 @@ The parameter `systemDispositions` can take on the following values:
 
 The parameter `leadState` can take on the following values:
 
-    | Value | Description |
-    |-|-|
-    | **`ACTIVE`** | Search for all leads currently engaged on an active call |
-    | **`AGENT_CALLBACK`** | Search for all leads that have been flagged for an agent-specific callback |
-    | **`CALLBACK_CANCELLED`** | Search for all leads that have had a callback flag removed |
-    | **`CALLBACK`** | Search for all leads that have been flagged for a callback |
-    | **`CANCELLED`** | Search for all leads that have been cancelled from dialing |
-    | **`COMPLETE`** | Search for all leads that have been cancelled (and will not be requeued for dialing) |
-    | **`DISCONNECTED`** | Search for all leads that have been assigned a DISCONNECTED lead state |
-    | **`DO_NOT_CALL`** | Search for all leads whose phone number is on the DNC list |
-    | **`INTERCEPT`** | Search for all leads with a disconnected or otherwise unreachable number |
-    | **`MAX_DIAL_LIMIT`** | Search for all leads that have been dialed the maximum number of times |
-    | **`PAUSED`** | Search for all leads that have been paused from dialing |
-    | **`PENDING_CALLBACK`** | Search for all leads that are awaiting a scheduled callback time set by an agent-specific callback disposition |
-    | **`PENDING_ERR`** | Search for all leads that have been set to PENDING and remain in that state |
-    | **`PENDING_HCI`** | Search for all leads that have not yet been dialed by an HCI agent |
-    | **`PENDING`** | Search for all leads that have been fetched by the preview dialer or are actively being dialed by the predictive dialer |
-    | **`READY`** | Search for all leads that are ready for dialing (including leads that have reached the maximum number of passes) |
-    | **`TRANSITIONED`** | Search for all leads that have been copied in transition mode and sent to another campaign. Please note that when a lead is copied in Transition mode, the original lead retains the original Lead ID, while the copied version gets a new Lead ID |
-    | **`WHITELIST`** | Search for all leads that have been whitelisted via the Whitelist Manager |
+| Value | Description |
+|-|-|
+| **`ACTIVE`** | Search for all leads currently engaged on an active call |
+| **`AGENT_CALLBACK`** | Search for all leads that have been flagged for an agent-specific callback |
+| **`CALLBACK_CANCELLED`** | Search for all leads that have had a callback flag removed |
+| **`CALLBACK`** | Search for all leads that have been flagged for a callback |
+| **`CANCELLED`** | Search for all leads that have been cancelled from dialing |
+| **`COMPLETE`** | Search for all leads that have been cancelled (and will not be requeued for dialing) |
+| **`DISCONNECTED`** | Search for all leads that have been assigned a DISCONNECTED lead state |
+| **`DO_NOT_CALL`** | Search for all leads whose phone number is on the DNC list |
+| **`INTERCEPT`** | Search for all leads with a disconnected or otherwise unreachable number |
+| **`MAX_DIAL_LIMIT`** | Search for all leads that have been dialed the maximum number of times |
+| **`PAUSED`** | Search for all leads that have been paused from dialing |
+| **`PENDING_CALLBACK`** | Search for all leads that are awaiting a scheduled callback time set by an agent-specific callback disposition |
+| **`PENDING_ERR`** | Search for all leads that have been set to PENDING and remain in that state |
+| **`PENDING_HCI`** | Search for all leads that have not yet been dialed by an HCI agent |
+| **`PENDING`** | Search for all leads that have been fetched by the preview dialer or are actively being dialed by the predictive dialer |
+| **`READY`** | Search for all leads that are ready for dialing (including leads that have reached the maximum number of passes) |
+| **`TRANSITIONED`** | Search for all leads that have been copied in transition mode and sent to another campaign. Please note that when a lead is copied in Transition mode, the original lead retains the original Lead ID, while the copied version gets a new Lead ID |
+| **`WHITELIST`** | Search for all leads that have been whitelisted via the Whitelist Manager |
 
 ### Lead Timezones
 
 The parameter `leadTimezones` can take on the following values:
 
-    | Value | Description |
-    |-|-|
-    | **`ADT`** | ADT - Atlantic Daylight Time |
-    | **`AKDT`** | AKDT - Alaska Daylight Time |
-    | **`AKST`** | AKST - Alaska Standard Time |
-    | **`AST`** | AST - Atlantic Standard Time |
-    | **`CDT`** | CDT - Central Daylight Time |
-    | **`CST`** | CST - Central Standard Time |
-    | **`EDT`** | EDT - Eastern Daylight Time |
-    | **`EST`** | EST - Eastern Standard Time |
-    | **`HADT`** | HADT - Hawaii-Aleutian Daylight Time |
-    | **`HAST`** | HAST - Hawaii-Aleutian Standard Time |
-    | **`MDT`** | MDT - Mountain Daylight Time |
-    | **`MST`** | MST - Mountain Standard Time |
-    | **`NDT`** | NDT - Newfoundland Daylight Time |
-    | **`NST`** | NST - Newfoundland Standard Time |
-    | **`PDT`** | PDT - Pacific Daylight Time |
-    | **`PMDT`** | PMDT - Pierre/Miquelon Daylight Time |
-    | **`PMST`** | PMST - Pierre/Miquelon Standard Time |
-    | **`PST`** | PST - Pacfic Standard Time |
-    | **`WSDT`** | WSDT - Samoa Daylight Time |
-    | **`WSST`** | WSST - Somoa Standard Time |
+| Value | Description |
+|-|-|
+| **`ADT`** | ADT - Atlantic Daylight Time |
+| **`AKDT`** | AKDT - Alaska Daylight Time |
+| **`AKST`** | AKST - Alaska Standard Time |
+| **`AST`** | AST - Atlantic Standard Time |
+| **`CDT`** | CDT - Central Daylight Time |
+| **`CST`** | CST - Central Standard Time |
+| **`EDT`** | EDT - Eastern Daylight Time |
+| **`EST`** | EST - Eastern Standard Time |
+| **`HADT`** | HADT - Hawaii-Aleutian Daylight Time |
+| **`HAST`** | HAST - Hawaii-Aleutian Standard Time |
+| **`MDT`** | MDT - Mountain Daylight Time |
+| **`MST`** | MST - Mountain Standard Time |
+| **`NDT`** | NDT - Newfoundland Daylight Time |
+| **`NST`** | NST - Newfoundland Standard Time |
+| **`PDT`** | PDT - Pacific Daylight Time |
+| **`PMDT`** | PMDT - Pierre/Miquelon Daylight Time |
+| **`PMST`** | PMST - Pierre/Miquelon Standard Time |
+| **`PST`** | PST - Pacfic Standard Time |
+| **`WSDT`** | WSDT - Samoa Daylight Time |
+| **`WSST`** | WSST - Somoa Standard Time |
 
 ### States
 
@@ -124,137 +124,135 @@ Get a list of states from the United States and all provinces and territories of
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
-        ```http
-
-            POST {BASE_URL}/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch
-            Authorization: bearer <myAccessToken>
-            Content-Type: application/json;charset=UTF-8
-            Accept: application/json
-
-
-            {
-              "firstName":"Jon",
-              "campaignId":136785,
-              "listIds":[],
-              "agentDispositions":[],
-              "systemDispositions":[],
-              "leadStates":[],
-              "physicalStates":[],
-              "leadTimezones":
-              	[
-              		{"name":"CST"},
-              		{"name":"PST"}
-              	],
-              "suppressed":"ALL",
-              "campaignIds":[136785]
-            }
-        ```
-=== "cURLs"
-        ```bash
-
-            curl -XPOST 'https://engage.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/        campaignLeads/leadSearch' \
-               -H 'Authorization: Bearer {myAccessToken}' \
-               -d '{"firstName":"John"}' \
-               -H 'Content-Type: application/json'
-        ```
-=== "Node JS"
-        ```javascript
-        /****** Install Node JS SDK wrapper *******
-        $ npm install ringcentral-engage-voice-client
-        *******************************************/
-
-        const RunRequest = async function () {
-            const EngageVoice = require('ringcentral-engage-voice-client').default
-
-            // Instantiate the SDK wrapper object with your RingCentral app credentials
-            const ev = new EngageVoice({
-                clientId: "RINGCENTRAL_CLIENTID",
-                clientSecret: "RINGCENTRAL_CLIENTSECRET"
-            })
-
-            try {
-                // Authorize with your RingCentral Office user credentials
-                await ev.authorize({
-                    username: "RINGCENTRAL_USERNAME",
-                    extension: "RINGCENTRAL_EXTENSION",
-                    password: "RINGCENTRAL_PASSWORD"
-                })
-
-                // Search Leads with first name John
-                const endpoint = "/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch"
-                const postBody = {
-                    "firstName": "John"
-                }
-                const response = await ev.post(endpoint, postBody)
-                console.log(response.data);
-            }
-            catch (err) {
-                console.log(err.message)
-            }
+    ```http
+        POST {BASE_URL}/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch
+        Authorization: bearer <myAccessToken>
+        Content-Type: application/json;charset=UTF-8
+        Accept: application/json
+    
+    
+        {
+          "firstName":"Jon",
+          "campaignId":136785,
+          "listIds":[],
+          "agentDispositions":[],
+          "systemDispositions":[],
+          "leadStates":[],
+          "physicalStates":[],
+          "leadTimezones":
+            [
+                {"name":"CST"},
+                {"name":"PST"}
+            ],
+          "suppressed":"ALL",
+          "campaignIds":[136785]
         }
-
-        RunRequest();
-        ```
+    ```
+=== "cURLs"
+    ```bash
+    curl -XPOST 'https://engage.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/        campaignLeads/leadSearch' \
+       -H 'Authorization: Bearer {myAccessToken}' \
+       -d '{"firstName":"John"}' \
+       -H 'Content-Type: application/json'
+    ```
+=== "Node JS"
+    ```javascript
+    /****** Install Node JS SDK wrapper *******
+    $ npm install ringcentral-engage-voice-client
+    *******************************************/
+    
+    const RunRequest = async function () {
+        const EngageVoice = require('ringcentral-engage-voice-client').default
+    
+        // Instantiate the SDK wrapper object with your RingCentral app credentials
+        const ev = new EngageVoice({
+            clientId: "RINGCENTRAL_CLIENTID",
+            clientSecret: "RINGCENTRAL_CLIENTSECRET"
+        })
+    
+        try {
+            // Authorize with your RingCentral Office user credentials
+            await ev.authorize({
+                username: "RINGCENTRAL_USERNAME",
+                extension: "RINGCENTRAL_EXTENSION",
+                password: "RINGCENTRAL_PASSWORD"
+            })
+    
+            // Search Leads with first name John
+            const endpoint = "/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch"
+            const postBody = {
+                "firstName": "John"
+            }
+            const response = await ev.post(endpoint, postBody)
+            console.log(response.data);
+        }
+        catch (err) {
+            console.log(err.message)
+        }
+    }
+    
+    RunRequest();
+    ```
 === "Python"
-        ```python
-        #### Install Python SDK wrapper ####
-        # $ pip3 install ringcentral_engage_voice
-        #  or
-        # $ pip install ringcentral_engage_voice
-        #####################################
-
-        from ringcentral_engage_voice import RingCentralEngageVoice
-
-        def search_leads():
-            try:
-                postBody = {
-                    "firstName": "John"
-                }
-                response = ev.post("/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch", postBody).        json()
-                print(response)
-            except Exception as e:
-                print(e)
-
-
-        # Instantiate the SDK wrapper object with your RingCentral app credentials
-        ev = RingCentralEngageVoice(
-            "RINGCENTRAL_CLIENTID",
-            "RINGCENTRAL_CLIENTSECRET")
-
+    ```python
+    #### Install Python SDK wrapper ####
+    # $ pip3 install ringcentral_engage_voice
+    #  or
+    # $ pip install ringcentral_engage_voice
+    #####################################
+    
+    from ringcentral_engage_voice import RingCentralEngageVoice
+    
+    def search_leads():
         try:
-            # Authorize with your RingCentral Office user credentials
-            ev.authorize(
-                username="RINGCENTRAL_USERNAME",
-                password="RINGCENTRAL_PASSWORD",
-                extension="RINGCENTRAL_EXTENSION"
-            )
-
-            search_leads()
+            postBody = {
+                "firstName": "John"
+            }
+            response = ev.post("/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch", postBody).        json()
+            print(response)
         except Exception as e:
             print(e)
-        ```
+    
+    
+    # Instantiate the SDK wrapper object with your RingCentral app credentials
+    ev = RingCentralEngageVoice(
+        "RINGCENTRAL_CLIENTID",
+        "RINGCENTRAL_CLIENTSECRET")
+    
+    try:
+        # Authorize with your RingCentral Office user credentials
+        ev.authorize(
+            username="RINGCENTRAL_USERNAME",
+            password="RINGCENTRAL_PASSWORD",
+            extension="RINGCENTRAL_EXTENSION"
+        )
+    
+        search_leads()
+    except Exception as e:
+        print(e)
+    ```
 === "PHP"
-        ```php
-        /****** Install PHP SDK wrapper **
-        $ composer require engagevoice-sdk-wrapper:dev-master
-        *************************************/
-
-        <?php
-        require('vendor/autoload.php');
-
-        // Instantiate the SDK wrapper object with your RingCentral app credentials
-        $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-        try{
-          // Login your account with your RingCentral Office user credentials
-          $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-          $endpoint = "admin/accounts/~/campaignLeads/leadSearch";
-          $params = array ( "firstName" => "John" );
-          $response = $ev->post($endpoint, $params);
-          print ($response."\r\n");
-        }catch (Exception $e) {
-          print $e->getMessage();
-        }
-        ```
+    ```php
+    /****** Install PHP SDK wrapper **
+    $ composer require engagevoice-sdk-wrapper:dev-master
+    *************************************/
+    
+    <?php
+    require('vendor/autoload.php');
+    
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
+    try{
+      // Login your account with your RingCentral Office user credentials
+      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+      $endpoint = "admin/accounts/~/campaignLeads/leadSearch";
+      $params = array ( "firstName" => "John" );
+      $response = $ev->post($endpoint, $params);
+      print ($response."\r\n");
+    }catch (Exception $e) {
+      print $e->getMessage();
+    }
+    ```
 ## References
 
 * [Web console documentation: Using the Leads search](https://docs.ringcentral.com/engage/article/voice-admin-use-lead-search)

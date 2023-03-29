@@ -19,14 +19,14 @@ Only `groupName` is a required parameter to create a skill profile. All other pa
 ### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 === "HTTP"
-        ```html
-        POST {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups
-        Content-Type: application/json
-
-        {
-            "groupName": "My Agent Group"
-        }
-        ```
+    ```html
+    POST {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups
+    Content-Type: application/json
+    
+    {
+        "groupName": "My Agent Group"
+    }
+    ```
 
 ## Read Agent Groups
 
@@ -35,78 +35,78 @@ To retrieve a list of Agent Groups, use the `agentGroups` API endpoint.
 ### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 === "HTTP"
-        ```html
-        GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups
-        ```
+    ```html
+    GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups
+    ```
 === "Node JS"
-        ```javascript
-        /****** Install Node JS SDK wrapper *******
-        $ npm install ringcentral-engage-voice-client
-        *******************************************/
+    ```javascript
+    /****** Install Node JS SDK wrapper *******
+    $ npm install ringcentral-engage-voice-client
+    *******************************************/
 
-        const RunRequest = async function () {
-            const EngageVoice = require('ringcentral-engage-voice-client').default
+    const RunRequest = async function () {
+        const EngageVoice = require('ringcentral-engage-voice-client').default
 
-            // Instantiate the SDK wrapper object with your RingCentral app credentials
-            const ev = new EngageVoice({
-                clientId: "RINGCENTRAL_CLIENTID",
-                clientSecret: "RINGCENTRAL_CLIENTSECRET"
+        // Instantiate the SDK wrapper object with your RingCentral app credentials
+        const ev = new EngageVoice({
+            clientId: "RINGCENTRAL_CLIENTID",
+            clientSecret: "RINGCENTRAL_CLIENTSECRET"
+        })
+
+        try {
+            // Authorize with your RingCentral Office user credentials
+            await ev.authorize({
+                username: "RINGCENTRAL_USERNAME",
+                extension: "RINGCENTRAL_EXTENSION",
+                password: "RINGCENTRAL_PASSWORD"
             })
 
-            try {
-                // Authorize with your RingCentral Office user credentials
-                await ev.authorize({
-                    username: "RINGCENTRAL_USERNAME",
-                    extension: "RINGCENTRAL_EXTENSION",
-                    password: "RINGCENTRAL_PASSWORD"
-                })
-
-                // Get Agent Groups
-                const response = await ev.get("/api/v1/admin/accounts/{accountId}/agentGroups")
-                console.log(response.data);
-            }
-            catch (err) {
-                console.log(err.message)
-            }
+            // Get Agent Groups
+            const response = await ev.get("/api/v1/admin/accounts/{accountId}/agentGroups")
+            console.log(response.data);
         }
+        catch (err) {
+            console.log(err.message)
+        }
+    }
 
-        RunRequest();
-        ```
+    RunRequest();
+    ```
 === "Python"
-        ```python
-        #### Install Python SDK wrapper ####
-        # $ pip3 install ringcentral_engage_voice
-        #  or
-        # $ pip install ringcentral_engage_voice
-        #####################################
+    ```python
+    #### Install Python SDK wrapper ####
+    # $ pip3 install ringcentral_engage_voice
+    #  or
+    # $ pip install ringcentral_engage_voice
+    #####################################
 
-        from ringcentral_engage_voice import RingCentralEngageVoice
+    from ringcentral_engage_voice import RingCentralEngageVoice
 
-        def retrieve_agent_groups():
-            try:
-                response = ev.get("/api/v1/admin/accounts/{accountId}/agentGroups").json()
-                print(response)
-            except Exception as e:
-                print(e)
-
-
-        # Instantiate the SDK wrapper object with your RingCentral app credentials
-        ev = RingCentralEngageVoice(
-            "RINGCENTRAL_CLIENTID",
-            "RINGCENTRAL_CLIENTSECRET")
-
+    def retrieve_agent_groups():
         try:
-            # Authorize with your RingCentral Office user credentials
-            ev.authorize(
-                username="RINGCENTRAL_USERNAME",
-                password="RINGCENTRAL_PASSWORD",
-                extension="RINGCENTRAL_EXTENSION"
-            )
-
-            retrieve_agent_groups()
+            response = ev.get("/api/v1/admin/accounts/{accountId}/agentGroups").json()
+            print(response)
         except Exception as e:
             print(e)
-        ```
+
+
+    # Instantiate the SDK wrapper object with your RingCentral app credentials
+    ev = RingCentralEngageVoice(
+        "RINGCENTRAL_CLIENTID",
+        "RINGCENTRAL_CLIENTSECRET")
+
+    try:
+        # Authorize with your RingCentral Office user credentials
+        ev.authorize(
+            username="RINGCENTRAL_USERNAME",
+            password="RINGCENTRAL_PASSWORD",
+            extension="RINGCENTRAL_EXTENSION"
+        )
+
+        retrieve_agent_groups()
+    except Exception as e:
+        print(e)
+    ```
 
 ### Response
 
@@ -137,10 +137,11 @@ To retrieve a single Agent Group, use the `agentGroups` API endpoint with a spec
 
 ### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
-==="HTTP"
-        ```html
-        GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
-        ```
+
+=== "HTTP"
+    ```html
+    GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
+    ```
 
 ### Response
 
@@ -164,113 +165,113 @@ To Update an Agent Group's name, get the Agent Group's JSON object, modify the `
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
-        ```html
-        # Retrieve Agent Group JSON object
-        GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
+    ```html
+    # Retrieve Agent Group JSON object
+    GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
 
-        # Modify `groupName` and `PUT` JSON object
-        PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
-        Content-Type: application/json
+    # Modify `groupName` and `PUT` JSON object
+    PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
+    Content-Type: application/json
 
-        {
-            "agentGroupId":111,
-            "groupName":"My Agent Group"
-            ...
-        }
-        ```
+    {
+        "agentGroupId":111,
+        "groupName":"My Agent Group"
+        ...
+    }
+    ```
 === "Node JS"
-        ```javascript
-        /****** Install Node JS SDK wrapper *******
-        $ npm install ringcentral-engage-voice-client
-        *******************************************/
+    ```javascript
+    /****** Install Node JS SDK wrapper *******
+    $ npm install ringcentral-engage-voice-client
+    *******************************************/
 
-        const RunRequest = async function () {
-            const EngageVoice = require('ringcentral-engage-voice-client').default
+    const RunRequest = async function () {
+        const EngageVoice = require('ringcentral-engage-voice-client').default
 
-            // Instantiate the SDK wrapper object with your RingCentral app credentials
-            const ev = new EngageVoice({
-                clientId: "RINGCENTRAL_CLIENTID",
-                clientSecret: "RINGCENTRAL_CLIENTSECRET"
+        // Instantiate the SDK wrapper object with your RingCentral app credentials
+        const ev = new EngageVoice({
+            clientId: "RINGCENTRAL_CLIENTID",
+            clientSecret: "RINGCENTRAL_CLIENTSECRET"
+        })
+
+        try {
+            // Authorize with your RingCentral Office user credentials
+            await ev.authorize({
+                username: "RINGCENTRAL_USERNAME",
+                extension: "RINGCENTRAL_EXTENSION",
+                password: "RINGCENTRAL_PASSWORD"
             })
 
-            try {
-                // Authorize with your RingCentral Office user credentials
-                await ev.authorize({
-                    username: "RINGCENTRAL_USERNAME",
-                    extension: "RINGCENTRAL_EXTENSION",
-                    password: "RINGCENTRAL_PASSWORD"
-                })
-
-                // Get Agent Groups data
-                const agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
-                const agentGroupsResponse = await ev.get(agentGroupsEndpoint)
-                for (var group of agentGroupsResponse.data) {
-                    // Update your Agent Group
-                    if (group.groupName == "My New Agent Group") {
-                        const singleAgentGroupEndpoint = agentGroupsEndpoint + "/" + group.agentGroupId
-                        group.groupName += " - updated"
-                        const singleAgentGroupResponse = await ev.put(singleAgentGroupEndpoint, group)
-                        console.log(singleAgentGroupResponse.data);
-                        break
-                    }
+            // Get Agent Groups data
+            const agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
+            const agentGroupsResponse = await ev.get(agentGroupsEndpoint)
+            for (var group of agentGroupsResponse.data) {
+                // Update your Agent Group
+                if (group.groupName == "My New Agent Group") {
+                    const singleAgentGroupEndpoint = agentGroupsEndpoint + "/" + group.agentGroupId
+                    group.groupName += " - updated"
+                    const singleAgentGroupResponse = await ev.put(singleAgentGroupEndpoint, group)
+                    console.log(singleAgentGroupResponse.data);
+                    break
                 }
             }
-            catch (err) {
-                console.log(err.message)
-            }
         }
+        catch (err) {
+            console.log(err.message)
+        }
+    }
 
-        RunRequest();
-        ```
+    RunRequest();
+    ```
 === "Python"
-        ```python
-        #### Install Python SDK wrapper ####
-        # $ pip3 install ringcentral_engage_voice
-        #  or
-        # $ pip install ringcentral_engage_voice
-        #####################################
+    ```python
+    #### Install Python SDK wrapper ####
+    # $ pip3 install ringcentral_engage_voice
+    #  or
+    # $ pip install ringcentral_engage_voice
+    #####################################
 
-        from ringcentral_engage_voice import RingCentralEngageVoice
+    from ringcentral_engage_voice import RingCentralEngageVoice
 
-        def update_agent_group():
-            try:
-                agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
-                agentGroupsResponse = ev.get(agentGroupsEndpoint).json()
-                for group in agentGroupsResponse:
-                    # Update your Agent Group
-                    if group['groupName'] == "My New Agent Group":
-                        singleAgentGroupEndpoint = f"{agentGroupsEndpoint}/{group['agentGroupId']}"    # f      string:https://www.python.org/dev/peps/pep-0498/
-                        group['groupName'] += " - Updated"
-                        singleAgentGroupResponse = ev.put(singleAgentGroupEndpoint, group).json()
-                        print(singleAgentGroupResponse)
-                        break
-            except Exception as e:
-                print(e)
-
-
-        # Instantiate the SDK wrapper object with your RingCentral app credentials
-        ev = RingCentralEngageVoice(
-            "RINGCENTRAL_CLIENTID",
-            "RINGCENTRAL_CLIENTSECRET")
-
+    def update_agent_group():
         try:
-            # Authorize with your RingCentral Office user credentials
-            ev.authorize(
-                username="RINGCENTRAL_USERNAME",
-                password="RINGCENTRAL_PASSWORD",
-                extension="RINGCENTRAL_EXTENSION"
-            )
-
-            update_agent_group()
+            agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
+            agentGroupsResponse = ev.get(agentGroupsEndpoint).json()
+            for group in agentGroupsResponse:
+                # Update your Agent Group
+                if group['groupName'] == "My New Agent Group":
+                    singleAgentGroupEndpoint = f"{agentGroupsEndpoint}/{group['agentGroupId']}"    # f      string:https://www.python.org/dev/peps/pep-0498/
+                    group['groupName'] += " - Updated"
+                    singleAgentGroupResponse = ev.put(singleAgentGroupEndpoint, group).json()
+                    print(singleAgentGroupResponse)
+                    break
         except Exception as e:
             print(e)
-        ```
+
+
+    # Instantiate the SDK wrapper object with your RingCentral app credentials
+    ev = RingCentralEngageVoice(
+        "RINGCENTRAL_CLIENTID",
+        "RINGCENTRAL_CLIENTSECRET")
+
+    try:
+        # Authorize with your RingCentral Office user credentials
+        ev.authorize(
+            username="RINGCENTRAL_USERNAME",
+            password="RINGCENTRAL_PASSWORD",
+            extension="RINGCENTRAL_EXTENSION"
+        )
+
+        update_agent_group()
+    except Exception as e:
+        print(e)
+    ```
 
 ## Delete Agent Group
 
 ### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 === "HTTP"
-        ```html
-        DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
-        ```
+    ```html
+    DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}
+    ```

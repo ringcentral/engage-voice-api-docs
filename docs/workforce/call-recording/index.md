@@ -22,9 +22,9 @@ If a call is answered and recorded, a call recording link will appear in the eve
 Dual channel (stereo) agent recordings can also be retrieved from the [Agent Segment Metadata Report](../../analytics/reports/agent-segment-metadata-report.md). You can find the agent recording from the `Segment Recording URL` field in the downloaded report.  Note that the agent recording is a `perspective` type recording and must be set manually.
 
 #### Agent Recording (Dual Channel)
-    ```html
-      https://aws46-recordings.vacd.biz/api/v1/calls/recordings?v=1&accountId=15300002&bucket=aws46-recordings&region=us-west-2&compliance=true&file=perspective/15300002/202008/05/202008051517160139120000000370-session-2-stereo.WAV
-    ```
+```html
+  https://aws46-recordings.vacd.biz/api/v1/calls/recordings?v=1&accountId=15300002&bucket=aws46-recordings&region=us-west-2&compliance=true&file=perspective/15300002/202008/05/202008051517160139120000000370-session-2-stereo.WAV
+```
 
 !!! important
     This recording is only available for customer accounts that are manually activated. Please work with your RingCentral representative to activate dual channel recordings for the account you wish to gather dual channel call recordings from.
