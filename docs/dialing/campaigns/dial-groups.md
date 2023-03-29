@@ -70,132 +70,132 @@ Only `gateName` is a required parameter to create a Queue. All other parameters 
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
-        ```html
-        ######################################################
-        The `BASE_URL` for your server is one of the following:
-        # `https://engage.ringcentral.com/voice`
-        # `https://portal.vacd.biz/`
-        # `https://portal.virtualacd.biz/`
-        ######################################################
-
-        POST {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups
-        Content-Type: application/json
-
-        {
-          "dialGroupName": "My Dial Group - Predictive",
-          "dialGroupDesc": "A test dial group with predictive dial mode",
-          "dialMode": "PREDICTIVE",
-          "isActive": true
-        }
-        ```
+    ```html
+    ######################################################
+    The `BASE_URL` for your server is one of the following:
+    # `https://engage.ringcentral.com/voice`
+    # `https://portal.vacd.biz/`
+    # `https://portal.virtualacd.biz/`
+    ######################################################
+    
+    POST {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups
+    Content-Type: application/json
+    
+    {
+      "dialGroupName": "My Dial Group - Predictive",
+      "dialGroupDesc": "A test dial group with predictive dial mode",
+      "dialMode": "PREDICTIVE",
+      "isActive": true
+    }
+    ```
 === "Node JS"
-        ```javascript 
-        /****** Install Node JS SDK wrapper *******
-        $ npm install ringcentral-engage-voice-client
-        *******************************************/
+    ```javascript 
+    /****** Install Node JS SDK wrapper *******
+    $ npm install ringcentral-engage-voice-client
+    *******************************************/
 
-        const RunRequest = async function () {
-            const EngageVoice = require('ringcentral-engage-voice-client').default
-
-            // Instantiate the SDK wrapper object with your RingCentral app credentials
-            const ev = new EngageVoice({
-                clientId: "RINGCENTRAL_CLIENTID",
-                clientSecret: "RINGCENTRAL_CLIENTSECRET"
-            })
-
-            try {
-                // Authorize with your RingCentral Office user credentials
-                await ev.authorize({
-                    username: "RINGCENTRAL_USERNAME",
-                    extension: "RINGCENTRAL_EXTENSION",
-                    password: "RINGCENTRAL_PASSWORD"
-                })
-
-                // Create a new Dial Group
-                const postBody = {
-                    "dialGroupName": "My New Dial Group",
-                    "dialGroupDesc": "A test dial group with predictive dial mode",
-                    "dialMode": "PREDICTIVE",
-                    "isActive": true
-                }
-                const response = await ev.post('/api/v1/admin/accounts/{accountId}/dialGroups', postBody)
-                console.log(response);
-            }
-            catch (err) {
-                console.log(err.message)
-            }
-        }
-
-        RunRequest();
-        ```
-=== "Python"
-        ```python
-        #### Install Python SDK wrapper ####
-        # $ pip3 install ringcentral_engage_voice
-        #  or
-        # $ pip install ringcentral_engage_voice
-        #####################################
-
-        from ringcentral_engage_voice import RingCentralEngageVoice
-
-        def create_dial_group():
-            try:
-                postBody = {
-                  "dialGroupName": "My New Dial Group",
-                  "dialGroupDesc": "A test dial group with predictive dial mode",
-                  "dialMode": "PREDICTIVE",
-                  "isActive": True
-                }
-                response = ev.post("/api/v1/admin/accounts/{accountId}/dialGroups", postBody).json()
-                print(response)
-            except Exception as e:
-                print(e)
-
-
-        # Instantiate the SDK wrapper object with your RingCentral app credentials
-        ev = RingCentralEngageVoice(
-            "RINGCENTRAL_CLIENTID",
-            "RINGCENTRAL_CLIENTSECRET")
-
-        try:
-            # Authorize with your RingCentral Office user credentials
-            ev.authorize(
-                username="RINGCENTRAL_USERNAME",
-                password="RINGCENTRAL_PASSWORD",
-                extension="RINGCENTRAL_EXTENSION"
-            )
-
-            create_dial_group()
-        except Exception as e:
-            print(e)
-        ```
-=== "PHP"
-        ```php
-        /************ Install PHP SDK wrapper **************
-        $ composer require engagevoice-sdk-wrapper:dev-master
-        *****************************************************/
-
-        <?php
-        require('vendor/autoload.php');
+    const RunRequest = async function () {
+        const EngageVoice = require('ringcentral-engage-voice-client').default
 
         // Instantiate the SDK wrapper object with your RingCentral app credentials
-        $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-        try{
-          // Login your account with your RingCentral Office user credentials
-          $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-          $endpoint = 'admin/accounts/~/dialGroups';
-          $params = array (
-            "dialGroupName" => "My Dial Group - Predictive",
-            "dialGroupDesc" => "A test dial group with predictive dial mode",
-            "dialMode" => "PREDICTIVE",
-            "isActive" => true
-          );
-          $response = $ev->post($endpoint, $params);
-          print ($response."\r\n");
-        }catch (Exception $e) {
-          print $e->getMessage();
+        const ev = new EngageVoice({
+            clientId: "RINGCENTRAL_CLIENTID",
+            clientSecret: "RINGCENTRAL_CLIENTSECRET"
+        })
+
+        try {
+            // Authorize with your RingCentral Office user credentials
+            await ev.authorize({
+                username: "RINGCENTRAL_USERNAME",
+                extension: "RINGCENTRAL_EXTENSION",
+                password: "RINGCENTRAL_PASSWORD"
+            })
+
+            // Create a new Dial Group
+            const postBody = {
+                "dialGroupName": "My New Dial Group",
+                "dialGroupDesc": "A test dial group with predictive dial mode",
+                "dialMode": "PREDICTIVE",
+                "isActive": true
+            }
+            const response = await ev.post('/api/v1/admin/accounts/{accountId}/dialGroups', postBody)
+            console.log(response);
         }
-        ```
+        catch (err) {
+            console.log(err.message)
+        }
+    }
+
+    RunRequest();
+    ```
+=== "Python"
+    ```python
+    #### Install Python SDK wrapper ####
+    # $ pip3 install ringcentral_engage_voice
+    #  or
+    # $ pip install ringcentral_engage_voice
+    #####################################
+
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    def create_dial_group():
+        try:
+            postBody = {
+              "dialGroupName": "My New Dial Group",
+              "dialGroupDesc": "A test dial group with predictive dial mode",
+              "dialMode": "PREDICTIVE",
+              "isActive": True
+            }
+            response = ev.post("/api/v1/admin/accounts/{accountId}/dialGroups", postBody).json()
+            print(response)
+        except Exception as e:
+            print(e)
+
+
+    # Instantiate the SDK wrapper object with your RingCentral app credentials
+    ev = RingCentralEngageVoice(
+        "RINGCENTRAL_CLIENTID",
+        "RINGCENTRAL_CLIENTSECRET")
+
+    try:
+        # Authorize with your RingCentral Office user credentials
+        ev.authorize(
+            username="RINGCENTRAL_USERNAME",
+            password="RINGCENTRAL_PASSWORD",
+            extension="RINGCENTRAL_EXTENSION"
+        )
+
+        create_dial_group()
+    except Exception as e:
+        print(e)
+    ```
+=== "PHP"
+    ```php
+    /************ Install PHP SDK wrapper **************
+    $ composer require engagevoice-sdk-wrapper:dev-master
+    *****************************************************/
+
+    <?php
+    require('vendor/autoload.php');
+
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
+    try{
+      // Login your account with your RingCentral Office user credentials
+      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+      $endpoint = 'admin/accounts/~/dialGroups';
+      $params = array (
+        "dialGroupName" => "My Dial Group - Predictive",
+        "dialGroupDesc" => "A test dial group with predictive dial mode",
+        "dialMode" => "PREDICTIVE",
+        "isActive" => true
+      );
+      $response = $ev->post($endpoint, $params);
+      print ($response."\r\n");
+    }catch (Exception $e) {
+      print $e->getMessage();
+    }
+    ```
 
 ### Response
 ```json
@@ -236,128 +236,128 @@ Now let's retrieve details for the Dial Group we just created to make to make su
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
-        ```html
-        ######################################################
-        The `BASE_URL` for your server is one of the following:
-        # `https://engage.ringcentral.com/voice`
-        # `https://portal.vacd.biz/`
-        # `https://portal.virtualacd.biz/`
-        ######################################################
+    ```html
+    ######################################################
+    The `BASE_URL` for your server is one of the following:
+    # `https://engage.ringcentral.com/voice`
+    # `https://portal.vacd.biz/`
+    # `https://portal.virtualacd.biz/`
+    ######################################################
 
-        GET {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}
-        ```
+    GET {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}
+    ```
 === "Node JS"
-        ```javascript
-        /****** Install Node JS SDK wrapper *******
-        $ npm install ringcentral-engage-voice-client
-        *******************************************/
+    ```javascript
+    /****** Install Node JS SDK wrapper *******
+    $ npm install ringcentral-engage-voice-client
+    *******************************************/
 
-        const RunRequest = async function () {
-            const EngageVoice = require('ringcentral-engage-voice-client').default
+    const RunRequest = async function () {
+        const EngageVoice = require('ringcentral-engage-voice-client').default
 
-            // Instantiate the SDK wrapper object with your RingCentral app credentials
-            const ev = new EngageVoice({
-                clientId: "RINGCENTRAL_CLIENTID",
-                clientSecret: "RINGCENTRAL_CLIENTSECRET"
+        // Instantiate the SDK wrapper object with your RingCentral app credentials
+        const ev = new EngageVoice({
+            clientId: "RINGCENTRAL_CLIENTID",
+            clientSecret: "RINGCENTRAL_CLIENTSECRET"
+        })
+
+        try {
+            // Authorize with your RingCentral Office user credentials
+            await ev.authorize({
+                username: "RINGCENTRAL_USERNAME",
+                extension: "RINGCENTRAL_EXTENSION",
+                password: "RINGCENTRAL_PASSWORD"
             })
 
-            try {
-                // Authorize with your RingCentral Office user credentials
-                await ev.authorize({
-                    username: "RINGCENTRAL_USERNAME",
-                    extension: "RINGCENTRAL_EXTENSION",
-                    password: "RINGCENTRAL_PASSWORD"
-                })
-
-                // Get Dial Groups data
-                const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-                const groupsResponse = await ev.get(groupsEndpoint)
-                for (var group of groupsResponse.data) {
-                    // Get every single Dial Group
-                    const singleGroupEndpoint = groupsEndpoint + "/" + group.dialGroupId
-                    const singleGroupResponse = await ev.get(singleGroupEndpoint)
-                    console.log(singleGroupResponse.data)
-                    console.log("=========")
-                }
-            }
-            catch (err) {
-                console.log(err.message)
+            // Get Dial Groups data
+            const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+            const groupsResponse = await ev.get(groupsEndpoint)
+            for (var group of groupsResponse.data) {
+                // Get every single Dial Group
+                const singleGroupEndpoint = groupsEndpoint + "/" + group.dialGroupId
+                const singleGroupResponse = await ev.get(singleGroupEndpoint)
+                console.log(singleGroupResponse.data)
+                console.log("=========")
             }
         }
+        catch (err) {
+            console.log(err.message)
+        }
+    }
 
-        RunRequest();
-        ```
+    RunRequest();
+    ```
 === "Python"
-        ```python
-        #### Install Python SDK wrapper ####
-        # $ pip3 install ringcentral_engage_voice
-        #  or
-        # $ pip install ringcentral_engage_voice
-        #####################################
+    ```python
+    #### Install Python SDK wrapper ####
+    # $ pip3 install ringcentral_engage_voice
+    #  or
+    # $ pip install ringcentral_engage_voice
+    #####################################
 
-        from ringcentral_engage_voice import RingCentralEngageVoice
+    from ringcentral_engage_voice import RingCentralEngageVoice
 
-        def retrieve_single_dial_group():
-            try:
-                dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-                dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
-                for group in dialGroupsResponse:
-                    # Retrieve every single Dial Group
-                    singleGroupEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}"    # f         string:https://www.python.org/dev/peps/pep-0498/
-                    singleGroupResponse = ev.get(singleGroupEndpoint).json()
-                    print(singleGroupResponse)
-                    print("=========")
-            except Exception as e:
-                print(e)
-
-
-        # Instantiate the SDK wrapper object with your RingCentral app credentials
-        ev = RingCentralEngageVoice(
-            "RINGCENTRAL_CLIENTID",
-            "RINGCENTRAL_CLIENTSECRET")
-
+    def retrieve_single_dial_group():
         try:
-            # Authorize with your RingCentral Office user credentials
-            ev.authorize(
-                username="RINGCENTRAL_USERNAME",
-                password="RINGCENTRAL_PASSWORD",
-                extension="RINGCENTRAL_EXTENSION"
-            )
-
-            retrieve_single_dial_group()
+            dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+            dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
+            for group in dialGroupsResponse:
+                # Retrieve every single Dial Group
+                singleGroupEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}"    # f         string:https://www.python.org/dev/peps/pep-0498/
+                singleGroupResponse = ev.get(singleGroupEndpoint).json()
+                print(singleGroupResponse)
+                print("=========")
         except Exception as e:
             print(e)
 
-        ```
+
+    # Instantiate the SDK wrapper object with your RingCentral app credentials
+    ev = RingCentralEngageVoice(
+        "RINGCENTRAL_CLIENTID",
+        "RINGCENTRAL_CLIENTSECRET")
+
+    try:
+        # Authorize with your RingCentral Office user credentials
+        ev.authorize(
+            username="RINGCENTRAL_USERNAME",
+            password="RINGCENTRAL_PASSWORD",
+            extension="RINGCENTRAL_EXTENSION"
+        )
+
+        retrieve_single_dial_group()
+    except Exception as e:
+        print(e)
+
+    ```
 === "PHP"
-        ```php
-        /************ Install PHP SDK wrapper **************
-        $ composer require engagevoice-sdk-wrapper:dev-master
-        *****************************************************/
+    ```php
+    /************ Install PHP SDK wrapper **************
+    $ composer require engagevoice-sdk-wrapper:dev-master
+    *****************************************************/
 
-        <?php
-        require('vendor/autoload.php');
+    <?php
+    require('vendor/autoload.php');
 
-        // Instantiate the SDK wrapper object with your RingCentral app credentials
-        $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-        try{
-          // Login your account with your RingCentral Office user credentials
-          $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-          $endpoint = 'admin/accounts/~/dialGroups';
-          $response = $ev->get($endpoint);
-          $jsonObj = json_decode($response);
-          foreach ($jsonObj as $group){
-              if ($group->dialGroupName == "My Dial Group - Predictive"){
-                  $endpoint .= '/' . $group->dialGroupId;
-                  $response = $ev->get($endpoint);
-                  print ($response."\r\n");
-                  break;
-              }
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
+    try{
+      // Login your account with your RingCentral Office user credentials
+      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+      $endpoint = 'admin/accounts/~/dialGroups';
+      $response = $ev->get($endpoint);
+      $jsonObj = json_decode($response);
+      foreach ($jsonObj as $group){
+          if ($group->dialGroupName == "My Dial Group - Predictive"){
+              $endpoint .= '/' . $group->dialGroupId;
+              $response = $ev->get($endpoint);
+              print ($response."\r\n");
+              break;
           }
-        }catch (Exception $e) {
-          print $e->getMessage();
-        }
-        ```
+      }
+    }catch (Exception $e) {
+      print $e->getMessage();
+    }
+    ```
 
 ### Response
 
@@ -399,148 +399,148 @@ Note the `dialGroupId`. We will use that ID to update the Dial Group we created.
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
-        ```html
-        ######################################################
-        The `BASE_URL` for your server is one of the following:
-        # `https://engage.ringcentral.com/voice`
-        # `https://portal.vacd.biz/`
-        # `https://portal.virtualacd.biz/`
-        ######################################################
+    ```html
+    ######################################################
+    The `BASE_URL` for your server is one of the following:
+    # `https://engage.ringcentral.com/voice`
+    # `https://portal.vacd.biz/`
+    # `https://portal.virtualacd.biz/`
+    ######################################################
 
-        PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}
-        {
-          "permissions": [],
-          "dialGroupId": 115793,
-          "dialGroupName":"My Dial Group - Predictive",
-          "dialGroupDesc":"A test dial group with predictive dial mode",
-          "dialMode": "PREDICTIVE",
-          "isActive": true,
-          "hciEnabled": "DISABLED",
-          "agentDialGroupMembers": null,
-          "enableAbsolutePriority": true,
-          "enableAgentFilter": true,
-          "enableListPriority": true,
-          "allowLeadSearch": "YES",
-          "enableCallbacksAfterMaxpass": true,
-          "enableCallbacksAfterMaxDailyPass": true
-        }
-        ```
+    PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}
+    {
+      "permissions": [],
+      "dialGroupId": 115793,
+      "dialGroupName":"My Dial Group - Predictive",
+      "dialGroupDesc":"A test dial group with predictive dial mode",
+      "dialMode": "PREDICTIVE",
+      "isActive": true,
+      "hciEnabled": "DISABLED",
+      "agentDialGroupMembers": null,
+      "enableAbsolutePriority": true,
+      "enableAgentFilter": true,
+      "enableListPriority": true,
+      "allowLeadSearch": "YES",
+      "enableCallbacksAfterMaxpass": true,
+      "enableCallbacksAfterMaxDailyPass": true
+    }
+    ```
 === "Node JS"
-        ```javascript
-        /****** Install Node JS SDK wrapper *******
-        $ npm install ringcentral-engage-voice-client
-        *******************************************/
+    ```javascript
+    /****** Install Node JS SDK wrapper *******
+    $ npm install ringcentral-engage-voice-client
+    *******************************************/
 
-        const EngageVoice = require('engagevoice-sdk-wrapper')
+    const EngageVoice = require('engagevoice-sdk-wrapper')
 
-        const RunRequest = async function () {
-            const EngageVoice = require('ringcentral-engage-voice-client').default
-
-            // Instantiate the SDK wrapper object with your RingCentral app credentials
-            const ev = new EngageVoice({
-                clientId: "RINGCENTRAL_CLIENTID",
-                clientSecret: "RINGCENTRAL_CLIENTSECRET"
-            })
-
-            try {
-                // Authorize with your RingCentral Office user credentials
-                await ev.authorize({
-                    username: "RINGCENTRAL_USERNAME",
-                    extension: "RINGCENTRAL_EXTENSION",
-                    password: "RINGCENTRAL_PASSWORD"
-                })
-
-                // Get Dial Groups data
-                const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-                const groupsResponse = await ev.get(groupsEndpoint)
-                for (var group of groupsResponse.data) {
-                    // Update your Dial Group
-                    if (group.dialGroupName == "My New Dial Group") {
-                        const singleGroupEndpoint = groupsEndpoint + "/" + group.dialGroupId
-                        group.enableAbsolutePriority = true
-                        group.enableAgentFilter = true
-                        group.enableListPriority = true
-                        group.allowLeadSearch = "YES"
-                        group.enableCallbacksAfterMaxpass = true
-                        group.enableCallbacksAfterMaxDailyPass = true
-                        const singleGroupResponse = await ev.put(singleGroupEndpoint, group)
-                        console.log(singleGroupResponse.data)
-                        break
-                    }
-                }
-            }
-            catch (err) {
-                console.log(err.message)
-            }
-        }
-
-        RunRequest();
-        ```
-=== "Python"
-        ```python
-        #### Install Python SDK wrapper ####
-        # $ pip3 install ringcentral_engage_voice
-        #  or
-        # $ pip install ringcentral_engage_voice
-        #####################################
-
-        from ringcentral_engage_voice import RingCentralEngageVoice
-
-        def update_single_dial_group():
-            try:
-                dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-                dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
-                for group in dialGroupsResponse:
-                    # Update your Dial Group
-                    if group['dialGroupName'] == "My New Dial Group":
-                        singleGroupEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}"    # f         string:https://www.python.org/dev/peps/pep-0498/
-                        group['enableAbsolutePriority'] = True
-                        group['enableAgentFilter'] = True
-                        group['enableListPriority'] = True
-                        group['allowLeadSearch'] = "YES"
-                        group['enableCallbacksAfterMaxpass'] = True
-                        group['enableCallbacksAfterMaxDailyPass'] = True
-                        singleGroupResponse = ev.put(singleGroupEndpoint, group).json()
-                        print(singleGroupResponse)
-                        break
-            except Exception as e:
-                print(e)
-        ```
-=== "PHP"
-        ```php
-        /************ Install PHP SDK wrapper **************
-        $ composer require engagevoice-sdk-wrapper:dev-master
-        *****************************************************/
-
-        <?php
-        require('vendor/autoload.php');
+    const RunRequest = async function () {
+        const EngageVoice = require('ringcentral-engage-voice-client').default
 
         // Instantiate the SDK wrapper object with your RingCentral app credentials
-        $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-        try{
-          // Login your account with your RingCentral Office user credentials
-          $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-          $endpoint = 'admin/accounts/~/dialGroups';
-          $response = $ev->get($endpoint);
-          $jsonObj = json_decode($response);
-          foreach ($jsonObj as $group){
-              if ($group->dialGroupName == "My Dial Group - Predictive"){
-                  $endpoint .= '/' . $group->dialGroupId;
-                  $group->enableAbsolutePriority = true;
-                  $group->enableAgentFilter = true;
-                  $group->enableListPriority = true;
-                  $group->allowLeadSearch = "YES";
-                  $group->enableCallbacksAfterMaxpass = true;
-                  $group->enableCallbacksAfterMaxDailyPass = true;
-                  $response = $ev->put($endpoint, $group);
-                  print ($response."\r\n");
-                  break;
-              }
-          }
-        }catch (Exception $e) {
-          print $e->getMessage();
+        const ev = new EngageVoice({
+            clientId: "RINGCENTRAL_CLIENTID",
+            clientSecret: "RINGCENTRAL_CLIENTSECRET"
+        })
+
+        try {
+            // Authorize with your RingCentral Office user credentials
+            await ev.authorize({
+                username: "RINGCENTRAL_USERNAME",
+                extension: "RINGCENTRAL_EXTENSION",
+                password: "RINGCENTRAL_PASSWORD"
+            })
+
+            // Get Dial Groups data
+            const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+            const groupsResponse = await ev.get(groupsEndpoint)
+            for (var group of groupsResponse.data) {
+                // Update your Dial Group
+                if (group.dialGroupName == "My New Dial Group") {
+                    const singleGroupEndpoint = groupsEndpoint + "/" + group.dialGroupId
+                    group.enableAbsolutePriority = true
+                    group.enableAgentFilter = true
+                    group.enableListPriority = true
+                    group.allowLeadSearch = "YES"
+                    group.enableCallbacksAfterMaxpass = true
+                    group.enableCallbacksAfterMaxDailyPass = true
+                    const singleGroupResponse = await ev.put(singleGroupEndpoint, group)
+                    console.log(singleGroupResponse.data)
+                    break
+                }
+            }
         }
-        ```
+        catch (err) {
+            console.log(err.message)
+        }
+    }
+
+    RunRequest();
+    ```
+=== "Python"
+    ```python
+    #### Install Python SDK wrapper ####
+    # $ pip3 install ringcentral_engage_voice
+    #  or
+    # $ pip install ringcentral_engage_voice
+    #####################################
+
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    def update_single_dial_group():
+        try:
+            dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
+            dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
+            for group in dialGroupsResponse:
+                # Update your Dial Group
+                if group['dialGroupName'] == "My New Dial Group":
+                    singleGroupEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}"    # f         string:https://www.python.org/dev/peps/pep-0498/
+                    group['enableAbsolutePriority'] = True
+                    group['enableAgentFilter'] = True
+                    group['enableListPriority'] = True
+                    group['allowLeadSearch'] = "YES"
+                    group['enableCallbacksAfterMaxpass'] = True
+                    group['enableCallbacksAfterMaxDailyPass'] = True
+                    singleGroupResponse = ev.put(singleGroupEndpoint, group).json()
+                    print(singleGroupResponse)
+                    break
+        except Exception as e:
+            print(e)
+    ```
+=== "PHP"
+    ```php
+    /************ Install PHP SDK wrapper **************
+    $ composer require engagevoice-sdk-wrapper:dev-master
+    *****************************************************/
+
+    <?php
+    require('vendor/autoload.php');
+
+    // Instantiate the SDK wrapper object with your RingCentral app credentials
+    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
+    try{
+      // Login your account with your RingCentral Office user credentials
+      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
+      $endpoint = 'admin/accounts/~/dialGroups';
+      $response = $ev->get($endpoint);
+      $jsonObj = json_decode($response);
+      foreach ($jsonObj as $group){
+          if ($group->dialGroupName == "My Dial Group - Predictive"){
+              $endpoint .= '/' . $group->dialGroupId;
+              $group->enableAbsolutePriority = true;
+              $group->enableAgentFilter = true;
+              $group->enableListPriority = true;
+              $group->allowLeadSearch = "YES";
+              $group->enableCallbacksAfterMaxpass = true;
+              $group->enableCallbacksAfterMaxDailyPass = true;
+              $response = $ev->put($endpoint, $group);
+              print ($response."\r\n");
+              break;
+          }
+      }
+    }catch (Exception $e) {
+      print $e->getMessage();
+    }
+    ```
 
 ### Response
 
