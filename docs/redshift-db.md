@@ -1,5 +1,14 @@
 # About Redshift Database Access
 
+!!! danger "Critcal Notice!!"
+    The Redshift Database Access only operates on Prebuilt Reports. Since Prebuilt Reports have been [discontinued](https://support.ringcentral.com/engagevoice/analytics/voice-analytics-intro-scheduled-reports.html), the use of the Redshift Database Access will be for legacy reporting only. 
+
+!!! info "Purchasing Redshift Database Access"
+    The Redshift Database Access is a chargeable item and must be granted by your account manager. Please reach out to your account manager to purchase and activate the Redshift Database Access.
+
+!!! warning "Not for Engage Omni"
+    The Redshift Database Access is not suitable for Engage Omni. If you are a new Engage Omni user, please use the [Historical reports and dashboards](https://support.ringcentral.com/engagevoice/analytics/historical-reports-dashboards.html) instead for your reporting purposes.
+
 When accessing the Redshift Historical Database you will be provided with a username, password, schema name and JDBC connection URL. The credentials will only enable a user to read/query from the database. There are also limitations as to the number of connections (5) and time that a query can run (5 minutes) before they are refused or terminated respectfully.
 
 With the aforementioned credentials you can create a connection to the historical database with your choice of client. This client will need to support either a Postgres or preferably the Redshift JDBC driver.
