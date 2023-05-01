@@ -14,29 +14,33 @@ The first thing we need to do is create an app in the RingCentral Developer Port
     While you can create a RingCentral account through the Developer Portal, you will need a production account to use Engage Voice APIs at this time.  Make sure to login to your developer account using the same credentials as your production RingCentral account. The RingCentral account created via the Developer Portal will **not** work.
 
 <a target="new" href="https://developer.ringcentral.com/new-app?name=Engage+Voice+Quick+Start+App&desc=A+simple+app+to+demo+engage+voice+apis+access&public=false&type=ServerOther&carriers=7710,7310,3420&permissions=ReadAccounts&redirectUri=" class="btn btn-primary">Create Engage Voice App</a>
-<a class="btn-link btn-collapse" data-toggle="collapse" href="#create-app-instructions" role="button" aria-expanded="false" aria-controls="create-app-instructions">Show detailed instructions</a>
 
-<div class="collapse" id="create-app-instructions">
+<div class="expand" id="create-app-instructions">
 <ol>
-<li><a href="https://developer.ringcentral.com/login.html#/">Login or create an account</a> if you have not done so already.</li>
+<li><a href="https://developers.ringcentral.com/login.html#/">Login or create an account</a> if you have not done so already.</li>
 <li>Go to Console/Apps and click 'Create App' button.</li>
-<li>Give your app a name and description, then click Next.</li>
-<li>On the second page of the create app wizard enter the following:
+<li>Select the App Type, "REST API App (most common)," then click Next.</li>
+<li>Give your app a name and description, then scroll to the "Auth" section.</li>
+<li>In the "Auth" section:
   <ul>
-  <li>Select 'Private' for Application Type.</li>
-  <li>Select 'Server-only (No UI)' for Platform Type.</li>
+  <li>Select 'JWT auth flow' for the authentication method.</li>
+  <li>Under "Issue refresh tokens?" make sure the box for 'Yes' is highlighted.</li>
   </ul>
   </li>
-<li>On the third page of the create app wizard, select the following permissions:
+<li>In the "Security" section, specify only the following "Application Scopes":
   <ul>
-    <li>ReadAccounts</li>
+    <li>Read Accounts</li>
   </ul>
 </li>
-<li>We are using Password Flow authentication, so leave "OAuth Redirect URI" blank.</li>
+<li>In the same "Security" section, make sure to select:
+  <ul>
+    <li>This app is <b>private</b> and will only be callable using credentials from the same RingCentral account.</li>
+  </ul>   
+</li>
 </ol>
 </div>
 
-When you are done, you will be taken to the app's dashboard. Make note of the Client ID. This is your Client ID for the App in the Sandbox. To start using Engage APIs, you need to graduate your app to Production and use the Production Client ID and Client Secret in upcoming steps.
+When you are done, you will be taken to the app's dashboard. Make note of the Client ID. This is your Client ID for the App in the Sandbox. To start using Engage APIs, you need to graduate your app to Production and use the Production Client ID and Client Secret in upcoming steps.  Make sure to have your Engage Voice account number ready for the next step. If you do not have an Engage Voice account, please reach out to our [Sales](https://www.ringcentral.com/feedback/sales-contact.html) team to sign up for an Engage Voice account.
 
 <a target="new" href="https://docs.google.com/forms/d/e/1FAIpQLScyidt7WFb_CJrpn9yGbcZ8P_gQ42UvXz3oBBnjF0tRh7MVMw/viewform?usp=sf_link" class="btn btn-primary">Request Graduation of Engage Voice App</a>
 
