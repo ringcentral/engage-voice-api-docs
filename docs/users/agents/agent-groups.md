@@ -18,7 +18,9 @@ Only `groupName` is a required parameter to create a skill profile. All other pa
 
 ### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+
 === "HTTP"
+
     ```html
     POST {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups
     Content-Type: application/json
@@ -34,101 +36,23 @@ To retrieve a list of Agent Groups, use the `agentGroups` API endpoint.
 
 ### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
-=== "HTTP"
-    ```html
-    GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups
-    ```
+
 === "Node JS"
+
     ```javascript
-    /****** Install Node JS SDK wrapper *******
-    $ npm install ringcentral-engage-voice-client
-    *******************************************/
-
-    const RunRequest = async function () {
-        const EngageVoice = require('ringcentral-engage-voice-client').default
-
-        // Instantiate the SDK wrapper object with your RingCentral app credentials
-        const ev = new EngageVoice({
-            clientId: "RINGCENTRAL_CLIENTID",
-            clientSecret: "RINGCENTRAL_CLIENTSECRET"
-        })
-
-        try {
-            // Authorize with your RingCentral Office user credentials
-            await ev.authorize({
-                username: "RINGCENTRAL_USERNAME",
-                extension: "RINGCENTRAL_EXTENSION",
-                password: "RINGCENTRAL_PASSWORD"
-            })
-
-            // Get Agent Groups
-            const response = await ev.get("/api/v1/admin/accounts/{accountId}/agentGroups")
-            console.log(response.data);
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-    }
-
-    RunRequest();
+    {!> code-samples/agent-groups/quick-start.js !}
     ```
+
 === "Python"
+
     ```python
-    #### Install Python SDK wrapper ####
-    # $ pip3 install ringcentral_engage_voice
-    #  or
-    # $ pip install ringcentral_engage_voice
-    #####################################
-
-    from ringcentral_engage_voice import RingCentralEngageVoice
-
-    def retrieve_agent_groups():
-        try:
-            response = ev.get("/api/v1/admin/accounts/{accountId}/agentGroups").json()
-            print(response)
-        except Exception as e:
-            print(e)
-
-
-    # Instantiate the SDK wrapper object with your RingCentral app credentials
-    ev = RingCentralEngageVoice(
-        "RINGCENTRAL_CLIENTID",
-        "RINGCENTRAL_CLIENTSECRET")
-
-    try:
-        # Authorize with your RingCentral Office user credentials
-        ev.authorize(
-            username="RINGCENTRAL_USERNAME",
-            password="RINGCENTRAL_PASSWORD",
-            extension="RINGCENTRAL_EXTENSION"
-        )
-
-        retrieve_agent_groups()
-    except Exception as e:
-        print(e)
+    {!> code-samples/agent-groups/quick-start.py !}
     ```
 
-### Response
+### Sample response
 
 ```json
-[
-  {
-    "permissions":[
-    
-    ],
-    "agentGroupId":1111,
-    "groupName":"Platform Team",
-    "isDefault":false
-  },
-  {
-    "permissions":[
-    
-    ],
-    "agentGroupId":2222,
-    "groupName":"Dev Support",
-    "isDefault":false
-  }
-]
+{!> code-samples/agent-groups/response.json !}
 ```
 
 ## Read Agent Group

@@ -1,0 +1,18 @@
+[
+  {
+    "permissions":[
+    
+    ],
+    "agentGroupId":1111,
+    "groupName":"Platform Team",
+    "isDefault":false
+  },
+  {
+    "permissions":[
+    
+    ],
+    "agentGroupId":2222,
+    "groupName":"Dev Support",
+    "isDefault":false
+  }
+]

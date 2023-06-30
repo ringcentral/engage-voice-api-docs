@@ -69,163 +69,56 @@ Only `gateName` is a required parameter to create a Queue. All other parameters 
 ### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
-=== "HTTP"
-    ```html
-    ######################################################
-    The `BASE_URL` for your server is one of the following:
-    # `https://engage.ringcentral.com/voice`
-    # `https://portal.vacd.biz/`
-    # `https://portal.virtualacd.biz/`
-    ######################################################
-    
-    POST {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups
-    Content-Type: application/json
-    
-    {
-      "dialGroupName": "My Dial Group - Predictive",
-      "dialGroupDesc": "A test dial group with predictive dial mode",
-      "dialMode": "PREDICTIVE",
-      "isActive": true
-    }
-    ```
-=== "Node JS"
-    ```javascript 
-    /****** Install Node JS SDK wrapper *******
+=== "JavaScript"
+
+    ### Install Engage Voice SDK Wrapper for Node JS
+
+    ```bash
     $ npm install ringcentral-engage-voice-client
-    *******************************************/
-
-    const RunRequest = async function () {
-        const EngageVoice = require('ringcentral-engage-voice-client').default
-
-        // Instantiate the SDK wrapper object with your RingCentral app credentials
-        const ev = new EngageVoice({
-            clientId: "RINGCENTRAL_CLIENTID",
-            clientSecret: "RINGCENTRAL_CLIENTSECRET"
-        })
-
-        try {
-            // Authorize with your RingCentral Office user credentials
-            await ev.authorize({
-                username: "RINGCENTRAL_USERNAME",
-                extension: "RINGCENTRAL_EXTENSION",
-                password: "RINGCENTRAL_PASSWORD"
-            })
-
-            // Create a new Dial Group
-            const postBody = {
-                "dialGroupName": "My New Dial Group",
-                "dialGroupDesc": "A test dial group with predictive dial mode",
-                "dialMode": "PREDICTIVE",
-                "isActive": true
-            }
-            const response = await ev.post('/api/v1/admin/accounts/{accountId}/dialGroups', postBody)
-            console.log(response);
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-    }
-
-    RunRequest();
     ```
+    ### Create and edit dial-groups.js
+
+    ```javascript 
+    {!> code-samples/dial-groups/quick-start.js !}
+    ```
+	
 === "Python"
+
+    ### Install Engage Voice SDK Wrapper for Python
+
+    ```bash
+    $ pip install ringcentral_engage_voice
+    ```
+
+    ### Create and edit dial-group.py
+
+    Create a file called <tt>dial-group.py</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
+
     ```python
-    #### Install Python SDK wrapper ####
-    # $ pip3 install ringcentral_engage_voice
-    #  or
-    # $ pip install ringcentral_engage_voice
-    #####################################
-
-    from ringcentral_engage_voice import RingCentralEngageVoice
-
-    def create_dial_group():
-        try:
-            postBody = {
-              "dialGroupName": "My New Dial Group",
-              "dialGroupDesc": "A test dial group with predictive dial mode",
-              "dialMode": "PREDICTIVE",
-              "isActive": True
-            }
-            response = ev.post("/api/v1/admin/accounts/{accountId}/dialGroups", postBody).json()
-            print(response)
-        except Exception as e:
-            print(e)
-
-
-    # Instantiate the SDK wrapper object with your RingCentral app credentials
-    ev = RingCentralEngageVoice(
-        "RINGCENTRAL_CLIENTID",
-        "RINGCENTRAL_CLIENTSECRET")
-
-    try:
-        # Authorize with your RingCentral Office user credentials
-        ev.authorize(
-            username="RINGCENTRAL_USERNAME",
-            password="RINGCENTRAL_PASSWORD",
-            extension="RINGCENTRAL_EXTENSION"
-        )
-
-        create_dial_group()
-    except Exception as e:
-        print(e)
+    {!> code-samples/dial-groups/quick-start.py !}
     ```
+	
 === "PHP"
-    ```php
-    /************ Install PHP SDK wrapper **************
-    $ composer require engagevoice-sdk-wrapper:dev-master
-    *****************************************************/
 
-    <?php
-    require('vendor/autoload.php');
+    ### Install Engage Voice SDK Wrapper for PHP
 
-    // Instantiate the SDK wrapper object with your RingCentral app credentials
-    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-    try{
-      // Login your account with your RingCentral Office user credentials
-      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-      $endpoint = 'admin/accounts/~/dialGroups';
-      $params = array (
-        "dialGroupName" => "My Dial Group - Predictive",
-        "dialGroupDesc" => "A test dial group with predictive dial mode",
-        "dialMode" => "PREDICTIVE",
-        "isActive" => true
-      );
-      $response = $ev->post($endpoint, $params);
-      print ($response."\r\n");
-    }catch (Exception $e) {
-      print $e->getMessage();
-    }
+    ```bash
+    $ composer require engagevoice-sdk-wrapper
     ```
 
-### Response
+    ### Create and Edit dial-group.php
+
+    Create a file called <tt>dial-group.php</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
+
+
+    ```php
+    {!> code-samples/dial-groups/quick-start.php !}
+    ```
+
+### Sample response
+
 ```json
-{
-  "isActive":true,
-  "dialGroupId":115793,
-  "dialGroupName":"My Dial Group - Predictive",
-  "dialGroupDesc":"A test dial group with predictive dial mode",
-  "dialMode":"PREDICTIVE",
-  "enableAbsolutePriority":false,
-  "enableAgentFilter":false,
-  "requireFetchedLeadsCalled":false,
-  "progressiveEnabled":false,
-  "progressiveCallDelay":0,
-  "allowPreviewLeadFilters":false,
-  "maxLeadsReturned":1,
-  "enableListPriority":false,
-  "allowLeadSearch":"NO",
-  "enableCallbacksAfterMaxpass":true,
-  "enableCallbacksAfterMaxDailyPass":false,
-  "minPredictiveAgents":1,
-  "maxPorts":1,
-  "agentsReady":0,
-  "billingKey":null,
-  "outdialServerGroupId":0,
-  "realTimeAgentData":false,
-  "hciEnabled":"DISABLED",
-  "agentDialGroupMembers":[],
-  "permissions":[],
-}
+{!> code-samples/dial-groups/response.json !}
 ```
 
 ## Retrieve a Single Dial Group
