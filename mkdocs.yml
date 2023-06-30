@@ -28,7 +28,7 @@ markdown_extensions:
   - pymdownx.superfences
   - mdx_include
 
-#extra_css: [extra.css]
+extra_css: [extra.css]
 #extra_javascript: [fonts.js]
 nav:
 - 'Primary':
@@ -43,10 +43,7 @@ nav:
       - 'Dialer Result Download': analytics/reports/dialer-result-download-report.md
   - 'Routing':
     - 'Overview': routing/index.md
-    - 'Getting Started':
-      - 'Node JS': routing/quick-start/node.md
-      - 'Python': routing/quick-start/python.md
-      - 'PHP': routing/quick-start/php.md
+    - 'Getting Started': routing/quick-start.md
     - 'Queues':
       - 'Queues': routing/queues/queues.md
       - 'Queue Events': routing/queues/queue-events.md

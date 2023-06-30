@@ -1,252 +1,277 @@
-#sidebar-nav .nav-item > a.nav-link {
-    padding-left: 0;
+.help .material-icons { font-size: .9rem }
+#content table img {
+    max-width: 100%;
 }
-.wy-nav-top {
-	background-color: #fff;
-	color: #0073ae;
-	font-size: 16px;
+#main blockquote {
+    padding: 10px 0 0 20px;
+    border-left: 5px solid #EEE;
+    margin-left: 10px;
 }
-
-.wy-side-nav-search {
-	background-color: #fff;
+.api-index td.endpoint {
+    border-top: 0;
+    padding-top: 0;
+    font-size: 0.85em;
 }
-
-.wy-side-nav-search input[type=text] {
-    background-image: url("./img/ico_search.png?1468643959");
-    background-position-x: 8px;
-    background-position-y: 50%;
-    background-size: initial;
-    background-repeat-x: no-repeat;
-    background-repeat-y: no-repeat;
-    box-shadow: none;
-    padding-left: 25px;
+.api-index .method {
+    white-space: nowrap;
+}
+.api-index .method,
+.api-index .description {
+    padding-bottom: 0;
 }
 
-.wy-side-nav-search>a {
-	color: #0073ae;
-	font-size: 18px;
-	font-weight: 200;
+.api-index [data-toggle="collapse"]:after {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: 0.8rem;
+    padding-left: 6px;
+    padding-right: 6px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\f054";
+    transform: rotate(90deg) ;
+    transition: all linear 0.25s;
+}   
+.api-index [data-toggle="collapse"].collapsed:after {
+    transform: rotate(0deg) ;
 }
 
-.wy-side-nav-search input[type=text] {
-	border: 1px solid #e8e8e8;
-	border-radius: 3px;
-	font-size: 14px;
-	color: #282828;
+.tabbed-content p {
+    padding: 1rem 1rem 0 1rem;
 }
 
-.wy-nav-side {
-	background-color: #fff;
-	
+.tabbed-content h1,
+.tabbed-content h2,
+.tabbed-content h3,
+.tabbed-content h4,
+.tabbed-content h5
+{
+    padding-left: 1rem;
 }
 
-.wy-menu-vertical {
-	border: 1px solid #e8e8e8;
-	border-radius: 8px;
+/*
+.tabbed-content .highlight, */
+.tabbed-content .admonition {
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
-.wy-menu-vertical a {
-	font-size: 14px;
-	font-weight: 400;
-	padding: 10px 0px;
-	color: #585858;
-	border-bottom: 1px solid #e8e8e8;
+#content #main a.btn {
+    text-decoration: none;
+    margin-right: 20px;
 }
 
-.wy-menu-vertical a:visited {
-	color: #585858;
+#sidebar-nav .nav li.nav-item > ul {
+    list-style: none;
+}
+#sidebar-nav .nav li.nav-item > ul > li {
+    margin-left: 15px;
 }
 
-.wy-menu-vertical a:hover {
-    background-color: #fff;
+#sidebar-nav {
+    background-color: rgb(88,88,88);
+    color: #DBE6F1;
 }
 
-.wy-menu-vertical li.toctree-l1 {
-	margin: 0 20px 0 30px;
+#sidebar-toc .repo {
+    border-bottom: 1px solid rgba(47,47,47,.1);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+#sidebar-toc .repo a {
 }
 
-.wy-menu-vertical li.toctree-l3 {
-	margin-left: 20px;
-}
-
-.wy-menu-vertical li a.toctree-l4 {
-	margin-left: 40px;
-}
-
-.wy-menu-vertical li.current {
-	background-color: #fff;
-}
-
-.wy-menu-vertical li.current a {
-	background-color: #fff;
-    color: #585858;
-    border: none;
-	padding: 10px 0;
-	font-size: 14px;
-	border-bottom: 1px solid #e8e8e8;
-}
-
-.wy-menu-vertical li.current a:hover {
-    background-color: #fff;
-}
-
-.wy-menu-vertical li.current>a {
-	background-color: #fff;
-	color: #0073ae;
-	border-bottom: 1px solid #0073ae;
-	font-weight: bold;
-}
-
-.wy-menu-vertical .subnav a {
-    padding: 10px 0;
-	color: #585858;
-}
-
-.wy-menu-vertical .subnav li.toctree-l1 {
-	margin: 0 20px 0 50px;
-}
-
-.wy-menu-vertical span {
-    line-height: 18px;
-    padding: 10px 0;
-	margin: 0 20px 0 30px;
+#sidebar-nav .toplevel .section-title {
+    margin-left: 35px;
+    padding-bottom: 3px;
     font-size: 14px;
-	font-weight: 400;
-    color: #585858;
-	border-bottom: 1px solid #e8e8e8;
+    text-transform: none;
 }
-
-.wy-nav-content {
-	background-color: #fff;
+#sidebar-nav .nav-item > a {
+    padding-left: 35px;
 }
-
-.wy-nav-content-wrap {
-    background: #fff;
+#sidebar-nav .nav-item {
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-size: 18px 18px;
+    background-position: 0 3px;
+    display: inline-block;
+    margin-bottom: 16px;
 }
-
-.btn {
-	padding: 3px 16px 0 16px;
-	border: 1px solid #e2e2e2;
-	border-radius: 5px;
-	box-shadow: none;
-	font-size: 12px;
-	color: #585858 !important;
-	height: 44px;
-	line-height: 35px;
+#sidebar-nav .nav-item .section-title.nav-link {
+    padding: 0;
 }
-
-.btn-neutral {
-	background-color: #fff !important;
-}
-
-.btn-neutral:hover {
-    background-color: #fff !important;
-}
-
-.rst-content table.docutils {
-    border: none;
-}
-
-.rst-content table.docutils th {
-    padding: 15px 10px;
+#sidebar-nav .nav-item > ul > li {
     font-size: 14px;
+    margin-left: 32px;
+}
+#sidebar-nav .toplevel.nav-item {
+    width: 100%;
+}
+#sidebar-nav #nav-item-api-reference {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/api-reference.svg')
+}
+#sidebar-nav #nav-item-api-reference:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/api-reference-hover.svg')
+}
+#sidebar-nav #nav-item-webinar {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/webinar.svg')
+}
+#sidebar-nav #nav-item-webinar:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/webinar-hover.svg')
+}
+#sidebar-nav #nav-item-artificial-intelligence {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/conversational-intelligence.svg')
+}
+#sidebar-nav #nav-item-artificial-intelligence:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/conversational-intelligence-hover.svg')
+}
+#sidebar-nav #nav-item-address-book {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/address-book.svg')
+}
+#sidebar-nav #nav-item-address-book:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/address-book-hover.svg')
+}
+#sidebar-nav #nav-item-analytics {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/analytics-beta.svg')
+}
+#sidebar-nav #nav-item-analytics:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/analytics-beta-hover.svg')
+}
+#sidebar-nav #nav-item-ringcentral-labs {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/ringcentral-labs.svg')
+}
+#sidebar-nav #nav-item-ringcentral-labs:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/ringcentral-labs-hover.svg');
+}
+#sidebar-nav #nav-item-applications {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/applications.svg')
+}
+#sidebar-nav #nav-item-applications:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/applications-hover.svg');
+}
+#sidebar-nav #nav-item-voice {
+    background-image: url('https://netstorage.ringcentral.com/dpw/api-reference/icons/group_icon_voice.svg?v=2020032620200227-0720')
+}
+#sidebar-nav #nav-item-voice:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/voice-hover.svg?v=20200326');
+}
+#sidebar-nav #nav-item-sms-and-fax {
+    background-image: url('https://netstorage.ringcentral.com/dpw/api-reference/icons/group_icon_messaging.svg?v=2020032620200227-0720');
+}
+#sidebar-nav #nav-item-sms-and-fax:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/api-reference/icons/group_icon_messaging_hover.svg');
+}
+#sidebar-nav #nav-item-team-messaging {
+    background-image: url('https://netstorage.ringcentral.com/dpw/api-reference/icons/group_icon_glip.svg?v=2020032620200227-0720');
+}
+#sidebar-nav #nav-item-team-messaging:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/api-reference/icons/group_icon_glip_hover.svg');
+}
+#sidebar-nav #nav-item-call-management {
+    background-image: url('https://netstorage.ringcentral.com/dpw/api-reference/icons/group_icon_call.svg?v=2020032620200227-0720');
+}
+#sidebar-nav #nav-item-call-management:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/api-reference/icons/group_icon_call_hover.svg');
+}
+#sidebar-nav #nav-item-meetings {
+    background-image: url('https://netstorage.ringcentral.com/dpw/api-reference/icons/group_icon_meeting.svg');
+}
+#sidebar-nav #nav-item-meetings:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/api-reference/icons/group_icon_meeting_hover.svg');
+}
+#sidebar-nav #nav-item-video {
+    background-image: url('https://netstorage.ringcentral.com/dpw/api-reference/icons/group_icon_meeting.svg');
+}
+#sidebar-nav #nav-item-video:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/api-reference/icons/group_icon_meeting_hover.svg');
+}
+#sidebar-nav #nav-item-using-the-api {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/default.svg');
+}
+#sidebar-nav #nav-item-using-the-api:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/default-hover.svg');
+}
+#sidebar-nav #nav-item-authentication {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/authentication.svg');
+}
+#sidebar-nav #nav-item-authentication:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/authentication-hover.svg');
+}
+#sidebar-nav #nav-item-notifications-and-events {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/notifications-and-events.svg');
+}
+#sidebar-nav #nav-item-notifications-and-events:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/notifications-and-events-hover.svg');
+}
+#sidebar-nav #nav-item-downloads-and-sdks {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/sdks.svg');
+}    
+#sidebar-nav #nav-item-downloads-and-sdks:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/guide/nav-icons/sdks-hover.svg');
+}    
+#sidebar-nav #nav-item-accounts-and-users {
+    background-image: url('https://netstorage.ringcentral.com/dpw/api-reference/icons/group_icon_account.svg')
+}
+#sidebar-nav #nav-item-accounts-and-users:hover {
+    background-image: url('https://netstorage.ringcentral.com/dpw/api-reference/icons/group_icon_account_hover.svg')
+}
+
+#sidebar-nav a,
+#sidebar-nav a:visited {
+    color: #DBE6F1;
+}
+footer .brand {
+    background: url('./img/footer_rclogo.png') no-repeat 0px 20px;
+    padding: 40px 0 10px 0;
+    font-size: 12px;
+}
+.btn-light:visited {
+    color: #212529;
+}
+.homepage .jumbotron h2 {
+    margin-top: 20px;
+}
+.jumbotron .qs-link {
+    margin-right: 10px;
+}
+#content #main a {
+    text-decoration: underline;
     font-weight: bold;
-    border-top: 1px solid #e8e8e8;
-    border-bottom: 1px solid #e8e8e8;
-    background: #fbfbfb;
-	color: #585858;
 }
 
-.rst-content table.docutils td {
-    padding: 15px 10px;
-    font-size: 14px;
-    border-top: 1px solid #e8e8e8;
-    border-bottom: 1px solid #e8e8e8;
-	border-left: none;
-	border-right:none;
-    background: #fff;	
+.carousel-control-prev-icon {
+ background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
 }
 
-.rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td {
-    background-color: #fff;
+.carousel-control-next-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
 }
 
-.rst-content table.docutils tbody>tr:last-child td {
-    border-bottom-width: 1px;
+.carousel-control-prev,
+.carousel-control-next {
+    background: transparent;
+    border: 0;
+    width: 7.5%
 }
 
-.rst-versions {
-	display: none;
-}
+.carousel .carousel-indicators li {  background-color: gray; }
+.carousel .carousel-indicators li.active { background-color: var(--primary); }
 
-body {
-    font-family: "Lato",Helvetica,Arial,sans-serif;
-	font-weight: 200;
-    color: #585858;
-    background-color: #fff;
+/*
+#secondary-nav {
+    background-color: rgb(245,245,245);
+    color: rgb(47,47,47);
 }
-
-h1 {
-	margin-top:;
-	margin-bottom: 38px;
-	font-size: 32px;
-	font-weight: 200;
-	font-family: "Lato",Helvetica,Arial,sans-serif;
+.nav-item-icon {
+    height: 16px;
+    width: 16px;
+    display: flex;
 }
-
-h2 {
-	margin-bottom: 38px;	
-	font-size: 24px;
-	font-weight: 200;
-	font-family: "Lato",Helvetica,Arial,sans-serif;
+#nav-item-voice .nav-item-icon {
+    background: url('./img/voice.svg') no-repeat 0px 0px;
 }
-
-h3 {
-	color: #585858;
-	font-size: 18px;
-	font-weight: 200;
-	font-family: "Lato",Helvetica,Arial,sans-serif;	
-}
-
-code {
-	margin: 10px 0;
-	padding: 0;
-	border: none;
-	font-size: 15px;
-	font-family: "courier new",courier,monospace;
-	color: #585858;
-	font-weight: 600;
-}
-
-code.hljs {
-	margin: 10px 0;
-	padding: 24px;
-	overflow-x: auto;
-	border: 1px solid #e8e8e8;
-	border-radius: 4px;
-	font-size: 15px;
-	line-height: 24px;
-	font-family: "courier new",courier,monospace;
-	color: #585858;
-	font-weight: 200;
-}
-
-ul {
-	font-size: 16px;
-}
-
-ol {
-	font-size: 16px;
-}
-
-a {
-    color: #0073ae;
-}
-
-a:visited {
-	color: #0073ae;
-}
-
-a.icon {
-	font-weight: 200;
-}
+*/
