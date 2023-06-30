@@ -68,11 +68,7 @@ nav:
       - 'Web2Campaign': dialing/leads/web2campaign.md
     - 'Active Calls':
       - 'Active Calls': dialing/active-calls/index.md
-      - 'Getting Started':
-        - 'Node JS': dialing/active-calls/quick-start/node.md
-        - 'PHP': dialing/active-calls/quick-start/php.md
-        - 'Python': dialing/active-calls/quick-start/python.md
-      #- 'List Active Calls': dialing/activecalls/list-activecalls.md
+      - 'Getting Started': dialing/active-calls/quick-start.md
   - 'Users':
     - 'Overview': users/agents/index.md
     - 'Agents':
