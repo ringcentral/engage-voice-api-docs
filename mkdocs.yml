@@ -56,10 +56,7 @@ nav:
       - 'IVR DNC List': https://ringcentral-tutorials.github.io/dnc-via-ivr-rest-demo
   - 'Dialing':
     - 'Overview': dialing/index.md
-    - 'Getting Started':
-      - 'Node JS': dialing/quick-start/node.md
-      - 'Python': dialing/quick-start/python.md
-      - 'PHP': dialing/quick-start/php.md
+    - 'Getting Started': dialing/quick-start.md
     - 'Campaigns':
       - 'Dial Groups': dialing/campaigns/dial-groups.md
       - 'Campaigns': dialing/campaigns/campaigns.md

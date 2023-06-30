@@ -1,6 +1,6 @@
-# Engage Voice Queue Group Quick Start
+# Engage Voice Dial Group Quick Start
 
-Welcome to the Engage Voice Platform. In this quick start, we are going to create a queue group for an account. Let's get started.
+Welcome to the Engage Voice Platform. In this Quick Start, we are going to create a predictive dial group for an account. Let's get started.
 
 ## Create an App
 
@@ -27,22 +27,22 @@ The first thing we need to do is create an app in the RingCentral Developer Port
 
 When you are done, you will be taken to the app's dashboard. Make note of the Client ID and Client Secret. We will be using those momentarily.
 
-## Create a queue group for an Engage Voice account
+## Create a Dial Group for an Engage Voice Account
 
 === "JavaScript"
 
-    ### Install Engage Voice SDK wrapper for Node JS
+    ### Install Engage Voice SDK Wrapper for Node JS
 
     ```bash
     $ npm install ringcentral-engage-voice-client
     ```
 
-    ### Create and edit create-queue-group.js
+    ### Create and Edit create-dial-group.js
 
-    Create a file called <tt>create-queue-group.js</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
+    Create a file called <tt>create-dial-group.js</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
 
     ```javascript
-    {!> code-samples/routing/quick-start.js !}
+    {!> code-samples/dialing/quick-start.js !}
     ```
 
     ### Run Your Code
@@ -50,7 +50,7 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
     You are almost done. Now run your script.
 
     ```bash
-    $ node create-queue-group.js
+    $ node create-dial-group.js
     ```
 
 === "PHP"
@@ -61,12 +61,12 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
     $ composer require engagevoice-sdk-wrapper
     ```
 
-    ### Create and Edit create-queue-group.php
+    ### Create and Edit create-dial-group.php
 
-    Create a file called <tt>create-queue-group.php</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
+    Create a file called <tt>create-dial-group.php</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
 
     ```php
-    {!> code-samples/routing/quick-start.php !}
+    {!> code-samples/dialing/quick-start.php !}
     ```
 
     ### Run Your Code
@@ -82,15 +82,15 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
     ### Install Engage Voice SDK Wrapper for Python
 
     ```bash
-    pip install ringcentral_engage_voice
+    $ pip install ringcentral_engage_voice
     ```
 
-    ### Create and Edit create-queue-group.py
+    ### Create and Edit create-dial-group.py
 
-    Create a file called <tt>create-queue-group.py</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
+    Create a file called <tt>create-dial-group.py</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
 
     ```python
-    {!> code-samples/routing/quick-start.py !}
+    {!> code-samples/dialing/quick-start.py !}
     ```
 
     ### Run Your Code
@@ -98,7 +98,7 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
     You are almost done. Now run your script.
 
     ```bash
-    $ python create-queue-group.py
+    $ python create-dial-group.py
     ```
 
 ## Need Help?
