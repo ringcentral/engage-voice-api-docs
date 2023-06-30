@@ -24,12 +24,11 @@ markdown_extensions:
   - pymdownx.tabbed
   - pymdownx.highlight:
       linenums_style: pymdownx-inline
-#      linenums: true
   - pymdownx.superfences
   - mdx_include
 
 extra_css: [extra.css]
-#extra_javascript: [fonts.js]
+
 nav:
 - 'Primary':
   - 'Analytics':
