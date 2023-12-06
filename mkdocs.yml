@@ -1,4 +1,4 @@
-site_name: RingCentral Engage Voice Developer Guide
+site_name: RingCentral RingCX Developer Guide
 site_url: https://engage-voice-api-docs.rtfd.org
 site_favicon: favicon.ico
 repo_url: https://github.com/ringcentral/engage-voice-api-docs
@@ -98,8 +98,8 @@ nav:
     #- 'Legacy Tokens': basics/auth-legacy.md
   - 'Authentication':
     - 'Overview': authentication/index.md
-    - 'Engage with RingCentral Token': authentication/auth-ringcentral.md
-    - 'Engage Access Token': authentication/auth-engage.md
+    - 'RingCX with RingCentral Token': authentication/auth-ringcentral.md
+    - 'RingCX Access Token': authentication/auth-engage.md
     - 'Legacy': authentication/auth-legacy.md
   - 'Events and Notifications':
     - 'Overview': notifications/index.md
@@ -110,4 +110,4 @@ nav:
   - 'SDKs': sdks/index.md
   - 'Embeddable': embeddable/get-started.md
   - 'Postman': postman.md
-  - 'Database Access': redshift-db.md
+  #- 'Database Access': redshift-db.md

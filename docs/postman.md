@@ -1,6 +1,6 @@
-# Using Postman to Test Engage Voice APIs
+# Using Postman to Test RingCX APIs
 
-For easy testing using [Postman](https://www.getpostman.com/), RingCentral provides a Postman 2.0 Collection for Engage Voice. It is based on the RingCentral Engage Voice OpenAPI 3.0 Specificaion. While Postman can import an OpenAPI 3.0 Specification directly, RingCentral recommends using the Collection as it provides better authorization handling using Postman variables and environments as recommended by Postman.
+For easy testing using [Postman](https://www.getpostman.com/), RingCentral provides a Postman 2.0 Collection for RingCX. It is based on the RingCentral RingCX OpenAPI 3.0 Specificaion. While Postman can import an OpenAPI 3.0 Specification directly, RingCentral recommends using the Collection as it provides better authorization handling using Postman variables and environments as recommended by Postman.
 
 The files are available here:
 
@@ -17,8 +17,8 @@ This document describes how to install and use the Postman 2.0 Collection.
 
 This Postman spec is designed for following environment:
 
-* Current RingCentral Engage Voice account located at: https://engage.ringcentral.com. See [here for more information on current and legacy systems.](../authentication)
-* RingCentral Engage Voice user linked to RingCentral Office user for Single Sign-on. RingCentral Office user should be using RingCentral password authenticaiton, not SAML-based Single Sign-on.
+* Current RingCentral RingCX account located at: https://engage.ringcentral.com. See [here for more information on current and legacy systems.](../authentication)
+* RingCentral RingCX user linked to RingCentral MVP user for Single Sign-on. RingCentral MVP user should be using RingCentral password authenticaiton, not SAML-based Single Sign-on.
 * RingCentral app created at https://developers.ringcentral.com with OAuth 2.0 Password Credentials flow enabled.
 
 ## Using Postman
@@ -31,7 +31,7 @@ Using Postman once you have your pre-requisites consists of a few steps:
 
 ### Importing the Postman Collection
 
-Use the following steps to import the Engage Digital Postman collection.
+Use the following steps to import the RingCX Postman collection.
 
 1. In the upper left corner of the Postman application click the "Import" button.
 2. Click the "Import from Link" tab.
@@ -67,4 +67,4 @@ To test the Postman collection, let's call the "Get Users" API.
 
 ## Feedback
 
-If you have any feedback on using the Postman collection, please [post to the Engage Voice docs GitHub repo](https://github.com/ringcentral/engage-voice-api-docs/issues).
+If you have any feedback on using the Postman collection, please [post to the RingCX docs GitHub repo](https://github.com/ringcentral/engage-voice-api-docs/issues).

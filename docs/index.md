@@ -1,9 +1,9 @@
 no_breadcrumb: true
-# RingCentral Engage Voice Developer Guide
+# RingCentral RingCX Developer Guide
 
 <div class="jumbotron pt-1">
   <h3 class="display-5">Let's Get Started!</h3>
-  <p class="lead">New to the Engage Voice Platform? Let us help you build your first Engage Voice application in minutes using one of our Quick Start Guides.</p>
+  <p class="lead">New to the RingCX Platform? Let us help you build your first RingCX application in minutes using one of our Quick Start Guides.</p>
   <hr class="my-4">
   <p>The following Quick Start Guides have been created to assist developers in getting started in each of our major APIs:</p>
   <ul>
@@ -21,7 +21,7 @@ no_breadcrumb: true
   <p><a class="btn btn-primary" href="https://docs.google.com/forms/d/1f4fxmM2maXyXtKbhDWd5ZQDAdYOzcEQUVytU96bUa-c">Partner Signup &raquo;</a></p>
 </div>
 
-Welcome RingCentral Engage Voice Developer! Here you have access to all the resources necessary to build an app successfully on the RingCentral Engage Voice Platform. Here are some specific resources and guides to help you get started.
+Welcome RingCentral RingCX Developer! Here you have access to all the resources necessary to build an app successfully on the RingCentral RingCX Platform. Here are some specific resources and guides to help you get started.
 
 ## Popular Use Cases and Documentation
 
@@ -31,7 +31,7 @@ Welcome RingCentral Engage Voice Developer! Here you have access to all the reso
     <div class="card-body pt-0 pb-0">
       <h5 class="card-title">Integrate Your CRM</h5>
       <h6 class="card-subtitle mb-2 text-muted">Embedable</h6>
-      <p class="card-text">Integrate Engage Voice with your CRM for a seamless agent experience. See our open source HubSpot integration for a complete code example.</p>
+      <p class="card-text">Integrate RingCX with your CRM for a seamless agent experience. See our open source HubSpot integration for a complete code example.</p>
       <ul class="pl-0 ml-4">
       <li><a href="./embeddable/get-started/" class="card-link">Integrate Your CRM</a></li>
       <li><a href="https://github.com/ringcentral/hubspot-embeddable-engage-phone" class="card-link">HubSpot Integration Example Source Code</a></li>
@@ -113,7 +113,7 @@ Welcome RingCentral Engage Voice Developer! Here you have access to all the reso
 
 ## Getting Help
 
-If on your way to building your first RingCentral Engage Voice application you encounter difficulty or need help, we are here to assist. Here are our most popular support resources available to you:
+If on your way to building your first RingCentral RingCX application you encounter difficulty or need help, we are here to assist. Here are our most popular support resources available to you:
 
 * [Developer Forums](https://devcommunity.ringcentral.com/) - post a question to our support community.
 * [StackOverflow](http://stackoverflow.com/questions/tagged/ringcentral) - seek help from one of the Internet's most popular Q&A sites for developers.
@@ -124,7 +124,7 @@ If on your way to building your first RingCentral Engage Voice application you e
 <div class="card-deck">
   <div class="card">
     <div class="card-body">
-      <h5 class="h5 card-title">Engage Voice API Reference</h5>
+      <h5 class="h5 card-title">RingCX API Reference</h5>
       <p class="card-text">Consult our exhaustive API Reference Guide, and make API calls using ZERO CODE.</p>
       <a href="https://developers.ringcentral.com/engage/voice/api-reference" class="btn btn-primary">Learn more</a>
     </div>
@@ -138,8 +138,8 @@ If on your way to building your first RingCentral Engage Voice application you e
   </div>
   <div class="card">
     <div class="card-body">
-      <h5 class="h5 card-title">Engage Voice Docs</h5>
-      <p class="card-text">Want to learn more about Engage Voice? Our UI documentation library is full of easily searchable details.</p>
+      <h5 class="h5 card-title">RingCX Docs</h5>
+      <p class="card-text">Want to learn more about RingCX? Our UI documentation library is full of easily searchable details.</p>
       <a href="https://docs.ringcentral.com/engage/" class="btn btn-primary">Learn more</a>
     </div>
   </div>

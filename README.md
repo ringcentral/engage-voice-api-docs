@@ -1,10 +1,10 @@
-# RingCentral Engage Voice API Docs
+# RingCentral RingCX API Docs
 
 [![Specs Status][specs-status-svg]][specs-status-url]
 [![Docs Status][docs-status-svg]][docs-status-url]
 [![Docs Status][docs-svg]][docs-url]
 
-This repository is the home of the RingCentral Engage Developer Guide: a collection of materials, and documentation to help educate developers on how to build on top of the RingCentral Engage platform.
+This repository is the home of the RingCentral RingCX Developer Guide: a collection of materials, and documentation to help educate developers on how to build on top of the RingCentral RingCX platform.
 
 Visit at: https://engage-voice-api-docs.rtfd.org
 
@@ -27,9 +27,9 @@ Then you should be able to load http://localhost:8000 to view the documentation.
 
 ### Testing OpenAPI Specs
 
-This repo holds OpenAPI specs for Engage Voice. For each commit, tests are run on Travis CI to verify that the OpenAPI 3.0 specs validate.
+This repo holds OpenAPI specs for RingCX. For each commit, tests are run on Travis CI to verify that the OpenAPI 3.0 specs validate.
 
-* Engage Voice Spec: [specs/voice/engage-voice_openapi3.json](specs/voice/engage-voice_openapi3.json)
+* RingCX Spec: [specs/voice/engage-voice_openapi3.json](specs/voice/engage-voice_openapi3.json)
 * Tests: [specs_test.go](specs_test.go)
 
 You can verify the specs localy with the following if you have [Go installed](https://golang.org/).
