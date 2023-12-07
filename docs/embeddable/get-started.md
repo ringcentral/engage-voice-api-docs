@@ -1,8 +1,8 @@
-# Engage Voice Embeddable
+# RingCX Embeddable
 
 ## Introduction
 
-Engage Voice Embeddable is an out-of-the-box embeddable web application that help developers to integrate RingCentral Engage Voice services to their web applications with few code.
+RingCX Embeddable is an out-of-the-box embeddable web application that help developers to integrate RingCentral RingCX services to their web applications with a few lines of code.
 
 ## Visit Online
 
