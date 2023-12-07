@@ -1,6 +1,6 @@
 # About Web Services (Webhooks)
 
-Web services, such as those based on the SOAP or HTTP protocols, talk to each other or talk to client applications that invoke them. These web services have collections of data elements that we collect in real time, ready to synchronously stream to an identified endpoint URL. When configuring a web service, you will define the data points to send, the place to send them to, and the name and operations of the web service. Here are more details about [Engage Voice Web Services](https://support.ringcentral.com/engagevoice/admin/voice-admin-intro-web-services.html)
+Web services, such as those based on the SOAP or HTTP protocols, talk to each other or talk to client applications that invoke them. These web services have collections of data elements that we collect in real time, ready to synchronously stream to an identified endpoint URL. When configuring a web service, you will define the data points to send, the place to send them to, and the name and operations of the web service. Here are more details about [RingCX Web Services](https://support.ringcentral.com/engagevoice/admin/voice-admin-intro-web-services.html)
 
 After you configure a web service, you can set up your campaigns or queues to invoke web services at various points in a call’s lifecycle. The invocation of a web service is done through a webhook, which is a trigger. By doing so, you can stream real-time or near real-time data to other web-based computing systems while calls are in progress. Follow the link to learn more about [setting up webhooks](https://support.ringcentral.com/engagevoice/admin/voice-admin-set-up-webhooks.html).
 
@@ -52,7 +52,7 @@ Alternatively, you can send a JSON body instead of form data as shown above. Be 
 ```
 
 !!! Note
-    When selecting the **Debug?** option, the details of the web service call will be stored in debug format on the Engage server. Access to the logged information must be requested through Operations as they are not directly accessible.
+    When selecting the **Debug?** option, the details of the web service call will be stored in debug format on the RingCX server. Access to the logged information must be requested through Operations as they are not directly accessible.
 
 ### Setting up Webhooks (Events)
 
