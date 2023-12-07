@@ -2,7 +2,7 @@
 
 To generate the API token, you would either use your own login, or create an "API User" specifically to host the API tokens you need to call into our system. If you needed to integrate multiple services and each service needed a different level of permissions, you could create multiple API users, each with different Rights. If you had multiple services and they each required the same rights, you could create one or more API tokens for the same user and distribute a unique token around to each service (best practice).
 
-> Note: Engage Voice APIs for Office customers are rooted at either:
+> Note: RingCX APIs for MVP customers are rooted at either:
 >
 > * `https://portal.vacd.biz/api/`
 > * `https://portal.virtualacd.biz/api/`
@@ -29,7 +29,7 @@ In the result, you will see an authToken property. This is what you will use to 
 
 `baf522ee-5d42-457a-a18d-7b8500eeb573`
 
-The AuthToken will expire after 1 hour. By using stayLoggedIn, you can extend the AuthToken to last 2 weeks. However, anytime an AuthToken is used in an API request, the AuthToken is automatically extended by 1 hour or 2 weeks depending on which AuthToken type you are using.
+The AuthToken will expire after 1 hour. By using `stayLoggedIn`, you can extend the AuthToken to last 2 weeks. However, anytime an AuthToken is used in an API request, the AuthToken is automatically extended by 1 hour or 2 weeks depending on which AuthToken type you are using.
 
 ## Generate an API Token for a user
 

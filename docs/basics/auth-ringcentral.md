@@ -1,8 +1,8 @@
 # Obtaining an Engage Access Token
 
-To access Engage Voice APIs, you need to request an Engage Access Token. This is by first requesting a RingCentral Access Token and then using an Engage API to create an Engage Access Token. Then the Engage Access Token can be used to access Engage Voice APIs.
+To access RingCX APIs, you need to request an Engage Access Token. This is by first requesting a RingCentral Access Token and then using an Engage API to create an Engage Access Token. Then the Engage Access Token can be used to access RingCX APIs.
 
-> Note: Engage Voice APIs for Office customers are rooted at:
+> Note: RingCX APIs for Office customers are rooted at:
 > 
 > `https://engage.ringcentral.com/voice/api/`
 
@@ -112,9 +112,9 @@ The following is an abbreviated reponse.
 }
 ```
 
-## Example Engage Voice API Call
+## Example RingCX API Call
 
-The following is an example Engage Voice API Call using a RingCentral Engage Access Token.
+The following is an example RingCX API Call using a RingCentral Engage Access Token.
 
 ```http
 GET https://engage.ringcentral.com/voice/api/v1/admin/users

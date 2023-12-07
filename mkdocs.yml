@@ -94,11 +94,9 @@ nav:
       - 'Methods, endpoints and parameters': 'basics/uris.md'
       #- 'App permissions': 'basics/permissions.md'
       #- 'Rate limits': 'basics/rate-limits.md'
-    #- 'Obtaining a Token': basics/auth-ringcentral.md
-    #- 'Legacy Tokens': basics/auth-legacy.md
   - 'Authentication':
     - 'Overview': authentication/index.md
-    - 'RingCX with RingCentral Token': authentication/auth-ringcentral.md
+    - 'RingCX with RingCentral Token (default)': authentication/auth-ringcentral.md
     - 'RingCX Access Token': authentication/auth-engage.md
     - 'Legacy': authentication/auth-legacy.md
   - 'Events and Notifications':

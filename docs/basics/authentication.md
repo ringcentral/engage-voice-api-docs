@@ -1,10 +1,10 @@
 # Authentication
 
-The RingCentral Engage Voice API is offered for both the current Engage Voice deployment or legacy systems.
+The RingCentral RingCX API is offered for both the current RingCX deployment or legacy systems.
 
 ## Current API
 
-The current Engage Voice system makes the API accessible at:
+The current RingCX system makes the API accessible at:
 
 * `https://engage.ringcentral.com/voice/api`
 

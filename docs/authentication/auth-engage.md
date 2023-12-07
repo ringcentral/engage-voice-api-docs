@@ -1,16 +1,16 @@
-# Obtaining an Engage Access Token without a RingCentral Office Login
+# Obtaining an RingCX Access Token without a RingCentral MVP Login
 
-To access Engage Voice APIs without a corresponding RingCentral Office account, you can directly login to the Engage platform by specifying the platform you reside on.
+To access RingCX APIs without a corresponding RingCentral MVP account, you can directly login to the RingCX platform by specifying the platform you reside on.
 
-!!! alert "Please Note"
-    For accounts with single-sign on to RingCentral Office, the method to [exchange access tokens](../auth-ringcentral/#retrieve-ringcentral-access-token) is recommended.
+!!! hint "All New Accounts Start with MVP"
+    For accounts with single-sign on to RingCentral MVP, the method to [exchange access tokens](../auth-ringcentral/#retrieve-ringcentral-access-token) is the default.
 
 !!! alert "Also Note"
     If you do not know which platform your account resides on, please contact your Customer Success Manager (CSM) and ask for your Platform ID.
 
-## Generate an Engage Access Token
+## Generate an RingCX Access Token
 
-The first step to login to Engage Voice without a RingCentral Office login is to provide your `username`, `password` and `platformId`.
+The first step to login to RingCX without a RingCentral MVP login is to provide your `username`, `password` and `platformId`.
 
 ### Request
 ```http

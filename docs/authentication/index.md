@@ -1,10 +1,10 @@
 # Authentication
 
-The RingCentral Engage Voice API is offered for Engage Voice with RingCentral login, Engage Voice without RingCentral login, or legacy systems.
+The RingCentral RingCX API is offered for RingCX with RingCentral login, RingCX without RingCentral login, or legacy systems.
 
 ## Current API
 
-The current Engage Voice system makes the API accessible at:
+The current RingCX system makes the API accessible at:
 
 * `https://engage.ringcentral.com/voice/api/`
 
@@ -14,7 +14,7 @@ and uses the OAuth 2.0 Authorization header:
 
 Read more about [authorizing with the current system API](auth-ringcentral).
 
-Or, if you do not have a RingCentral login linked to Engage Voice read more about [authorizing without a RingCentral login](auth-engage.md).
+Or, if you do not have a RingCentral login linked to RingCX read more about [authorizing without a RingCentral login](auth-engage.md).
 
 ## Legacy API
 

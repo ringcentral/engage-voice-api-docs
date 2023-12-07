@@ -1,19 +1,19 @@
-# Obtaining an Engage Access Token with a RingCentral Login
+# Obtaining an RingCX Access Token with a RingCentral Login
 
-To access Engage Voice APIs, you need to create an Engage Voice App, and then with the client credentials, request an Engage Access Token. Once you have created an App, request a RingCentral Access Token and then using an Engage API to create an Engage Access Token. Then the Engage Access Token can be used to access Engage Voice APIs.
+To access RingCX APIs, you need to create an RingCX App, and then with the client credentials, request an RingCX Access Token. Once you have created an App, request a RingCentral Access Token and then using an RingCX API to create an RingCX Access Token. Then the RingCX Access Token can be used to access RingCX APIs.
 
-> Note: Engage Voice APIs for Office customers are rooted at:
+> Note: RingCX APIs for MVP customers are rooted at:
 >
 > `https://engage.ringcentral.com/voice/api/`
 
 ## Create an App
 
-The first thing we need to do is create an app in the RingCentral Developer Portal. This can be done quickly by clicking the "Create Engage Voice App" button below. Just click the button, enter a name and description if you choose, and click the "Create" button. If you do not yet have a RingCentral account, you will be prompted to create one.
+The first thing we need to do is create an app in the RingCentral Developer Portal. This can be done quickly by clicking the "Create RingCX App" button below. Just click the button, enter a name and description if you choose, and click the "Create" button. If you do not yet have a RingCentral account, you will be prompted to create one.
 
 !!! important
-    While you can create a RingCentral account through the Developer Portal, you will need a production account to use Engage Voice APIs at this time.  Make sure to login to your developer account using the same credentials as your production RingCentral account. The RingCentral account created via the Developer Portal will **not** work.
+    While you can create a RingCentral account through the Developer Portal, you will need a production account to use RingCX APIs at this time.  Make sure to login to your developer account using the same credentials as your production RingCentral account. The RingCentral account created via the Developer Portal will **not** work.
 
-<a target="new" href="https://developer.ringcentral.com/new-app?name=Engage+Voice+Quick+Start+App&desc=A+simple+app+to+demo+engage+voice+apis+access&public=false&type=ServerOther&carriers=7710,7310,3420&permissions=ReadAccounts&redirectUri=" class="btn btn-primary">Create Engage Voice App</a>
+<a target="new" href="https://developer.ringcentral.com/new-app?name=Engage+Voice+Quick+Start+App&desc=A+simple+app+to+demo+engage+voice+apis+access&public=false&type=ServerOther&carriers=7710,7310,3420&permissions=ReadAccounts&redirectUri=" class="btn btn-primary">Create RingCX App</a>
 
 <div class="expand" id="create-app-instructions">
 <ol>
@@ -40,9 +40,9 @@ The first thing we need to do is create an app in the RingCentral Developer Port
 </ol>
 </div>
 
-When you are done, you will be taken to the app's dashboard. Make note of the Client ID. This is your Client ID for the App in the Sandbox. To start using Engage APIs, you need to graduate your app to Production and use the Production Client ID and Client Secret in upcoming steps.  Make sure to have your Engage Voice account number ready for the next step. If you do not have an Engage Voice account, please reach out to our [Sales](https://www.ringcentral.com/feedback/sales-contact.html) team to sign up for an Engage Voice account.
+When you are done, you will be taken to the app's dashboard. Make note of the Client ID. This is your Client ID for the App in the Sandbox. To start using RingCX APIs, you need to graduate your app to Production and use the Production Client ID and Client Secret in upcoming steps.  Make sure to have your RingCX account number ready for the next step. If you do not have an RingCX account, please reach out to our [Sales](https://www.ringcentral.com/feedback/sales-contact.html) team to sign up for an RingCX account.
 
-<a target="new" href="https://docs.google.com/forms/d/e/1FAIpQLScyidt7WFb_CJrpn9yGbcZ8P_gQ42UvXz3oBBnjF0tRh7MVMw/viewform?usp=sf_link" class="btn btn-primary">Request Graduation of Engage Voice App</a>
+<a target="new" href="https://docs.google.com/forms/d/e/1FAIpQLScyidt7WFb_CJrpn9yGbcZ8P_gQ42UvXz3oBBnjF0tRh7MVMw/viewform?usp=sf_link" class="btn btn-primary">Request Graduation of RingCX App</a>
 
 ## Retrieve RingCentral Access Token
 
@@ -50,9 +50,9 @@ Now retrieve a RingCentral access token using the following instructions:
 
 [RingCentral Authentication](https://developers.ringcentral.com/guide/authentication)
 
-## Retrieve RingCentral Engage Access Token
+## Retrieve RingCentral RingCX Access Token
 
-Once you have a RingCentral Access Token, call the following Engage API to receive an Engage Bearer access token.
+Once you have a RingCentral Access Token, call the following RingCX API to receive an RingCX Bearer access token.
 
 ### Request
 
@@ -73,7 +73,7 @@ rcAccessToken=<rcAccessToken>&rcTokenType=Bearer
 
 Where:
 
--   **`<rcAccessToken>`** is the RingCentral Access Token you received from RingCentral Office authentication flow.
+-   **`<rcAccessToken>`** is the RingCentral Access Token you received from RingCentral MVP authentication flow.
 
 === "cURL"
     ```bash
@@ -93,9 +93,9 @@ Where:
           "net/url"
         )
 
-    // EngageToken is an example and does not cover all the
+    // RingCXToken is an example and does not cover all the
     // properties in the API response.
-    type EngageToken struct {
+    type RingCXToken struct {
         	AccessToken string `json:"accessToken"`
         	TokenType   string `json:"tokenType"`
     }
@@ -110,13 +110,13 @@ Where:
         if res.StatusCode >= 300 {
         		return "", fmt.Errorf("Invalid Token Response [%v]", res.StatusCode)
         }
-        engageToken := EngageToken{}
+        ringCXToken := RingCXToken{}
         bytes, err := ioutil.ReadAll(res.Body)
         if err != nil {
         		return "", err
         }
-        err = json.Unmarshal(bytes, &engageToken)
-        return engageToken.AccessToken, err
+        err = json.Unmarshal(bytes, &ringCXToken)
+        return ringCXToken.AccessToken, err
     }
 
     func main() {
@@ -225,8 +225,8 @@ The following is an abbreviated response.
 
 ```json
 {
-  "refreshToken":"<rcEngageRefreshToken>",
-  "accessToken":"<rcEngageAccessToken>",
+  "refreshToken":"<rcRingCXRefreshToken>",
+  "accessToken":"<rcRingCXAccessToken>",
   "tokenType":"Bearer",
   "agentDetails":[
     {
@@ -251,13 +251,13 @@ The following is an abbreviated response.
 }
 ```
 
-## Example Engage Voice API Call
+## Example RingCX API Call
 
-The following is an example Engage Voice API Call using a RingCentral Engage Access Token.
+The following is an example RingCX API Call using a RingCentral RingCX Access Token.
 
 ```http
 GET https://engage.ringcentral.com/voice/api/v1/admin/users
-Authorization: Bearer <rcEngageAccessToken>
+Authorization: Bearer <rcRingCXAccessToken>
 ```
 
 ## Get Accounts
@@ -266,16 +266,16 @@ Another method to try is to retrieve the accounts this user has access to. The m
 
 ```http
 GET https://engage.ringcentral.com/voice/api/v1/admin/accounts
-Authorization: Bearer <rcEngageAccessToken>
+Authorization: Bearer <rcRingCXAccessToken>
 ```
 
 Here is an example cURL command:
 
-`curl -X GET https://engage.ringcentral.com/voice/api/v1/admin/accounts -H "Authorization: Bearer {rcEngageAccessToken}"`
+`curl -X GET https://engage.ringcentral.com/voice/api/v1/admin/accounts -H "Authorization: Bearer {rcRingCXAccessToken}"`
 
-## Refresh RingCentral Engage Access Token
+## Refresh RingCentral RingCX Access Token
 
-The RingCentral Engage Access Token will only live for a few minutes (currently 5 minutes) before needing to be refreshed. If the access token is expired, the API request will respond with:
+The RingCentral RingCX Access Token will only live for a few minutes (currently 5 minutes) before needing to be refreshed. If the access token is expired, the API request will respond with:
 
 ```http
 401 Unauthorized
@@ -283,7 +283,7 @@ The RingCentral Engage Access Token will only live for a few minutes (currently 
 Jwt is expired
 ```
 
-Use the `refreshToken` to refresh the RingCentral Engage access token, by calling the following Engage API.
+Use the `refreshToken` to refresh the RingCentral RingCX access token, by calling the following RingCX API.
 
 ### Request
 
@@ -291,12 +291,12 @@ Use the `refreshToken` to refresh the RingCentral Engage access token, by callin
 POST https://engage.ringcentral.com/api/auth/token/refresh
 Content-Type: application/x-www-form-urlencoded
 
-refresh_token=<rcEngageRefreshToken>&rcTokenType=Bearer
+refresh_token=<rcRingCXRefreshToken>&rcTokenType=Bearer
 ```
 
 Where:
 
--   **`<rcEngageRefreshToken>`** is the RingCentral Refresh Token you received from RingCentral Engage authentication flow.
+-   **`<rcRingCXRefreshToken>`** is the RingCentral Refresh Token you received from RingCentral RingCX authentication flow.
 
 ### Response
 
@@ -306,8 +306,8 @@ The following is an abbreviated response.
 
 ```json
 {
-  "refreshToken":"<rcEngageRefreshToken>", //Save this as it will be new.
-  "accessToken":"<rcEngageAccessToken>",
+  "refreshToken":"<rcRingCXRefreshToken>", //Save this as it will be new.
+  "accessToken":"<rcRingCXAccessToken>",
   "tokenType":"Bearer",
   "agentDetails":[
     {
