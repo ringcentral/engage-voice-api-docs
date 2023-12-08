@@ -2,7 +2,7 @@
 
 <img class="img-fluid" width="100%" src="../images/dialing-components.png">
 
-Outbound calling activities can be planned and managed effectively using Engage Voice dialing components. They are not only helping a business determine objectives of outbound calls, but also ensure high agent performance, great customer service and deliver quality reports.
+Outbound calling activities can be planned and managed effectively using RingCX dialing components. They are not only helping a business determine objectives of outbound calls, but also ensure high agent performance, great customer service and deliver quality reports.
 
 -   Dialing groups determine the dialing mode - this is the "How" a call will be made.
 

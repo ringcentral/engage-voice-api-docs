@@ -1,8 +1,6 @@
-# Engage Voice Reports APIs
+# RingCX Reports APIs
 
-Overview and Description
-
-## Popular Use Cases and Documentation
+## Popular use cases and documentation
 
 <div class="card-deck">
 

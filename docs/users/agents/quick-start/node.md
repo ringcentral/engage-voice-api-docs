@@ -2,15 +2,15 @@ no_breadcrumb:true
 
 # Agent JavaScript Quick Start
 
-Welcome to the Engage Voice Platform.
+Welcome to the RingCX Platform.
 
 In this Quick Start, we are going to read a list of agent groups for an account. Let's get started.
 
 ## Create an App
 
-The first thing we need to do is create an app in the RingCentral Developer Portal. This can be done quickly by clicking the "Create Engage Voice App" button below. Just click the button, enter a name and description if you choose, and click the "Create" button. If you do not yet have a RingCentral account, you will be prompted to create one.
+The first thing we need to do is create an app in the RingCentral Developer Portal. This can be done quickly by clicking the "Create RingCX App" button below. Just click the button, enter a name and description if you choose, and click the "Create" button. If you do not yet have a RingCentral account, you will be prompted to create one.
 
-<a target="_new" href="https://developer.ringcentral.com/new-app?name=Engage+Voice+Quick+Start+App&desc=A+simple+app+to+demo+engage+voice+apis+access&public=false&type=ServerOther&carriers=7710,7310,3420&permissions=ReadAccounts&redirectUri=" class="btn btn-primary">Create Engage Voice App</a>
+<a target="_new" href="https://developer.ringcentral.com/new-app?name=RingCX+Quick+Start+App&desc=A+simple+app+to+demo+RingCX+apis+access&public=false&type=ServerOther&carriers=7710,7310,3420&permissions=ReadAccounts&redirectUri=" class="btn btn-primary">Create RingCX App</a>
 <a class="btn-link btn-collapse" data-toggle="collapse" href="#create-app-instructions" role="button" aria-expanded="false" aria-controls="create-app-instructions">Show detailed instructions</a>
 
 <div class="collapse" id="create-app-instructions">
@@ -35,9 +35,9 @@ The first thing we need to do is create an app in the RingCentral Developer Port
 
 When you are done, you will be taken to the app's dashboard. Make note of the Client ID and Client Secret. We will be using those momentarily.
 
-## Read Agent Groups for an Engage Voice Account
+## Read Agent Groups for a RingCX Account
 
-### Install Engage Voice SDK Wrapper for Node JS
+### Install RingCX SDK Wrapper for Node JS
 
 ```bash
 $ npm install engagevoice-sdk-wrapper --save
@@ -101,4 +101,4 @@ Having difficulty? Feeling frustrated? Receiving an error you don't understand? 
 
 ## What's Next?
 
-When you have successfully made your first API call, it is time to take your next step towards building a more robust Engage Voice application.
+When you have successfully made your first API call, it is time to take your next step towards building a more robust RingCX application.

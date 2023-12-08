@@ -1,6 +1,6 @@
 # About Agent Groups
 
-Agent groups are a the way to manage agents in Engage Voice. All agents are assigned to one and only one Agent Group. Agent groups can be used to organize your agents into different categories, which can be useful in situations like when you’d like to separate your agents into groups that represent the different teams in your contact center.
+Agent groups are a the way to manage agents in RingCX. All agents are assigned to one and only one Agent Group. Agent groups can be used to organize your agents into different categories, which can be useful in situations like when you’d like to separate your agents into groups that represent the different teams in your contact center.
 
 ## Create Agent Group
 

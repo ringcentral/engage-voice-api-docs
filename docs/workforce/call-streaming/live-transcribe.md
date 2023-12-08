@@ -2,7 +2,7 @@
 
 Live Transcription is one of the advanced uses of Audio Streaming service with the support of any Live Transcribe service from platforms like Google, Watson etc. 
 
-The following quick guide will take you through a simple process of creating a local Live Transcribe server that works with Engage Voice Audio Streaming and Google Live Transcribe.
+The following quick guide will take you through a simple process of creating a local Live Transcribe server that works with RingCX Audio Streaming and Google Live Transcribe.
 
 !!!important
     It's assumed that you have gone through [Getting Started Guide](./../getting-started)

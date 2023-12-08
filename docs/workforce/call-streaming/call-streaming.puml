@@ -1,11 +1,11 @@
 @startuml
 
-title Engage Voice Call Streaming Workflow
+title RingCX Call Streaming Workflow
 
 autonumber
 
 actor "Admin" as admin
-control "Engage Voice"  as stream
+control "RingCX"  as stream
 control "Your WSS server" as wss 
 control "Other services" as other
 actor "Agent" as agent

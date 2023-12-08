@@ -10,7 +10,7 @@ Before starting, make sure you have an Agent Group created and the `agentGroupId
 
 ### Primary Parameters
 
-The following API properties are primary properties to create an agent and are also displayed in the Create Agent form in the Engage Voice Admin Console. The UI category section and property name is provided in the table below for easy mapping. Some supporting properties that are not visible in the UI are provided as well.
+The following API properties are primary properties to create an agent and are also displayed in the Create Agent form in the RingCX Admin Console. The UI category section and property name is provided in the table below for easy mapping. Some supporting properties that are not visible in the UI are provided as well.
 
 | API Property | | UI Category | UI Property | Description |
 |-|-|-|-|-|
@@ -20,7 +20,7 @@ The following API properties are primary properties to create an agent and are a
 | **`externalAgentId`** | Optional | Agent Information | External Agent ID | If you have external systems that reference agents by their own unique identifiers, enter that unique identifier in this setting |
 | **`location`** | Optional | Agent Information | Location | Agent's location |
 | **`team`** | Optional | Agent Information | Team | Agent's team name |
-| **`rcUserId`** | Optional | Agent Information | RC Office extension | Office extensionId. Sync a RingCentral Office user to the new agent user. This will link the agent’s basic information from RingCentral Office to their information in Engage Voice, such as their first and last name, their email address, and username and password. Retrieve a list of [Extensions](./#extensions) and use the `id` value. |
+| **`rcUserId`** | Optional | Agent Information | RC Office extension | Office extensionId. Sync a RingCentral Office user to the new agent user. This will link the agent’s basic information from RingCentral Office to their information in RingCX, such as their first and last name, their email address, and username and password. Retrieve a list of [Extensions](./#extensions) and use the `id` value. |
 | **`userManagedByRC`** | Optional | Agent Information | RC Office extension  | `false` |
 | **`allowLoginControl`** | Optional | Login Settings | Allow Login | `true` |
 | **`allowLoginUpdates`** | Optional | Login Settings | Allow Login | `true` |

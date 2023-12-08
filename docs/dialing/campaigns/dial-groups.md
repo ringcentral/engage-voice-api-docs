@@ -71,7 +71,7 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 
 === "JavaScript"
 
-    ### Install Engage Voice SDK Wrapper for Node JS
+    ### Install RingCX SDK Wrapper for Node JS
 
     ```bash
     $ npm install ringcentral-engage-voice-client
@@ -84,7 +84,7 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 	
 === "Python"
 
-    ### Install Engage Voice SDK Wrapper for Python
+    ### Install RingCX SDK Wrapper for Python
 
     ```bash
     $ pip install ringcentral_engage_voice
@@ -100,7 +100,7 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 	
 === "PHP"
 
-    ### Install Engage Voice SDK Wrapper for PHP
+    ### Install RingCX SDK Wrapper for PHP
 
     ```bash
     $ composer require engagevoice-sdk-wrapper

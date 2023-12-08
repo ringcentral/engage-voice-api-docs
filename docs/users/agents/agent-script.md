@@ -32,7 +32,7 @@ To make this request, we make a GET request to an AWS Lambda function. It should
 !!! Note
     The AWS server above is not the same as the one you create. You need to create your own AWS Lambda function and have your own AWS server to run it from.  
 
-Notice the `q=:phone`. We are defining `phone` as a URL Parameter and this is how we put it into the query string. The caller's phone is automatically discovered by Engage Voice and put into the tool's [model object](https://support.ringcentral.com/engagevoice/admin/voice-admin-use-javascript-tool.html#modelobject). To retrieve it, we access the model like so:
+Notice the `q=:phone`. We are defining `phone` as a URL Parameter and this is how we put it into the query string. The caller's phone is automatically discovered by RingCX and put into the tool's [model object](https://support.ringcentral.com/engagevoice/admin/voice-admin-use-javascript-tool.html#modelobject). To retrieve it, we access the model like so:
 
 `{{model.lead.leadPhone}}`
 
@@ -42,7 +42,7 @@ This means your WWW tool should be configured as below:
 
 #### That Special AWS Lambda Function
 
-Notice that GET request goes to an AWS server? This is our Lambda function to proxy the request to HubSpot. This example is more about how to use Engage Voice, but to make sure you are successful with the complete solution, I've included the code below.  Just make sure to set your environment variables in AWS Lambda.
+Notice that GET request goes to an AWS server? This is our Lambda function to proxy the request to HubSpot. This example is more about how to use RingCX, but to make sure you are successful with the complete solution, I've included the code below.  Just make sure to set your environment variables in AWS Lambda.
 
 | Key | Value|
 |-|-|

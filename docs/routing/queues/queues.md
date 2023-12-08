@@ -63,6 +63,7 @@ One of the **Agent Settings** is available in a nested object. This setting incl
 | **`afterCallState.description`** | Optional | Post Call State | *empty* | Choose the agent state you would like to place agents in once they finish a call. Options in this dropdown menu will populate according to the agent states you configure via the Agent States at the account level. Retrieve a list of states using [Post Call States](./#post-call-states) |
 
 ### Supporting Values and APIs
+
 The following APIs are used to retrieve predefined values for certain fields. Use these values to populate the correct parameter values of fields.
 
 #### Dial Groups
@@ -83,10 +84,12 @@ Gets a list of post call states for an agent. Some examples include "Available",
 
   `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/auxStates/?activeOnly=true`
 
-### Request
+### Code samples
+
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
 === "HTTP"
+
     ```html
 
     POST {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates
@@ -100,129 +103,19 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
             "outboundCallerId":"ani", /* ani is the default inbound caller's ID. Please see list below      of caller IDs */
     }
     ```
-=== "Node JS"
+=== "Javascript"
+
     ```javascript
-    /****** Install Node JS SDK wrapper *******
-    $ npm install ringcentral-engage-voice-client
-    *******************************************/
-
-    const RunRequest = async function () {
-        const EngageVoice = require('ringcentral-engage-voice-client').default
-
-        // Instantiate the SDK wrapper object with your RingCentral app credentials
-        const ev = new EngageVoice({
-            clientId: "RINGCENTRAL_CLIENTID",
-            clientSecret: "RINGCENTRAL_CLIENTSECRET"
-        })
-
-        try {
-            // Authorize with your RingCentral Office user credentials
-            await ev.authorize({
-                username: "RINGCENTRAL_USERNAME",
-                extension: "RINGCENTRAL_EXTENSION",
-                password: "RINGCENTRAL_PASSWORD"
-            })
-
-            // Get Queue Groups data
-            const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
-            const groupsResponse = await ev.get(groupsEndpoint)
-            for (var group of groupsResponse.data) {
-                // Create a new Queue under your Queue Group
-                if (group.groupName == "My New Queue Group") {
-                    const queueEndpoint = groupsEndpoint + "/" + group.gateGroupId + "/gates"
-                    const postBody = {
-                        "isActive": true,
-                        "gateName": "My Node Queue",
-                        "gateDesc": "An initial queue for this Queue Group"
-                    }
-                    const queueResponse = await ev.post(queueEndpoint, postBody)
-                    console.log(queueResponse.data);
-                }
-            }
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-    }
-
-    RunRequest();
+    {!> code-samples/routing/queue-create.js !}
     ```
 === "Python"
     ```python
-    #### Install Python SDK wrapper ####
-    # $ pip3 install ringcentral_engage_voice
-    #  or
-    # $ pip install ringcentral_engage_voice
-    #####################################
-
-    from ringcentral_engage_voice import RingCentralEngageVoice
-
-    def create_queue():
-        try:
-            groupsEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
-            groupsResponse = ev.get(groupsEndpoint).json()
-            for group in groupsResponse:
-                # Create a new Queue under your Queue Group
-                if (group['groupName'] == "Ma New Queue Group"):
-                    queueEndpoint = f"{groupsEndpoint}/{group['gateGroupId']}/gates"    # f         string:https://www.python.org/dev/peps/pep-0498/
-                    postBody = {
-                        "gateName" : "My New Queue",
-                        "gateDesc" : "An initial queue for this Queue Group",
-                        "isActive" : True
-                    }
-                    queueResponse = ev.post(queueEndpoint, postBody).json()
-                    print(queueResponse)
-        except Exception as e:
-            print(e)
-
-
-    # Instantiate the SDK wrapper object with your RingCentral app credentials
-    ev = RingCentralEngageVoice(
-        "RINGCENTRAL_CLIENTID",
-        "RINGCENTRAL_CLIENTSECRET")
-
-    try:
-        # Authorize with your RingCentral Office user credentials
-        ev.authorize(
-            username="RINGCENTRAL_USERNAME",
-            password="RINGCENTRAL_PASSWORD",
-            extension="RINGCENTRAL_EXTENSION"
-        )
-
-        create_queue()
-    except Exception as e:
-        print(e)
+    {!> code-samples/routing/queue-create.py !}
     ```
+
 === "PHP"
     ```php
-    <?php
-    require('vendor/autoload.php');
-
-    // Instantiate the SDK wrapper object with your RingCentral app credentials
-    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-    try{
-      // Login your account with your RingCentral Office user credentials
-      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-      $endpoint = "admin/accounts/~/gateGroups";
-      // get a list of Queue Groups and find the "Platform" queue group for this user
-      $response = $ev->get($endpoint);
-      $jsonObj = json_decode($response);
-      foreach ($jsonObj as $group){
-          if ($group->groupName == "Platform"){
-              // Create a new Queue for this queue group
-              $endpoint = 'admin/accounts/~/gateGroups/' . $group->gateGroupId . "/gates";
-              $params = array (
-                "isActive" => true,
-                "gateName" => "My PHP Queue",
-                "gateDesc" => "An initial queue for this Queue Group"
-              );
-              $response = $ev->post($endpoint, $params);
-              print ($response);
-          }
-      }
-    }catch (Exception $e) {
-      print $e->getMessage();
-    }
+    {!> code-samples/routing/queue-create.php !}
     ```
 
 Where key parameters are:
@@ -250,87 +143,9 @@ Where key parameters are:
 The response will auto fill any undefined settings with default settings.
 
 ### Response
+
 ```json
-{
-  "isActive": true,
-  "gateName": "My Queue",
-  "gateDesc": "An initial queue for this Queue Group",
-  "gatePriority": 0,
-  "billingCode": null,
-  "outboundCallerId": "ani",
-  "manualCallerId": null,
-  "transferCallerId": null,
-  "callbackCampaign": null,
-  "abandonCampaign": null,
-  "recordCall": 1,
-  "stopRecordingOnTransfer": false,
-  "recordingInConference": false,
-  "shortAbandonTime": 30,
-  "slaTime": 30,
-  "shortCallTime": 30,
-  "longCallTime": 300,
-  "whisperMessage": null,
-  "blockedAniMessage": null,
-  "onHoldMessage": null,
-  "endCallMessage": null,
-  "script": null,
-  "appUrl": null,
-  "backupAppUrl": null,
-  "ttAccept": false,
-  "hangupOnDisposition": false,
-  "enableGlobalPhoneBook": false,
-  "enableIvrTokens": false,
-  "afterCallState":
-  {
-    "id":11789,
-    "description":"Available"
-  },
-  "wrapTime": 8,
-  "acceptTime": 30,
-  "dispositionTimeout": 60,
-  "dequeueSoapService": null,
-  "resultFileDestination": null,
-  "agentConnSoapService": null,
-  "agentTermSoapService": null,
-  "postCallSoapService": null,
-  "postDispSoapService": null,
-  "transferTermSoapService": null,
-  "sunSched":"00000000",
-  "monSched": "08002100",
-  "tueSched":"08002100",
-  "wedSched": "08002100",
-  "thuSched":"08002100",
-  "friSched": "08002100",
-  "satSched":"00000000",  
-  "throttlingAniEvent": null,
-  "afterCallState": null,
-  "maxQueueEvent": null,
-  "fifoDisabled": true,
-  "observeDst": true,
-  "specialAniEvent": null,
-  "throttleDays": 0,
-  "surveyPopType":"FLASH",
-  "dequeueDelay": 0,
-  "agentPopMessage": null,
-  "noAgentEvent": null,
-  "requeueType": "ADVANCED",
-  "throttleCalls": 0,
-  "afterCallBaseState": null,
-  "syncQueueWait": 10,
-  "maxQueueLimit": -1,
-  "gateGroup":
-    {"id": 52653,
-     "description": "Platform"
-    },
-  "gateId": 72976,
-  "gateClosedEvent": null,
-  "permissions": [],
-  "pauseRecordingSec": 30,
-  "survey": null,
-  "createdOn": "2020-05-15T20:38:13.686+0000",
-  "revMatch": false,
-  "agentGateAccess": []
-}
+{!> code-samples/routing/queue-create-response.json !}
 ```
 
 Where:
@@ -358,9 +173,11 @@ Where:
     | **`Dynamic Unique ID`** | A unique ten-digit, system-generated ID for each call session. This setting is useful in identifying specific calls in cases in which a 30-digit unique ID is not an option (or if you keep your own records that don’t include the unique ID). |
 
 ## Retrieve Queues
+
 Retrieve a list of Queues using the `gate` endpoint.
 
 ### Optional Parameters
+
 The following parameters are optional.
 
 | API Property | Type | UI Display | UI Default | Description |
@@ -368,563 +185,152 @@ The following parameters are optional.
 | **`page`** | Integer | Hidden | 1 | A way to specify which page to show for a long number of Queues |
 | **`maxRows`** | Integer | Hidden | ?? | You can specify the maximum number of Queues to return in a single call. |
 
-### Request
+### Sample code
+
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
-=== "HTTP"
-    ```html
-    GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates
-    ```
-=== "Node JS"
+=== "Javascript"
+
     ```javascript
-    /****** Install Node JS SDK wrapper *******
-    $ npm install ringcentral-engage-voice-client
-    *******************************************/
-
-    const RunRequest = async function () {
-        const EngageVoice = require('ringcentral-engage-voice-client').default
-
-        const ev = new EngageVoice({
-            clientId: "RINGCENTRAL_CLIENTID",
-            clientSecret: "RINGCENTRAL_CLIENTSECRET"
-        })
-
-        try {
-            // Authorize with your RingCentral Office user credentials
-            await ev.authorize({
-                username: "RINGCENTRAL_USERNAME",
-                extension: "RINGCENTRAL_EXTENSION",
-                password: "RINGCENTRAL_PASSWORD"
-            })
-
-            // Get Queue Groups data
-            const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
-            const groupsResponse = await ev.get(groupsEndpoint)
-            for (var group of groupsResponse.data) {
-                // Get Queues under your Queue Group
-                if (group.groupName == "My New Queue Group") {
-                    const queueEndpoint = groupsEndpoint + "/" + group.gateGroupId + "/gates"
-                    const queueResponse = await ev.get(queueEndpoint)
-                    console.log(queueResponse.data);
-                }
-            }
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-    }
-
-    RunRequest();
+    {!> code-samples/routing/queue-list.js !}
     ```
 === "Python"
     ```python
-    #### Install Python SDK wrapper ####
-    # $ pip3 install ringcentral_engage_voice
-    #  or
-    # $ pip install ringcentral_engage_voice
-    #####################################
-
-    from ringcentral_engage_voice import RingCentralEngageVoice
-
-    def retrieve_queues():
-        try:
-            groupsEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
-            groupsResponse = ev.get(groupsEndpoint).json()
-            for group in groupsResponse:
-                # Retrieve Queues under your Queue Group
-                if (group['groupName'] == "My New Queue Group"):
-                    queueEndpoint = f"{groupsEndpoint}/{group['gateGroupId']}/gates"    # f         string:https://www.python.org/dev/peps/pep-0498/
-                    queueResponse = ev.get(queueEndpoint).json()
-                    print(queueResponse)
-        except Exception as e:
-            print(e)
-
-
-    # Instantiate the SDK wrapper object with your RingCentral app credentials
-    ev = RingCentralEngageVoice(
-        "RINGCENTRAL_CLIENTID",
-        "RINGCENTRAL_CLIENTSECRET")
-
-    try:
-        # Authorize with your RingCentral Office user credentials
-        ev.authorize(
-            username="RINGCENTRAL_USERNAME",
-            password="RINGCENTRAL_PASSWORD",
-            extension="RINGCENTRAL_EXTENSION"
-        )
-
-        retrieve_queues()
-    except Exception as e:
-        print(e)
+    {!> code-samples/routing/queue-list.py !}
     ```
 === "PHP"
     ```php
-    <?php
-    require('vendor/autoload.php');
-
-    // Instantiate the SDK wrapper object with your RingCentral app credentials
-    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-    try{
-      // Login your account with your RingCentral Office user credentials
-      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-      $endpoint = "admin/accounts/~/gateGroups";
-      // get a list of Queue Groups and find the "Platform" queue group for this user
-      $response = $ev->get($endpoint);
-      $jsonObj = json_decode($response);
-      foreach ($jsonObj as $group){
-          if ($group->groupName == "Platform"){
-              // get a list of Queues from this "Platform" Queue Group
-              $endpoint = 'admin/accounts/~/gateGroups/' . $group->gateGroupId . "/gates";
-              $response = $ev->post($endpoint);
-              print ($response);
-          }
-      }
-    }catch (Exception $e) {
-      print $e->getMessage();
-    }
+    {!> code-samples/routing/queue-list.php !}
     ```
 
-### Response
+### Sample request
+
+```http
+GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates
+```
+
+### Sample response
+
 ```json
-[
-  {
-    "script": null,
-    "gateGroup":
-      {
-        "id": 52653,
-        "description": "Platform"
-      },
-    "gateName": "Platform Inbound",
-    "gateDesc": null,
-    "gateId": 72874,
-    "agentGateAccess": null,
-    "isActive": true,
-    "permissions": []
-  },
-  {
-    "script": null,
-    "gateGroup":
-      {
-        "id": 52653,
-        "description": "Platform"
-      },
-    "gateName": "My Queue",
-    "gateDesc": "An initial queue for this Queue Group",
-    "gateId": 72979,
-    "agentGateAccess": null,
-    "isActive": true,
-    "permissions": []
-  }
-]
+{!> code-samples/routing/queue-list-response.json !}
 ```
 
 ## Retrieve a Single Queue
 
 Retrieve details for a single Queue using the `gates` endpoint.
 
-### Request
+### Sample code
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
-=== "HTTP"
-    ```html
-        GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
-    ```
-=== "Node JS"
+=== "Javascript"
+
     ```javascript
-    /****** Install Node JS SDK wrapper *******
-    $ npm install ringcentral-engage-voice-client
-    *******************************************/
-
-    const RunRequest = async function () {
-        const EngageVoice = require('ringcentral-engage-voice-client').default
-
-        // Instantiate the SDK wrapper object with your RingCentral app credentials
-        const ev = new EngageVoice({
-            clientId: "RINGCENTRAL_CLIENTID",
-            clientSecret: "RINGCENTRAL_CLIENTSECRET"
-        })
-
-        try {
-            // Authorize with your RingCentral Office user credentials
-            await ev.authorize({
-                username: "RINGCENTRAL_USERNAME",
-                extension: "RINGCENTRAL_EXTENSION",
-                password: "RINGCENTRAL_PASSWORD"
-            })
-
-            // Get Queue Groups data
-            const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
-            const groupsResponse = await ev.get(groupsEndpoint)
-            for (var group of groupsResponse.data) {
-                // Get every single Queue under your Queue Group
-                if (group.groupName == "My New Queue Group") {
-                    const queuesEndpoint = groupsEndpoint + "/" + group.gateGroupId + "/gates"
-                    const queuesResponse = await ev.get(queuesEndpoint)
-                    for (var queue of queuesResponse.data) {
-                        const singleQueueEndpoint = queuesEndpoint + "/" + queue.gateId
-                        const singleQueueResponse = await ev.get(singleQueueEndpoint)
-                        console.log(singleQueueResponse.data);
-                        console.log("=========")
-                    }
-                }
-            }
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-    }
-
-    RunRequest();
+    {!> code-samples/routing/queue-get.js !}
     ```
 === "Python"
+
     ```python
-    #### Install Python SDK wrapper ####
-    # $ pip3 install ringcentral_engage_voice
-    #  or
-    # $ pip install ringcentral_engage_voice
-    #####################################
-
-    from ringcentral_engage_voice import RingCentralEngageVoice
-
-    def retrieve_single_queue():
-        try:
-            groupsEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
-            groupsResponse = ev.get(groupsEndpoint).json()
-            for group in groupsResponse:
-                # Retrieve Queues under your Queue Group
-                if (group['groupName'] == "My New Queue Group"):
-                    queuesEndpoint = f"{groupsEndpoint}/{group['gateGroupId']}/gates"    # f        string:https://www.python.org/dev/peps/pep-0498/
-                    queuesResponse = ev.get(queuesEndpoint).json()
-                    for queue in queuesResponse:
-                        # Retrieve every single Queue
-                        singleQueueEndpoint = f"{queuesEndpoint}/{queue['gateId']}"
-                        singleQueueResponse = ev.get(singleQueueEndpoint).json()
-                        print(singleQueueResponse)
-                        print("==========")
-        except Exception as e:
-            print(e)
-
-
-    # Instantiate the SDK wrapper object with your RingCentral app credentials
-    ev = RingCentralEngageVoice(
-        "RINGCENTRAL_CLIENTID",
-        "RINGCENTRAL_CLIENTSECRET")
-
-    try:
-        # Authorize with your RingCentral Office user credentials
-        ev.authorize(
-            username="RINGCENTRAL_USERNAME",
-            password="RINGCENTRAL_PASSWORD",
-            extension="RINGCENTRAL_EXTENSION"
-        )
-
-        retrieve_single_queue()
-    except Exception as e:
-        print(e)
+    {!> code-samples/routing/queue-get.py !}
     ```
+
 === "PHP"
-    ```php
-    <?php
-    require('vendor/autoload.php');
 
-    // Instantiate the SDK wrapper object with your RingCentral app credentials
-    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-    try{
-      // Login your account with your RingCentral Office user credentials
-      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-      $endpoint = "admin/accounts/~/gateGroups";
-      // get a list of Queue Groups and find the "Platform" queue group for this user
-      $response = $ev->get($endpoint);
-      $jsonObj = json_decode($response);
-      foreach ($jsonObj as $group){
-          if ($group->groupName == "Platform"){
-              // get a list of Queues from this "Platform" Queue Group
-              $endpoint = 'admin/accounts/~/gateGroups/' . $group->gateGroupId . "/gates";
-              $response = $ev->post($endpoint);
-              $jsonObj = json_decode($response);
-              foreach ($jsonObj as $queue) {
-                  if ($queue->gateName == "My PHP Queue"){
-                    $endpoint .= '/' . $queue->gateId;
-                    $queueInfo = $ev->get($endpoint);
-                    print ($queueInfo);
-                    break;
-                  }
-              }
-              break;
-          }
-      }
-    }catch (Exception $e) {
-      print $e->getMessage();
-    }
+    ```php
+    {!> code-samples/routing/queue-get.php !}
     ```
 
-### Response
+### Sample request
+
+```html
+GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
+```
+
+### Sample response
+
 ```json
-{
-  "isActive": true,
-  "gateName": "My Queue",
-  "gateDesc": "An initial queue for this Queue Group",
-  "gatePriority": 0,
-  "billingCode": null,
-  "outboundCallerId": "ani",
-  "manualCallerId": null,
-  "transferCallerId": null,
-  "callbackCampaign": null,
-  "abandonCampaign": null,
-  "recordCall": 1,
-  "stopRecordingOnTransfer": false,
-  "recordingInConference": false,
-  "shortAbandonTime": 30,
-  "slaTime": 30,
-  "shortCallTime": 30,
-  "longCallTime": 300,
-  "whisperMessage": null,
-  "blockedAniMessage": null,
-  "onHoldMessage": null,
-  "endCallMessage": null,
-  "script": null,
-  "appUrl": null,
-  "backupAppUrl": null,
-  "ttAccept": false,
-  "hangupOnDisposition": false,
-  "enableGlobalPhoneBook": false,
-  "enableIvrTokens": false,
-  "afterCallState": null,
-  "wrapTime": 8,
-  "acceptTime": 30,
-  "dispositionTimeout": 60,
-  "dequeueSoapService": null,
-  "resultFileDestination": null,
-  "agentConnSoapService": null,
-  "agentTermSoapService": null,
-  "postCallSoapService": null,
-  "postDispSoapService": null,
-  "transferTermSoapService": null,
-  "satSched": "00000000",
-  "sunSched": "00000000",
-  "monSched": "08002100",
-  "tueSched": "08002100",
-  "wedSched": "08002100",
-  "thuSched": "08002100",
-  "friSched": "08002100",
-  "throttlingAniEvent": null,
-  "maxQueueEvent": null,
-  "fifoDisabled": true,
-  "observeDst": true,
-  "specialAniEvent": null,
-  "throttleDays": 0,
-  "surveyPopType": "FLASH",
-  "dequeueDelay": 0,
-  "agentPopMessage": null,
-  "noAgentEvent": null,
-  "requeueType": "ADVANCED",
-  "throttleCalls": 0,
-  "afterCallBaseState": null,
-  "blockedAniMessage": null,
-  "syncQueueWait": 10,
-  "maxQueueLimit": -1,
-  "gateGroup":
-    {
-      "id": 52653,
-      "description": "Platform"
-    },
-  "gateId": 72991,
-  "gateClosedEvent": null,
-  "permissions": [],
-  "pauseRecordingSec": 30,
-  "survey": null,
-  "createdOn": "2020-05-18T15:41:44.000+0000",
-  "revMatch": false,
-  "agentGateAccess": null,
-}
+{!> code-samples/routing/queue-get-response.json !}
 ```
 
 ## Update a Single Queue
 
 Update the details for a single Queue  using the `gates` endpoint. Several details need to be updated with a single `PUT` command so make sure to `GET` all details, modify the relevant fields, and then submit the entire object to update the Queue.
 
-### Request
+### Sample code
+
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
 
-=== "HTTP"
-    ```html
-    # Retrieve the entire Queue JSON object
-    GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
-    Content-Type: application/json
-        {
-          "isActive": true,
-          "gateName": "My Queue",
-          "gateDesc": "An initial queue for this Queue Group",
-          "gateGroup":
-            {
-              "id": 52653,
-              "description": "Platform"
-            },
-          "gateId": 72992,
-          "script": null,
-          "agentGateAccess": null,
-          "permissions": []
-        }
+=== "Javascript"
 
-    # Modify the gateDesc and send the entire JSON response back
-    PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
-    Content-Type: application/json
-        {
-          "isActive": true,
-          "gateName": "My Queue",
-          "gateDesc": "An *edited* queue for this Queue Group",
-          "gateGroup":
-            {
-              "id": 52653,
-              "description": "Platform"
-            },
-          "gateId": 72992,
-          "script": null,
-          "agentGateAccess": null,
-          "permissions": []
-        }
-    ```
-=== "Node JS"
     ```javascript
-    /****** Install Node JS SDK wrapper *******
-    $ npm install ringcentral-engage-voice-client
-    *******************************************/
-
-    const RunRequest = async function () {
-        const EngageVoice = require('ringcentral-engage-voice-client').default
-
-        const ev = new EngageVoice({
-            clientId: "RINGCENTRAL_CLIENTID",
-            clientSecret: "RINGCENTRAL_CLIENTSECRET"
-        })
-
-        try {
-            // Authorize with your RingCentral Office user credentials
-            await ev.authorize({
-                username: "RINGCENTRAL_USERNAME",
-                extension: "RINGCENTRAL_EXTENSION",
-                password: "RINGCENTRAL_PASSWORD"
-            })
-
-            // Get Queue Groups info
-            const groupEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
-            const groupResponse = await ev.get(groupEndpoint)
-            for (var group of groupResponse.data) {
-                // Update your Queue under your Queue Group
-                if (group.groupName == "My New Queue Group") {
-                    const queueEndpoint = groupEndpoint + "/" + group.gateGroupId + "/gates"
-                    const queueResponse = await ev.get(queueEndpoint)
-                    for (var queue of queueResponse.data) {
-                        if (queue.gateName == "My Node Queue") {
-                            const singleQueueEndpoint = queueEndpoint + "/" + queue.gateId
-                            queue.gateDesc = "An *edited* queue description for this Queue"
-                            const singleQueueResponse = await ev.put(singleQueueEndpoint, queue)
-                            console.log(singleQueueResponse.data);
-                            break
-                        }
-                    }
-                }
-            }
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-    }
-
-    RunRequest();
+    {!> code-samples/routing/queue-update.js !}
     ```
+
 === "Python"
+
     ```python
-    #### Install Python SDK wrapper ####
-    # $ pip3 install ringcentral_engage_voice
-    #  or
-    # $ pip install ringcentral_engage_voice
-    #####################################
-
-    from ringcentral_engage_voice import RingCentralEngageVoice
-
-    def update_single_queue():
-        try:
-            groupsEndpoint = "/api/v1/admin/accounts/{accountId}/gateGroups"
-            groupsResponse = ev.get(groupsEndpoint).json()
-            for group in groupsResponse:
-                # Retrieve Queues under your Queue Group
-                if (group['groupName'] == "My New Queue Group"):
-                    queuesEndpoint = f"{groupsEndpoint}/{group['gateGroupId']}/gates"    # f        string:https://www.python.org/dev/peps/pep-0498/
-                    queuesResponse = ev.get(queuesEndpoint).json()
-                    for queue in queuesResponse:
-                        # Update your Queue
-                        if queue['gateName'] == "My New Queue":
-                            singleQueueEndpoint = f"{queuesEndpoint}/{queue['gateId']}"
-                            queue['gateDesc'] = f"{queue['gateDesc']} - Updated"
-                            singleQueueResponse = ev.put(singleQueueEndpoint, queue).json()
-                            print(singleQueueResponse)
-                            break
-        except Exception as e:
-            print(e)
-
-
-    # Instantiate the SDK wrapper object with your RingCentral app credentials
-    ev = RingCentralEngageVoice(
-        "RINGCENTRAL_CLIENTID",
-        "RINGCENTRAL_CLIENTSECRET")
-
-    try:
-        # Authorize with your RingCentral Office user credentials
-        ev.authorize(
-            username="RINGCENTRAL_USERNAME",
-            password="RINGCENTRAL_PASSWORD",
-            extension="RINGCENTRAL_EXTENSION"
-        )
-
-        update_single_queue()
-    except Exception as e:
-        print(e)
+    {!> code-samples/routing/queue-update.py !}
     ```
+
 === "PHP"
-    ```php
-    <?php
-    require('vendor/autoload.php');
 
-    // Instantiate the SDK wrapper object with your RingCentral app credentials
-    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-    try{
-      // Login your account with your RingCentral Office user credentials
-      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-      $endpoint = "admin/accounts/~/gateGroups";
-      // get a list of Queue Groups and find the "Platform" queue group for this user
-      $response = $ev->get($endpoint);
-      $jsonObj = json_decode($response);
-      foreach ($jsonObj as $group){
-          if ($group->groupName == "Platform"){
-              // get a list of Queues from this "Platform" Queue Group
-              $endpoint = 'admin/accounts/~/gateGroups/' . $group->gateGroupId . "/gates";
-              $response = $ev->post($endpoint);
-              $jsonObj = json_decode($response);
-              foreach ($jsonObj as $queue) {
-                  if ($queue->gateName == "My PHP Queue"){
-                    $endpoint .= '/' . $queue->gateId;
-                    $queue->gateDesc = "An *edited* queue description for this Queue"
-                    $queueInfo = $ev->put($endpoint, $queue);
-                    print ($queueInfo);
-                    break;
-                  }
-              }
-              break;
-          }
-      }
-    }catch (Exception $e) {
-      print $e->getMessage();
-    }
+    ```php
+    {!> code-samples/routing/queue-update.php !}
     ```
+
+### Sample request
+
+#### Retrieve the entire Queue JSON object
+
+```http
+GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
+Content-Type: application/json
+
+{
+  "isActive": true,
+  "gateName": "My Queue",
+  "gateDesc": "An initial queue for this Queue Group",
+  "gateGroup":
+    {
+      "id": 52653,
+      "description": "Platform"
+    },
+  "gateId": 72992,
+  "script": null,
+  "agentGateAccess": null,
+  "permissions": []
+}
+```
+
+#### Modify the gateDesc and send the entire JSON response back
+
+```http
+PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
+Content-Type: application/json
+
+{
+  "isActive": true,
+  "gateName": "My Queue",
+  "gateDesc": "An *edited* queue for this Queue Group",
+  "gateGroup":
+    {
+      "id": 52653,
+      "description": "Platform"
+    },
+  "gateId": 72992,
+  "script": null,
+  "agentGateAccess": null,
+  "permissions": []
+}
+```
 
 ## Delete a Single Queue
 
 Delete a single Queue Group using the `gates` endpoint.
 
-### Request
 Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
-=== "HTTP"
-    ```html
-    DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
-    ```
+
+### Sample request
+
+```html
+DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
+```

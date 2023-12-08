@@ -1,0 +1,20 @@
+[
+  {
+    "groupSkills": null,
+    "groupName": "Platform",
+    "gateGroupId": 52653,
+    "permissions": []
+  },
+  {
+    "groupSkills": null,
+    "groupName": "Evaluations",
+    "gateGroupId": 52658,
+    "permissions": []
+  },
+  {
+    "groupSkills": null,
+    "groupName": "John's Queue",
+    "gateGroupId": 52671,
+    "permissions": []
+  }
+]

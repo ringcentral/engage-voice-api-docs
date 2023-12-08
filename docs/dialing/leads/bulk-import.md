@@ -1,6 +1,6 @@
 # About Bulk Lead Import
 
-The Engage Voice API allows you to load one or multiple leads at a time. You can also load leads for immediate dialing at the top of the dialer cache or in normal priority.
+The RingCX API allows you to load one or multiple leads at a time. You can also load leads for immediate dialing at the top of the dialer cache or in normal priority.
 
 !!! alert "Please Note"
     To enumerate a list of Campaigns for the `campaignId` path property, please review section [Enumerating Campaigns](./#enumerating-campaigns) below.

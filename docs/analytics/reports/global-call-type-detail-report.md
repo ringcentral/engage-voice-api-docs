@@ -1,6 +1,6 @@
 # About Call Details and Recordings
 
-Call detail records (CDRs) and recordings are available via the Global Call Type Detail (GCTD) Report which provides complete real-time data for all calls in Engage Voice. When recordings are available, media URL is provided in the call detail record.
+Call detail records (CDRs) and recordings are available via the Global Call Type Detail (GCTD) Report which provides complete real-time data for all calls in RingCX. When recordings are available, a media URL is provided in the call detail record.
 
 !!! alert "Please Note"
     Calls will appear in this report a few minutes after a call ends or agent dispositions, whichever comes last. Live calls are not included in this report. If you wish to retrieve information on live calls, see the [Active Calls API](../../../dialing/active-calls).
@@ -87,7 +87,7 @@ The call detail record includes a number of properties for the call, allowing yo
 
 ### Unique Item Identifier
 
-The `uii` is the unique identifier in the call in Engage.
+The `uii` is the unique identifier in the call in RingCX.
 
 ### Calculating Wait Times
 

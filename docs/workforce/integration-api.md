@@ -1,10 +1,10 @@
 # Unique Integration APIs
 
-When integrating workforce management with our contact center platform, you may also want to connect to our RingCentral MVP platform. For example, agents may have a need to contact other employees who are not agents and are part of the back office. Those employees will have a RingCentral MVP account and you'll need the RingCentral user ID to lookup the address book and find contacts that are only in the back office. In those cases, you need a mapping between the RingCentral user ID and Engage Voice agent ID.
+When integrating workforce management with our contact center platform, you may also want to connect to our RingCentral MVP platform. For example, agents may have a need to contact other employees who are not agents and are part of the back office. Those employees will have a RingCentral MVP account and you'll need the RingCentral user ID to lookup the address book and find contacts that are only in the back office. In those cases, you need a mapping between the RingCentral user ID and RingCX agent ID.
 
 ## User List
 
-The [public user list](https://developers.ringcentral.com/engage/voice/api-reference/Users/listAllUsers) most developers will use has many details including creation date, enabled status, and roles. However, for integrations, a smaller set of user data may be all that is needed, but with the added ability to distinguish the Engage user name from the RingCentral user name and the environment ID. For this purpose, there's an [integration user list](https://developers.ringcentral.com/engage/voice/api-reference/Integration-User-Controller/getUserList) that can be used instead.
+The [public user list](https://developers.ringcentral.com/engage/voice/api-reference/Users/listAllUsers) most developers will use has many details including creation date, enabled status, and roles. However, for integrations, a smaller set of user data may be all that is needed, but with the added ability to distinguish the RingCX user name from the RingCentral user name and the environment ID. For this purpose, there's an [integration user list](https://developers.ringcentral.com/engage/voice/api-reference/Integration-User-Controller/getUserList) that can be used instead.
 
 ## Sub-Accounts
 
@@ -12,7 +12,7 @@ Each main account has a sub-account where most customers reside. However, for pa
 
 ## Agents
 
-Most developers will want a list of agents and agent groups, but for workforce management, there are additional details that are important to know about agents.  [Agents](https://developers.ringcentral.com/engage/voice/api-reference/Agents/getAgentList) are derived from RingCentral MVP users and the RingCentral User ID will map to an agent ID in Engage Voice.  Along with this detail, you can also retrieve the agent's supervisors as an array of agent IDs, or if the agent is a supervisor, a list of agents that the agent supervises (`superviseeAgentIds`).
+Most developers will want a list of agents and agent groups, but for workforce management, there are additional details that are important to know about agents.  [Agents](https://developers.ringcentral.com/engage/voice/api-reference/Agents/getAgentList) are derived from RingCentral MVP users and the RingCentral User ID will map to an agent ID in RingCX.  Along with this detail, you can also retrieve the agent's supervisors as an array of agent IDs, or if the agent is a supervisor, a list of agents that the agent supervises (`superviseeAgentIds`).
 
 ## Queue Groups
 

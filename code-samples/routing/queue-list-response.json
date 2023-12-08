@@ -1,0 +1,30 @@
+[
+  {
+    "script": null,
+    "gateGroup":
+      {
+        "id": 52653,
+        "description": "Platform"
+      },
+    "gateName": "Platform Inbound",
+    "gateDesc": null,
+    "gateId": 72874,
+    "agentGateAccess": null,
+    "isActive": true,
+    "permissions": []
+  },
+  {
+    "script": null,
+    "gateGroup":
+      {
+        "id": 52653,
+        "description": "Platform"
+      },
+    "gateName": "My Queue",
+    "gateDesc": "An initial queue for this Queue Group",
+    "gateId": 72979,
+    "agentGateAccess": null,
+    "isActive": true,
+    "permissions": []
+  }
+]

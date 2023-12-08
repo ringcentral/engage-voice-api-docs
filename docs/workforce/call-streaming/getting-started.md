@@ -52,7 +52,7 @@ runServer(port, keyFilePath);
 
 You will get a WSS address "Server URI" which will be used later as `{streamingUrl}` and a HTTPS address "Client URI" which we can configure now.
 
-- Go to Engage Voice Admin
+- Go to RingCX Admin
 - Go to Agent tools -> Script designer
 - Create a new group to include your Queue/Campaign
 - Go to Script Studio -> drag a `Page` component to the middle -> connect Start - Page - End
@@ -86,8 +86,8 @@ For our server to know where to send audio streams to, we will need a streaming 
 Let's test with a [Queue](../../../routing/queues/queues)(incoming call streams). Here we will need:
 
 - `productId`: the id for your `Queue`
-- `mainAccountId`: get it from Engage Voice Admin Console -> Settings -> Accounts -> main account id
-- `subAccountId`: get it from Engage Voice Admin Console -> Settings -> Accounts -> expand main account -> sub account id
+- `mainAccountId`: get it from RingCX Admin Console -> Settings -> Accounts -> main account id
+- `subAccountId`: get it from RingCX Admin Console -> Settings -> Accounts -> expand main account -> sub account id
 - `rcAccountId`: `RingCentral User ID` for admin user
 
 
@@ -138,7 +138,7 @@ Sample response:
 
 #### Enable Streaming for Queue/Campaign
 
-**Go to [Engage Voice admin console](https://engage.ringcentral.com/).**
+**Go to [RingCX admin console](https://engage.ringcentral.com/).**
 
 - **For Queue: Go to Routing -> Voice queues & skills -> Select your Queue -> Recording settings**
 - **For Campaign: Go to Dialing -> Campaigns -> Select your Campaign -> Recording settings**
@@ -158,7 +158,7 @@ Call streaming will work alongside call recording.
 
 Let's have a quick review on what the WebSocket messages look like.
 
-When an agent in the Queue/Campaign is connected to a call, Engage Voice server will start to send websocket messages to `streamingUrl`. There are 4 types of messages:
+When an agent in the Queue/Campaign is connected to a call, RingCX server will start to send websocket messages to `streamingUrl`. There are 4 types of messages:
 
 - [Connect](#connect-message)
 - [Start](#start-message)

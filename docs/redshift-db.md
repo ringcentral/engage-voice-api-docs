@@ -6,9 +6,6 @@
 !!! info "Purchasing Redshift Database Access"
     The Redshift Database Access is a chargeable item and must be granted by your account manager. Please reach out to your account manager to purchase and activate the Redshift Database Access.
 
-!!! warning "Not for Engage Omni"
-    The Redshift Database Access is not suitable for Engage Omni. If you are a new Engage Omni user, please use the [Historical reports and dashboards](https://support.ringcentral.com/engagevoice/analytics/historical-reports-dashboards.html) instead for your reporting purposes.
-
 When accessing the Redshift Historical Database you will be provided with a username, password, schema name and JDBC connection URL. The credentials will only enable a user to read/query from the database. There are also limitations as to the number of connections (5) and time that a query can run (5 minutes) before they are refused or terminated respectfully.
 
 With the aforementioned credentials you can create a connection to the historical database with your choice of client. This client will need to support either a Postgres or preferably the Redshift JDBC driver.
@@ -64,7 +61,7 @@ A brief description of the four core tables are below.
 ### CALLS
 By far the largest table with the most information. It is also the largest table in terms of data stored and number of columns, which as of this documentation is 165. This creates a challenge at times when querying because you must be very specific about the information that you want to return or the performance of your query will suffer.
 
-This Calls table contains a unique record per call. In most scenarios this will mean one record per uii. A uii is a unique 30 character call identifier with the first 14 digits representing the time that the call initiated on the Engage Voice platform. An example uii might look like this.
+This Calls table contains a unique record per call. In most scenarios this will mean one record per uii. A uii is a unique 30 character call identifier with the first 14 digits representing the time that the call initiated on the RingCX platform. An example uii might look like this.
 
 UII - 202001010011550131070000000400
 
