@@ -7,14 +7,14 @@ The primary search fields include a selection of basic search parameters. You ca
 
 | API Property | UI Display | UI Default | Description |
 |-|-|-|-|
-| **`campaignId`** | Campaign | *first available campaign* | Search from a list of available dial groups and campaigns. Use [Dial Groups and Campaigns](./#dial-groups-and-campaigns) to retrieve valid values. |
+| **`campaignId`** | Campaign | *first available campaign* | Search from a list of available dial groups and campaigns. Use [Dial Groups and Campaigns](#dial-groups-and-campaigns) to retrieve valid values. |
 | **`suppressed`** | Suppressed | *first available campaign* | Suppressed leads are leads the system will not dial. They will still maintain their lead status, however, unlike paused or cancelled leads (whose lead status will change once they have been paused or cancelled). Allowed values include `ONLY_SUPPRESSED`, `ONLY_UNSUPPRESSED`, `ALL` |
-| **`listIds`** | Loaded Lists | *Select lists...* | Search from any loaded leads list by their ID. Please note that this parameter depends upon a campaign in the campaignId setting. Use [Leads List](./#leads-list) to retrieve valid values. |
-| **`agentDispositions`** | Agent Dispositions | *Select agent dispositions...* | Search for leads from a list of agent dispositions by campaign. This parameters depends upon a campaign in the campaignId Use [Campaign Dispositions](./#campaign-dispositions) to retrieve a valid list of values. |
-| **`systemDispositions`** | System Dispositions | *Select system dispositions...* | Search from a list of system dispositions by account. Use [System Dispositions](./#system-dispositions) for a list of valid values. |
-| **`leadStates`** | Lead Status | *Select lead status...* | Search from a list of lead status by account. Use [Lead Status](./#lead-status) for a list of valid values. |
-| **`physicalStates`** | State | *Select states...* | Search for leads by their (geographical) state. You can select one or more states via the dropdown list. The list includes all of the United States and all provinces and territories of Canada. Use [States](./#states) for a list of valid values |
-| **`leadTimezones`** | Timezone | *Select timezones...* | Search for leads by timezone. You need only include the name of the timezone, but the list must be written as an array of objects. Use [Lead Timezones](./#lead-timezones) for a list of valid values |
+| **`listIds`** | Loaded Lists | *Select lists...* | Search from any loaded leads list by their ID. Please note that this parameter depends upon a campaign in the campaignId setting. Use [Leads List](#leads-list) to retrieve valid values. |
+| **`agentDispositions`** | Agent Dispositions | *Select agent dispositions...* | Search for leads from a list of agent dispositions by campaign. This parameters depends upon a campaign in the campaignId Use [Campaign Dispositions](#campaign-dispositions) to retrieve a valid list of values. |
+| **`systemDispositions`** | System Dispositions | *Select system dispositions...* | Search from a list of system dispositions by account. Use [System Dispositions](#system-dispositions) for a list of valid values. |
+| **`leadStates`** | Lead Status | *Select lead status...* | Search from a list of lead status by account. Use [Lead Status](#lead-status) for a list of valid values. |
+| **`physicalStates`** | State | *Select states...* | Search for leads by their (geographical) state. You can select one or more states via the dropdown list. The list includes all of the United States and all provinces and territories of Canada. Use [States](#states) for a list of valid values |
+| **`leadTimezones`** | Timezone | *Select timezones...* | Search for leads by timezone. You need only include the name of the timezone, but the list must be written as an array of objects. Use [Lead Timezones](#lead-timezones) for a list of valid values |
 
 ## Supporting Values and APIs
 
@@ -121,7 +121,7 @@ Get a list of states from the United States and all provinces and territories of
 `GET {BASE_URL}/api/v1/admin/states`
 
 ## Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "HTTP"
     ```http

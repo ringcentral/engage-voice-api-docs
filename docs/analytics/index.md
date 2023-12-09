@@ -2,7 +2,7 @@
 
 Analytics refers to the real-time, historical, and custom reporting portions of the platform in the form of stats and reports. The system collects, shares, and receives customer and call/chat information.
 
-The activity of [Agents](../users/agents/agents) while handling calls in the contact center contributes to the collection of analytics data. Agents record their interactions with leads and customers via configurable dispositions that can be used to track call/chat information and outcomes for reporting purposes.
+The activity of [Agents](../users/agents/agents.md) while handling calls in the contact center contributes to the collection of analytics data. Agents record their interactions with leads and customers via configurable dispositions that can be used to track call/chat information and outcomes for reporting purposes.
 
 Throughout these calls and chats, all this information makes its way to the Analytics section of the Admin platform, where it’s stored for future, deeper analysis via historical reporting and/or distributed to various real-time reporting applications throughout the system for instant analysis.
 

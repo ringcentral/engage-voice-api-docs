@@ -12,12 +12,12 @@ This document describes how to install and use the Postman 2.0 Collection.
 ## Pre-Requisites
 
 !!! primary "Note for Legacy Systems"
-    Legacy systems [decribed here](../authentication) and Legacy password authentication are not supported with
+    Legacy systems [decribed here](authentication/index.md) and Legacy password authentication are not supported with
     this Postman Collection. If you have such a need, please [make a request here](https://github.com/ringcentral/engage-voice-api-docs/issues).
 
 This Postman spec is designed for following environment:
 
-* Current RingCentral RingCX account located at: https://engage.ringcentral.com. See [here for more information on current and legacy systems.](../authentication)
+* Current RingCentral RingCX account located at: https://engage.ringcentral.com. See [here for more information on current and legacy systems.](authentication/index.md)
 * RingCentral RingCX user linked to RingCentral MVP user for Single Sign-on. RingCentral MVP user should be using RingCentral password authenticaiton, not SAML-based Single Sign-on.
 * RingCentral app created at https://developers.ringcentral.com with OAuth 2.0 Password Credentials flow enabled.
 

@@ -8,7 +8,7 @@ RingCX Embeddable is an out-of-the-box embeddable web application that help deve
 
 Visit GitHub pages: [https://ringcentral.github.io/engage-voice-embeddable](https://ringcentral.github.io/engage-voice-embeddable/)
 
-![demo](demo.png)
+![demo](images/embeddable-demo.png)
 
 ## Inject into Web app
 

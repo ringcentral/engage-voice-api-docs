@@ -1,7 +1,7 @@
 # Save To Files Example and Walkthrough
 
 !!!important
-    It's assumed that you have gone through [Getting Started Guide](./../getting-started)
+    It's assumed that you have gone through [Getting Started Guide](./getting-started.md)
 
 ### Step.1 Start ngrok
 
@@ -27,7 +27,7 @@ This will be our `streamingUrl`.
 
 ### Step.2 Setup streaming profile
 
-Please refer to [Getting Started Guide](./../getting-started) Step.1.
+Please refer to [Getting Started Guide](./getting-started.md) Step.1.
 
 ### Step.3 Start Local Server
 

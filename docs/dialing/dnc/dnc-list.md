@@ -4,7 +4,7 @@ Maintaining an up-to-date internal Do Not Call (DNC) list is essential if you wa
 
 ### Request
 
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "HTTP"
     ```bash

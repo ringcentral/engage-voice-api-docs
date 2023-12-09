@@ -10,12 +10,12 @@ It takes a JSON request body with the following notable parameters. See the exam
 |-|-|
 | **`reportType`** | set to `CASPER_REPORT`. |
 | **`reportTypeName`** | set to `Cloud_Call_Detail_Download`. |
-| **`reportCriteria.accountIds`** | This is a string array. To retrieve a list of possible values, use [Accounts](./#accounts).
+| **`reportCriteria.accountIds`** | This is a string array. To retrieve a list of possible values, use [Accounts](#accounts).
 | **`reportCriteria.groupBy`** | Either `PROFILE` or `DESTINATION`. If using `PROFILE`, set the `reportCriteria.cloudProfileGroupIds` and `reportCriteria.cloudProfileIds` properties. If using `DESTINATION`, set the `reportCriteria.cloudDestinationGroupIds` and `reportCriteria.cloudDestinationIds` properties. |
-| **`reportCriteria.cloudProfileGroupIds`** | Set if `groupBy` is set to `PROFILE`. If you want all groups, include all values, including `null`. Corresponds to "Cloud Profile Groups" in the Admin UI. Populate with an integer array of profile `groupId` values. Use the [Cloud Profiles](./#cloud-profiles) and populate with the list of `groupId` values. |
-| **`reportCriteria.cloudProfileIds`** | Set if `groupBy` is set to `PROFILE`. If you want all groups, include all values. Corresponds to "Cloud Profiles" in the Admin UI. Populate with an integer array of profile `groupId` values. Use the [Cloud Profiles](./#cloud-profiles) and populate with the list of group children `objId` values. The objId values musts correspond with `groupId` values in the `cloudProfileGroupIds` properties. |
-| **`reportCriteria.cloudDestinationGroupIds`** | Set if `groupBy` is set to `DESTINATION`. If you want all groups, include all values, including `null`. Corresponds to "Cloud Destination Groups" in the Admin UI. Populate with an integer array of profile `groupId` values. Use the [Cloud Destinations](./#cloud-destinations) and populate with the selected `groupId` values. |
-| **`reportCriteria.cloudDestinationIds`** | Set if `groupBy` is set to `DESTINATION`. If you want all groups, include all values.  Corresponds to "Cloud Destinations" in the Admin UI. Populate with an integer array of profile `groupId` values. se the [Cloud Destinations](./#cloud-destinations) and populate with with the selected group children `objId` values. The objId values musts correspond with `groupId` values in the `cloudProfileGroupIds` properties. |
+| **`reportCriteria.cloudProfileGroupIds`** | Set if `groupBy` is set to `PROFILE`. If you want all groups, include all values, including `null`. Corresponds to "Cloud Profile Groups" in the Admin UI. Populate with an integer array of profile `groupId` values. Use the [Cloud Profiles](#cloud-profiles) and populate with the list of `groupId` values. |
+| **`reportCriteria.cloudProfileIds`** | Set if `groupBy` is set to `PROFILE`. If you want all groups, include all values. Corresponds to "Cloud Profiles" in the Admin UI. Populate with an integer array of profile `groupId` values. Use the [Cloud Profiles](#cloud-profiles) and populate with the list of group children `objId` values. The objId values musts correspond with `groupId` values in the `cloudProfileGroupIds` properties. |
+| **`reportCriteria.cloudDestinationGroupIds`** | Set if `groupBy` is set to `DESTINATION`. If you want all groups, include all values, including `null`. Corresponds to "Cloud Destination Groups" in the Admin UI. Populate with an integer array of profile `groupId` values. Use the [Cloud Destinations](#cloud-destinations) and populate with the selected `groupId` values. |
+| **`reportCriteria.cloudDestinationIds`** | Set if `groupBy` is set to `DESTINATION`. If you want all groups, include all values.  Corresponds to "Cloud Destinations" in the Admin UI. Populate with an integer array of profile `groupId` values. se the [Cloud Destinations](#cloud-destinations) and populate with with the selected group children `objId` values. The objId values musts correspond with `groupId` values in the `cloudProfileGroupIds` properties. |
 | **`reportCriteria.startTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
 | **`reportCriteria.endTimestamp`** | use ANSI SQL 92` TIMESTAMP` format such as: `2020-04-22 00:00:00.0000`. |
 | **`reportCriteria.timezoneName`** | Use the "TZ database name" from the [tz database](https://en.wikipedia.org/wiki/Tz_database). For example, `US/Pacific`.|
@@ -55,9 +55,8 @@ For Cloud Reports, you'll also need cloud destination groups and corresponding c
 
 ### Request
 
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
-=== "HTTP"
 ```bash
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/reportsStreaming
 Authorization: bearer <myAccessToken>

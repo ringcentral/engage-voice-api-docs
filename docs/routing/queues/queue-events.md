@@ -1,6 +1,6 @@
 # About Queue Events
 
-In Creating an inbound [Queue](./queues.md), we discussed that inbound queues can be configured to provide the specific experience you want each caller to have while waiting for an agent to take their call. This experience can be configured by creating [Queue Events](./queue-events), a series of sequential events that the customer will experience once they are routed to the queue.
+In Creating an inbound [Queue](queues.md), we discussed that inbound queues can be configured to provide the specific experience you want each caller to have while waiting for an agent to take their call. This experience can be configured by creating [Queue Events](queue-events.md), a series of sequential events that the customer will experience once they are routed to the queue.
 
 You can configure queue events to be as simple or complex as you like, from providing hold music for the caller while they wait to providing DTMF input options that the caller can choose from to determine the destination they’d like to route to.
 
@@ -18,207 +18,32 @@ You can create a priority queue event for two different types of ANIs: Special A
 
 ## Create Queue Events
 
-Queue Events are actually a component of Queues and therefore do not need a `POST` method.  Create the [Queue](./queues) first and then update the Queue Events details using `PUT` below.
+Queue Events are actually a component of Queues and therefore do not need a `POST` method.  Create the [Queue](queues.md) first and then update the Queue Events details using `PUT` below.
 
 ## Retrieve Queue Events
 
-Retrieve a list of Queue Events set on this [Queue](./queues).
+Retrieve a list of Queue Events set on this [Queue](queues.md).
 
-### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+### Sample request
 
-=== "HTTP"
-    ```html
-    GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
-    ```
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
-### Response
+```http
+GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
+```
 
-=== "Response"
-    ```json
-    [
-      {
-        "eventId":67882,
-        "eventRank":0,
-        "queueEvent":"PLAY-AUDIO-LOOP:holdmusic",
-        "eventDuration":120,
-        "enableDtmf":0,
-        "gate":
-          {
-            "permissions":[],
-            "gateId":73001,
-            "gateName":"My Queue (Spanish)",
-            "gateDesc":"An *edited* queue for this Queue Group",
-            "billingCode":null,
-            "dequeueDelay":0,
-            "maxQueueLimit":-1,
-            "maxQueueEvent":null,
-            "noAgentEvent":null,
-            "specialAniEvent":null,
-            "gateClosedEvent":null,
-            "throttlingAniEvent":null,
-            "throttleCalls":0,
-            "throttleDays":0,
-            "monSched":"08002100",
-            "tueSched":"08002100",
-            "wedSched":"08002100",
-            "thuSched":"08002100",
-            "friSched":"08002100",
-            "satSched":"00000000",
-            "sunSched":"00000000",
-            "agentPopMessage":null,
-            "whisperMessage":null,
-            "onHoldMessage":null,
-            "blockedAniMessage":null,
-            "gatePriority":0,
-            "recordCall":1,
-            "stopRecordingOnTransfer":false,
-            "recordingInConference":false,
-            "revMatch":false,
-            "appUrl":null,
-            "backupAppUrl":null,
-            "surveyPopType":"FLASH",
-            "createdOn":"2020-05-18T19:22:12.000+0000",
-            "shortAbandonTime":30,
-            "shortCallTime":30,
-            "longCallTime":300,
-            "acceptTime":30,
-            "ttAccept":false,
-            "requeueType":"ADVANCED",
-            "slaTime":30,
-            "afterCallBaseState":null,
-            "hangupOnDisposition":false,
-            "wrapTime":8,
-            "endCallMessage":null,
-            "outboundCallerId":"ani",
-            "transferCallerId":null,
-            "manualCallerId":null,
-            "syncQueueWait":10,
-            "enableGlobalPhoneBook":false,
-            "fifoDisabled":true,
-            "pauseRecordingSec":30,
-            "isActive":true,
-            "observeDst":true,
-            "enableIvrTokens":false,
-            "dispositionTimeout":60,
-            "gateGroup":
-              {
-                "id":52676,
-                "description":"My Queue Group"
-              },
-            "afterCallState":null,
-            "postCallSoapService":null,
-            "dequeueSoapService":null,
-            "agentConnSoapService":null,
-            "postDispSoapService":null,
-            "transferTermSoapService":null,
-            "agentTermSoapService":null,
-            "callbackCampaign":null,
-            "abandonCampaign":null,
-            "resultFileDestination":null,
-            "survey":null,
-            "gatePriorityGroup":null,
-            "script":null,
-            "gateQueueEvents":null,
-            "agentGateAccess":null,
-            "gateOpen":true
-          }
-      },
-      {
-        "eventId":67883,
-        "eventRank":1,
-        "queueEvent":"END-CALL:true",
-        "eventDuration":0,
-        "enableDtmf":0,
-        "gate":
-          {
-            "permissions":[],
-            "gateId":73001,
-            "gateName":"My Queue (Spanish)",
-            "gateDesc":"An *edited* queue for this Queue Group",
-            "billingCode":null,
-            "dequeueDelay":0,
-            "maxQueueLimit":-1,
-            "maxQueueEvent":null,
-            "noAgentEvent":null,
-            "specialAniEvent":null,
-            "gateClosedEvent":null,
-            "throttlingAniEvent":null,
-            "throttleCalls":0,
-            "throttleDays":0,
-            "monSched":"08002100",
-            "tueSched":"08002100",
-            "wedSched":"08002100",
-            "thuSched":"08002100",
-            "friSched":"08002100",
-            "satSched":"00000000",
-            "sunSched":"00000000",
-            "agentPopMessage":null,
-            "whisperMessage":null,
-            "onHoldMessage":null,
-            "blockedAniMessage":null,
-            "gatePriority":0,
-            "recordCall":1,
-            "stopRecordingOnTransfer":false,
-            "recordingInConference":false,
-            "revMatch":false,
-            "appUrl":null,
-            "backupAppUrl":null,
-            "surveyPopType":"FLASH",
-            "createdOn":"2020-05-18T19:22:12.000+0000",
-            "shortAbandonTime":30,
-            "shortCallTime":30,
-            "longCallTime":300,
-            "acceptTime":30,
-            "ttAccept":false,
-            "requeueType":"ADVANCED",
-            "slaTime":30,
-            "afterCallBaseState":null,
-            "hangupOnDisposition":false,
-            "wrapTime":8,
-            "endCallMessage":null,
-            "outboundCallerId":"ani",
-            "transferCallerId":null,
-            "manualCallerId":null,
-            "syncQueueWait":10,
-            "enableGlobalPhoneBook":false,
-            "fifoDisabled":true,
-            "pauseRecordingSec":30,
-            "isActive":true,
-            "observeDst":true,
-            "enableIvrTokens":false,
-            "dispositionTimeout":60,
-            "gateGroup":
-              {
-                "id":52676,
-                "description":"My Queue Group"
-              },
-            "afterCallState":null,
-            "postCallSoapService":null,
-            "dequeueSoapService":null,
-            "agentConnSoapService":null,
-            "postDispSoapService":null,
-            "transferTermSoapService":null,
-            "agentTermSoapService":null,
-            "callbackCampaign":null,
-            "abandonCampaign":null,
-            "resultFileDestination":null,
-            "survey":null,
-            "gatePriorityGroup":null,
-            "script":null,
-            "gateQueueEvents":null,
-            "agentGateAccess":null,
-            "gateOpen":true
-          }
-      }
-    ]    
-    ```
+### Sample response
+
+```json
+{!> code-samples/routing/queue-events-response.json !}
+```
 
 ## Update Queue Events
 
 Modify Queue Events using the `gateQueueEvents` endpoint.  You can modify multiple Queue Events with this command.  To modify only a single Queue Event, use the `gateQueueEvents` with your specific `eventId`.
 
 ### Primary Parameters
+
 Only `gateName` is a required parameter to create a Queue. All other parameters are optional.
 
 | API Property |  | UI Display | UI Default | Description |
@@ -232,210 +57,34 @@ Only `gateName` is a required parameter to create a Queue. All other parameters 
 | **`agentSkillProfiles`** | Optional | **None** | *empty* | Custom skills defined and bound to an Agent to redirect these queues to. |
 | **`requeueShortcut`** | Optional | **None** | *empty* | Allow agents to manually send their current call to a specific inbound queue, or to another agent with a special skill. |
 
-### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+### Sample request
 
-=== "HTTP"
-    ```html
-    POST {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
-    Content-Type: application/json
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
-    [
-      {
-        "eventId":67882,
-        "eventRank":0,
-        "queueEvent":"PLAY-AUDIO-LOOP:holdmusic",
-        "eventDuration":120,
-        "enableDtmf":0
-      },
-      {
-        "eventId":67883,
-        "eventRank":1,
-        "queueEvent":"END-CALL:true",
-        "eventDuration":0,
-        "enableDtmf":0
-      }
-    ]    
-    ```
+```http
+POST {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
+Content-Type: application/json
 
-### Response
+[
+  {
+    "eventId":67882,
+    "eventRank":0,
+    "queueEvent":"PLAY-AUDIO-LOOP:holdmusic",
+    "eventDuration":120,
+    "enableDtmf":0
+  },
+  {
+    "eventId":67883,
+    "eventRank":1,
+    "queueEvent":"END-CALL:true",
+    "eventDuration":0,
+    "enableDtmf":0
+  }
+]    
+```
 
-=== "Response"
-    ```json
-    [
-      {
-        "eventId":67882,
-        "eventRank":0,
-        "queueEvent":"PLAY-AUDIO-LOOP:holdmusic",
-        "eventDuration":120,
-        "enableDtmf":0,
-        "gate":
-          {
-            "permissions":[],
-            "gateId":73001,
-            "gateName":"My Queue (Spanish)",
-            "gateDesc":"An *edited* queue for this Queue Group",
-            "billingCode":null,
-            "dequeueDelay":0,
-            "maxQueueLimit":-1,
-            "maxQueueEvent":null,
-            "noAgentEvent":null,
-            "specialAniEvent":null,
-            "gateClosedEvent":null,
-            "throttlingAniEvent":null,
-            "throttleCalls":0,
-            "throttleDays":0,
-            "monSched":"08002100",
-            "tueSched":"08002100",
-            "wedSched":"08002100",
-            "thuSched":"08002100",
-            "friSched":"08002100",
-            "satSched":"00000000",
-            "sunSched":"00000000",
-            "agentPopMessage":null,
-            "whisperMessage":null,
-            "onHoldMessage":null,
-            "blockedAniMessage":null,
-            "gatePriority":0,
-            "recordCall":1,
-            "stopRecordingOnTransfer":false,
-            "recordingInConference":false,
-            "revMatch":false,
-            "appUrl":null,
-            "backupAppUrl":null,
-            "surveyPopType":"FLASH",
-            "createdOn":"2020-05-18T19:22:12.000+0000",
-            "shortAbandonTime":30,
-            "shortCallTime":30,
-            "longCallTime":300,
-            "acceptTime":30,
-            "ttAccept":false,
-            "requeueType":"ADVANCED",
-            "slaTime":30,
-            "afterCallBaseState":null,
-            "hangupOnDisposition":false,
-            "wrapTime":8,
-            "endCallMessage":null,
-            "outboundCallerId":"ani",
-            "transferCallerId":null,
-            "manualCallerId":null,
-            "syncQueueWait":10,
-            "enableGlobalPhoneBook":false,
-            "fifoDisabled":true,
-            "pauseRecordingSec":30,
-            "isActive":true,
-            "observeDst":true,
-            "enableIvrTokens":false,
-            "dispositionTimeout":60,
-            "gateGroup":
-              {
-                "id":52676,
-                "description":"My Queue Group"
-              },
-            "afterCallState":null,
-            "postCallSoapService":null,
-            "dequeueSoapService":null,
-            "agentConnSoapService":null,
-            "postDispSoapService":null,
-            "transferTermSoapService":null,
-            "agentTermSoapService":null,
-            "callbackCampaign":null,
-            "abandonCampaign":null,
-            "resultFileDestination":null,
-            "survey":null,
-            "gatePriorityGroup":null,
-            "script":null,
-            "gateQueueEvents":null,
-            "agentGateAccess":null,
-            "gateOpen":true
-          }
-      },
-      {
-        "eventId":67883,
-        "eventRank":1,
-        "queueEvent":"END-CALL:true",
-        "eventDuration":0,
-        "enableDtmf":0,
-        "gate":
-          {
-            "permissions":[],
-            "gateId":73001,
-            "gateName":"My Queue (Spanish)",
-            "gateDesc":"An *edited* queue for this Queue Group",
-            "billingCode":null,
-            "dequeueDelay":0,
-            "maxQueueLimit":-1,
-            "maxQueueEvent":null,
-            "noAgentEvent":null,
-            "specialAniEvent":null,
-            "gateClosedEvent":null,
-            "throttlingAniEvent":null,
-            "throttleCalls":0,
-            "throttleDays":0,
-            "monSched":"08002100",
-            "tueSched":"08002100",
-            "wedSched":"08002100",
-            "thuSched":"08002100",
-            "friSched":"08002100",
-            "satSched":"00000000",
-            "sunSched":"00000000",
-            "agentPopMessage":null,
-            "whisperMessage":null,
-            "onHoldMessage":null,
-            "blockedAniMessage":null,
-            "gatePriority":0,
-            "recordCall":1,
-            "stopRecordingOnTransfer":false,
-            "recordingInConference":false,
-            "revMatch":false,
-            "appUrl":null,
-            "backupAppUrl":null,
-            "surveyPopType":"FLASH",
-            "createdOn":"2020-05-18T19:22:12.000+0000",
-            "shortAbandonTime":30,
-            "shortCallTime":30,
-            "longCallTime":300,
-            "acceptTime":30,
-            "ttAccept":false,
-            "requeueType":"ADVANCED",
-            "slaTime":30,
-            "afterCallBaseState":null,
-            "hangupOnDisposition":false,
-            "wrapTime":8,
-            "endCallMessage":null,
-            "outboundCallerId":"ani",
-            "transferCallerId":null,
-            "manualCallerId":null,
-            "syncQueueWait":10,
-            "enableGlobalPhoneBook":false,
-            "fifoDisabled":true,
-            "pauseRecordingSec":30,
-            "isActive":true,
-            "observeDst":true,
-            "enableIvrTokens":false,
-            "dispositionTimeout":60,
-            "gateGroup":
-              {
-                "id":52676,
-                "description":"My Queue Group"
-              },
-            "afterCallState":null,
-            "postCallSoapService":null,
-            "dequeueSoapService":null,
-            "agentConnSoapService":null,
-            "postDispSoapService":null,
-            "transferTermSoapService":null,
-            "agentTermSoapService":null,
-            "callbackCampaign":null,
-            "abandonCampaign":null,
-            "resultFileDestination":null,
-            "survey":null,
-            "gatePriorityGroup":null,
-            "script":null,
-            "gateQueueEvents":null,
-            "agentGateAccess":null,
-            "gateOpen":true
-          }
-        }
-      ]
-    ```
+### Sample response
+
+```json
+{!> code-samples/routing/queue-events-response.json !}
+```

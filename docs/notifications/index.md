@@ -11,8 +11,8 @@ Workforce management (WFM) is a set of processes that maximizes efficiency in th
 
 Workforce management integration consists of two steps. Start by specifying the URL you want to send events to using the web interface.  Then read on to learn more about the data being sent to your endpoint.
 
-* [Configure the workforce management integration via the web interface](./wfm/configure-wfm)
-* [Learn more about what is sent in the payload](./wfm/payload-wfm)
+* [Configure the workforce management integration via the web interface](wfm/configure-wfm.md)
+* [Learn more about what is sent in the payload](wfm/payload-wfm.md)
 
 ## Introduction to Web Services
 
@@ -20,4 +20,4 @@ Web Services allow you to custom build the action you want to take upon an event
 
 Once you setup your Web Service, you'll need to trigger the web service from an inbound queue or outbound campaign. This is also known as [setting up webhooks](https://support.ringcentral.com/engagevoice/admin/voice-admin-set-up-webhooks.html).
 
-* [Learn how to setup web services and link them to queues or campaigns](./web-service)
+* [Learn how to setup web services and link them to queues or campaigns](web-service/index.md)

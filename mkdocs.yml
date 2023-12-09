@@ -1,6 +1,5 @@
 site_name: RingCentral RingCX Developer Guide
 site_url: https://engage-voice-api-docs.rtfd.org
-site_favicon: favicon.ico
 repo_url: https://github.com/ringcentral/engage-voice-api-docs
 docs_dir: docs
 theme:
@@ -92,8 +91,6 @@ nav:
   - 'Using the API':
     - 'Fundamentals':
       - 'Methods, endpoints and parameters': 'basics/uris.md'
-      #- 'App permissions': 'basics/permissions.md'
-      #- 'Rate limits': 'basics/rate-limits.md'
   - 'Authentication':
     - 'Overview': authentication/index.md
     - 'RingCX with RingCentral Token (default)': authentication/auth-ringcentral.md
@@ -105,7 +102,7 @@ nav:
       - 'Creating an Event': notifications/wfm/configure-wfm.md
       - 'Event Payload': notifications/wfm/payload-wfm.md
     - 'Web Services': notifications/web-service/index.md
-  - 'SDKs': sdks/index.md
-  - 'Embeddable': embeddable/get-started.md
+  - 'SDKs': sdks.md
+  - 'Embeddable': embeddable.md
   - 'Postman': postman.md
   #- 'Database Access': redshift-db.md

@@ -15,41 +15,40 @@ It takes a JSON request body with the following notable parameters. See the exam
 
 ### Request
 
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
-=== "HTTP"
-    ```bash
-    POST {BASE_URL}/api/v1/admin/accounts/{accountId}/reportsStreaming
-    Authorization: bearer <myAccessToken>
-    Content-Type: application/json;charset=UTF-8
+```bash
+POST {BASE_URL}/api/v1/admin/accounts/{accountId}/reportsStreaming
+Authorization: bearer <myAccessToken>
+Content-Type: application/json;charset=UTF-8
 
-    {
-      "reportId":null,
-      "destination":null,
-      "delimiter":"COMMA",
-      "reportType":"CASPER_REPORT",
-      "cciReport":true,
-      "reportTypeName":"Agent_Session_Report_Raw",
-      "reportCriteria":{
-        "rollupAgent":"",
-        "agentTeams":[],
-        "secureAgentGroupIds":"",
-        "agentGroupIds":[],
-        "secureAgentIds":"",
-        "agentIds":[],
-        "endTimestamp":"2020-08-26 23:59:00",
-        "startTimestamp":"2020-08-01 00:00:00",
-        "timezoneName":"US/Eastern",
-        "criteriaType":"CASPER_CRITERIA",
-        "reportName":"Agent_Session_Report_Raw",
-        "returnType":"CSV",
-        "schedule":{
-          "repeatOption":"ONCE"
-        },
-        "accountIds":[]
-      }
-    }
-    ```
+{
+  "reportId":null,
+  "destination":null,
+  "delimiter":"COMMA",
+  "reportType":"CASPER_REPORT",
+  "cciReport":true,
+  "reportTypeName":"Agent_Session_Report_Raw",
+  "reportCriteria":{
+    "rollupAgent":"",
+    "agentTeams":[],
+    "secureAgentGroupIds":"",
+    "agentGroupIds":[],
+    "secureAgentIds":"",
+    "agentIds":[],
+    "endTimestamp":"2020-08-26 23:59:00",
+    "startTimestamp":"2020-08-01 00:00:00",
+    "timezoneName":"US/Eastern",
+    "criteriaType":"CASPER_CRITERIA",
+    "reportName":"Agent_Session_Report_Raw",
+    "returnType":"CSV",
+    "schedule":{
+      "repeatOption":"ONCE"
+    },
+    "accountIds":[]
+  }
+}
+```
 
 ### Response
 

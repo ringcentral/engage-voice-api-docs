@@ -49,11 +49,11 @@ Two types of events are created by Workforce Management Integration; agent state
     | **`Engaged`** | An automatic state when an agent is on a call (off-hook) |
     | **`Working`** | An automatic state when an agent is on a call |
 
-    Additional custom states can also be created and for events to be triggered for custom states, the "Send All Agents States" must be selected. You can also limit the agent states to only login event by just selecting "Agent Login Events" and/or only logout events by selecting "Agent Logout Events". More state event details can be found in the [Agent State Information](../payload-wfm/#agent-state-information)
+    Additional custom states can also be created and for events to be triggered for custom states, the "Send All Agents States" must be selected. You can also limit the agent states to only login event by just selecting "Agent Login Events" and/or only logout events by selecting "Agent Logout Events". More state event details can be found in the [Agent State Information](payload-wfm.md#agent-state-information)
 
 -   **End Call**
 
-    At the end of a call, an event can be sent with call details including the agent who picked up the call, when the call was answered, how long the call duration was for, and a link to the call recording. A full list of call details can be found in the [End Call Events Information](../payload-wfm/#end-call-information)
+    At the end of a call, an event can be sent with call details including the agent who picked up the call, when the call was answered, how long the call duration was for, and a link to the call recording. A full list of call details can be found in the [End Call Events Information](payload-wfm.md#end-call-information)
 
 ## Adding Custom Headers
 

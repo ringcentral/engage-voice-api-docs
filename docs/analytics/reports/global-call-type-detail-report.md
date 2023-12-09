@@ -3,7 +3,7 @@
 Call detail records (CDRs) and recordings are available via the Global Call Type Detail (GCTD) Report which provides complete real-time data for all calls in RingCX. When recordings are available, a media URL is provided in the call detail record.
 
 !!! alert "Please Note"
-    Calls will appear in this report a few minutes after a call ends or agent dispositions, whichever comes last. Live calls are not included in this report. If you wish to retrieve information on live calls, see the [Active Calls API](../../../dialing/active-calls).
+    Calls will appear in this report a few minutes after a call ends or agent dispositions, whichever comes last. Live calls are not included in this report. If you wish to retrieve information on live calls, see the [Active Calls API](../../dialing/active-calls/index.md).
 
 ### Primary Parameters
 
@@ -17,30 +17,29 @@ The call detail report has a number of request properties that allow filtering r
 
 ###  Request
 
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
-=== "HTTP"
-    ```bash
-    POST /api/v1/admin/accounts/{accountId}/reportsStreaming
-    Authorization: bearer <myAccessToken>
-    Content-Type: application/json;charset=UTF-8
-    Accept: application/json
+```http
+POST /api/v1/admin/accounts/{accountId}/reportsStreaming
+Authorization: bearer <myAccessToken>
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
 
-    {
-    	"reportType":"GLOBAL_CALL_TYPE_DELIMITED",
-    	"reportCriteria":{
-    		"criteriaType":"GLOBAL_CALL_TYPE_CRITERIA",
-    		"startDate":"2020-04-22T00:00:00.000-0000",
-    		"containGates":true,
-    		"containCampaigns":true,
-    		"containIvrStudios":true,
-    		"containCloudProfiles":true,
-    		"containTracNumbers":true,
-    		"containAgents":true,
-    		"includeNoAnswers":false
-    	}
-    }
-    ```
+{
+	"reportType":"GLOBAL_CALL_TYPE_DELIMITED",
+	"reportCriteria":{
+		"criteriaType":"GLOBAL_CALL_TYPE_CRITERIA",
+		"startDate":"2020-04-22T00:00:00.000-0000",
+		"containGates":true,
+		"containCampaigns":true,
+		"containIvrStudios":true,
+		"containCloudProfiles":true,
+		"containTracNumbers":true,
+		"containAgents":true,
+		"includeNoAnswers":false
+	}
+}
+```
 
 ### Response
 
@@ -119,11 +118,13 @@ The call recording URLs can be secured using basic auth or accessible anonymousl
 An example recording media request follows:
 
 === "HTTP"
+
     ```http
     GET https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?... \
     &file=.../11111111111111111111-1.WAV
     Authorization: Basic <base64-encoded-username-password>
     ```
+
 === "cURL"
     ```bash
     > curl https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?... \

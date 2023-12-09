@@ -3,7 +3,7 @@
 !!!important
     Please work with your RingCentral representative to activate Call Streaming service for your organization.
 
-**Call Streaming** runs alongside [Call Recording](./../../call-recording). It streams real-time stereo audio to your WebSocket Secure(WSS) server, which can then be used for services like Speech Analysis etc.
+**Call Streaming** runs alongside [Call Recording](../call-recording/index.md). It streams real-time stereo audio to your WebSocket Secure(WSS) server, which can then be used for services like Speech Analysis etc.
 
 **Call Streaming** requires a WSS server built and hosted by you. The server is to receive audio streams for further processing. [Quick start guide](#quick-start-guide) is provided below.
 
@@ -83,7 +83,7 @@ if __name__ == "__main__":
 
 For our server to know where to send audio streams to, we will need a streaming profile.
 
-Let's test with a [Queue](../../../routing/queues/queues)(incoming call streams). Here we will need:
+Let's test with a [Queue](../../routing/queues/queues.md)(incoming call streams). Here we will need:
 
 - `productId`: the id for your `Queue`
 - `mainAccountId`: get it from RingCX Admin Console -> Settings -> Accounts -> main account id
@@ -93,7 +93,7 @@ Let's test with a [Queue](../../../routing/queues/queues)(incoming call streams)
 
 Call Streaming operates per **Queue(inbound calls) or Campaign(outbound calls)**. The streaming service will be activated upon the creation of a streaming profile. As shown by the flow chart above, audio streams will be sent to your `{streamingUrl}` where your WebSocket server can do further processing.
 
-To create a streaming profile, do `HTTP POST` request to `{PLATFORM_BASE_URL}/media-distributor/product` (be sure to set [PLATFORM_BASE_URL](../../../basics/uris/#current-host) with `Bearer Auth Token` from [authorizationToken](../../../authentication/auth-ringcentral)).
+To create a streaming profile, do `HTTP POST` request to `{PLATFORM_BASE_URL}/media-distributor/product` (be sure to set [PLATFORM_BASE_URL](../../basics/uris.md#current-host) with `Bearer Auth Token` from [authorizationToken](../../authentication/auth-ringcentral.md)).
 
 | API Property | Description |
 |-|-|

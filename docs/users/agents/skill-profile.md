@@ -4,19 +4,19 @@
 
 Depending on your contact center, there may be times that you’d like the system to route certain types of calls to specific agents with special skills. If this is the case, you can assign these agents custom skills by creating skill profiles. Skill profiles are the custom skills that you can create for each agent to tell the system to route certain calls to the agents you’ve assigned these skills to.
 
-You can create skill profiles using the [Agents](../agents) endpoint, defining the agent you wish to assign that skill to, and then creating the Skill Profile for that agent.
+You can create skill profiles using the [Agents](../agents/index.md) endpoint, defining the agent you wish to assign that skill to, and then creating the Skill Profile for that agent.
 
-Skill profiles work in conjunction with [Group Skills](../../../routing/queues/group-skills), which are created at the queue group level. Creating group skills is the first step in the process of assigning skills to your agents. After you create group skills, you’ll also need to add these skills (via [Queue Events](../../../routing/queues/queue-events)) to any queue that you assign these agents to. Once you have completed these two steps, you can assign these skills to the desired agents.
+Skill profiles work in conjunction with [Group Skills](../../routing/queues/group-skills.md), which are created at the queue group level. Creating group skills is the first step in the process of assigning skills to your agents. After you create group skills, you’ll also need to add these skills (via [Queue Events](../../routing/queues/queue-events.md)) to any queue that you assign these agents to. Once you have completed these two steps, you can assign these skills to the desired agents.
 
 Let’s say, for example, you have Spanish-speaking customers calling into your contact center, and you’d like to designate certain agents to take these calls. You can create a group skill that you add to the queues of your choice, and then assign those skills to any bilingual or Spanish-speaking agents assigned to those queues.
 
 In the sections below, we’ll review each step you should take to create a skill profile, which includes creating a group skill, adding it to a queue, and then finally assigning the skill to an agent.
 
 ## Creating a group skill
-As we discussed above, before you can create a skill profile, you must first create a group skill. In the example below, we’ll show you how to create a group skill; however, if you’d like to learn more about group skills and the settings you’ll find in that part of the platform, visit [Group Skills](../../../routing/queues/group-skills).
+As we discussed above, before you can create a skill profile, you must first create a group skill. In the example below, we’ll show you how to create a group skill; however, if you’d like to learn more about group skills and the settings you’ll find in that part of the platform, visit [Group Skills](../../routing/queues/group-skills.md).
 
 ### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "HTTP"
     ```html
@@ -66,9 +66,9 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 ```
 
 ## Adding group skills to a queue event
-Once you’ve created a group skill, you can assign that skill to a [Queue](../../../routing/queues/queues), so long as the queue has been created under the queue group in which the group skill was created.
+Once you’ve created a group skill, you can assign that skill to a [Queue](../../routing/queues/queues.md), so long as the queue has been created under the queue group in which the group skill was created.
 
-In the example below, we’ll show you how you can add this group skill to a queue via the Queue Events setting, but if you’d like to learn more about Queue Events, including how to create a queue event, please visit [Queue Events](../../../routing/queues/queue-events).
+In the example below, we’ll show you how you can add this group skill to a queue via the Queue Events setting, but if you’d like to learn more about Queue Events, including how to create a queue event, please visit [Queue Events](../../routing/queues/queue-events.md).
 
 !!! alert "Please Note"
     If you do not assign this skill to the "Route to Agent" event type, the system will be unable to successfully route the skill-specific calls
@@ -86,7 +86,7 @@ Gets a list of group skills for the Queue Group under this account.
   `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills`
 
 ### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "HTTP"
     ```html hl_lines="7"
@@ -213,7 +213,7 @@ Only `profileName` is a required parameter to create a skill profile. All other 
 | **`chatGroupSkills`** | Optional | Chat Group Skills | *empty* | List of Chat Group Skills to assign to this Skill Profile. |
 
 ### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "HTTP"
     ```html

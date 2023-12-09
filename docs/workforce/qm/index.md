@@ -8,11 +8,11 @@ Tracking your agents in real time is important for workforce management, but kno
 
 ## Call Events
 
-When a call is ended, a call event is triggered so you can know that a call is ready for processing. Follow the guide for [Configuring Workforce Management](../../notifications/wfm/configure-wfm.md) and make sure to select `End Call Events`. See the details of an [End Call Event](../../notifications/wfm/payload-wfm/#end-call-events) payload that is sent to your endpoint.
+When a call is ended, a call event is triggered so you can know that a call is ready for processing. Follow the guide for [Configuring Workforce Management](../../notifications/wfm/configure-wfm.md) and make sure to select `End Call Events`. See the details of an [End Call Event](../../notifications/wfm/payload-wfm.md#end-call-events) payload that is sent to your endpoint.
 
 ## Call Details and Recordings
 
-Sometimes, you may miss an event due to server issues or connection issues.  In these cases, you can reconcile your call events with the [Call Details and Recordings](../../analytics/reports/global-call-type-detail-report/) report. All the call details are available in this historical report including the [single channel call recording](../../analytics/reports/global-call-type-detail-report/#call-recordings).
+Sometimes, you may miss an event due to server issues or connection issues.  In these cases, you can reconcile your call events with the [Call Details and Recordings](../../analytics/reports/global-call-type-detail-report.md) report. All the call details are available in this historical report including the [single channel call recording](../../analytics/reports/global-call-type-detail-report.md#call-recordings).
 
 ## Agent Reports
 
@@ -20,7 +20,7 @@ Not all agent performance can be tracked via events. Some details like ring time
 
 ## Call Recordings
 
-There are two types of [call recordings](../call-recording): single channel (mono) or dual channel (also known as Agent Recordings). These recording links can be sent as events, or retrieved from reports.
+There are two types of [call recordings](../call-recording/index.md): single channel (mono) or dual channel (also known as Agent Recordings). These recording links can be sent as events, or retrieved from reports.
 
 !!! important
     This recording is only available for customer accounts that are manually activated. Please work with your RingCentral representative to activate dual channel recordings for the account you wish to gather dual channel call recordings from.

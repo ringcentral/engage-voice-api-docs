@@ -23,6 +23,7 @@ Protocol, host and port together constitute the main entry point to access the A
 There are two types or networking protocols typically available in REST: HTTP and HTTPS.  Note that for security reasons, connection is allowed using only HTTPS protocol to the default HTTPS port 443, so the port can be omitted in the URI.
 
 ### Current Host
+
 RingCX is using the host server, and is accessible on `https://engage.ringcentral.com`.
 
 * Authentication path
@@ -86,12 +87,15 @@ In the RingCX API, as in any REST API, the resources are accessible by standard 
 Let's consider a simple example of a `GET` method — retrieving details of the user you are currently logged in as from the RingCX REST API.
 
 === "Request"
+
     ```http
     GET /api/v1/userDetail/self
     Accept: application/json
     Authorization: Bearer {authToken}
     ```
+
 === "Response"
+
     ```http
     HTTP/1.1 200 OK
     Content-Type: application/json

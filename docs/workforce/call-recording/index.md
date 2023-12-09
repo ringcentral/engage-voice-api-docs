@@ -4,7 +4,7 @@ Call recordings can be retrieved as single channel (mono) recordings or as dual 
 
 ### Single Channel Recordings (Mono)
 
-Call recordings are the audio files of the call. You can retrieve single channel (mono) call recordings using the [End Call Event](../../notifications/wfm/payload-wfm/#end-call-events). If you miss the event or wish to just manually retrieve the call details, you can also use the [Global Call Type Detail](../../analytics/reports/global-call-type-detail-report#call-recordings) report.
+Call recordings are the audio files of the call. You can retrieve single channel (mono) call recordings using the [End Call Event](../../notifications/wfm/payload-wfm.md#end-call-events). If you miss the event or wish to just manually retrieve the call details, you can also use the [Global Call Type Detail](../../analytics/reports/global-call-type-detail-report.md#call-recordings) report.
 
 If a call is answered and recorded, a call recording link will appear in the event, or as part of the report, under `recording_url`. Use this link to retrieve the call recording.
 

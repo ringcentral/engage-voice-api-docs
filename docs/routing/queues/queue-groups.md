@@ -1,6 +1,6 @@
 # About Queue Groups
 
-Queue Groups are containers for one or more groups. Queue Groups must be created before creating a queue for routing.  Once a Queue Group is created, and you set the Group Skill, create your [Queues](../queues) in the Queue Group.
+Queue Groups are containers for one or more groups. Queue Groups must be created before creating a queue for routing.  Once a Queue Group is created, and you set the Group Skill, create your [Queues](queues.md) in the Queue Group.
 
 ## Core Concepts
 
@@ -27,7 +27,7 @@ Only `groupName` is a required parameter to create a Queue Group. All other para
 
 ### Code samples
 
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "Javascript"
 
@@ -78,7 +78,7 @@ The following parameters are optional.
 | **`maxRows`** | Integer | Hidden | ?? | You can specify the maximum number of Queue Groups to return in a single call. |
 
 ### Code samples
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "Javascript"
 
@@ -118,7 +118,7 @@ Retrieve details for a single Queue Group using the `gateGroups` endpoint.
 
 ### Code samples
 
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "Javascript"
 
@@ -151,7 +151,7 @@ Update the details for a single Queue Group using the `gateGroups` endpoint. Sev
 
 ### Code samples
 
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 	
 === "Javascript"
 
@@ -200,7 +200,7 @@ Content-Type: application/json
 
 Delete a single Queue Group using the `gateGroups` endpoint.
 
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 #### Sample request
 

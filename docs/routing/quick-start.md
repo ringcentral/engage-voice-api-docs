@@ -17,7 +17,6 @@ The first thing we need to do is create an app in the RingCentral Developer Port
 <li>Under "Auth" select "JWT auth flow"
 <li>Under "Security" add the following permissions:
   <ul>
-    <li>SMS</li>
     <li>ReadAccounts</li>
   </ul>
 </li>

@@ -10,5 +10,5 @@ However, there are instances where you need to invoke an endpoint, or you need t
 
 In the following sections, we'll show you how to use the following nodes from a developer's point of view.
 
-* [WWW node](./www-node)
-* [Scripting node](./scripting-node)
+* [WWW node](www-node.md)
+* [Scripting node](scripting-node.md)

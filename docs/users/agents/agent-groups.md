@@ -17,7 +17,7 @@ Only `groupName` is a required parameter to create a skill profile. All other pa
 
 
 ### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "HTTP"
 
@@ -35,7 +35,7 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 To retrieve a list of Agent Groups, use the `agentGroups` API endpoint.
 
 ### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "Node JS"
 
@@ -60,7 +60,7 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 To retrieve a single Agent Group, use the `agentGroups` API endpoint with a specific agent group ID.
 
 ### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "HTTP"
     ```html
@@ -86,7 +86,7 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 To Update an Agent Group's name, get the Agent Group's JSON object, modify the `groupName` and then `PUT` the JSON to back the the Agent Group's endpoint:
 
 ### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "HTTP"
     ```html
@@ -194,7 +194,8 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 ## Delete Agent Group
 
 ### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+
 === "HTTP"
     ```html
     DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}

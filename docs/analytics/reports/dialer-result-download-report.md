@@ -3,7 +3,7 @@
 The Dialer Result Download provides data on all calls matching the search criteria. Administrators use this report to get information on specific agents and call/chat activities including agent notes.
 
 !!! alert "Please Note"
-    Calls will appear in this report a few minutes after a call ends or agent dispositions, whichever comes last. Live calls are not included in this report. If you wish to retrieve information on live calls, see the [Active Calls API](../../../dialing/active-calls).
+    Calls will appear in this report a few minutes after a call ends or agent dispositions, whichever comes last. Live calls are not included in this report. If you wish to retrieve information on live calls, see the [Active Calls API](../../dialing/active-calls/index.md).
 
 ### Primary Parameters
 
@@ -20,7 +20,7 @@ Criteria
 | **`reportCriteria.includeXferData`** | Set to `true` to download all transfer data (fields that start with ‘transfer_’). |
 | **`reportCriteria.includeSpeedToLead`** | Set to `true` to download all speed to lead data (fields that start with ‘speed_to_lead_’). |
 | **`reportCriteria.dialedLeadsReportType`** | set to `ALL_LEADS` to retrieve all the leads, or `ALL_PASSES` to just retrieve passes for each lead, or `LAST_PASSES` to retrieve lead's last pass only. |
-| **`reportCriteria.systemDisposition`** | a predefined set of disposition states. Please review the list of available [disposition types](../dialer-result-download-report/#system-disposition). |
+| **`reportCriteria.systemDisposition`** | a predefined set of disposition states. Please review the list of available [disposition types](#system-disposition). |
 Schedule
 | **`reportCriteria.schedule.repeatOption`** | set to `ONCE` to only run this report with this criteria a single time |
 | **`reportCriteria.schedule.scheduleTimezoneName`** | Use the "TZ database name" from the [tz database](https://en.wikipedia.org/wiki/Tz_database). For example, `US/Pacific`. |
@@ -28,35 +28,36 @@ Schedule
 
 ###  Request
 
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 #### HTTP
-```bash
-  POST /api/v1/admin/accounts/{accountId}/reportsStreaming
-  Authorization: bearer <myAccessToken>
-  Content-Type: application/json;charset=UTF-8
-  Accept: application/json
-```
-```json
-  {
-  	"reportType":"DIALER_RESULT_DOWNLOAD",
-  	"reportCriteria":{
-  		"criteriaType":"DIALER_RESULT_DOWNLOAD_CRITERIA",
-  		"startDate":"2020-04-22T00:00:00.000-0000",
-      "includeAuxData":true,
-      "includeXferData":true,
-      "includeSpeedToLead":true,
-      "dialedLeadsReportType":"ALL",
-      "systemDisposition:":"ALL",
-      "schedule": {
-        "repeatOption":"ONCE",
-        "scheduleTimezoneName":"US/Eastern"
-      }
-  	}
-  }
+
+```http
+POST /api/v1/admin/accounts/{accountId}/reportsStreaming
+Authorization: bearer <myAccessToken>
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+
+{
+	"reportType":"DIALER_RESULT_DOWNLOAD",
+	"reportCriteria":{
+		"criteriaType":"DIALER_RESULT_DOWNLOAD_CRITERIA",
+		"startDate":"2020-04-22T00:00:00.000-0000",
+    "includeAuxData":true,
+    "includeXferData":true,
+    "includeSpeedToLead":true,
+    "dialedLeadsReportType":"ALL",
+    "systemDisposition:":"ALL",
+    "schedule": {
+      "repeatOption":"ONCE",
+      "scheduleTimezoneName":"US/Eastern"
+    }
+	}
+}
 ```
 
 ### System Disposition
+
 | API Property | Description |
 |-|-|
 | **`ALL`** | returns all dialed calls regardless of disposition type |
@@ -99,7 +100,7 @@ The dialer result report returns data in a CSV format like the following.
 | **`state`** | State where the lead resides |
 | **`zip`** | Zip code where the lead resides |
 | **`lead_passes`** | The number of passes the lead has accured so far |
-| **`pass_disposition`** | The system disposition for the pass. See [system disposition](../dialer-result-download-report/#system-disposition) for disposition types  |
+| **`pass_disposition`** | The system disposition for the pass. See [system disposition](#system-disposition) for disposition types  |
 | **`agent_disposition`** | The disposition created by the agent for this pass |
 | **`call_start`** | The date and time the call began |
 | **`duration`** | The duration of the call (in minutes) |

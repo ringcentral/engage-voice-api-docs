@@ -26,9 +26,10 @@ For the request body (shown as "Body Content" in the UI), we set the parameters 
 
 With the following headers:
 
-`Content-Type: application/x-www-form-urlencoded`
-
-`Authorization: Basic {yourEncodedClientIdandClientSecret}`
+```http
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic {yourEncodedClientIdandClientSecret}
+```
 
 Where `yourEncodeClientIdandClientSecret` is a Base64 encoded string of your Client ID and Client Secret with a colon (`:`) delimiter in between.
 
@@ -36,4 +37,4 @@ Where `yourEncodeClientIdandClientSecret` is a Base64 encoded string of your Cli
 
 <img class="img-fluid" width="799" src="../../../images/ivr-www-properties-headers.png">
 
-Click "OK" and you've created your own POST request to authenticate with our RingCentral Office platform. The next step is to receive and process the response. For that, we'll need to use the [Scripting node](../scripting-node) to parse with JavaScript.
+Click "OK" and you've created your own POST request to authenticate with our RingCentral Office platform. The next step is to receive and process the response. For that, we'll need to use the [Scripting node](scripting-node.md) to parse with JavaScript.

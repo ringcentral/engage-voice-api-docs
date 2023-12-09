@@ -16,7 +16,7 @@ Active calls can be listed based on a criteria called "Product". Each product mu
 | **`maxRows`** | Max number of items per page. |
 
 ### Request
-Be sure to set the proper [BASE_URL](../../basics/uris/#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 ```http
 GET {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/list?product=ACCOUNT&productId=12440001
@@ -54,7 +54,7 @@ Instead of manually dialing from a phone dial pad, an outbound call from an agen
 | **`callerId`** | The phone number of the caller which can be seen by a callee. |
 
 ### Request
-Be sure to set the proper [BASE_URL](../../basics/uris/#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 ```http
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/createManualAgentCall?username=some.name%40abc.com&destination=6501234567&ringDuration=5&callerId=1234567890
@@ -80,7 +80,7 @@ The following value lists and APIs are used to retrieve predefined values for ce
 | **`COACHING`** | A supervisor can listen to the agent/customer conversation, and be able to talk (whisper) to an agent only. |
 
 ### Request
-Be sure to set the proper [BASE_URL](../../basics/uris/#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 ```http
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/addSessionToCall?destination=+15554150123&sessionType=MONITOR
@@ -99,7 +99,7 @@ Sets the call disposition for either INBOUND or OUTBOUND calls and releases the 
 | **`notes`** | Notes of this call disposition |
 
 ### Request
-Be sure to set the proper [BASE_URL](../../basics/uris/#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 ```http
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/dispositionCall
@@ -113,7 +113,7 @@ POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/dispositionC
 As the name implies, an active call can be terminated using this API.
 
 ### Request
-Be sure to set the proper [BASE_URL](../../basics/uris/#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 ```http
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/hangupCall
@@ -129,7 +129,7 @@ Remove a third party from a call. This will not terminate an active call.
 | **`phone`** | the phone number of a supervisor |
 
 ### Request
-Be sure to set the proper [BASE_URL](../../basics/uris/#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 ```http
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/hangupSession?phone=6501234567
@@ -145,7 +145,7 @@ As the name implies, an active call recording can be easily toggled on or off us
 | **`record`** | 'true' for start recording and 'false' for stop recording |
 
 ### Request
-Be sure to set the proper [BASE_URL](../../basics/uris/#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 ```http
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/toggleCallRecording?record=true

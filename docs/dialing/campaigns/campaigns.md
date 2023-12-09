@@ -11,10 +11,10 @@ Campaigns are created for a specific period of time so a start and end date must
 Caller ID must be an accurate number for this account. This should be the number that leads can call to reach a customer service representative. The customer service representative must be able to put the caller on your internal DNC list. If the Caller ID number goes to an automatic responder, the responder must also provide the lead with a way to request placement on your DNC list, either by leaving a voicemail or via a touchtone entry.
 
 ## Prerequisite
-Once you’ve created and configured your [dial group](../dial-groups), you can begin creating campaigns within that group to segment and configure your outgoing calls. Remember that all the campaigns within any given dial group will use the dialing mode you selected in your dial group configuration settings.
+Once you’ve created and configured your [dial group](dial-groups.md), you can begin creating campaigns within that group to segment and configure your outgoing calls. Remember that all the campaigns within any given dial group will use the dialing mode you selected in your dial group configuration settings.
 
 ## Create Campaigns
-To create a campaign, first select your desired [dial group](../dial-groups) and then create your campaign with the following details.
+To create a campaign, first select your desired [dial group](dial-groups.md) and then create your campaign with the following details.
 
 ### Primary Parameters
 Your campaign must have name, start and end date, and valid caller ID. All other parameters are optional.
@@ -24,7 +24,7 @@ Your campaign must have name, start and end date, and valid caller ID. All other
 | **`isActive`** | Optional | Active | *unchecked* | Make the campaign active. `1` means active, `0` means inactive, and `2` means agent callbacks only. |
 | **`campaignName`** | Required | Name | *empty* | Give this campaign a name. |
 | **`campaignDesc`** | Optional | Description | *empty* | Set a short description for the new campaign. |
-| **`campaignPriority`** | Optional | Campaign Priority | Priority 1 - Average | Set a short description for the new campaign. Use [Campaign Priority](./#campaign-priority) to retrieve valid values |
+| **`campaignPriority`** | Optional | Campaign Priority | Priority 1 - Average | Set a short description for the new campaign. Use [Campaign Priority](#campaign-priority) to retrieve valid values |
 | **`startDate`** | Required | Start Date | *empty* | Set a start date for this campaign in ISO-8601 format such as: `2020-04-22T00:00:00.000-0000`. |
 | **`endDate`** | Required | End Date | *empty* | Set an end date for this campaign in ISO-8601 format such as: `2020-04-22T00:00:00.000-0000`. |
 | **Dialer Settings** | | | | |
@@ -33,7 +33,7 @@ Your campaign must have name, start and end date, and valid caller ID. All other
 | **`callerId`** | Required | Caller Id | *empty* | Enter the Caller ID you wish to display to leads contacted via this campaign. This should be the number that leads can call to reach a customer service representative. The customer service representative must be able to put the caller on your internal DNC list. If the Caller ID number goes to an automatic responder, the responder must also provide the lead with a way to request placement on your DNC list, either by leaving a voicemail or via a touchtone entry. |
 | **`transferCallerId`** | Optional | Transfer Override Caller ID | *empty* | Enter a ten-digit phone number here (format: ##########) that the system can use to override the Caller ID number entered above if an agent transfers a lead from this campaign to another number (whether via manual transfer or disposition-based transfer). |
 | **`scrubDisconnectNoanswer`** | Optional | Disconnect Scrubbing | 0 | This setting refers to a third-party integration that looks up system dispositions of ‘no-answer’ and determines whether they’re actually no-answers or if they’re simply disconnects. Please note that disconnect scrubbing is only performed if the first pass results in a no-answer. `0` means 'No, Disabled', and `1` means 'Yes, Enabled'. |
-| **`dialLoadedOrder`** | Optional | Dial Leads In Order Loaded | Natural Sort | This setting allows you to choose the order in which leads will be dialed (we recommend you do NOT dial leads in the order in which they were loaded). Please note that before the system defaults to the order you select below, it will first respect features and settings like Quota Management, Timezone and Dial Zone Management, Custom Campaign Criteria, Lead List Priority, and Priority Requeue to determine which leads are available to dial. Once all relevant conditions have been satisfied, the system will then dial leads in the order of your choice. Use [Dial Lead in Order Loaded](./#dial-lead-in-order-loaded) to determine valid values |
+| **`dialLoadedOrder`** | Optional | Dial Leads In Order Loaded | Natural Sort | This setting allows you to choose the order in which leads will be dialed (we recommend you do NOT dial leads in the order in which they were loaded). Please note that before the system defaults to the order you select below, it will first respect features and settings like Quota Management, Timezone and Dial Zone Management, Custom Campaign Criteria, Lead List Priority, and Priority Requeue to determine which leads are available to dial. Once all relevant conditions have been satisfied, the system will then dial leads in the order of your choice. Use [Dial Lead in Order Loaded](#dial-lead-in-order-loaded) to determine valid values |
 | **`customDialZoneGroup`** | Optional | Custom Dial Zone Group | *empty* | Select a custom dial zone group from the dropdown if you wish to map custom timezone values for leads on this campaign. Please note that this is an advanced feature. |
 | **`trackSpeedToLead`** | Optional | Track Speed To Lead | *unchecked* | This option allows you to track (via reporting) how much time passes between the time the system receives a new lead and when it actually dials that lead. |
 | **`machineDetect`** | Optional | Voicemail Detection Enabled | *unchecked* | Check this box to direct the system not to connect to an agent if an answering machine is detected. |
@@ -65,10 +65,10 @@ The parameter `dialLoadedOrder` can take on the following values:
 | **`1`** | Natural Sort, Randomized | This option dials leads with the lowest pass count in random order. |
 | **`2`** | Yes — Ascending Order (Not Recommended!) | This option dials leads from first to last based on the order in which they were loaded. |
 | **`3`** | Yes — Descending Order (Not Recommended!) | This option dials leads from last to first based on the order in which they were loaded. Please note: We recommend against dialing leads in the order loaded because lead lists usually contain phone numbers from the same geographical area. If thousands of agents suddenly start dialing into the same geographical area, they can overwhelm the associated telecommunications central office, causing network disruptions. |
-| **`4`** | Using Lead Priority | This option dials leads according to the priority indicated via the Loaded Lists menu option. Please note that the system assigns all leads a default priority number of 999. You can add a Lead Priority column to your lead lists and use it to assign each lead a priority number. When you upload the list via Loaded Lists, be sure to use the custom list mapping setting to map that column to the system’s Lead Priority destination. Learn more about loading [lead lists](../../leads/bulk-import)|
+| **`4`** | Using Lead Priority | This option dials leads according to the priority indicated via the Loaded Lists menu option. Please note that the system assigns all leads a default priority number of 999. You can add a Lead Priority column to your lead lists and use it to assign each lead a priority number. When you upload the list via Loaded Lists, be sure to use the custom list mapping setting to map that column to the system’s Lead Priority destination. Learn more about loading [lead lists](../leads/bulk-import.md)|
 
 ### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "HTTP"
     ```html
@@ -344,7 +344,7 @@ Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-paramet
 ```
 
 ## Clone Campaigns
-To create a copy of a campaign (clone), first select your desired [dial group](../dial-groups) and then clone your campaign with the following details.
+To create a copy of a campaign (clone), first select your desired [dial group](dial-groups.md) and then clone your campaign with the following details.
 
 ### Primary Parameters
 Your campaign must have name, start and end date, and valid caller ID. All other parameters are optional.
@@ -353,14 +353,14 @@ Your campaign must have name, start and end date, and valid caller ID. All other
 |-|-|
 | **Path Parameters** | |
 | **`accountId`** | The unique account identifier. |
-| **`dialGroupId`** | The unique [Dial Group](../dial-groups) identifier. |
-| **`campaignId`** | The unique [Campaign](../campaigns#response) identifier. |
+| **`dialGroupId`** | The unique [Dial Group](dial-groups.md) identifier. |
+| **`campaignId`** | The unique [Campaign](campaigns.md#response) identifier. |
 | **Query Parameters** | |
 | **`newCampaignName`** | A new name for this clone of the campaign. Use `+` for spaces. |
 | **`newCountryCode`** | The country for this campaign, with a default of `USA`. |
 
 ### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "HTTP"
     ```html

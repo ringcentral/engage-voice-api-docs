@@ -3,7 +3,7 @@
 To access RingCX APIs without a corresponding RingCentral MVP account, you can directly login to the RingCX platform by specifying the platform you reside on.
 
 !!! hint "All New Accounts Start with MVP"
-    For accounts with single-sign on to RingCentral MVP, the method to [exchange access tokens](../auth-ringcentral/#retrieve-ringcentral-access-token) is the default.
+    For accounts with single-sign on to RingCentral MVP, the method to [exchange access tokens](auth-ringcentral.md#retrieve-ringcentral-access-token) is the default.
 
 !!! alert "Also Note"
     If you do not know which platform your account resides on, please contact your Customer Success Manager (CSM) and ask for your Platform ID.
@@ -21,11 +21,11 @@ Here is an example using cURL:
 
 `curl -X POST 'https://engage.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platform ID}'`
 
-In the response, you will see a very long string for an `accessToken`. You'll want to copy and save this for your next call.  You will also see a shorter string for a `refreshToken`. Save this token as well to [refresh your access token](../auth-engage/#refresh-ringcentral-engage-access-token) when the access token expires.
+In the response, you will see a very long string for an `accessToken`. You'll want to copy and save this for your next call.  You will also see a shorter string for a `refreshToken`. Save this token as well to [refresh your access token](#refresh-ringcentral-engage-access-token) when the access token expires.
 
 ## Generate a Permanent API Token
 
-In specific instances, a permanent API token is desired (for example, calling an API from the IVR). You can create permanent API tokens for this instance. Every time you run the method below, a new API token will be created and returned. You can also [retrieve a list](../auth-engage/#list-all-personal-api-tokens) of permanent API tokens to see which tokens are still working.
+In specific instances, a permanent API token is desired (for example, calling an API from the IVR). You can create permanent API tokens for this instance. Every time you run the method below, a new API token will be created and returned. You can also [retrieve a list](#list-all-personal-api-tokens) of permanent API tokens to see which tokens are still working.
 
 ### Request
 ```http
@@ -59,7 +59,7 @@ Here is an example using cURL:
 
 `curl -X GET https://engage.ringcentral.com/voice/api/v1/admin/token -H "X-Auth-Token: {apiToken}"`
 
-The `apiToken` in the `X-Auth-Token` header can be a token generated using the user credentials in the [step above](../auth-engage/#generate-a-permanent-api-token) or an existing API token for the user, or even a new access token from just logging in.
+The `apiToken` in the `X-Auth-Token` header can be a token generated using the user credentials in the [step above](#generate-a-permanent-api-token) or an existing API token for the user, or even a new access token from just logging in.
 
 The response will be an API token list that looks something like:
 
@@ -76,13 +76,22 @@ The response will be an API token list that looks something like:
 
 If you are done with an API Token and no longer need it, or you feel it may have been compromised, you can delete an existing token as follows.
 
-```http
-DELETE https://engage.ringcentral.com/voice/api/v1/admin/token/{apiToken}
+=== "X-Auth-Token"
 
-X-Auth-Token: {apiToken}
-or
-Authorization: Bearer <accessToken>
-```
+    ```http
+    DELETE https://engage.ringcentral.com/voice/api/v1/admin/token/{apiToken}
+
+    X-Auth-Token: {apiToken}
+    ```
+
+=== "Authorization header"
+
+    ```http
+    DELETE https://engage.ringcentral.com/voice/api/v1/admin/token/{apiToken}
+
+    Authorization: Bearer <accessToken>
+    ```
+
 
 Here is an example cURL command:
 

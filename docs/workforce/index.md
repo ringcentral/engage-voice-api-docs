@@ -4,7 +4,7 @@ Workforce Optimization (WFO) is a business strategy focused on balancing custome
 
 We break down Workforce Optimization into the following topics:
 
-* [Workforce Management](../notifications/wfm/configure-wfm)
-* [Quality Management](./qm)
-* [Call Recordings](./call-recording)
-* [Call Streaming](./call-streaming/getting-started)
+* [Workforce Management](../notifications/wfm/configure-wfm.md)
+* [Quality Management](./qm/index.md)
+* [Call Recordings](./call-recording/index.md)
+* [Call Streaming](./call-streaming/getting-started.md)

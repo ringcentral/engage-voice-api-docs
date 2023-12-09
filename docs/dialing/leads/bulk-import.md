@@ -3,7 +3,7 @@
 The RingCX API allows you to load one or multiple leads at a time. You can also load leads for immediate dialing at the top of the dialer cache or in normal priority.
 
 !!! alert "Please Note"
-    To enumerate a list of Campaigns for the `campaignId` path property, please review section [Enumerating Campaigns](./#enumerating-campaigns) below.
+    To enumerate a list of Campaigns for the `campaignId` path property, please review section [Enumerating Campaigns](#enumerating-campaigns) below.
 
 The JSON body consists of a set of options along with an array of leads in the `uploadLeads` property
 
@@ -43,7 +43,7 @@ To upload leads for a campaign, we will need a campaign Id. As campaigns are mem
 ## Enumerating Campaigns and Import Leads
 
 ### Request
-Be sure to set the proper [BASE_URL](../../../basics/uris/#resources-and-parameters) and [authorization header](../../../authentication/auth-ringcentral) for your deployment.
+Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
 === "HTTP"
     ```http
