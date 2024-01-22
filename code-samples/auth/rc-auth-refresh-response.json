@@ -1,0 +1,25 @@
+{
+  "refreshToken":"<rcRingCXRefreshToken>", //Save this as it will be new.
+  "accessToken":"<rcRingCXAccessToken>",
+  "tokenType":"Bearer",
+  "agentDetails":[
+    {
+      "agentId":111111,
+      "firstName":"John",
+      "lastName":"Wang",
+      "email":"john.wang@example.com",
+      "username":"john.wang@example.com",
+      "agentType":"AGENT",
+      "rcUserId":222222,
+      "accountId":"333333",
+      "accountName":"RingForce",
+      "agentGroupId":null,
+      "allowLoginControl":true,
+      "allowLoginUpdates":true
+    }
+  ],
+  "adminId":1111,
+  "adminUrl":"/voice/admin/",
+  "agentUrl":"/voice/agent/",
+  "ssoLogin":true
+}
