@@ -216,3 +216,23 @@ The easiest way to delete leads in a campaign is using `externId` which is typic
     }
   }
 ```
+## Email Leads
+
+The campaign leads can be emailed to a specific email or multiple emails separated by commas.
+
+`PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/campaignLeads/actions=EMAIL_LEADS`
+
+#### Request Body
+
+```json
+ {
+    "campaignLeadSearchCriteria": {
+        "campaignId":thisCampaign.campaign.campaignId
+    },
+    "leadActionParams": {
+        "paramMap": {
+            "EMAIL_TO": "email1,email2"
+        }
+    }
+}
+```
