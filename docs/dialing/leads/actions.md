@@ -227,11 +227,11 @@ The campaign leads can be emailed to a specific email or multiple emails separat
 ```json
  {
     "campaignLeadSearchCriteria": {
-        "campaignId":thisCampaign.campaign.campaignId
+        "campaignId":123456
     },
     "leadActionParams": {
         "paramMap": {
-            "EMAIL_TO": "email1,email2"
+            "EMAIL_TO": "name1@myemail.com,name2@myemail.com"
         }
     }
 }
