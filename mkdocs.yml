@@ -86,7 +86,6 @@ nav:
       - 'Save To Files': workforce/call-streaming/save-to-files.md
     - 'Quality Management': workforce/qm/index.md
     - 'Call Recordings': workforce/call-recording/index.md
-    - 'Integration APIs': workforce/integration-api.md
 - 'Secondary':
   - 'Using the API':
     - 'Fundamentals':
@@ -102,6 +101,7 @@ nav:
       - 'Creating an Event': notifications/wfm/configure-wfm.md
       - 'Event Payload': notifications/wfm/payload-wfm.md
     - 'Web Services': notifications/web-service/index.md
+  - 'Integration': integration/index.md
   - 'SDKs': sdks.md
   - 'Embeddable': embeddable.md
   - 'Postman': postman.md

@@ -32,7 +32,7 @@ This repo holds OpenAPI specs for RingCX. For each commit, tests are run on Trav
 * RingCX Spec: [specs/voice/engage-voice_openapi3.json](specs/voice/engage-voice_openapi3.json)
 * Tests: [specs_test.go](specs_test.go)
 
-You can verify the specs localy with the following if you have [Go installed](https://golang.org/).
+You can verify the specs locally with the following if you have [Go installed](https://golang.org/).
 
 ```
 % git clone https://github.com/ringcentral/engage-voice-api-docs.git
