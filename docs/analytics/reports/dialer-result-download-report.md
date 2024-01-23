@@ -46,7 +46,7 @@ Accept: application/json
     "includeAuxData":true,
     "includeXferData":true,
     "includeSpeedToLead":true,
-    "dialedLeadsReportType":"ALL",
+    "dialedLeadsReportType":"ALL_LEADS",
     "systemDisposition:":"ALL",
     "schedule": {
       "repeatOption":"ONCE",
