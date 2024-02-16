@@ -1,13 +1,14 @@
-# Obtaining a Permanent Access Token using Legacy Credentials
+# Obtaining a permanent access token using legacy credentials
 
 To generate the API token, you would either use your own login, or create an "API User" specifically to host the API tokens you need to call into our system. If you needed to integrate multiple services and each service needed a different level of permissions, you could create multiple API users, each with different Rights. If you had multiple services and they each required the same rights, you could create one or more API tokens for the same user and distribute a unique token around to each service (best practice).
 
-> Note: RingCX APIs for MVP customers are rooted at either:
->
-> * `https://portal.vacd.biz/api/`
-> * `https://portal.virtualacd.biz/api/`
+!!! info "What URLs to use when accessing the RingCX API""
+    RingCX APIs for RingEX customers are rooted at either:
+    
+    * `https://portal.vacd.biz/api/`
+    * `https://portal.virtualacd.biz/api/`
 
-## Generating an Auth Token
+## Generating an auth token
 
 Get AuthToken for the user you would like to generate API token for (one time operation)
 

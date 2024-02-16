@@ -1,4 +1,4 @@
-# Using Postman to Test RingCX APIs
+# Using Postman to test RingCX APIs
 
 For easy testing using [Postman](https://www.getpostman.com/), RingCentral provides a Postman 2.0 Collection for RingCX. It is based on the RingCentral RingCX OpenAPI 3.0 Specificaion. While Postman can import an OpenAPI 3.0 Specification directly, RingCentral recommends using the Collection as it provides better authorization handling using Postman variables and environments as recommended by Postman.
 
@@ -17,8 +17,8 @@ This document describes how to install and use the Postman 2.0 Collection.
 
 This Postman spec is designed for following environment:
 
-* Current RingCentral RingCX account located at: https://engage.ringcentral.com. See [here for more information on current and legacy systems.](authentication/index.md)
-* RingCentral RingCX user linked to RingCentral MVP user for Single Sign-on. RingCentral MVP user should be using RingCentral password authenticaiton, not SAML-based Single Sign-on.
+* Current RingCentral RingCX account located at: https://engage.ringcentral.com. See [here for more information on current and legacy systems](authentication/index.md).
+* RingCentral RingCX user linked to RingEX user for single-sign-on. RingEX users should be using RingCentral password authenticaiton, not SAML-based Single Sign-on.
 * RingCentral app created at https://developers.ringcentral.com with OAuth 2.0 Password Credentials flow enabled.
 
 ## Using Postman

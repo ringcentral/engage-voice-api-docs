@@ -1,16 +1,15 @@
-# Obtaining an RingCX Access Token without a RingCentral MVP Login
+# Obtaining a RingCX access token without a RingEX Login
 
-To access RingCX APIs without a corresponding RingCentral MVP account, you can directly login to the RingCX platform by specifying the platform you reside on.
+To access RingCX APIs without a corresponding RingEX account, you can directly login to the RingCX platform by specifying the platform you reside on.
 
-!!! hint "All New Accounts Start with MVP"
-    For accounts with single-sign on to RingCentral MVP, the method to [exchange access tokens](auth-ringcentral.md#retrieve-ringcentral-access-token) is the default.
+!!! hint "All new accounts start with RingEX"
+    For accounts with single-sign-on to RingEX, the method to [exchange access tokens](auth-ringcentral.md#retrieve-ringcentral-access-token) is the default.
 
-!!! alert "Also Note"
-    If you do not know which platform your account resides on, please contact your Customer Success Manager (CSM) and ask for your Platform ID.
+!!! alert "If you do not know which platform your account resides on, please contact your Customer Success Manager (CSM) and ask for your Platform ID."
 
 ## Generate an RingCX Access Token
 
-The first step to login to RingCX without a RingCentral MVP login is to provide your `username`, `password` and `platformId`.
+The first step to login to RingCX without a RingEX login is to provide your `username`, `password` and `platformId`.
 
 ### Request
 ```http

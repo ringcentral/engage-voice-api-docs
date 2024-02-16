@@ -1,12 +1,10 @@
-# Obtaining an RingCX Access Token with a RingCentral Login
+# Obtaining a RingCX access token with a RingCentral Login
 
-To access RingCX APIs, you need to create an RingCX App, and then with the client credentials, request an RingCX Access Token. Once you have created an App, request a RingCentral Access Token and then using an RingCX API to create an RingCX Access Token. Then the RingCX Access Token can be used to access RingCX APIs.
+To access RingCX APIs, you need to create a RingCX App, and then with the client credentials, request a RingCX access token. Once you have created an app, request a RingEX access token and then using a RingCX API to create a RingCX access token. Then the RingCX Access Token can be used to access RingCX APIs.
 
-> Note: RingCX APIs for MVP customers are rooted at:
->
-> `https://engage.ringcentral.com/voice/api/`
+!!! info "RingCX APIs for RingEX customers are rooted at: https://engage.ringcentral.com/voice/api/"
 
-## Create an App
+## Create an app
 
 The first thing we need to do is create an app in the RingCentral Developer Portal. This can be done quickly by clicking the "Create RingCX App" button below. Just click the button, enter a name and description if you choose, and click the "Create" button. If you do not yet have a RingCentral account, you will be prompted to create one.
 
@@ -73,7 +71,7 @@ rcAccessToken=<rcAccessToken>&rcTokenType=Bearer
 
 Where:
 
--   **`<rcAccessToken>`** is the RingCentral Access Token you received from RingCentral MVP authentication flow.
+-   **`<rcAccessToken>`** is the RingCentral access token you received from the RingEX authentication flow.
 
 === "cURL"
 
