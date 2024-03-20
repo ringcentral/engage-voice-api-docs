@@ -33,7 +33,7 @@ Welcome RingCentral RingCX Developer! Here you have access to all the resources 
       <h6 class="card-subtitle mb-2 text-muted">Embedable</h6>
       <p class="card-text">Integrate RingCX with your CRM for a seamless agent experience. See our open source HubSpot integration for a complete code example.</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./embeddable/get-started/" class="card-link">Integrate Your CRM</a></li>
+      <li><a href="./embeddable/" class="card-link">Integrate Your CRM</a></li>
       <li><a href="https://github.com/ringcentral/hubspot-embeddable-engage-phone" class="card-link">HubSpot Integration Example Source Code</a></li>
       </ul>
     </div>
