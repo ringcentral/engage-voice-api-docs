@@ -33,22 +33,20 @@ The first thing we need to do is create an app in the RingCentral Developer Port
 <li>In the same "Security" section, make sure to select:
   <ul>
     <li>This app is <b>private</b> and will only be callable using credentials from the same RingCentral account.</li>
-  </ul>   
+  </ul>
 </li>
 </ol>
 </div>
 
-When you are done, you will be taken to the app's dashboard. Make note of the Client ID. This is your Client ID for the App in the Sandbox. To start using RingCX APIs, you need to graduate your app to Production and use the Production Client ID and Client Secret in upcoming steps.  Make sure to have your RingCX account number ready for the next step. If you do not have an RingCX account, please reach out to our [Sales](https://www.ringcentral.com/feedback/sales-contact.html) team to sign up for an RingCX account.
+When you are done, you will be taken to the app's dashboard. Make note of the Client ID. You will use this credential when authenticating your application in upcoming steps.  Next, make sure to have your RingCX account number ready. If you do not have an RingCX account, please reach out to our [Sales](https://www.ringcentral.com/feedback/sales-contact.html) team to sign up for an RingCX account.
 
-<a target="new" href="https://docs.google.com/forms/d/e/1FAIpQLScyidt7WFb_CJrpn9yGbcZ8P_gQ42UvXz3oBBnjF0tRh7MVMw/viewform?usp=sf_link" class="btn btn-primary">Request Graduation of RingCX App</a>
-
-## Retrieve RingCentral Access Token
+## Retrieve RingCentral access token
 
 Now retrieve a RingCentral access token using the following instructions:
 
 [RingCentral Authentication](https://developers.ringcentral.com/guide/authentication)
 
-## Retrieve RingCentral RingCX Access Token
+## Retrieve RingCentral RingCX access token
 
 Once you have a RingCentral Access Token, call the following RingCX API to receive an RingCX Bearer access token.
 
@@ -61,7 +59,8 @@ Content-Type: application/x-www-form-urlencoded
 rcAccessToken=<rcAccessToken>&rcTokenType=Bearer
 ```
 
-It's also a good idea to use a refresh token as the access token expires in 5 minutes.  
+It's also a good idea to use a refresh token as the access token expires in 5 minutes.
+
 ```http
 POST https://engage.ringcentral.com/api/auth/login/rc/accesstoken?includeRefresh=true
 Content-Type: application/x-www-form-urlencoded
