@@ -11,7 +11,7 @@ Active calls can be listed based on a criteria called "Product". Each product mu
 | API Property | Description |
 |-|-|
 | **`product`** | The name of a product, which can be one of the following criteria:</br>`"ACCOUNT"` - `"ACD"` - `"AGENT"` - `"CHAT_QUEUE"` - `"OUTBOUND"` - `"VISUAL_IVR"` - `"CLOUD_PROFILE"` - `"CLOUD_DESTINATION"` - `"TRAC_NUMBER"` - `"HTTP_SERVICES"` - `"SCRIPTING"` - `"TN_MANAGER"` - `"SURVEY"` - `"DNIS"` - `"TEAMS"` - `"KNOWLEDGE_BASE"` - `"UTILITIES"` |
-| **`productId`** | The identifier of a selected product. E.g. if the **`product`** is `"ACCOUNT"`, the **productId** is the account id. |
+| **`productId`** | The identifier of a selected product. E.g. if the **`product`** is `"ACCOUNT"`, the **productId** is the account id.</br> Supported productId: `"ACCOUNT"` -  `"ACD"` - `"OUTBOUND"` - `"VISUAL_IVR"` - `"CLOUD_PROFILE"` - `"TRAC_NUMBER"` - `"DNIS"` |
 | **`page`** | Number of page per request. |
 | **`maxRows`** | Max number of items per page. |
 
