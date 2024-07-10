@@ -13,12 +13,12 @@ The first step to login to RingCX without a RingEX login is to provide your `use
 
 ### Request
 ```http
-POST https://engage.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platform ID}
+POST https://ringcx.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platform ID}
 ```
 
 Here is an example using cURL:
 
-`curl -X POST 'https://engage.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platform ID}'`
+`curl -X POST 'https://ringcx.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platform ID}'`
 
 In the response, you will see a very long string for an `accessToken`. You'll want to copy and save this for your next call.  You will also see a shorter string for a `refreshToken`. Save this token as well to [refresh your access token](#refresh-ringcentral-engage-access-token) when the access token expires.
 
@@ -28,14 +28,14 @@ In specific instances, a permanent API token is desired (for example, calling an
 
 ### Request
 ```http
-POST https://engage.ringcentral.com/voice/api/v1/admin/token
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/token
 
 Authorization: Bearer {accessToken}
 ```
 
 Here is an example using cURL:
 
-`curl -X POST https://engage.ringcentral.com/voice/api/v1/admin/token -H "Authorization: Bearer <accessToken>"`
+`curl -X POST https://ringcx.ringcentral.com/voice/api/v1/admin/token -H "Authorization: Bearer <accessToken>"`
 
 The response will be an API token that looks something like:
 
@@ -47,7 +47,7 @@ As you create new API tokens, those permanent API tokens will persist and you ca
 
 ### Request
 ```http
-GET https://engage.ringcentral.com/voice/api/v1/admin/token
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/token
 
 X-Auth-Token: {apiToken}
 or
@@ -56,7 +56,7 @@ Authorization: Bearer <accessToken>
 
 Here is an example using cURL:
 
-`curl -X GET https://engage.ringcentral.com/voice/api/v1/admin/token -H "X-Auth-Token: {apiToken}"`
+`curl -X GET https://ringcx.ringcentral.com/voice/api/v1/admin/token -H "X-Auth-Token: {apiToken}"`
 
 The `apiToken` in the `X-Auth-Token` header can be a token generated using the user credentials in the [step above](#generate-a-permanent-api-token) or an existing API token for the user, or even a new access token from just logging in.
 
@@ -78,7 +78,7 @@ If you are done with an API Token and no longer need it, or you feel it may have
 === "X-Auth-Token"
 
     ```http
-    DELETE https://engage.ringcentral.com/voice/api/v1/admin/token/{apiToken}
+    DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/token/{apiToken}
 
     X-Auth-Token: {apiToken}
     ```
@@ -86,7 +86,7 @@ If you are done with an API Token and no longer need it, or you feel it may have
 === "Authorization header"
 
     ```http
-    DELETE https://engage.ringcentral.com/voice/api/v1/admin/token/{apiToken}
+    DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/token/{apiToken}
 
     Authorization: Bearer <accessToken>
     ```
@@ -94,17 +94,17 @@ If you are done with an API Token and no longer need it, or you feel it may have
 
 Here is an example cURL command:
 
-`curl -X DELETE https://engage.ringcentral.com/voice/api/v1/admin/token/{API-TOKEN-FOR-DELETE} -H "X-Auth-Token: {apiToken}"`
+`curl -X DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/token/{API-TOKEN-FOR-DELETE} -H "X-Auth-Token: {apiToken}"`
 
 ## Get Accounts
 
 A method to try is to retrieve the accounts this user has access to. The main account is the top level account and is considered a container for the sub-accounts that most operations are performed on.
 
 ```http
-GET https://engage.ringcentral.com/voice/api/v1/admin/accounts
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts
 Authorization: Bearer <accessToken>
 ```
 
 Here is an example cURL command:
 
-`curl -X GET https://engage.ringcentral.com/voice/api/v1/admin/accounts -H "Authorization: Bearer {accessToken}"`
+`curl -X GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts -H "Authorization: Bearer {accessToken}"`

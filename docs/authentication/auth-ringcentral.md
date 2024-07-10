@@ -2,7 +2,7 @@
 
 To access RingCX APIs, you need to create a RingCX App, and then with the client credentials, request a RingCX access token. Once you have created an app, request a RingEX access token and then using a RingCX API to create a RingCX access token. Then the RingCX Access Token can be used to access RingCX APIs.
 
-!!! info "RingCX APIs for RingEX customers are rooted at: https://engage.ringcentral.com/voice/api/"
+!!! info "RingCX APIs for RingEX customers are rooted at: https://ringcx.ringcentral.com/voice/api/"
 
 ## Create an app
 
@@ -53,7 +53,7 @@ Once you have a RingCentral Access Token, call the following RingCX API to recei
 ### Request
 
 ```http
-POST https://engage.ringcentral.com/api/auth/login/rc/accesstoken
+POST https://ringcx.ringcentral.com/api/auth/login/rc/accesstoken
 Content-Type: application/x-www-form-urlencoded
 
 rcAccessToken=<rcAccessToken>&rcTokenType=Bearer
@@ -62,7 +62,7 @@ rcAccessToken=<rcAccessToken>&rcTokenType=Bearer
 It's also a good idea to use a refresh token as the access token expires in 5 minutes.
 
 ```http
-POST https://engage.ringcentral.com/api/auth/login/rc/accesstoken?includeRefresh=true
+POST https://ringcx.ringcentral.com/api/auth/login/rc/accesstoken?includeRefresh=true
 Content-Type: application/x-www-form-urlencoded
 
 rcAccessToken=<rcAccessToken>&rcTokenType=Bearer
@@ -75,7 +75,7 @@ Where:
 === "cURL"
 
     ```bash
-    $ curl -XPOST https://engage.ringcentral.com/api/auth/login/rc/accesstoken \
+    $ curl -XPOST https://ringcx.ringcentral.com/api/auth/login/rc/accesstoken \
           -d 'rcAccessToken=<rcAccessToken>' \
           -d 'rcTokenType=Bearer'
     ```
@@ -119,7 +119,7 @@ The following is an abbreviated response.
 The following is an example RingCX API Call using a RingCentral RingCX Access Token.
 
 ```http
-GET https://engage.ringcentral.com/voice/api/v1/admin/users
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/users
 Authorization: Bearer <rcRingCXAccessToken>
 ```
 
@@ -128,13 +128,13 @@ Authorization: Bearer <rcRingCXAccessToken>
 Another method to try is to retrieve the accounts this user has access to. The main account is the top level account and is consider a container for the sub-accounts that most operations are performed on.
 
 ```http
-GET https://engage.ringcentral.com/voice/api/v1/admin/accounts
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts
 Authorization: Bearer <rcRingCXAccessToken>
 ```
 
 Here is an example cURL command:
 
-`curl -X GET https://engage.ringcentral.com/voice/api/v1/admin/accounts -H "Authorization: Bearer {rcRingCXAccessToken}"`
+`curl -X GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts -H "Authorization: Bearer {rcRingCXAccessToken}"`
 
 ## Refresh RingCentral RingCX Access Token
 
@@ -151,7 +151,7 @@ Use the `refreshToken` to refresh the RingCentral RingCX access token, by callin
 ### Request
 
 ```http
-POST https://engage.ringcentral.com/api/auth/token/refresh
+POST https://ringcx.ringcentral.com/api/auth/token/refresh
 Content-Type: application/x-www-form-urlencoded
 
 refresh_token=<rcRingCXRefreshToken>&rcTokenType=Bearer

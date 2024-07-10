@@ -24,7 +24,7 @@ There are two types or networking protocols typically available in REST: HTTP an
 
 ### Current Host
 
-RingCX is using the host server, and is accessible on `https://engage.ringcentral.com`.
+RingCX is using the host server, and is accessible on `https://ringcx.ringcentral.com`.
 
 * Authentication path
   `/api/auth/login`
@@ -44,7 +44,7 @@ RingCX legacy host servers are also still accessible on `https://portal.vacd.biz
 
 All of RingCX's API resources are organized by either an authentication path or a API endpoint path. All API endpoint paths start with either `/voice/api` or just the legacy method of `/api` followed by the version number of the API you are accessing.  Currently only `/v1` is publicly available. Let's consider a typical API resource URI:
 
-<code>https://engage.ringcentral.com/voice/api/v1/admin/accounts/<strong>15300002</strong>/agentGroups/<strong>2025</strong>/agents/<strong>1369310</strong></code>
+<code>https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/<strong>15300002</strong>/agentGroups/<strong>2025</strong>/agents/<strong>1369310</strong></code>
 
 Path parameters are commonly used in the RingCX's API to identify a particular entity belonging to a given type by its unique key. Most of the API resources represent some objects (i.e. agent) which are owned by a particular RingCX account (company) and a subsequent group (i.e. agent group). Three example path parameters are `accountId`, `agentGroupId`, and `agentId`. As you might expect, they identify the account, the group, and the object ID. In this example, the account, agent group, and specific agent, and are bolded in the example above.
 

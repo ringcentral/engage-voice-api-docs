@@ -138,7 +138,7 @@ Sample response:
 
 #### Enable Streaming for Queue/Campaign
 
-**Go to [RingCX admin console](https://engage.ringcentral.com/).**
+**Go to [RingCX admin console](https://ringcx.ringcentral.com/).**
 
 - **For Queue: Go to Routing -> Voice queues & skills -> Select your Queue -> Recording settings**
 - **For Campaign: Go to Dialing -> Campaigns -> Select your Campaign -> Recording settings**

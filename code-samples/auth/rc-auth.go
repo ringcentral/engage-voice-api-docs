@@ -16,7 +16,7 @@ type RingCXToken struct {
 
 func RcToEvToken(rctoken string) (string, error) {
   	res, err := http.PostForm(
-    		"https://engage.ringcentral.com/api/auth/login/rc/accesstoken",
+    		"https://ringcx.ringcentral.com/api/auth/login/rc/accesstoken",
     		url.Values{"rcAccessToken": {rctoken}, "rcTokenType": {"Bearer"}})
     if err != nil {
     		return "", err

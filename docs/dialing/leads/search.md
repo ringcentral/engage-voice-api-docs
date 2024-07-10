@@ -150,7 +150,7 @@ Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-paramete
     ```
 === "cURLs"
     ```bash
-    curl -XPOST 'https://engage.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/        campaignLeads/leadSearch' \
+    curl -XPOST 'https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/        campaignLeads/leadSearch' \
        -H 'Authorization: Bearer {myAccessToken}' \
        -d '{"firstName":"John"}' \
        -H 'Content-Type: application/json'

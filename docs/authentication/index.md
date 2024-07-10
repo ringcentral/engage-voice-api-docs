@@ -6,7 +6,7 @@ The RingCentral RingCX API is offered for RingCX with RingCentral login, RingCX 
 
 The current RingCX system makes the API accessible at:
 
-* `https://engage.ringcentral.com/voice/api/`
+* `https://ringcx.ringcentral.com/voice/api/`
 
 and uses the OAuth 2.0 Authorization header:
 

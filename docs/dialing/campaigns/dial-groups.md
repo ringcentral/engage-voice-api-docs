@@ -132,7 +132,7 @@ Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-paramete
     ```html
     ######################################################
     The `BASE_URL` for your server is one of the following:
-    # `https://engage.ringcentral.com/voice`
+    # `https://ringcx.ringcentral.com/voice`
     # `https://portal.vacd.biz/`
     # `https://portal.virtualacd.biz/`
     ######################################################
@@ -295,7 +295,7 @@ Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-paramete
     ```html
     ######################################################
     The `BASE_URL` for your server is one of the following:
-    # `https://engage.ringcentral.com/voice`
+    # `https://ringcx.ringcentral.com/voice`
     # `https://portal.vacd.biz/`
     # `https://portal.virtualacd.biz/`
     ######################################################

@@ -17,7 +17,7 @@ This document describes how to install and use the Postman 2.0 Collection.
 
 This Postman spec is designed for following environment:
 
-* Current RingCentral RingCX account located at: https://engage.ringcentral.com. See [here for more information on current and legacy systems](authentication/index.md).
+* Current RingCentral RingCX account located at: https://ringcx.ringcentral.com. See [here for more information on current and legacy systems](authentication/index.md).
 * RingCentral RingCX user linked to RingEX user for single-sign-on. RingEX users should be using RingCentral password authenticaiton, not SAML-based Single Sign-on.
 * RingCentral app created at https://developers.ringcentral.com with OAuth 2.0 Password Credentials flow enabled.
 

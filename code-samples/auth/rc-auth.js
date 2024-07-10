@@ -2,7 +2,7 @@ var https = require('https')
 
 var RC_ACCESS_TOKEN = "VALID-RINGCENTRAL-ACCESS-TOKEN"
 
-var url = "engage.ringcentral.com"
+var url = "ringcx.ringcentral.com"
 var path = '/api/auth/login/rc/accesstoken'
 var body = 'rcAccessToken=' + RC_ACCESS_TOKEN + "&rcTokenType=Bearer"
 var headers = { 'Content-Type': 'application/x-www-form-urlencoded' }

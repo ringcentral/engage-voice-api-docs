@@ -1,7 +1,7 @@
 import requests
 
 RC_ACCESS_TOKEN = "VALID-RINGCENTRAL-ACCESS-TOKEN"
-url = "https://engage.ringcentral.com/api/auth/login/rc/accesstoken"
+url = "https://ringcx.ringcentral.com/api/auth/login/rc/accesstoken"
 body = "rcAccessToken=%s&rcTokenType=Bearer" % (RC_ACCESS_TOKEN)
 headers = {
               'Content-Type': 'application/x-www-form-urlencoded'

@@ -1,7 +1,7 @@
 <?php
 $RC_ACCESS_TOKEN = "VALID-RINGCENTRAL-ACCESS-TOKEN";
 
-$url = "https://engage.ringcentral.com/api/auth/login/rc/accesstoken";
+$url = "https://ringcx.ringcentral.com/api/auth/login/rc/accesstoken";
 $body = 'rcAccessToken=' . $RC_ACCESS_TOKEN . "&rcTokenType=Bearer";
 $headers = array ('Content-Type: application/x-www-form-urlencoded');
 
