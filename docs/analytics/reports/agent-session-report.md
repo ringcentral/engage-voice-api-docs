@@ -1,4 +1,4 @@
-# About Agent Session Report
+# Agent Session Report (Deprecated)
 
 The Agent Session Report provides an overview of agent activity for each agent logged in during the date range selected. Data is accurate up to the second the report is run, but this report only provides access to the last 90 days worth of data.
 
