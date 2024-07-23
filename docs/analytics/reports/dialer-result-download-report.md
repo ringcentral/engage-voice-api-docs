@@ -1,4 +1,4 @@
-# About Dialer Result Download
+# Dialer Result Download (Deprecated)
 
 The Dialer Result Download provides data on all calls matching the search criteria. Administrators use this report to get information on specific agents and call/chat activities including agent notes.
 
