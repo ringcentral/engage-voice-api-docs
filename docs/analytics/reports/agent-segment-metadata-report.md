@@ -1,6 +1,6 @@
-# About Agent Segment Metadata Report
+# Agent Segment Metadata Report (Deprecated)
 
-The Agent Segment Metadata Report provides granular details of agent activity for each call leg during the date range selected. Each record represents a call leg and details the activity of that leg including ring time, hold time, and talk time. The Agent Segment Metadata Report is split into two reports: one for inbound call and one for outbound dialing.
+The Agent Segment Metadata Report API provides granular details of agent activity for each call leg during the date range selected. Each record represents a call leg and details the activity of that leg including ring time, hold time, and talk time. The Agent Segment Metadata Report is split into two reports: one for inbound call and one for outbound dialing.
 
 ### Primary Parameters
 
