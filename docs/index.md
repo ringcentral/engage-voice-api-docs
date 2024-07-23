@@ -136,13 +136,6 @@ If on your way to building your first RingCentral RingCX application you encount
       <a href="./sdks" class="btn btn-primary">Learn more</a>
     </div>
   </div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="h5 card-title">RingCX Docs</h5>
-      <p class="card-text">Want to learn more about RingCX? Our UI documentation library is full of easily searchable details.</p>
-      <a href="https://docs.ringcentral.com/engage/" class="btn btn-primary">Learn more</a>
-    </div>
-  </div>
 </div>
 
 ## About RingCentral
