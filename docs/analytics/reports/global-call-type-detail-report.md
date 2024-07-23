@@ -1,4 +1,4 @@
-# About Call Details and Recordings
+# Call Details and Recordings (Deprecated)
 
 Call detail records (CDRs) and recordings are available via the Global Call Type Detail (GCTD) Report which provides complete real-time data for all calls in RingCX. When recordings are available, a media URL is provided in the call detail record.
 
