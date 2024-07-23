@@ -83,12 +83,12 @@ Welcome RingCentral RingCX Developer! Here you have access to all the resources 
   <div class="card" style="width: 18rem;">
     <div class="card-body pt-0 pb-0">
       <h5 class="card-title">Access Reports & Recordings</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Reports API</h6>
+      <h6 class="card-subtitle mb-2 text-muted">Integration & Reports API</h6>
       <p class="card-text">Monitor agent activity and download recordings for agent optimization, analysis, compliance and archival.</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./analytics/reports/global-call-type-detail-report/" class="card-link">Call Details and Recordings</a></li>
-      <li><a href="./analytics/reports/agent-session-report/" class="card-link">View Agent Activity</a></li>
-      <li><a href="./analytics/reports/agent-segment-metadata-report/" class="card-link">Agent Segment Metadata</a></li>
+      <li><a href="./integration#agent-extended-statistics-report" class="card-link">Agent Extended Statistics Report</a></li>
+      <li><a href="./integration#agent-segment-metadata-report" class="card-link">Agent Segment Metadata Report</a></li>
+      <li><a href="./integration#queue-statistics-report" class="card-link">Queue Statistics Report</a></li>
       </ul>
     </div>
   </div>
