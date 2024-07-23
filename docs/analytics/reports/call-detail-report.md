@@ -1,6 +1,6 @@
-# About Call Detail Report
+# Call Detail Report (Deprecated)
 
-The Call Detail Report provides cloud routing data for your cloud-based unified queues and includes every cloud-routed call based on filtering criteria that you supply when running the report.
+The Call Detail Report API provides cloud routing data for your cloud-based unified queues and includes every cloud-routed call based on filtering criteria that you supply when running the report.
 
 ### Primary Parameters
 
