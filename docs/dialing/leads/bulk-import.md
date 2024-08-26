@@ -56,6 +56,8 @@ Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-paramete
         "duplicateHandling": "REMOVE_FROM_LIST",
         "listState": "ACTIVE",
         "timeZoneOption": "NOT_APPLICABLE",
+        "phoneNumbersI18nEnabled": true,
+        "internationalNumberFormat": false,
         "uploadLeads": [
           {
              "leadPhone":"1111111111",
@@ -143,6 +145,8 @@ Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-paramete
                                 "listState": "ACTIVE",
                                 "duplicateHandling": "RETAIN_ALL",
                                 "timeZoneOption": "NPA_NXX",
+                                "phoneNumbersI18nEnabled": true,
+                                "internationalNumberFormat": false,
                                 "description": "Lead Search Test",
                                 "dialPriority": "IMMEDIATE",
                                 "uploadLeads": [{
@@ -206,6 +210,8 @@ Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-paramete
                               "duplicateHandling": "REMOVE_FROM_LIST",
                               "listState": "ACTIVE",
                               "timeZoneOption": "NPA_NXX",
+                              "phoneNumbersI18nEnabled": true,
+                              "internationalNumberFormat": false,
                               "uploadLeads": [{
                                    "leadPhone":"8888888888",
                                    "externId":"222",
@@ -312,6 +318,8 @@ Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-paramete
         "duplicateHandling" => "REMOVE_FROM_LIST",
         "listState" => "ACTIVE",
         "timeZoneOption" => "NOT_APPLICABLE",
+        "phoneNumbersI18nEnabled" => true,
+        "internationalNumberFormat" => false,
         "uploadLeads" => array (
           array (
              "leadPhone" => "1111111111",
