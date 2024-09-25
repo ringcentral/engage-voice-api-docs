@@ -14333,7 +14333,7 @@
             "name": "none"
         },
         "termsOfService": "https://developers.ringcentral.com",
-        "title": "RingCentral Engage Voice API",
+        "title": "RingCentral RingCx API",
         "version": "1.0.0"
     },
     "openapi": "3.0.0",
@@ -25304,6 +25304,1352 @@
                 ]
             }
         },
+        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/recordings/dialogs/{dialogId}/segments/{segmentId}": {
+            "get": {
+                "tags": [
+                    "Public Integration API"
+                ],
+                "summary": "Fetches recordings data",
+                "description": "This API fetches recording data for a specified dialog and segment. This is a streaming API, it will return an audio stream for given request.",
+                "operationId": "getRecordingSegmentData",
+                "parameters": [
+                    {
+                        "name": "rcAccountId",
+                        "in": "path",
+                        "description": "RC account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "980634004"
+                        }
+                    },
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "subaccount id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99999999"
+                        }
+                    },
+                    {
+                        "name": "dialogId",
+                        "in": "path",
+                        "description": "dialog id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "d-65f286b0ee1c4900074c1bb2-1710393008514"
+                        }
+                    },
+                    {
+                        "name": "segmentId",
+                        "in": "path",
+                        "description": "segment id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "d-668cf767a626550007d021f6-668cf767a626550007d021f5"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Bad request",
+                                    "cause": "",
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/recordings/dialogs/d-65f286b0ee1c4900074c1bb2-1710393008514/segments/d-668cf767a626550007d021f6-668cf767a626550007d021f5 - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "JWT has expired."
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "You do not have permission to access this resource.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Access is denied.",
+                                    "cause": "",
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/recordings/dialogs/d-65f286b0ee1c4900074c1bb2-1710393008514/segments/d-668cf767a626550007d021f6-668cf767a626550007d021f5 - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The resource you requested does not exist.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Not found",
+                                    "cause": "",
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/recordings/dialogs/d-65f286b0ee1c4900074c1bb2-1710393008514/segments/d-668cf767a626550007d021f6-668cf767a626550007d021f5 - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Internal server error",
+                                    "cause": "",
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/recordings/dialogs/d-65f286b0ee1c4900074c1bb2-1710393008514/segments/d-668cf767a626550007d021f6-668cf767a626550007d021f5 - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/interaction-metadata": {
+            "post": {
+                "tags": [
+                    "Public Integration API"
+                ],
+                "summary": "Returns Interaction Segment Metadata",
+                "description": "This API is used to fetch interaction metadata for VOICE/DIGITAL for all segments under provided time duration.",
+                "operationId": "getInteractionMetadata",
+                "parameters": [
+                    {
+                        "name": "rcAccountId",
+                        "in": "path",
+                        "description": "RC account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "980634004"
+                        }
+                    },
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "RingCX subAccount id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99999999"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/InteractionMetadataRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CalabrioInteractionSegmentMetaData2Array"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Bad request",
+                                    "cause": "",
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/interaction-metadata - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "JWT has expired."
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "You do not have permission to access this resource.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Access is denied.",
+                                    "cause": "",
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/interaction-metadata - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The resource you requested does not exist.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Not found",
+                                    "cause": "",
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/interaction-metadata - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Internal server error",
+                                    "cause": "",
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/interaction-metadata - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/transcripts/dialogs/{dialogId}/segments/{segmentId}": {
+            "get": {
+                "tags": [
+                    "Public Integration API"
+                ],
+                "summary": "Fetches Transcript data for both voice and digital",
+                "description": "This API fetches interaction transcript data for provided dialogId and segmentId. This is a streaming API, it will return an audio stream for given request.",
+                "operationId": "getTranscriptSegmentData",
+                "parameters": [
+                    {
+                        "name": "rcAccountId",
+                        "in": "path",
+                        "description": "RC account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "980634004"
+                        }
+                    },
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "Sub Account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99999999"
+                        }
+                    },
+                    {
+                        "name": "dialogId",
+                        "in": "path",
+                        "description": "dialog id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "d-668cf1d0a626550007d01d1b-1720512976864-1909690a312da"
+                        }
+                    },
+                    {
+                        "name": "segmentId",
+                        "in": "path",
+                        "description": "segment id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "d-668d1051a626550007d02828-1720520785904-19097081cf749"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RCInteractionTranscriptData"
+                                },
+                                "examples": {
+                                    "example1": {
+                                        "value": {
+                                            "channelClass": "DIGITAL",
+                                            "errorCode": null,
+                                            "errorMessage": null,
+                                            "transcript": [
+                                                {
+                                                    "participantId": "d-6555aa00cd0df30007872d38-6555aa00cd0df30007872d37",
+                                                    "rcUserId": null,
+                                                    "participantName": null,
+                                                    "participantType": "contact",
+                                                    "timestamp": "1721651880000",
+                                                    "message": "I cannot transfer number porting"
+                                                },
+                                                {
+                                                    "participantId": "d-6555b45ccd0df30007872dd2-1700115548459-18bd6d7301135",
+                                                    "rcUserId": null,
+                                                    "participantName": null,
+                                                    "participantType": "agent",
+                                                    "timestamp": "1721651881000",
+                                                    "message": "Can you provide your RC account? And describe the steps you met?"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "example2": {
+                                        "value": {
+                                            "channelClass": "VOICE",
+                                            "errorCode": null,
+                                            "errorMessage": null,
+                                            "transcript": [
+                                                {
+                                                    "participantId": "d-6555aa00cd0df30007872d38-6555aa00cd0df30007872d37",
+                                                    "rcUserId": null,
+                                                    "participantName": null,
+                                                    "participantType": null,
+                                                    "timestamp": "1721651880000",
+                                                    "message": "yes sir"
+                                                },
+                                                {
+                                                    "participantId": "d-6555b45ccd0df30007872dd2-1700115548459-18bd6d7301135",
+                                                    "rcUserId": null,
+                                                    "participantName": null,
+                                                    "participantType": null,
+                                                    "timestamp": "1721651881000",
+                                                    "message": "ok"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Bad request",
+                                    "cause": "",
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/transcripts/dialogs/d-668cf1d0a626550007d01d1b-1720512976864-1909690a312da/segments/d-668d1051a626550007d02828-1720520785904-19097081cf749 - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "JWT has expired."
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "You do not have permission to access this resource.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Access is denied.",
+                                    "cause": "",
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/transcripts/dialogs/d-668cf1d0a626550007d01d1b-1720512976864-1909690a312da/segments/d-668d1051a626550007d02828-1720520785904-19097081cf749 - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The resource you requested does not exist.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Not found",
+                                    "cause": "",
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/transcripts/dialogs/d-668cf1d0a626550007d01d1b-1720512976864-1909690a312da/segments/d-668d1051a626550007d02828-1720520785904-19097081cf749 - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Internal server error",
+                                    "cause": "",
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/transcripts/dialogs/d-668cf1d0a626550007d01d1b-1720512976864-1909690a312da/segments/d-668d1051a626550007d02828-1720520785904-19097081cf749 - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/queue-groups": {
+            "get": {
+                "tags": [
+                    "Public Integration API"
+                ],
+                "summary": "Returns a list of queue groups",
+                "description": "This API returns a list of all queue-groups for given sub-account",
+                "operationId": "getQueueGroups",
+                "parameters": [
+                    {
+                        "name": "rcAccountId",
+                        "in": "path",
+                        "description": "RC account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "138885004"
+                        }
+                    },
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "Engage Voice sub-account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99999033"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/QueueGroup"
+                                    },
+                                    "example": [
+                                        {
+                                            "queueGroupId": 1009,
+                                            "groupName": "Queue group 1",
+                                            "queueGroupType": "VOICE"
+                                        },
+                                        {
+                                            "queueGroupId": 1010,
+                                            "groupName": "Queue group 2",
+                                            "queueGroupType": "DIGITAL"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Bad request",
+                                    "cause": "",
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "JWT has expired."
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "You do not have permission to access this resource.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Access is denied.",
+                                    "cause": "",
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The resource you requested does not exist.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Not found",
+                                    "cause": "",
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Internal server error",
+                                    "cause": "",
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/queue-groups/{queueGroupId}/with-agents": {
+            "get": {
+                "tags": [
+                    "Public Integration API"
+                ],
+                "summary": "Returns a list of agent ids of the queue group.",
+                "description": "This API returns a list of all queues and their associated agents for given sub-account and queue-group id. Note: Maximum number of records returned by this API is 2000.",
+                "operationId": "getQueuesWithAgents",
+                "parameters": [
+                    {
+                        "name": "rcAccountId",
+                        "in": "path",
+                        "description": "RC account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "138885004"
+                        }
+                    },
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "Engage Voice sub-account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99990033"
+                        }
+                    },
+                    {
+                        "name": "queueGroupId",
+                        "in": "path",
+                        "description": "Queue group ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1009
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CXQueueWithAgents"
+                                    },
+                                    "example": [
+                                        {
+                                            "queueId": 555,
+                                            "queueType": "VOICE",
+                                            "queueName": "Test queue 1",
+                                            "queueGroupId": 1009,
+                                            "isActive": true,
+                                            "createdOn": "2020-07-21T17:32:28Z",
+                                            "agentIds": [
+                                                10,
+                                                20
+                                            ]
+                                        },
+                                        {
+                                            "queueId": 556,
+                                            "queueType": "VOICE",
+                                            "queueName": "Test queue 2",
+                                            "queueGroupId": 1009,
+                                            "isActive": true,
+                                            "createdOn": "2020-07-21T17:32:28Z",
+                                            "agentIds": [
+                                                30
+                                            ]
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Bad request",
+                                    "cause": "",
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups/1009/with-agents - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "JWT has expired."
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "You do not have permission to access this resource.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Access is denied.",
+                                    "cause": "",
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups/1009/with-agents - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The resource you requested does not exist.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Not found",
+                                    "cause": "",
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups/1009/with-agents - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Internal server error",
+                                    "cause": "",
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups/1009/with-agents - GET",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/agg-queue-stats": {
+            "post": {
+                "tags": [
+                    "Public Integration API"
+                ],
+                "summary": "Builds queue statistics",
+                "operationId": "buildAggQueueStats",
+                "description": "This API returns statistics of all queues for given sub-account and duration.",
+                "parameters": [
+                    {
+                        "name": "rcAccountId",
+                        "in": "path",
+                        "description": "RC account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "138885004"
+                        }
+                    },
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "Engage Voice sub-account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99999033"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AggregatedIntegrationParams"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AggregatedQueueStats"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "interval": 60,
+                                        "dateTimeFrom": "03-04-2024T01:00:00",
+                                        "queue": 5682,
+                                        "queueName": "Queue",
+                                        "offdDirectIxnCnt": 3,
+                                        "overflowInIxnCnt": 0,
+                                        "abandIxnCnt": 0,
+                                        "overflowOutIxnCnt": 0,
+                                        "answIxnCnt": 3,
+                                        "queuedAndAnswIxnDur": 9,
+                                        "queuedAndAbandIxnDur": 0,
+                                        "talkingIxnDur": 90,
+                                        "wrapUpDur": 13,
+                                        "queuedAnswLongestQueDur": 1,
+                                        "queuedAbandLongestQueDur": 0,
+                                        "ansServicelevelCnt": 0,
+                                        "waitDur": 13,
+                                        "abandShortIxnCnt": 0,
+                                        "abandWithinSlCnt": 0
+                                    },
+                                    {
+                                        "interval": 60,
+                                        "dateTimeFrom": "03-04-2024T02:00:00",
+                                        "queue": 5687,
+                                        "queueName": "Neringa queue",
+                                        "offdDirectIxnCnt": 3,
+                                        "overflowInIxnCnt": 0,
+                                        "abandIxnCnt": 0,
+                                        "overflowOutIxnCnt": 0,
+                                        "answIxnCnt": 3,
+                                        "queuedAndAnswIxnDur": 0,
+                                        "queuedAndAbandIxnDur": 0,
+                                        "talkingIxnDur": 9,
+                                        "wrapUpDur": 13,
+                                        "queuedAnswLongestQueDur": 0,
+                                        "queuedAbandLongestQueDur": 0,
+                                        "ansServicelevelCnt": 0,
+                                        "waitDur": 13,
+                                        "abandShortIxnCnt": 0,
+                                        "abandWithinSlCnt": 0
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Bad request",
+                                    "cause": "",
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-queue-stats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "JWT has expired."
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "You do not have permission to access this resource.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Access is denied.",
+                                    "cause": "",
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-queue-stats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The resource you requested does not exist.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Not found",
+                                    "cause": "",
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-queue-stats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Internal server error",
+                                    "cause": "",
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-queue-stats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/agg-agent-extended-stats": {
+            "post": {
+                "tags": [
+                    "Public Integration API"
+                ],
+                "summary": "Builds extended agent queue statistics",
+                "operationId": "buildExtendedAggQueueStats",
+                "description": "This API returns statistics of all queues along with their agents for given Sub-Account and duration.",
+                "parameters": [
+                    {
+                        "name": "rcAccountId",
+                        "in": "path",
+                        "description": "RC account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "138885004"
+                        }
+                    },
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "Engage Voice sub-account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99990033"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AggregatedIntegrationParams"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ExtendedAggregatedQueueStats"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "interval": 60,
+                                        "dateTimeFrom": "03-04-2024T05:00:00",
+                                        "agentId": 1,
+                                        "agentName": "aws93-l13-las01 test number",
+                                        "queue": 5682,
+                                        "queueName": "Queue",
+                                        "talkingIxnDur": 56,
+                                        "wrapUpDur": 0,
+                                        "answIxnCnt": 1,
+                                        "transferOutIxnCnt": 4
+                                    },
+                                    {
+                                        "interval": 60,
+                                        "dateTimeFrom": "03-04-2024T06:00:00",
+                                        "agentId": 10693,
+                                        "agentName": "Neringa Norkute",
+                                        "queue": 5688,
+                                        "queueName": "Neringa queue 2",
+                                        "talkingIxnDur": 137,
+                                        "wrapUpDur": 5,
+                                        "answIxnCnt": 2,
+                                        "transferOutIxnCnt": 0
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Bad request",
+                                    "cause": "",
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-extended-stats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "JWT has expired."
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "You do not have permission to access this resource.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Access is denied.",
+                                    "cause": "",
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-extended-stats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The resource you requested does not exist.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Not found",
+                                    "cause": "",
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-extended-stats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Internal server error",
+                                    "cause": "",
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-extended-stats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/agg-agent-stats": {
+            "post": {
+                "tags": [
+                    "Public Integration API"
+                ],
+                "summary": "Builds agent statistics",
+                "description": "This API returns statistics of all agents for given sub-account and duration.",
+                "operationId": "buildAggAgentStats",
+                "parameters": [
+                    {
+                        "name": "rcAccountId",
+                        "in": "path",
+                        "description": "RC account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "138885004"
+                        }
+                    },
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "Engage Voice sub-account id",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "99990033"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AggregatedIntegrationParams"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AggregatedAgentStats"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "interval": 60,
+                                        "dateTimeFrom": "03-04-2024T08:00:00",
+                                        "agentId": 33,
+                                        "agentName": "test number, aws91-l22-engage",
+                                        "availDur": 3376,
+                                        "totWorkDur": 3376,
+                                        "pauseDur": 0,
+                                        "waitDur": 2476,
+                                        "adminDur": 0,
+                                        "directOutIxnCnt": 0,
+                                        "directOutIxnDur": 0,
+                                        "directInIxnCnt": 0,
+                                        "directInIxnDur": 0
+                                    },
+                                    {
+                                        "interval": 60,
+                                        "dateTimeFrom": "03-04-2024T09:00:00",
+                                        "agentId": 132598,
+                                        "agentName": "kaduk, alena",
+                                        "availDur": 117,
+                                        "totWorkDur": 117,
+                                        "pauseDur": 0,
+                                        "waitDur": 113,
+                                        "adminDur": 0,
+                                        "directOutIxnCnt": 0,
+                                        "directOutIxnDur": 0,
+                                        "directInIxnCnt": 1,
+                                        "directInIxnDur": 5
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Bad request",
+                                    "cause": "",
+                                    "generalMessage": "The supplied data is not valid",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-stats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "example": "JWT has expired."
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "You do not have permission to access this resource.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Access is denied.",
+                                    "cause": "",
+                                    "generalMessage": "You do not have permission to access this resource",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-stats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "The resource you requested does not exist.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Not found",
+                                    "cause": "",
+                                    "generalMessage": "The resource you have requested does not exist",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-stats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Errors"
+                                },
+                                "example": {
+                                    "details": "",
+                                    "developerMessage": "Internal server error",
+                                    "cause": "",
+                                    "generalMessage": "An Internal Server Error occurred while processing this request",
+                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-stats - POST",
+                                    "timestamp": 1611847650696
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
         "/v1/admin/utilities/tnManager/updateCustomerDnisBulk": {
             "put": {
                 "tags": [
@@ -25881,7 +27227,8 @@
                 "Integration Agent Controller",
                 "Integration Agent Group Controller",
                 "Integration Gate Group Controller",
-                "Integration Report Controller"
+                "Integration Report Controller",
+                "Public Integration API"
             ]
         }
     ]
