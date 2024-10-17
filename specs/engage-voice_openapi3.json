@@ -23463,6 +23463,7 @@
         },
         "/voice/api/v1/admin/accounts/{accountId}/reportsStreaming": {
             "post": {
+                "deprecated": true,
                 "description": "Permissions: READ on Account",
                 "operationId": "streamFile",
                 "parameters": [
