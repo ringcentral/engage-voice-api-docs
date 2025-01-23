@@ -201,7 +201,7 @@ Using the same JavaScript function above, you can also find the target campaign 
 
 The easiest way to delete leads in a campaign is using `externId` which is typically the lead id in your own system.
 
-`PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/campaignLeads/actions=DELETE_LEADS`
+`PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/campaignLeads/actions?leadAction=DELETE_LEADS`
 
 #### Request Body
 
@@ -209,9 +209,9 @@ The easiest way to delete leads in a campaign is using `externId` which is typic
   {
     "campaignLeadSearchCriteria":
     {
-        "externIds":[
-          "100000",
-          "100001"
+        "leadIds":[
+          100000,
+          100001
           ]
     }
   }
@@ -220,7 +220,7 @@ The easiest way to delete leads in a campaign is using `externId` which is typic
 
 The campaign leads can be emailed to a specific email or multiple emails separated by commas.
 
-`PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/campaignLeads/actions=EMAIL_LEADS`
+`PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/campaignLeads/actions?leadAction=EMAIL_LEADS`
 
 #### Request Body
 
