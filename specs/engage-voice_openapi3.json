@@ -1745,25 +1745,10 @@
                         "$ref": "#/components/schemas/RegionalSettingRequestResponse"
                     },
                     "roles": {
-                        "items": {
-                            "enum": [
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@6613aefd[roleType=SUPER_USER,goodDataMapping=<null>,description=Authenticated Super User,defaultRole=false,name=SUPER_USER,ordinal=0]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@6c94a58f[roleType=USER,goodDataMapping=<null>,description=Authenticated User,defaultRole=true,name=USER,ordinal=1]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@615437bb[roleType=MANAGE_USERS,goodDataMapping=<null>,description=Ability to Manage Users,defaultRole=false,name=MANAGE_USERS,ordinal=2]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@28255ec3[roleType=MANAGE_RIGHTS,goodDataMapping=<null>,description=Ability to Manage User Rights,defaultRole=false,name=MANAGE_RIGHTS,ordinal=3]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@69e4fc8d[roleType=ACCESS_SIBLINGS,goodDataMapping=<null>,description=Ability to Manage Sibling Users,defaultRole=false,name=ACCESS_SIBLINGS,ordinal=4]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@2f98248a[roleType=ACCESS_AUDIT_LOG,goodDataMapping=<null>,description=Ability to view the Audit Log,defaultRole=false,name=ACCESS_AUDIT_LOG,ordinal=5]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@2f9ab651[roleType=ASSUME_USERS,goodDataMapping=<null>,description=Ability to assume users in hierachy,defaultRole=false,name=ASSUME_USERS,ordinal=6]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@58f034ec[roleType=REPORT_ADMINISTRATIVE_USER,goodDataMapping=<null>,description=,defaultRole=false,name=REPORT_ADMINISTRATIVE_USER,ordinal=7]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@12a814c2[roleType=WFO_ACCESS,goodDataMapping=<null>,description=Ability to use integration API,defaultRole=false,name=WFO_ACCESS,ordinal=8]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@dbe5649[roleType=ACCESS_GOODDATA_EDITOR,goodDataMapping=editorRole,description=Ability to customize dashboards and reports and review project data,defaultRole=false,name=ACCESS_GOODDATA_EDITOR,ordinal=9]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@4415ea06[roleType=ACCESS_GOODDATA_ANALYST,goodDataMapping=explorerOnlyRole,description=(In embedded mode only) Ability to access dashboards on a view-only basis, can access Analytical Designer and KPI Dashboards,defaultRole=false,name=ACCESS_GOODDATA_ANALYST,ordinal=10]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@7f068004[roleType=ACCESS_GOODDATA_VIEWER,goodDataMapping=dashboardOnlyRole,description=(In embedded mode only) Ability to access dashboards on a view-only basis,defaultRole=false,name=ACCESS_GOODDATA_VIEWER,ordinal=11]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@1deb09eb[roleType=NO_ACCESS,goodDataMapping=<null>,description=,defaultRole=false,name=NO_ACCESS,ordinal=12]"
-                            ],
-                            "type": "string"
-                        },
-                        "type": "array"
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Role"
+                      }
                     },
                     "rootUser": {
                         "type": "boolean"
@@ -7234,6 +7219,34 @@
                     }
                 },
                 "type": "object"
+            },
+            "Role": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string"
+                },
+                "roleType": {
+                  "type": "string",
+                  "enum": [
+                    "SUPER_USER",
+                    "USER",
+                    "MANAGE_USERS",
+                    "MANAGE_RIGHTS",
+                    "ACCESS_SIBLINGS",
+                    "ACCESS_AUDIT_LOG",
+                    "ACCESS_GOODDATA_ADMIN",
+                    "ACCESS_GOODDATA_EDITOR",
+                    "ACCESS_GOODDATA_EXPLORER",
+                    "ACCESS_GOODDATA_VIEWER",
+                    "ACCESS_GOODDATA_EMBEDDED_EXPLORER",
+                    "ACCESS_GOODDATA_EMBEDDED_DASHBOARD",
+                    "ASSUME_USERS",
+                    "REPORT_ADMINISTRATIVE_USER",
+                    "NO_ACCESS"
+                  ]
+                }
+              }
             },
             "DateTime": {
                 "properties": {
@@ -13270,25 +13283,10 @@
                         "$ref": "#/components/schemas/RegionalSettingRequestResponse"
                     },
                     "roles": {
-                        "items": {
-                            "enum": [
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@6613aefd[roleType=SUPER_USER,goodDataMapping=<null>,description=Authenticated Super User,defaultRole=false,name=SUPER_USER,ordinal=0]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@6c94a58f[roleType=USER,goodDataMapping=<null>,description=Authenticated User,defaultRole=true,name=USER,ordinal=1]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@615437bb[roleType=MANAGE_USERS,goodDataMapping=<null>,description=Ability to Manage Users,defaultRole=false,name=MANAGE_USERS,ordinal=2]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@28255ec3[roleType=MANAGE_RIGHTS,goodDataMapping=<null>,description=Ability to Manage User Rights,defaultRole=false,name=MANAGE_RIGHTS,ordinal=3]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@69e4fc8d[roleType=ACCESS_SIBLINGS,goodDataMapping=<null>,description=Ability to Manage Sibling Users,defaultRole=false,name=ACCESS_SIBLINGS,ordinal=4]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@2f98248a[roleType=ACCESS_AUDIT_LOG,goodDataMapping=<null>,description=Ability to view the Audit Log,defaultRole=false,name=ACCESS_AUDIT_LOG,ordinal=5]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@2f9ab651[roleType=ASSUME_USERS,goodDataMapping=<null>,description=Ability to assume users in hierachy,defaultRole=false,name=ASSUME_USERS,ordinal=6]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@58f034ec[roleType=REPORT_ADMINISTRATIVE_USER,goodDataMapping=<null>,description=,defaultRole=false,name=REPORT_ADMINISTRATIVE_USER,ordinal=7]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@12a814c2[roleType=WFO_ACCESS,goodDataMapping=<null>,description=Ability to use integration API,defaultRole=false,name=WFO_ACCESS,ordinal=8]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@dbe5649[roleType=ACCESS_GOODDATA_EDITOR,goodDataMapping=editorRole,description=Ability to customize dashboards and reports and review project data,defaultRole=false,name=ACCESS_GOODDATA_EDITOR,ordinal=9]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@4415ea06[roleType=ACCESS_GOODDATA_ANALYST,goodDataMapping=explorerOnlyRole,description=(In embedded mode only) Ability to access dashboards on a view-only basis, can access Analytical Designer and KPI Dashboards,defaultRole=false,name=ACCESS_GOODDATA_ANALYST,ordinal=10]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@7f068004[roleType=ACCESS_GOODDATA_VIEWER,goodDataMapping=dashboardOnlyRole,description=(In embedded mode only) Ability to access dashboards on a view-only basis,defaultRole=false,name=ACCESS_GOODDATA_VIEWER,ordinal=11]",
-                                "com.connectfirst.api.model.intelliqueue_globalcatalog.auth.Role@1deb09eb[roleType=NO_ACCESS,goodDataMapping=<null>,description=,defaultRole=false,name=NO_ACCESS,ordinal=12]"
-                            ],
-                            "type": "string"
-                        },
-                        "type": "array"
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Role"
+                      }
                     },
                     "rootUser": {
                         "type": "boolean"
