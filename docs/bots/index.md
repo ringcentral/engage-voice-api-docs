@@ -19,7 +19,7 @@ The following guide for developers helps developer connect, update, and disconne
 
 ## Bot Connection
 
-<img class="img-fluid" width="871" src="../../images/bot-connection-diagram.png">
+<img class="img-fluid" width="871" src="../images/bot-connection-diagram.png">
 
 SIP transport between RingCentral and Partner can be:
 
@@ -43,7 +43,7 @@ There is no authentication mechanism per say. A typical implementation would rel
 
 ## Bot Update
 
-<img class="img-fluid" width="638" src="../../images/bot-update-diagram.png">
+<img class="img-fluid" width="638" src="../images/bot-update-diagram.png">
 
 At any point during the flow, a bot can provide data to RingCentral. Data exchange between the developer and RingCentral is based on SIP INFO message. Data can be provided in the SIP INFO payload. Currently a JSON-encoded payload is the only format supported. In this case, Content-Type header is set to application/json.
 
@@ -53,7 +53,7 @@ When providing a final intent, JSON ‘final’ property is expected to be set t
 
 ## Bot Disconnection
 
-<img class="img-fluid" width="330" src="../../images/bot-disconnection-diagram.png">
+<img class="img-fluid" width="330" src="../images/bot-disconnection-diagram.png">
 
 Although a developer may disconnect their bot at any time, it is expected that the disconnection will be initiated by RingCentral, after final intent is received from bot. A simple BYE request is used to disconnect the bot.
 
