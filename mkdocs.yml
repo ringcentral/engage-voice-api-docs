@@ -94,7 +94,7 @@ nav:
   - 'Authentication':
     - 'Overview': authentication/index.md
     - 'RingCX with RingCentral Token (default)': authentication/auth-ringcentral.md
-    - 'RingCX Access Token': authentication/auth-engage.md
+    - 'Engage Access Token': authentication/auth-engage.md
     - 'Legacy': authentication/auth-legacy.md
   - 'Events and Notifications':
     - 'Overview': notifications/index.md
