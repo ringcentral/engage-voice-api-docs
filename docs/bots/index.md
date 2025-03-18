@@ -1,4 +1,4 @@
-# Introduction
+# Bot and IVA SIP integration
 
 This guide describes an interface between RingCentral and the Bot Partner Platform based on the SIP protocol.
 
@@ -13,11 +13,11 @@ Limitations:
 
 * Potential issues with the size of the custom data
 
-# Implementation
+## Implementation
 
 The following guide for developers helps developer connect, update, and disconnect a bot from the interaction.
 
-## Bot Connection
+### Bot Connection
 
 <img class="img-fluid" width="871" src="../images/bot-connection-diagram.png">
 
@@ -37,11 +37,11 @@ Bot selection can also be based on a specific SIP header (header name TBD).
 
 In general, SIP headers shall be available from the bot flow engine.
 
-### Authentication between RingCentral and Bot Partner Platform
+#### Authentication between RingCentral and Bot Partner Platform
 
 There is no authentication mechanism per say. A typical implementation would rely on IP address whitelisting. The required list of RingCentral public IP addresses that are used to establish SIP dialog with bot are documented in the IP Supernets section of the [Ring Cental Network Requirements Documentation](https://support.ringcentral.com/article-v2/Network-requirements.html?brand=RingCentral&product=RingEX&language=en_US)
 
-## Bot Update
+### Bot Update
 
 <img class="img-fluid" width="638" src="../images/bot-update-diagram.png">
 
@@ -51,13 +51,13 @@ The bot flow shall allow the end-user specifying the JSON data.
 
 When providing a final intent, JSON ‘final’ property is expected to be set to true.
 
-## Bot Disconnection
+### Bot Disconnection
 
 <img class="img-fluid" width="330" src="../images/bot-disconnection-diagram.png">
 
 Although a developer may disconnect their bot at any time, it is expected that the disconnection will be initiated by RingCentral, after final intent is received from bot. A simple BYE request is used to disconnect the bot.
 
-# Connection Reuse
+## Connection Reuse
 
 With TCP or TLS transport, RingCX establishes the connection toward the 3rd-party bot destination, and an INVITE message is sent over that establishes the connection. In this case, RingCX does not expect (and does not support) receiving SIP messages (neither responses to the INVITE nor in-dialog requests) on the provided address specified in Contact header. Instead, any SIP message from the bot is expected to be sent to RingCX over the established TCP/TLS connection.
 
