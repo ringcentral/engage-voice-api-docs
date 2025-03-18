@@ -2,10 +2,10 @@
 
 To access RingCX APIs without a corresponding RingEX account, you can directly login to the Engage platform by specifying the platform you reside on.
 
-!!! hint "All new accounts start with RingEX"
+!!! important "All new accounts start with RingEX"
     For accounts with single-sign-on to RingEX, the method to [exchange access tokens](auth-ringcentral.md#retrieve-ringcentral-access-token) is the default.
 
-!!! warning "If you do not know which platform your account resides on, please contact your Customer Success Manager (CSM) and ask for your Platform ID."
+!!! note "If you do not know which platform your account resides on, please contact your Customer Success Manager (CSM) and ask for your Platform ID."
 
 ## Generate an Engage Access Token
 
