@@ -102,7 +102,10 @@ nav:
       - 'Creating an Event': notifications/wfm/configure-wfm.md
       - 'Event Payload': notifications/wfm/payload-wfm.md
     - 'Web Services': notifications/web-service/index.md
-  - 'Integration': integration/index.md
+  - 'Integration': 
+    - 'Integrations': integration/index.md
+    - 'Administration': integration/admin.md
+    - 'Routing': integration/agent-avail.md
   - 'SDKs': sdks.md
   - 'Embeddable': embeddable.md
   - 'Postman': postman.md

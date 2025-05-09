@@ -30,7 +30,7 @@ RingCX is using the host server, and is accessible on `https://ringcx.ringcentra
   `/api/auth/login`
 * API endpoint path
   `/voice/api/v1`
-* Platform base url
+* Platform base url including [Integration APIs](../integration/index.md)
   `/platform/api`
 
 ### Legacy Host

@@ -2,55 +2,33 @@
 
 When integrating workforce management with our contact center platform, you may also want to connect to our RingEX platform. For example, agents may have a need to contact other employees who are not agents and are part of the back office. Those employees will have a RingEX account and you'll need the RingCentral user ID to lookup the address book and find contacts that are only in the back office. In those cases, you need a mapping between the RingCentral user ID and RingCX agent ID.
 
-## User List
-
-The [public user list](https://developers.ringcentral.com/engage/voice/api-reference/Users/listAllUsers) most developers will use has many details including creation date, enabled status, and roles. However, for integrations, a smaller set of user data may be all that is needed, but with the added ability to distinguish the RingCX user name from the RingCentral user name and the environment ID. For this purpose, there's an [integration user list](https://developers.ringcentral.com/engage/voice/api-reference/Integration-User-Controller/getUserList) that can be used instead.
-
-## Sub-Accounts
-
-Each main account has a sub-account where most customers reside. However, for partners, more sub-accounts may exist and retrieving [sub-accounts](https://developers.ringcentral.com/engage/voice/api-reference/Integration-Account-Controller/getSubAccountsByMainAccountId) may be useful for determining which account is being used by the customer.
-
-## Agents
-
-Most developers will want a list of agents and agent groups, but for workforce management, there are additional details that are important to know about agents.  [Agents](https://developers.ringcentral.com/engage/voice/api-reference/Agents/getAgentList) are derived from RingEX users and the RingCentral User ID will map to an agent ID in RingCX.  Along with this detail, you can also retrieve the agent's supervisors as an array of agent IDs, or if the agent is a supervisor, a list of agents that the agent supervises (`superviseeAgentIds`).
-
-## Queue Groups
-
-Once known as gates, queues are inbound routing rules for customers calling in to a number. Typically, queues have agents assigned to them and each queue would have to be iterated through to find all the agents assigned to a queue group. However, the [gate group with agents](https://developers.ringcentral.com/engage/voice/api-reference/Integration-Gate-Group-Controller/getGateGroupsWithAgents) integration API allows you to get a complete list of all queues in a queue group and the agents contained in that queue in a single call.
-
 ## Integration Reports
 
 The integration reports are special reports for integration purposes to assist with better workforce management. The integration reports consists of the following reports for agent and queue statistics.
 
-* Agent Extended Statistics Report - An extended agent and queue report with call counts and durations
-* Agent Segment Metadata Report - A detailed agent interaction report by segment for each call
-* Queue Statistics Report - A specific report that lists all the queues in a queue group and the agents within each queue.
+!!! tip "The Reports API calls must be 5 minutes before now!"
+    When making an API call for the following reports, you must specify a time period at least 5 minutes before the current time. This means you can not specify a time period in the future, or even the current time. You must specify at least an end time with the end time being 5 minutes before the current time.
 
-### Agent Extended Statistics Report
+!!! tip "Be aware of rate limits"
+    The following report APIs are rate limited. This means you can only call the API a certain number of times before having to wait to call the report API again.
 
-The report file can be in either CSV or XML format. The table below explains the fields of each interval.
+    The rate limit is currently set at 2 calls per minute (per node)
 
-| Field | Description |
-|-|-|
-| interval | period of time in minutes in 15, 30, 45, or 60 minute lengths. |
-| date_from | start date for this interval |
-| time (H24:MI) | time in hour:minute format of the current interval |
-| agent_id | the agent's unique identifier |
-| agent_name | the agent's full name |
-| queue | the queue's unique identifier in which the agent is in |
-| queue_name | the queue's name in which the agent is in |
-| talking_call_dur | total handling time (in seconds) on the call |
-| wrap_up_dur | Total wrap-up time or after call work (in seconds), associated with queue calls answered by the agent |
-| answ_call_cnt | number of answered calls (only calls through a queue)|
-| transfer_out_call_cnt | number of calls answered and then transferred to a queue |
+    What this means is you may call the report API up to 2 times per node, but your request may be distributed to another node where your API call will succeed. The best way to handle this rate limit is to make an API call and if you receive a rate limit warning `429 Too Many Requests` status code, implement a backoff mechanism (e.g. exponential backoff) to space out retry attempts. You should also log rate limit errors and adjust request strategies accordingly.
+
+* **Agent Segment Metadata Report** - Also known as the interaction metadata report, this detailed agent interaction report has a record for each segment of a call
+* **Queue Statistics Report** - A specific report that lists all the queues in a queue group and the agents within each queue.
+* **Agent Extended Statistics Report** - An extended agent and queue report with call counts and durations
 
 ### Agent Segment Metadata Report
 
-Also known as the interaction metadata report, this report is broken down into call legs, or also known as segments. Each segment consists of an interaction between a single agent and client. Each client could have have multiple segments as they are transferred to different agents, but each agent has only a single segment with a client.
+Also known as the interaction metadata report, this report is broken down into call legs, or also known as segments. Each segment consists of an interaction between a single agent and client. Each client could have have multiple segments as they are transferred to different agents, but each agent has only a single segment with a client. The interaction metadata reports are based upon completed interactions, but interactions may take time to be processed before being available in the report. Please allow a 15 minute window before invoking this API to retrieve the current completed interactions.
 
-`POST https://{BASE_URL}/voice/api/integration/v2/admin/reports/accounts/{subAccountId}/interactionMetadata`
+Be sure to set the proper [BASE_URL](../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
-#### Request Body
+`POST https://{BASE_URL}/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/interaction-metadata`
+
+#### Request
 
 | Field | Description|
 |-|-|
@@ -58,7 +36,8 @@ Also known as the interaction metadata report, this report is broken down into c
 | timeInterval | Interval length in seconds. Maximum allowed length is 3600 (1 hour). Note: if your time interval start or end in the future consecutive requests may return different list of segment. Idempotent results only guaranteed for the completed intervals. Segment recording URL may be added after delay. Allow 1-2min for processing |
 | timeZone | Timezone name which should be used for report generation |
 
-**Quick example**: let's say we want to find the report with call start time `2022-10-20T07:47:48`, we'll have `segmentEndTime` < `2022-10-20T07:47:48` < `segmentEndTime + timeInterval` (assuming no time zone offset). So a valid set of values for request body will be:
+!!! info "Quick example"
+    Let's say we want to find the report with call start time `2022-10-20T07:47:48`, we'll have `segmentEndTime` < `2022-10-20T07:47:48` < `segmentEndTime + timeInterval` (assuming no time zone offset). So a valid set of values for request body will be:
 
 ```json
 {
@@ -72,45 +51,124 @@ Also known as the interaction metadata report, this report is broken down into c
 
 | Field | Description |
 |-|-|
+| subAccountId | The customer's account that they operate within. |
+| dialogId | Each interaction is uniquely identified by this ID. For a call, the interaction starts when a call is made and last until the call is ended. For a chat, the interaction starts when a chat is started and lasts until the chat ends. |
 | interactionId | Unique interaction ID (UII) used to connect different call segments together in transfer/conference scenarios. |
+| channelId | A unique channel ID for the source associated with an account such as X/Twitter, Facebook, email, or webpage chat. |
+| channelType | A more detailed version of the `channelClass`. The `VOICE` channel can have types such as `VOICE`, `MVP_CALL`, or `MVP_MEETING`. The `DIGITAL` channel can consists of many types such as `EMAIL`, `SMS`, or even `TWITTER`. |
+| channelClass | RingCX has `VOICE` channels and `DIGITAL` channels to choose from. |
+| channelEndpointAddress | The ANI of the interaction. The phone number or user name of the person making the call/chat (this could be the agent or the customer) |
+| contactEndpointAddress | The DNIS of the interaction. The phone number or the user name of the person who is receiving the call/chat (this could be the agent or the customer) |
+| dialogOrigination | the direction of the call/chat from the perspective of the agent whether `INBOUND` or `OUTBOUND`. For chats, the direction is always `INBOUND` |
 | interactionRecordingLocation | the link for entire call recording in mono format |
-| interactionStartTimeMs | Start time of the interaction. Could be different from segment start time if customer was engaged with the IVR, waited in queue, etc before agent joined the conversation. Milliseconds precision |
-| interactionDurationMs | The total duration of the interaction. Milliseconds precision |
-| interactionCallingAddress | The ANI of the interaction. The phone number of the person making the call (this could be the agent or the customer) |
-| interactionCalledAddress | The DNIS of the interaction. The phone number of the person who is receiving the call (this could be the agent or the customer) |
-| interactionDirection | the direction of the call whether `INBOUND` or `OUTBOUND` |
-| segmentID | Unique segment sequence ID within the interaction that typically begins at `2` |
-| segmentAgentId | the agent identifier (RingCentral user id) of the agent for this call leg |
+| dialogStartTimeMs | Start time of the dialog. Could be different from segment start time if customer was engaged with the IVR, waited in queue, etc before agent joined the conversation. Milliseconds precision. |
+| dialogDurationMs | The total duration of the dialog, including all agent segments. This can be different from the `segmentDurationMs` because a segment is measured by the agent time with the participant and a dialog can include other agents, IVR, or queue. Milliseconds precision |
+| segmentID | Unique segment sequence ID within the interaction. A new segment is created whenever an agent or contact leaves a call or joins a call. There can multiple segments for each dialog (see `dialogId` above). |
+| segmentType | A segment is a portion of a dialog. A segment can consist of the `AGENT` or `BOT` talking to a participant, or a participant interacting with an `IVR`. |
+| segmentParticipantId | the participant identifier (RingCentral user id) of the participant for this call leg |
+| segmentParticipantRcExtensionId | The unique RingCentral identifier represented by their internal extension ID (not extension number that you can dial) |
+| segmentStartTimeMs | Time participant joined the conversation. Milliseconds precision and time zone is in UTC. |
+| segmentEndTimeMs | Time participant left the conversation. Milliseconds precision and time zone is in UTC. |
+| segmentDurationMs | Segment duration (available even when segmentContactEndTime is not provided) in milliseconds. |
 | segmentAgentGroupId | the agent group identifier of the agent group this agent belongs to, for this call leg |
-| segmentContactStartTimeMs | Time agent joined the conversation. Milliseconds precision |
-| segmentContactEndTimeMs | Time agent left the conversation. Milliseconds precision |
-| segmentDuration | Segment duration (available even when segmentContactEndTime is not provided) seconds |
 | segmentRecordingURL | the call recording for this call leg (note, there could be many legs to a single call if the call is transferred) |
 | segmentEvents | Ordered list of events. Can be empty if segmentRecordingURL is empty. In other cases array start with the event REC_START. Events don't overlap each other. A child element has `eventTimeMs`(event time with milliseconds precision. Server side), `clientEventTimeMs`(event time with milliseconds precision. Client side) and `eventType`(can be either `REC_START` or `REC_STOP`)|
 
+### Retrieving Agent Segment Recordings
+
+To retrieve the agent call recording you must first ensure the agent segment recording feature is enabled for each [queue](https://support.ringcentral.com/article-v2/Using-AI-generated-transcripts-and-summaries.html?brand=RingCentral&product=RingCX&language=en_US) or [campaign](https://support.ringcentral.com/article-v2/Configuring-outbound-call-recording-settings.html?brand=RingCentral&product=RingCX&language=en_US) that you want to record (click each type to see how). Once enabled, the interaction-metadata API will indicate an interaction will have a recording available. To retrieve the recording, please wait at least 10 minutes for the recording to be processed and ready.
+
+To retrieve the call recording you will need your account information including your [RingEX account ID](https://developers.ringcentral.com/api-reference/Company/readAccountInfo) and [RingCX subaccount ID](https://developers.ringcentral.com/engage/voice/api-reference/Integration-Account-Controller/getSubAccountsByMainAccountId).
+
+Then you will need two fields from the interaction metadata report including the `dialogId` and the `segmentId`. With these four parameters, you can retriee the call recording in `audio/wav` format
+
+Be sure to set the proper [BASE_URL](../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+
+`POST https://{BASE_URL}/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/recordings/dialogs/{dialogId}/segments/{segmentId}`
+
+### Retrieving Agent Segment Transcripts
+
+#### Special Note About Call Recording Formats
+
+Call recordings are normally returned as a WAV file with PCM 16 bit encoding when using the API. If using the API via a browswer interface, a compressed MP3 file is returned instead. If you need the compressed audio file, you can set a browser like type as the `User-Agent`:
+
+| Key | Value |
+|-|-|
+| User-Agent | Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 |
+
 ### Queue Statistics Report
 
-The report file can be in either CSV or XML format. The table below explains the fields of each interval.
+This report returns statistics for a single queue over a period of time and returns the statistics in JSON format. When making an agent extended statistics report request, you will want to specify the `startDate` in the following format: `YYYY-MM-DD HH:MM:SS`. If you do not specify and `endDate` you will receive all report statistics to the current date. You should specify an `endDate` to limit your response to based upon your `timeZone`. The `timeInterval` will return records in 15, 30, 45, and 60 minute intervals.
+
+Be sure to set the proper [BASE_URL](../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+
+`POST https://{BASE_URL}/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/agg-queue-stats`
+
+#### Request
+
+| Field | Description|
+|-|-|
+| startDate | Start date and time for the logging interval in `YYYY-MM-DD HH:MM:SS` format |
+| endDate | End date and time for the logging interval in `YYYY-MM-DD HH:MM:SS` format |
+| timeInterval | Interval length in minutes. This will return records in 15, 30, 45, and 60 minute intervals |
+| timeZone | Timezone name which should be used for report generation |
+
+The table below explains the fields of each interval.
+
+#### Response
 
 | Field | Description |
 |-|-|
 | interval | period of time in minutes in 15, 30, 45, or 60 minute lengths. |
-| date_from | start date for this interval |
-| time (H24:MI) | time in hour:minute format of the current interval |
+| dateTimeFrom | start date for this interval |
 | queue | the queue’s unique numeric identifier |
-| queue_name | given name of the queue |
-| offd_direct_call_cnt | inbound calls to this queue, this queue being the original receiver |
-| overflow_in_call_cnt | number of calls to this queue with another queue as original receiver (Overflow in) |
-| aband_call_cnt | number of lost/abandoned calls during this interval |
-| overflow_out_call_cnt | number of overflow calls in this interval |
-| answ_call_cnt | number of answered calls in this interval |
-| queued_and_answ_call_dur | total queue time for all queued calls that were answered (in seconds) |
-| queued_and_aband_call_dur | total queue time for all queued calls that were abandoned (in seconds) |
-| talking_call_dur | length of time for the call |
-| wrap_up_dur | length of time for the agent to disposition the call |
-| queued_answ_longest_que_dur | the longest time a caller was in the queue before it was answered by an agent (in seconds) |
-| queued_aband_longest_que_dur | the longest time a caller was in the queue before the caller abandoned (or lost) the call (in seconds) |
-| ans_servicelevel_cnt | number of items answered within service level |
-| wait_dur | total waiting time for agents ready and waiting on items (in seconds) |
-| aband_short_call_cnt | number of abandoned short items, e.g. items with a queue time less than 5 seconds |
-| aband_within_sl_cnt | number of abandoned items within service level. Any abandoned items reported in `aband_short_call_cnt` should not be included |
+| queueName | given name of the queue |
+| offDirectIxnCnt | inbound calls or chats to this queue, this queue being the original receiver |
+| overflowInIxnCnt | number of calls or chats to this queue with another queue as original receiver (Overflow in) |
+| abandIxnCnt | number of lost/abandoned calls or chats during this interval |
+| overflowOutIxnCnt | number of overflow calls or chats that were sent to another queue in this interval |
+| answIxnCnt | number of answered calls in this interval |
+| queuedAndAnswIxnDur | total queue time for all queued calls and chats that were answered (in seconds) |
+| queuedAndAbandIxnDur | total queue time for all queued calls and chats that were abandoned (in seconds) |
+| talkingIxnDur | length of time in seconds for the call and chats |
+| wrapUpDur | length of time ins seconds for the agent to disposition the call |
+| queuedAnswLongestQueDur | the longest time a caller was in the queue before it was answered by an agent (in seconds) |
+| queuedAbandLongestQueDur | the longest time a caller was in the queue before the caller abandoned (or lost) the call (in seconds) |
+| ansServicelevelCnt | number of answered conatct on this queue within service level |
+| waitDur | total waiting time for agents ready and waiting on contacts (in seconds) |
+| abandShortIxnCnt | number of abandoned contacts, e.g. contacts with a queue time less than 5 seconds |
+| abandWithinSlCnt | number of abandoned contacts within service level. Any abandoned contacts reported in `aband_short_call_cnt` should not be included |
+
+### Agent Extended Statistics Report
+
+This report returns statistics of all queues along with their agents for given Sub-Account and duration in JSON format. When making an agent extended statistics report request, you will want to specify the `startDate` in the following format: `YYYY-MM-DD HH:MM:SS`. If you do not specify and `endDate` you will receive all report statistics to the current date. You should specify an `endDate` to limit your response to based upon your `timeZone`. The `timeInterval` will return records in 15, 30, 45, and 60 minute intervals.
+
+Be sure to set the proper [BASE_URL](../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+
+`POST https://{BASE_URL}/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/agg-agent-extended-stats`
+
+#### Request
+
+| Field | Description|
+|-|-|
+| startDate | Start date and time for the logging interval in `YYYY-MM-DD HH:MM:SS` format |
+| endDate | End date and time for the logging interval in `YYYY-MM-DD HH:MM:SS` format |
+| timeInterval | Interval length in minutes. This will return records in 15, 30, 45, and 60 minute intervals |
+| timeZone | Timezone name which should be used for report generation |
+
+The table below explains the fields of each interval.
+
+#### Response
+
+| Field | Description |
+|-|-|
+| interval | period of time in minutes in 15, 30, 45, or 60 minute lengths. |
+| dateTimeFrom | start date for this interval |
+| agentId | the agent's unique identifier |
+| agentName | the agent's full name |
+| queue | the queue's unique identifier in which the agent is in |
+| queueName | the queue's name in which the agent is in |
+| talkingIxnDur | total handling time (in seconds) on the call or chat |
+| wrapUpDur | total wrap-up time or after call/chat work (in seconds), associated with queue calls or chat answered by the agent |
+| answIxnCnt | number of answered calls or chats (only calls or chats through a queue)|
+| transferOutIxnCnt | number of calls or chats answered and then transferred to a queue |
