@@ -1,6 +1,6 @@
-# Unique Integration APIs
+# Historical Reporting APIs
 
-When integrating workforce management with our contact center platform, you may also want to connect to our RingEX platform. For example, agents may have a need to contact other employees who are not agents and are part of the back office. Those employees will have a RingEX account and you'll need the RingCentral user ID to lookup the address book and find contacts that are only in the back office. In those cases, you need a mapping between the RingCentral user ID and RingCX agent ID.
+The following reports are commonly used for workforce management and give you detailed agent interaction records or aggregated statistics across queues and agents.
 
 ## Integration Reports
 

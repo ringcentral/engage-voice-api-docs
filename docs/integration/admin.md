@@ -4,7 +4,7 @@ The following set of APIs are for admins that need to manage their sub accounts,
 
 ## User List
 
-The [public user list](https://developers.ringcentral.com/engage/voice/api-reference/Users/listAllUsers) most developers will use has many details including creation date, enabled status, and roles. However, for integrations, a smaller set of user data may be all that is needed, but with the added ability to distinguish the RingCX user name from the RingCentral user name and the environment ID. For this purpose, there's an [integration user list](https://developers.ringcentral.com/engage/voice/api-reference/Integration-User-Controller/getUserList) that can be used instead.
+The user list returns a list of admins on the account. For a list of agents, please use the [Agents](https://developers.ringcentral.com/engage/voice/api-reference/Integration-Agent-Controller/getAgentList) API. The [public user list](https://developers.ringcentral.com/engage/voice/api-reference/Users/listAllUsers) most developers will use has many details including creation date, enabled status, and roles. However, for integrations, a smaller set of user data may be all that is needed, but with the added ability to distinguish the RingCX user name from the RingEX user name and the environment ID. For this purpose, there's an [integration user list](https://developers.ringcentral.com/engage/voice/api-reference/Integration-User-Controller/getUserList) that can be used instead.
 
 ## Sub-Accounts
 

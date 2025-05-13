@@ -103,7 +103,7 @@ nav:
       - 'Event Payload': notifications/wfm/payload-wfm.md
     - 'Web Services': notifications/web-service/index.md
   - 'Integration': 
-    - 'Integrations': integration/index.md
+    - 'Reports': integration/reports.md
     - 'Administration': integration/admin.md
     - 'Routing': integration/agent-avail.md
   - 'SDKs': sdks.md
