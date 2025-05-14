@@ -2,6 +2,8 @@
 
 Supervisors want to have clear and reliable metrics to assess agent availability and understand how inbound calls are being handled within a queue. These availability metrics gives supervisors that insight in order to make decisions on agent staffing and how to best handle customers waiting in the queue.
 
+!!! tip "App Scope for CX Routing is required"
+    To use the agent availability APIs, you must have the `CX Routing` app scope assigned to your application. For instructions on how to add app scopes to your application, please use the [App scopes](https://developers.ringcentral.com/guide/basics/permissions) guide.
 
 ## Parameters
 
