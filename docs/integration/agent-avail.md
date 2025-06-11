@@ -5,6 +5,14 @@ Supervisors want to have clear and reliable metrics to assess agent availability
 !!! tip "App Scope for CX Routing is required"
     To use the agent availability APIs, you must have the `CX Routing` app scope assigned to your application. For instructions on how to add app scopes to your application, please use the [App scopes](https://developers.ringcentral.com/guide/basics/permissions) guide.
 
+## Sample request
+
+Be sure to set the proper [BASE_URL](../basics/uris.md#resources-and-parameters) and [authorization header](../authentication/auth-ringcentral.md) for your deployment.
+
+```http
+GET {BASE_URL}/cx/routing/v1/sub-accounts/{subAccountId}/queues/{queueId}/availability?queueType=Voice
+```
+
 ## Parameters
 
 The following describe the important parameters, including `path` and `query` parameters, and how to use them:
