@@ -1745,10 +1745,10 @@
                         "$ref": "#/components/schemas/RegionalSettingRequestResponse"
                     },
                     "roles": {
-                        "type": "array",
                         "items": {
                             "$ref": "#/components/schemas/Role"
-                        }
+                        },
+                        "type": "array"
                     },
                     "rootUser": {
                         "type": "boolean"
