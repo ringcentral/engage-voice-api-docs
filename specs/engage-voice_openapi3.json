@@ -1745,10 +1745,10 @@
                         "$ref": "#/components/schemas/RegionalSettingRequestResponse"
                     },
                     "roles": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Role"
-                      }
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Role"
+                        }
                     },
                     "rootUser": {
                         "type": "boolean"
@@ -7221,32 +7221,32 @@
                 "type": "object"
             },
             "Role": {
-              "type": "object",
-              "properties": {
-                "description": {
-                  "type": "string"
-                },
-                "roleType": {
-                  "type": "string",
-                  "enum": [
-                    "SUPER_USER",
-                    "USER",
-                    "MANAGE_USERS",
-                    "MANAGE_RIGHTS",
-                    "ACCESS_SIBLINGS",
-                    "ACCESS_AUDIT_LOG",
-                    "ACCESS_GOODDATA_ADMIN",
-                    "ACCESS_GOODDATA_EDITOR",
-                    "ACCESS_GOODDATA_EXPLORER",
-                    "ACCESS_GOODDATA_VIEWER",
-                    "ACCESS_GOODDATA_EMBEDDED_EXPLORER",
-                    "ACCESS_GOODDATA_EMBEDDED_DASHBOARD",
-                    "ASSUME_USERS",
-                    "REPORT_ADMINISTRATIVE_USER",
-                    "NO_ACCESS"
-                  ]
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "roleType": {
+                        "type": "string",
+                        "enum": [
+                            "SUPER_USER",
+                            "USER",
+                            "MANAGE_USERS",
+                            "MANAGE_RIGHTS",
+                            "ACCESS_SIBLINGS",
+                            "ACCESS_AUDIT_LOG",
+                            "ACCESS_GOODDATA_ADMIN",
+                            "ACCESS_GOODDATA_EDITOR",
+                            "ACCESS_GOODDATA_EXPLORER",
+                            "ACCESS_GOODDATA_VIEWER",
+                            "ACCESS_GOODDATA_EMBEDDED_EXPLORER",
+                            "ACCESS_GOODDATA_EMBEDDED_DASHBOARD",
+                            "ASSUME_USERS",
+                            "REPORT_ADMINISTRATIVE_USER",
+                            "NO_ACCESS"
+                        ]
+                    }
                 }
-              }
             },
             "DateTime": {
                 "properties": {
@@ -13283,10 +13283,10 @@
                         "$ref": "#/components/schemas/RegionalSettingRequestResponse"
                     },
                     "roles": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Role"
-                      }
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Role"
+                        }
                     },
                     "rootUser": {
                         "type": "boolean"
@@ -14311,6 +14311,137 @@
                         "example": "REC_START"
                     }
                 }
+            },
+            "WEMInteractionSegmentMetaData2Array": {
+                "type": "array",
+                "items": {
+                    "$ref": "#/components/schemas/WEMDialogSegmentMetaData"
+                },
+                "example": [
+                    {
+                        "subAccountId": "99999999",
+                        "dialogId": "s-v-93bd0e6f0f0a479ea8025fe8f8ec3e1d-1721690897808",
+                        "interactionId": "202407221928172035020000000572",
+                        "channelId": "2013770791",
+                        "channelType": "VOICE",
+                        "channelClass": "VOICE",
+                        "channelEndpointAddress": "7312066731",
+                        "contactEndpointAddress": "2013770791",
+                        "dialogOrigination": "INBOUND",
+                        "dialogStartTimeMs": "2024-07-22T11:24:40.000Z",
+                        "dialogEndTimeMs": "2024-07-22T11:24:47.000Z",
+                        "dialogDurationMs": 7000,
+                        "segmentId": "p-v-93bd0e6f0f0a479ea8025fe8f8ec3e1d-1721690897808-190dcc63d90ab",
+                        "segmentType": "AGENT",
+                        "segmentParticipantId": "449438",
+                        "segmentParticipantRcExtensionId": "985901004",
+                        "segmentStartTimeMs": "2024-07-22T11:24:40.000Z",
+                        "segmentEndTimeMs": "2024-07-22T11:24:47.000Z",
+                        "segmentDurationMs": 7000,
+                        "segmentAgentGroupId": "76873",
+                        "systemDisposition": "ANSWER",
+                        "agentDisposition": "Success",
+                        "agentNotes": "requeue to others",
+                        "hasRecording": true,
+                        "hasTranscript": true,
+                        "segmentEvents": [
+                            {
+                                "eventTimeMs": "2024-07-22T11:24:40.000Z",
+                                "clientEventTimeMs": "2024-07-22T11:24:40.000Z",
+                                "eventType": "REC_START"
+                            },
+                            {
+                                "eventTimeMs": "2024-07-22T11:24:47.000Z",
+                                "clientEventTimeMs": "2024-07-22T11:24:47.000Z",
+                                "eventType": "REC_STOP"
+                            }
+                        ]
+                    },
+                    {
+                        "subAccountId": "99999999",
+                        "dialogId": "d-65fc2f3a382dd00007d8a5d7-1711025979007",
+                        "interactionId": "202407230228251400000000001026",
+                        "channelId": "672daeb8cd026600070ca39f",
+                        "channelType": "ENGAGE_MESSAGING",
+                        "channelClass": "DIGITAL",
+                        "channelEndpointAddress": "+16506675176",
+                        "contactEndpointAddress": "+1324",
+                        "dialogOrigination": "INBOUND",
+                        "dialogStartTimeMs": "2024-07-23T02:28:25.014Z",
+                        "dialogEndTimeMs": "2024-07-23T02:28:42.000Z",
+                        "dialogDurationMs": 17000,
+                        "segmentId": "d-669e351bef0ea5000753266b-669f4d88a7ba580007b48caf",
+                        "segmentType": "AGENT",
+                        "segmentParticipantId": "789438",
+                        "segmentParticipantRcExtensionId": "1552533005",
+                        "segmentStartTimeMs": "2024-07-23T02:28:25.000Z",
+                        "segmentEndTimeMs": "2024-07-23T02:28:42.000Z",
+                        "segmentDurationMs": 17000,
+                        "segmentAgentGroupId": "79698",
+                        "systemDisposition": null,
+                        "agentDisposition": "Success",
+                        "agentNotes": "Engage Messaging Notes",
+                        "hasRecording": false,
+                        "hasTranscript": true,
+                        "segmentEvents": null
+                    },
+                    {
+                        "subAccountId": "99999999",
+                        "dialogId": "d-672dbaf7c211050006e056e1-1731050231731",
+                        "interactionId": "202411080217120144700000000001",
+                        "channelId": "672daeb8cd026600070ca39f",
+                        "channelType": "EMAIL",
+                        "channelClass": "DIGITAL",
+                        "channelEndpointAddress": "+16506675176",
+                        "contactEndpointAddress": "+1324",
+                        "dialogOrigination": "INBOUND",
+                        "dialogStartTimeMs": "2024-07-23T02:28:25.014Z",
+                        "dialogEndTimeMs": "2024-07-23T02:28:42.000Z",
+                        "dialogDurationMs": 17000,
+                        "segmentId": "d-672dbaf7c211050006e056e1-1731050231731-1930aa2600f99",
+                        "segmentType": "AGENT",
+                        "segmentParticipantId": "789438",
+                        "segmentParticipantRcExtensionId": "1552533005",
+                        "segmentStartTimeMs": "2024-07-23T02:28:25.000Z",
+                        "segmentEndTimeMs": "2024-07-23T02:28:42.000Z",
+                        "segmentDurationMs": 17000,
+                        "segmentAgentGroupId": "79698",
+                        "systemDisposition": null,
+                        "agentDisposition": "Success",
+                        "agentNotes": "email notes",
+                        "hasRecording": false,
+                        "hasTranscript": true,
+                        "segmentEvents": null
+                    },
+                    {
+                        "subAccountId": "99999999",
+                        "dialogId": "d-672dba74c211050006e056d4-1731050100923",
+                        "interactionId": "202411080215020144700000000000",
+                        "channelId": "672daeb8cd026600070ca39f",
+                        "channelType": "MESSENGER",
+                        "channelClass": "DIGITAL",
+                        "channelEndpointAddress": "+16506675176",
+                        "contactEndpointAddress": "+1324",
+                        "dialogOrigination": "INBOUND",
+                        "dialogStartTimeMs": "2024-07-23T02:28:25.014Z",
+                        "dialogEndTimeMs": "2024-07-23T02:28:42.000Z",
+                        "dialogDurationMs": 17000,
+                        "segmentId": "d-672dba74c211050006e056d4-1731050100923-1930aa0638ea8",
+                        "segmentType": "AGENT",
+                        "segmentParticipantId": "789438",
+                        "segmentParticipantRcExtensionId": "1552533005",
+                        "segmentStartTimeMs": "2024-07-23T02:28:25.000Z",
+                        "segmentEndTimeMs": "2024-07-23T02:28:42.000Z",
+                        "segmentDurationMs": 17000,
+                        "segmentAgentGroupId": "79698",
+                        "systemDisposition": null,
+                        "agentDisposition": "Success",
+                        "agentNotes": "Messenger notes",
+                        "hasRecording": false,
+                        "hasTranscript": true,
+                        "segmentEvents": null
+                    }
+                ]
             }
         },
         "securitySchemes": {
@@ -25382,7 +25513,7 @@
                                 "schema": {
                                     "type": "string"
                                 },
-                                "example": "JWT has expired."
+                                "example": "JWT is expired."
                             }
                         }
                     },
@@ -25494,7 +25625,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/CalabrioInteractionSegmentMetaData2Array"
+                                    "$ref": "#/components/schemas/WEMInteractionSegmentMetaData2Array"
                                 }
                             }
                         }
@@ -25524,7 +25655,7 @@
                                 "schema": {
                                     "type": "string"
                                 },
-                                "example": "JWT has expired."
+                                "example": "JWT is expired."
                             }
                         }
                     },
@@ -25656,20 +25787,18 @@
                                             "errorMessage": null,
                                             "transcript": [
                                                 {
+                                                    "message": "I cannot transfer number porting",
                                                     "participantId": "d-6555aa00cd0df30007872d38-6555aa00cd0df30007872d37",
-                                                    "rcUserId": null,
-                                                    "participantName": null,
                                                     "participantType": "contact",
-                                                    "timestamp": "1721651880000",
-                                                    "message": "I cannot transfer number porting"
+                                                    "rcUserId": "665127314",
+                                                    "timestamp": "1721651880000"
                                                 },
                                                 {
+                                                    "message": "Can you provide your RC account? And describe the steps you met?",
                                                     "participantId": "d-6555b45ccd0df30007872dd2-1700115548459-18bd6d7301135",
-                                                    "rcUserId": null,
-                                                    "participantName": null,
                                                     "participantType": "agent",
-                                                    "timestamp": "1721651881000",
-                                                    "message": "Can you provide your RC account? And describe the steps you met?"
+                                                    "rcUserId": "665127314",
+                                                    "timestamp": "1721651881000"
                                                 }
                                             ]
                                         }
@@ -25728,7 +25857,7 @@
                                 "schema": {
                                     "type": "string"
                                 },
-                                "example": "JWT has expired."
+                                "example": "JWT is expired."
                             }
                         }
                     },
@@ -25786,12 +25915,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ]
+                }
             }
         },
         "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/queue-groups": {
@@ -25875,7 +25999,7 @@
                                 "schema": {
                                     "type": "string"
                                 },
-                                "example": "JWT has expired."
+                                "example": "JWT is expired."
                             }
                         }
                     },
@@ -26007,7 +26131,7 @@
                                         },
                                         {
                                             "queueId": 556,
-                                            "queueType": "VOICE",
+                                            "queueType": "DIGITAL",
                                             "queueName": "Test queue 2",
                                             "queueGroupId": 1009,
                                             "isActive": true,
@@ -26046,7 +26170,7 @@
                                 "schema": {
                                     "type": "string"
                                 },
-                                "example": "JWT has expired."
+                                "example": "JWT is expired."
                             }
                         }
                     },
@@ -26165,46 +26289,50 @@
                                 },
                                 "example": [
                                     {
-                                        "interval": 60,
+                                        "abandIxnCnt": 0,
+                                        "abandShortIxnCnt": 0,
+                                        "abandWithinSlCnt": 0,
+                                        "ansServicelevelCnt": 0,
+                                        "answIxnCnt": 3,
+                                        "completedContacts": 122,
                                         "dateTimeFrom": "03-04-2024T01:00:00",
-                                        "queue": 5682,
-                                        "queueName": "Queue",
+                                        "interval": 60,
                                         "offdDirectIxnCnt": 3,
                                         "overflowInIxnCnt": 0,
-                                        "abandIxnCnt": 0,
                                         "overflowOutIxnCnt": 0,
-                                        "answIxnCnt": 3,
-                                        "queuedAndAnswIxnDur": 9,
-                                        "queuedAndAbandIxnDur": 0,
-                                        "talkingIxnDur": 90,
-                                        "wrapUpDur": 13,
-                                        "queuedAnswLongestQueDur": 1,
+                                        "queue": 5686,
                                         "queuedAbandLongestQueDur": 0,
-                                        "ansServicelevelCnt": 0,
+                                        "queuedAndAbandIxnDur": 0,
+                                        "queuedAndAnswIxnDur": 9,
+                                        "queuedAnswLongestQueDur": 1,
+                                        "queueName": "Queue",
+                                        "segmentHoldTime": 512000,
+                                        "talkingIxnDur": 90,
                                         "waitDur": 13,
-                                        "abandShortIxnCnt": 0,
-                                        "abandWithinSlCnt": 0
+                                        "wrapUpDur": 13
                                     },
                                     {
-                                        "interval": 60,
+                                        "abandIxnCnt": 0,
+                                        "abandShortIxnCnt": 0,
+                                        "abandWithinSlCnt": 0,
+                                        "ansServicelevelCnt": 0,
+                                        "answIxnCnt": 3,
+                                        "completedContacts": 21,
                                         "dateTimeFrom": "03-04-2024T02:00:00",
-                                        "queue": 5687,
-                                        "queueName": "Neringa queue",
+                                        "interval": 60,
                                         "offdDirectIxnCnt": 3,
                                         "overflowInIxnCnt": 0,
-                                        "abandIxnCnt": 0,
                                         "overflowOutIxnCnt": 0,
-                                        "answIxnCnt": 3,
-                                        "queuedAndAnswIxnDur": 0,
-                                        "queuedAndAbandIxnDur": 0,
-                                        "talkingIxnDur": 9,
-                                        "wrapUpDur": 13,
-                                        "queuedAnswLongestQueDur": 0,
+                                        "queue": 5686,
                                         "queuedAbandLongestQueDur": 0,
-                                        "ansServicelevelCnt": 0,
+                                        "queuedAndAbandIxnDur": 0,
+                                        "queuedAndAnswIxnDur": 9,
+                                        "queuedAnswLongestQueDur": 1,
+                                        "queueName": "Queue 2",
+                                        "segmentHoldTime": 12000,
+                                        "talkingIxnDur": 90,
                                         "waitDur": 13,
-                                        "abandShortIxnCnt": 0,
-                                        "abandWithinSlCnt": 0
+                                        "wrapUpDur": 13
                                     }
                                 ]
                             }
@@ -26235,7 +26363,7 @@
                                 "schema": {
                                     "type": "string"
                                 },
-                                "example": "JWT has expired."
+                                "example": "JWT is expired."
                             }
                         }
                     },
@@ -26406,7 +26534,7 @@
                                 "schema": {
                                     "type": "string"
                                 },
-                                "example": "JWT has expired."
+                                "example": "JWT is expired."
                             }
                         }
                     },
@@ -26531,7 +26659,7 @@
                                         "agentName": "test number, aws91-l22-engage",
                                         "availDur": 3376,
                                         "totWorkDur": 3376,
-                                        "pauseDur": 0,
+                                        "pauseDur": 900,
                                         "waitDur": 2476,
                                         "adminDur": 0,
                                         "directOutIxnCnt": 0,
@@ -26583,7 +26711,7 @@
                                 "schema": {
                                     "type": "string"
                                 },
-                                "example": "JWT has expired."
+                                "example": "JWT is expired."
                             }
                         }
                     },
