@@ -41,7 +41,7 @@ Be sure to set the proper [BASE_URL](../basics/uris.md#resources-and-parameters)
 
 ```json
 {
-    "segmentEndTime": "2022-10-20T07:40:00",
+    "segmentEndTime": "2022-10-20 07:40:00",
     "timeInterval": 600,
     "timeZone": "US/Eastern"
 }
