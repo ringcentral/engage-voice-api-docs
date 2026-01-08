@@ -11,12 +11,12 @@ The JSON body consists of a set of options along with an array of leads in the `
 
 Some key options for the request body include:
 
-| Property | Description |
-|-|-|
-| **dialPriority** | set this value to `IMMEDIATE` to add leads to the top of the dialer queue, `NORMAL` otherwise. |
-| **duplicateHandling** | Duplicates are determined by the lead's `leadPhone` property.<ul><li>`REMOVE_ALL_EXISTING` means to remove the new lead in this batch in favor of the existing lead in any list in the campaign (as long as that lead in the existing lead list was already added with this same property). This means that the lead was already loaded into one of the lists within the campaign using `REMOVE_ALL_EXISTING` previously.</li><li>`REMOVE_FROM_LIST` looks for duplicate leads in the list being uploaded. It does not remove duplicates in the lead list that has already been imported previously.</li><li>`RETAIN_ALL` means to keep all duplicates.</li></ul> |
-| **timeZoneOption** | this field tells the Engage how to set the timezone for the user. Use `NPA_NXX` to set the timezone via the lead's phone number. Use `ZIPCODE` to set the timezone via the lead's zipcode. Use `EXPLICIT` to set the timezone via the `CampaignLead` object's `leadTimezone` property. Finally, use `NOT_APPLICABLE` if there is no timezone desired. |
-| **numberOriginCountry** | this is a required field if the international outbound calling feature is enabled for the account. |
+| Property | | Description |
+|-|-|-|
+| **dialPriority** | Required | set this value to `IMMEDIATE` to add leads to the top of the dialer queue, `NORMAL` otherwise. |
+| **duplicateHandling** | Required | Duplicates are determined by the lead's `leadPhone` property.<ul><li>`REMOVE_ALL_EXISTING` means to remove the new lead in this batch in favor of the existing lead in any list in the campaign (as long as that lead in the existing lead list was already added with this same property). This means that the lead was already loaded into one of the lists within the campaign using `REMOVE_ALL_EXISTING` previously.</li><li>`REMOVE_FROM_LIST` looks for duplicate leads in the list being uploaded. It does not remove duplicates in the lead list that has already been imported previously.</li><li>`RETAIN_ALL` means to keep all duplicates.</li></ul> |
+| **timeZoneOption** | Required | this field tells the Engage how to set the timezone for the user. Use `NPA_NXX` to set the timezone via the lead's phone number. Use `ZIPCODE` to set the timezone via the lead's zipcode. Use `EXPLICIT` to set the timezone via the `CampaignLead` object's `leadTimezone` property. Finally, use `NOT_APPLICABLE` if there is no timezone desired. |
+| **numberOriginCountry** | Required(conditionally) | this is a required field if the international outbound calling feature is enabled for the account. |
 
 Each load in the `uploadLeads` array consists of a lead with the following notable options:
 
@@ -375,4 +375,5 @@ Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-paramete
       }
     }
     ```
+
 
