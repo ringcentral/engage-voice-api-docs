@@ -41,7 +41,7 @@ Leads are uploaded per Campaign which requires a `campaignId`. The following two
 
 To upload leads for a campaign, we will need a campaign Id. As campaigns are members of a dialing group.
 
-## Enumerating Campaigns and Import Leads
+## Enumerating Campaigns and Uploading Leads
 
 ### Request
 Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
