@@ -32,6 +32,7 @@ nav:
 - 'Primary':
   - 'Analytics':
     - 'Overview': analytics/index.md
+    - 'Audit Logs': analytics/audit-logs.md
     - 'Cloud Reports':
       - 'Call Detail': analytics/reports/call-detail-report.md
     - 'Realtime Reports':

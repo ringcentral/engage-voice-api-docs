@@ -12,18 +12,44 @@ Audit logs are critical for organizations requiring rigorous change management p
 * **Forensic Investigation:** Track administrative user activity, including simulated sessions, to investigate suspicious or erroneous system modifications.
 
 ### Historical vs Real Time Audit Scope
-The Audit API is designed for the retrieval of historical change records. It is not intended for real-time monitoring or alerting. The system logs administrative events as they occur, making them available for retrieval shortly after the action is finalized.
+The Audit API is designed for the retrieval of historical change records. It is not intended for real-time monitoring or alerting. The system logs administrative events as they occur, making them available for retrieval 5 minutes after the action is finalized. 
 
 ### Required App Permissions (Scopes)
-Access to the administrative audit trail is governed by **OAuth Scopes**. These must be enabled in your application settings within the [RingCentral Developer Portal](https://developers.ringcentral.com/my-account.html#/applications).
 
-To successfully invoke these endpoints, your app must be configured with the following permissions:
+Access to the administrative audit trail is governed by **OAuth Scopes** and specific **RingCX Admin Permissions**. These settings ensure that forensic data is only accessible to authorized applications and users.
 
-* **`ReadAuditTrail`**: The primary scope required to search and retrieve audit log records.
-* **`ReadAccounts`**: Required for the Discovery API and to validate the `accountId` context used in search requests.
+#### 1. Configure OAuth Scopes
 
-> [!IMPORTANT]
-> Since you are using a **JWT** or **3-Legged OAuth** flow, the user authenticating the app must also have administrative privileges within the account to view this forensic data. If the app has the correct scopes but the user lacks the necessary platform permissions, the API will return a `403 Forbidden` error.
+To successfully exchange a JWT for an access token using your client credentials, your application must be configured with the following permission in the [Developer Portal](https://developers.ringcentral.com/my-account.html#/applications):
+
+* **`ReadAccounts`**: Required to validate the account context and complete the authentication flow.
+
+For a detailed walkthrough on exchanging your JWT for an access token, please refer to the [RingCentral Authentication Guide](https://developers.ringcentral.com/engage/voice/guide/authentication/auth-ringcentral).
+
+#### 2. Enable RingCX Admin Access
+
+In addition to app scopes, the user authenticating the app must have the specific **Audit log access** permission enabled within the RingCX Admin portal. Without this, the API will fail to authorize the request.
+
+To enable this:
+
+1. Log in to **RingCX Admin**.
+2. Navigate to **Users** > **Administrators**.
+3. Select the target user and ensure the **Audit log access** box is checked.
+
+![Audit Log Access Configuration](../images/audit-log-access.png)
+
+[!WARNING]
+If the application has the correct scopes but the user lacks this platform permission, the API will return the following error:
+> ```json
+> {
+>     "errorCode": "access.denied.exception",
+>     "generalMessage": "You do not have permission to access this resource",
+>     "details": "",
+>     "requestUri": "/api/v1/admin/auditLogs/search - PUT",
+>     "timestamp": <TIMESTAMP>
+> }
+> 
+> ```
 
 ### Be Aware of Rate Limits
 Standard platform rate limiting applies to audit requests. The limit is 10 requests per minute. To ensure system stability during large data extractions, implement a robust backoff mechanism. If the API returns a `429 Too Many Requests` status code, utilize an exponential backoff strategy for subsequent retry attempts.
@@ -60,17 +86,19 @@ The Search API serves as the primary extraction point for audit records. It allo
 `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/auditLogs/search`
 
 ### Request Body
-Field | Description
---- | ---
-accountId | **Required.** The unique identifier for the sub-account being audited.
-startDateTime | **Required.** The start of the search interval (ISO-8601 with offset).
-endDateTime | **Required.** The end of the search interval (ISO-8601 with offset).
-auditActions | Filter results by specific actions: `CREATE`, `UPDATE`, or `DELETE`.
-searchEntities | An optional array of entity names (from the Discovery API) to narrow the audit scope.
-createUserId | Filter for actions performed by a specific administrator's unique ID.
-auditedEntityId | Filter for actions performed on a specific resource (e.g., a specific Agent's ID).
-orderBy | The field used for record sorting (commonly `createTime`).
-ascOrDesc | The sort direction for the audit trail: `ASCENDING` or `DESCENDING`.
+| Parameter | Type | Requirement | Description |
+| --- | --- | --- | --- |
+| `accountId` | String | **Required** | The unique identifier for the sub-account being audited. |
+| `startDateTime` | String | **Required** | The start of the search interval (ISO-8601 `date-time`). |
+| `endDateTime` | String | **Required** | The end of the search interval (ISO-8601 `date-time`). |
+| `auditActions` | Array | Optional | Filter results by specific actions: `CREATE`, `UPDATE`, or `DELETE`. |
+| `searchEntities` | Array | Optional | An optional array of entity names to narrow the audit scope (e.g., `Agent`, `Campaign`). |
+| `createUserId` | String | Optional | Filter for actions performed by a specific administrator's unique ID. |
+| `auditedEntityId` | String | Optional | Filter for actions performed on a specific resource (e.g., a specific Agent's ID). |
+| `orderBy` | String | Optional | The field name used for record sorting. |
+| `ascOrDesc` | String | Optional | The sort direction for the audit trail: `ASCENDING` or `DESCENDING`. |
+| `startDateTimeAsUnix` | Integer | Optional | Unix timestamp for the start date (alternative to `startDateTime`). |
+| `endDateTimeAsUnix` | Integer | Optional | Unix timestamp for the end date (alternative to `endDateTime`). |
 
 **Example Request:**
 ```json
@@ -85,104 +113,80 @@ ascOrDesc | The sort direction for the audit trail: `ASCENDING` or `DESCENDING`.
 
 ### Audit Log Response Details
 
-(Add a list of what kind of actions (like login/logout, and stuff) can appear and what they will look like)
+The Audit Log API tracks administrative changes across the platform. The `actionType` field identifies the nature of the event:
+
+* **CREATE**: A new entity (such as an Agent or Campaign) was added to the system.
+* **UPDATE**: An existing entity was modified. These records include an `auditLogResultList` detailing specific field changes.
+* **DELETE**: An entity was removed from the system.
 
 The response object provides a chronological trail of administrative actions. Each record in the results array contains the following key attributes:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `element` | String | The entity type that was modified (e.g., `Agent`, `Campaign`, `IVR`). |
-| `elementId` | String | The unique internal system identifier for the modified entity. |
-| `description` | String | A human-readable name for the entity, such as a Campaign name or Agent email. |
-| `action` | String | The specific operation performed: `CREATE`, `UPDATE`, or `DELETE`. |
-| `dateTime` | String | ISO-8601 timestamp of when the administrative event occurred. |
-| `user` | String | The email address of the administrator who performed the action. |
-| `simulatedBy` | String | Populated if an admin performed the action while "simulating" another user. |
-| `changes` | Array | A collection of specific field modifications (populated for `UPDATE` actions). |
+| `id` | String | The unique identifier (UUID) for the specific audit log entry. |
+| `auditedClass` | String | The Java class path of the entity type that was modified (e.g., `com.connectfirst...Gate`). |
+| `auditedEntityId` | String | The unique internal system identifier for the modified entity. |
+| `auditedEntityDescription` | String | A human-readable name for the entity, such as a Gate name or Agent email. |
+| `actionType` | String | The specific operation performed: `CREATE`, `UPDATE`, or `DELETE`. |
+| `createTimeAsDateTime` | String | ISO-8601 timestamp of when the administrative event occurred. |
+| `accountId` | String | The unique identifier for the sub-account where the action occurred. |
+| `authUser` | Object | Contains details about the administrator who performed the action, including `userName` and `sourceId` (IP address). |
+| `auditLogResultList` | Array | A collection of specific field modifications (populated for `UPDATE` actions). |
+| `affectedEntityJson` | String | A JSON string representation of the entity (usually populated for `CREATE` and `DELETE` actions). |
+| `_class` | String | Internal system identifier indicating the underlying document model (e.g., `com.connectfirst.api.model.documents.AuditLog`). |
 
-#### Changes Object Structure
+#### auditLogResultList Object Structure
 
-For `UPDATE` actions, the `changes` array details precisely which settings were altered:
+For `UPDATE` actions, the `auditLogResultList` array details precisely which settings were altered:
 
-* **field**: The internal name of the setting that was changed (e.g., `dialingMode`).
-* **previousValue**: The value of the setting before the update.
+* **attributeName**: The internal name of the setting that was changed (e.g., `gatePriority`).
+* **originalValue**: The value of the setting before the update.
 * **newValue**: The updated value of the setting.
+* **classType**: The full Java class path of the entity being modified.
 
 ---
 
 ### Example Response JSON
-Below is an example output from the audit log search showing a configuration **UPDATE** to an existing `VisualIvr` object and a **CREATE** action for a new `GateDisposition` entity.
+
+Below is an example output from the audit log search showing a configuration **UPDATE** to an existing `Gate` object.
+
 ```json
 [
     {
-        "id": "UNIQUE-UUID-HEX-STRING",
+        "id": "00000000-0000-0000-0000-000000000000",
         "authUser": {
-            "sourceId": "IP-ADDRESS",
-            "firstName": "USER-FIRST-NAME",
-            "lastName": "USER-LAST-NAME",
-            "userName": "user.email@example.com",
-            "userId": "INTERNAL-USER-ID",
+            "sourceId": "0.0.0.0",
+            "firstName": "Admin",
+            "lastName": "User",
+            "userName": "admin.user@example.com",
+            "userId": "00000",
             "fullJson": null,
             "simulatedByUserId": null,
             "simulatedByUserName": null,
             "simulatedFromIP": null
         },
-        "createTime": 1767745493366,
+        "createTime": 1111111111111,
         "auditLogResultList": [
             {
-                "attributeName": "debug",
-                "originalValue": "false",
-                "newValue": "true",
-                "classType": "com.connectfirst.api.model.intelliqueue_globalcatalog.ivrStudio.VisualIvr"
-            },
-            {
-                "attributeName": "debugEmail",
-                "originalValue": null,
-                "newValue": "user.email@example.com",
-                "classType": "com.connectfirst.api.model.intelliqueue_globalcatalog.ivrStudio.VisualIvr"
+                "attributeName": "gatePriority",
+                "originalValue": "0",
+                "newValue": "1",
+                "classType": "com.connectfirst.api.model.intelliqueue_globalcatalog.acd.Gate"
             }
         ],
-        "auditedClass": "com.connectfirst.api.model.intelliqueue_globalcatalog.ivrStudio.VisualIvr",
-        "auditedEntityId": "ENTITY-ID-STRING",
-        "auditedEntityDescription": "OBJECT-NAME-OR-DESCRIPTION",
+        "auditedClass": "com.connectfirst.api.model.intelliqueue_globalcatalog.acd.Gate",
+        "auditedEntityId": "000000",
+        "auditedEntityDescription": "Example Entity Name",
         "actionType": "UPDATE",
         "affectedEntityJson": null,
-        "accountId": "ACCOUNT-ID-STRING",
-        "createTimeAsDateTime": "2026-01-07T00:24:53.366+0000",
-        "_class": "com.connectfirst.api.model.documents.AuditLog"
-    },
-    {
-        "id": "UNIQUE-UUID-HEX-STRING",
-        "authUser": {
-            "sourceId": "IP-ADDRESS",
-            "firstName": "USER-FIRST-NAME",
-            "lastName": "USER-LAST-NAME",
-            "userName": "user.email@example.com",
-            "userId": "INTERNAL-USER-ID",
-            "fullJson": null,
-            "simulatedByUserId": null,
-            "simulatedByUserName": null,
-            "simulatedFromIP": null
-        },
-        "createTime": 1767752574376,
-        "auditLogResultList": null,
-        "auditedClass": "com.connectfirst.api.model.intelliqueue_globalcatalog.acd.GateDisposition",
-        "auditedEntityId": "ENTITY-ID-STRING",
-        "auditedEntityDescription": "OBJECT-NAME-OR-DESCRIPTION",
-        "actionType": "CREATE",
-        "affectedEntityJson": "{\"gateDispositionId\":123456,\"disposition\":\"Placeholder Name\",\"isRequeued\":0,\"isActive\":true}",
-        "accountId": "ACCOUNT-ID-STRING",
-        "createTimeAsDateTime": "2026-01-07T02:22:54.376+0000",
+        "accountId": "00000000",
+        "createTimeAsDateTime": "2026-01-13T00:00:00.000+0000",
         "_class": "com.connectfirst.api.model.documents.AuditLog"
     }
 ]
 
 ```
 
-### Response Characteristics
-
-* **Deletions**: If an entity is deleted, the `changes` array will be empty as the entire record is removed from the active system.
-* **Simulated Actions**: The `simulatedBy` and `simulatedFromIP` fields are critical for forensic auditing when troubleshooting changes made by external support or high-level administrators acting on behalf of a local user.
 
 ### Supported elements
 
