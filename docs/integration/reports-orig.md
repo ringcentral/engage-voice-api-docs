@@ -21,7 +21,7 @@ Data availability is subject to a propagation delay while interactions are final
 
 !!! important "Rate Limiting & Stability"
     * **Limit:** Requests are limited to **4 calls per minute** per node.
-    * **Strategy:** If the API returns a `429 Too Many Requests` status code, implement an **exponential backoff** strategy.
+    * **Strategy:** If the API returns a `429 Too Many Requests` status code, implement an **exponential backoff** strategy for subsequent retry attempts. This strategy involves doubling the delay after each consecutive 429 error (e.g., 1s, 2s, 4s...) rather than retrying at fixed intervals.
 
 ### Required Permissions & Scopes
 
