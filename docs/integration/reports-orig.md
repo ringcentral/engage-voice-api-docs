@@ -20,7 +20,7 @@ Data availability is subject to a propagation delay while interactions are final
 * **Processing Buffer:** For interaction metadata and recordings, it is recommended to allow a 15-minute window for all media processing to complete.
 
 !!! important "Rate Limiting & Stability"
-    * **Limit:** Requests are limited to **2 calls per minute** per instance. The effective rate limit scales based on the number of instances available in the server environment.
+    * **Limit:** Requests are limited to **2 calls per minute**.
     * **Strategy:** If the API returns a `429 Too Many Requests` status code, implement an **exponential backoff** strategy for subsequent retry attempts. This strategy involves doubling the delay after each consecutive 429 error (e.g., 1s, 2s, 4s...) rather than retrying at fixed intervals.
 
 ### Required Permissions & Scopes
