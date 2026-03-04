@@ -43,7 +43,14 @@ A user would use this to perform forensic tracking or quality assurance. For exa
 
 * **Reference:** [Interaction Metadata API Details](https://developers.ringcentral.com/engage/voice/api-reference/Integration-Report-Controller/streamFileInteractionMetadata)
 
+### Retrieving Agent Segment Recordings & Transcripts
 
+Once metadata is retrieved, users can access the specific media files.
+
+* **Recordings:** Used for compliance archiving and quality evaluations. To account for processing time, allow at least 10 minutes after an interaction completes before retrieval.
+* **Transcripts:** Used for text-based sentiment analysis and quick review of conversations without listening to audio. Like recordings, these should be accessed after the 10-15 minute processing window.
+
+For more details on how to retrieve these files refer to the [Call Transcripts API](../analytics/reports/call-transcripts.md)
 
 ---
 
