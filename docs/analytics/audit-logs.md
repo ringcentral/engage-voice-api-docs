@@ -38,21 +38,21 @@ To enable this:
 
 ![Audit Log Access Configuration](../images/audit-log-access.png)
 
-[!WARNING]
-If the application has the correct scopes but the user lacks this platform permission, the API will return the following error:
-> ```json
-> {
->     "errorCode": "access.denied.exception",
->     "generalMessage": "You do not have permission to access this resource",
->     "details": "",
->     "requestUri": "/api/v1/admin/auditLogs/search - PUT",
->     "timestamp": <TIMESTAMP>
-> }
-> 
-> ```
+!!! warning
+    If the application has the correct scopes but the user lacks this platform permission, the API will return the following error:
+    > ```json
+    > {
+    >     "errorCode": "access.denied.exception",
+    >     "generalMessage": "You do not have permission to access this resource",
+    >     "details": "",
+    >     "requestUri": "/api/v1/admin/auditLogs/search - PUT",
+    >     "timestamp": <TIMESTAMP>
+    > }
+    > 
+    > ```
 
 !!! important "Important - Be Aware of Rate Limits"
-    Standard platform rate limiting applies to audit requests. The limit is 10 requests per minute. To ensure system stability during large data extractions, implement a robust backoff mechanism. If the API returns a `429 Too Many Requests` status code, utilize an exponential backoff strategy for subsequent retry attempts.
+    Standard platform rate limiting applies to audit requests. The limit is 120 requests per minute. For high-volume data uploads, you can include up to 1000 leads per single API call to maximize throughput. If the API returns a 429 Too Many Requests status code, implement an exponential backoff strategy for subsequent retry attempts to ensure system stability.
 
 
 ### Important Technical Constraints

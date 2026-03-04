@@ -12,6 +12,10 @@ Visit at: https://engage-voice-api-docs.rtfd.org
 
 If you would like to contribute to the RingCentral documentation effort, fork this repository, make your desired edits and contributions, and issue a pull request accordingly.
 
+### Adding New Articles
+
+When creating a new documentation page, please use the [template.md](docs/template.md) file as a baseline to ensure consistent formatting and metadata.
+
 ### Running ReadTheDocs Locally
 
 ```

@@ -15311,6 +15311,65 @@
                 ]
             }
         },
+        "/voice/api/v1/admin/auditLogs/auditable": {
+            "get": {
+                "tags": [
+                    "Audit Logs"
+                ],
+                "summary": "Identify system entities eligible for auditing",
+                "operationId": "getAuditableEntities",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Auditable"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/voice/api/v1/admin/auditLogs/search": {
+            "put": {
+                "tags": [
+                    "Audit Logs"
+                ],
+                "summary": "Search administrative audit records",
+                "description": "The Search API serves as the primary extraction point for audit records. It allows organizations to reconstruct the history of administrative tasks by filtering for specific timeframes, action types, or individual actors.",
+                "operationId": "searchAuditLogs",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuditLogSearchCriteria"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AuditLog"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/voice/api/v1/admin/accounts/{accountId}/agentGroups": {
             "get": {
                 "description": "Permissions: READ on Account, Post Filtered Results",
