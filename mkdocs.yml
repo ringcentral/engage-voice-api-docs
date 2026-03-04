@@ -35,6 +35,7 @@ nav:
     - 'Audit Logs': analytics/audit-logs.md
     - 'Cloud Reports':
       - 'Call Detail': analytics/reports/call-detail-report.md
+      - 'Call Transcripts': analytics/reports/call-transcripts.md
     - 'Realtime Reports':
       - 'Agent Segment Metadata': analytics/reports/agent-segment-metadata-report.md
       - 'Agent Session': analytics/reports/agent-session-report.md
