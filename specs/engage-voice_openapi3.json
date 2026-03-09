@@ -14442,6 +14442,261 @@
                         "segmentEvents": null
                     }
                 ]
+            },
+            "WEMDialogSegmentMetaData": {
+                "type": "object",
+                "properties": {
+                    "subAccountId": { "type": "string" },
+                    "dialogId": { "type": "string" },
+                    "interactionId": { "type": "string" },
+                    "channelId": { "type": "string" },
+                    "channelType": { "type": "string" },
+                    "channelClass": { "type": "string" },
+                    "channelEndpointAddress": { "type": "string" },
+                    "contactEndpointAddress": { "type": "string" },
+                    "dialogOrigination": { "type": "string" },
+                    "dialogStartTimeMs": { "type": "string", "format": "date-time" },
+                    "dialogEndTimeMs": { "type": "string", "format": "date-time" },
+                    "dialogDurationMs": { "type": "integer" },
+                    "segmentId": { "type": "string" },
+                    "segmentType": { "type": "string" },
+                    "segmentParticipantId": { "type": "string" },
+                    "segmentParticipantRcExtensionId": { "type": "string" },
+                    "segmentStartTimeMs": { "type": "string", "format": "date-time" },
+                    "segmentEndTimeMs": { "type": "string", "format": "date-time" },
+                    "segmentDurationMs": { "type": "integer" },
+                    "segmentAgentGroupId": { "type": "string" },
+                    "systemDisposition": { "type": "string", "nullable": true },
+                    "agentDisposition": { "type": "string" },
+                    "agentNotes": { "type": "string" },
+                    "hasRecording": { "type": "boolean" },
+                    "hasTranscript": { "type": "boolean" },
+                    "segmentEvents": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/InteractionSegmentEvent" },
+                        "nullable": true
+                    }
+                }
+            },
+            "AggregatedIntegrationParams": {
+                "type": "object",
+                "required": [
+                    "segmentEndTime",
+                    "timeInterval",
+                    "timeZone"
+                ],
+                "properties": {
+                    "segmentEndTime": {
+                        "type": "string",
+                        "description": "Start date and time for the logging interval",
+                        "example": "2024-03-04 08:27:15"
+                    },
+                    "timeInterval": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Interval length in seconds. Maximum allowed length is 3600 (1 hour).",
+                        "example": 1800
+                    },
+                    "timeZone": {
+                        "type": "string",
+                        "description": "Timezone name which should be used for report generation",
+                        "example": "US/Eastern"
+                    }
+                }
+            },
+            "AggregatedAgentStats": {
+                "type": "object",
+                "properties": {
+                    "interval": { "type": "integer", "format": "int32" },
+                    "dateTimeFrom": { "type": "string" },
+                    "agentId": { "type": "integer", "format": "int32" },
+                    "agentName": { "type": "string" },
+                    "availDur": { "type": "integer", "format": "int32" },
+                    "totWorkDur": { "type": "integer", "format": "int32" },
+                    "pauseDur": { "type": "integer", "format": "int32" },
+                    "waitDur": { "type": "integer", "format": "int32" },
+                    "adminDur": { "type": "integer", "format": "int32" },
+                    "directOutIxnCnt": { "type": "integer", "format": "int32" },
+                    "directOutIxnDur": { "type": "integer", "format": "int32" },
+                    "directInIxnCnt": { "type": "integer", "format": "int32" },
+                    "directInIxnDur": { "type": "integer", "format": "int32" }
+                }
+            },
+            "AggregatedQueueStats": {
+                "type": "object",
+                "properties": {
+                    "dateTimeFrom": { "type": "string" },
+                    "interval": { "type": "integer", "format": "int32" },
+                    "queue": { "type": "integer", "format": "int32" },
+                    "queueName": { "type": "string" },
+                    "offdDirectIxnCnt": { "type": "integer", "format": "int32" },
+                    "answIxnCnt": { "type": "integer", "format": "int32" },
+                    "abandIxnCnt": { "type": "integer", "format": "int32" },
+                    "abandShortIxnCnt": { "type": "integer", "format": "int32" },
+                    "abandWithinSlCnt": { "type": "integer", "format": "int32" },
+                    "ansServicelevelCnt": { "type": "integer", "format": "int32" },
+                    "completedContacts": { "type": "integer", "format": "int32" },
+                    "queuedAndAnswIxnDur": { "type": "integer", "format": "int32" },
+                    "queuedAndAbandIxnDur": { "type": "integer", "format": "int32" },
+                    "queuedAnswLongestQueDur": { "type": "integer", "format": "int32" },
+                    "queuedAbandLongestQueDur": { "type": "integer", "format": "int32" },
+                    "talkingIxnDur": { "type": "integer", "format": "int32" },
+                    "wrapUpDur": { "type": "integer", "format": "int32" },
+                    "waitDur": { "type": "integer", "format": "int32" },
+                    "segmentHoldTime": { "type": "integer", "format": "int32" },
+                    "overflowInIxnCnt": { "type": "integer", "format": "int32" },
+                    "overflowOutIxnCnt": { "type": "integer", "format": "int32" }
+                }
+            },
+            "ExtendedAggregatedQueueStats": {
+                "type": "object",
+                "properties": {
+                    "interval": { "type": "integer", "format": "int32" },
+                    "dateTimeFrom": { "type": "string" },
+                    "agentId": { "type": "integer", "format": "int32" },
+                    "agentName": { "type": "string" },
+                    "queue": { "type": "integer", "format": "int32" },
+                    "queueName": { "type": "string" },
+                    "talkingIxnDur": { "type": "integer", "format": "int32" },
+                    "wrapUpDur": { "type": "integer", "format": "int32" },
+                    "answIxnCnt": { "type": "integer", "format": "int32" },
+                    "transferOutIxnCnt": { "type": "integer", "format": "int32" }
+                }
+            },
+            "CXQueueWithAgents": {
+                "type": "object",
+                "required": [
+                    "queueId",
+                    "queueName",
+                    "queueGroupId",
+                    "isActive",
+                    "createdOn"
+                ],
+                "properties": {
+                    "queueId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Unique ID for inbound queue",
+                        "example": 555
+                    },
+                    "queueType": {
+                        "type": "string",
+                        "enum": [
+                            "VOICE",
+                            "DIGITAL"
+                        ],
+                        "example": "VOICE"
+                    },
+                    "queueName": {
+                        "type": "string",
+                        "description": "Name of inbound queue",
+                        "example": "Test queue"
+                    },
+                    "queueGroupId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "inbound queue group ID",
+                        "example": 1009
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "true if the inbound queue is active",
+                        "example": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Timestamp when inbound group was created",
+                        "example": "2020-07-21T17:32:28Z"
+                    },
+                    "agentIds": {
+                        "type": "array",
+                        "description": "List of agents who connected to this queue",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": [
+                            10,
+                            20
+                        ]
+                    }
+                }
+            },
+            "RCInteractionTranscriptData": {
+                "type": "object",
+                "properties": {
+                    "channelClass": {
+                        "type": "string",
+                        "example": "DIGITAL"
+                    },
+                    "errorCode": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "errorMessage": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "transcript": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TranscriptPhrase"
+                        }
+                    }
+                }
+            },
+            "TranscriptPhrase": {
+                "type": "object",
+                "properties": {
+                    "participantId": {
+                        "type": "string"
+                    },
+                    "rcUserId": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "participantName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "participantType": {
+                        "type": "string",
+                        "example": "agent"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "example": "1721651880000"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            },
+            "QueueGroup": {
+                "type": "object",
+                "properties": {
+                    "queueGroupId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Unique ID for queue group",
+                        "example": 1009
+                    },
+                    "groupName": {
+                        "type": "string",
+                        "description": "Queue group name",
+                        "example": "Queue group 1"
+                    },
+                    "queueGroupType": {
+                        "type": "string",
+                        "enum": [
+                            "VOICE",
+                            "DIGITAL"
+                        ],
+                        "description": "The type of queues contained in this group",
+                        "example": "VOICE"
+                    }
+                }
             }
         },
         "securitySchemes": {
@@ -14457,13 +14712,13 @@
         }
     },
     "info": {
-        "contact": {},
+        "title": "RingCentral RingCX API",
+        "version": "1.0.0",
+        "termsOfService": "https://developers.ringcentral.com",
         "license": {
             "name": "none"
         },
-        "termsOfService": "https://developers.ringcentral.com",
-        "title": "RingCentral RingCx API",
-        "version": "1.0.0"
+        "contact": {}
     },
     "openapi": "3.0.0",
     "paths": {
