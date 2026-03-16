@@ -4,21 +4,20 @@ The Call Recording APIs allow developers to retrieve and manage audio files gene
 
 ## Strategic Overview
 
-Call recordings are essential for maintaining accountability and improving agent performance. By programmatically retrieving these files, organizations can automate the ingestion of audio data into third-party speech analytics tools, long-term storage buckets (S3/Azure), or specialized Quality Management (QM) platforms.
+Call recordings are essential for maintaining accountability and improving agent performance. By programmatically retrieving these files, organizations can automate the ingestion of audio data into third-party speech analytics tools, long-term storage buckets, or specialized Quality Management (QM) platforms.
 
 ### Key Use Cases
 
 * **Compliance Archiving:** Automatically move recordings to secure, long-term storage to meet regulatory requirements (e.g., PCI or HIPAA).
 * **Quality Management (QM):** Feed audio files into evaluation platforms for manual or automated scoring of agent performance.
-* **Speech Analytics:** Integrate with AI-driven tools to perform sentiment analysis, keyword spotting, and automated categorization of customer intent.
+* **Speech Analytics:** Integrate with AI-driven tools to perform sentiment analysis and automated categorization of customer intent.
 
 ### Real-Time vs. Latency Expectations
 
 Retrieving recordings requires a specific waiting period to allow the system to finalize, encode, and index the audio media.
 
-* **Real-Time Trigger:** The **End Call Event** notification is sent **1-3 seconds** after a call ends and contains the initial `recording_url`.
-* **Encoding Latency:** While the URL is generated immediately, the actual file may take **1-2 minutes** to become valid and accessible, depending on the call length.
-* **Historical Access:** The Agent Segment Metadata report may take several minutes to reflect new records; periodic polling is recommended.
+* **Data Availability:** For interaction metadata and recordings, it is recommended to allow a **15-minute window** for all media processing to complete.
+* **Historical Access:** Reports used to discover recording metadata may take several minutes to reflect new records; periodic polling is recommended.
 
 ### Required Permissions & Scopes
 
@@ -35,20 +34,27 @@ To successfully authenticate, your application must be configured with the follo
 The ability to access specific recording types depends on your account configuration:
 
 1. Log in to **RingCX Admin**.
-2. **For Stereo (Agent) Recordings:** Navigate to **Account Settings**. These must be **manually activated** by your RingCentral representative.
-3. **For API Access:** Ensure the user has **READ on Account** permissions within their assigned Rights Document.
+2. **Permissions:** Ensure the user has **READ on Account** permissions within their assigned Rights Document.
+3. **For Stereo (Agent) Recordings:** These must be **manually activated** by your RingCentral representative.
 
 ---
 
 ## API Discovery
 
-To retrieve a recording, you must first obtain the unique metadata associated with the call (such as the `bucket`, `region`, and `file` name).
+To retrieve a recording, you must first obtain the unique metadata associated with the call, specifically the storage parameters (bucket, region, and file path). These are discovered via the **interactionMetadata** report.
 
-| Source | Method | Field to Capture |
-| --- | --- | --- |
-| **End Call Event** | Webhook | `recording_url` |
-| **Global Call Type Report** | REST API | `recording_url` |
-| **Agent Segment Metadata** | REST API | `Segment Recording URL` |
+For a detailed walkthrough on discovering metadata, please refer to the [Agent Segment Metadata API Guide](../../integration/reports-orig.md#agent-segment-metadata).
+
+`POST /voice/api/integration/v1/admin/reports/accounts/{subAccountId}/interactionMetadata`
+
+### Request Body / Parameters
+
+| Parameter | Type | Requirement | Description |
+| --- | --- | --- | --- |
+| `subAccountId` | String | **Required** | The unique identifier for the RingCX sub-account. |
+| `segmentEndTime` | String | **Required** | Start date and time for the logging interval (ISO-8601). |
+| `timeInterval` | Integer | **Required** | Interval length in seconds (Maximum 3600). |
+| `timeZone` | String | **Required** | Timezone name used for report generation. |
 
 ---
 
@@ -56,25 +62,18 @@ To retrieve a recording, you must first obtain the unique metadata associated wi
 
 This endpoint returns a call recording stream (typically a `.WAV` file).
 
-`GET https://[cluster]-recordings.[domain]/api/v1/calls/recordings`
+`GET /voice/api/internal/v1/calls/recordings`
 
-### Request Parameters
+### Request Body / Parameters
 
 | Parameter | Type | Requirement | Description |
 | --- | --- | --- | --- |
-| `v` | Integer | **Required** | The API version (usually `1`). |
+| `v` | String | **Required** | The API version. |
 | `accountId` | String | **Required** | The unique identifier for the sub-account. |
-| `region` | String | **Required** | The AWS region where the file is stored (e.g., `us-east-1`). |
-| `bucket` | String | **Required** | The storage bucket name (e.g., `c02-recordings`). |
+| `region` | String | **Required** | The AWS region where the file is stored. |
+| `bucket` | String | **Required** | The storage bucket name. |
 | `file` | String | **Required** | The full path and filename of the `.WAV` file. |
 | `compliance` | Boolean | Optional | Set to `true` to retrieve records from the compliance-protected store. |
-
-**Example Request:**
-
-```html
-GET https://c02-recordings.virtualacd.biz/api/v1/calls/recordings/?v=1&accountId=15300002&bucket=c02-recordings&region=us-east-1&compliance=false&file=15300002/202007/30/202007302136360132130000036446-1.WAV
-
-```
 
 ### Response Details
 
@@ -83,7 +82,8 @@ The API returns a binary stream of the recording.
 | Status | Code | Description |
 | --- | --- | --- |
 | **OK** | 200 | Successful operation. The body contains the audio stream. |
-| **Accepted** | 202 | Recording is still encoding; try again in 60 seconds. |
+| **Unauthorized** | 401 | Authentication failed or token is invalid. |
+| **Forbidden** | 403 | User does not have permission to access this recording. |
 | **Not Found** | 404 | The specified recording file does not exist. |
 
 ---
@@ -92,38 +92,40 @@ The API returns a binary stream of the recording.
 
 ### Recommended Pattern
 
-1. **Subscribe to Webhooks:** Use [End Call Events](https://www.google.com/search?q=../../notifications/wfm/payload-wfm.md%23end-call-events) to receive the `recording_url` immediately.
-2. **Queue for Processing:** Do not attempt to download immediately. Place the URL in a processing queue.
-3. **Delayed Polling:** Trigger the download worker **2 minutes** after the call ends to ensure encoding is finished.
-4. **Error Handling:** If you receive a `404` or an empty body, implement exponential backoff and retry up to 3 times.
+1. **Poll Metadata:** Use the `interactionMetadata` endpoint to find calls that ended at least 15 minutes ago.
+2. **Extract IDs:** Capture the specific storage parameters (bucket, region, file) provided in the metadata response.
+3. **Stream Media:** Use those parameters to call the `recordings` endpoint to retrieve the `.WAV` file.
 
 !!! important "Rate Limiting & Stability"
-  * **Limit:** Standard platform limits apply to the metadata reports; however, the media server itself is optimized for streaming.
-  * **Strategy:** Implement exponential backoff for `503` (Service Unavailable) or `429` (Too Many Requests) errors.
+
+* **Limit:** Requests are limited to **2 calls per minute** for reporting/metadata endpoints.
+* **Strategy:** Implement **exponential backoff** on `429` (Too Many Requests) errors.
 
 ### Sample Implementation (Python)
 
 ```python
 import requests
-import time
 
-# Example parameters from an End Call Event
-params = {
-    'v': '1',
-    'accountId': '15300002',
-    'region': 'us-east-1',
-    'bucket': 'c02-recordings',
-    'file': '15300002/202007/30/20200730213636-1.WAV'
-}
+# Base configuration
+BASE_URL = "https://engage.ringcentral.com/voice/api"
+ACCESS_TOKEN = "YOUR_TOKEN"
 
-url = "https://c02-recordings.virtualacd.biz/api/v1/calls/recordings"
-
-def download_recording(target_url, request_params):
-    # Wait for encoding (recommended 1-2 minutes)
-    print("Waiting for media encoding...")
-    time.sleep(120) 
+def download_recording(account_id, region, bucket, file_path):
+    endpoint = f"{BASE_URL}/internal/v1/calls/recordings"
     
-    response = requests.get(target_url, params=request_params, stream=True)
+    params = {
+        'v': '1',
+        'accountId': account_id,
+        'region': region,
+        'bucket': bucket,
+        'file': file_path
+    }
+    
+    headers = {
+        'Authorization': f'Bearer {ACCESS_TOKEN}'
+    }
+    
+    response = requests.get(endpoint, headers=headers, params=params, stream=True)
     
     if response.status_code == 200:
         with open('call_recording.wav', 'wb') as f:
@@ -131,9 +133,7 @@ def download_recording(target_url, request_params):
                 f.write(chunk)
         print("Download complete.")
     else:
-        print(f"Error: {response.status_code}")
-
-download_recording(url, params)
+        print(f"Failed: {response.status_code}")
 
 ```
 
@@ -143,8 +143,7 @@ download_recording(url, params)
 
 ??? info "View Supported Recording Types"
 
-  | Type | Channel | Description |
-  | :--- | :--- | :--- |
-  | **Single Channel** | Mono | A single audio track containing both the agent and customer mixed. |
-  | **Dual Channel** | Stereo | Also known as "Perspective" recordings. The agent and customer are on separate audio channels, which is preferred for high-accuracy transcription. |
-
+| Type | Channel | Description |
+| --- | --- | --- |
+| **Single Channel** | Mono | A single audio track containing both the agent and customer mixed. |
+| **Dual Channel** | Stereo | Also known as "Perspective" recordings. The agent and customer are on separate audio channels, preferred for high-accuracy transcription. |
