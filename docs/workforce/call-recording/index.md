@@ -58,6 +58,29 @@ For a detailed walkthrough on discovering metadata, please refer to the [Agent S
 
 ---
 
+
+### Extracting Storage Parameters
+
+The `interactionMetadata` response provides a `segmentRecordingURL` for each segment. While this looks like a direct link, you must extract the query parameters to use with the authenticated **Download Recording** endpoint.
+
+**Example Metadata Fragment:**
+
+```json
+"segmentRecordingURL": "https://.../recordings/?v=1&accountId=99990001&bucket=c02-recordings&region=us-east-1&file=99990001/202205/09/recording-1.WAV"
+
+```
+
+**Mapping to Download Parameters:**
+
+| API Parameter | Extraction Key from `segmentRecordingURL` | Example Value |
+| --- | --- | --- |
+| **`accountId`** | `accountId` | `99990001` |
+| **`region`** | `region` | `us-east-1` |
+| **`bucket`** | `bucket` | `c02-recordings` |
+| **`file`** | `file` | `99990001/202205/09/recording-1.WAV` |
+
+---
+
 ## Main Endpoint: Download Recording
 
 This endpoint returns a call recording stream (typically a `.WAV` file).
@@ -87,6 +110,8 @@ The API returns a binary stream of the recording.
 | **Not Found** | 404 | The specified recording file does not exist. |
 
 ---
+
+
 
 ## Implementation Strategy
 
