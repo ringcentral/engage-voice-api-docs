@@ -41,7 +41,7 @@ The **Interaction Metadata** API is used to reconstruct the complete "story" of 
 
 A user would use this to perform forensic tracking or quality assurance. For example, if a customer was transferred three times, this API provides the metadata for all three segments, including specific timestamps for when each agent joined or left, and the direct URL to the audio recording for that specific portion of the call.
 
-* **Reference:** [Interaction Metadata API Details](https://developers.ringcentral.com/engage/voice/api-reference/Integration-Report-Controller/streamFileInteractionMetadata)
+* **Reference:** [Interaction Metadata API Details](https://developers.ringcentral.com/engage/voice/api-reference/Integration-Report-Controller/getInteractionMetadata)
 
 ### Retrieving Agent Segment Recordings & Transcripts
 
