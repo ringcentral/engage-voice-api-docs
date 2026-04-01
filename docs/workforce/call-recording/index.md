@@ -1,174 +1,130 @@
+
 # Call Recording APIs
 
-The Call Recording APIs allow developers to retrieve and manage audio files generated during voice interactions. This API provides access to both single-channel (mono) and dual-channel (stereo/perspective) recordings, enabling organizations to perform quality assurance, maintain compliance archives, and conduct sentiment analysis.
+The Call Recording APIs allow developers to programmatically retrieve and manage audio files generated during voice interactions. This API supports both single-channel (mono) and dual-channel (stereo/perspective) recordings, providing the foundation for compliance archiving, quality assurance, and AI-driven sentiment analysis.
 
 ## Strategic Overview
 
-Call recordings are essential for maintaining accountability and improving agent performance. By programmatically retrieving these files, organizations can automate the ingestion of audio data into third-party speech analytics tools, long-term storage buckets, or specialized Quality Management (QM) platforms.
+Call recordings are vital for maintaining organizational accountability and driving performance improvements. By automating the retrieval of these files, organizations can feed audio data into third-party speech analytics, long-term cold storage, or specialized Quality Management (QM) platforms.
 
 ### Key Use Cases
 
-* **Compliance Archiving:** Automatically move recordings to secure, long-term storage to meet regulatory requirements (e.g., PCI or HIPAA).
-* **Quality Management (QM):** Feed audio files into evaluation platforms for manual or automated scoring of agent performance.
-* **Speech Analytics:** Integrate with AI-driven tools to perform sentiment analysis and automated categorization of customer intent.
+* **Compliance Archiving:** Automatically migrate recordings to secure, long-term storage to satisfy regulatory requirements (e.g., PCI, HIPAA, or MiFID II).
+* **Quality Management (QM):** Export audio to evaluation platforms for manual or automated agent performance scoring.
+* **Speech Analytics:** Integrate with AI tools to perform transcription, sentiment analysis, and intent categorization.
 
 ### Real-Time vs. Latency Expectations
 
-Retrieving recordings requires a specific waiting period to allow the system to finalize, encode, and index the audio media.
+Retrieving recordings requires a processing window to allow the system to finalize, encode, and index the audio media.
 
-* **Data Availability:** For interaction metadata and recordings, it is recommended to allow a **15-minute window** for all media processing to complete.
-* **Historical Access:** Reports used to discover recording metadata may take several minutes to reflect new records; periodic polling is recommended.
+* **Data Availability:** For interaction metadata and associated recordings, it is recommended to allow a **15-minute window** after the call ends for all media processing to complete.
+* **Historical Access:** Reporting data may take several minutes to sync; periodic polling is recommended for automated workflows.
 
 ### Required Permissions & Scopes
 
-Access to recording media is governed by account-level security and explicit administrative permissions.
+Access to recording media is governed by account-level security and explicit administrative rights.
 
 #### 1. Configure OAuth Scopes
-
-To successfully authenticate, your application must be configured with the following permission in the [Developer Portal](https://developers.ringcentral.com/my-account.html#/applications):
-
-* **`ReadAccounts`**: Required to validate the account context and authorize media stream access.
+Ensure your application is configured with the following scope in the [Developer Portal](https://developers.ringcentral.com/my-account.html#/applications):
+* **`ReadAccounts`**: Required to validate account context and authorize access to the media stream.
 
 #### 2. Enable Platform Permissions
-
-The ability to access specific recording types depends on your account configuration:
-
-1. Log in to **RingCX Admin**.
-2. **Permissions:** Ensure the user has **READ on Account** permissions within their assigned Rights Document.
-3. **For Stereo (Agent) Recordings:** These must be **manually activated** by your RingCentral representative.
+1.  Log in to **RingCX Admin**.
+2.  **Permissions:** Ensure the user has **READ on Account** permissions.
+3.  **For Stereo (Agent) Recordings:** Stereo recording must be **manually activated** by your RingCentral representative.
 
 ---
 
-## API Discovery
+## API Discovery: Interaction Metadata
 
-To retrieve a recording, you must first obtain the unique metadata associated with the call, specifically the storage parameters (bucket, region, and file path). These are discovered via the **interactionMetadata** report.
+To retrieve a recording, you must first identify the unique identifiers for the call. Unlike legacy systems that provided a direct URL, the current API requires a **Dialog ID** and a **Segment ID**, which are discovered via the `interaction-metadata` report.
+
+`POST https://engage.ringcentral.com/voice/api/integration/v1/admin/reports/accounts/{subAccountId}/interaction-metadata`
 
 For a detailed walkthrough on discovering metadata, please refer to the [Agent Segment Metadata API Guide](../../integration/reports-orig.md#agent-segment-metadata).
 
-`POST /voice/api/integration/v1/admin/reports/accounts/{subAccountId}/interactionMetadata`
 
-### Request Body / Parameters
-
-| Parameter | Type | Requirement | Description |
-| --- | --- | --- | --- |
-| `subAccountId` | String | **Required** | The unique identifier for the RingCX sub-account. |
-| `segmentEndTime` | String | **Required** | Start date and time for the logging interval (ISO-8601). |
-| `timeInterval` | Integer | **Required** | Interval length in seconds (Maximum 3600). |
-| `timeZone` | String | **Required** | Timezone name used for report generation. |
-
----
-
-
-### Extracting Storage Parameters
-
-The `interactionMetadata` response provides a `segmentRecordingURL` for each segment. While this looks like a direct link, you must extract the query parameters to use with the authenticated **Download Recording** endpoint.
-
-**Example Metadata Fragment:**
-
-```json
-"segmentRecordingURL": "https://.../recordings/?v=1&accountId=99990001&bucket=c02-recordings&region=us-east-1&file=99990001/202205/09/recording-1.WAV"
-
-```
-
-**Mapping to Download Parameters:**
-
-| API Parameter | Extraction Key from `segmentRecordingURL` | Example Value |
-| --- | --- | --- |
-| **`accountId`** | `accountId` | `99990001` |
-| **`region`** | `region` | `us-east-1` |
-| **`bucket`** | `bucket` | `c02-recordings` |
-| **`file`** | `file` | `99990001/202205/09/recording-1.WAV` |
+### Locating IDs in the Response
+The response will contain a list of interaction segments. For each segment you wish to download, capture the following fields:
+1.  **`dialogId`**: The unique ID for the entire call conversation.
+2.  **`segmentId`**: The specific ID for the media segment within that dialog.
 
 ---
 
 ## Main Endpoint: Download Recording
 
-This endpoint returns a call recording stream (typically a `.WAV` file).
+Once you have the necessary IDs from the metadata report, use the following endpoint to stream the `.WAV` audio file.
 
-`GET /voice/api/internal/v1/calls/recordings`
+`GET https://engage.ringcentral.com/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/recordings/dialogs/{dialogId}/segments/{segmentId}`
 
-### Request Body / Parameters
+### Path Parameters
 
 | Parameter | Type | Requirement | Description |
-| --- | --- | --- | --- |
-| `v` | String | **Required** | The API version. |
-| `accountId` | String | **Required** | The unique identifier for the sub-account. |
-| `region` | String | **Required** | The AWS region where the file is stored. |
-| `bucket` | String | **Required** | The storage bucket name. |
-| `file` | String | **Required** | The full path and filename of the `.WAV` file. |
-| `compliance` | Boolean | Optional | Set to `true` to retrieve records from the compliance-protected store. |
+| :--- | :--- | :--- | :--- |
+| **`rcAccountId`** | String | **Required** | Your primary RingCentral Account ID. |
+| **`subAccountId`** | String | **Required** | The RingCX sub-account ID where the call occurred. |
+| **`dialogId`** | String | **Required** | The ID of the dialog (obtained via interaction-metadata). |
+| **`segmentId`** | String | **Required** | The ID of the segment (obtained via interaction-metadata). |
 
 ### Response Details
-
 The API returns a binary stream of the recording.
 
 | Status | Code | Description |
-| --- | --- | --- |
-| **OK** | 200 | Successful operation. The body contains the audio stream. |
-| **Unauthorized** | 401 | Authentication failed or token is invalid. |
-| **Forbidden** | 403 | User does not have permission to access this recording. |
-| **Not Found** | 404 | The specified recording file does not exist. |
+| :--- | :--- | :--- |
+| **OK** | 200 | Success. The response body contains the audio stream. |
+| **Unauthorized**| 401 | Authentication failed or token is invalid. |
+| **Forbidden** | 403 | Insufficient permissions to access this specific recording. |
+| **Not Found** | 404 | The specified dialog or segment ID does not exist. |
 
 ---
-
-
 
 ## Implementation Strategy
 
 ### Recommended Pattern
+1.  **Poll Metadata:** Call the `interaction-metadata` endpoint to find segments that ended at least 15 minutes ago.
+2.  **Extract Identifiers:** Parse the JSON response to map the `dialogId` and `segmentId` for each record.
+3.  **Stream Media:** Call the Download Recording endpoint using the path parameters to retrieve the `.WAV` file.
 
-1. **Poll Metadata:** Use the `interactionMetadata` endpoint to find calls that ended at least 15 minutes ago.
-2. **Extract IDs:** Capture the specific storage parameters (bucket, region, file) provided in the metadata response.
-3. **Stream Media:** Use those parameters to call the `recordings` endpoint to retrieve the `.WAV` file.
-
-!!! important "Rate Limiting & Stability"
-
-* **Limit:** Requests are limited to **2 calls per minute** for reporting/metadata endpoints.
-* **Strategy:** Implement **exponential backoff** on `429` (Too Many Requests) errors.
+!!! [!IMPORTANT]
+    **Rate Limiting:** Metadata and reporting endpoints are typically limited to **2 calls per minute**. To maintain stability, implement **exponential backoff** when encountering `429` (Too Many Requests) errors.
 
 ### Sample Implementation (Python)
 
 ```python
 import requests
 
-# Base configuration
-BASE_URL = "https://engage.ringcentral.com/voice/api"
+# Configuration
+BASE_URL = "https://engage.ringcentral.com"
 ACCESS_TOKEN = "YOUR_TOKEN"
 
-def download_recording(account_id, region, bucket, file_path):
-    endpoint = f"{BASE_URL}/internal/v1/calls/recordings"
-    
-    params = {
-        'v': '1',
-        'accountId': account_id,
-        'region': region,
-        'bucket': bucket,
-        'file': file_path
-    }
+def download_recording(rc_account_id, sub_account_id, dialog_id, segment_id):
+    # Construct the path-based URL
+    url = f"{BASE_URL}/cx/integration/v1/accounts/{rc_account_id}/sub-accounts/{sub_account_id}/recordings/dialogs/{dialog_id}/segments/{segment_id}"
     
     headers = {
-        'Authorization': f'Bearer {ACCESS_TOKEN}'
+        'Authorization': f'Bearer {ACCESS_TOKEN}',
+        'Accept': 'audio/wav'
     }
     
-    response = requests.get(endpoint, headers=headers, params=params, stream=True)
+    # Request the stream
+    response = requests.get(url, headers=headers, stream=True)
     
     if response.status_code == 200:
-        with open('call_recording.wav', 'wb') as f:
-            for chunk in response.iter_content(chunk_size=1024):
+        file_name = f"recording_{segment_id}.wav"
+        with open(file_name, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=4096):
                 f.write(chunk)
-        print("Download complete.")
+        print(f"Download complete: {file_name}")
     else:
-        print(f"Failed: {response.status_code}")
-
+        print(f"Failed to retrieve recording. Status: {response.status_code}")
+        print(response.text)
 ```
 
 ---
 
 ## Appendix: Recording Types
 
-??? info "View Supported Recording Types"
-
 | Type | Channel | Description |
-| --- | --- | --- |
-| **Single Channel** | Mono | A single audio track containing both the agent and customer mixed. |
-| **Dual Channel** | Stereo | Also known as "Perspective" recordings. The agent and customer are on separate audio channels, preferred for high-accuracy transcription. |
+| :--- | :--- | :--- |
+| **Single Channel** | Mono | A single audio track with agent and customer audio mixed together. |
+| **Dual Channel** | Stereo | Also known as "Perspective" recordings. Agent and customer are separated into left/right channels; ideal for high-accuracy AI transcription. |
