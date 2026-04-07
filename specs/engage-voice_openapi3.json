@@ -25010,7 +25010,7 @@
         "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/interaction-metadata": {
             "post": {
                 "tags": [
-                    "Integration Report Controller"
+                    "Public Integration API"
                 ],
                 "summary": "Returns Interaction Segment Metadata",
                 "description": "This API is used to fetch interaction metadata for VOICE/DIGITAL for all segments under provided time duration.",
@@ -26765,7 +26765,6 @@
                 "Integration Agent Controller",
                 "Integration Agent Group Controller",
                 "Integration Gate Group Controller",
-                "Integration Report Controller",
                 "Public Integration API"
             ]
         }
