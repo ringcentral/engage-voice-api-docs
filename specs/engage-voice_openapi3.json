@@ -25863,7 +25863,7 @@
                     "Public Integration API"
                 ],
                 "summary": "Builds extended agent queue statistics",
-                "operationId": "buildExtendedAggQueueStats",
+                "operationId": "buildExtendedAggAgentStats",
                 "description": "This API returns statistics of all queues along with their agents for given Sub-Account and duration.",
                 "parameters": [
                     {

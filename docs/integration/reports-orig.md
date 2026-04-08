@@ -41,7 +41,7 @@ The **Interaction Metadata** API is used to reconstruct the complete "story" of 
 
 A user would use this to perform forensic tracking or quality assurance. For example, if a customer was transferred three times, this API provides the metadata for all three segments, including specific timestamps for when each agent joined or left, and the direct URL to the audio recording for that specific portion of the call.
 
-* **Reference:** [Interaction Metadata API Details](https://developers.ringcentral.com/engage/voice/api-reference/Integration-Report-Controller/getInteractionMetadata)
+* **Reference:** [Interaction Metadata API Details](https://developers.ringcentral.com/engage/voice/api-reference/Public-Integration-API/getInteractionMetadata)
 
 ### Retrieving Agent Segment Recordings & Transcripts
 
@@ -56,7 +56,7 @@ For more details on how to retrieve these files refer to the [Call Transcripts A
 
 ## Aggregated Statistics
 
-### Queue Statistics (`aggQueueStats`)
+### Queue Statistics (`agg-queue-stats`)
 
 **Purpose:** Service Level Monitoring and Operational Health.
 
@@ -64,9 +64,9 @@ The **Queue Statistics** API provides a high-level view of how specific contact 
 
 Operations managers use this data to ensure the center is meeting its Service Level Agreements (SLAs). It is the primary tool for identifying volume trends, such as spikes in abandoned calls or excessive wait times, allowing for real-time or historical staffing adjustments.
 
-* **Reference:** [Queue Statistics API Details](https://developers.ringcentral.com/engage/voice/api-reference/Integration-Report-Controller/streamFileAggQueueStats)
+* **Reference:** [Queue Statistics API Details](https://developers.ringcentral.com/engage/voice/api-reference/Public-Integration-API/buildAggQueueStats)
 
-### Agent Statistics (`aggAgentStats`)
+### Agent Statistics (`agg-agent-stats`)
 
 **Purpose:** Workforce Productivity and Attendance Tracking.
 
@@ -74,9 +74,9 @@ The **Agent Statistics** API is designed to measure the general output and avail
 
 A user would use this API to generate daily or weekly productivity reports. It is commonly used for payroll verification and ensuring that agents are adhering to their scheduled shifts by comparing their active time against their expected hours.
 
-* **Reference:** [Agent Statistics API Details](https://developers.ringcentral.com/engage/voice/api-reference/Integration-Report-Controller/streamFileAggAgentStats)
+* **Reference:** [Agent Statistics API Details](https://developers.ringcentral.com/engage/voice/api-reference/Public-Integration-API/buildAggAgentStats)
 
-### Agent Extended Statistics (`aggAgentExtendedStats`)
+### Agent Extended Statistics (`agg-agent-extended-stats`)
 
 **Purpose:** Deep-Dive Performance and Behavioral Analysis.
 
@@ -84,6 +84,6 @@ The **Agent Extended Statistics** API provides a more granular breakdown of perf
 
 This is the preferred tool for workforce planners and supervisors performing root-cause analysis. If a supervisor notices a drop in efficiency, they can use this API to determine if the issue is tied to a specific queue or if an agent is transferring a disproportionate number of interactions, indicating a potential need for further training.
 
-* **Reference:** [Agent Extended Statistics API Details](https://developers.ringcentral.com/engage/voice/api-reference/Integration-Report-Controller/streamFileAggAgentExtendedStats)
+* **Reference:** [Agent Extended Statistics API Details](https://developers.ringcentral.com/engage/voice/api-reference/Public-Integration-API/buildExtendedAggAgentStats)
 
 ---
