@@ -39,7 +39,7 @@ Ensure your application is configured with the following scope in the [Developer
 
 To retrieve a recording, you must first identify the unique identifiers for the call. Unlike legacy systems that provided a direct URL, the current API requires a **Dialog ID** and a **Segment ID**, which are discovered via the `interaction-metadata` report.
 
-`POST https://engage.ringcentral.com/voice/api/integration/v1/admin/reports/accounts/{subAccountId}/interaction-metadata`
+`POST https://engage.ringcentral.com/voice/api/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/interaction-metadata`
 
 For a detailed walkthrough on discovering metadata, please refer to the [Agent Segment Metadata API Guide](../../integration/reports-orig.md#agent-segment-metadata).
 
