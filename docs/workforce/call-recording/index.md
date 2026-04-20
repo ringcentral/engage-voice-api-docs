@@ -1,7 +1,7 @@
 
 # Call Recording APIs
 
-The Call Recording APIs allow developers to programmatically retrieve and manage audio files generated during voice interactions. This API supports both single-channel (mono) and dual-channel (stereo/perspective) recordings, providing the foundation for compliance archiving, quality assurance, and AI-driven sentiment analysis.
+The Call Recording APIs allow developers to programmatically retrieve and manage audio files generated during voice interactions. This API supports dual-channel recordings.
 
 ## Strategic Overview
 
@@ -25,8 +25,13 @@ Retrieving recordings requires a processing window to allow the system to finali
 Access to recording media is governed by account-level security and explicit administrative rights.
 
 #### 1. Configure OAuth Scopes
-Ensure your application is configured with the following scope in the [Developer Portal](https://developers.ringcentral.com/my-account.html#/applications):
-* **`ReadAccounts`**: Required to validate account context and authorize access to the media stream.
+
+To authenticate, your application must be configured with the following permission in the [Developer Portal](https://developers.ringcentral.com/my-account.html#/applications):
+
+* **`ReadAccounts`**: Required to validate the account context and access interaction metadata.
+
+!!! warning "Warning"
+    ReadAccounts is the only Oauth Scope permission with any effect on RingCx APIs. Platform permissions are managed through the RingCx Admin portal.
 
 #### 2. Enable Platform Permissions
 1.  Log in to **RingCX Admin**.
@@ -122,9 +127,4 @@ def download_recording(rc_account_id, sub_account_id, dialog_id, segment_id):
 
 ---
 
-## Appendix: Recording Types
 
-| Type | Channel | Description |
-| :--- | :--- | :--- |
-| **Single Channel** | Mono | A single audio track with agent and customer audio mixed together. |
-| **Dual Channel** | Stereo | Also known as "Perspective" recordings. Agent and customer are separated into left/right channels; ideal for high-accuracy AI transcription. |
