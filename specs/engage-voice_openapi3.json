@@ -14442,6 +14442,276 @@
                         "segmentEvents": null
                     }
                 ]
+            },
+            "WEMDialogSegmentMetaData": {
+                "type": "object",
+                "properties": {
+                    "subAccountId": { "type": "string" },
+                    "dialogId": { "type": "string" },
+                    "interactionId": { "type": "string" },
+                    "channelId": { "type": "string" },
+                    "channelType": { "type": "string" },
+                    "channelClass": { "type": "string" },
+                    "channelEndpointAddress": { "type": "string" },
+                    "contactEndpointAddress": { "type": "string" },
+                    "dialogOrigination": { "type": "string" },
+                    "dialogStartTimeMs": { "type": "string", "format": "date-time" },
+                    "dialogEndTimeMs": { "type": "string", "format": "date-time" },
+                    "dialogDurationMs": { "type": "integer" },
+                    "segmentId": { "type": "string" },
+                    "segmentType": { "type": "string" },
+                    "segmentParticipantId": { "type": "string" },
+                    "segmentParticipantRcExtensionId": { "type": "string" },
+                    "segmentStartTimeMs": { "type": "string", "format": "date-time" },
+                    "segmentEndTimeMs": { "type": "string", "format": "date-time" },
+                    "segmentDurationMs": { "type": "integer" },
+                    "segmentAgentGroupId": { "type": "string" },
+                    "systemDisposition": { "type": "string", "nullable": true },
+                    "agentDisposition": { "type": "string" },
+                    "agentNotes": { "type": "string" },
+                    "hasRecording": { "type": "boolean" },
+                    "hasTranscript": { "type": "boolean" },
+                    "segmentEvents": {
+                        "type": "array",
+                        "items": { "$ref": "#/components/schemas/InteractionSegmentEvent" },
+                        "nullable": true
+                    }
+                }
+            },
+            "AggregatedIntegrationParams": {
+                "type": "object",
+                "required": [
+                    "startDate",
+                    "endDate",
+                    "timeInterval",
+                    "timeZone"
+                ],
+                "properties": {
+                    "startDate": {
+                        "type": "string",
+                        "description": "Start date and time for the logging interval in 'YYYY-MM-DD HH:mm:ss' format.",
+                        "example": "2026-03-02 09:00:00"
+                    },
+                    "endDate": {
+                        "type": "string",
+                        "description": "End date and time for the logging interval in 'YYYY-MM-DD HH:mm:ss' format. Must be within 3 hours of the startDate.",
+                        "example": "2026-03-02 12:00:00"
+                    },
+                    "timeInterval": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Interval length in seconds (e.g., 1800 for 30 minutes).",
+                        "example": 1800
+                    },
+                    "timeZone": {
+                        "type": "string",
+                        "description": "Timezone name used for report generation (e.g., 'US/Eastern').",
+                        "example": "US/Eastern"
+                    },
+                    "outputFormat": {
+                        "type": "string",
+                        "enum": [
+                            "CSV",
+                            "XML"
+                        ],
+                        "description": "The file format of the generated report.",
+                        "example": "CSV"
+                    }
+                }
+            },
+            "AggregatedAgentStats": {
+                "type": "object",
+                "properties": {
+                    "interval": { "type": "integer", "format": "int32" },
+                    "dateTimeFrom": { "type": "string" },
+                    "agentId": { "type": "integer", "format": "int32" },
+                    "agentName": { "type": "string" },
+                    "availDur": { "type": "integer", "format": "int32" },
+                    "totWorkDur": { "type": "integer", "format": "int32" },
+                    "pauseDur": { "type": "integer", "format": "int32" },
+                    "waitDur": { "type": "integer", "format": "int32" },
+                    "adminDur": { "type": "integer", "format": "int32" },
+                    "directOutIxnCnt": { "type": "integer", "format": "int32" },
+                    "directOutIxnDur": { "type": "integer", "format": "int32" },
+                    "directInIxnCnt": { "type": "integer", "format": "int32" },
+                    "directInIxnDur": { "type": "integer", "format": "int32" }
+                }
+            },
+            "AggregatedQueueStats": {
+                "type": "object",
+                "properties": {
+                    "dateTimeFrom": { "type": "string" },
+                    "interval": { "type": "integer", "format": "int32" },
+                    "queue": { "type": "integer", "format": "int32" },
+                    "queueName": { "type": "string" },
+                    "offdDirectIxnCnt": { "type": "integer", "format": "int32" },
+                    "answIxnCnt": { "type": "integer", "format": "int32" },
+                    "abandIxnCnt": { "type": "integer", "format": "int32" },
+                    "abandShortIxnCnt": { "type": "integer", "format": "int32" },
+                    "abandWithinSlCnt": { "type": "integer", "format": "int32" },
+                    "ansServicelevelCnt": { "type": "integer", "format": "int32" },
+                    "completedContacts": { "type": "integer", "format": "int32" },
+                    "queuedAndAnswIxnDur": { "type": "integer", "format": "int32" },
+                    "queuedAndAbandIxnDur": { "type": "integer", "format": "int32" },
+                    "queuedAnswLongestQueDur": { "type": "integer", "format": "int32" },
+                    "queuedAbandLongestQueDur": { "type": "integer", "format": "int32" },
+                    "talkingIxnDur": { "type": "integer", "format": "int32" },
+                    "wrapUpDur": { "type": "integer", "format": "int32" },
+                    "waitDur": { "type": "integer", "format": "int32" },
+                    "segmentHoldTime": { "type": "integer", "format": "int32" },
+                    "overflowInIxnCnt": { "type": "integer", "format": "int32" },
+                    "overflowOutIxnCnt": { "type": "integer", "format": "int32" }
+                }
+            },
+            "ExtendedAggregatedQueueStats": {
+                "type": "object",
+                "properties": {
+                    "interval": { "type": "integer", "format": "int32" },
+                    "dateTimeFrom": { "type": "string" },
+                    "agentId": { "type": "integer", "format": "int32" },
+                    "agentName": { "type": "string" },
+                    "queue": { "type": "integer", "format": "int32" },
+                    "queueName": { "type": "string" },
+                    "talkingIxnDur": { "type": "integer", "format": "int32" },
+                    "wrapUpDur": { "type": "integer", "format": "int32" },
+                    "answIxnCnt": { "type": "integer", "format": "int32" },
+                    "transferOutIxnCnt": { "type": "integer", "format": "int32" }
+                }
+            },
+            "CXQueueWithAgents": {
+                "type": "object",
+                "required": [
+                    "queueId",
+                    "queueName",
+                    "queueGroupId",
+                    "isActive",
+                    "createdOn"
+                ],
+                "properties": {
+                    "queueId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Unique ID for inbound queue",
+                        "example": 555
+                    },
+                    "queueType": {
+                        "type": "string",
+                        "enum": [
+                            "VOICE",
+                            "DIGITAL"
+                        ],
+                        "example": "VOICE"
+                    },
+                    "queueName": {
+                        "type": "string",
+                        "description": "Name of inbound queue",
+                        "example": "Test queue"
+                    },
+                    "queueGroupId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "inbound queue group ID",
+                        "example": 1009
+                    },
+                    "isActive": {
+                        "type": "boolean",
+                        "description": "true if the inbound queue is active",
+                        "example": true
+                    },
+                    "createdOn": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Timestamp when inbound group was created",
+                        "example": "2020-07-21T17:32:28Z"
+                    },
+                    "agentIds": {
+                        "type": "array",
+                        "description": "List of agents who connected to this queue",
+                        "items": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "example": [
+                            10,
+                            20
+                        ]
+                    }
+                }
+            },
+            "RCInteractionTranscriptData": {
+                "type": "object",
+                "properties": {
+                    "channelClass": {
+                        "type": "string",
+                        "example": "DIGITAL"
+                    },
+                    "errorCode": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "errorMessage": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "transcript": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/TranscriptPhrase"
+                        }
+                    }
+                }
+            },
+            "TranscriptPhrase": {
+                "type": "object",
+                "properties": {
+                    "participantId": {
+                        "type": "string"
+                    },
+                    "rcUserId": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "participantName": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "participantType": {
+                        "type": "string",
+                        "example": "agent"
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "example": "1721651880000"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            },
+            "QueueGroup": {
+                "type": "object",
+                "properties": {
+                    "queueGroupId": {
+                        "type": "integer",
+                        "format": "int32",
+                        "description": "Unique ID for queue group",
+                        "example": 1009
+                    },
+                    "groupName": {
+                        "type": "string",
+                        "description": "Queue group name",
+                        "example": "Queue group 1"
+                    },
+                    "queueGroupType": {
+                        "type": "string",
+                        "enum": [
+                            "VOICE",
+                            "DIGITAL"
+                        ],
+                        "description": "The type of queues contained in this group",
+                        "example": "VOICE"
+                    }
+                }
             }
         },
         "securitySchemes": {
@@ -14457,13 +14727,13 @@
         }
     },
     "info": {
-        "contact": {},
+        "title": "RingCentral RingCX API",
+        "version": "1.0.0",
+        "termsOfService": "https://developers.ringcentral.com",
         "license": {
             "name": "none"
         },
-        "termsOfService": "https://developers.ringcentral.com",
-        "title": "RingCentral RingCx API",
-        "version": "1.0.0"
+        "contact": {}
     },
     "openapi": "3.0.0",
     "paths": {
@@ -18293,142 +18563,6 @@
                 "summary": "Clears the cache for a campaign",
                 "tags": [
                     "Campaigns"
-                ]
-            }
-        },
-        "/voice/api/v1/admin/accounts/{accountId}/gateGroups": {
-            "get": {
-                "description": "Permissions: READ on Account, Post Filtered Results",
-                "operationId": "getGateGroupList",
-                "parameters": [
-                    {
-                        "description": "accountId",
-                        "in": "path",
-                        "name": "accountId",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "page",
-                        "in": "query",
-                        "name": "page",
-                        "schema": {
-                            "format": "int32",
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "description": "maxRows",
-                        "in": "query",
-                        "name": "maxRows",
-                        "schema": {
-                            "format": "int32",
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "items": {
-                                        "$ref": "#/components/schemas/GateGroup"
-                                    },
-                                    "type": "array"
-                                }
-                            }
-                        },
-                        "description": "OK"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    },
-                    {
-                        "BearerAuth": []
-                    },
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "summary": "Returns a listing of queue groups (AKA gate groups) for an account",
-                "tags": [
-                    "Queue Groups"
-                ]
-            },
-            "post": {
-                "description": "Permissions: CREATE on Account",
-                "operationId": "createGateGroup",
-                "parameters": [
-                    {
-                        "description": "accountId",
-                        "in": "path",
-                        "name": "accountId",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/GateGroup"
-                            }
-                        }
-                    },
-                    "description": "gateGroup",
-                    "required": true
-                },
-                "responses": {
-                    "201": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/GateGroup"
-                                }
-                            }
-                        },
-                        "description": "Created"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    },
-                    {
-                        "BearerAuth": []
-                    },
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "summary": "Create a single queue group (AKA gate group) for an account",
-                "tags": [
-                    "Queue Groups"
                 ]
             }
         },
@@ -24728,771 +24862,6 @@
                 ]
             }
         },
-        "/voice/api/integration/v1/admin/accounts/{subAccountId}/gateGroups": {
-            "get": {
-                "tags": [
-                    "Integration Gate Group Controller"
-                ],
-                "summary": "Returns a list of inbound queue groups",
-                "description": "Permissions: WFO_ACCESS role",
-                "operationId": "getGateGroups",
-                "parameters": [
-                    {
-                        "name": "subAccountId",
-                        "in": "path",
-                        "description": "Engage Voice sub-account id",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "99990033"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/GateGroup"
-                                    },
-                                    "example": [
-                                        {
-                                            "gateGroupId": 1009,
-                                            "groupName": "Queue group 1"
-                                        },
-                                        {
-                                            "gateGroupId": 1010,
-                                            "groupName": "Queue group 2"
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "details": "The supplied data is not valid",
-                                    "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "voice/api/integration/v1/admin/accounts/99990033/gateGroups - GET",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "text/plain": {
-                                "schema": {
-                                    "type": "string"
-                                },
-                                "example": "Jwt is expired"
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "You do not have permission to access this resource",
-                                    "details": "",
-                                    "developerMessage": "Access is denied",
-                                    "cause": "",
-                                    "requestUri": "voice/api/integration/v1/admin/accounts/99990033/gateGroups - GET",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "details": "The resource you have requested does not exist",
-                                    "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "voice/api/integration/v1/admin/accounts/99990033/gateGroups - GET",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "details": "An Internal Server Error occurred while processing this request",
-                                    "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "voice/api/integration/v1/admin/accounts/99990033/gateGroups - GET",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/voice/api/integration/v1/admin/accounts/{subAccountId}/gateGroups/{gateGroupId}/withAgents": {
-            "get": {
-                "tags": [
-                    "Integration Gate Group Controller"
-                ],
-                "summary": "Returns a list of queues with agent IDs",
-                "description": "Permissions: WFO_ACCESS role",
-                "operationId": "getGateGroupsWithAgents",
-                "parameters": [
-                    {
-                        "name": "subAccountId",
-                        "in": "path",
-                        "description": "Engage Voice sub-account id",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "99990033"
-                        }
-                    },
-                    {
-                        "name": "gateGroupId",
-                        "in": "path",
-                        "description": "Inbound queue group ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int64",
-                            "example": 1009
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/QueueWithAgents"
-                                    },
-                                    "example": [
-                                        {
-                                            "queueId": 555,
-                                            "queueName": "Test queue 1",
-                                            "gateGroupId": 1009,
-                                            "isActive": true,
-                                            "createdOn": "2020-07-21T17:32:28Z",
-                                            "agentIds": [
-                                                10,
-                                                20
-                                            ]
-                                        },
-                                        {
-                                            "queueId": 556,
-                                            "queueName": "Test queue 2",
-                                            "gateGroupId": 1009,
-                                            "isActive": true,
-                                            "createdOn": "2020-07-21T17:32:28Z",
-                                            "agentId": [
-                                                30
-                                            ]
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "details": "The supplied data is not valid",
-                                    "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "voice/api/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "text/plain": {
-                                "schema": {
-                                    "type": "string"
-                                },
-                                "example": "Jwt is expired"
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "You do not have permission to access this resource",
-                                    "details": "",
-                                    "developerMessage": "Access is denied",
-                                    "cause": "",
-                                    "requestUri": "voice/api/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "details": "The resource you have requested does not exist",
-                                    "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "voice/api/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "details": "An Internal Server Error occurred while processing this request",
-                                    "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "voice/api/integration/v1/admin/accounts/99990033/gateGroups/1009/withAgents - GET",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/voice/api/integration/v1/admin/reports/accounts/{subAccountId}/aggAgentExtendedStats": {
-            "post": {
-                "tags": [
-                    "Integration Report Controller"
-                ],
-                "summary": "Builds Queue Extended Statistics Report in requested format",
-                "description": "Permissions: WFO_ACCESS role",
-                "operationId": "streamFileAggAgentExtendedStats",
-                "parameters": [
-                    {
-                        "name": "subAccountId",
-                        "in": "path",
-                        "description": "Engage Voice sub-account id",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "99990033"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "*/*": {
-                            "schema": {
-                                "$ref": "#/components/schemas/HistoricalReportParams"
-                            }
-                        }
-                    },
-                    "required": false
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {}
-                    },
-                    "400": {
-                        "description": "Bad request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "voice/api/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "text/plain": {
-                                "schema": {
-                                    "type": "string"
-                                },
-                                "example": "Jwt is expired"
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "You do not have permission to access this resource",
-                                    "details": "",
-                                    "developerMessage": "Access is denied",
-                                    "cause": "",
-                                    "requestUri": "voice/api/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "voice/api/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "voice/api/integration/v1/admin/reports/accounts/99990033/aggAgentExtendedStats - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/voice/api/integration/v2/admin/reports/accounts/{subAccountId}/interactionMetadata": {
-            "post": {
-                "tags": [
-                    "Integration Report Controller"
-                ],
-                "summary": "Builds Agent Segment Metadata Report in requested format",
-                "description": "Permissions: WFO_ACCESS role",
-                "operationId": "streamFileInteractionMetadata",
-                "parameters": [
-                    {
-                        "name": "subAccountId",
-                        "in": "path",
-                        "description": "Engage Voice sub-account id",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "99990033"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "*/*": {
-                            "schema": {
-                                "$ref": "#/components/schemas/InteractionMetadataRequest"
-                            }
-                        }
-                    },
-                    "required": false
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/InteractionSegmentMetaData2Array"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "details": "",
-                                    "developerMessage": "Bad request",
-                                    "cause": "",
-                                    "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "voice/api/integration/v2/admin/reports/accounts/99990033/interactionMetadata - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "text/plain": {
-                                "schema": {
-                                    "type": "string"
-                                },
-                                "example": "Jwt is expired"
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "You do not have permission to access this resource",
-                                    "details": "",
-                                    "developerMessage": "Access is denied",
-                                    "cause": "",
-                                    "requestUri": "voice/api/integration/v2/admin/reports/accounts/99990033/interactionMetadata - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "details": "",
-                                    "developerMessage": "Not found",
-                                    "cause": "",
-                                    "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "voice/api/integration/v2/admin/reports/accounts/99990033/interactionMetadata - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "details": "",
-                                    "developerMessage": "Internal server error",
-                                    "cause": "",
-                                    "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "voice/api/integration/v2/admin/reports/accounts/99990033/interactionMetadata - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/voice/api/integration/v1/admin/reports/accounts/{subAccountId}/aggAgentStats": {
-            "post": {
-                "tags": [
-                    "Integration Report Controller"
-                ],
-                "summary": "Builds Agent statistics Report in requested format",
-                "description": "Permissions: WFO_ACCESS role",
-                "operationId": "streamFileAggAgentStats",
-                "parameters": [
-                    {
-                        "name": "subAccountId",
-                        "in": "path",
-                        "description": "Engage Voice sub-account id",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "99990033"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "*/*": {
-                            "schema": {
-                                "$ref": "#/components/schemas/HistoricalReportParams"
-                            }
-                        }
-                    },
-                    "required": false
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {}
-                    },
-                    "400": {
-                        "description": "Bad request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "voice/api/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "text/plain": {
-                                "schema": {
-                                    "type": "string"
-                                },
-                                "example": "Jwt is expired"
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "You do not have permission to access this resource",
-                                    "details": "",
-                                    "developerMessage": "Access is denied",
-                                    "cause": "",
-                                    "requestUri": "voice/api/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "voice/api/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "voice/api/integration/v1/admin/reports/accounts/99990033/aggAgentStats - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/voice/api/integration/v1/admin/reports/accounts/{subAccountId}/aggQueueStats": {
-            "post": {
-                "tags": [
-                    "Integration Report Controller"
-                ],
-                "summary": "Builds Inbound/Outbound queue statistics in requested format",
-                "description": "Permissions: WFO_ACCESS role",
-                "operationId": "streamFileAggQueueStats",
-                "parameters": [
-                    {
-                        "name": "subAccountId",
-                        "in": "path",
-                        "description": "Engage Voice sub-account id",
-                        "required": true,
-                        "schema": {
-                            "type": "string",
-                            "example": "99990033"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "*/*": {
-                            "schema": {
-                                "$ref": "#/components/schemas/HistoricalReportParams"
-                            }
-                        }
-                    },
-                    "required": false
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {}
-                    },
-                    "400": {
-                        "description": "Bad request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "voice/api/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "text/plain": {
-                                "schema": {
-                                    "type": "string"
-                                },
-                                "example": "Jwt is expired"
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "You do not have permission to access this resource",
-                                    "details": "",
-                                    "developerMessage": "Access is denied",
-                                    "cause": "",
-                                    "requestUri": "voice/api/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "voice/api/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Errors"
-                                },
-                                "example": {
-                                    "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "voice/api/integration/v1/admin/reports/accounts/99990033/aggQueueStats - POST",
-                                    "timestamp": 1611847650696
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ]
-            }
-        },
         "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/recordings/dialogs/{dialogId}/segments/{segmentId}": {
             "get": {
                 "tags": [
@@ -26494,7 +25863,7 @@
                     "Public Integration API"
                 ],
                 "summary": "Builds extended agent queue statistics",
-                "operationId": "buildExtendedAggQueueStats",
+                "operationId": "buildExtendedAggAgentStats",
                 "description": "This API returns statistics of all queues along with their agents for given Sub-Account and duration.",
                 "parameters": [
                     {
@@ -27319,7 +26688,8 @@
             "popular": true,
             "tags": [
                 "Reporting",
-                "Real Time Reporting"
+                "Real Time Reporting",
+                "Audit Logs"
             ]
         },
         {
@@ -27395,7 +26765,6 @@
                 "Integration Agent Controller",
                 "Integration Agent Group Controller",
                 "Integration Gate Group Controller",
-                "Integration Report Controller",
                 "Public Integration API"
             ]
         }
