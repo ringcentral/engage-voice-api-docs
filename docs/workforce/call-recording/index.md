@@ -90,7 +90,7 @@ The API returns a binary stream of the recording.
 2.  **Extract Identifiers:** Parse the JSON response to map the `dialogId` and `segmentId` for each record.
 3.  **Stream Media:** Call the Download Recording endpoint using the path parameters to retrieve the `.WAV` file.
 
-!!! [!IMPORTANT]
+!!! important "Rate Limiting"
     **Rate Limiting:** Metadata and reporting endpoints are typically limited to **2 calls per minute**. To maintain stability, implement **exponential backoff** when encountering `429` (Too Many Requests) errors.
 
 ### Sample Implementation (Python)
