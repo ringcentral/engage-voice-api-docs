@@ -46,7 +46,7 @@ To use AI-generated transcripts, ensure the feature is active within the RingCX 
 
 ## API Discovery: Finding Dialog and Segment IDs
 
-To retrieve a transcript, you must first obtain the unique `dialogId` and `segmentId` using the interaction metadata endpoint.
+To retrieve a transcript, you must first obtain the unique `dialogId` and `segmentId` using the [interaction metadata endpoint](../../integration/reports-orig.md#agent-segment-metadata).
 
 `POST https://ringcx.ringcentral.com/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/interaction-metadata`
 
