@@ -27,6 +27,9 @@ To authenticate, your application must be configured with the following permissi
 
 * **`ReadAccounts`**: Required to validate the account context and access interaction metadata.
 
+!!! warning "Warning"
+    ReadAccounts is the only Oauth Scope permission with any effect on RingCx APIs. Platform permissions are managed through the RingCx Admin portal.
+
 #### 2. Enable Platform Permissions
 
 To use AI-generated transcripts, ensure the feature is active within the RingCX Admin portal:
