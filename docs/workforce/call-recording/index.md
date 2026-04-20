@@ -36,7 +36,7 @@ To authenticate, your application must be configured with the following permissi
 #### 2. Enable Platform Permissions
 1.  Log in to **RingCX Admin**.
 2.  **Permissions:** Ensure the user has **READ on Account** permissions.
-3.  **For Stereo (Agent) Recordings:** Stereo recording must be **manually activated** by your RingCentral representative.
+3.  **For Recordings:** Recording must be **manually activated** by your RingCentral representative.
 
 ---
 
