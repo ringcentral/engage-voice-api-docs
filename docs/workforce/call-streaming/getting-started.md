@@ -107,7 +107,7 @@ To create a streaming profile, do `HTTP POST` request to `{PLATFORM_BASE_URL}/pl
 
 Sample request:
 
-`POST https://{PLATFORM_ENDPOINT_PATH}/platform/api/media/product`
+`POST {PLATFORM_BASE_URL}/platform/api/media/product`
 
 `Authorization: bearer {authorizationToken}`
 
