@@ -53,13 +53,13 @@ The authenticating user must have reporting access enabled in the RingCX Admin p
 
 Returns real-time dial activity and outcome counters for every outbound campaign in the account.
 
-`GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/realTimeData/outbound`
+`GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{subaccountId}/realTimeData/outbound`
 
 ### Request Parameters
 
 | Parameter | Type | Requirement | Description |
 | --- | --- | --- | --- |
-| `accountId` | String | **Required** | The unique identifier for the RingCX sub-account. |
+| `subaccountId` | String | **Required** | The unique identifier for the RingCX sub-account. |
 
 ### Response Details
 
@@ -79,7 +79,7 @@ A few particularly useful derived metrics:
     | --- | --- | --- |
     | `campaignId` | Integer | Unique campaign identifier. |
     | `campaignName` | String | Campaign display name. |
-    | `accountId` | String | Sub-account the campaign belongs to. |
+    | `subaccountId` | String | Sub-account the campaign belongs to. |
     | `dialGroupId` | Integer | Dial group the campaign runs under. |
     | `dialGroupName` | String | Dial group display name. |
     | `lastUpdate` | String (date-time) | Timestamp of the most recent data refresh. |
@@ -124,13 +124,13 @@ A few particularly useful derived metrics:
 
 Returns real-time traffic counts for every Visual IVR application in the account, enabling monitoring of self-service load and agent handoff volumes.
 
-`GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/realTimeData/ivr`
+`GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{subaccountId}/realTimeData/ivr`
 
 ### Request Parameters
 
 | Parameter | Type | Requirement | Description |
 | --- | --- | --- | --- |
-| `accountId` | String | **Required** | The unique identifier for the RingCX sub-account. |
+| `subaccountId` | String | **Required** | The unique identifier for the RingCX sub-account. |
 
 ### Response Details
 
@@ -148,7 +148,7 @@ containment = (presented - transferGate - transferCloud - transferTrac) / presen
     | --- | --- | --- |
     | `visualIvrId` | Integer | Unique IVR application identifier. |
     | `ivrGroupId` | Integer | IVR group identifier. |
-    | `accountId` | String | Sub-account the IVR belongs to. |
+    | `subaccountId` | String | Sub-account the IVR belongs to. |
     | `visualIvrName` | String | IVR application display name. |
     | `ivrGroupName` | String | IVR group display name. |
     | `lastUpdate` | String (date-time) | Timestamp of the most recent data refresh. |

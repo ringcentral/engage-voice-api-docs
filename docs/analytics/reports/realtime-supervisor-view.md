@@ -53,13 +53,13 @@ The authenticating user must have reporting access enabled in the RingCX Admin p
 
 Returns a live snapshot of every agent currently logged in to the account — their current state, active call details, and session-level performance counters.
 
-`GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/realTimeData/agent`
+`GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{subaccountId}/realTimeData/agent`
 
 ### Request Parameters
 
 | Parameter | Type | Requirement | Description |
 | --- | --- | --- | --- |
-| `accountId` | String | **Required** | The unique identifier for the RingCX sub-account. |
+| `subaccountId` | String | **Required** | The unique identifier for the RingCX sub-account. |
 
 ### Response Details
 
@@ -72,7 +72,7 @@ Returns an array of `AgentStats` objects — one per logged-in agent session. Ke
     | Field | Type | Description |
     | --- | --- | --- |
     | `agentId` | Integer | Unique agent identifier. |
-    | `accountId` | String | Sub-account the agent belongs to. |
+    | `subaccountId` | String | Sub-account the agent belongs to. |
     | `accountName` | String | Sub-account display name. |
     | `firstName` | String | Agent's first name. |
     | `lastName` | String | Agent's last name. |
@@ -127,13 +127,13 @@ Returns an array of `AgentStats` objects — one per logged-in agent session. Ke
 
 Returns real-time statistics for every inbound voice queue in the account, including live activity, staffing levels, and daily performance counters.
 
-`GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/realTimeData/inbound`
+`GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{subaccountId}/realTimeData/inbound`
 
 ### Request Parameters
 
 | Parameter | Type | Requirement | Description |
 | --- | --- | --- | --- |
-| `accountId` | String | **Required** | The unique identifier for the RingCX sub-account. |
+| `subaccountId` | String | **Required** | The unique identifier for the RingCX sub-account. |
 
 ### Response Details
 
@@ -147,7 +147,7 @@ Returns an array of `AcdStats` objects — one per inbound queue. Key fields inc
     | --- | --- | --- |
     | `gateId` | Integer | Unique queue (gate) identifier. |
     | `gateGroupId` | Integer | Queue group identifier. |
-    | `accountId` | String | Sub-account the queue belongs to. |
+    | `subaccountId` | String | Sub-account the queue belongs to. |
     | `gateName` | String | Queue display name. |
     | `groupName` | String | Queue group display name. |
     | `schedule` | String | Name of the active schedule. |
@@ -196,13 +196,13 @@ Returns an array of `AcdStats` objects — one per inbound queue. Key fields inc
 
 Returns real-time statistics for every chat queue in the account, mirroring the structure of the inbound voice endpoint for digital channels.
 
-`GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/realTimeData/chat`
+`GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{subaccountId}/realTimeData/chat`
 
 ### Request Parameters
 
 | Parameter | Type | Requirement | Description |
 | --- | --- | --- | --- |
-| `accountId` | String | **Required** | The unique identifier for the RingCX sub-account. |
+| `subaccountId` | String | **Required** | The unique identifier for the RingCX sub-account. |
 
 ### Response Details
 
@@ -216,7 +216,7 @@ Returns an array of `ChatStats` objects — one per chat queue. Key fields mirro
     | --- | --- | --- |
     | `chatQueueId` | Integer | Unique chat queue identifier. |
     | `chatQueueGroupId` | Integer | Chat queue group identifier. |
-    | `accountId` | String | Sub-account the queue belongs to. |
+    | `subaccountId` | String | Sub-account the queue belongs to. |
     | `chatQueueName` | String | Chat queue display name. |
     | `chatQueueGroupName` | String | Chat queue group display name. |
     | `schedule` | String | Name of the active schedule. |
