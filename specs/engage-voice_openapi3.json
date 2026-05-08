@@ -24862,7 +24862,7 @@
                 ]
             }
         },
-        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/recordings/dialogs/{dialogId}/segments/{segmentId}": {
+        "/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/recordings/dialogs/{dialogId}/segments/{segmentId}": {
             "get": {
                 "tags": [
                     "Public Integration API"
@@ -24928,7 +24928,7 @@
                                     "developerMessage": "Bad request",
                                     "cause": "",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/recordings/dialogs/d-65f286b0ee1c4900074c1bb2-1710393008514/segments/d-668cf767a626550007d021f6-668cf767a626550007d021f5 - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/980634004/sub-accounts/99999999/recordings/dialogs/d-65f286b0ee1c4900074c1bb2-1710393008514/segments/d-668cf767a626550007d021f6-668cf767a626550007d021f5 - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24957,7 +24957,7 @@
                                     "developerMessage": "Access is denied.",
                                     "cause": "",
                                     "generalMessage": "You do not have permission to access this resource",
-                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/recordings/dialogs/d-65f286b0ee1c4900074c1bb2-1710393008514/segments/d-668cf767a626550007d021f6-668cf767a626550007d021f5 - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/980634004/sub-accounts/99999999/recordings/dialogs/d-65f286b0ee1c4900074c1bb2-1710393008514/segments/d-668cf767a626550007d021f6-668cf767a626550007d021f5 - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24975,7 +24975,7 @@
                                     "developerMessage": "Not found",
                                     "cause": "",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/recordings/dialogs/d-65f286b0ee1c4900074c1bb2-1710393008514/segments/d-668cf767a626550007d021f6-668cf767a626550007d021f5 - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/980634004/sub-accounts/99999999/recordings/dialogs/d-65f286b0ee1c4900074c1bb2-1710393008514/segments/d-668cf767a626550007d021f6-668cf767a626550007d021f5 - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -24993,7 +24993,7 @@
                                     "developerMessage": "Internal server error",
                                     "cause": "",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/recordings/dialogs/d-65f286b0ee1c4900074c1bb2-1710393008514/segments/d-668cf767a626550007d021f6-668cf767a626550007d021f5 - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/980634004/sub-accounts/99999999/recordings/dialogs/d-65f286b0ee1c4900074c1bb2-1710393008514/segments/d-668cf767a626550007d021f6-668cf767a626550007d021f5 - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25007,7 +25007,7 @@
                 ]
             }
         },
-        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/interaction-metadata": {
+        "/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/interaction-metadata": {
             "post": {
                 "tags": [
                     "Public Integration API"
@@ -25070,7 +25070,7 @@
                                     "developerMessage": "Bad request",
                                     "cause": "",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/interaction-metadata - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/980634004/sub-accounts/99999999/interaction-metadata - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25099,7 +25099,7 @@
                                     "developerMessage": "Access is denied.",
                                     "cause": "",
                                     "generalMessage": "You do not have permission to access this resource",
-                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/interaction-metadata - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/980634004/sub-accounts/99999999/interaction-metadata - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25117,7 +25117,7 @@
                                     "developerMessage": "Not found",
                                     "cause": "",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/interaction-metadata - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/980634004/sub-accounts/99999999/interaction-metadata - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25135,7 +25135,7 @@
                                     "developerMessage": "Internal server error",
                                     "cause": "",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/interaction-metadata - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/980634004/sub-accounts/99999999/interaction-metadata - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25149,7 +25149,7 @@
                 ]
             }
         },
-        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/transcripts/dialogs/{dialogId}/segments/{segmentId}": {
+        "/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/transcripts/dialogs/{dialogId}/segments/{segmentId}": {
             "get": {
                 "tags": [
                     "Public Integration API"
@@ -25272,7 +25272,7 @@
                                     "developerMessage": "Bad request",
                                     "cause": "",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/transcripts/dialogs/d-668cf1d0a626550007d01d1b-1720512976864-1909690a312da/segments/d-668d1051a626550007d02828-1720520785904-19097081cf749 - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/980634004/sub-accounts/99999999/transcripts/dialogs/d-668cf1d0a626550007d01d1b-1720512976864-1909690a312da/segments/d-668d1051a626550007d02828-1720520785904-19097081cf749 - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25301,7 +25301,7 @@
                                     "developerMessage": "Access is denied.",
                                     "cause": "",
                                     "generalMessage": "You do not have permission to access this resource",
-                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/transcripts/dialogs/d-668cf1d0a626550007d01d1b-1720512976864-1909690a312da/segments/d-668d1051a626550007d02828-1720520785904-19097081cf749 - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/980634004/sub-accounts/99999999/transcripts/dialogs/d-668cf1d0a626550007d01d1b-1720512976864-1909690a312da/segments/d-668d1051a626550007d02828-1720520785904-19097081cf749 - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25319,7 +25319,7 @@
                                     "developerMessage": "Not found",
                                     "cause": "",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/transcripts/dialogs/d-668cf1d0a626550007d01d1b-1720512976864-1909690a312da/segments/d-668d1051a626550007d02828-1720520785904-19097081cf749 - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/980634004/sub-accounts/99999999/transcripts/dialogs/d-668cf1d0a626550007d01d1b-1720512976864-1909690a312da/segments/d-668d1051a626550007d02828-1720520785904-19097081cf749 - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25337,7 +25337,7 @@
                                     "developerMessage": "Internal server error",
                                     "cause": "",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/cx/integration/v1/accounts/980634004/sub-accounts/99999999/transcripts/dialogs/d-668cf1d0a626550007d01d1b-1720512976864-1909690a312da/segments/d-668d1051a626550007d02828-1720520785904-19097081cf749 - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/980634004/sub-accounts/99999999/transcripts/dialogs/d-668cf1d0a626550007d01d1b-1720512976864-1909690a312da/segments/d-668d1051a626550007d02828-1720520785904-19097081cf749 - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25346,7 +25346,7 @@
                 }
             }
         },
-        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/queue-groups": {
+        "/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/queue-groups": {
             "get": {
                 "tags": [
                     "Public Integration API"
@@ -25414,7 +25414,7 @@
                                     "developerMessage": "Bad request",
                                     "cause": "",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25443,7 +25443,7 @@
                                     "developerMessage": "Access is denied.",
                                     "cause": "",
                                     "generalMessage": "You do not have permission to access this resource",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25461,7 +25461,7 @@
                                     "developerMessage": "Not found",
                                     "cause": "",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25479,7 +25479,7 @@
                                     "developerMessage": "Internal server error",
                                     "cause": "",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25493,7 +25493,7 @@
                 ]
             }
         },
-        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/queue-groups/{queueGroupId}/with-agents": {
+        "/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/queue-groups/{queueGroupId}/with-agents": {
             "get": {
                 "tags": [
                     "Public Integration API"
@@ -25585,7 +25585,7 @@
                                     "developerMessage": "Bad request",
                                     "cause": "",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups/1009/with-agents - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups/1009/with-agents - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25614,7 +25614,7 @@
                                     "developerMessage": "Access is denied.",
                                     "cause": "",
                                     "generalMessage": "You do not have permission to access this resource",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups/1009/with-agents - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups/1009/with-agents - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25632,7 +25632,7 @@
                                     "developerMessage": "Not found",
                                     "cause": "",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups/1009/with-agents - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups/1009/with-agents - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25650,7 +25650,7 @@
                                     "developerMessage": "Internal server error",
                                     "cause": "",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups/1009/with-agents - GET",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/queue-groups/1009/with-agents - GET",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25664,7 +25664,7 @@
                 ]
             }
         },
-        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/agg-queue-stats": {
+        "/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/agg-queue-stats": {
             "post": {
                 "tags": [
                     "Public Integration API"
@@ -25778,7 +25778,7 @@
                                     "developerMessage": "Bad request",
                                     "cause": "",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-queue-stats - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-queue-stats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25807,7 +25807,7 @@
                                     "developerMessage": "Access is denied.",
                                     "cause": "",
                                     "generalMessage": "You do not have permission to access this resource",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-queue-stats - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-queue-stats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25825,7 +25825,7 @@
                                     "developerMessage": "Not found",
                                     "cause": "",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-queue-stats - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-queue-stats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25843,7 +25843,7 @@
                                     "developerMessage": "Internal server error",
                                     "cause": "",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-queue-stats - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-queue-stats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25857,7 +25857,7 @@
                 ]
             }
         },
-        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/agg-agent-extended-stats": {
+        "/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/agg-agent-extended-stats": {
             "post": {
                 "tags": [
                     "Public Integration API"
@@ -25949,7 +25949,7 @@
                                     "developerMessage": "Bad request",
                                     "cause": "",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-extended-stats - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-extended-stats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25978,7 +25978,7 @@
                                     "developerMessage": "Access is denied.",
                                     "cause": "",
                                     "generalMessage": "You do not have permission to access this resource",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-extended-stats - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-extended-stats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -25996,7 +25996,7 @@
                                     "developerMessage": "Not found",
                                     "cause": "",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-extended-stats - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-extended-stats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -26014,7 +26014,7 @@
                                     "developerMessage": "Internal server error",
                                     "cause": "",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-extended-stats - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-extended-stats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -26028,7 +26028,7 @@
                 ]
             }
         },
-        "/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/agg-agent-stats": {
+        "/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/agg-agent-stats": {
             "post": {
                 "tags": [
                     "Public Integration API"
@@ -26126,7 +26126,7 @@
                                     "developerMessage": "Bad request",
                                     "cause": "",
                                     "generalMessage": "The supplied data is not valid",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-stats - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-stats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -26155,7 +26155,7 @@
                                     "developerMessage": "Access is denied.",
                                     "cause": "",
                                     "generalMessage": "You do not have permission to access this resource",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-stats - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-stats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -26173,7 +26173,7 @@
                                     "developerMessage": "Not found",
                                     "cause": "",
                                     "generalMessage": "The resource you have requested does not exist",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-stats - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-stats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
@@ -26191,7 +26191,7 @@
                                     "developerMessage": "Internal server error",
                                     "cause": "",
                                     "generalMessage": "An Internal Server Error occurred while processing this request",
-                                    "requestUri": "/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-stats - POST",
+                                    "requestUri": "/voice/api/cx/integration/v1/accounts/138885004/sub-accounts/99999033/agg-agent-stats - POST",
                                     "timestamp": 1611847650696
                                 }
                             }
