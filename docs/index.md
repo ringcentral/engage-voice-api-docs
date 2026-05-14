@@ -9,7 +9,7 @@ no_breadcrumb: true
   <ul>
     <li><a href="./dialing/leads/bulk-import/">Bulk Import and Sync Leads</a> using our <strong>Leads API</strong>.</li>
     <li><a href="./analytics/reports/global-call-type-detail-report">Download Call Details and Recordings</a> using our <strong>Reports API</strong>.</li>
-    <li><a href="./dialing/active-calls/">Get a List of Active Calls</a> using our <strong>Active Calls API</strong>.</li>
+    <li><a href="./analytics/active-calls/">Get a List of Active Calls</a> using our <strong>Active Calls API</strong>.</li>
     <li><a href="./users/agents/">Provision and Sync Agents</a> using our <strong>Agent API</strong>.</li>
   </ul>
   <!--<p>Not a programmer? <a href="./basics/explorer/">Try out the API with no programming</a>.</p>-->

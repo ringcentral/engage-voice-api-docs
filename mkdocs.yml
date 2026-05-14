@@ -33,6 +33,9 @@ nav:
   - 'Analytics':
     - 'Overview': analytics/index.md
     - 'Audit Logs': analytics/audit-logs.md
+    - 'Active Calls':
+      - 'Active Calls': analytics/active-calls/index.md
+      - 'Getting Started': analytics/active-calls/quick-start.md
     - 'Cloud Reports':
       - 'Call Detail': analytics/reports/call-detail-report.md
       - 'Call Transcripts': analytics/reports/call-transcripts.md
@@ -55,7 +58,7 @@ nav:
       - 'Scripting Node': routing/ivr/scripting-node.md
     - 'Tutorials':
       - 'IVR DNC List': https://ringcentral-tutorials.github.io/dnc-via-ivr-rest-demo
-  - 'Dialing':
+  - 'Dialer':
     - 'Overview': dialing/index.md
     - 'Getting Started': dialing/quick-start.md
     - 'Campaigns':
@@ -67,9 +70,6 @@ nav:
       - 'Searching Leads': dialing/leads/search.md
       - 'Lead Actions': dialing/leads/actions.md
       - 'Web2Campaign': dialing/leads/web2campaign.md
-    - 'Active Calls':
-      - 'Active Calls': dialing/active-calls/index.md
-      - 'Getting Started': dialing/active-calls/quick-start.md
   - 'Users':
     - 'Overview': users/agents/index.md
     - 'Agents':
@@ -77,7 +77,7 @@ nav:
       - 'Agent Groups': users/agents/agent-groups.md
       - 'Skill Profiles': users/agents/skill-profile.md
       - 'Agent Scripting': users/agents/agent-script.md
-  - 'Workforce':
+  - 'AI WEM':
     - 'Overview': workforce/index.md
     - 'Workforce Management':
       - 'Creating an Event': notifications/wfm/configure-wfm.md
