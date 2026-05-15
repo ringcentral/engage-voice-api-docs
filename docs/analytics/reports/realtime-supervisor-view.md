@@ -1,6 +1,6 @@
 # Real-Time Supervisor View API
 
-The Real-Time Supervisor View APIs allow supervisors and operations teams to monitor live agent activity and queue health across voice and digital channels so they can manage staffing, intervene on at-risk queues, and maintain service levels without waiting for a scheduled report.
+The Real-Time Supervisor View APIs provide programmatic access to live agent states and queue health across voice and digital channels, enabling developers to build custom wallboards, automated SLA alerts, and staffing integrations that surface real-time operational data to supervisors.
 
 ## Strategic Overview
 

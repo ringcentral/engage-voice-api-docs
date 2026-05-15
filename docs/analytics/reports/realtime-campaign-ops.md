@@ -1,10 +1,10 @@
 # Real-Time Campaign Operations API
 
-The Real-Time Campaign Operations APIs allow campaign managers and operations teams to monitor live outbound dialing activity and IVR self-service traffic so they can assess campaign pacing, diagnose dial outcome issues, and track containment rates without waiting for end-of-day reports.
+The Real-Time Campaign Operations APIs provide programmatic access to live outbound dialing activity and IVR self-service traffic, enabling developers to build custom dashboards, automated alerts, and integrations that surface campaign pacing, dial outcome health, and IVR containment data in real time.
 
 ## Strategic Overview
 
-These endpoints surface the real-time state of your outbound campaigns and IVR applications. While historical reporting APIs provide post-hoc analysis, these endpoints answer operational questions in the moment: Is this campaign agent-starved? What is my current human answer rate? How many callers are self-serving through IVR versus transferring to a queue?
+These endpoints surface the real-time state of your outbound campaigns and IVR applications. Unlike the historical reporting APIs, which provide post-hoc analysis, these endpoints are designed for programmatic consumption of live operational state — feeding custom wallboards, triggering automated alerts, or correlating RingCX campaign data with external systems like a CRM or workforce management platform.
 
 ### Key Use Cases
 
