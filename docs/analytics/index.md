@@ -19,12 +19,11 @@ You can also use analytics to help identify the high or low points in customer a
   <div class="card" style="width: 18rem;">
     <div class="card-body pt-0 pb-0">
       <h5 class="card-title">Real Time Reports</h5>
-      <h6 class="card-subtitle mb-2 text-muted">Reports Streaming API</h6>
-      <p class="card-text">The Realtime Reports category provides data that is accurate up to the second the report is run, but these reports only provide access to the last 90 days worth of data. The reports in this category include:</p>
+      <h6 class="card-subtitle mb-2 text-muted">Realtime API</h6>
+      <p class="card-text">The Realtime Reports category provides point-in-time snapshots of live agent activity, queue health, and campaign operations. The reports in this category include:</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./reports/agent-session-report" class="card-link">Agent Session Report</a></li>
-      <li><a href="./reports/global-call-type-detail-report" class="card-link">Call Details and Recordings</a></li>
-      <li><a href="./reports/agent-segment-metadata-report" class="card-link">Agent Segment Metadata</a></li>
+      <li><a href="./reports/realtime-supervisor-view" class="card-link">Supervisor View</a></li>
+      <li><a href="./reports/realtime-campaign-ops" class="card-link">Campaign Operations</a></li>
       </ul>
     </div>
   </div>
