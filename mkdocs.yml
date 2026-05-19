@@ -67,7 +67,6 @@ nav:
       - 'Web2Campaign': dialing/leads/web2campaign.md
     - 'Active Calls':
       - 'Active Calls': dialing/active-calls/index.md
-      - 'Getting Started': dialing/active-calls/quick-start.md
   - 'Users':
     - 'Overview': users/agents/index.md
     - 'Agents':
