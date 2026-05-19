@@ -82,7 +82,7 @@ The list endpoint is the entry point for almost every workflow. It returns the `
 **Example Request:**
 
 ```http
-GET /voice/api/v1/admin/accounts/12440011/activeCalls/list?product=ACCOUNT&productId=12440011
+GET /voice/api/v1/admin/accounts/{accountID}/activeCalls/list?product=ACCOUNT&productId=12440011
 ```
 
 ### Response Details
