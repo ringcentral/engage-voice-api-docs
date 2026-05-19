@@ -158,7 +158,7 @@ The endpoint returns `true` on success.
 
 ## Adding a Supervisor Session
 
-Attaches a third party — typically a supervisor — to an active call. The `sessionType` parameter governs how the supervisor participates in the conversation.
+Supervisor sessions let a third party — typically a manager or QA analyst — join a live call without interrupting it. Depending on the `sessionType`, the supervisor can listen silently, whisper guidance to the agent, or join as a full participant. The `sessionType` parameter governs how the supervisor participates in the conversation.
 
 `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/addSessionToCall`
 
