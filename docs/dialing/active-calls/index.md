@@ -71,8 +71,9 @@ The list endpoint is the entry point for almost every workflow. It returns the `
 
 | Parameter | Type | Requirement | Description |
 | --- | --- | --- | --- |
-| `product` | String | **Required** | The category of resource to filter by. See the appendix for the full list of supported products. |
-| `productId` | Integer | **Required** | The numeric identifier of the selected product (e.g. the account ID when `product=ACCOUNT`). |
+| `product` | String | Optional | The category of resource to filter by. See the appendix for the full list of supported products. |
+| `productId` | Integer | Optional | The numeric identifier of the selected product (e.g. the account ID when `product=ACCOUNT`). |
+| `externalId` | String | Optional | Filter results to the call matching this custom external identifier. Use as an alternative to `product`/`productId` when you have a known external reference. |
 | `page` | Integer | Optional | Zero-indexed page number for paginated results. |
 | `maxRows` | Integer | Optional | Maximum number of records to return per page. |
 
