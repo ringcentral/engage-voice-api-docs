@@ -35,7 +35,6 @@ nav:
     - 'Audit Logs': analytics/audit-logs.md
     - 'Active Calls':
       - 'Active Calls': analytics/active-calls/index.md
-      - 'Getting Started': analytics/active-calls/quick-start.md
     - 'Cloud Reports':
       - 'Call Detail': analytics/reports/call-detail-report.md
       - 'Call Transcripts': analytics/reports/call-transcripts.md
