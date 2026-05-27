@@ -27621,7 +27621,7 @@
                 ],
                 "summary": "Returns a listing of remote http service groups for an account",
                 "description": "Permissions: READ on Account",
-                "operationId": "getRemoteHttpServiceGroupListByAccount",
+                "operationId": "getHttpServiceGroupList",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27690,7 +27690,7 @@
                 ],
                 "summary": "Creates a remote http service group for an account",
                 "description": "Permissions: CREATE on Account",
-                "operationId": "createHTTPServiceGroup",
+                "operationId": "createHttpServiceGroup",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27748,7 +27748,7 @@
                 ],
                 "summary": "Returns a listing of remote http service groups with related data",
                 "description": "Permissions: READ on Account",
-                "operationId": "getRemoteHttpServiceGroupListByAccountWithChildren",
+                "operationId": "getHttpServiceGroupListWithChildren",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27809,7 +27809,7 @@
                 ],
                 "summary": "Returns a remote http service group for an account",
                 "description": "Permissions: READ on HTTP Service Group",
-                "operationId": "getRemoteHttpServiceGroup",
+                "operationId": "getHttpServiceGroup",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27866,7 +27866,7 @@
                 ],
                 "summary": "Updates a remote http service group",
                 "description": "Permissions: UPDATE on HTTP Service Group",
-                "operationId": "updateHTTPServiceGroup",
+                "operationId": "updateHttpServiceGroup",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27935,7 +27935,7 @@
                 ],
                 "summary": "Returns a listing of remote http services",
                 "description": "Permissions: READ on Web Service Group",
-                "operationId": "getRemoteHttpServiceList",
+                "operationId": "getHttpServiceList",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28015,7 +28015,7 @@
                 ],
                 "summary": "Returns a remote http service",
                 "description": "Permissions: CREATE on Web Service Group",
-                "operationId": "createRemoteHttpService",
+                "operationId": "createHttpService",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28084,7 +28084,7 @@
                 ],
                 "summary": "Returns a remote http service",
                 "description": "Permissions: READ on Web Service",
-                "operationId": "getRemoteHttpService",
+                "operationId": "getHttpService",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28152,7 +28152,7 @@
                 ],
                 "summary": "Returns a remote http service",
                 "description": "Permissions: UPDATE on Web Service",
-                "operationId": "updateRemoteHttpService",
+                "operationId": "updateHttpService",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28232,7 +28232,7 @@
                 ],
                 "summary": "Clones a remote http service",
                 "description": "Permissions: READ on Web Service (Permission Override), CREATE on Web Service Group",
-                "operationId": "cloneRemoteHttpService",
+                "operationId": "cloneHttpService",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28311,7 +28311,7 @@
                 ],
                 "summary": "Returns a listing of remote http service inputs for an account",
                 "description": "Permissions: READ on HTTP Service",
-                "operationId": "getRemoteHttpServiceInputList",
+                "operationId": "getHttpServiceInputList",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28382,7 +28382,7 @@
                 ],
                 "summary": "Returns a remote http service input for an account",
                 "description": "Permissions: UPDATE on HTTP Service",
-                "operationId": "saveRemoteHttpServiceInputs",
+                "operationId": "createHttpServiceInput",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28468,7 +28468,7 @@
                 ],
                 "summary": "Returns a remote http service input for an account",
                 "description": "Permissions: READ on HTTP Service",
-                "operationId": "getRemoteHttpServiceInput",
+                "operationId": "getHttpServiceInput",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28547,7 +28547,7 @@
                 ],
                 "summary": "Returns a remote http service input for an account",
                 "description": "Permissions: UPDATE on HTTP Service",
-                "operationId": "deleteRemoteHttpServiceInput",
+                "operationId": "deleteHttpServiceInput",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28628,7 +28628,7 @@
                 ],
                 "summary": "Set remote HTTP service active state",
                 "description": "Permissions: UPDATE on Web Service",
-                "operationId": "setRemoteHttpServiceIsEnabled",
+                "operationId": "setHttpServiceIsActive",
                 "parameters": [
                     {
                         "name": "accountId",
