@@ -23,6 +23,16 @@ To authenticate, your application must be configured with **`ReadAccounts`** in 
 
 The authenticating RingCX user must have Admin portal permissions to read and update cloud route groups, destinations, profiles, assigned destinations, and DNIS overrides for the target account.
 
+!!! warning "Common Authorization Errors"
+    If the OAuth token is valid but the user cannot manage cloud routing, the API returns an error similar to:
+    ```json
+    {
+      "errorCode": "access.denied.exception",
+      "generalMessage": "You do not have permission to access this resource",
+      "timestamp": 1611847650696
+    }
+    ```
+
 ## Discover Cloud Route Groups
 
 Start by listing destination groups and profile groups for the account.
@@ -41,12 +51,12 @@ Cloud route destinations define where calls can be sent. A destination belongs t
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List destinations | `GET /voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/getCloudRouteDestinationList) |
-| Create destination | `POST /voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/createCloudRouteDestination) |
-| Get destination | `GET /voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/getCloudRouteDestination) |
-| Update destination | `PUT /voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/updateCloudRouteDestination) |
-| Clone destination | `POST /voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/clone` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/cloneCloudRouteDestination) |
-| Set active state | `PUT /voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/setIsActive` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/setCloudRouteDestinationIsActive) |
+| List destinations | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/getCloudRouteDestinationList) |
+| Create destination | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/createCloudRouteDestination) |
+| Get destination | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/getCloudRouteDestination) |
+| Update destination | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/updateCloudRouteDestination) |
+| Clone destination | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/clone` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/cloneCloudRouteDestination) |
+| Set active state | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/setIsActive` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/setCloudRouteDestinationIsActive) |
 
 ## Manage Profiles
 
@@ -54,11 +64,11 @@ Cloud route profiles control how traffic is distributed across assigned destinat
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| Create profile | `POST /voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/createCloudRouteProfile) |
-| Get profile | `GET /voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudProfileId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/getCloudRouteProfile) |
-| Update profile | `PUT /voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/updateCloudRouteProfile) |
-| Clone profile | `POST /voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/clone` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/cloneCloudRouteProfile) |
-| Set active state | `PUT /voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/setIsActive` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/setCloudRouteProfileIsActive) |
+| Create profile | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/createCloudRouteProfile) |
+| Get profile | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudProfileId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/getCloudRouteProfile) |
+| Update profile | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/updateCloudRouteProfile) |
+| Clone profile | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/clone` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/cloneCloudRouteProfile) |
+| Set active state | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/setIsActive` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/setCloudRouteProfileIsActive) |
 
 ## Assign Destinations to Profiles
 
@@ -66,11 +76,11 @@ Use assigned destinations to define the destinations a profile can route to. For
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List assigned destinations | `GET /voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/getCloudAssignedDestinationList) |
-| Create assignment | `POST /voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/createCloudAssignedDestination) |
-| Update assignments in batch | `PUT /voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/batch` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/batchUpdateCloudAssignedDestinations) |
-| Export allocation hours | `POST /voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/percentAllocationHours/export` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/exportPercentAllocationHours) |
-| Import allocation hours | `POST /voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/percentAllocationHours/import` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/importPercentAllocationHours) |
+| List assigned destinations | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/getCloudAssignedDestinationList) |
+| Create assignment | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/createCloudAssignedDestination) |
+| Update assignments in batch | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/batch` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/batchUpdateCloudAssignedDestinations) |
+| Export allocation hours | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/percentAllocationHours/export` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/exportPercentAllocationHours) |
+| Import allocation hours | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/percentAllocationHours/import` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/importPercentAllocationHours) |
 
 ## Configure DNIS Overrides
 
@@ -78,9 +88,9 @@ DNIS overrides let a cloud route destination apply number-specific routing behav
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List overrides | `GET /voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/dnisOverrides` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/getDnisOverrideList) |
-| Create override | `POST /voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/dnisOverrides` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/createDnisOverride) |
-| Create overrides in batch | `POST /voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/dnisOverrides/batch` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/createDnisOverrideBatch) |
+| List overrides | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/dnisOverrides` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/getDnisOverrideList) |
+| Create override | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/dnisOverrides` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/createDnisOverride) |
+| Create overrides in batch | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/dnisOverrides/batch` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Cloud-Routing/createDnisOverrideBatch) |
 
 ## Recommended Workflow
 
@@ -145,6 +155,23 @@ DNIS overrides let a cloud route destination apply number-specific routing behav
   "active": true
 }
 ```
+
+### Example Destination Response
+
+```json
+{
+  "cloudRouteDestinationId": 12345,
+  "cloudRouteGroupId": 678,
+  "destinationName": "Denver overflow",
+  "description": "Overflow destination for Denver support",
+  "active": false,
+  "priority": 10
+}
+```
+
+### Percent Allocation Import/Export
+
+Use the export endpoint to retrieve the platform's current percent-allocation-hours file, edit the returned file offline, then send the updated file to the import endpoint. Keep the exported file format intact; the exact file schema is controlled by the generated export and should not be reconstructed from scratch.
 
 ## Primary Resource Fields
 
