@@ -14446,34 +14446,91 @@
             "WEMDialogSegmentMetaData": {
                 "type": "object",
                 "properties": {
-                    "subAccountId": { "type": "string" },
-                    "dialogId": { "type": "string" },
-                    "interactionId": { "type": "string" },
-                    "channelId": { "type": "string" },
-                    "channelType": { "type": "string" },
-                    "channelClass": { "type": "string" },
-                    "channelEndpointAddress": { "type": "string" },
-                    "contactEndpointAddress": { "type": "string" },
-                    "dialogOrigination": { "type": "string" },
-                    "dialogStartTimeMs": { "type": "string", "format": "date-time" },
-                    "dialogEndTimeMs": { "type": "string", "format": "date-time" },
-                    "dialogDurationMs": { "type": "integer" },
-                    "segmentId": { "type": "string" },
-                    "segmentType": { "type": "string" },
-                    "segmentParticipantId": { "type": "string" },
-                    "segmentParticipantRcExtensionId": { "type": "string" },
-                    "segmentStartTimeMs": { "type": "string", "format": "date-time" },
-                    "segmentEndTimeMs": { "type": "string", "format": "date-time" },
-                    "segmentDurationMs": { "type": "integer" },
-                    "segmentAgentGroupId": { "type": "string" },
-                    "systemDisposition": { "type": "string", "nullable": true },
-                    "agentDisposition": { "type": "string" },
-                    "agentNotes": { "type": "string" },
-                    "hasRecording": { "type": "boolean" },
-                    "hasTranscript": { "type": "boolean" },
+                    "subAccountId": {
+                        "type": "string"
+                    },
+                    "dialogId": {
+                        "type": "string"
+                    },
+                    "interactionId": {
+                        "type": "string"
+                    },
+                    "channelId": {
+                        "type": "string"
+                    },
+                    "channelType": {
+                        "type": "string"
+                    },
+                    "channelClass": {
+                        "type": "string"
+                    },
+                    "channelEndpointAddress": {
+                        "type": "string"
+                    },
+                    "contactEndpointAddress": {
+                        "type": "string"
+                    },
+                    "dialogOrigination": {
+                        "type": "string"
+                    },
+                    "dialogStartTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "dialogEndTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "dialogDurationMs": {
+                        "type": "integer"
+                    },
+                    "segmentId": {
+                        "type": "string"
+                    },
+                    "segmentType": {
+                        "type": "string"
+                    },
+                    "segmentParticipantId": {
+                        "type": "string"
+                    },
+                    "segmentParticipantRcExtensionId": {
+                        "type": "string"
+                    },
+                    "segmentStartTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "segmentEndTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "segmentDurationMs": {
+                        "type": "integer"
+                    },
+                    "segmentAgentGroupId": {
+                        "type": "string"
+                    },
+                    "systemDisposition": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "agentDisposition": {
+                        "type": "string"
+                    },
+                    "agentNotes": {
+                        "type": "string"
+                    },
+                    "hasRecording": {
+                        "type": "boolean"
+                    },
+                    "hasTranscript": {
+                        "type": "boolean"
+                    },
                     "segmentEvents": {
                         "type": "array",
-                        "items": { "$ref": "#/components/schemas/InteractionSegmentEvent" },
+                        "items": {
+                            "$ref": "#/components/schemas/InteractionSegmentEvent"
+                        },
                         "nullable": true
                     }
                 }
@@ -14522,60 +14579,185 @@
             "AggregatedAgentStats": {
                 "type": "object",
                 "properties": {
-                    "interval": { "type": "integer", "format": "int32" },
-                    "dateTimeFrom": { "type": "string" },
-                    "agentId": { "type": "integer", "format": "int32" },
-                    "agentName": { "type": "string" },
-                    "availDur": { "type": "integer", "format": "int32" },
-                    "totWorkDur": { "type": "integer", "format": "int32" },
-                    "pauseDur": { "type": "integer", "format": "int32" },
-                    "waitDur": { "type": "integer", "format": "int32" },
-                    "adminDur": { "type": "integer", "format": "int32" },
-                    "directOutIxnCnt": { "type": "integer", "format": "int32" },
-                    "directOutIxnDur": { "type": "integer", "format": "int32" },
-                    "directInIxnCnt": { "type": "integer", "format": "int32" },
-                    "directInIxnDur": { "type": "integer", "format": "int32" }
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "agentId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "agentName": {
+                        "type": "string"
+                    },
+                    "availDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totWorkDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "pauseDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "waitDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "adminDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directOutIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directInIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directInIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "AggregatedQueueStats": {
                 "type": "object",
                 "properties": {
-                    "dateTimeFrom": { "type": "string" },
-                    "interval": { "type": "integer", "format": "int32" },
-                    "queue": { "type": "integer", "format": "int32" },
-                    "queueName": { "type": "string" },
-                    "offdDirectIxnCnt": { "type": "integer", "format": "int32" },
-                    "answIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandShortIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandWithinSlCnt": { "type": "integer", "format": "int32" },
-                    "ansServicelevelCnt": { "type": "integer", "format": "int32" },
-                    "completedContacts": { "type": "integer", "format": "int32" },
-                    "queuedAndAnswIxnDur": { "type": "integer", "format": "int32" },
-                    "queuedAndAbandIxnDur": { "type": "integer", "format": "int32" },
-                    "queuedAnswLongestQueDur": { "type": "integer", "format": "int32" },
-                    "queuedAbandLongestQueDur": { "type": "integer", "format": "int32" },
-                    "talkingIxnDur": { "type": "integer", "format": "int32" },
-                    "wrapUpDur": { "type": "integer", "format": "int32" },
-                    "waitDur": { "type": "integer", "format": "int32" },
-                    "segmentHoldTime": { "type": "integer", "format": "int32" },
-                    "overflowInIxnCnt": { "type": "integer", "format": "int32" },
-                    "overflowOutIxnCnt": { "type": "integer", "format": "int32" }
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queue": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queueName": {
+                        "type": "string"
+                    },
+                    "offdDirectIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "answIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandShortIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandWithinSlCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "ansServicelevelCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "completedContacts": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAndAnswIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAndAbandIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAnswLongestQueDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAbandLongestQueDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "talkingIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "wrapUpDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "waitDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "segmentHoldTime": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "overflowInIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "overflowOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "ExtendedAggregatedQueueStats": {
                 "type": "object",
                 "properties": {
-                    "interval": { "type": "integer", "format": "int32" },
-                    "dateTimeFrom": { "type": "string" },
-                    "agentId": { "type": "integer", "format": "int32" },
-                    "agentName": { "type": "string" },
-                    "queue": { "type": "integer", "format": "int32" },
-                    "queueName": { "type": "string" },
-                    "talkingIxnDur": { "type": "integer", "format": "int32" },
-                    "wrapUpDur": { "type": "integer", "format": "int32" },
-                    "answIxnCnt": { "type": "integer", "format": "int32" },
-                    "transferOutIxnCnt": { "type": "integer", "format": "int32" }
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "agentId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "agentName": {
+                        "type": "string"
+                    },
+                    "queue": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queueName": {
+                        "type": "string"
+                    },
+                    "talkingIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "wrapUpDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "answIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "transferOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "CXQueueWithAgents": {
@@ -26528,6 +26710,2774 @@
                         }
                     }
                 }
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/tracGroups/withChildren": {
+            "get": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns a listing of trac groups with related data for an account",
+                "description": "Permissions: READ on Account, Post Filtered Results",
+                "operationId": "getListWithNumberChildren",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "includePermissions",
+                        "in": "query",
+                        "description": "includePermissions",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TracGroup"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}": {
+            "get": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns a trac group for an account",
+                "description": "Permissions: READ on Trac Group",
+                "operationId": "getTracGroupsTracGroupId",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TracGroup"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Updates a trac group for an account",
+                "description": "Permissions: Update on Trac Group",
+                "operationId": "updateTracGroup",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TracGroup"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TracGroup"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Updates a trac group for an account",
+                "description": "Permissions: Delete on Trac Group",
+                "operationId": "deleteTracGroup",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers": {
+            "get": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns a listing of trac numbers for an account",
+                "description": "Permissions: READ on Trac Group, Post Filtered Results",
+                "operationId": "getTracNumbers",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TracNumber"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Creates a trac number for an account",
+                "description": "Permissions: Create on Trac Group",
+                "operationId": "createTracNumber",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TracNumber"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TracNumber"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers/{tracId}": {
+            "get": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns a trac number for an account",
+                "description": "Permissions: READ on Trac Number",
+                "operationId": "getTracNumber",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracId",
+                        "in": "path",
+                        "description": "tracId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TracNumber"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Updates a trac number for an account",
+                "description": "Permissions: Update on Trac Group",
+                "operationId": "updateTracNumber",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracId",
+                        "in": "path",
+                        "description": "tracId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TracNumber"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TracNumber"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers/{tracId}/routingRules": {
+            "get": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns a list of routing rules for a trac number",
+                "description": "Permissions: READ on Trac Number",
+                "operationId": "getTracRoutingRuleByNumber",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracId",
+                        "in": "path",
+                        "description": "tracId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TracRoutingRule"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Creates a routing rule for a trac number",
+                "description": "Permissions: UPDATE on Trac Number",
+                "operationId": "createTracRoutingRule",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracId",
+                        "in": "path",
+                        "description": "tracId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TracRoutingRule"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers/{tracId}/routingRules/{ruleId}": {
+            "get": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns a trac number routing rule for a trac number",
+                "description": "Permissions: READ on Trac Number",
+                "operationId": "getTracRoutingRule",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracId",
+                        "in": "path",
+                        "description": "tracId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "ruleId",
+                        "in": "path",
+                        "description": "ruleId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Updates a routing rule for a trac number",
+                "description": "Permissions: UPDATE on Trac Number",
+                "operationId": "updateTracRoutingRule",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracId",
+                        "in": "path",
+                        "description": "tracId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "ruleId",
+                        "in": "path",
+                        "description": "ruleId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TracRoutingRule"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Deletes a routing rule for a trac number",
+                "description": "Permissions: UPDATE on Trac Number",
+                "operationId": "deleteTracRoutingRule",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracId",
+                        "in": "path",
+                        "description": "tracId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "ruleId",
+                        "in": "path",
+                        "description": "ruleId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers/{tracId}/scheduleOverrides": {
+            "get": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns a list of schedule overrides for a trac number",
+                "description": "Permissions: READ on Trac Number",
+                "operationId": "getTracScheduleOverridesByNumber",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracId",
+                        "in": "path",
+                        "description": "tracId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/TracScheduleOverride"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Creates a schedule override for a trac number",
+                "description": "Permissions: UPDATE on Trac Number (Permission Override)",
+                "operationId": "createTracScheduleOverridesByNumber",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracId",
+                        "in": "path",
+                        "description": "tracId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TracScheduleOverride"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TracScheduleOverride"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers/{tracId}/scheduleOverrides/{overrideId}": {
+            "get": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns a schedule override for a trac number",
+                "description": "Permissions: READ on Trac Number",
+                "operationId": "getTracScheduleOverride",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracId",
+                        "in": "path",
+                        "description": "tracId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "overrideId",
+                        "in": "path",
+                        "description": "overrideId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TracScheduleOverride"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Updates a schedule override for a trac number",
+                "description": "Permissions: UPDATE on Trac Number",
+                "operationId": "updateTracScheduleOverridesByNumber",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracId",
+                        "in": "path",
+                        "description": "tracId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "overrideId",
+                        "in": "path",
+                        "description": "overrideId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TracScheduleOverride"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TracScheduleOverride"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Deletes a schedule override for a trac number",
+                "description": "Permissions: UPDATE on Trac Number (Permission Override)",
+                "operationId": "deleteTracScheduleOverridesByNumber",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracGroupId",
+                        "in": "path",
+                        "description": "tracGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "tracId",
+                        "in": "path",
+                        "description": "tracId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "overrideId",
+                        "in": "path",
+                        "description": "overrideId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/accounts": {
+            "get": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns all available Media Values that a user has access to",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "getAccounts",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Account"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/assignedDnis": {
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Updates an assigned dnis, will not assign a product to an assigned dnis",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "updateDnisAssignment",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AssignedDnis"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AssignedDnis"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Deletes the assignment between a product and a dnis pool",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "deleteDnisAssignment",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DeleteDnisRequest"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/assignedDnis/cloudRouteProfiles/{cloudRouteProfileId}": {
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "If assigned dnis doesn't exist, this endpoint will create a new assigned dnis and assigns a cloud profile to it.If the assigned dnis already exists, this endpoint will assign a cloud profile to it",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "assignCloudRouteProfile",
+                "parameters": [
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AssignedDnis"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AssignedDnis"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/assignedDnis/gates/{gateId}": {
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "If assigned dnis doesn't exist, this endpoint will create a new assigned dnis and assigns a gate to it.If assigned dnis already exists, this endpoint will assign a gate to it",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "assignGate",
+                "parameters": [
+                    {
+                        "name": "gateId",
+                        "in": "path",
+                        "description": "gateId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AssignedDnis"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AssignedDnis"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/assignedDnis/visualIvrs/{visualIvrId}": {
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "If assigned dnis doesn't exist, this endpoint will create a new assigned dnis and assigns a visual ivr to it.If assigned dnis already exists, this endpoint will assign a visualIvr to it",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "assignVisualIvr",
+                "parameters": [
+                    {
+                        "name": "visualIvrId",
+                        "in": "path",
+                        "description": "visualIvrId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AssignedDnis"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AssignedDnis"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/assignedDnis/{dnis}": {
+            "get": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Gets the assignment between a product and a dnis pool",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "getDnisAssignment",
+                "parameters": [
+                    {
+                        "name": "dnis",
+                        "in": "path",
+                        "description": "dnis",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AssignedDnis"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Deletes the assignment between a product and a dnis pool",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "deleteDnisAssignment2",
+                "parameters": [
+                    {
+                        "name": "dnis",
+                        "in": "path",
+                        "description": "dnis",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis": {
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Updates an assigned sms dnis, will not assign a chat queue to an assigned sms dnis",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "updateSmsDnisAssignment",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AssignedSmsDnis"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AssignedSmsDnis"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/chatQueues/{chatQueueId}": {
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "If it doesn't exist, this endpoint will create a new assigned sms dnis and assigns a chat to an assigned sms dnis.If it already exists, this endpoint will assign a chat queue to an assigned sms dnis",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "assignChatQueue",
+                "parameters": [
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AssignedSmsDnis"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AssignedSmsDnis"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/{dnis}": {
+            "get": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Gets the assignment between a chat queue and a dnis pool",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "getSmsDnisAssignment",
+                "parameters": [
+                    {
+                        "name": "dnis",
+                        "in": "path",
+                        "description": "dnis",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AssignedSmsDnis"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Deletes the assignment between a chat queue and a dnis pool",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "deleteSmsDnisAssignment",
+                "parameters": [
+                    {
+                        "name": "dnis",
+                        "in": "path",
+                        "description": "dnis",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/checkNewDnisList": {
+            "post": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns a list of dnis pools that already exist",
+                "description": "Permissions: UPDATE on TN_MANAGER, filter out restricted accounts",
+                "operationId": "validateNewDnisList",
+                "parameters": [
+                    {
+                        "name": "phoneNumbersI18nEnabled",
+                        "in": "query",
+                        "description": "phoneNumbersI18nEnabled",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/dnisPool": {
+            "post": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Creates a list of dnis pools, will not save any assignments",
+                "description": "Has Role: SUPER_USER",
+                "operationId": "createDnisPoolList",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/DnisPool"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/DnisPool"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Updates a single dnis pool, will not save or update any assignments",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "updateDnisPoolList",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/DnisPool"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/DnisPool"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/dnisPool/bulkDelete": {
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Deletes a dnis list, will also delete associated assignments",
+                "description": "Has Role: SUPER_USER",
+                "operationId": "deleteDnisList",
+                "parameters": [
+                    {
+                        "name": "phoneNumbersI18nEnabled",
+                        "in": "query",
+                        "description": "phoneNumbersI18nEnabled",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/dnisPool/{dnis}": {
+            "get": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns a single dnis pool without assignments",
+                "description": "Permissions: READ on TN_MANAGER",
+                "operationId": "getUtilitiesTnManagerDnisPoolDnis",
+                "parameters": [
+                    {
+                        "name": "dnis",
+                        "in": "path",
+                        "description": "dnis",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phoneNumbersI18nEnabled",
+                        "in": "query",
+                        "description": "phoneNumbersI18nEnabled",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DnisPool"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Deletes a single dnis pool, will also delete associated assignments",
+                "description": "Has Role: SUPER_USER",
+                "operationId": "deleteDnis",
+                "parameters": [
+                    {
+                        "name": "dnis",
+                        "in": "path",
+                        "description": "dnis",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/mediaValues": {
+            "get": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns all available Media Values that a user has access to",
+                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "getMediaValues",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MediaCodeValuesOnDnisPool"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/report": {
+            "post": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns all dnis pools",
+                "description": "Permissions: READ on Account, READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "getDnisPoolListAsReport",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TnManagerSearchCriteria"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/search": {
+            "post": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns all dnis pools or count of dnis pools if 'count' param is provided",
+                "description": "Permissions: READ on Account, READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "getDnisPoolList",
+                "parameters": [
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "count",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "maxRows",
+                        "in": "query",
+                        "description": "maxRows",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TnManagerSearchCriteria"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/searchDnis": {
+            "post": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns all dnis pools for Customer",
+                "description": "Permissions: READ on Account, READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "getCustomerDnisPoolList",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DnisListRequest"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/updateBulkDnisPool": {
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Updates for bulk csv data dnis pool, will update assignments too",
+                "description": "Permissions: READ/WRITE on TN_MANAGER, filter out restricted accounts",
+                "operationId": "updateBulkDnisPoolList",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/DnisPool"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DnisBulkUpdateRespose"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/updateCustomerDnisBulk": {
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Update Dnis Records in Bulk",
+                "description": "",
+                "operationId": "updateCustomerDnisBulk",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/updatePoolAndAssignment": {
+            "put": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Takes a single update request for pools/assignments and smsAssignments",
+                "description": "",
+                "operationId": "UpdateDnisPoolAndAssignments",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/DnisPoolUpdateRequest"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/utilities/tnManager/uploadDnisPool": {
+            "post": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Creates a list of dnis pools from upload file",
+                "description": "Has Role: USER",
+                "operationId": "previewDnisList",
+                "parameters": [
+                    {
+                        "name": "fileType",
+                        "in": "query",
+                        "description": "fileType",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "COMMA"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "quoteCharacter",
+                        "in": "query",
+                        "description": "quoteCharacter",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "file",
+                        "in": "query",
+                        "description": "file",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phoneNumbersI18nEnabled",
+                        "in": "query",
+                        "description": "phoneNumbersI18nEnabled",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DnisListPreviewResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v2/admin/utilities/tnManager/searchDnis": {
+            "post": {
+                "tags": [
+                    "Phone Number Management"
+                ],
+                "summary": "Returns all dnis pools for Customer",
+                "description": "Permissions: READ on Account, READ on TN_MANAGER, filter out restricted accounts",
+                "operationId": "getCustomerDnisPoolList2",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DnisListRequest"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DnisSearchResultDTO"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             }
         }
     },
