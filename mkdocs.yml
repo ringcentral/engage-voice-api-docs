@@ -47,6 +47,8 @@ nav:
       - 'Queue Events': routing/queues/queue-events.md
       - 'Queue Groups': routing/queues/queue-groups.md
       - 'Group Skills': routing/queues/group-skills.md
+    - 'Chat':
+      - 'Chat Queues': routing/chat/chat-queues.md
     - 'IVR':
       - 'Overview': routing/ivr/index.md
       - 'WWW Node': routing/ivr/www-node.md

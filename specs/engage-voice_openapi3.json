@@ -14446,34 +14446,91 @@
             "WEMDialogSegmentMetaData": {
                 "type": "object",
                 "properties": {
-                    "subAccountId": { "type": "string" },
-                    "dialogId": { "type": "string" },
-                    "interactionId": { "type": "string" },
-                    "channelId": { "type": "string" },
-                    "channelType": { "type": "string" },
-                    "channelClass": { "type": "string" },
-                    "channelEndpointAddress": { "type": "string" },
-                    "contactEndpointAddress": { "type": "string" },
-                    "dialogOrigination": { "type": "string" },
-                    "dialogStartTimeMs": { "type": "string", "format": "date-time" },
-                    "dialogEndTimeMs": { "type": "string", "format": "date-time" },
-                    "dialogDurationMs": { "type": "integer" },
-                    "segmentId": { "type": "string" },
-                    "segmentType": { "type": "string" },
-                    "segmentParticipantId": { "type": "string" },
-                    "segmentParticipantRcExtensionId": { "type": "string" },
-                    "segmentStartTimeMs": { "type": "string", "format": "date-time" },
-                    "segmentEndTimeMs": { "type": "string", "format": "date-time" },
-                    "segmentDurationMs": { "type": "integer" },
-                    "segmentAgentGroupId": { "type": "string" },
-                    "systemDisposition": { "type": "string", "nullable": true },
-                    "agentDisposition": { "type": "string" },
-                    "agentNotes": { "type": "string" },
-                    "hasRecording": { "type": "boolean" },
-                    "hasTranscript": { "type": "boolean" },
+                    "subAccountId": {
+                        "type": "string"
+                    },
+                    "dialogId": {
+                        "type": "string"
+                    },
+                    "interactionId": {
+                        "type": "string"
+                    },
+                    "channelId": {
+                        "type": "string"
+                    },
+                    "channelType": {
+                        "type": "string"
+                    },
+                    "channelClass": {
+                        "type": "string"
+                    },
+                    "channelEndpointAddress": {
+                        "type": "string"
+                    },
+                    "contactEndpointAddress": {
+                        "type": "string"
+                    },
+                    "dialogOrigination": {
+                        "type": "string"
+                    },
+                    "dialogStartTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "dialogEndTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "dialogDurationMs": {
+                        "type": "integer"
+                    },
+                    "segmentId": {
+                        "type": "string"
+                    },
+                    "segmentType": {
+                        "type": "string"
+                    },
+                    "segmentParticipantId": {
+                        "type": "string"
+                    },
+                    "segmentParticipantRcExtensionId": {
+                        "type": "string"
+                    },
+                    "segmentStartTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "segmentEndTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "segmentDurationMs": {
+                        "type": "integer"
+                    },
+                    "segmentAgentGroupId": {
+                        "type": "string"
+                    },
+                    "systemDisposition": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "agentDisposition": {
+                        "type": "string"
+                    },
+                    "agentNotes": {
+                        "type": "string"
+                    },
+                    "hasRecording": {
+                        "type": "boolean"
+                    },
+                    "hasTranscript": {
+                        "type": "boolean"
+                    },
                     "segmentEvents": {
                         "type": "array",
-                        "items": { "$ref": "#/components/schemas/InteractionSegmentEvent" },
+                        "items": {
+                            "$ref": "#/components/schemas/InteractionSegmentEvent"
+                        },
                         "nullable": true
                     }
                 }
@@ -14522,60 +14579,185 @@
             "AggregatedAgentStats": {
                 "type": "object",
                 "properties": {
-                    "interval": { "type": "integer", "format": "int32" },
-                    "dateTimeFrom": { "type": "string" },
-                    "agentId": { "type": "integer", "format": "int32" },
-                    "agentName": { "type": "string" },
-                    "availDur": { "type": "integer", "format": "int32" },
-                    "totWorkDur": { "type": "integer", "format": "int32" },
-                    "pauseDur": { "type": "integer", "format": "int32" },
-                    "waitDur": { "type": "integer", "format": "int32" },
-                    "adminDur": { "type": "integer", "format": "int32" },
-                    "directOutIxnCnt": { "type": "integer", "format": "int32" },
-                    "directOutIxnDur": { "type": "integer", "format": "int32" },
-                    "directInIxnCnt": { "type": "integer", "format": "int32" },
-                    "directInIxnDur": { "type": "integer", "format": "int32" }
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "agentId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "agentName": {
+                        "type": "string"
+                    },
+                    "availDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totWorkDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "pauseDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "waitDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "adminDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directOutIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directInIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directInIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "AggregatedQueueStats": {
                 "type": "object",
                 "properties": {
-                    "dateTimeFrom": { "type": "string" },
-                    "interval": { "type": "integer", "format": "int32" },
-                    "queue": { "type": "integer", "format": "int32" },
-                    "queueName": { "type": "string" },
-                    "offdDirectIxnCnt": { "type": "integer", "format": "int32" },
-                    "answIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandShortIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandWithinSlCnt": { "type": "integer", "format": "int32" },
-                    "ansServicelevelCnt": { "type": "integer", "format": "int32" },
-                    "completedContacts": { "type": "integer", "format": "int32" },
-                    "queuedAndAnswIxnDur": { "type": "integer", "format": "int32" },
-                    "queuedAndAbandIxnDur": { "type": "integer", "format": "int32" },
-                    "queuedAnswLongestQueDur": { "type": "integer", "format": "int32" },
-                    "queuedAbandLongestQueDur": { "type": "integer", "format": "int32" },
-                    "talkingIxnDur": { "type": "integer", "format": "int32" },
-                    "wrapUpDur": { "type": "integer", "format": "int32" },
-                    "waitDur": { "type": "integer", "format": "int32" },
-                    "segmentHoldTime": { "type": "integer", "format": "int32" },
-                    "overflowInIxnCnt": { "type": "integer", "format": "int32" },
-                    "overflowOutIxnCnt": { "type": "integer", "format": "int32" }
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queue": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queueName": {
+                        "type": "string"
+                    },
+                    "offdDirectIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "answIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandShortIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandWithinSlCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "ansServicelevelCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "completedContacts": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAndAnswIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAndAbandIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAnswLongestQueDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAbandLongestQueDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "talkingIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "wrapUpDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "waitDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "segmentHoldTime": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "overflowInIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "overflowOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "ExtendedAggregatedQueueStats": {
                 "type": "object",
                 "properties": {
-                    "interval": { "type": "integer", "format": "int32" },
-                    "dateTimeFrom": { "type": "string" },
-                    "agentId": { "type": "integer", "format": "int32" },
-                    "agentName": { "type": "string" },
-                    "queue": { "type": "integer", "format": "int32" },
-                    "queueName": { "type": "string" },
-                    "talkingIxnDur": { "type": "integer", "format": "int32" },
-                    "wrapUpDur": { "type": "integer", "format": "int32" },
-                    "answIxnCnt": { "type": "integer", "format": "int32" },
-                    "transferOutIxnCnt": { "type": "integer", "format": "int32" }
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "agentId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "agentName": {
+                        "type": "string"
+                    },
+                    "queue": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queueName": {
+                        "type": "string"
+                    },
+                    "talkingIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "wrapUpDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "answIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "transferOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "CXQueueWithAgents": {
@@ -26528,6 +26710,2641 @@
                         }
                     }
                 }
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/chatGroups/withChildren": {
+            "get": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Returns a listing of Chat Groups with related data for an Account",
+                "description": "Permissions: READ on Account and READ on CHAT_QUEUE, Post Filtered Results",
+                "operationId": "getChatGroupListWithChildren",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "includePermissions",
+                        "in": "query",
+                        "description": "includePermissions",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "maxRows",
+                        "in": "query",
+                        "description": "maxRows",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ChatGroup"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}": {
+            "get": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Returns a single Chat Group",
+                "description": "Permissions: READ on Chat Group",
+                "operationId": "getChatGroup",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatGroup"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Updates a single Chat Group",
+                "description": "Permissions: UPDATE on Chat Group",
+                "operationId": "updateChatGroup",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatGroup"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatGroup"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues": {
+            "get": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Returns a listing of all Chat Queues for the given account",
+                "description": "Permissions: READ on Chat Group, Post Filtered Results",
+                "operationId": "listChatQueues",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "maxRows",
+                        "in": "query",
+                        "description": "maxRows",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ChatQueue"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Creates a new Chat Queue",
+                "description": "Permissions: CREATE on Chat Group",
+                "operationId": "createChatQueue",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatQueue"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatQueue"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}": {
+            "get": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Returns a single Chat Queue",
+                "description": "Permissions: READ on Chat Queue",
+                "operationId": "getChatQueue",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatQueue"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Updates a Chat Queue",
+                "description": "Permissions: UPDATE on Chat Queue",
+                "operationId": "updateChatQueue",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatQueue"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatQueue"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/assignAgents": {
+            "put": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Assigns a listing of Agents to a Chat Queue",
+                "description": "Permissions: UPDATE on Chat Queue and READ on Agent",
+                "operationId": "assignAgentsToChatQueues",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/AgentChatQueueAccess"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Agent"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/assignedAgents": {
+            "get": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Returns a listing of all Agents assigned to a Chat Queue",
+                "description": "Permissions: READ on Chat Queue",
+                "operationId": "getAgentsFromChatQueue",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "maxRows",
+                        "in": "query",
+                        "description": "maxRows",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/AgentListViewDto"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/dispositions": {
+            "get": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Returns a listing of dispositions for a Chat Queue",
+                "description": "Permissions: READ on Chat Queue",
+                "operationId": "getChatQueueDispositionList",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ChatQueueDisposition"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Creates a new disposition",
+                "description": "Permissions: UPDATE on Chat Queue (Permission Override)",
+                "operationId": "createChatQueueDisposition",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatQueueDisposition"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatQueueDisposition"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/dispositions/{dispositionId}": {
+            "get": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Returns a disposition for a Chat Queue",
+                "description": "Permissions: READ on Chat Queue",
+                "operationId": "getChatQueueDisposition",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "dispositionId",
+                        "in": "path",
+                        "description": "dispositionId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatQueueDisposition"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Updates a disposition for a Chat Queue",
+                "description": "Permissions: UPDATE on Chat Queue",
+                "operationId": "updateChatQueueDisposition",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "dispositionId",
+                        "in": "path",
+                        "description": "dispositionId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatQueueDisposition"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatQueueDisposition"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Deletes a disposition",
+                "description": "Permissions: UPDATE on Chat Queue (Permission Override)",
+                "operationId": "deleteChatQueueDisposition",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "dispositionId",
+                        "in": "path",
+                        "description": "dispositionId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/events": {
+            "get": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Returns a listing of events for a Chat Queue",
+                "description": "Permissions: READ on Chat Queue",
+                "operationId": "getChatQueueEventList",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ChatQueueEvent"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Creates a new event",
+                "description": "Permissions: UPDATE on Chat Queue (Permission Override)",
+                "operationId": "createChatQueueEvent",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatQueueEvent"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatQueueEvent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/events/{eventId}": {
+            "get": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Returns a event for a Chat Queue",
+                "description": "Permissions: READ on Chat Queue",
+                "operationId": "getChatQueueEvents",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "eventId",
+                        "in": "path",
+                        "description": "eventId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatQueueEvent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Updates an event for a Chat Queue",
+                "description": "Permissions: Update on Chat Queue",
+                "operationId": "updateChatQueueEvent",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "eventId",
+                        "in": "path",
+                        "description": "eventId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatQueueEvent"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatQueueEvent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Deletes an event",
+                "description": "Permissions: UPDATE on Chat Queue (Perimssion Override)",
+                "operationId": "deleteChatQueueEvent",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "eventId",
+                        "in": "path",
+                        "description": "eventId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/scheduleOverrides": {
+            "get": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Returns a listing of Schedule Overrides for a Chat Queue",
+                "description": "Permissions: READ on Chat Queue",
+                "operationId": "getChatQueueScheduleOverrides",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ChatQueueScheduleOverride"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Creates a new Schedule Override",
+                "description": "Permissions: UPDATE on Chat Queue (Permission Override)",
+                "operationId": "createChatQueueScheduledOverride",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatQueueScheduleOverride"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatQueueScheduleOverride"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Saves a listing of Schedule Overrides",
+                "description": "Permissions: UPDATE on Chat Queue",
+                "operationId": "saveChatQueueScheduleOverrides",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/ChatQueueScheduleOverride"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ChatQueueScheduleOverride"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/scheduleOverrides/{scheduleOverrideId}": {
+            "put": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Updates a single Schedule Override",
+                "description": "Permissions: UPDATE on Chat Queue",
+                "operationId": "updateChatQueueScheduledOverride",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "scheduleOverrideId",
+                        "in": "path",
+                        "description": "scheduleOverrideId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatQueueScheduleOverride"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatQueueScheduleOverride"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Deletes a Schedule Override",
+                "description": "Permissions: UPDATE on Chat Queue (Permission Override)",
+                "operationId": "deleteChatQueueScheduledOverride",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "scheduleOverrideId",
+                        "in": "path",
+                        "description": "scheduleOverrideId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/setIsActive": {
+            "put": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Set active state for a chat queue",
+                "description": "Permissions: UPDATE on Chat Queue",
+                "operationId": "setChatQueueIsActive",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ActiveStateBoolean"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/unassignAgents/{agentId}": {
+            "delete": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Unassigns an agent from a Chat Queue",
+                "description": "Permissions: UPDATE on Chat Queue (Permission Override) and READ on Agent",
+                "operationId": "unassignAgentFromChatQueue",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "agentId",
+                        "in": "path",
+                        "description": "agentId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatGroupId",
+                        "in": "path",
+                        "description": "chatGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/utilities/assignChatQueueChatWidget": {
+            "post": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Assigns a Queue to a Widget",
+                "description": "Permissions: READ on Account (Permission Override), CREATE on Utilities",
+                "operationId": "createChatQueueWidgetAssignment",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatQueueChatWidgetAccess"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatQueueChatWidgetAccess"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/utilities/assignChatQueueChatWidget/{guid}": {
+            "get": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Returns a single assignment",
+                "description": "Permissions: READ on Account, READ on Utilities",
+                "operationId": "getChatQueueWidgetAssignment",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "guid",
+                        "in": "path",
+                        "description": "guid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatQueueChatWidgetAccess"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Updates an Assignment of a Queue to a Widget",
+                "description": "Permissions: READ on Account (Permission Override), UPDATE on Utilities",
+                "operationId": "updateChatQueueWidgetAssignment",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "guid",
+                        "in": "path",
+                        "description": "guid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatQueueChatWidgetAccess"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatQueueChatWidgetAccess"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Deletes an Assignment of a Queue to a Widget",
+                "description": "Permissions: READ on Account, DELETE on Utilities",
+                "operationId": "deleteChatQueueWidgetAssignment",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "guid",
+                        "in": "path",
+                        "description": "guid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/utilities/chatQueues/{chatQueueId}/chatWidgets": {
+            "get": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Returns a listing of Chat Widgets for an Account",
+                "description": "Permissions: READ on Account, READ on Utilities",
+                "operationId": "listChatWidgetsForQueue",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "chatQueueId",
+                        "in": "path",
+                        "description": "chatQueueId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ChatQueueChatWidgetAccess"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/utilities/chatWidgets": {
+            "get": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Returns a listing of Chat Widgets for an Account",
+                "description": "Permissions: READ on Account, READ on Utilities",
+                "operationId": "listChatWidgets",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ChatWidget"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Create a single Chat Widget",
+                "description": "Permissions: READ on Account (Permission Override), CREATE on Utilities",
+                "operationId": "createChatWidget",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatWidget"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatWidget"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/utilities/chatWidgets/{widgetId}": {
+            "get": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Returns a single Chat Widget",
+                "description": "Permissions: READ on Account, READ on Utilities",
+                "operationId": "getChatWidget",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "widgetId",
+                        "in": "path",
+                        "description": "widgetId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatWidget"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Updates a single Chat Widget",
+                "description": "Permissions: READ on Account (Permission Override), UPDATE on Utilities",
+                "operationId": "updateChatWidget",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "widgetId",
+                        "in": "path",
+                        "description": "widgetId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChatWidget"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ChatWidget"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Chat Queues"
+                ],
+                "summary": "Deletes a single Chat Widget",
+                "description": "Permissions: Read on Account (Permission Override), DELETE on Utilities",
+                "operationId": "deleteChatWidget",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "widgetId",
+                        "in": "path",
+                        "description": "widgetId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             }
         }
     },
