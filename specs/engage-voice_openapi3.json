@@ -26851,7 +26851,7 @@
                 ],
                 "summary": "Assigns a rights document to a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
-                "operationId": "assignRightsDocsToUsers",
+                "operationId": "assignRightsDoc",
                 "parameters": [
                     {
                         "name": "rightsDocId",
@@ -27351,7 +27351,7 @@
                 ],
                 "summary": "Returns a user",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER role",
-                "operationId": "getUserDetails",
+                "operationId": "getUser",
                 "parameters": [
                     {
                         "name": "userId",
@@ -28675,7 +28675,7 @@
                 ],
                 "summary": "Returns a map of rights documents for a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
-                "operationId": "getUsersRightsDocs2",
+                "operationId": "getRightsDocs",
                 "parameters": [
                     {
                         "name": "userId",
@@ -29025,7 +29025,7 @@
                 ],
                 "summary": "Returns a listing of roles for a user",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER roles",
-                "operationId": "getUserRoles",
+                "operationId": "getRoles",
                 "parameters": [
                     {
                         "name": "userId",
@@ -29091,7 +29091,7 @@
                 ],
                 "summary": "Adds a role to a user",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER roles",
-                "operationId": "addUserRole",
+                "operationId": "addRole",
                 "parameters": [
                     {
                         "name": "userId",
@@ -29149,7 +29149,7 @@
                 ],
                 "summary": "Removes a role from a user",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER roles",
-                "operationId": "removeUserRole",
+                "operationId": "removeRole",
                 "parameters": [
                     {
                         "name": "userId",
@@ -29311,7 +29311,7 @@
                 ],
                 "summary": "Used to reset a users password",
                 "description": "Permissions: NONE",
-                "operationId": "unsecuredPasswordReset",
+                "operationId": "passwordReset",
                 "parameters": [
                     {
                         "name": "token",
@@ -29367,7 +29367,7 @@
                 ],
                 "summary": "Resets a password if a user is locked out, an email will be sent to the user",
                 "description": "Permissions: NONE",
-                "operationId": "unsecuredPasswordResetRequest",
+                "operationId": "passwordResetRequest",
                 "parameters": [
                     {
                         "name": "userName",
