@@ -23,15 +23,25 @@ Your application needs the `ReadAccounts` OAuth scope.
 
 The authenticating user must have sufficient Admin portal permissions to read users and update roles or rights documents. Use least privilege for automation accounts, and separate read-only audit automation from onboarding/offboarding automation.
 
+!!! warning "Common Authorization Errors"
+    If the OAuth token is valid but the user cannot manage users, roles, or rights documents, the API returns an error similar to:
+    ```json
+    {
+      "errorCode": "access.denied.exception",
+      "generalMessage": "You do not have permission to access this resource",
+      "timestamp": 1611847650696
+    }
+    ```
+
 ## Users
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List users | `GET /voice/api/v1/admin/users` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getUserList) |
-| Create user | `POST /voice/api/v1/admin/users` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/createUser) |
-| Get user | `GET /voice/api/v1/admin/users/{userId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getUser) |
-| Update user | `PUT /voice/api/v1/admin/users/{userId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/updateUser) |
-| Delete user | `DELETE /voice/api/v1/admin/users/{userId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/deleteUser) |
+| List users | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/users` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getUserList) |
+| Create user | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/users` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/createUser) |
+| Get user | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getUser) |
+| Update user | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/updateUser) |
+| Delete user | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/deleteUser) |
 
 ## Roles
 
@@ -39,9 +49,9 @@ Roles are coarse-grained access assignments. Use role endpoints for straightforw
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List user roles | `GET /voice/api/v1/admin/users/{userId}/roles` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getRoles) |
-| Add role | `POST /voice/api/v1/admin/users/{userId}/roles/{roleType}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/addRole) |
-| Remove role | `DELETE /voice/api/v1/admin/users/{userId}/roles/{roleType}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/removeRole) |
+| List user roles | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/roles` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getRoles) |
+| Add role | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/roles/{roleType}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/addRole) |
+| Remove role | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/roles/{roleType}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/removeRole) |
 
 ## Rights Documents
 
@@ -49,20 +59,20 @@ Rights documents provide detailed administrative permissions. Use these endpoint
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List rights docs | `GET /voice/api/v1/admin/users/{userId}/rightsDocs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getRightsDocs) |
-| Create rights doc | `POST /voice/api/v1/admin/users/{userId}/rightsDocs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/createRightsDoc) |
-| Update rights doc | `PUT /voice/api/v1/admin/users/{userId}/rightsDocs/{rightsDocId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/updateRightsDoc) |
-| Delete rights doc | `DELETE /voice/api/v1/admin/users/{userId}/rightsDocs/{rightsDocId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/deleteRightsDoc) |
-| Assign rights doc | `POST /voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/assignRightsDoc) |
-| Delete assignment | `DELETE /voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments/{assignedUserId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/deleteRightsDocAssignment) |
+| List rights docs | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/rightsDocs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getRightsDocs) |
+| Create rights doc | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/rightsDocs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/createRightsDoc) |
+| Update rights doc | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/rightsDocs/{rightsDocId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/updateRightsDoc) |
+| Delete rights doc | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/rightsDocs/{rightsDocId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/deleteRightsDoc) |
+| Assign rights doc | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/assignRightsDoc) |
+| Delete assignment | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments/{assignedUserId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/deleteRightsDocAssignment) |
 
 ## Auth Utilities
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| Validate token | `GET /voice/api/v1/auth/isTokenValid` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/isTokenValid) |
-| Reset password | `POST /voice/api/v1/auth/passwordReset` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/passwordReset) |
-| Request password reset | `POST /voice/api/v1/auth/passwordResetRequest` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/passwordResetRequest) |
+| Validate token | `GET https://ringcx.ringcentral.com/voice/api/v1/auth/isTokenValid` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/isTokenValid) |
+| Reset password | `POST https://ringcx.ringcentral.com/voice/api/v1/auth/passwordReset` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/passwordReset) |
+| Request password reset | `POST https://ringcx.ringcentral.com/voice/api/v1/auth/passwordResetRequest` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/passwordResetRequest) |
 
 ## Recommended Workflow
 
@@ -123,6 +133,19 @@ Use the `roleType` path parameter for the role being assigned.
 {
   "assignedUserId": 987654,
   "accountIds": [123456]
+}
+```
+
+### Example User Response
+
+```json
+{
+  "userId": 987654,
+  "email": "alex.admin@example.com",
+  "firstName": "Alex",
+  "lastName": "Admin",
+  "active": true,
+  "timezone": "America/Denver"
 }
 ```
 
