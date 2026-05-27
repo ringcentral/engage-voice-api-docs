@@ -15,16 +15,34 @@ Knowledge base content is organized into groups, categories, and articles. These
 
 ### Required Permissions & Scopes
 
-Your application needs the `ReadAccounts` OAuth scope. The authenticating user must also have Admin portal permissions to read and update knowledge base groups, categories, and articles.
+#### 1. Configure OAuth Scopes
+
+To authenticate, your application must be configured with the following permission in the [Developer Portal](https://developers.ringcentral.com/my-account.html#/applications):
+
+* **`ReadAccounts`**: Required to validate account context and access RingCX administrative APIs.
+
+#### 2. Enable RingCX Admin Access
+
+In the RingCX Admin portal, the authenticating user must have permission to read and update knowledge base groups, categories, and articles for the target account.
+
+!!! warning "Common Authorization Errors"
+    If the application has the right OAuth scope but the user lacks knowledge base management permissions, the API returns an error similar to:
+    ```json
+    {
+      "errorCode": "access.denied.exception",
+      "generalMessage": "You do not have permission to access this resource",
+      "timestamp": 1611847650696
+    }
+    ```
 
 ## Knowledge Base Groups
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List groups with children | `GET /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/withChildren` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/getKnowledgeBaseGroupListWithChildren) |
-| Get group | `GET /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/getKnowledgeBaseGroup) |
-| Update group | `PUT /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/updateKnowledgeBaseGroup) |
-| Delete group | `DELETE /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/deleteKnowledgeBaseGroup) |
+| List groups with children | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/withChildren` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/getKnowledgeBaseGroupListWithChildren) |
+| Get group | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/getKnowledgeBaseGroup) |
+| Update group | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/updateKnowledgeBaseGroup) |
+| Delete group | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/deleteKnowledgeBaseGroup) |
 
 ## Categories
 
@@ -32,12 +50,12 @@ Categories organize articles within a knowledge base group.
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List categories | `GET /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/getKnowledgeBaseCategoryList) |
-| Create category | `POST /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/createKnowledgeBaseCategory) |
-| List categories with articles | `GET /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/withChildren` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/getKnowledgeBaseCategoryListWithChildren) |
-| Get category | `GET /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/getKnowledgeBaseCategory) |
-| Update category | `PUT /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/updateKnowledgeBaseCategory) |
-| Delete category | `DELETE /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/deleteKnowledgeBaseCategory) |
+| List categories | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/getKnowledgeBaseCategoryList) |
+| Create category | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/createKnowledgeBaseCategory) |
+| List categories with articles | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/withChildren` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/getKnowledgeBaseCategoryListWithChildren) |
+| Get category | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/getKnowledgeBaseCategory) |
+| Update category | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/updateKnowledgeBaseCategory) |
+| Delete category | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/deleteKnowledgeBaseCategory) |
 
 ## Articles
 
@@ -45,11 +63,11 @@ Articles are managed within a category.
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List articles | `GET /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}/knowledgeBaseArticles` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/getKnowledgeBaseArticleList) |
-| Create article | `POST /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}/knowledgeBaseArticles` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/createKnowledgeBaseArticle) |
-| Get article | `GET /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}/knowledgeBaseArticles/{knowledgeBaseArticleId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/getKnowledgeBaseArticle) |
-| Update article | `PUT /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}/knowledgeBaseArticles/{knowledgeBaseArticleId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/updateKnowledgeBaseArticle) |
-| Delete article | `DELETE /voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}/knowledgeBaseArticles/{knowledgeBaseArticleId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/deleteKnowledgeBaseArticle) |
+| List articles | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}/knowledgeBaseArticles` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/getKnowledgeBaseArticleList) |
+| Create article | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}/knowledgeBaseArticles` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/createKnowledgeBaseArticle) |
+| Get article | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}/knowledgeBaseArticles/{knowledgeBaseArticleId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/getKnowledgeBaseArticle) |
+| Update article | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}/knowledgeBaseArticles/{knowledgeBaseArticleId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/updateKnowledgeBaseArticle) |
+| Delete article | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}/knowledgeBaseArticles/{knowledgeBaseArticleId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Knowledge-Base/deleteKnowledgeBaseArticle) |
 
 ## Recommended Workflow
 
@@ -61,6 +79,9 @@ Articles are managed within a category.
 
 !!! important
     Keep an external content identifier in article metadata when available. That makes synchronization idempotent and helps prevent duplicate articles.
+
+!!! important "Rate Limiting & Stability"
+    Synchronize knowledge base content in batches, especially when importing from an external CMS. Read the group/category tree first, update only changed articles, and use exponential backoff on `429 Too Many Requests` responses.
 
 ## Identifiers and Parameters
 
@@ -112,6 +133,25 @@ Articles are managed within a category.
   "active": true,
   "showSend": true,
   "order": 20
+}
+```
+
+### Example Article Response
+
+```json
+{
+  "knowledgeBaseArticleId": 9876,
+  "title": "Update invoice contact",
+  "content": "<p>Open Billing, select the account, and update the invoice contact.</p>",
+  "contentPlain": "Open Billing, select the account, and update the invoice contact.",
+  "labels": "billing,invoice",
+  "active": true,
+  "showSend": true,
+  "order": 20,
+  "knowledgeBaseCategory": {
+    "knowledgeBaseCategoryId": 1234,
+    "name": "Billing"
+  }
 }
 ```
 
