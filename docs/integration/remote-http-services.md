@@ -17,7 +17,25 @@ IVR WWW nodes, scripting nodes, and other workflow steps reference these service
 
 ### Required Permissions & Scopes
 
-Your application needs the `ReadAccounts` OAuth scope. The authenticating user must have platform permissions to read and update remote HTTP service groups, HTTP services, service inputs, and external auth configurations.
+#### 1. Configure OAuth Scopes
+
+To authenticate, your application must be configured with the following permission in the [Developer Portal](https://developers.ringcentral.com/my-account.html#/applications):
+
+* **`ReadAccounts`**: Required to validate account context and access RingCX integration configuration APIs.
+
+#### 2. Enable RingCX Admin Access
+
+In the RingCX Admin portal, the authenticating user must have permission to read and update remote HTTP service groups, HTTP services, service inputs, and external auth configurations.
+
+!!! warning "Common Authorization Errors"
+    If the OAuth token is valid but the RingCX user lacks integration configuration access, the API returns an error similar to:
+    ```json
+    {
+      "errorCode": "access.denied.exception",
+      "generalMessage": "You do not have permission to access this resource",
+      "timestamp": 1611847650696
+    }
+    ```
 
 ## Manage Service Groups
 
@@ -25,11 +43,11 @@ Service groups organize related remote HTTP services.
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List groups | `GET /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getHttpServiceGroupList) |
-| Create group | `POST /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createHttpServiceGroup) |
-| List groups with services | `GET /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/withChildren` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getHttpServiceGroupListWithChildren) |
-| Get group | `GET /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getHttpServiceGroup) |
-| Update group | `PUT /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/updateHttpServiceGroup) |
+| List groups | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getHttpServiceGroupList) |
+| Create group | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createHttpServiceGroup) |
+| List groups with services | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/withChildren` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getHttpServiceGroupListWithChildren) |
+| Get group | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getHttpServiceGroup) |
+| Update group | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/updateHttpServiceGroup) |
 
 ## Manage HTTP Services
 
@@ -37,12 +55,12 @@ HTTP service records describe the external endpoint and how RingCX calls it.
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List services | `GET /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getHttpServiceList) |
-| Create service | `POST /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createHttpService) |
-| Get service | `GET /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getHttpService) |
-| Update service | `PUT /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/updateHttpService) |
-| Clone service | `POST /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/clone` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/cloneHttpService) |
-| Set active state | `PUT /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/setIsActive` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/setHttpServiceIsActive) |
+| List services | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getHttpServiceList) |
+| Create service | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createHttpService) |
+| Get service | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getHttpService) |
+| Update service | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/updateHttpService) |
+| Clone service | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/clone` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/cloneHttpService) |
+| Set active state | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/setIsActive` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/setHttpServiceIsActive) |
 
 ## Configure Service Inputs
 
@@ -50,10 +68,10 @@ Inputs define the values RingCX passes into the remote service request. Keep the
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List inputs | `GET /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/inputs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getHttpServiceInputList) |
-| Create input | `POST /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/inputs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createHttpServiceInput) |
-| Get input | `GET /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/inputs/{inputId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getHttpServiceInput) |
-| Delete input | `DELETE /voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/inputs/{inputId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/deleteHttpServiceInput) |
+| List inputs | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/inputs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getHttpServiceInputList) |
+| Create input | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/inputs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createHttpServiceInput) |
+| Get input | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/inputs/{inputId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getHttpServiceInput) |
+| Delete input | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/inputs/{inputId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/deleteHttpServiceInput) |
 
 ## External Auth Configurations
 
@@ -61,12 +79,12 @@ External auth configurations store reusable authentication settings for remote s
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List auth configs | `GET /voice/api/v1/admin/accounts/{accountId}/external/authConfigs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getExternalAuthConfigsList) |
-| Get auth config | `GET /voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getExternalAuthConfigById) |
-| Delete auth config | `DELETE /voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/deleteExternalAuthConfigById) |
-| Create API key auth | `POST /voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/apiKey` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createExternalAccountAuthConfigApiKey) |
-| Create basic auth | `POST /voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/basic` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createExternalAccountAuthConfigBasic) |
-| Create OAuth auth | `POST /voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/oauth` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createExternalAccountAuthConfigOAuth) |
+| List auth configs | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/external/authConfigs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getExternalAuthConfigsList) |
+| Get auth config | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getExternalAuthConfigById) |
+| Delete auth config | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/deleteExternalAuthConfigById) |
+| Create API key auth | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/apiKey` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createExternalAccountAuthConfigApiKey) |
+| Create basic auth | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/basic` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createExternalAccountAuthConfigBasic) |
+| Create OAuth auth | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/oauth` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createExternalAccountAuthConfigOAuth) |
 
 ## Recommended Workflow
 
@@ -79,6 +97,9 @@ External auth configurations store reusable authentication settings for remote s
 
 !!! important
     Treat remote service changes like production integration changes. Validate the external endpoint, authentication, and expected response shape before activating the service in a live routing flow.
+
+!!! important "Rate Limiting & Stability"
+    Remote HTTP service changes can affect live IVR and scripting flows. Batch provisioning updates, activate services only after validation, and use exponential backoff on `429 Too Many Requests` responses.
 
 ## Request Examples
 
@@ -131,6 +152,47 @@ External auth configurations store reusable authentication settings for remote s
   "name": "CRM API key",
   "apiKey": "secret-value",
   "headerName": "X-API-Key"
+}
+```
+
+### Create Basic Auth
+
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/basic`
+
+```json
+{
+  "name": "CRM basic auth",
+  "username": "ringcx-service",
+  "password": "secret-value"
+}
+```
+
+### Create OAuth Auth
+
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/oauth`
+
+```json
+{
+  "name": "CRM OAuth",
+  "tokenUrl": "https://auth.example.com/oauth/token",
+  "clientId": "ringcx-client",
+  "clientSecret": "secret-value",
+  "grantType": "client_credentials"
+}
+```
+
+### Example HTTP Service Response
+
+```json
+{
+  "serviceId": 4567,
+  "serviceGroupId": 1234,
+  "serviceName": "Lookup customer by ANI",
+  "description": "Returns CRM profile data for the caller",
+  "url": "https://api.example.com/customers/lookup",
+  "method": "POST",
+  "contentType": "application/json",
+  "active": false
 }
 ```
 
