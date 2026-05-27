@@ -14446,34 +14446,91 @@
             "WEMDialogSegmentMetaData": {
                 "type": "object",
                 "properties": {
-                    "subAccountId": { "type": "string" },
-                    "dialogId": { "type": "string" },
-                    "interactionId": { "type": "string" },
-                    "channelId": { "type": "string" },
-                    "channelType": { "type": "string" },
-                    "channelClass": { "type": "string" },
-                    "channelEndpointAddress": { "type": "string" },
-                    "contactEndpointAddress": { "type": "string" },
-                    "dialogOrigination": { "type": "string" },
-                    "dialogStartTimeMs": { "type": "string", "format": "date-time" },
-                    "dialogEndTimeMs": { "type": "string", "format": "date-time" },
-                    "dialogDurationMs": { "type": "integer" },
-                    "segmentId": { "type": "string" },
-                    "segmentType": { "type": "string" },
-                    "segmentParticipantId": { "type": "string" },
-                    "segmentParticipantRcExtensionId": { "type": "string" },
-                    "segmentStartTimeMs": { "type": "string", "format": "date-time" },
-                    "segmentEndTimeMs": { "type": "string", "format": "date-time" },
-                    "segmentDurationMs": { "type": "integer" },
-                    "segmentAgentGroupId": { "type": "string" },
-                    "systemDisposition": { "type": "string", "nullable": true },
-                    "agentDisposition": { "type": "string" },
-                    "agentNotes": { "type": "string" },
-                    "hasRecording": { "type": "boolean" },
-                    "hasTranscript": { "type": "boolean" },
+                    "subAccountId": {
+                        "type": "string"
+                    },
+                    "dialogId": {
+                        "type": "string"
+                    },
+                    "interactionId": {
+                        "type": "string"
+                    },
+                    "channelId": {
+                        "type": "string"
+                    },
+                    "channelType": {
+                        "type": "string"
+                    },
+                    "channelClass": {
+                        "type": "string"
+                    },
+                    "channelEndpointAddress": {
+                        "type": "string"
+                    },
+                    "contactEndpointAddress": {
+                        "type": "string"
+                    },
+                    "dialogOrigination": {
+                        "type": "string"
+                    },
+                    "dialogStartTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "dialogEndTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "dialogDurationMs": {
+                        "type": "integer"
+                    },
+                    "segmentId": {
+                        "type": "string"
+                    },
+                    "segmentType": {
+                        "type": "string"
+                    },
+                    "segmentParticipantId": {
+                        "type": "string"
+                    },
+                    "segmentParticipantRcExtensionId": {
+                        "type": "string"
+                    },
+                    "segmentStartTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "segmentEndTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "segmentDurationMs": {
+                        "type": "integer"
+                    },
+                    "segmentAgentGroupId": {
+                        "type": "string"
+                    },
+                    "systemDisposition": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "agentDisposition": {
+                        "type": "string"
+                    },
+                    "agentNotes": {
+                        "type": "string"
+                    },
+                    "hasRecording": {
+                        "type": "boolean"
+                    },
+                    "hasTranscript": {
+                        "type": "boolean"
+                    },
                     "segmentEvents": {
                         "type": "array",
-                        "items": { "$ref": "#/components/schemas/InteractionSegmentEvent" },
+                        "items": {
+                            "$ref": "#/components/schemas/InteractionSegmentEvent"
+                        },
                         "nullable": true
                     }
                 }
@@ -14522,60 +14579,185 @@
             "AggregatedAgentStats": {
                 "type": "object",
                 "properties": {
-                    "interval": { "type": "integer", "format": "int32" },
-                    "dateTimeFrom": { "type": "string" },
-                    "agentId": { "type": "integer", "format": "int32" },
-                    "agentName": { "type": "string" },
-                    "availDur": { "type": "integer", "format": "int32" },
-                    "totWorkDur": { "type": "integer", "format": "int32" },
-                    "pauseDur": { "type": "integer", "format": "int32" },
-                    "waitDur": { "type": "integer", "format": "int32" },
-                    "adminDur": { "type": "integer", "format": "int32" },
-                    "directOutIxnCnt": { "type": "integer", "format": "int32" },
-                    "directOutIxnDur": { "type": "integer", "format": "int32" },
-                    "directInIxnCnt": { "type": "integer", "format": "int32" },
-                    "directInIxnDur": { "type": "integer", "format": "int32" }
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "agentId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "agentName": {
+                        "type": "string"
+                    },
+                    "availDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totWorkDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "pauseDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "waitDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "adminDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directOutIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directInIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directInIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "AggregatedQueueStats": {
                 "type": "object",
                 "properties": {
-                    "dateTimeFrom": { "type": "string" },
-                    "interval": { "type": "integer", "format": "int32" },
-                    "queue": { "type": "integer", "format": "int32" },
-                    "queueName": { "type": "string" },
-                    "offdDirectIxnCnt": { "type": "integer", "format": "int32" },
-                    "answIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandShortIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandWithinSlCnt": { "type": "integer", "format": "int32" },
-                    "ansServicelevelCnt": { "type": "integer", "format": "int32" },
-                    "completedContacts": { "type": "integer", "format": "int32" },
-                    "queuedAndAnswIxnDur": { "type": "integer", "format": "int32" },
-                    "queuedAndAbandIxnDur": { "type": "integer", "format": "int32" },
-                    "queuedAnswLongestQueDur": { "type": "integer", "format": "int32" },
-                    "queuedAbandLongestQueDur": { "type": "integer", "format": "int32" },
-                    "talkingIxnDur": { "type": "integer", "format": "int32" },
-                    "wrapUpDur": { "type": "integer", "format": "int32" },
-                    "waitDur": { "type": "integer", "format": "int32" },
-                    "segmentHoldTime": { "type": "integer", "format": "int32" },
-                    "overflowInIxnCnt": { "type": "integer", "format": "int32" },
-                    "overflowOutIxnCnt": { "type": "integer", "format": "int32" }
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queue": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queueName": {
+                        "type": "string"
+                    },
+                    "offdDirectIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "answIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandShortIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandWithinSlCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "ansServicelevelCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "completedContacts": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAndAnswIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAndAbandIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAnswLongestQueDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAbandLongestQueDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "talkingIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "wrapUpDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "waitDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "segmentHoldTime": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "overflowInIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "overflowOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "ExtendedAggregatedQueueStats": {
                 "type": "object",
                 "properties": {
-                    "interval": { "type": "integer", "format": "int32" },
-                    "dateTimeFrom": { "type": "string" },
-                    "agentId": { "type": "integer", "format": "int32" },
-                    "agentName": { "type": "string" },
-                    "queue": { "type": "integer", "format": "int32" },
-                    "queueName": { "type": "string" },
-                    "talkingIxnDur": { "type": "integer", "format": "int32" },
-                    "wrapUpDur": { "type": "integer", "format": "int32" },
-                    "answIxnCnt": { "type": "integer", "format": "int32" },
-                    "transferOutIxnCnt": { "type": "integer", "format": "int32" }
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "agentId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "agentName": {
+                        "type": "string"
+                    },
+                    "queue": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queueName": {
+                        "type": "string"
+                    },
+                    "talkingIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "wrapUpDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "answIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "transferOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "CXQueueWithAgents": {
@@ -26528,6 +26710,4489 @@
                         }
                     }
                 }
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of cloud route groups for an account",
+                "description": "Permissions: READ on Account, Post Filtered Results",
+                "operationId": "getCloudRouteDestinationGroups",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteGroup"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Create a cloud route group for an account",
+                "description": "Permissions: CREATE on Account",
+                "operationId": "createCloudRouteGroup",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteGroup"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteGroup"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/withChildren": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of cloud route groups with related data for an account",
+                "description": "Permissions: READ on Account, Post Filtered Results",
+                "operationId": "getListWithProfileChildren",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "includePermissions",
+                        "in": "query",
+                        "description": "includePermissions",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteGroup"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a cloud route group for an account",
+                "description": "Permissions: READ on Cloud Route Group",
+                "operationId": "getCloudRouteDestinationGroupsCloudRouteGroupId",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteGroup"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Updates a cloud route group for an account",
+                "description": "Permissions: UPDATE on Cloud Route Group",
+                "operationId": "updateCloudRouteGroup",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteGroup"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteGroup"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Deletes a cloud route group for an account",
+                "description": "Permissions: DELETE on Cloud Route Group",
+                "operationId": "deleteCloudRouteGroup",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of cloud destinations for a cloud route group",
+                "description": "Permissions: READ on Cloud Destination, Post Filtered Results",
+                "operationId": "getCloudRouteDestinationGroupsCloudRouteGroupIdCloudRouteDestinations",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteDestination"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Create a cloud destination for a cloud route group",
+                "description": "Permissions: CREATE on Cloud Destination",
+                "operationId": "createCloudRoute",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteDestination"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteDestination"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/withChildren": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of cloud destinations with related data for a cloud route group",
+                "description": "Permissions: READ on Cloud Destinations, Post Filtered Results",
+                "operationId": "getListWithChildren",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "includePermissions",
+                        "in": "query",
+                        "description": "includePermissions",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteDestination"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a cloud destination for a cloud route group",
+                "description": "Permissions: READ on Cloud Destination",
+                "operationId": "getCloudRouteDestinationGroupsCloudRouteGroupIdCloudRouteDestinationsCloudRouteDestinationId",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteDestination"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Updates a cloud destination for a cloud route group",
+                "description": "Permissions: UPDATE on Cloud Destination",
+                "operationId": "updateCloudRoute",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteDestination"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteDestination"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/assignedProfiles": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of assigned profiles for a cloud route destination",
+                "description": "Permissions: READ on Cloud Destination",
+                "operationId": "getListByDestination",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Creates an assigned profile for a cloud route destination",
+                "description": "Permissions: UPDATE on Cloud Destination (Permissions Override)",
+                "operationId": "createCloudAssignedDestination",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/assignedProfiles/{cloudAssignedDestinationId}": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns an assigned profile for a cloud route destination",
+                "description": "Permissions: READ on Cloud Destination",
+                "operationId": "getCloudRouteDestinationGroupsCloudRouteGroupIdCloudRouteDestinationsCloudRouteDestinationIdAssignedProfilesCloudAssignedDestinationId",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedDestinationId",
+                        "in": "path",
+                        "description": "cloudAssignedDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Updates an assigned profile for a cloud route destination",
+                "description": "Permissions: UPDATE on Cloud Destination",
+                "operationId": "updateCloudAssignedDestination",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedDestinationId",
+                        "in": "path",
+                        "description": "cloudAssignedDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Deletes an assigned profile for a cloud route destination",
+                "description": "Permissions: UPDATE on Cloud Destination (Permissions Override)",
+                "operationId": "deleteCloudAssignedDestination",
+                "parameters": [
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedDestinationId",
+                        "in": "path",
+                        "description": "cloudAssignedDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/clone": {
+            "post": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Creates a clone of the cloud route destination for a cloud group",
+                "description": "Permissions: READ on existing Cloud Route Destination and CREATE on Cloud Group (Permission Override)",
+                "operationId": "cloneCloudDestination",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "newDestinationName",
+                        "in": "query",
+                        "description": "newDestinationName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteDestination"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/dnisOverrides": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of dnis overrides for a cloud route destination",
+                "description": "Permissions: READ on Cloud Destination",
+                "operationId": "getCloudRouteDestinationGroupsCloudRouteGroupIdCloudRouteDestinationsCloudRouteDestinationIdDnisOverrides",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteDestinationOverride"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Create a dnis override for a cloud route destination",
+                "description": "Permissions: UPDATE on Cloud Destination (Permission Override)",
+                "operationId": "createCloudRouteDestinationOverride",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudDestinationType",
+                        "in": "query",
+                        "description": "cloudDestinationType",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "STANDARD",
+                                "DID",
+                                "SIP",
+                                "IN_NETWORK_DID",
+                                "ACD",
+                                "IVR",
+                                "IVR_STUDIO"
+                            ]
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteDestinationOverride"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteDestinationOverride"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/dnisOverrides/batch": {
+            "post": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Create a list dnis overrides for a cloud route destination",
+                "description": "Permissions: UPDATE on Cloud Destination (Permission Override)",
+                "operationId": "createCloudRouteDestinationOverrideList",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "file",
+                        "in": "query",
+                        "description": "file",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "replaceAll",
+                        "in": "query",
+                        "description": "replaceAll",
+                        "required": true,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "phoneNumbersI18nEnabled",
+                        "in": "query",
+                        "description": "phoneNumbersI18nEnabled",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteDestinationOverride"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/dnisOverrides/{cloudRouteDestinationOverrideId}": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a dnis override for a cloud route destination",
+                "description": "Permissions: READ on Cloud Destination",
+                "operationId": "getCloudRouteDestinationOverride",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationOverrideId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationOverrideId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteDestinationOverride"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Updates a dnis override for a cloud route destination",
+                "description": "Permissions: UPDATE on Cloud Destination",
+                "operationId": "updateCloudRouteDestinationOverride",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationOverrideId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationOverrideId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudDestinationType",
+                        "in": "query",
+                        "description": "cloudDestinationType",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "STANDARD",
+                                "DID",
+                                "SIP",
+                                "IN_NETWORK_DID",
+                                "ACD",
+                                "IVR",
+                                "IVR_STUDIO"
+                            ]
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteDestinationOverride"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteDestinationOverride"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Deletes a dnis override for a cloud route destination",
+                "description": "Permissions: UPDATE on Cloud Destination (Permission Override)",
+                "operationId": "deleteCloudRoute",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationOverrideId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationOverrideId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/setIsActive": {
+            "put": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Set active state for a cloud route destination",
+                "description": "Permissions: UPDATE on Cloud Destination",
+                "operationId": "setCloudRouteDestinationIsActive",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteDestinationId",
+                        "in": "path",
+                        "description": "cloudRouteDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ActiveStateBoolean"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/withChildren": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of Cloud Route Groups with children for an Account",
+                "description": "Permissions: READ on Account, Post Filtered Results",
+                "operationId": "getListWithProfileChildren2",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "includePermissions",
+                        "in": "query",
+                        "description": "includePermissions",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteGroup"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a single Cloud Route Group",
+                "description": "Permissions: READ on Cloud Route Group",
+                "operationId": "getCloudRouteProfileGroupsCloudRouteGroupId",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteGroup"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Updates a single Cloud Route Group",
+                "description": "Permissions: UPDATE on Cloud Route Group",
+                "operationId": "updateCloudRouteGroup2",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteGroup"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteGroup"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Deletes a specific Cloud Route Group",
+                "description": "Permissions: DELETE on Cloud Route Group",
+                "operationId": "deleteCloudRouteGroup2",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of cloud route profiles for a cloud group",
+                "description": "Permissions: READ on Cloud Group, Post Filtered Results",
+                "operationId": "getCloudRouteProfileGroupsCloudRouteGroupIdCloudRouteProfiles",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteProfile"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Create a cloud route profile for a cloud group",
+                "description": "Permissions: CREATE on Cloud Group",
+                "operationId": "createCloudRoute2",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteProfile"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteProfile"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudProfileId}": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a cloud route profile for a cloud group",
+                "description": "Permissions: READ on Cloud Group",
+                "operationId": "getCloudRouteProfileGroupsCloudRouteGroupIdCloudRouteProfilesCloudProfileId",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudProfileId",
+                        "in": "path",
+                        "description": "cloudProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteProfile"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}": {
+            "put": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Updates a cloud route profile for a cloud group",
+                "description": "Permissions: UPDATE on Cloud Profile",
+                "operationId": "updateCloudRoute2",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteProfile"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteProfile"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of assigned destinations for a cloud route profile",
+                "description": "Permissions: READ on Cloud Profile",
+                "operationId": "getListByProfile",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Creates an assigned destination for a cloud route profile",
+                "description": "Permissions: CREATE on Cloud Profile",
+                "operationId": "createCloudAssignedDestination2",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/batch": {
+            "put": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Updates a list of assigned destinations for a cloud route profile",
+                "description": "Permissions: UPDATE on Cloud Profile",
+                "operationId": "updateCloudAssignedDestinationBatch",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/percentAllocationHours/export": {
+            "post": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Exports the percent allocations for a list of assigned destinations for a cloud route profile",
+                "description": "Permissions: READ on Cloud Profile (Permission Override)",
+                "operationId": "exportPercentAllocationHours",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/percentAllocationHours/import": {
+            "post": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Updates the percent allocations for a list of assigned destinations for a cloud route profile",
+                "description": "Permissions: UPDATE on Cloud Profile (Permission Override)",
+                "operationId": "updatePercentAllocationHoursBatch",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "extension",
+                        "in": "query",
+                        "description": "extension",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "PIPE",
+                                "COMMA",
+                                "TAB"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "file",
+                        "in": "query",
+                        "description": "file",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/{cloudAssignedDestinationId}": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns an assigned destination for a cloud route profile",
+                "description": "Permissions: READ on Cloud Profile",
+                "operationId": "getCloudRouteProfileGroupsCloudRouteGroupIdCloudRouteProfilesCloudRouteProfileIdAssignedDestinationsCloudAssignedDestinationId",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedDestinationId",
+                        "in": "path",
+                        "description": "cloudAssignedDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Updates an assigned destination for a cloud route profile",
+                "description": "Permissions: UPDATE on Cloud Profile",
+                "operationId": "updateCloudAssignedDestination2",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedDestinationId",
+                        "in": "path",
+                        "description": "cloudAssignedDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteAssignedDestination"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Deletes an assigned destination for a cloud route profile",
+                "description": "Permissions: DELETE on Cloud Profile",
+                "operationId": "deleteCloudAssignedDestination2",
+                "parameters": [
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedDestinationId",
+                        "in": "path",
+                        "description": "cloudAssignedDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/{cloudAssignedDestinationId}/dnisOverrides": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of dnis overrides for a cloud route profile assigned destination",
+                "description": "Permissions: READ on Cloud Profile",
+                "operationId": "getCloudRouteProfileGroupsCloudRouteGroupIdCloudRouteProfilesCloudRouteProfileIdAssignedDestinationsCloudAssignedDestinationIdDnisOverrides",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedDestinationId",
+                        "in": "path",
+                        "description": "cloudAssignedDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteAssignedOverride"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Creates a dnis override for a cloud route profile assigned destination",
+                "description": "Permissions: UPDATE on Cloud Profile (Permission Override)",
+                "operationId": "createCloudRouteAssignedOverride",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedDestinationId",
+                        "in": "path",
+                        "description": "cloudAssignedDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudDestinationType",
+                        "in": "query",
+                        "description": "cloudDestinationType",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "STANDARD",
+                                "DID",
+                                "SIP",
+                                "IN_NETWORK_DID",
+                                "ACD",
+                                "IVR",
+                                "IVR_STUDIO"
+                            ]
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteAssignedOverride"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteAssignedOverride"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/{cloudAssignedDestinationId}/dnisOverrides/batch": {
+            "post": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Create a list of dnis overrides for a cloud route profile assigned destination",
+                "description": "Permissions: UPDATE on Cloud Profile (Permission Override) ",
+                "operationId": "createCloudRouteAssignedOverrideList",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedDestinationId",
+                        "in": "path",
+                        "description": "cloudAssignedDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "replaceAll",
+                        "in": "query",
+                        "description": "replaceAll",
+                        "required": true,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "file",
+                        "in": "query",
+                        "description": "file",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "phoneNumbersI18nEnabled",
+                        "in": "query",
+                        "description": "phoneNumbersI18nEnabled",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteAssignedOverride"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/{cloudAssignedDestinationId}/dnisOverrides/{cloudAssignedOverrideId}": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a dnis override for a cloud route profile assigned destination",
+                "description": "Permissions: READ on Cloud Profile",
+                "operationId": "getOverride",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedDestinationId",
+                        "in": "path",
+                        "description": "cloudAssignedDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedOverrideId",
+                        "in": "path",
+                        "description": "cloudAssignedOverrideId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteAssignedOverride"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Updates a dnis override for a cloud route profile assigned destination",
+                "description": "Permissions: UPDATE on Cloud Profile",
+                "operationId": "updateCloudRouteDestinationOverride2",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedDestinationId",
+                        "in": "path",
+                        "description": "cloudAssignedDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedOverrideId",
+                        "in": "path",
+                        "description": "cloudAssignedOverrideId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudDestinationType",
+                        "in": "query",
+                        "description": "cloudDestinationType",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "STANDARD",
+                                "DID",
+                                "SIP",
+                                "IN_NETWORK_DID",
+                                "ACD",
+                                "IVR",
+                                "IVR_STUDIO"
+                            ]
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteAssignedOverride"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteAssignedOverride"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Deletes a dnis override for a cloud route profile assigned destination",
+                "description": "Permissions: UPDATE on Cloud Profile (Permission Override)",
+                "operationId": "deleteCloudRouteAssignedOverride",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedDestinationId",
+                        "in": "path",
+                        "description": "cloudAssignedDestinationId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudAssignedOverrideId",
+                        "in": "path",
+                        "description": "cloudAssignedOverrideId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/clone": {
+            "post": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Creates a clone of the cloud route profile for a cloud group",
+                "description": "Permissions: READ on cloned Cloud Route Profile and CREATE on Cloud Group (Permission Override)",
+                "operationId": "cloneCloudRoute",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "newCloudRouteProfileName",
+                        "in": "query",
+                        "description": "newCloudRouteProfileName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteProfile"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/dtmfEvents": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of dtmf events for a cloud route profile",
+                "description": "Permissions: READ Cloud Profile",
+                "operationId": "getCloudRouteDtmfEventList",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteDtmfEvent"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Creates a dtmf event for a cloud profile",
+                "description": "Permissions: UPDATE on Cloud Profile (Permission Override)",
+                "operationId": "createCloudRouteDtmfEvent",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteDtmfEvent"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteDtmfEvent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/dtmfEvents/{dtmfEventId}": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a dtmf event for a cloud profile",
+                "description": "Permissions: READ on Cloud Profile",
+                "operationId": "getCloudRouteDtmfEvent",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "dtmfEventId",
+                        "in": "path",
+                        "description": "dtmfEventId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteDtmfEvent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Updates a dtmf event for a cloud route profile",
+                "description": "Permissions: UPDATE on Cloud Profile",
+                "operationId": "updateCloudRouteDtmfEvent",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "dtmfEventId",
+                        "in": "path",
+                        "description": "dtmfEventId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CloudRouteDtmfEvent"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CloudRouteDtmfEvent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Deletes a dtmf event for a cloud route profile",
+                "description": "Permissions: UPDATE on Cloud Profile (Permission Override) ",
+                "operationId": "deleteCloudRouteDtmfEvent",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "dtmfEventId",
+                        "in": "path",
+                        "description": "dtmfEventId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/setIsActive": {
+            "put": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Set active state for a cloud route profile",
+                "description": "Permissions: UPDATE on Cloud Profile",
+                "operationId": "setCloudRouteIsActive",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ActiveStateBoolean"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/stickyDestinations/searchByAnis": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of sticky destinations by ani for a cloud route profile",
+                "description": "Permissions: READ on Cloud Profile",
+                "operationId": "getListByAni",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "aniParams",
+                        "in": "query",
+                        "description": "aniParams",
+                        "required": true,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "anis",
+                        "in": "query",
+                        "description": "anis",
+                        "required": false,
+                        "schema": {
+                            "type": "array"
+                        }
+                    },
+                    {
+                        "name": "fullAni",
+                        "in": "query",
+                        "description": "fullAni",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "count",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "maxRows",
+                        "in": "query",
+                        "description": "maxRows",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/stickyDestinations/{ani}": {
+            "delete": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Deletes a sticky destination by ani for a cloud route profile",
+                "description": "Permissions: UPDATE on Cloud Profile (Permission Override)",
+                "operationId": "deleteByAni",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteProfileId",
+                        "in": "path",
+                        "description": "cloudRouteProfileId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "ani",
+                        "in": "path",
+                        "description": "ani",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v2-skinny/admin/accounts/{accountId}/cloudRouteDestinationGroups": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of cloud route groups by account. This will not return the destinations under a group. Pass in the account id you'd like to search by as a parameter.",
+                "description": "Permissions: READ on Account, Post Filtered Results",
+                "operationId": "getSkinnyCloudRouteDestinationGroups",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteGroupSkinny"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v2-skinny/admin/accounts/{accountId}/cloudRouteDestinationGroups/withChildren": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of cloud route groups, and the individual cloud destinations underneath each group, by account. Pass in the account id you'd like to search by as a parameter.",
+                "description": "Permissions: READ on Account, Post Filtered Results",
+                "operationId": "getListWithProfileChildren3",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteGroupSkinny"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v2-skinny/admin/accounts/{accountId}/cloudRouteProfileGroups": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of cloud route groups by account. This will not return the cloud route profiles under a group.Pass in the account id you'd like to search by as a parameter.",
+                "description": "Permissions: READ on Account, Post Filtered Results",
+                "operationId": "getSkinnyCloudRouteProfileGroups",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteGroupSkinny"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v2-skinny/admin/accounts/{accountId}/cloudRouteProfileGroups/withChildren": {
+            "get": {
+                "tags": [
+                    "Cloud Routing"
+                ],
+                "summary": "Returns a listing of cloud route groups, and the individual cloud profiles underneath each group, by account. Pass in the account id you'd like to search by as a parameter.",
+                "description": "Permissions: READ on Account, Post Filtered Results",
+                "operationId": "getListWithProfileChildren4",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/CloudRouteGroupSkinny"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             }
         }
     },
