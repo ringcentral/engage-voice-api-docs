@@ -26719,7 +26719,7 @@
                 ],
                 "summary": "Returns a listing of knowledge base groups with related data for an account",
                 "description": "Permissions: READ on Account, Post Filtered Results",
-                "operationId": "getListWithChildren",
+                "operationId": "getKnowledgeBaseGroupListWithChildren",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -26780,7 +26780,7 @@
                 ],
                 "summary": "Returns a knowledge base group for an account",
                 "description": "Permissions: READ on Knowledge Base Group",
-                "operationId": "getKnowledgeBaseGroupsKnowledgeBaseGroupId",
+                "operationId": "getKnowledgeBaseGroup",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -26963,7 +26963,7 @@
                 ],
                 "summary": "Returns a listing of knowledge base categories for a knowledge base group",
                 "description": "Permissions: READ on Knowledge Base, Post Filtered Results",
-                "operationId": "getKnowledgeBaseGroupsKnowledgeBaseGroupIdKnowledgeBaseCategories",
+                "operationId": "getKnowledgeBaseCategoryList",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27092,7 +27092,7 @@
                 ],
                 "summary": "Returns a listing of knowledge base categories with related data for a knowledge base group",
                 "description": "Permissions: READ on Knowledge Base, Post Filtered Results",
-                "operationId": "getListWithChildren2",
+                "operationId": "getKnowledgeBaseCategoryListWithChildren",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27154,7 +27154,7 @@
                 ],
                 "summary": "Returns a knowledge base category for a knowledge base group",
                 "description": "Permissions: READ on Knowledge Base Category",
-                "operationId": "getKnowledgeBaseGroupsKnowledgeBaseGroupIdKnowledgeBaseCategoriesKnowledgeBaseCategoryId",
+                "operationId": "getKnowledgeBaseCategory",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27300,7 +27300,7 @@
                 ],
                 "summary": "Deletes a knowledge base category for a knowledge base group",
                 "description": "Permissions: DELETE on Knowledge Base Category",
-                "operationId": "deleteKnowledgeBaseGroup2",
+                "operationId": "deleteKnowledgeBaseCategory",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27370,7 +27370,7 @@
                 ],
                 "summary": "Returns a listing of knowledge base articles for a knowledge base category",
                 "description": "Permissions: READ on Scripting",
-                "operationId": "getKnowledgeBaseGroupsKnowledgeBaseGroupIdKnowledgeBaseCategoriesKnowledgeBaseCategoryIdKnowledgeBaseArticles",
+                "operationId": "getKnowledgeBaseArticleList",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27521,7 +27521,7 @@
                 ],
                 "summary": "Returns a knowledge base articles for a knowledge base category",
                 "description": "Permissions: READ on Scripting",
-                "operationId": "getKnowledgeBaseGroupsKnowledgeBaseGroupIdKnowledgeBaseCategoriesKnowledgeBaseCategoryIdKnowledgeBaseArticlesKnowledgeBaseArticleId",
+                "operationId": "getKnowledgeBaseArticle",
                 "parameters": [
                     {
                         "name": "accountId",
