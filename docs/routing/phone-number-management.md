@@ -16,7 +16,25 @@ Phone numbers are shared by many RingCX features. Voice DNIS can be assigned to 
 
 ### Required Permissions & Scopes
 
-Your application needs the `ReadAccounts` OAuth scope. In the RingCX Admin portal, the authenticating user must also have permission to read and update telephone-number inventory and the destination product being assigned.
+#### 1. Configure OAuth Scopes
+
+To authenticate, your application must be configured with the following permission in the [Developer Portal](https://developers.ringcentral.com/my-account.html#/applications):
+
+* **`ReadAccounts`**: Required to validate account context and access RingCX administrative APIs.
+
+#### 2. Enable RingCX Admin Access
+
+In the RingCX Admin portal, the authenticating user must have permission to read and update telephone-number inventory and the destination product being assigned, such as queues, Visual IVRs, cloud route profiles, or chat queues.
+
+!!! warning "Common Authorization Errors"
+    If the user can authenticate but cannot manage the target number or destination product, the API returns an error similar to:
+    ```json
+    {
+      "errorCode": "access.denied.exception",
+      "generalMessage": "You do not have permission to access this resource",
+      "timestamp": 1611847650696
+    }
+    ```
 
 ## Manage DNIS Pools
 
@@ -24,12 +42,12 @@ DNIS pool endpoints create, update, search, upload, and delete phone-number inve
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| Search DNIS | `POST /voice/api/v1/admin/utilities/tnManager/searchDnis` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/searchDnis) |
-| Search pools | `POST /voice/api/v1/admin/utilities/tnManager/search` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/search) |
-| Create DNIS pool records | `POST /voice/api/v1/admin/utilities/tnManager/dnisPool` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/createDnisPool) |
-| Update a DNIS pool record | `PUT /voice/api/v1/admin/utilities/tnManager/dnisPool` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateDnisPool) |
-| Upload DNIS pool records | `POST /voice/api/v1/admin/utilities/tnManager/uploadDnisPool` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/uploadDnisPool) |
-| Bulk update DNIS pools | `PUT /voice/api/v1/admin/utilities/tnManager/updateBulkDnisPool` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateBulkDnisPool) |
+| Search DNIS | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/searchDnis` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/searchDnis) |
+| Search pools | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/search` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/search) |
+| Create DNIS pool records | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/dnisPool` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/createDnisPool) |
+| Update a DNIS pool record | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/dnisPool` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateDnisPool) |
+| Upload DNIS pool records | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/uploadDnisPool` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/uploadDnisPool) |
+| Bulk update DNIS pools | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/updateBulkDnisPool` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateBulkDnisPool) |
 
 ## Assign Voice DNIS
 
@@ -37,11 +55,11 @@ Use assigned DNIS endpoints to connect numbers to voice routing products.
 
 | Destination | Method and Path | API Reference |
 | --- | --- | --- |
-| Queue | `PUT /voice/api/v1/admin/utilities/tnManager/assignedDnis/gates/{gateId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateAssignedDnisForGate) |
-| Visual IVR | `PUT /voice/api/v1/admin/utilities/tnManager/assignedDnis/visualIvrs/{visualIvrId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateAssignedDnisForVisualIvr) |
-| Cloud route profile | `PUT /voice/api/v1/admin/utilities/tnManager/assignedDnis/cloudRouteProfiles/{cloudRouteProfileId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateAssignedDnisForCloudRouteProfile) |
-| Existing assignment | `GET /voice/api/v1/admin/utilities/tnManager/assignedDnis/{dnis}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/getAssignedDnis) |
-| Remove assignment | `DELETE /voice/api/v1/admin/utilities/tnManager/assignedDnis/{dnis}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/deleteAssignedDnis) |
+| Queue | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedDnis/gates/{gateId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateAssignedDnisForGate) |
+| Visual IVR | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedDnis/visualIvrs/{visualIvrId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateAssignedDnisForVisualIvr) |
+| Cloud route profile | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedDnis/cloudRouteProfiles/{cloudRouteProfileId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateAssignedDnisForCloudRouteProfile) |
+| Existing assignment | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedDnis/{dnis}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/getAssignedDnis) |
+| Remove assignment | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedDnis/{dnis}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/deleteAssignedDnis) |
 
 ## Assign SMS DNIS
 
@@ -51,7 +69,7 @@ SMS DNIS assignments connect digital numbers to chat queues.
 
 **API Reference:** [Assign SMS DNIS to chat queue](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateAssignedSmsDnisForChatQueue)
 
-Use `GET /voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/{dnis}` to inspect an existing SMS assignment and `DELETE /voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/{dnis}` to remove it.
+Use `GET https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/{dnis}` to inspect an existing SMS assignment and `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/{dnis}` to remove it.
 
 ## Tracking Numbers
 
@@ -59,12 +77,12 @@ Tracking numbers are managed under tracking-number groups.
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List groups with numbers | `GET /voice/api/v1/admin/accounts/{accountId}/tracGroups/withChildren` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/getTracGroupListWithChildren) |
-| Get group | `GET /voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/getTracGroup) |
-| Update group | `PUT /voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateTracGroup) |
-| List numbers | `GET /voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/getTracNumberList) |
-| Create number | `POST /voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/createTracNumber) |
-| Update number | `PUT /voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers/{tracId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateTracNumber) |
+| List groups with numbers | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/tracGroups/withChildren` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/getTracGroupListWithChildren) |
+| Get group | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/getTracGroup) |
+| Update group | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateTracGroup) |
+| List numbers | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/getTracNumberList) |
+| Create number | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/createTracNumber) |
+| Update number | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers/{tracId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateTracNumber) |
 
 ## Recommended Workflow
 
@@ -156,6 +174,15 @@ Tracking numbers are managed under tracking-number groups.
   "destinationName": "Support queue"
 }
 ```
+
+## Resource Schema Summary
+
+| Resource | Key Fields | Notes |
+| --- | --- | --- |
+| DNIS pool record | `dnis`, `accountId`, `description`, `active`, `assignedProduct` | Inventory record for a phone number before or after assignment. |
+| Voice assignment | `dnis`, `product`, `destinationId`, `destinationName` | Maps a number to a queue, Visual IVR, or cloud route profile. |
+| SMS assignment | `dnis`, `chatQueueId`, `chatQueueName` | Maps an SMS-enabled number to a chat queue. |
+| Tracking number | `tracId`, `tracGroupId`, `dnis`, `description`, `active` | Tracking-number configuration used for attribution or routing. |
 
 ## Common Errors
 
