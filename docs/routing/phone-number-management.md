@@ -16,7 +16,7 @@ Phone numbers are shared by many RingCX features. Voice DNIS can be assigned to 
 
 ### Required Permissions & Scopes
 
-Your application needs the `ReadAccounts` OAuth scope. The authenticating user must also have platform permissions to read and update telephone-number inventory and the destination product being assigned.
+Your application needs the `ReadAccounts` OAuth scope. In the RingCX Admin portal, the authenticating user must also have permission to read and update telephone-number inventory and the destination product being assigned.
 
 ## Manage DNIS Pools
 
@@ -77,3 +77,116 @@ Tracking numbers are managed under tracking-number groups.
 
 !!! warning
     Reassigning or deleting a phone number can immediately affect customer routing. Confirm the target product and maintenance window before applying bulk changes.
+
+!!! important "Rate Limiting & Stability"
+    Treat number inventory changes as provisioning operations. Search first, update only changed records, and batch bulk uploads so retries do not duplicate or reassign numbers unexpectedly.
+
+## Primary Parameters
+
+| Parameter | Type | Requirement | Description |
+| --- | --- | --- | --- |
+| `dnis` | String | **Required** | Phone number in DNIS inventory. Use a normalized E.164-style value when possible. |
+| `gateId` | Integer | Required for queue assignment | Voice queue identifier. |
+| `visualIvrId` | Integer | Required for Visual IVR assignment | Visual IVR identifier. |
+| `cloudRouteProfileId` | Integer | Required for cloud routing assignment | Cloud route profile identifier. |
+| `chatQueueId` | Integer | Required for SMS assignment | Chat queue that should receive SMS traffic for the number. |
+| `page`, `size`, `sort` | Integer/String | Optional | Search controls for paginated inventory lookups. |
+| `file` | File | Required for upload endpoints | Bulk DNIS pool upload payload. |
+
+## Request and Response Examples
+
+### Create DNIS Pool Records
+
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/dnisPool`
+
+```json
+{
+  "dnis": "15551234567",
+  "description": "Main support line",
+  "accountId": 123456,
+  "active": true
+}
+```
+
+### Assign Voice DNIS to a Queue
+
+`PUT https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedDnis/gates/{gateId}`
+
+```json
+{
+  "dnis": "15551234567"
+}
+```
+
+### Assign SMS DNIS to a Chat Queue
+
+`PUT https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/chatQueues/{chatQueueId}`
+
+```json
+{
+  "dnis": "15557654321"
+}
+```
+
+### Search Result
+
+```json
+{
+  "records": [
+    {
+      "dnis": "15551234567",
+      "assignedProduct": "GATE",
+      "destinationId": 4567,
+      "active": true
+    }
+  ],
+  "page": 0,
+  "size": 25,
+  "totalElements": 1
+}
+```
+
+### Assignment Lookup
+
+```json
+{
+  "dnis": "15551234567",
+  "product": "GATE",
+  "destinationId": 4567,
+  "destinationName": "Support queue"
+}
+```
+
+## Common Errors
+
+| Status | Cause | Resolution |
+| --- | --- | --- |
+| `400 Bad Request` | DNIS format is invalid or the target destination ID is missing. | Normalize numbers and validate target IDs before assignment. |
+| `403 Forbidden` | Caller lacks telephone-number or destination-product permissions. | Grant inventory and target product permissions in the Admin portal. |
+| `404 Not Found` | DNIS or destination product does not exist. | Search inventory and list the destination product before assigning. |
+| `409 Conflict` | DNIS is already assigned or duplicated in a bulk upload. | Inspect the current assignment and remove or update it intentionally. |
+
+## Sample Implementation (Python)
+
+```python
+import requests
+
+BASE_URL = "https://ringcx.ringcentral.com/voice/api"
+
+def search_then_assign_voice_dnis(token, dnis, gate_id):
+    headers = {"Authorization": f"Bearer {token}"}
+    search = requests.post(
+        f"{BASE_URL}/v1/admin/utilities/tnManager/searchDnis",
+        headers=headers,
+        json={"dnis": dnis},
+    )
+    search.raise_for_status()
+
+    assignment = requests.put(
+        f"{BASE_URL}/v1/admin/utilities/tnManager/assignedDnis/gates/{gate_id}",
+        headers=headers,
+        json={"dnis": dnis},
+    )
+    assignment.raise_for_status()
+    return assignment.json() if assignment.content else None
+```
