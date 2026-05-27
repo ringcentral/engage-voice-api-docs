@@ -217,3 +217,59 @@ Chat widgets are configured under account utilities and can be assigned to queue
 
 !!! important "Rate Limiting & Stability"
     Standard RingCX API rate limiting applies. For bulk provisioning, make changes in batches and implement exponential backoff on `429 Too Many Requests` responses.
+
+## ChatQueue Response Schema
+
+Chat queue responses vary by endpoint, but queue objects generally include these field groups.
+
+| Group | Fields | Description |
+| --- | --- | --- |
+| Identity | `chatQueueId`, `chatGroupId`, `accountId`, `queueName` | Stable identifiers and display name. |
+| Routing state | `active`, `priority`, `routingMode`, `maxChats` | Controls whether the queue can receive work and how work is prioritized. |
+| Assignment | `assignedAgents`, `skillProfileId`, `teamId` | Agent or skill-based routing configuration when returned by child endpoints. |
+| Schedule | `scheduleId`, `timezone`, `scheduleOverrides` | Normal and temporary availability settings. |
+| Counters/configuration | `slaSeconds`, `requeueTimeout`, `dispositionRequired` | Queue behavior used by routing, reporting, and wrap-up workflows. |
+
+## Platform Permission Error
+
+If the caller has the OAuth scope but lacks access to the chat group, queue, or agent assignment operation, the API can return a permission error similar to:
+
+```json
+{
+  "errorCode": "access.denied.exception",
+  "generalMessage": "You do not have permission to access this resource",
+  "timestamp": 1611847650696
+}
+```
+
+## Common Errors
+
+| Status | Cause | Resolution |
+| --- | --- | --- |
+| `400 Bad Request` | Full-object update is missing fields that are required by the queue model. | Read the queue first and merge your changes into the full object before sending `PUT`. |
+| `403 Forbidden` | Caller lacks access to the chat group, queue, or agent assignment. | Confirm Admin portal permissions for digital routing and agent management. |
+| `404 Not Found` | Queue, group, disposition, event, widget, or agent ID does not exist under the account. | Re-list the parent resource immediately before changing children. |
+| `409 Conflict` | Queue is inactive, already assigned, or has conflicting widget/agent state. | Verify queue status and existing assignments before retrying. |
+
+## Sample Implementation (Python)
+
+```python
+import requests
+
+BASE_URL = "https://ringcx.ringcentral.com/voice/api"
+
+def assign_agent_to_chat_queue(token, account_id, chat_group_id, chat_queue_id, agent_id):
+    headers = {"Authorization": f"Bearer {token}"}
+    assign_url = (
+        f"{BASE_URL}/v1/admin/accounts/{account_id}/chatGroups/{chat_group_id}"
+        f"/chatQueues/{chat_queue_id}/assignAgents/{agent_id}"
+    )
+    response = requests.post(assign_url, headers=headers)
+    response.raise_for_status()
+
+    list_url = (
+        f"{BASE_URL}/v1/admin/accounts/{account_id}/chatGroups/{chat_group_id}"
+        f"/chatQueues/{chat_queue_id}/assignedAgents"
+    )
+    return requests.get(list_url, headers=headers).json()
+```
