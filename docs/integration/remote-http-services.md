@@ -6,6 +6,8 @@ The Remote HTTP Service APIs let you configure outbound HTTP integrations used b
 
 Remote HTTP services define reusable external endpoints that RingCX can call from IVR, scripting, or integration workflows. They are useful when the same CRM, middleware, or data-enrichment service must be configured consistently across many queues, scripts, or sub-accounts.
 
+IVR WWW nodes, scripting nodes, and other workflow steps reference these service definitions so the workflow does not need to duplicate endpoint URLs, headers, credentials, and input mappings.
+
 ### Key Use Cases
 
 * **Integration Provisioning:** Create service definitions during customer onboarding.
@@ -77,3 +79,115 @@ External auth configurations store reusable authentication settings for remote s
 
 !!! important
     Treat remote service changes like production integration changes. Validate the external endpoint, authentication, and expected response shape before activating the service in a live routing flow.
+
+## Request Examples
+
+### Create a Service Group
+
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups`
+
+```json
+{
+  "groupName": "CRM enrichment",
+  "description": "Services used by inbound IVR and scripts",
+  "active": true
+}
+```
+
+### Create an HTTP Service
+
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices`
+
+```json
+{
+  "serviceName": "Lookup customer by ANI",
+  "description": "Returns CRM profile data for the caller",
+  "url": "https://api.example.com/customers/lookup",
+  "method": "POST",
+  "contentType": "application/json",
+  "active": false
+}
+```
+
+### Create a Service Input
+
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/inputs`
+
+```json
+{
+  "inputName": "ani",
+  "source": "CALL",
+  "required": true,
+  "description": "Caller phone number passed to the CRM lookup"
+}
+```
+
+### Create API Key Auth
+
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/apiKey`
+
+```json
+{
+  "name": "CRM API key",
+  "apiKey": "secret-value",
+  "headerName": "X-API-Key"
+}
+```
+
+## Resource Notes
+
+| Resource | Key Fields | Notes |
+| --- | --- | --- |
+| Service group | `serviceGroupId`, `groupName`, `description`, `active` | Logical container for related services. |
+| HTTP service | `serviceId`, `serviceName`, `url`, `method`, `contentType`, `active` | Defines the external endpoint RingCX workflows call. |
+| Service input | `inputId`, `inputName`, `source`, `required` | Maps RingCX runtime values into the request. |
+| Auth config | `authConfigId`, `authType`, `name` | Stores reusable credentials for outbound calls. |
+
+## Common Errors
+
+| Status | Cause | Resolution |
+| --- | --- | --- |
+| `400 Bad Request` | Malformed URL, method, auth payload, or input mapping. | Validate service definitions before activating them. |
+| `403 Forbidden` | User lacks integration configuration permissions. | Grant remote service and external auth permissions in the Admin portal. |
+| `404 Not Found` | Service group, service, input, or auth config is not under the account. | Re-list parent resources and use IDs from the same account. |
+| `409 Conflict` | Service is inactive, duplicated, or referenced by a workflow that prevents deletion. | Clone/update safely and activate only after validation. |
+
+## Sample Implementation (Python)
+
+```python
+import requests
+
+BASE_URL = "https://ringcx.ringcentral.com/voice/api"
+
+def provision_remote_service(token, account_id):
+    headers = {"Authorization": f"Bearer {token}"}
+    group = requests.post(
+        f"{BASE_URL}/v1/admin/accounts/{account_id}/httpServiceGroups",
+        headers=headers,
+        json={"groupName": "CRM enrichment", "active": True},
+    )
+    group.raise_for_status()
+    group_id = group.json()["serviceGroupId"]
+
+    service = requests.post(
+        f"{BASE_URL}/v1/admin/accounts/{account_id}/httpServiceGroups/{group_id}/httpServices",
+        headers=headers,
+        json={
+            "serviceName": "Lookup customer by ANI",
+            "url": "https://api.example.com/customers/lookup",
+            "method": "POST",
+            "contentType": "application/json",
+            "active": False,
+        },
+    )
+    service.raise_for_status()
+    service_id = service.json()["serviceId"]
+
+    input_response = requests.post(
+        f"{BASE_URL}/v1/admin/accounts/{account_id}/httpServiceGroups/{group_id}/httpServices/{service_id}/inputs",
+        headers=headers,
+        json={"inputName": "ani", "source": "CALL", "required": True},
+    )
+    input_response.raise_for_status()
+    return {"group": group.json(), "service": service.json(), "input": input_response.json()}
+```
