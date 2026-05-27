@@ -15,7 +15,7 @@ Knowledge base content is organized into groups, categories, and articles. These
 
 ### Required Permissions & Scopes
 
-Your application needs the `ReadAccounts` OAuth scope. The authenticating user must also have platform permissions to read and update knowledge base groups, categories, and articles.
+Your application needs the `ReadAccounts` OAuth scope. The authenticating user must also have Admin portal permissions to read and update knowledge base groups, categories, and articles.
 
 ## Knowledge Base Groups
 
@@ -61,3 +61,111 @@ Articles are managed within a category.
 
 !!! important
     Keep an external content identifier in article metadata when available. That makes synchronization idempotent and helps prevent duplicate articles.
+
+## Identifiers and Parameters
+
+| Parameter | Type | Requirement | Description |
+| --- | --- | --- | --- |
+| `accountId` | Integer | **Required** | RingCX account that owns the knowledge base. |
+| `knowledgeBaseGroupId` | Integer | **Required** | Group that contains categories. |
+| `knowledgeBaseCategoryId` | Integer | **Required for category/article operations** | Category that contains articles. |
+| `knowledgeBaseArticleId` | Integer | **Required for article read/update/delete** | Article identifier. |
+
+## Request Examples
+
+### Create a Category
+
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories`
+
+```json
+{
+  "name": "Billing",
+  "description": "Billing and invoice support articles",
+  "active": true,
+  "order": 10
+}
+```
+
+### Create an Article
+
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}/knowledgeBaseArticles`
+
+```json
+{
+  "title": "Update invoice contact",
+  "content": "<p>Open Billing, select the account, and update the invoice contact.</p>",
+  "labels": "billing,invoice",
+  "active": true,
+  "showSend": true,
+  "order": 20
+}
+```
+
+### Update an Article
+
+```json
+{
+  "knowledgeBaseArticleId": 9876,
+  "title": "Update invoice contact",
+  "content": "<p>Open Billing, select the account, and update the invoice contact.</p><p>Save your changes.</p>",
+  "labels": "billing,invoice,admin",
+  "active": true,
+  "showSend": true,
+  "order": 20
+}
+```
+
+## Article Schema Notes
+
+Knowledge base article content is stored in the `content` field as HTML. The service also exposes a plain-text projection as `contentPlain` in list/detail views where supported.
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `knowledgeBaseArticleId` | Integer | Article identifier. |
+| `title` | String | Article title. |
+| `content` | String | HTML article body. |
+| `contentPlain` | String | HTML-stripped article content returned by the service. |
+| `labels` | String | Label text used for filtering or categorization. |
+| `active` | Boolean | Whether the article is available. |
+| `showSend` | Boolean | Whether agents can send the article where supported by the UI. |
+| `order` | Integer | Sort order within the category. |
+| `knowledgeBaseCategory` | Object | Parent category reference. |
+
+!!! info "Content Format"
+    The implementation cleans saved HTML content, including link handling. Avoid sending unsupported scripts or raw external markup; sanitize CMS content before synchronizing it into RingCX.
+
+## Common Errors
+
+| Status | Cause | Resolution |
+| --- | --- | --- |
+| `400 Bad Request` | Missing category/article fields or invalid content. | Validate HTML and required fields before submitting. |
+| `403 Forbidden` | Caller lacks knowledge base permissions. | Grant Admin portal permission for knowledge base management. |
+| `404 Not Found` | Group, category, or article ID is not under the account. | Read the tree with `withChildren` before updating nested resources. |
+| `409 Conflict` | Duplicate content or deletion blocked by downstream dependencies. | Use an external CMS identifier in labels or metadata and confirm before deletion. |
+
+## Sample Implementation (Python)
+
+```python
+import requests
+
+BASE_URL = "https://ringcx.ringcentral.com/voice/api"
+
+def sync_cms_article(token, account_id, group_id, category_id, cms_article):
+    headers = {"Authorization": f"Bearer {token}"}
+    body = {
+        "title": cms_article["title"],
+        "content": cms_article["html"],
+        "labels": f"cms,{cms_article['id']}",
+        "active": True,
+        "showSend": True,
+        "order": cms_article.get("order", 0),
+    }
+    response = requests.post(
+        f"{BASE_URL}/v1/admin/accounts/{account_id}/knowledgeBaseGroups/{group_id}"
+        f"/knowledgeBaseCategories/{category_id}/knowledgeBaseArticles",
+        headers=headers,
+        json=body,
+    )
+    response.raise_for_status()
+    return response.json()
+```
