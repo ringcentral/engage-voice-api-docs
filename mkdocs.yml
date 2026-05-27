@@ -69,6 +69,7 @@ nav:
       - 'Active Calls': dialing/active-calls/index.md
   - 'Users':
     - 'Overview': users/agents/index.md
+    - 'Admin Users and Permissions': users/admin-users-and-permissions.md
     - 'Agents':
       - 'Agents': users/agents/agents.md
       - 'Agent Groups': users/agents/agent-groups.md

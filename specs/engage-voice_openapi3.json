@@ -14446,34 +14446,91 @@
             "WEMDialogSegmentMetaData": {
                 "type": "object",
                 "properties": {
-                    "subAccountId": { "type": "string" },
-                    "dialogId": { "type": "string" },
-                    "interactionId": { "type": "string" },
-                    "channelId": { "type": "string" },
-                    "channelType": { "type": "string" },
-                    "channelClass": { "type": "string" },
-                    "channelEndpointAddress": { "type": "string" },
-                    "contactEndpointAddress": { "type": "string" },
-                    "dialogOrigination": { "type": "string" },
-                    "dialogStartTimeMs": { "type": "string", "format": "date-time" },
-                    "dialogEndTimeMs": { "type": "string", "format": "date-time" },
-                    "dialogDurationMs": { "type": "integer" },
-                    "segmentId": { "type": "string" },
-                    "segmentType": { "type": "string" },
-                    "segmentParticipantId": { "type": "string" },
-                    "segmentParticipantRcExtensionId": { "type": "string" },
-                    "segmentStartTimeMs": { "type": "string", "format": "date-time" },
-                    "segmentEndTimeMs": { "type": "string", "format": "date-time" },
-                    "segmentDurationMs": { "type": "integer" },
-                    "segmentAgentGroupId": { "type": "string" },
-                    "systemDisposition": { "type": "string", "nullable": true },
-                    "agentDisposition": { "type": "string" },
-                    "agentNotes": { "type": "string" },
-                    "hasRecording": { "type": "boolean" },
-                    "hasTranscript": { "type": "boolean" },
+                    "subAccountId": {
+                        "type": "string"
+                    },
+                    "dialogId": {
+                        "type": "string"
+                    },
+                    "interactionId": {
+                        "type": "string"
+                    },
+                    "channelId": {
+                        "type": "string"
+                    },
+                    "channelType": {
+                        "type": "string"
+                    },
+                    "channelClass": {
+                        "type": "string"
+                    },
+                    "channelEndpointAddress": {
+                        "type": "string"
+                    },
+                    "contactEndpointAddress": {
+                        "type": "string"
+                    },
+                    "dialogOrigination": {
+                        "type": "string"
+                    },
+                    "dialogStartTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "dialogEndTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "dialogDurationMs": {
+                        "type": "integer"
+                    },
+                    "segmentId": {
+                        "type": "string"
+                    },
+                    "segmentType": {
+                        "type": "string"
+                    },
+                    "segmentParticipantId": {
+                        "type": "string"
+                    },
+                    "segmentParticipantRcExtensionId": {
+                        "type": "string"
+                    },
+                    "segmentStartTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "segmentEndTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "segmentDurationMs": {
+                        "type": "integer"
+                    },
+                    "segmentAgentGroupId": {
+                        "type": "string"
+                    },
+                    "systemDisposition": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "agentDisposition": {
+                        "type": "string"
+                    },
+                    "agentNotes": {
+                        "type": "string"
+                    },
+                    "hasRecording": {
+                        "type": "boolean"
+                    },
+                    "hasTranscript": {
+                        "type": "boolean"
+                    },
                     "segmentEvents": {
                         "type": "array",
-                        "items": { "$ref": "#/components/schemas/InteractionSegmentEvent" },
+                        "items": {
+                            "$ref": "#/components/schemas/InteractionSegmentEvent"
+                        },
                         "nullable": true
                     }
                 }
@@ -14522,60 +14579,185 @@
             "AggregatedAgentStats": {
                 "type": "object",
                 "properties": {
-                    "interval": { "type": "integer", "format": "int32" },
-                    "dateTimeFrom": { "type": "string" },
-                    "agentId": { "type": "integer", "format": "int32" },
-                    "agentName": { "type": "string" },
-                    "availDur": { "type": "integer", "format": "int32" },
-                    "totWorkDur": { "type": "integer", "format": "int32" },
-                    "pauseDur": { "type": "integer", "format": "int32" },
-                    "waitDur": { "type": "integer", "format": "int32" },
-                    "adminDur": { "type": "integer", "format": "int32" },
-                    "directOutIxnCnt": { "type": "integer", "format": "int32" },
-                    "directOutIxnDur": { "type": "integer", "format": "int32" },
-                    "directInIxnCnt": { "type": "integer", "format": "int32" },
-                    "directInIxnDur": { "type": "integer", "format": "int32" }
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "agentId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "agentName": {
+                        "type": "string"
+                    },
+                    "availDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totWorkDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "pauseDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "waitDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "adminDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directOutIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directInIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directInIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "AggregatedQueueStats": {
                 "type": "object",
                 "properties": {
-                    "dateTimeFrom": { "type": "string" },
-                    "interval": { "type": "integer", "format": "int32" },
-                    "queue": { "type": "integer", "format": "int32" },
-                    "queueName": { "type": "string" },
-                    "offdDirectIxnCnt": { "type": "integer", "format": "int32" },
-                    "answIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandShortIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandWithinSlCnt": { "type": "integer", "format": "int32" },
-                    "ansServicelevelCnt": { "type": "integer", "format": "int32" },
-                    "completedContacts": { "type": "integer", "format": "int32" },
-                    "queuedAndAnswIxnDur": { "type": "integer", "format": "int32" },
-                    "queuedAndAbandIxnDur": { "type": "integer", "format": "int32" },
-                    "queuedAnswLongestQueDur": { "type": "integer", "format": "int32" },
-                    "queuedAbandLongestQueDur": { "type": "integer", "format": "int32" },
-                    "talkingIxnDur": { "type": "integer", "format": "int32" },
-                    "wrapUpDur": { "type": "integer", "format": "int32" },
-                    "waitDur": { "type": "integer", "format": "int32" },
-                    "segmentHoldTime": { "type": "integer", "format": "int32" },
-                    "overflowInIxnCnt": { "type": "integer", "format": "int32" },
-                    "overflowOutIxnCnt": { "type": "integer", "format": "int32" }
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queue": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queueName": {
+                        "type": "string"
+                    },
+                    "offdDirectIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "answIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandShortIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandWithinSlCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "ansServicelevelCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "completedContacts": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAndAnswIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAndAbandIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAnswLongestQueDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAbandLongestQueDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "talkingIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "wrapUpDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "waitDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "segmentHoldTime": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "overflowInIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "overflowOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "ExtendedAggregatedQueueStats": {
                 "type": "object",
                 "properties": {
-                    "interval": { "type": "integer", "format": "int32" },
-                    "dateTimeFrom": { "type": "string" },
-                    "agentId": { "type": "integer", "format": "int32" },
-                    "agentName": { "type": "string" },
-                    "queue": { "type": "integer", "format": "int32" },
-                    "queueName": { "type": "string" },
-                    "talkingIxnDur": { "type": "integer", "format": "int32" },
-                    "wrapUpDur": { "type": "integer", "format": "int32" },
-                    "answIxnCnt": { "type": "integer", "format": "int32" },
-                    "transferOutIxnCnt": { "type": "integer", "format": "int32" }
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "agentId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "agentName": {
+                        "type": "string"
+                    },
+                    "queue": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queueName": {
+                        "type": "string"
+                    },
+                    "talkingIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "wrapUpDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "answIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "transferOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "CXQueueWithAgents": {
@@ -24000,41 +24182,47 @@
         },
         "/voice/api/v1/admin/users": {
             "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a listing of all users that a user has access to",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER role",
                 "operationId": "listAllUsers",
                 "parameters": [
                     {
-                        "description": "activeOnly",
-                        "in": "query",
                         "name": "activeOnly",
+                        "in": "query",
+                        "description": "activeOnly",
+                        "required": false,
                         "schema": {
-                            "default": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "default": false
                         }
                     },
                     {
-                        "description": "flatten",
-                        "in": "query",
                         "name": "flatten",
+                        "in": "query",
+                        "description": "flatten",
+                        "required": false,
                         "schema": {
-                            "default": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "default": false
                         }
                     }
                 ],
                 "responses": {
                     "200": {
+                        "description": "OK",
                         "content": {
                             "application/json": {
                                 "schema": {
+                                    "type": "array",
                                     "items": {
                                         "$ref": "#/components/schemas/User"
-                                    },
-                                    "type": "array"
+                                    }
                                 }
                             }
-                        },
-                        "description": "OK"
+                        }
                     },
                     "401": {
                         "description": "Unauthorized"
@@ -24049,47 +24237,45 @@
                 "security": [
                     {
                         "BearerAuth": []
-                    },
-                    {
-                        "BearerAuth": []
-                    },
-                    {
-                        "BearerAuth": []
                     }
-                ],
-                "summary": "Returns a listing of all users that a user has access to",
-                "tags": [
-                    "Users"
                 ]
             },
             "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Creates a single new user",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER role",
                 "operationId": "createUser",
                 "parameters": [
                     {
-                        "description": "parentUserId",
-                        "in": "query",
                         "name": "parentUserId",
+                        "in": "query",
+                        "description": "parentUserId",
+                        "required": false,
                         "schema": {
-                            "format": "int32",
-                            "type": "integer"
+                            "type": "integer",
+                            "format": "int32"
                         }
                     },
                     {
-                        "description": "returnUri",
-                        "in": "query",
                         "name": "returnUri",
+                        "in": "query",
+                        "description": "returnUri",
+                        "required": false,
                         "schema": {
-                            "type": "string"
+                            "type": "string",
+                            "format": "uri"
                         }
                     },
                     {
-                        "description": "isSSO",
-                        "in": "query",
                         "name": "isSSO",
+                        "in": "query",
+                        "description": "isSSO",
+                        "required": false,
                         "schema": {
-                            "default": false,
-                            "type": "boolean"
+                            "type": "boolean",
+                            "default": false
                         }
                     }
                 ],
@@ -24101,91 +24287,18 @@
                             }
                         }
                     },
-                    "description": "userRequest",
-                    "required": true
+                    "required": false
                 },
                 "responses": {
-                    "201": {
+                    "200": {
+                        "description": "OK",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/User"
                                 }
                             }
-                        },
-                        "description": "Created"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    },
-                    {
-                        "BearerAuth": []
-                    },
-                    {
-                        "BearerAuth": []
-                    }
-                ],
-                "summary": "Creates a single new user",
-                "tags": [
-                    "Users"
-                ],
-                "x-codegen-request-body-name": "userRequest"
-            }
-        },
-        "/voice/api/v1/auth/login": {
-            "post": {
-                "description": "Permissions: Anonymous User",
-                "operationId": "doLogin",
-                "parameters": [
-                    {
-                        "description": "username",
-                        "in": "query",
-                        "name": "username",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
                         }
-                    },
-                    {
-                        "description": "password",
-                        "in": "query",
-                        "name": "password",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "description": "stayLoggedIn",
-                        "in": "query",
-                        "name": "stayLoggedIn",
-                        "schema": {
-                            "default": false,
-                            "type": "boolean"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/UserLoginView"
-                                }
-                            }
-                        },
-                        "description": "OK"
                     },
                     "201": {
                         "description": "Created"
@@ -24203,17 +24316,73 @@
                 "security": [
                     {
                         "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Application login to authenticate and receive an X-Auth-Token",
+                "description": "Permissions: Anonymous User",
+                "operationId": "doLogin",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "query",
+                        "description": "username",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
-                        "BearerAuth": []
+                        "name": "password",
+                        "in": "query",
+                        "description": "password",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
                     },
+                    {
+                        "name": "stayLoggedIn",
+                        "in": "query",
+                        "description": "stayLoggedIn",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserLoginView"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
                     {
                         "BearerAuth": []
                     }
-                ],
-                "summary": "Application login to authenticate and receive an X-Auth-Token",
-                "tags": [
-                    "Legacy Auth"
                 ]
             }
         },
@@ -26528,6 +26697,2763 @@
                         }
                     }
                 }
+            }
+        },
+        "/voice/api/v1/admin/auth": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns information provided by /v1/auth/login for users who are already authenticated. Additionally, we return the host name of this platform.",
+                "description": "",
+                "operationId": "getUserLoginView",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserLoginView"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/rightsDocs/assignments/{userId}": {
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Assigns a user to a rights document",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "assignUserToRightsDocs",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "rightsDocIds",
+                        "in": "query",
+                        "description": "rightsDocIds",
+                        "required": true,
+                        "schema": {
+                            "type": "array"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a listing of users assigned to a rights document",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "getRightsDocAssignments",
+                "parameters": [
+                    {
+                        "name": "rightsDocId",
+                        "in": "path",
+                        "description": "rightsDocId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Assigns a rights document to a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "assignRightsDocsToUsers",
+                "parameters": [
+                    {
+                        "name": "rightsDocId",
+                        "in": "path",
+                        "description": "rightsDocId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "userIds",
+                        "in": "query",
+                        "description": "userIds",
+                        "required": true,
+                        "schema": {
+                            "type": "array"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments/{assignedUserId}": {
+            "delete": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Deletes a rights document from a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "deleteRightsDocAssignment",
+                "parameters": [
+                    {
+                        "name": "assignedUserId",
+                        "in": "path",
+                        "description": "assignedUserId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "rightsDocId",
+                        "in": "path",
+                        "description": "rightsDocId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/availableUserNames": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Checks if username is available",
+                "description": "Permissions: Authenticated User",
+                "operationId": "isUserNameTaken",
+                "parameters": [
+                    {
+                        "name": "userName",
+                        "in": "query",
+                        "description": "userName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/duplicateAuthenticatedUser": {
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Duplicates this authenticated user's session and returns a new auth token",
+                "description": "Permissions: Authenticated User",
+                "operationId": "duplicateAuthenticatedUsers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthenticatedUser"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/passwordReset": {
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Resets a user's password",
+                "description": "Permissions: Authenticated User",
+                "operationId": "securedPasswordRequestRequest",
+                "parameters": [
+                    {
+                        "name": "currentPassword",
+                        "in": "query",
+                        "description": "currentPassword",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "newPassword",
+                        "in": "query",
+                        "description": "newPassword",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/reassign": {
+            "put": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Reassigns all existing child users to a new parent user",
+                "description": "Permissions: MANAGE_USERS or SUPER_USER role",
+                "operationId": "reassignUsers",
+                "parameters": [
+                    {
+                        "name": "oldUserId",
+                        "in": "query",
+                        "description": "oldUserId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "reassignUserId",
+                        "in": "query",
+                        "description": "reassignUserId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/root": {
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Creates a single root user",
+                "description": "Permissions: SUPER_USER role",
+                "operationId": "createRootUser",
+                "parameters": [
+                    {
+                        "name": "returnUri",
+                        "in": "query",
+                        "description": "returnUri",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "format": "uri"
+                        }
+                    },
+                    {
+                        "name": "isSSO",
+                        "in": "query",
+                        "description": "isSSO",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminUserRequest"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/root/{userId}/assignAccount": {
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Assigns an account to a root user",
+                "description": "Permissions: SUPER_USER role",
+                "operationId": "assignAccountToRootUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "accountId",
+                        "in": "query",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "isMaster",
+                        "in": "query",
+                        "description": "isMaster",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{targetUpdateUserId}": {
+            "put": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Updates a user",
+                "description": "Permissions: MANAGE_USERS or SUPER_USER role",
+                "operationId": "updateUser",
+                "parameters": [
+                    {
+                        "name": "targetUpdateUserId",
+                        "in": "path",
+                        "description": "targetUpdateUserId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminUserRequest"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a user",
+                "description": "Permissions: MANAGE_USERS or SUPER_USER role",
+                "operationId": "getUserDetails",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Deletes a user",
+                "description": "Permissions: MANAGE_USERS or SUPER_USER role",
+                "operationId": "deleteUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "reassignUserId",
+                        "in": "query",
+                        "description": "reassignUserId",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "cascadeDelete",
+                        "in": "query",
+                        "description": "cascadeDelete",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": true
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/aggregatedRightsDocs": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a map of aggregated rights documents for a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "getAggregatedRightsDocForAllAccounts",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "$ref": "#/components/schemas/RightsDocument"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/assignAccountToAnyUser": {
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Assigns an account to any user",
+                "description": "Permissions: hasRole('MANAGE_RIGHTS') or hasRole('SUPER_USER')",
+                "operationId": "assignAccountToAnyUser",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "accountId",
+                        "in": "query",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "isMaster",
+                        "in": "query",
+                        "description": "isMaster",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/assignedMasterRightsDocs": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a map of assigned master rights documents for a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "getUsersAssignedRightsDocs",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/RightsDocument"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/assignedRightsDocs": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a map of assigned rights documents for a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "getUsersAssignedRightsDocs2",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/RightsDocument"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/bulkAssignAccountToAnyUser": {
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Assigns an account to any user",
+                "description": "Permissions: hasRole('MANAGE_RIGHTS') or hasRole('SUPER_USER')",
+                "operationId": "assignAccountToAnyUser2",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RightsDocTable"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/children": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a hierarchical listing of all users that a user has access to",
+                "description": "Permissions: MANAGE_USERS or SUPER_USER role",
+                "operationId": "listAllUsersChildren",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/dashboards": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a listing of a dashboards for a user",
+                "description": "Permissions: Authenticated User",
+                "operationId": "getDashboardList",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Dashboard"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Creates a new dashboard for a user",
+                "description": "Permissions: Authenticated User",
+                "operationId": "createDashboard",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Dashboard"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Dashboard"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/dashboards/{dashboardId}": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a dashboard for a user",
+                "description": "Permissions: Authenticated User",
+                "operationId": "getDashboardDetail",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "dashboardId",
+                        "in": "path",
+                        "description": "dashboardId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Dashboard"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Updates an existing dashboard for a user",
+                "description": "Permissions: Authenticated User",
+                "operationId": "updateDashboard",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "dashboardId",
+                        "in": "path",
+                        "description": "dashboardId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Dashboard"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Dashboard"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Deletes a dashboard for a user",
+                "description": "Permissions: Authenticated User",
+                "operationId": "deleteDashboard",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "dashboardId",
+                        "in": "path",
+                        "description": "dashboardId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/dashboards/{dashboardId}/share": {
+            "put": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Creates a copy of the dashboard for each admin id supplied",
+                "description": "Permissions: Authenticated User",
+                "operationId": "shareDashboard",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "dashboardId",
+                        "in": "path",
+                        "description": "dashboardId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "userIds",
+                        "in": "query",
+                        "description": "userIds",
+                        "required": true,
+                        "schema": {
+                            "type": "array"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "integer",
+                                        "format": "int32"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/effectiveAssignedRightsDocs": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a map of merged (master and regular) and aggregated assigned rights documents for a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "getEffectiveAssignedRightsDocForAllAccounts",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "$ref": "#/components/schemas/RightsDocument"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/masterRightsDocs": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a map of master rights documents for a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "getUsersRightsDocs",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/RightsDocument"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Creates a new master rights document for a user",
+                "description": "Permissions: SUPER_USER roles",
+                "operationId": "createRightsDoc",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RightsDocument"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RightsDocument"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/masterRightsDocs/{rightsDocId}": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a single master rights document for a user",
+                "description": "Permissions: SUPER_USER roles",
+                "operationId": "getRightsDoc",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "rightsDocId",
+                        "in": "path",
+                        "description": "rightsDocId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RightsDocument"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Updates an existing master rights document for a user",
+                "description": "Permissions: SUPER_USER roles",
+                "operationId": "updateRightsDoc",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "rightsDocId",
+                        "in": "path",
+                        "description": "rightsDocId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RightsDocument"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RightsDocument"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Deletes an existing master rights document for a user",
+                "description": "Permissions: SUPER_USER roles",
+                "operationId": "deleteRightsDoc",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "rightsDocId",
+                        "in": "path",
+                        "description": "rightsDocId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/ownedMasterRightsDocs": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a map of owned master rights documents for a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "getUsersOwnedRightsDocs",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/RightsDocument"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/ownedRightsDocs": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a map of owned rights documents for a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "getUsersOwnedRightsDocs2",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/RightsDocument"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/passwordReset": {
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Resets a user's password and sends reset password email",
+                "description": "Permissions: Authenticated User",
+                "operationId": "securePasswordRequestResetForUse",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "returnPath",
+                        "in": "query",
+                        "description": "returnPath",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "resetViaEngageAuth",
+                        "in": "query",
+                        "description": "resetViaEngageAuth",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/rightsDocs": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a map of rights documents for a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "getUsersRightsDocs2",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/RightsDocument"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Creates a new rights document for a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "createRightsDoc2",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RightsDocument"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RightsDocument"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/rightsDocs/{rightsDocId}": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a single rights document for a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "getRightsDoc2",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "rightsDocId",
+                        "in": "path",
+                        "description": "rightsDocId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RightsDocument"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Updates an existing rights document for a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "updateRightsDoc2",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "rightsDocId",
+                        "in": "path",
+                        "description": "rightsDocId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RightsDocument"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RightsDocument"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Deletes an existing rights document for a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "deleteRightsDoc2",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "rightsDocId",
+                        "in": "path",
+                        "description": "rightsDocId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/rightsDocsWithSubAccounts": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a map of rights documents for a user",
+                "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
+                "operationId": "getUsersRightsDocsByMasterDoc",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "enablePreBuiltRoles",
+                        "in": "query",
+                        "description": "enablePreBuiltRoles",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/RightsDocument"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/roles": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Returns a listing of roles for a user",
+                "description": "Permissions: MANAGE_USERS or SUPER_USER roles",
+                "operationId": "getUserRoles",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string",
+                                        "enum": [
+                                            "SUPER_USER",
+                                            "USER",
+                                            "MANAGE_USERS",
+                                            "MANAGE_RIGHTS",
+                                            "ACCESS_SIBLINGS",
+                                            "ACCESS_AUDIT_LOG",
+                                            "ASSUME_USERS",
+                                            "REPORT_ADMINISTRATIVE_USER",
+                                            "WFO_ACCESS",
+                                            "ACCESS_GOODDATA_EDITOR",
+                                            "ACCESS_GOODDATA_ANALYST",
+                                            "ACCESS_GOODDATA_VIEWER",
+                                            "NO_ACCESS"
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/roles/{roleType}": {
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Adds a role to a user",
+                "description": "Permissions: MANAGE_USERS or SUPER_USER roles",
+                "operationId": "addUserRole",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "roleType",
+                        "in": "path",
+                        "description": "roleType",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Removes a role from a user",
+                "description": "Permissions: MANAGE_USERS or SUPER_USER roles",
+                "operationId": "removeUserRole",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "roleType",
+                        "in": "path",
+                        "description": "roleType",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/users/{userId}/setIsActive": {
+            "put": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Set user is active",
+                "description": "Permissions: Authenticated User",
+                "operationId": "setUserIsActive",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "userId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ActiveStateBoolean"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/auth/isTokenValid": {
+            "get": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Checks to see if a given token is valid",
+                "description": "Permissions: NONE",
+                "operationId": "isTokenValid",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/auth/passwordReset": {
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Used to reset a users password",
+                "description": "Permissions: NONE",
+                "operationId": "unsecuredPasswordReset",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "token",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "password",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/auth/passwordResetRequest": {
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "Resets a password if a user is locked out, an email will be sent to the user",
+                "description": "Permissions: NONE",
+                "operationId": "unsecuredPasswordResetRequest",
+                "parameters": [
+                    {
+                        "name": "userName",
+                        "in": "query",
+                        "description": "userName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "returnPath",
+                        "in": "query",
+                        "description": "returnPath",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/auth/smsGateway/messages/callbacks/": {
+            "post": {
+                "tags": [
+                    "Admin Users and Permissions"
+                ],
+                "summary": "incomingMessageCallback",
+                "description": "",
+                "operationId": "incomingMessageCallback",
+                "parameters": [
+                    {
+                        "name": "message",
+                        "in": "query",
+                        "description": "message",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             }
         }
     },
