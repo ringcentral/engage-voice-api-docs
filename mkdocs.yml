@@ -105,6 +105,7 @@ nav:
     - 'Overview': integration/index.md
     - 'Reports': integration/reports-orig.md
     - 'Administration': integration/admin.md
+    - 'Remote HTTP Services': integration/remote-http-services.md
     - 'Routing': integration/agent-avail.md
   - 'SDKs': sdks.md
   - 'Embeddable': embeddable.md

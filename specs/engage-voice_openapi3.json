@@ -14446,34 +14446,91 @@
             "WEMDialogSegmentMetaData": {
                 "type": "object",
                 "properties": {
-                    "subAccountId": { "type": "string" },
-                    "dialogId": { "type": "string" },
-                    "interactionId": { "type": "string" },
-                    "channelId": { "type": "string" },
-                    "channelType": { "type": "string" },
-                    "channelClass": { "type": "string" },
-                    "channelEndpointAddress": { "type": "string" },
-                    "contactEndpointAddress": { "type": "string" },
-                    "dialogOrigination": { "type": "string" },
-                    "dialogStartTimeMs": { "type": "string", "format": "date-time" },
-                    "dialogEndTimeMs": { "type": "string", "format": "date-time" },
-                    "dialogDurationMs": { "type": "integer" },
-                    "segmentId": { "type": "string" },
-                    "segmentType": { "type": "string" },
-                    "segmentParticipantId": { "type": "string" },
-                    "segmentParticipantRcExtensionId": { "type": "string" },
-                    "segmentStartTimeMs": { "type": "string", "format": "date-time" },
-                    "segmentEndTimeMs": { "type": "string", "format": "date-time" },
-                    "segmentDurationMs": { "type": "integer" },
-                    "segmentAgentGroupId": { "type": "string" },
-                    "systemDisposition": { "type": "string", "nullable": true },
-                    "agentDisposition": { "type": "string" },
-                    "agentNotes": { "type": "string" },
-                    "hasRecording": { "type": "boolean" },
-                    "hasTranscript": { "type": "boolean" },
+                    "subAccountId": {
+                        "type": "string"
+                    },
+                    "dialogId": {
+                        "type": "string"
+                    },
+                    "interactionId": {
+                        "type": "string"
+                    },
+                    "channelId": {
+                        "type": "string"
+                    },
+                    "channelType": {
+                        "type": "string"
+                    },
+                    "channelClass": {
+                        "type": "string"
+                    },
+                    "channelEndpointAddress": {
+                        "type": "string"
+                    },
+                    "contactEndpointAddress": {
+                        "type": "string"
+                    },
+                    "dialogOrigination": {
+                        "type": "string"
+                    },
+                    "dialogStartTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "dialogEndTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "dialogDurationMs": {
+                        "type": "integer"
+                    },
+                    "segmentId": {
+                        "type": "string"
+                    },
+                    "segmentType": {
+                        "type": "string"
+                    },
+                    "segmentParticipantId": {
+                        "type": "string"
+                    },
+                    "segmentParticipantRcExtensionId": {
+                        "type": "string"
+                    },
+                    "segmentStartTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "segmentEndTimeMs": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "segmentDurationMs": {
+                        "type": "integer"
+                    },
+                    "segmentAgentGroupId": {
+                        "type": "string"
+                    },
+                    "systemDisposition": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "agentDisposition": {
+                        "type": "string"
+                    },
+                    "agentNotes": {
+                        "type": "string"
+                    },
+                    "hasRecording": {
+                        "type": "boolean"
+                    },
+                    "hasTranscript": {
+                        "type": "boolean"
+                    },
                     "segmentEvents": {
                         "type": "array",
-                        "items": { "$ref": "#/components/schemas/InteractionSegmentEvent" },
+                        "items": {
+                            "$ref": "#/components/schemas/InteractionSegmentEvent"
+                        },
                         "nullable": true
                     }
                 }
@@ -14522,60 +14579,185 @@
             "AggregatedAgentStats": {
                 "type": "object",
                 "properties": {
-                    "interval": { "type": "integer", "format": "int32" },
-                    "dateTimeFrom": { "type": "string" },
-                    "agentId": { "type": "integer", "format": "int32" },
-                    "agentName": { "type": "string" },
-                    "availDur": { "type": "integer", "format": "int32" },
-                    "totWorkDur": { "type": "integer", "format": "int32" },
-                    "pauseDur": { "type": "integer", "format": "int32" },
-                    "waitDur": { "type": "integer", "format": "int32" },
-                    "adminDur": { "type": "integer", "format": "int32" },
-                    "directOutIxnCnt": { "type": "integer", "format": "int32" },
-                    "directOutIxnDur": { "type": "integer", "format": "int32" },
-                    "directInIxnCnt": { "type": "integer", "format": "int32" },
-                    "directInIxnDur": { "type": "integer", "format": "int32" }
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "agentId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "agentName": {
+                        "type": "string"
+                    },
+                    "availDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "totWorkDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "pauseDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "waitDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "adminDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directOutIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directInIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "directInIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "AggregatedQueueStats": {
                 "type": "object",
                 "properties": {
-                    "dateTimeFrom": { "type": "string" },
-                    "interval": { "type": "integer", "format": "int32" },
-                    "queue": { "type": "integer", "format": "int32" },
-                    "queueName": { "type": "string" },
-                    "offdDirectIxnCnt": { "type": "integer", "format": "int32" },
-                    "answIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandShortIxnCnt": { "type": "integer", "format": "int32" },
-                    "abandWithinSlCnt": { "type": "integer", "format": "int32" },
-                    "ansServicelevelCnt": { "type": "integer", "format": "int32" },
-                    "completedContacts": { "type": "integer", "format": "int32" },
-                    "queuedAndAnswIxnDur": { "type": "integer", "format": "int32" },
-                    "queuedAndAbandIxnDur": { "type": "integer", "format": "int32" },
-                    "queuedAnswLongestQueDur": { "type": "integer", "format": "int32" },
-                    "queuedAbandLongestQueDur": { "type": "integer", "format": "int32" },
-                    "talkingIxnDur": { "type": "integer", "format": "int32" },
-                    "wrapUpDur": { "type": "integer", "format": "int32" },
-                    "waitDur": { "type": "integer", "format": "int32" },
-                    "segmentHoldTime": { "type": "integer", "format": "int32" },
-                    "overflowInIxnCnt": { "type": "integer", "format": "int32" },
-                    "overflowOutIxnCnt": { "type": "integer", "format": "int32" }
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queue": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queueName": {
+                        "type": "string"
+                    },
+                    "offdDirectIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "answIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandShortIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "abandWithinSlCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "ansServicelevelCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "completedContacts": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAndAnswIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAndAbandIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAnswLongestQueDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queuedAbandLongestQueDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "talkingIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "wrapUpDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "waitDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "segmentHoldTime": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "overflowInIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "overflowOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "ExtendedAggregatedQueueStats": {
                 "type": "object",
                 "properties": {
-                    "interval": { "type": "integer", "format": "int32" },
-                    "dateTimeFrom": { "type": "string" },
-                    "agentId": { "type": "integer", "format": "int32" },
-                    "agentName": { "type": "string" },
-                    "queue": { "type": "integer", "format": "int32" },
-                    "queueName": { "type": "string" },
-                    "talkingIxnDur": { "type": "integer", "format": "int32" },
-                    "wrapUpDur": { "type": "integer", "format": "int32" },
-                    "answIxnCnt": { "type": "integer", "format": "int32" },
-                    "transferOutIxnCnt": { "type": "integer", "format": "int32" }
+                    "interval": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "dateTimeFrom": {
+                        "type": "string"
+                    },
+                    "agentId": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "agentName": {
+                        "type": "string"
+                    },
+                    "queue": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "queueName": {
+                        "type": "string"
+                    },
+                    "talkingIxnDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "wrapUpDur": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "answIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "transferOutIxnCnt": {
+                        "type": "integer",
+                        "format": "int32"
+                    }
                 }
             },
             "CXQueueWithAgents": {
@@ -26528,6 +26710,2340 @@
                         }
                     }
                 }
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs": {
+            "get": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "getExternalAuthConfigsList",
+                "description": "",
+                "operationId": "getExternalAuthConfigsList",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "maxRows",
+                        "in": "query",
+                        "description": "maxRows",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthConfigList"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/oauth/info": {
+            "get": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "getExternalAccountAuthConfigOauthInfo",
+                "description": "",
+                "operationId": "getExternalAccountAuthConfigOauthInfo",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "oauthProvider",
+                        "in": "query",
+                        "description": "oauthProvider",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthConfigOAuthUrl"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}": {
+            "get": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "getExternalAuthConfigById",
+                "description": "",
+                "operationId": "getExternalAuthConfigById",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "authConfigId",
+                        "in": "path",
+                        "description": "authConfigId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetExternalAuthConfigById200Response"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "deleteExternalAuthConfigById",
+                "description": "",
+                "operationId": "deleteExternalAuthConfigById",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "authConfigId",
+                        "in": "path",
+                        "description": "authConfigId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": ""
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/apiKey": {
+            "post": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "createExternalAccountAuthConfigApiKey",
+                "description": "",
+                "operationId": "createExternalAccountAuthConfigApiKey",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "authConfigId",
+                        "in": "path",
+                        "description": "authConfigId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthConfigApiKey"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthConfigApiKey"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "patchExternalAuthConfigApiKey",
+                "description": "",
+                "operationId": "patchExternalAuthConfigApiKey",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "authConfigId",
+                        "in": "path",
+                        "description": "authConfigId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthConfigApiKey"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthConfigApiKey"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/basic": {
+            "post": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "createExternalAccountAuthConfigBasic",
+                "description": "",
+                "operationId": "createExternalAccountAuthConfigBasic",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "authConfigId",
+                        "in": "path",
+                        "description": "authConfigId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthConfigBasic"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthConfigBasic"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "patchExternalAuthConfigBasic",
+                "description": "",
+                "operationId": "patchExternalAuthConfigBasic",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "authConfigId",
+                        "in": "path",
+                        "description": "authConfigId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthConfigBasic"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthConfigBasic"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/customAuth": {
+            "post": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "createExternalAccountAuthConfigCustomAuth",
+                "description": "",
+                "operationId": "createExternalAccountAuthConfigCustomAuth",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "authConfigId",
+                        "in": "path",
+                        "description": "authConfigId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthConfigCustomAuth"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthConfigCustomAuth"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "patchExternalAuthConfigCustomAuth",
+                "description": "",
+                "operationId": "patchExternalAuthConfigCustomAuth",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "authConfigId",
+                        "in": "path",
+                        "description": "authConfigId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthConfigCustomAuth"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthConfigCustomAuth"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/jwt": {
+            "post": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "createExternalAccountAuthConfigJwt",
+                "description": "",
+                "operationId": "createExternalAccountAuthConfigJwt",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "authConfigId",
+                        "in": "path",
+                        "description": "authConfigId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthConfigJwt"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthConfigJwt"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "patchExternalAuthConfigJwt",
+                "description": "",
+                "operationId": "patchExternalAuthConfigJwt",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "authConfigId",
+                        "in": "path",
+                        "description": "authConfigId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthConfigJwt"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthConfigJwt"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/oauth": {
+            "post": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "createExternalAccountAuthConfigOAuth",
+                "description": "",
+                "operationId": "createExternalAccountAuthConfigOAuth",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "authConfigId",
+                        "in": "path",
+                        "description": "authConfigId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthConfigOAuth"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthConfigOAuth"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "patchExternalAuthConfigOAuth",
+                "description": "",
+                "operationId": "patchExternalAuthConfigOAuth",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    },
+                    {
+                        "name": "authConfigId",
+                        "in": "path",
+                        "description": "authConfigId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AuthConfigOAuth"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthConfigOAuth"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups": {
+            "get": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Returns a listing of remote http service groups for an account",
+                "description": "Permissions: READ on Account",
+                "operationId": "getRemoteHttpServiceGroupListByAccount",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "maxRows",
+                        "in": "query",
+                        "description": "maxRows",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RemoteHttpServiceGroup"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Creates a remote http service group for an account",
+                "description": "Permissions: CREATE on Account",
+                "operationId": "createHTTPServiceGroup",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RemoteHttpServiceGroup"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RemoteHttpServiceGroup"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/withChildren": {
+            "get": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Returns a listing of remote http service groups with related data",
+                "description": "Permissions: READ on Account",
+                "operationId": "getRemoteHttpServiceGroupListByAccountWithChildren",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "includePermissions",
+                        "in": "query",
+                        "description": "includePermissions",
+                        "required": false,
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RemoteHttpServiceGroup"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}": {
+            "get": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Returns a remote http service group for an account",
+                "description": "Permissions: READ on HTTP Service Group",
+                "operationId": "getRemoteHttpServiceGroup",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RemoteHttpServiceGroup"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Updates a remote http service group",
+                "description": "Permissions: UPDATE on HTTP Service Group",
+                "operationId": "updateHTTPServiceGroup",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RemoteHttpServiceGroup"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RemoteHttpServiceGroup"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices": {
+            "get": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Returns a listing of remote http services",
+                "description": "Permissions: READ on Web Service Group",
+                "operationId": "getRemoteHttpServiceList",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "maxRows",
+                        "in": "query",
+                        "description": "maxRows",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RemoteHttpService"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Returns a remote http service",
+                "description": "Permissions: CREATE on Web Service Group",
+                "operationId": "createRemoteHttpService",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RemoteHttpService"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RemoteHttpService"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}": {
+            "get": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Returns a remote http service",
+                "description": "Permissions: READ on Web Service",
+                "operationId": "getRemoteHttpService",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceId",
+                        "in": "path",
+                        "description": "serviceId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RemoteHttpService"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Returns a remote http service",
+                "description": "Permissions: UPDATE on Web Service",
+                "operationId": "updateRemoteHttpService",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceId",
+                        "in": "path",
+                        "description": "serviceId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RemoteHttpService"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RemoteHttpService"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/clone": {
+            "post": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Clones a remote http service",
+                "description": "Permissions: READ on Web Service (Permission Override), CREATE on Web Service Group",
+                "operationId": "cloneRemoteHttpService",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceId",
+                        "in": "path",
+                        "description": "serviceId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "newName",
+                        "in": "query",
+                        "description": "newName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RemoteHttpService"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/inputs": {
+            "get": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Returns a listing of remote http service inputs for an account",
+                "description": "Permissions: READ on HTTP Service",
+                "operationId": "getRemoteHttpServiceInputList",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceId",
+                        "in": "path",
+                        "description": "serviceId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RemoteHttpServiceInput"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Returns a remote http service input for an account",
+                "description": "Permissions: UPDATE on HTTP Service",
+                "operationId": "saveRemoteHttpServiceInputs",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceId",
+                        "in": "path",
+                        "description": "serviceId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/RemoteHttpServiceInput"
+                                }
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RemoteHttpServiceInput"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/inputs/{inputId}": {
+            "get": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Returns a remote http service input for an account",
+                "description": "Permissions: READ on HTTP Service",
+                "operationId": "getRemoteHttpServiceInput",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceId",
+                        "in": "path",
+                        "description": "serviceId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "inputId",
+                        "in": "path",
+                        "description": "inputId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RemoteHttpServiceInput"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Returns a remote http service input for an account",
+                "description": "Permissions: UPDATE on HTTP Service",
+                "operationId": "deleteRemoteHttpServiceInput",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceId",
+                        "in": "path",
+                        "description": "serviceId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "inputId",
+                        "in": "path",
+                        "description": "inputId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/setIsActive": {
+            "put": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Set remote HTTP service active state",
+                "description": "Permissions: UPDATE on Web Service",
+                "operationId": "setRemoteHttpServiceIsEnabled",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "serviceId",
+                        "in": "path",
+                        "description": "serviceId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ActiveStateBoolean"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v2/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices": {
+            "get": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Returns a listing of remote http services",
+                "description": "Permissions: READ on Web Service Group",
+                "operationId": "getRemoteHttpServiceListUsingGET",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "page",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "maxRows",
+                        "in": "query",
+                        "description": "maxRows",
+                        "required": false,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/ExternalHttpService"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "createRemoteHttpServiceUsingPOST",
+                "description": "",
+                "operationId": "createRemoteHttpServiceUsingPOST",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExternalHttpService"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExternalHttpService"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/v2/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}": {
+            "get": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "Returns a remote http service",
+                "description": "Permissions: READ on Web Service",
+                "operationId": "getRemoteHttpServiceUsingGET",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "serviceId",
+                        "in": "path",
+                        "description": "serviceId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExternalHttpService"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "updateRemoteHttpServiceUsingPUT",
+                "description": "",
+                "operationId": "updateRemoteHttpServiceUsingPUT",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "serviceId",
+                        "in": "path",
+                        "description": "serviceId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExternalHttpService"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ExternalHttpService"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Remote HTTP Services"
+                ],
+                "summary": "deleteRemoteHttpServiceUsingDELETE",
+                "description": "",
+                "operationId": "deleteRemoteHttpServiceUsingDELETE",
+                "parameters": [
+                    {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "serviceGroupId",
+                        "in": "path",
+                        "description": "serviceGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    },
+                    {
+                        "name": "serviceId",
+                        "in": "path",
+                        "description": "serviceId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
             }
         }
     },
