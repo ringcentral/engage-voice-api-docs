@@ -26719,7 +26719,7 @@
                 ],
                 "summary": "Get all subscription for sub-account",
                 "description": "Permissions: WFO_ACCESS role",
-                "operationId": "getAllSubscribedWFM",
+                "operationId": "getAllSubscriptions",
                 "parameters": [
                     {
                         "name": "rcAccountId",
@@ -26776,7 +26776,7 @@
                 ],
                 "summary": "Subscribe wfm for sub-accounts",
                 "description": "Permissions: WFO_ACCESS role",
-                "operationId": "subscribeWFM",
+                "operationId": "subscribe",
                 "parameters": [
                     {
                         "name": "rcAccountId",
@@ -26842,7 +26842,7 @@
                 ],
                 "summary": "Update a subscription for sub-account",
                 "description": "Permissions: WFO_ACCESS role",
-                "operationId": "getAllSubscribedWFM2",
+                "operationId": "updateSubscription",
                 "parameters": [
                     {
                         "name": "rcAccountId",
@@ -26915,7 +26915,7 @@
                 ],
                 "summary": "Update a subscription for sub-account",
                 "description": "Permissions: WFO_ACCESS role",
-                "operationId": "deleteSubscribedWFM",
+                "operationId": "deleteSubscription",
                 "parameters": [
                     {
                         "name": "rcAccountId",
