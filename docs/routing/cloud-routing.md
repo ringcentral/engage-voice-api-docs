@@ -15,7 +15,13 @@ Cloud routing is used when inbound voice traffic should be distributed across ex
 
 ### Required Permissions & Scopes
 
-Your application needs the `ReadAccounts` OAuth scope. The authenticating RingCX user also needs platform permissions to read and update cloud route groups, destinations, profiles, and assigned destinations.
+#### 1. Configure OAuth Scopes
+
+To authenticate, your application must be configured with **`ReadAccounts`** in the [Developer Portal](https://developers.ringcentral.com/my-account.html#/applications).
+
+#### 2. Enable RingCX Admin Access
+
+The authenticating RingCX user must have Admin portal permissions to read and update cloud route groups, destinations, profiles, assigned destinations, and DNIS overrides for the target account.
 
 ## Discover Cloud Route Groups
 
@@ -87,3 +93,108 @@ DNIS overrides let a cloud route destination apply number-specific routing behav
 
 !!! important "Rate Limiting & Stability"
     Make provisioning changes in batches and use exponential backoff on `429 Too Many Requests` responses.
+
+## Request Examples
+
+### Create a Destination
+
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations`
+
+```json
+{
+  "destinationName": "Denver overflow",
+  "description": "Overflow destination for Denver support",
+  "active": false,
+  "priority": 10
+}
+```
+
+### Create a Profile
+
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles`
+
+```json
+{
+  "profileName": "Support business hours",
+  "description": "Primary and overflow destinations for support",
+  "active": false
+}
+```
+
+### Assign a Destination
+
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations`
+
+```json
+{
+  "cloudRouteDestinationId": 12345,
+  "priority": 1,
+  "percentAllocation": 100,
+  "active": true
+}
+```
+
+### Create a DNIS Override
+
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/dnisOverrides`
+
+```json
+{
+  "dnis": "15551234567",
+  "description": "Route VIP support line to Denver overflow",
+  "active": true
+}
+```
+
+## Primary Resource Fields
+
+| Resource | Fields | Notes |
+| --- | --- | --- |
+| Destination group | `cloudRouteGroupId`, `groupName`, `active` | Groups destinations and profiles for an account. |
+| Destination | `cloudRouteDestinationId`, `destinationName`, `description`, `active`, `priority` | A target that can receive routed calls. |
+| Profile | `cloudRouteProfileId`, `profileName`, `description`, `active` | Routing policy that owns destination assignments. |
+| Assigned destination | `assignedDestinationId`, `cloudRouteDestinationId`, `priority`, `percentAllocation`, `active` | Connects a destination to a profile. |
+| DNIS override | `dnisOverrideId`, `dnis`, `cloudRouteDestinationId`, `active` | Applies number-specific routing behavior. |
+
+## Common Errors
+
+| Status | Cause | Resolution |
+| --- | --- | --- |
+| `400 Bad Request` | Missing required destination/profile fields or malformed allocation import. | Validate request bodies and uploaded allocation files before calling the API. |
+| `403 Forbidden` | User lacks cloud-routing Admin portal permissions. | Grant routing configuration permissions for the target account. |
+| `404 Not Found` | Group, destination, profile, assignment, or DNIS override ID does not belong to the account. | Re-list the parent resource and use IDs from the same group. |
+| `409 Conflict` | Active routing configuration would conflict with existing assignments or DNIS overrides. | Deactivate or update existing configuration before creating replacements. |
+
+## Sample Implementation (Python)
+
+```python
+import requests
+
+BASE_URL = "https://ringcx.ringcentral.com/voice/api"
+
+def create_destination_and_assign(token, account_id, group_id, profile_id):
+    headers = {"Authorization": f"Bearer {token}"}
+    destination_url = (
+        f"{BASE_URL}/v1/admin/accounts/{account_id}"
+        f"/cloudRouteDestinationGroups/{group_id}/cloudRouteDestinations"
+    )
+    destination = requests.post(
+        destination_url,
+        headers=headers,
+        json={"destinationName": "Denver overflow", "active": False, "priority": 10},
+    )
+    destination.raise_for_status()
+    destination_id = destination.json()["cloudRouteDestinationId"]
+
+    assign_url = (
+        f"{BASE_URL}/v1/admin/accounts/{account_id}/cloudRouteProfileGroups/{group_id}"
+        f"/cloudRouteProfiles/{profile_id}/assignedDestinations"
+    )
+    assignment = requests.post(
+        assign_url,
+        headers=headers,
+        json={"cloudRouteDestinationId": destination_id, "priority": 1, "percentAllocation": 100, "active": True},
+    )
+    assignment.raise_for_status()
+    return assignment.json()
+```
