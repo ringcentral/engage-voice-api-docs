@@ -158,11 +158,11 @@ Dispositions let agents mark the outcome of a digital interaction. Use these end
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List dispositions | `GET /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/dispositions` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/getChatQueueDispositionList) |
-| Create disposition | `POST /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/dispositions` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/createChatQueueDisposition) |
-| Get disposition | `GET /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/dispositions/{dispositionId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/getChatQueueDisposition) |
-| Update disposition | `PUT /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/dispositions/{dispositionId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/updateChatQueueDisposition) |
-| Delete disposition | `DELETE /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/dispositions/{dispositionId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/deleteChatQueueDisposition) |
+| List dispositions | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/dispositions` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/getChatQueueDispositionList) |
+| Create disposition | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/dispositions` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/createChatQueueDisposition) |
+| Get disposition | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/dispositions/{dispositionId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/getChatQueueDisposition) |
+| Update disposition | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/dispositions/{dispositionId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/updateChatQueueDisposition) |
+| Delete disposition | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/dispositions/{dispositionId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/deleteChatQueueDisposition) |
 
 ## Configure Queue Events
 
@@ -170,11 +170,11 @@ Queue events define behavior that occurs while a digital interaction is waiting 
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List events | `GET /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/events` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/getChatQueueEventList) |
-| Create event | `POST /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/events` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/createChatQueueEvent) |
-| Get event | `GET /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/events/{eventId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/getChatQueueEvents) |
-| Update event | `PUT /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/events/{eventId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/updateChatQueueEvent) |
-| Delete event | `DELETE /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/events/{eventId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/deleteChatQueueEvent) |
+| List events | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/events` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/getChatQueueEventList) |
+| Create event | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/events` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/createChatQueueEvent) |
+| Get event | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/events/{eventId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/getChatQueueEvents) |
+| Update event | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/events/{eventId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/updateChatQueueEvent) |
+| Delete event | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/events/{eventId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/deleteChatQueueEvent) |
 
 ## Configure Schedule Overrides
 
@@ -182,11 +182,11 @@ Schedule overrides temporarily change queue availability without changing the qu
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List overrides | `GET /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/scheduleOverrides` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/getChatQueueScheduleOverrides) |
-| Create override | `POST /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/scheduleOverrides` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/createChatQueueScheduledOverride) |
-| Save override list | `PUT /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/scheduleOverrides` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/saveChatQueueScheduleOverrides) |
-| Update override | `PUT /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/scheduleOverrides/{scheduleOverrideId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/updateChatQueueScheduledOverride) |
-| Delete override | `DELETE /voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/scheduleOverrides/{scheduleOverrideId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/deleteChatQueueScheduledOverride) |
+| List overrides | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/scheduleOverrides` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/getChatQueueScheduleOverrides) |
+| Create override | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/scheduleOverrides` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/createChatQueueScheduledOverride) |
+| Save override list | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/scheduleOverrides` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/saveChatQueueScheduleOverrides) |
+| Update override | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/scheduleOverrides/{scheduleOverrideId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/updateChatQueueScheduledOverride) |
+| Delete override | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/scheduleOverrides/{scheduleOverrideId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/deleteChatQueueScheduledOverride) |
 
 ## Connect Chat Widgets
 
@@ -199,12 +199,12 @@ Chat widgets are configured under account utilities and can be assigned to queue
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List widgets | `GET /voice/api/v1/admin/accounts/{accountId}/utilities/chatWidgets` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/listChatWidgets) |
-| Create widget | `POST /voice/api/v1/admin/accounts/{accountId}/utilities/chatWidgets` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/createChatWidget) |
-| Get widget | `GET /voice/api/v1/admin/accounts/{accountId}/utilities/chatWidgets/{widgetId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/getChatWidget) |
-| Update widget | `PUT /voice/api/v1/admin/accounts/{accountId}/utilities/chatWidgets/{widgetId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/updateChatWidget) |
-| Assign widget to queue | `POST /voice/api/v1/admin/accounts/{accountId}/utilities/assignChatQueueChatWidget` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/createChatQueueWidgetAssignment) |
-| List queue widgets | `GET /voice/api/v1/admin/accounts/{accountId}/utilities/chatQueues/{chatQueueId}/chatWidgets` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/listChatWidgetsForQueue) |
+| List widgets | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/utilities/chatWidgets` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/listChatWidgets) |
+| Create widget | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/utilities/chatWidgets` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/createChatWidget) |
+| Get widget | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/utilities/chatWidgets/{widgetId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/getChatWidget) |
+| Update widget | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/utilities/chatWidgets/{widgetId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/updateChatWidget) |
+| Assign widget to queue | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/utilities/assignChatQueueChatWidget` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/createChatQueueWidgetAssignment) |
+| List queue widgets | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/utilities/chatQueues/{chatQueueId}/chatWidgets` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Chat-Queues/listChatWidgetsForQueue) |
 
 ## Recommended Implementation Pattern
 
@@ -229,6 +229,19 @@ Chat queue responses vary by endpoint, but queue objects generally include these
 | Assignment | `assignedAgents`, `skillProfileId`, `teamId` | Agent or skill-based routing configuration when returned by child endpoints. |
 | Schedule | `scheduleId`, `timezone`, `scheduleOverrides` | Normal and temporary availability settings. |
 | Counters/configuration | `slaSeconds`, `requeueTimeout`, `dispositionRequired` | Queue behavior used by routing, reporting, and wrap-up workflows. |
+
+**Example Response:**
+
+```json
+{
+  "chatQueueId": 4567,
+  "chatGroupId": 1234,
+  "chatQueueName": "Support Chat",
+  "chatQueueDesc": "General support digital queue",
+  "isActive": true,
+  "maxChats": 3
+}
+```
 
 ## Platform Permission Error
 
