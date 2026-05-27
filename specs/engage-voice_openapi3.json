@@ -26719,7 +26719,7 @@
                 ],
                 "summary": "Returns a listing of cloud route groups for an account",
                 "description": "Permissions: READ on Account, Post Filtered Results",
-                "operationId": "getCloudRouteDestinationGroups",
+                "operationId": "getCloudRouteDestinationGroupList",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27073,7 +27073,7 @@
                 ],
                 "summary": "Returns a listing of cloud destinations for a cloud route group",
                 "description": "Permissions: READ on Cloud Destination, Post Filtered Results",
-                "operationId": "getCloudRouteDestinationGroupsCloudRouteGroupIdCloudRouteDestinations",
+                "operationId": "getCloudRouteDestinationList",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27133,7 +27133,7 @@
                 ],
                 "summary": "Create a cloud destination for a cloud route group",
                 "description": "Permissions: CREATE on Cloud Destination",
-                "operationId": "createCloudRoute",
+                "operationId": "createCloudRouteDestination",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27277,7 +27277,7 @@
                 ],
                 "summary": "Returns a cloud destination for a cloud route group",
                 "description": "Permissions: READ on Cloud Destination",
-                "operationId": "getCloudRouteDestinationGroupsCloudRouteGroupIdCloudRouteDestinationsCloudRouteDestinationId",
+                "operationId": "getCloudRouteDestination",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27345,7 +27345,7 @@
                 ],
                 "summary": "Updates a cloud destination for a cloud route group",
                 "description": "Permissions: UPDATE on Cloud Destination",
-                "operationId": "updateCloudRoute",
+                "operationId": "updateCloudRouteDestination",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27818,7 +27818,7 @@
                 ],
                 "summary": "Creates a clone of the cloud route destination for a cloud group",
                 "description": "Permissions: READ on existing Cloud Route Destination and CREATE on Cloud Group (Permission Override)",
-                "operationId": "cloneCloudDestination",
+                "operationId": "cloneCloudRouteDestination",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27900,7 +27900,7 @@
                 ],
                 "summary": "Returns a listing of dnis overrides for a cloud route destination",
                 "description": "Permissions: READ on Cloud Destination",
-                "operationId": "getCloudRouteDestinationGroupsCloudRouteGroupIdCloudRouteDestinationsCloudRouteDestinationIdDnisOverrides",
+                "operationId": "getDnisOverrideList",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -27960,7 +27960,7 @@
                 ],
                 "summary": "Create a dnis override for a cloud route destination",
                 "description": "Permissions: UPDATE on Cloud Destination (Permission Override)",
-                "operationId": "createCloudRouteDestinationOverride",
+                "operationId": "createDnisOverride",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28061,7 +28061,7 @@
                 ],
                 "summary": "Create a list dnis overrides for a cloud route destination",
                 "description": "Permissions: UPDATE on Cloud Destination (Permission Override)",
-                "operationId": "createCloudRouteDestinationOverrideList",
+                "operationId": "createDnisOverrideBatch",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28734,7 +28734,7 @@
                 ],
                 "summary": "Returns a listing of cloud route profiles for a cloud group",
                 "description": "Permissions: READ on Cloud Group, Post Filtered Results",
-                "operationId": "getCloudRouteProfileGroupsCloudRouteGroupIdCloudRouteProfiles",
+                "operationId": "getCloudRouteProfileList",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28794,7 +28794,7 @@
                 ],
                 "summary": "Create a cloud route profile for a cloud group",
                 "description": "Permissions: CREATE on Cloud Group",
-                "operationId": "createCloudRoute2",
+                "operationId": "createCloudRouteProfile",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28866,7 +28866,7 @@
                 ],
                 "summary": "Returns a cloud route profile for a cloud group",
                 "description": "Permissions: READ on Cloud Group",
-                "operationId": "getCloudRouteProfileGroupsCloudRouteGroupIdCloudRouteProfilesCloudProfileId",
+                "operationId": "getCloudRouteProfile",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28936,7 +28936,7 @@
                 ],
                 "summary": "Updates a cloud route profile for a cloud group",
                 "description": "Permissions: UPDATE on Cloud Profile",
-                "operationId": "updateCloudRoute2",
+                "operationId": "updateCloudRouteProfile",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -29016,7 +29016,7 @@
                 ],
                 "summary": "Returns a listing of assigned destinations for a cloud route profile",
                 "description": "Permissions: READ on Cloud Profile",
-                "operationId": "getListByProfile",
+                "operationId": "getCloudAssignedDestinationList",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -29170,7 +29170,7 @@
                 ],
                 "summary": "Updates a list of assigned destinations for a cloud route profile",
                 "description": "Permissions: UPDATE on Cloud Profile",
-                "operationId": "updateCloudAssignedDestinationBatch",
+                "operationId": "batchUpdateCloudAssignedDestinations",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -29319,7 +29319,7 @@
                 ],
                 "summary": "Updates the percent allocations for a list of assigned destinations for a cloud route profile",
                 "description": "Permissions: UPDATE on Cloud Profile (Permission Override)",
-                "operationId": "updatePercentAllocationHoursBatch",
+                "operationId": "importPercentAllocationHours",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -30230,7 +30230,7 @@
                 ],
                 "summary": "Creates a clone of the cloud route profile for a cloud group",
                 "description": "Permissions: READ on cloned Cloud Route Profile and CREATE on Cloud Group (Permission Override)",
-                "operationId": "cloneCloudRoute",
+                "operationId": "cloneCloudRouteProfile",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -30712,7 +30712,7 @@
                 ],
                 "summary": "Set active state for a cloud route profile",
                 "description": "Permissions: UPDATE on Cloud Profile",
-                "operationId": "setCloudRouteIsActive",
+                "operationId": "setCloudRouteProfileIsActive",
                 "parameters": [
                     {
                         "name": "accountId",
