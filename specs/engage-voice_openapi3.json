@@ -26719,7 +26719,7 @@
                 ],
                 "summary": "Returns a listing of trac groups with related data for an account",
                 "description": "Permissions: READ on Account, Post Filtered Results",
-                "operationId": "getListWithNumberChildren",
+                "operationId": "getTracGroupListWithChildren",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -26780,7 +26780,7 @@
                 ],
                 "summary": "Returns a trac group for an account",
                 "description": "Permissions: READ on Trac Group",
-                "operationId": "getTracGroupsTracGroupId",
+                "operationId": "getTracGroup",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -26963,7 +26963,7 @@
                 ],
                 "summary": "Returns a listing of trac numbers for an account",
                 "description": "Permissions: READ on Trac Group, Post Filtered Results",
-                "operationId": "getTracNumbers",
+                "operationId": "getTracNumberList",
                 "parameters": [
                     {
                         "name": "accountId",
@@ -28163,7 +28163,7 @@
                 ],
                 "summary": "If assigned dnis doesn't exist, this endpoint will create a new assigned dnis and assigns a cloud profile to it.If the assigned dnis already exists, this endpoint will assign a cloud profile to it",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
-                "operationId": "assignCloudRouteProfile",
+                "operationId": "updateAssignedDnisForCloudRouteProfile",
                 "parameters": [
                     {
                         "name": "cloudRouteProfileId",
@@ -28227,7 +28227,7 @@
                 ],
                 "summary": "If assigned dnis doesn't exist, this endpoint will create a new assigned dnis and assigns a gate to it.If assigned dnis already exists, this endpoint will assign a gate to it",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
-                "operationId": "assignGate",
+                "operationId": "updateAssignedDnisForGate",
                 "parameters": [
                     {
                         "name": "gateId",
@@ -28291,7 +28291,7 @@
                 ],
                 "summary": "If assigned dnis doesn't exist, this endpoint will create a new assigned dnis and assigns a visual ivr to it.If assigned dnis already exists, this endpoint will assign a visualIvr to it",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
-                "operationId": "assignVisualIvr",
+                "operationId": "updateAssignedDnisForVisualIvr",
                 "parameters": [
                     {
                         "name": "visualIvrId",
@@ -28355,7 +28355,7 @@
                 ],
                 "summary": "Gets the assignment between a product and a dnis pool",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
-                "operationId": "getDnisAssignment",
+                "operationId": "getAssignedDnis",
                 "parameters": [
                     {
                         "name": "dnis",
@@ -28400,7 +28400,7 @@
                 ],
                 "summary": "Deletes the assignment between a product and a dnis pool",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
-                "operationId": "deleteDnisAssignment2",
+                "operationId": "deleteAssignedDnis",
                 "parameters": [
                     {
                         "name": "dnis",
@@ -28502,7 +28502,7 @@
                 ],
                 "summary": "If it doesn't exist, this endpoint will create a new assigned sms dnis and assigns a chat to an assigned sms dnis.If it already exists, this endpoint will assign a chat queue to an assigned sms dnis",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
-                "operationId": "assignChatQueue",
+                "operationId": "updateAssignedSmsDnisForChatQueue",
                 "parameters": [
                     {
                         "name": "chatQueueId",
@@ -28728,7 +28728,7 @@
                 ],
                 "summary": "Creates a list of dnis pools, will not save any assignments",
                 "description": "Has Role: SUPER_USER",
-                "operationId": "createDnisPoolList",
+                "operationId": "createDnisPool",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -28781,7 +28781,7 @@
                 ],
                 "summary": "Updates a single dnis pool, will not save or update any assignments",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
-                "operationId": "updateDnisPoolList",
+                "operationId": "updateDnisPool",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -29077,7 +29077,7 @@
                 ],
                 "summary": "Returns all dnis pools or count of dnis pools if 'count' param is provided",
                 "description": "Permissions: READ on Account, READ on TN_MANAGER, filter out restricted accounts",
-                "operationId": "getDnisPoolList",
+                "operationId": "search",
                 "parameters": [
                     {
                         "name": "count",
@@ -29158,7 +29158,7 @@
                 ],
                 "summary": "Returns all dnis pools for Customer",
                 "description": "Permissions: READ on Account, READ on TN_MANAGER, filter out restricted accounts",
-                "operationId": "getCustomerDnisPoolList",
+                "operationId": "searchDnis",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -29207,7 +29207,7 @@
                 ],
                 "summary": "Updates for bulk csv data dnis pool, will update assignments too",
                 "description": "Permissions: READ/WRITE on TN_MANAGER, filter out restricted accounts",
-                "operationId": "updateBulkDnisPoolList",
+                "operationId": "updateBulkDnisPool",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -29360,7 +29360,7 @@
                 ],
                 "summary": "Creates a list of dnis pools from upload file",
                 "description": "Has Role: USER",
-                "operationId": "previewDnisList",
+                "operationId": "uploadDnisPool",
                 "parameters": [
                     {
                         "name": "fileType",
