@@ -59,10 +59,12 @@ External auth configurations store reusable authentication settings for remote s
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List auth configs | `GET /voice/api/cx/admin/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/external/authConfigs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getAccountAuthConfigs) |
-| Create auth config | `POST /voice/api/cx/admin/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/external/authConfigs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createAccountAuthConfig) |
-| Update auth config | `PUT /voice/api/cx/admin/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/external/authConfigs/{configId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/updateAccountAuthConfig) |
-| Delete auth config | `DELETE /voice/api/cx/admin/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/external/authConfigs/{configId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/deleteAccountAuthConfig) |
+| List auth configs | `GET /voice/api/v1/admin/accounts/{accountId}/external/authConfigs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getExternalAuthConfigsList) |
+| Get auth config | `GET /voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/getExternalAuthConfigById) |
+| Delete auth config | `DELETE /voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/deleteExternalAuthConfigById) |
+| Create API key auth | `POST /voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/apiKey` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createExternalAccountAuthConfigApiKey) |
+| Create basic auth | `POST /voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/basic` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createExternalAccountAuthConfigBasic) |
+| Create OAuth auth | `POST /voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/oauth` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Remote-HTTP-Services/createExternalAccountAuthConfigOAuth) |
 
 ## Recommended Workflow
 
