@@ -88,11 +88,17 @@ At minimum, provide a queue name and the settings required by your routing model
 ```json
 {
   "chatQueueName": "Support Chat",
-  "chatQueueDesc": "General support digital queue",
+  "chatQueueDescription": "General support digital queue",
   "isActive": true,
-  "maxChats": 3
+  "queuePriority": 5,
+  "maxQueueLimit": 50,
+  "slaTime": 30,
+  "agentWrapTime": 15
 }
 ```
+
+!!! note
+    Per-agent concurrent chat capacity is set on the **Agent** record (`maxChats`), not on the queue. Use the [Agent API](https://developers.ringcentral.com/engage/voice/api-reference) to control how many chats a given agent can handle simultaneously.
 
 ### Get or Update a Chat Queue
 
@@ -220,26 +226,34 @@ Chat widgets are configured under account utilities and can be assigned to queue
 
 ## ChatQueue Response Schema
 
-Chat queue responses vary by endpoint, but queue objects generally include these field groups.
+The `ChatQueue` definition is large because it mirrors the Admin portal. The fields most commonly read or written through the API are:
 
 | Group | Fields | Description |
 | --- | --- | --- |
-| Identity | `chatQueueId`, `chatGroupId`, `accountId`, `queueName` | Stable identifiers and display name. |
-| Routing state | `active`, `priority`, `routingMode`, `maxChats` | Controls whether the queue can receive work and how work is prioritized. |
-| Assignment | `assignedAgents`, `skillProfileId`, `teamId` | Agent or skill-based routing configuration when returned by child endpoints. |
-| Schedule | `scheduleId`, `timezone`, `scheduleOverrides` | Normal and temporary availability settings. |
-| Counters/configuration | `slaSeconds`, `requeueTimeout`, `dispositionRequired` | Queue behavior used by routing, reporting, and wrap-up workflows. |
+| Identity | `chatQueueId`, `chatQueueName`, `chatQueueDescription`, `chatGroup` | Stable identifiers and display name. The owning chat group is returned as an embedded `chatGroup` object. |
+| Routing state | `isActive`, `queuePriority`, `requeueType`, `maxQueueLimit`, `agentMaxAcceptTime` | Controls whether the queue can receive work and how work is prioritised. |
+| Schedule | `monSched`, `tueSched`, `wedSched`, `thuSched`, `friSched`, `satSched`, `sunSched`, `observeDst` | Day-of-week schedules controlling normal availability. |
+| Behaviour timers | `slaTime`, `shortChatTime`, `longChatTime`, `agentWrapTime`, `idleTimeout`, `dispTimeout` | Queue timers used by routing, reporting, and wrap-up workflows. |
+| Wired services | `newChatHttpService`, `dequeueHttpService`, `agentConnectHttpService`, `agentTermHttpService`, `postDispHttpService`, `postChatHttpService` | Embedded `RemoteHttpService` references invoked at lifecycle events. |
+| Permissions | `permissions` | Per-resource CRUD permissions for the authenticated user. |
 
 **Example Response:**
 
 ```json
 {
   "chatQueueId": 4567,
-  "chatGroupId": 1234,
   "chatQueueName": "Support Chat",
-  "chatQueueDesc": "General support digital queue",
+  "chatQueueDescription": "General support digital queue",
   "isActive": true,
-  "maxChats": 3
+  "queuePriority": 5,
+  "maxQueueLimit": 50,
+  "slaTime": 30,
+  "agentWrapTime": 15,
+  "chatGroup": {
+    "chatGroupId": 1234,
+    "groupName": "Support"
+  },
+  "permissions": ["READ", "UPDATE"]
 }
 ```
 
@@ -271,13 +285,18 @@ import requests
 
 BASE_URL = "https://ringcx.ringcentral.com/voice/api"
 
-def assign_agent_to_chat_queue(token, account_id, chat_group_id, chat_queue_id, agent_id):
+def assign_agents_to_chat_queue(token, account_id, chat_group_id, chat_queue_id, agent_ids):
     headers = {"Authorization": f"Bearer {token}"}
+
     assign_url = (
         f"{BASE_URL}/v1/admin/accounts/{account_id}/chatGroups/{chat_group_id}"
-        f"/chatQueues/{chat_queue_id}/assignAgents/{agent_id}"
+        f"/chatQueues/{chat_queue_id}/assignAgents"
     )
-    response = requests.post(assign_url, headers=headers)
+    response = requests.put(
+        assign_url,
+        headers=headers,
+        json=[{"agentId": agent_id} for agent_id in agent_ids],
+    )
     response.raise_for_status()
 
     list_url = (
