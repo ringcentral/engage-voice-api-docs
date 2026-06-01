@@ -41,7 +41,10 @@ The authenticating user must have sufficient Admin portal permissions to read us
 | Create user | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/users` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/createUser) |
 | Get user | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getUser) |
 | Update user | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/updateUser) |
+| Set active state | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/setIsActive` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/setUserIsActive) |
 | Delete user | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/deleteUser) |
+
+Use `activeOnly=true` to list only enabled users and `flatten=true` when you need a flat list instead of a hierarchy.
 
 ## Roles
 
@@ -63,16 +66,24 @@ Rights documents provide detailed administrative permissions. Use these endpoint
 | Create rights doc | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/rightsDocs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/createRightsDoc) |
 | Update rights doc | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/rightsDocs/{rightsDocId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/updateRightsDoc) |
 | Delete rights doc | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/rightsDocs/{rightsDocId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/deleteRightsDoc) |
+| List assigned rights docs | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/assignedRightsDocs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getUsersAssignedRightsDocs2) |
+| List assigned master rights docs | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/assignedMasterRightsDocs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getUsersAssignedRightsDocs) |
 | Assign rights doc | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/assignRightsDoc) |
+| Assign user to rights docs | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/rightsDocs/assignments/{userId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/assignUserToRightsDocs) |
 | Delete assignment | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments/{assignedUserId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/deleteRightsDocAssignment) |
 
-## Auth Utilities
+## API Tokens and Auth Utilities
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
+| List API tokens | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/token` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getApiTokensForLoggedInUser) |
+| Create API token | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/token` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/createApiTokenForLoggedInUser) |
+| Remove API token | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/token/{token}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/removeApiToken) |
 | Validate token | `GET https://ringcx.ringcentral.com/voice/api/v1/auth/isTokenValid` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/isTokenValid) |
 | Reset password | `POST https://ringcx.ringcentral.com/voice/api/v1/auth/passwordReset` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/passwordReset) |
 | Request password reset | `POST https://ringcx.ringcentral.com/voice/api/v1/auth/passwordResetRequest` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/passwordResetRequest) |
+
+API tokens are long-lived authenticated-user tokens. Create and rotate them only for service accounts that are governed like other administrative users.
 
 ## Recommended Workflow
 
@@ -91,6 +102,8 @@ Rights documents provide detailed administrative permissions. Use these endpoint
 ## Request Examples
 
 ### Create a User
+
+The create endpoint accepts optional query parameters: `parentUserId` places the new user under an existing administrator, `returnUri` supplies a callback URI for onboarding flows, and `isSSO=true` marks the user for SSO-based access.
 
 ```json
 {
@@ -136,6 +149,8 @@ The `RightsDocument` schema does not have `description` or `active`. Use `cascad
 `POST https://ringcx.ringcentral.com/voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments?userIds=987654&userIds=987655`
 
 The assignment endpoint takes one or more `userIds` query parameters. It does not accept a JSON request body.
+
+To assign multiple rights documents to one user, call `POST https://ringcx.ringcentral.com/voice/api/v1/admin/rightsDocs/assignments/{userId}?rightsDocIds=4567&rightsDocIds=4568`.
 
 ### Example User Response
 
