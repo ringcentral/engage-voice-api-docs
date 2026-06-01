@@ -25,7 +25,7 @@ To authenticate, your application must be configured with the following permissi
 
 #### 2. Enable RingCX Admin Access
 
-In the RingCX Admin portal, the authenticating user must have permission to read and update remote HTTP service groups, HTTP services, service inputs, and external auth configurations.
+The authenticating user must have RingCX permissions that match the action being performed. Each endpoint in this set declares the permission it requires (`READ on Account`, `CREATE on Account`, `READ`, `UPDATE`, `DELETE`, etc., on the Remote HTTP Service Group, HTTP Service, HTTP Service Input, or External Auth Config resource). Grant the corresponding role permissions in the **RingCX Admin Portal** under **Users & Permissions**.
 
 !!! warning "Common Authorization Errors"
     If the OAuth token is valid but the RingCX user lacks integration configuration access, the API returns an error similar to:
@@ -110,8 +110,7 @@ External auth configurations store reusable authentication settings for remote s
 ```json
 {
   "groupName": "CRM enrichment",
-  "description": "Services used by inbound IVR and scripts",
-  "active": true
+  "isDefault": false
 }
 ```
 
@@ -119,14 +118,18 @@ External auth configurations store reusable authentication settings for remote s
 
 `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices`
 
+The `serviceType` enum controls how RingCX calls the remote endpoint. For SOAP services populate `soapEndpoint` plus the SOAP-specific fields (`soapPortname`, `soapServicename`, `soapOperationname`, `soapAction`, `targetNamespace`); for HTTP services populate `httpServiceConfig` with the full HTTP request specification (URL, headers, etc.). Reusable credentials are linked through `authConfigId`.
+
 ```json
 {
-  "serviceName": "Lookup customer by ANI",
-  "description": "Returns CRM profile data for the caller",
-  "url": "https://api.example.com/customers/lookup",
-  "method": "POST",
-  "contentType": "application/json",
-  "active": false
+  "accountId": "123456",
+  "serviceType": "HTTP_POST",
+  "serviceDescription": "Lookup customer by ANI",
+  "httpServiceConfig": "{\"url\":\"https://api.example.com/customers/lookup\",\"headers\":{\"Content-Type\":\"application/json\"}}",
+  "authConfigId": "60629848-0ddf-4757-8868-de5b76d54bb7",
+  "isEnabled": false,
+  "isDebug": false,
+  "enableMappings": true
 }
 ```
 
@@ -136,10 +139,11 @@ External auth configurations store reusable authentication settings for remote s
 
 ```json
 {
-  "inputName": "ani",
-  "source": "CALL",
-  "required": true,
-  "description": "Caller phone number passed to the CRM lookup"
+  "name": "ani",
+  "type": "PARAMETER",
+  "simpleDataType": "STRING",
+  "value": "",
+  "rank": "0"
 }
 ```
 
@@ -147,11 +151,14 @@ External auth configurations store reusable authentication settings for remote s
 
 `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/apiKey`
 
+`providerName` and `apiKey` are required. `authConfigId` is supplied as a path parameter and does not need to appear in the body for create operations.
+
 ```json
 {
-  "name": "CRM API key",
-  "apiKey": "secret-value",
-  "headerName": "X-API-Key"
+  "providerName": "CRM API key",
+  "description": "Service account key for the CRM lookup integration",
+  "authType": "APIKEY",
+  "apiKey": "secret-value"
 }
 ```
 
@@ -159,9 +166,13 @@ External auth configurations store reusable authentication settings for remote s
 
 `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/basic`
 
+`providerName`, `username`, and `password` are required.
+
 ```json
 {
-  "name": "CRM basic auth",
+  "providerName": "CRM basic auth",
+  "description": "Basic credentials for CRM lookup",
+  "authType": "BASIC",
   "username": "ringcx-service",
   "password": "secret-value"
 }
@@ -171,13 +182,18 @@ External auth configurations store reusable authentication settings for remote s
 
 `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/oauth`
 
+`providerName`, `clientId`, `secret`, `tokenUrl`, and `grantType` are required. The client secret field is named `secret` (not `clientSecret`).
+
 ```json
 {
-  "name": "CRM OAuth",
-  "tokenUrl": "https://auth.example.com/oauth/token",
+  "providerName": "CRM OAuth",
+  "description": "OAuth credentials for CRM lookup",
+  "authType": "OAUTH",
+  "grantType": "CLIENT_CREDENTIALS",
   "clientId": "ringcx-client",
-  "clientSecret": "secret-value",
-  "grantType": "client_credentials"
+  "secret": "secret-value",
+  "tokenUrl": "https://auth.example.com/oauth/token",
+  "clientCredentialsSupplyIn": "BODY"
 }
 ```
 
@@ -186,13 +202,15 @@ External auth configurations store reusable authentication settings for remote s
 ```json
 {
   "serviceId": 4567,
-  "serviceGroupId": 1234,
-  "serviceName": "Lookup customer by ANI",
-  "description": "Returns CRM profile data for the caller",
-  "url": "https://api.example.com/customers/lookup",
-  "method": "POST",
-  "contentType": "application/json",
-  "active": false
+  "accountId": "123456",
+  "serviceType": "HTTP_POST",
+  "serviceDescription": "Lookup customer by ANI",
+  "httpServiceConfig": "{\"url\":\"https://api.example.com/customers/lookup\",\"headers\":{\"Content-Type\":\"application/json\"}}",
+  "authConfigId": "60629848-0ddf-4757-8868-de5b76d54bb7",
+  "isEnabled": false,
+  "isDebug": false,
+  "enableMappings": true,
+  "permissions": ["READ", "UPDATE"]
 }
 ```
 
@@ -200,10 +218,10 @@ External auth configurations store reusable authentication settings for remote s
 
 | Resource | Key Fields | Notes |
 | --- | --- | --- |
-| Service group | `serviceGroupId`, `groupName`, `description`, `active` | Logical container for related services. |
-| HTTP service | `serviceId`, `serviceName`, `url`, `method`, `contentType`, `active` | Defines the external endpoint RingCX workflows call. |
-| Service input | `inputId`, `inputName`, `source`, `required` | Maps RingCX runtime values into the request. |
-| Auth config | `authConfigId`, `authType`, `name` | Stores reusable credentials for outbound calls. |
+| Service group (`RemoteHttpServiceGroup`) | `serviceGroupId`, `groupName`, `isDefault`, `services` | Logical container for related services. There is no description or active flag on the group itself. |
+| HTTP service (`RemoteHttpService`) | `serviceId`, `accountId`, `serviceType`, `serviceDescription`, `soapEndpoint`/`httpServiceConfig`, `authConfigId`, `isEnabled`, `isDebug`, `enableMappings` | `serviceType` is one of `SOAP`, `HTTP_POST`, `HTTP_GET`, `HTTP`. SOAP services use `soapEndpoint` plus the `soap*` and `targetNamespace` fields; HTTP services use `httpServiceConfig`. |
+| Service input (`RemoteHttpServiceInput`) | `inputId`, `name`, `type`, `value`, `simpleDataType`, `rank` | Maps RingCX runtime values into the request. |
+| Auth config | `authConfigId`, `authType` (`APIKEY`/`JWT`/`BASIC`/`OAUTH`/`CUSTOM_AUTH`), `providerName`, `description` | Stores reusable credentials for outbound calls. Auth-type-specific fields live on `AuthConfigApiKey`, `AuthConfigBasic`, `AuthConfigOAuth`, `AuthConfigJwt`, and `AuthConfigCustomAuth`. |
 
 ## Common Errors
 
@@ -217,16 +235,18 @@ External auth configurations store reusable authentication settings for remote s
 ## Sample Implementation (Python)
 
 ```python
+import json
 import requests
 
 BASE_URL = "https://ringcx.ringcentral.com/voice/api"
 
-def provision_remote_service(token, account_id):
+def provision_remote_service(token, account_id, auth_config_id):
     headers = {"Authorization": f"Bearer {token}"}
+
     group = requests.post(
         f"{BASE_URL}/v1/admin/accounts/{account_id}/httpServiceGroups",
         headers=headers,
-        json={"groupName": "CRM enrichment", "active": True},
+        json={"groupName": "CRM enrichment", "isDefault": False},
     )
     group.raise_for_status()
     group_id = group.json()["serviceGroupId"]
@@ -235,11 +255,16 @@ def provision_remote_service(token, account_id):
         f"{BASE_URL}/v1/admin/accounts/{account_id}/httpServiceGroups/{group_id}/httpServices",
         headers=headers,
         json={
-            "serviceName": "Lookup customer by ANI",
-            "url": "https://api.example.com/customers/lookup",
-            "method": "POST",
-            "contentType": "application/json",
-            "active": False,
+            "accountId": account_id,
+            "serviceType": "HTTP_POST",
+            "serviceDescription": "Lookup customer by ANI",
+            "httpServiceConfig": json.dumps({
+                "url": "https://api.example.com/customers/lookup",
+                "headers": {"Content-Type": "application/json"},
+            }),
+            "authConfigId": auth_config_id,
+            "isEnabled": False,
+            "enableMappings": True,
         },
     )
     service.raise_for_status()
@@ -248,7 +273,13 @@ def provision_remote_service(token, account_id):
     input_response = requests.post(
         f"{BASE_URL}/v1/admin/accounts/{account_id}/httpServiceGroups/{group_id}/httpServices/{service_id}/inputs",
         headers=headers,
-        json={"inputName": "ani", "source": "CALL", "required": True},
+        json={
+            "name": "ani",
+            "type": "PARAMETER",
+            "simpleDataType": "STRING",
+            "value": "",
+            "rank": "0",
+        },
     )
     input_response.raise_for_status()
     return {"group": group.json(), "service": service.json(), "input": input_response.json()}
