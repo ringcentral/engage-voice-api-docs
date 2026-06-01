@@ -26757,7 +26757,7 @@
                     {
                         "name": "rightsDocIds",
                         "in": "query",
-                        "description": "rightsDocIds",
+                        "description": "Repeat the parameter (e.g. ?rightsDocIds=1&rightsDocIds=2) to assign multiple rights documents to the user.",
                         "required": true,
                         "schema": {
                             "type": "array",
@@ -26765,7 +26765,9 @@
                                 "type": "integer",
                                 "format": "int32"
                             }
-                        }
+                        },
+                        "style": "form",
+                        "explode": true
                     }
                 ],
                 "responses": {
@@ -26870,7 +26872,7 @@
                     {
                         "name": "userIds",
                         "in": "query",
-                        "description": "userIds",
+                        "description": "Repeat the parameter (e.g. ?userIds=1&userIds=2) to assign the rights document to multiple users.",
                         "required": true,
                         "schema": {
                             "type": "array",
@@ -26878,7 +26880,9 @@
                                 "type": "integer",
                                 "format": "int32"
                             }
-                        }
+                        },
+                        "style": "form",
+                        "explode": true
                     }
                 ],
                 "responses": {
@@ -28125,7 +28129,7 @@
                     {
                         "name": "userIds",
                         "in": "query",
-                        "description": "userIds",
+                        "description": "Repeat the parameter (e.g. ?userIds=1&userIds=2) to share the dashboard with multiple users.",
                         "required": true,
                         "schema": {
                             "type": "array",
@@ -28133,7 +28137,9 @@
                                 "type": "integer",
                                 "format": "int32"
                             }
-                        }
+                        },
+                        "style": "form",
+                        "explode": true
                     }
                 ],
                 "responses": {

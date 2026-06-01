@@ -116,11 +116,18 @@ Use the `roleType` path parameter for the role being assigned.
 
 ### Create a Rights Document
 
+The `RightsDocument` schema does not have `description` or `active`. Use `cascade` to control whether the document applies to child users and use `accountPermissions`, `productPermissions`, and `resourcePermissions` to declare what the document grants.
+
 ```json
 {
   "rightsDocName": "Reporting audit access",
-  "description": "Read-only analytics and reporting permissions",
-  "active": true
+  "cascade": false,
+  "isMaster": false,
+  "accountPermissions": [
+    "READ"
+  ],
+  "productPermissions": [],
+  "resourcePermissions": []
 }
 ```
 
@@ -155,7 +162,7 @@ The assignment endpoint takes one or more `userIds` query parameters. It does no
 | --- | --- | --- |
 | User | `userId`, `userName`, `firstName`, `lastName`, `enabled`, `regionalSettings`, `roles` | Admin portal identity and lifecycle state. |
 | Role | `roleType`, `userId`, `createdOn` | Coarse access grant. Supported role values include `SUPER_USER`, `USER`, `MANAGE_USERS`, `MANAGE_RIGHTS`, `ACCESS_SIBLINGS`, `ACCESS_AUDIT_LOG`, `ASSUME_USERS`, `REPORT_ADMINISTRATIVE_USER`, `WFO_ACCESS`, `ACCESS_GOODDATA_EDITOR`, `ACCESS_GOODDATA_ANALYST`, `ACCESS_GOODDATA_VIEWER`, and `NO_ACCESS`. |
-| Rights document | `rightsDocId`, `rightsDocName`, `description`, `active`, `permissions` | Fine-grained administrative permissions. |
+| Rights document | `rightsDocId`, `rightsDocName`, `ownerId`, `cascade`, `isMaster`, `accountPermissions`, `productPermissions`, `resourcePermissions`, `roleCode`, `isSystemRole` | Fine-grained administrative permissions. There is no `description` or `active` field on this resource. |
 | Assignment | `rightsDocId`, `userIds`, `rightsDocIds` | Grants rights document access to one or more users. Assignment create operations use query parameters rather than a JSON body. |
 
 ## Common Errors
