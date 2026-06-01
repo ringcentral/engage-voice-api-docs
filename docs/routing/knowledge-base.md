@@ -23,7 +23,7 @@ To authenticate, your application must be configured with the following permissi
 
 #### 2. Enable RingCX Admin Access
 
-In the RingCX Admin portal, the authenticating user must have permission to read and update knowledge base groups, categories, and articles for the target account.
+In the RingCX Admin portal, the authenticating user must have permission to read and update knowledge base groups, categories, and articles for the target account. Category creation requires `CREATE` on Knowledge Base Group, while article creation requires `CREATE` on Scripting.
 
 !!! warning "Common Authorization Errors"
     If the application has the right OAuth scope but the user lacks knowledge base management permissions, the API returns an error similar to:
@@ -60,6 +60,8 @@ Categories organize articles within a knowledge base group.
 ## Articles
 
 Articles are managed within a category.
+
+Article permissions are tied to Scripting because knowledge articles can be used in agent and routing workflows. See the [IVR Scripting node](ivr/scripting-node.md) documentation when content changes are part of a scripting workflow.
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
@@ -100,7 +102,7 @@ Articles are managed within a category.
 
 ```json
 {
-  "name": "Billing",
+  "title": "Billing",
   "description": "Billing and invoice support articles",
   "active": true,
   "order": 10
@@ -150,7 +152,7 @@ Articles are managed within a category.
   "order": 20,
   "knowledgeBaseCategory": {
     "knowledgeBaseCategoryId": 1234,
-    "name": "Billing"
+    "title": "Billing"
   }
 }
 ```
