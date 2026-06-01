@@ -146,6 +146,8 @@ Agent assignment determines which agents can receive interactions from the chat 
 ]
 ```
 
+The request body is an array of `AgentChatQueueAccess` objects. Each object can include `agentId`, `chatQueueId`, and `agentRank`; the queue is also identified by the `chatQueueId` path parameter.
+
 ### List Assigned Agents
 
 `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/assignedAgents`
