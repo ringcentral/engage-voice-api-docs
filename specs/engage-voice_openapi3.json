@@ -2109,6 +2109,14 @@
                 },
                 "type": "object"
             },
+            "ActiveStateBoolean": {
+                "properties": {
+                    "isActive": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
             "AgentAccountAccess": {
                 "properties": {
                     "account": {
@@ -2404,6 +2412,248 @@
                             "$ref": "#/components/schemas/RcOfficeUser"
                         },
                         "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "AgentListViewDto": {
+                "properties": {
+                    "agentId": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "agentGroupId": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "permissions": {
+                        "items": {
+                            "enum": [
+                                "CREATE",
+                                "READ",
+                                "UPDATE",
+                                "DELETE",
+                                "REPORT"
+                            ],
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "firstName": {
+                        "type": "string"
+                    },
+                    "lastName": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "defaultLoginDest": {
+                        "type": "string"
+                    },
+                    "agentType": {
+                        "enum": [
+                            "AGENT",
+                            "SUPERVISOR",
+                            "MULTI_USER",
+                            "MULTI_SUPERVISOR"
+                        ],
+                        "type": "string"
+                    },
+                    "maxChats": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "allowInbound": {
+                        "type": "boolean"
+                    },
+                    "allowOutbound": {
+                        "type": "boolean"
+                    },
+                    "allowChat": {
+                        "type": "boolean"
+                    },
+                    "allowBlended": {
+                        "type": "boolean"
+                    },
+                    "allowChatVoiceConcurrent": {
+                        "type": "boolean"
+                    },
+                    "allowOffHook": {
+                        "type": "boolean"
+                    },
+                    "allowHold": {
+                        "type": "boolean"
+                    },
+                    "allowTransfer": {
+                        "type": "boolean"
+                    },
+                    "allowManualIntlTransfer": {
+                        "type": "boolean"
+                    },
+                    "allowDirectAgentTransfer": {
+                        "enum": [
+                            "DIRECT_TRANSFER_DISABLED",
+                            "ALLOW_DIRECT_TRANSFER_TO_SAME_GROUP",
+                            "ALLOW_DIRECT_TRANSFER_TO_ANY_GROUP"
+                        ],
+                        "type": "string"
+                    },
+                    "allowHangup": {
+                        "type": "boolean"
+                    },
+                    "allowRequeue": {
+                        "type": "boolean"
+                    },
+                    "allowLoginControl": {
+                        "type": "boolean"
+                    },
+                    "allowLoginUpdates": {
+                        "type": "boolean"
+                    },
+                    "allowCrossGateRequeue": {
+                        "type": "boolean"
+                    },
+                    "gatesControlAgentVisibility": {
+                        "type": "boolean"
+                    },
+                    "allowCampStats": {
+                        "type": "boolean"
+                    },
+                    "allowGateStats": {
+                        "type": "boolean"
+                    },
+                    "allowAgentStats": {
+                        "type": "boolean"
+                    },
+                    "allowSelfAgentStats": {
+                        "type": "boolean"
+                    },
+                    "allowChatStats": {
+                        "type": "boolean"
+                    },
+                    "disableSupervisorMonitoring": {
+                        "type": "boolean"
+                    },
+                    "allowManualCalls": {
+                        "type": "boolean"
+                    },
+                    "allowManualIntlCalls": {
+                        "type": "boolean"
+                    },
+                    "allowLeadInserts": {
+                        "type": "boolean"
+                    },
+                    "allowAutoAnswer": {
+                        "type": "boolean"
+                    },
+                    "defaultAutoAnswerOn": {
+                        "type": "boolean"
+                    },
+                    "isActive": {
+                        "type": "boolean"
+                    },
+                    "loadBalanceEnabled": {
+                        "type": "boolean"
+                    },
+                    "location": {
+                        "type": "string"
+                    },
+                    "team": {
+                        "type": "string"
+                    },
+                    "showLeadHistory": {
+                        "type": "boolean"
+                    },
+                    "allowManualOutboundGates": {
+                        "type": "boolean"
+                    },
+                    "allowManualPass": {
+                        "type": "boolean"
+                    },
+                    "allowEndcallforeveryone": {
+                        "type": "boolean"
+                    },
+                    "allowHistoricalDialing": {
+                        "type": "boolean"
+                    },
+                    "rcUserId": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "allowTransferToVoiceMail": {
+                        "type": "boolean"
+                    },
+                    "enableWEM": {
+                        "type": "boolean"
+                    },
+                    "allowContactManagement": {
+                        "type": "boolean"
+                    },
+                    "agentAccountAccess": {
+                        "items": {
+                            "$ref": "#/components/schemas/AgentAccountAccess"
+                        },
+                        "uniqueItems": true,
+                        "type": "array"
+                    },
+                    "agentGateAccess": {
+                        "items": {
+                            "$ref": "#/components/schemas/AgentGateAccess"
+                        },
+                        "uniqueItems": true,
+                        "type": "array"
+                    },
+                    "agentGateGroupAccess": {
+                        "items": {
+                            "$ref": "#/components/schemas/AgentGateGroupAccess"
+                        },
+                        "uniqueItems": true,
+                        "type": "array"
+                    },
+                    "agentChatGroupAccess": {
+                        "items": {
+                            "$ref": "#/components/schemas/AgentChatGroupAccess"
+                        },
+                        "uniqueItems": true,
+                        "type": "array"
+                    },
+                    "agentDialGroupMembers": {
+                        "items": {
+                            "$ref": "#/components/schemas/AgentDialGroupMember"
+                        },
+                        "uniqueItems": true,
+                        "type": "array"
+                    },
+                    "agentChatQueueAccesses": {
+                        "items": {
+                            "$ref": "#/components/schemas/AgentChatQueueAccess"
+                        },
+                        "uniqueItems": true,
+                        "type": "array"
+                    },
+                    "enablePresenceSync": {
+                        "type": "boolean"
+                    },
+                    "allowCampaignSelection": {
+                        "type": "string"
+                    },
+                    "allowComplianceCheck": {
+                        "type": "string"
+                    },
+                    "allowExternIdSelection": {
+                        "type": "string"
+                    },
+                    "campSelectionNoMatchBehaviour": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "groupId": {
+                        "format": "int32",
+                        "type": "integer"
                     }
                 },
                 "type": "object"

@@ -98,7 +98,7 @@ At minimum, provide a queue name and the settings required by your routing model
 ```
 
 !!! note
-    Per-agent concurrent chat capacity is set on the **Agent** record (`maxChats`), not on the queue. Use the [Agent API](https://developers.ringcentral.com/engage/voice/api-reference) to control how many chats a given agent can handle simultaneously.
+    Per-agent concurrent chat capacity is set on the **Agent** record (`maxChats`), not on the queue. Use the [Update agent](https://developers.ringcentral.com/engage/voice/api-reference/Agents/updateAgent) API to control how many chats a given agent can handle simultaneously.
 
 ### Get or Update a Chat Queue
 

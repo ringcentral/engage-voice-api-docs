@@ -16,7 +16,7 @@ Most developers will want a list of agents and agent groups, but for workforce m
 
 ## Queue Groups with Agents
 
-Once known as gates, queues are inbound routing rules for customers calling in to a number. Typically, queues have agents assigned to them and each queue would have to be iterated through to find all the agents assigned to a queue group. However, the [gate group with agents](https://developers.ringcentral.com/engage/voice/api-reference/Integration-Gate-Group-Controller/getGateGroupsWithAgents) integration API allows you to get a complete list of all queues in a queue group and the agents contained in that queue in a single call.
+Once known as gates, queues are inbound routing rules for customers calling in to a number. Typically, queues have agents assigned to them and each queue would have to be iterated through to find all the agents assigned to a queue group. However, the [gate group with agents](https://developers.ringcentral.com/engage/voice/api-reference/Public-Integration-API/getQueuesWithAgents) integration API allows you to get a complete list of all queues in a queue group and the agents contained in that queue in a single call.
 
 !!! info "This is not active agents in a queue"
     This API only returns a list of agents assigned to the queue. It does not return a list of agents actively receivng calls and chats from a queue.
