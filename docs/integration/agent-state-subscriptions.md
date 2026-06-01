@@ -84,6 +84,7 @@ The request body matches the `RTASubscriptionRequest` schema.
   "retryCount": 3,
   "notificationUrl": "https://example.com/ringcx/agent-states",
   "authConfigId": "2f8f8b6e-2a5c-4d8c-bd44-31db90a77b2a",
+  "active": true,
   "customHeaders": {
     "X-Integration-Name": "wfm-sync"
   },
