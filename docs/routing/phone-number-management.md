@@ -109,7 +109,8 @@ Tracking numbers are managed under tracking-number groups.
 | `cloudRouteProfileId` | Integer | Required for cloud routing assignment | Cloud route profile identifier. |
 | `chatQueueId` | Integer | Required for SMS assignment | Chat queue that should receive SMS traffic for the number. |
 | `page`, `size`, `sort` | Integer/String | Optional | Search controls for paginated inventory lookups. |
-| `file` | File | Required for upload endpoints | Bulk DNIS pool upload payload. |
+| `file` | File | Required for `uploadDnisPool` | Bulk DNIS pool upload payload (sent as `multipart/form-data`, not a query string). |
+| `fileType` | String enum | Required for `uploadDnisPool` | Delimiter format. Currently `COMMA`. |
 
 ## Request and Response Examples
 
@@ -117,61 +118,97 @@ Tracking numbers are managed under tracking-number groups.
 
 `POST https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/dnisPool`
 
+The body is an **array** of `DnisPool` objects; the endpoint creates the list atomically and returns the saved records. The description field on a DnisPool is `dnisDescription` and the owning account is `reservedAccountId` (string). Use `notes` for free-form internal notes.
+
 ```json
-{
-  "dnis": "15551234567",
-  "description": "Main support line",
-  "accountId": 123456,
-  "active": true
-}
+[
+  {
+    "dnis": "15551234567",
+    "reservedAccountId": "123456",
+    "dnisDescription": "Main support line",
+    "dnisCategory": "VOICE",
+    "active": true
+  }
+]
+```
+
+### Upload a DNIS Pool File
+
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/uploadDnisPool`
+
+This endpoint accepts a delimited file as a `multipart/form-data` upload. The `fileType` query parameter declares the delimiter (`COMMA`). Use `quoteCharacter` when fields contain the delimiter.
+
+```bash
+curl -X POST \
+  "https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/uploadDnisPool?fileType=COMMA" \
+  -H "Authorization: Bearer <token>" \
+  -F "file=@dnis_pool.csv"
 ```
 
 ### Assign Voice DNIS to a Queue
 
 `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedDnis/gates/{gateId}`
 
+The body is an **array** of `AssignedDnis` objects. Each entry must use `dnisDescription` (not `description`) and `isActive`.
+
 ```json
-{
-  "dnis": "15551234567"
-}
+[
+  {
+    "dnis": "15551234567",
+    "isActive": true,
+    "dnisDescription": "Primary support routing"
+  }
+]
 ```
 
 ### Assign SMS DNIS to a Chat Queue
 
 `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/chatQueues/{chatQueueId}`
 
+The body is an **array** of `AssignedSmsDnis` objects.
+
 ```json
-{
-  "dnis": "15557654321"
-}
+[
+  {
+    "dnis": "15557654321",
+    "isActive": true,
+    "dnisDescription": "Support SMS line"
+  }
+]
 ```
 
-### Search Result
+### Search Result (`searchDnis`)
+
+The shape returned by `getCustomerDnisPoolList` is `DnisSearchResultDTO`. Fields below are illustrative; refer to the API reference for the full set returned for a given account.
 
 ```json
 {
   "records": [
     {
       "dnis": "15551234567",
-      "assignedProduct": "GATE",
-      "destinationId": 4567,
+      "dnisE164": "+15551234567",
+      "reservedAccountId": "123456",
+      "dnisCategory": "VOICE",
       "active": true
     }
   ],
-  "page": 0,
-  "size": 25,
   "totalElements": 1
 }
 ```
 
-### Assignment Lookup
+### Assignment Lookup (`getDnisAssignment`)
+
+Returns a single `AssignedDnis`. The product is signalled by which of `gate`, `visualIvr`, `cloudRouteProfile`, or `tracNumber` is populated.
 
 ```json
 {
   "dnis": "15551234567",
-  "product": "GATE",
-  "destinationId": 4567,
-  "destinationName": "Support queue"
+  "isActive": true,
+  "dnisDescription": "Primary support routing",
+  "gate": {
+    "gateId": 4567,
+    "gateName": "Support queue"
+  }
 }
 ```
 
@@ -179,10 +216,10 @@ Tracking numbers are managed under tracking-number groups.
 
 | Resource | Key Fields | Notes |
 | --- | --- | --- |
-| DNIS pool record | `dnis`, `accountId`, `description`, `active`, `assignedProduct` | Inventory record for a phone number before or after assignment. |
-| Voice assignment | `dnis`, `product`, `destinationId`, `destinationName` | Maps a number to a queue, Visual IVR, or cloud route profile. |
-| SMS assignment | `dnis`, `chatQueueId`, `chatQueueName` | Maps an SMS-enabled number to a chat queue. |
-| Tracking number | `tracId`, `tracGroupId`, `dnis`, `description`, `active` | Tracking-number configuration used for attribution or routing. |
+| DNIS pool record (`DnisPool`) | `dnis`, `dnisE164`, `reservedAccountId`, `dnisDescription`, `dnisCategory`, `notes`, `active` | Inventory record for a phone number before or after assignment. |
+| Voice assignment (`AssignedDnis`) | `dnis`, `isActive`, `dnisDescription`, plus one of `gate` / `visualIvr` / `cloudRouteProfile` / `tracNumber` | The destination object embedded on the response tells you which product owns the assignment. |
+| SMS assignment (`AssignedSmsDnis`) | `dnis`, `isActive`, `dnisDescription`, `chatQueue` | Maps an SMS-enabled number to a chat queue. |
+| Tracking number (`TracNumber`) | `tracId`, `tracGroupId`, `dnis`, `dnisDescription`, `active` | Tracking-number configuration used for attribution or routing. |
 
 ## Common Errors
 
@@ -200,8 +237,9 @@ import requests
 
 BASE_URL = "https://ringcx.ringcentral.com/voice/api"
 
-def search_then_assign_voice_dnis(token, dnis, gate_id):
+def search_then_assign_voice_dnis(token, dnis, gate_id, description="Primary support routing"):
     headers = {"Authorization": f"Bearer {token}"}
+
     search = requests.post(
         f"{BASE_URL}/v1/admin/utilities/tnManager/searchDnis",
         headers=headers,
@@ -212,8 +250,27 @@ def search_then_assign_voice_dnis(token, dnis, gate_id):
     assignment = requests.put(
         f"{BASE_URL}/v1/admin/utilities/tnManager/assignedDnis/gates/{gate_id}",
         headers=headers,
-        json={"dnis": dnis},
+        json=[
+            {
+                "dnis": dnis,
+                "isActive": True,
+                "dnisDescription": description,
+            }
+        ],
     )
     assignment.raise_for_status()
     return assignment.json() if assignment.content else None
+
+
+def upload_dnis_pool(token, file_path, file_type="COMMA"):
+    headers = {"Authorization": f"Bearer {token}"}
+    with open(file_path, "rb") as fh:
+        response = requests.post(
+            f"{BASE_URL}/v1/admin/utilities/tnManager/uploadDnisPool",
+            headers=headers,
+            params={"fileType": file_type},
+            files={"file": fh},
+        )
+    response.raise_for_status()
+    return response.json()
 ```

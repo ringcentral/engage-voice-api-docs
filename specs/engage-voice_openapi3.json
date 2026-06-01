@@ -29365,7 +29365,7 @@
                     {
                         "name": "fileType",
                         "in": "query",
-                        "description": "fileType",
+                        "description": "Delimiter format of the uploaded file.",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -29377,17 +29377,8 @@
                     {
                         "name": "quoteCharacter",
                         "in": "query",
-                        "description": "quoteCharacter",
+                        "description": "Quote character used in the uploaded file when fields contain the delimiter.",
                         "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "file",
-                        "in": "query",
-                        "description": "file",
-                        "required": true,
                         "schema": {
                             "type": "string"
                         }
@@ -29403,6 +29394,27 @@
                         }
                     }
                 ],
+                "requestBody": {
+                    "description": "Delimited file containing DNIS pool records.",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "file"
+                                ],
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary",
+                                        "description": "DNIS pool upload file."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "OK",
