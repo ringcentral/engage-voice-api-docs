@@ -21,7 +21,7 @@ Your application needs the `ReadAccounts` OAuth scope.
 
 #### 2. Enable RingCX Admin Access
 
-The authenticating user must have sufficient Admin portal permissions to read users and update roles or rights documents. Use least privilege for automation accounts, and separate read-only audit automation from onboarding/offboarding automation.
+The authenticating user must have sufficient Admin portal permissions to read users and update roles or rights documents. User create/list operations require `MANAGE_USERS` or `SUPER_USER`; rights document assignment requires `MANAGE_RIGHTS` or `SUPER_USER`. Use least privilege for automation accounts, and separate read-only audit automation from onboarding/offboarding automation.
 
 !!! warning "Common Authorization Errors"
     If the OAuth token is valid but the user cannot manage users, roles, or rights documents, the API returns an error similar to:
@@ -88,26 +88,23 @@ Rights documents provide detailed administrative permissions. Use these endpoint
 !!! important "Rate Limiting & Stability"
     User and permission changes should be serialized per user. Avoid parallel role and rights document updates for the same user because the final effective permission set can be difficult to audit.
 
-## Absolute Endpoint Examples
-
-| Workflow | Endpoint |
-| --- | --- |
-| Create user | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/users` |
-| Add role | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/roles/{roleType}` |
-| Create rights document | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/rightsDocs` |
-| Assign rights document | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments` |
-
 ## Request Examples
 
 ### Create a User
 
 ```json
 {
-  "email": "alex.admin@example.com",
+  "userName": "alex.admin@example.com",
   "firstName": "Alex",
   "lastName": "Admin",
-  "active": true,
-  "timezone": "America/Denver"
+  "enabled": true,
+  "roles": [
+    "USER",
+    "MANAGE_USERS"
+  ],
+  "regionalSettings": {
+    "timezoneName": "America/Denver"
+  }
 }
 ```
 
@@ -129,23 +126,26 @@ Use the `roleType` path parameter for the role being assigned.
 
 ### Assign a Rights Document
 
-```json
-{
-  "assignedUserId": 987654,
-  "accountIds": [123456]
-}
-```
+`POST https://ringcx.ringcentral.com/voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments?userIds=987654&userIds=987655`
+
+The assignment endpoint takes one or more `userIds` query parameters. It does not accept a JSON request body.
 
 ### Example User Response
 
 ```json
 {
   "userId": 987654,
-  "email": "alex.admin@example.com",
+  "userName": "alex.admin@example.com",
   "firstName": "Alex",
   "lastName": "Admin",
-  "active": true,
-  "timezone": "America/Denver"
+  "enabled": true,
+  "roles": [
+    "USER",
+    "MANAGE_USERS"
+  ],
+  "regionalSettings": {
+    "timezoneName": "America/Denver"
+  }
 }
 ```
 
@@ -153,10 +153,10 @@ Use the `roleType` path parameter for the role being assigned.
 
 | Resource | Key Fields | Notes |
 | --- | --- | --- |
-| User | `userId`, `email`, `firstName`, `lastName`, `active`, `timezone` | Admin portal identity and lifecycle state. |
-| Role | `roleType`, `userId`, `createdOn` | Coarse access grant. Role names are controlled by the platform. |
+| User | `userId`, `userName`, `firstName`, `lastName`, `enabled`, `regionalSettings`, `roles` | Admin portal identity and lifecycle state. |
+| Role | `roleType`, `userId`, `createdOn` | Coarse access grant. Supported role values include `SUPER_USER`, `USER`, `MANAGE_USERS`, `MANAGE_RIGHTS`, `ACCESS_SIBLINGS`, `ACCESS_AUDIT_LOG`, `ASSUME_USERS`, `REPORT_ADMINISTRATIVE_USER`, `WFO_ACCESS`, `ACCESS_GOODDATA_EDITOR`, `ACCESS_GOODDATA_ANALYST`, `ACCESS_GOODDATA_VIEWER`, and `NO_ACCESS`. |
 | Rights document | `rightsDocId`, `rightsDocName`, `description`, `active`, `permissions` | Fine-grained administrative permissions. |
-| Assignment | `rightsDocId`, `assignedUserId`, `accountIds` | Grants rights document access to a user/account context. |
+| Assignment | `rightsDocId`, `userIds`, `rightsDocIds` | Grants rights document access to one or more users. Assignment create operations use query parameters rather than a JSON body. |
 
 ## Common Errors
 
@@ -165,7 +165,7 @@ Use the `roleType` path parameter for the role being assigned.
 | `400 Bad Request` | Missing user fields, invalid role type, or malformed rights document. | Validate against the generated API reference before submitting. |
 | `403 Forbidden` | Caller cannot manage users, roles, or rights docs. | Grant appropriate Admin portal permission to the automation user. |
 | `404 Not Found` | User, role, or rights document ID does not exist. | List the target resource before updating or deleting. |
-| `409 Conflict` | Email, role, or assignment already exists. | Treat create operations as idempotent by reading current state first. |
+| `409 Conflict` | Username, role, or assignment already exists. | Treat create operations as idempotent by reading current state first. |
 
 ## Sample Implementation (Python)
 
@@ -174,12 +174,19 @@ import requests
 
 BASE_URL = "https://ringcx.ringcentral.com/voice/api"
 
-def onboard_admin_user(token, email, role_type):
+def onboard_admin_user(token, user_name, role_type, rights_doc_id=None):
     headers = {"Authorization": f"Bearer {token}"}
     user = requests.post(
         f"{BASE_URL}/v1/admin/users",
         headers=headers,
-        json={"email": email, "firstName": "Alex", "lastName": "Admin", "active": True},
+        json={
+            "userName": user_name,
+            "firstName": "Alex",
+            "lastName": "Admin",
+            "enabled": True,
+            "roles": ["USER"],
+            "regionalSettings": {"timezoneName": "America/Denver"},
+        },
     )
     user.raise_for_status()
     user_id = user.json()["userId"]
@@ -189,5 +196,14 @@ def onboard_admin_user(token, email, role_type):
         headers=headers,
     )
     role.raise_for_status()
+
+    if rights_doc_id is not None:
+        assignment = requests.post(
+            f"{BASE_URL}/v1/admin/rightsDocs/{rights_doc_id}/assignments",
+            headers=headers,
+            params={"userIds": [user_id]},
+        )
+        assignment.raise_for_status()
+
     return user.json()
 ```
