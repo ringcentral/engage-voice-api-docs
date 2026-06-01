@@ -37,7 +37,7 @@ The authenticating user must have sufficient Admin portal permissions to read us
 
 | Operation | Method and Path | API Reference |
 | --- | --- | --- |
-| List users | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/users` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getUserList) |
+| List users | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/users` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/listAllUsers) |
 | Create user | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/users` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/createUser) |
 | Get user | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getUser) |
 | Update user | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/updateUser) |

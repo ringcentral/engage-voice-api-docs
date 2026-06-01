@@ -12,11 +12,11 @@ When a call is ended, a call event is triggered so you can know that a call is r
 
 ## Call Details and Recordings
 
-Sometimes, you may miss an event due to server issues or connection issues.  In these cases, you can reconcile your call events with the [Call Details and Recordings](../../analytics/reports/global-call-type-detail-report.md) report. All the call details are available in this historical report including the [single channel call recording](../../analytics/reports/global-call-type-detail-report.md#call-recordings).
+Sometimes, you may miss an event due to server issues or connection issues.  In these cases, you can reconcile your call events with the [Call Details and Recordings](../../integration/reports-orig.md#interaction-metadata-media) report. All the call details are available in this historical report including the [single channel call recording](../../integration/reports-orig.md#retrieving-agent-segment-recordings-transcripts).
 
 ## Agent Reports
 
-Not all agent performance can be tracked via events. Some details like ring time, hold time, and talk time are all captured and report on after the call. You can find these report details in the [Agent Segment Metadata Report](../../analytics/reports/agent-segment-metadata-report.md). This report also includes the call recording, stored as a `WAV` file and can be retrieved 1-2 minutes after the call ends. To determine when a call ends, use the [Configuring Workforce Management](../../notifications/wfm/configure-wfm.md) to listen for End Call Events.
+Not all agent performance can be tracked via events. Some details like ring time, hold time, and talk time are all captured and report on after the call. You can find these report details in the [Agent Segment Metadata Report](../../integration/reports-orig.md#agent-segment-metadata). This report also includes the call recording, stored as a `WAV` file and can be retrieved 1-2 minutes after the call ends. To determine when a call ends, use the [Configuring Workforce Management](../../notifications/wfm/configure-wfm.md) to listen for End Call Events.
 
 ## Call Recordings
 

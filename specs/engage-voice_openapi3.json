@@ -2109,6 +2109,14 @@
                 },
                 "type": "object"
             },
+            "ActiveStateBoolean": {
+                "properties": {
+                    "isActive": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
             "AgentAccountAccess": {
                 "properties": {
                     "account": {
@@ -24080,7 +24088,7 @@
                 ],
                 "summary": "Retrieves all Api Tokens for AuthenticatedUser",
                 "tags": [
-                    "Legacy Auth"
+                    "Admin Users and Permissions"
                 ]
             },
             "post": {
@@ -24123,7 +24131,7 @@
                 ],
                 "summary": "Creates a new 'Api Token' based AuthenticatedUser that does not expire",
                 "tags": [
-                    "Legacy Auth"
+                    "Admin Users and Permissions"
                 ]
             }
         },
@@ -24176,7 +24184,7 @@
                 ],
                 "summary": "Removes an api token",
                 "tags": [
-                    "Legacy Auth"
+                    "Admin Users and Permissions"
                 ]
             }
         },
