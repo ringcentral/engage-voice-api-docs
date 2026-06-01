@@ -110,12 +110,16 @@ DNIS overrides let a cloud route destination apply number-specific routing behav
 
 `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations`
 
+The resource identifier on the response is `cloudDestinationId` and the description field is `destinationDesc`. `routeDestination` carries the destination address (DID, SIP URI, ACD queue, etc.) and `destinationType` controls how the platform treats it. `isActive` governs whether the destination receives traffic.
+
 ```json
 {
   "destinationName": "Denver overflow",
-  "description": "Overflow destination for Denver support",
-  "active": false,
-  "priority": 10
+  "destinationDesc": "Overflow destination for Denver support",
+  "destinationType": "DID",
+  "routeDestination": "13035551234",
+  "ringDuration": 20,
+  "isActive": false
 }
 ```
 
@@ -123,11 +127,15 @@ DNIS overrides let a cloud route destination apply number-specific routing behav
 
 `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles`
 
+The resource identifier is `cloudProfileId` and the description field is `profileDesc`. `routingType` and `percentAllocType` control how traffic is distributed across the profile's assigned destinations.
+
 ```json
 {
   "profileName": "Support business hours",
-  "description": "Primary and overflow destinations for support",
-  "active": false
+  "profileDesc": "Primary and overflow destinations for support",
+  "routingType": "PERCENT_ALLOCATION",
+  "percentAllocType": "DAILY",
+  "isActive": false
 }
 ```
 
@@ -135,12 +143,15 @@ DNIS overrides let a cloud route destination apply number-specific routing behav
 
 `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations`
 
+The assignment object references the underlying destination by embedding a `cloudDestination` object. Use `rank` for priority and `allocationPercent` for percent-allocation profiles.
+
 ```json
 {
-  "cloudRouteDestinationId": 12345,
-  "priority": 1,
-  "percentAllocation": 100,
-  "active": true
+  "cloudDestination": { "cloudDestinationId": 12345 },
+  "destinationType": "STANDARD",
+  "rank": 1,
+  "allocationPercent": 100,
+  "ringDuration": 20
 }
 ```
 
@@ -148,11 +159,13 @@ DNIS overrides let a cloud route destination apply number-specific routing behav
 
 `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/dnisOverrides`
 
+A DNIS override (`CloudRouteDestinationOverride`) attaches an alternate `routeDestination` to a specific DNIS on the parent destination.
+
 ```json
 {
   "dnis": "15551234567",
-  "description": "Route VIP support line to Denver overflow",
-  "active": true
+  "routeDestination": "13035556789",
+  "countryId": "1"
 }
 ```
 
@@ -160,28 +173,39 @@ DNIS overrides let a cloud route destination apply number-specific routing behav
 
 ```json
 {
-  "cloudRouteDestinationId": 12345,
-  "cloudRouteGroupId": 678,
+  "cloudDestinationId": 12345,
+  "cloudRouteGroup": { "cloudGroupId": 678, "groupName": "Denver routing" },
   "destinationName": "Denver overflow",
-  "description": "Overflow destination for Denver support",
-  "active": false,
-  "priority": 10
+  "destinationDesc": "Overflow destination for Denver support",
+  "destinationType": "DID",
+  "routeDestination": "13035551234",
+  "ringDuration": 20,
+  "isActive": false,
+  "isDeleted": false,
+  "permissions": ["READ", "UPDATE"]
 }
 ```
 
 ### Percent Allocation Import/Export
 
-Use the export endpoint to retrieve the platform's current percent-allocation-hours file, edit the returned file offline, then send the updated file to the import endpoint. Keep the exported file format intact; the exact file schema is controlled by the generated export and should not be reconstructed from scratch.
+The export endpoint returns the current percent-allocation-hours file for the profile. Edit the returned file offline, then POST it back to the import endpoint as a `multipart/form-data` upload. The `extension` query parameter (`PIPE`, `COMMA`, or `TAB`) tells the platform how to parse the delimited file. Keep the export format intact; the file schema is controlled by the generator and should not be reconstructed from scratch.
+
+```bash
+curl -X POST \
+  "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/percentAllocationHours/import?extension=COMMA" \
+  -H "Authorization: Bearer <token>" \
+  -F "file=@allocation_hours.csv"
+```
 
 ## Primary Resource Fields
 
 | Resource | Fields | Notes |
 | --- | --- | --- |
-| Destination group | `cloudRouteGroupId`, `groupName`, `active` | Groups destinations and profiles for an account. |
-| Destination | `cloudRouteDestinationId`, `destinationName`, `description`, `active`, `priority` | A target that can receive routed calls. |
-| Profile | `cloudRouteProfileId`, `profileName`, `description`, `active` | Routing policy that owns destination assignments. |
-| Assigned destination | `assignedDestinationId`, `cloudRouteDestinationId`, `priority`, `percentAllocation`, `active` | Connects a destination to a profile. |
-| DNIS override | `dnisOverrideId`, `dnis`, `cloudRouteDestinationId`, `active` | Applies number-specific routing behavior. |
+| Destination group (`CloudRouteGroup`) | `cloudGroupId`, `groupName`, `isDefault`, `cloudRouteDestinations`, `cloudRouteProfiles`, `permissions` | Groups destinations and profiles for an account. |
+| Destination (`CloudRouteDestination`) | `cloudDestinationId`, `destinationName`, `destinationDesc`, `destinationType`, `routeDestination`, `ringDuration`, `isActive`, `isDeleted` | A target that can receive routed calls. Day-of-week schedule fields (`monSched`, `tueSched`, ...) define when the destination is eligible. |
+| Profile (`CloudRouteProfile`) | `cloudProfileId`, `profileName`, `profileDesc`, `routingType`, `percentAllocType`, `routeExhaustedAction`, `isActive` | Routing policy that owns destination assignments. |
+| Assigned destination (`CloudRouteAssignedDestination`) | `assignedDestinationId`, `cloudDestination`, `destinationType`, `rank`, `allocationPercent`, `allocationPercentHours`, `ringDuration` | Connects a destination to a profile. |
+| DNIS override (`CloudRouteDestinationOverride`) | `destOverrideId`, `dnis`, `routeDestination`, `countryId`, `cloudDestination` | Applies number-specific routing behaviour on top of a destination. |
 
 ## Common Errors
 
@@ -199,29 +223,60 @@ import requests
 
 BASE_URL = "https://ringcx.ringcentral.com/voice/api"
 
-def create_destination_and_assign(token, account_id, group_id, profile_id):
+def create_destination_and_assign(token, account_id, dest_group_id, profile_group_id, profile_id):
     headers = {"Authorization": f"Bearer {token}"}
+
     destination_url = (
         f"{BASE_URL}/v1/admin/accounts/{account_id}"
-        f"/cloudRouteDestinationGroups/{group_id}/cloudRouteDestinations"
+        f"/cloudRouteDestinationGroups/{dest_group_id}/cloudRouteDestinations"
     )
     destination = requests.post(
         destination_url,
         headers=headers,
-        json={"destinationName": "Denver overflow", "active": False, "priority": 10},
+        json={
+            "destinationName": "Denver overflow",
+            "destinationDesc": "Overflow destination for Denver support",
+            "destinationType": "DID",
+            "routeDestination": "13035551234",
+            "ringDuration": 20,
+            "isActive": False,
+        },
     )
     destination.raise_for_status()
-    destination_id = destination.json()["cloudRouteDestinationId"]
+    destination_id = destination.json()["cloudDestinationId"]
 
     assign_url = (
-        f"{BASE_URL}/v1/admin/accounts/{account_id}/cloudRouteProfileGroups/{group_id}"
+        f"{BASE_URL}/v1/admin/accounts/{account_id}/cloudRouteProfileGroups/{profile_group_id}"
         f"/cloudRouteProfiles/{profile_id}/assignedDestinations"
     )
     assignment = requests.post(
         assign_url,
         headers=headers,
-        json={"cloudRouteDestinationId": destination_id, "priority": 1, "percentAllocation": 100, "active": True},
+        json={
+            "cloudDestination": {"cloudDestinationId": destination_id},
+            "destinationType": "STANDARD",
+            "rank": 1,
+            "allocationPercent": 100,
+            "ringDuration": 20,
+        },
     )
     assignment.raise_for_status()
     return assignment.json()
+
+
+def import_allocation_hours(token, account_id, profile_group_id, profile_id, file_path, extension="COMMA"):
+    headers = {"Authorization": f"Bearer {token}"}
+    url = (
+        f"{BASE_URL}/v1/admin/accounts/{account_id}/cloudRouteProfileGroups/{profile_group_id}"
+        f"/cloudRouteProfiles/{profile_id}/assignedDestinations/percentAllocationHours/import"
+    )
+    with open(file_path, "rb") as fh:
+        response = requests.post(
+            url,
+            headers=headers,
+            params={"extension": extension},
+            files={"file": fh},
+        )
+    response.raise_for_status()
+    return response.json()
 ```

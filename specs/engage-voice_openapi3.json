@@ -29356,7 +29356,7 @@
                     {
                         "name": "extension",
                         "in": "query",
-                        "description": "extension",
+                        "description": "Delimiter used in the uploaded allocation-hours file.",
                         "required": true,
                         "schema": {
                             "type": "string",
@@ -29366,17 +29366,29 @@
                                 "TAB"
                             ]
                         }
-                    },
-                    {
-                        "name": "file",
-                        "in": "query",
-                        "description": "file",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
                     }
                 ],
+                "requestBody": {
+                    "description": "Allocation-hours file exported from the matching `percentAllocationHours/export` endpoint and edited offline.",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "required": [
+                                    "file"
+                                ],
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary",
+                                        "description": "Updated allocation-hours file."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "OK",
