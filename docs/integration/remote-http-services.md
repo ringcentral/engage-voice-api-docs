@@ -138,14 +138,18 @@ The `serviceType` enum controls how RingCX calls the remote endpoint. For SOAP s
 `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/inputs`
 
 ```json
-{
-  "name": "ani",
-  "type": "PARAMETER",
-  "simpleDataType": "STRING",
-  "value": "",
-  "rank": "0"
-}
+[
+  {
+    "name": "ani",
+    "type": "PARAMETER",
+    "simpleDataType": "STRING",
+    "value": "",
+    "rank": "0"
+  }
+]
 ```
+
+The service input save endpoint accepts an array of `RemoteHttpServiceInput` objects.
 
 ### Create API Key Auth
 
@@ -220,7 +224,7 @@ The `serviceType` enum controls how RingCX calls the remote endpoint. For SOAP s
 | --- | --- | --- |
 | Service group (`RemoteHttpServiceGroup`) | `serviceGroupId`, `groupName`, `isDefault`, `services` | Logical container for related services. There is no description or active flag on the group itself. |
 | HTTP service (`RemoteHttpService`) | `serviceId`, `accountId`, `serviceType`, `serviceDescription`, `soapEndpoint`/`httpServiceConfig`, `authConfigId`, `isEnabled`, `isDebug`, `enableMappings` | `serviceType` is one of `SOAP`, `HTTP_POST`, `HTTP_GET`, `HTTP`. SOAP services use `soapEndpoint` plus the `soap*` and `targetNamespace` fields; HTTP services use `httpServiceConfig`. |
-| Service input (`RemoteHttpServiceInput`) | `inputId`, `name`, `type`, `value`, `simpleDataType`, `rank` | Maps RingCX runtime values into the request. |
+| Service input (`RemoteHttpServiceInput`) | `inputId`, `name`, `type`, `value`, `simpleDataType`, `rank` | Maps RingCX runtime values into the request. Inputs are saved as an array. |
 | Auth config | `authConfigId`, `authType` (`APIKEY`/`JWT`/`BASIC`/`OAUTH`/`CUSTOM_AUTH`), `providerName`, `description` | Stores reusable credentials for outbound calls. Auth-type-specific fields live on `AuthConfigApiKey`, `AuthConfigBasic`, `AuthConfigOAuth`, `AuthConfigJwt`, and `AuthConfigCustomAuth`. |
 
 ## Common Errors
@@ -273,13 +277,15 @@ def provision_remote_service(token, account_id, auth_config_id):
     input_response = requests.post(
         f"{BASE_URL}/v1/admin/accounts/{account_id}/httpServiceGroups/{group_id}/httpServices/{service_id}/inputs",
         headers=headers,
-        json={
-            "name": "ani",
-            "type": "PARAMETER",
-            "simpleDataType": "STRING",
-            "value": "",
-            "rank": "0",
-        },
+        json=[
+            {
+                "name": "ani",
+                "type": "PARAMETER",
+                "simpleDataType": "STRING",
+                "value": "",
+                "rank": "0",
+            }
+        ],
     )
     input_response.raise_for_status()
     return {"group": group.json(), "service": service.json(), "input": input_response.json()}
