@@ -23,7 +23,7 @@ To authenticate, your application must be configured with the following permissi
 
 #### 2. Enable RingCX Admin Access
 
-In the RingCX Admin portal, the authenticating user must have permission to read and update knowledge base groups, categories, and articles for the target account. Category creation requires `CREATE` on Knowledge Base Group, while article creation requires `CREATE` on Scripting.
+The authenticating user must have RingCX permissions that match the action being performed. Category creation requires `CREATE` on Knowledge Base Group, while article creation requires `CREATE` on Scripting.
 
 !!! warning "Common Authorization Errors"
     If the application has the right OAuth scope but the user lacks knowledge base management permissions, the API returns an error similar to:
@@ -100,6 +100,8 @@ Article permissions are tied to Scripting because knowledge articles can be used
 
 `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories`
 
+The category display name is `title`, not `name`. `KnowledgeBaseGroup` is the resource whose display name is `name`; categories and articles both use `title`.
+
 ```json
 {
   "title": "Billing",
@@ -157,9 +159,11 @@ Article permissions are tied to Scripting because knowledge articles can be used
 }
 ```
 
-## Article Schema Notes
+## Article and Category Schema Notes
 
 Knowledge base article content is stored in the `content` field as HTML. The service also exposes a plain-text projection as `contentPlain` in list/detail views where supported.
+
+### `KnowledgeBaseArticle`
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -171,7 +175,21 @@ Knowledge base article content is stored in the `content` field as HTML. The ser
 | `active` | Boolean | Whether the article is available. |
 | `showSend` | Boolean | Whether agents can send the article where supported by the UI. |
 | `order` | Integer | Sort order within the category. |
-| `knowledgeBaseCategory` | Object | Parent category reference. |
+| `knowledgeBaseCategory` | Object | Parent category reference (`KnowledgeBaseCategory`). |
+
+### `KnowledgeBaseCategory`
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `knowledgeBaseCategoryId` | Integer | Category identifier. |
+| `title` | String | Category title. The group display name is `name`; categories and articles both use `title`. |
+| `description` | String | Free-form description. |
+| `active` | Boolean | Whether the category is available. |
+| `order` | Integer | Sort order within the group. |
+| `groupId` | Integer | Parent group identifier. |
+| `knowledgeBaseGroup` | Object | Parent group reference (`KnowledgeBaseGroup`). |
+| `knowledgeBaseArticles` | Array | Articles in the category, returned by the `withChildren` list endpoint. |
+| `permissions` | Array | Per-resource CRUD permissions for the authenticated user. |
 
 !!! info "Content Format"
     The implementation cleans saved HTML content, including link handling. Avoid sending unsupported scripts or raw external markup; sanitize CMS content before synchronizing it into RingCX.
