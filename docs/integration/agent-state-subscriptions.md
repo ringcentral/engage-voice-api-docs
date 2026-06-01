@@ -70,7 +70,7 @@ The request body matches the `RTASubscriptionRequest` schema.
 | `description` | String | Optional | Human-readable description. |
 | `retryCount` | Integer | Optional | Maximum retry count. Defaults to `3` and cannot exceed `10`. |
 | `notificationUrl` | String | **Required** | HTTP or HTTPS endpoint that receives agent-state notifications. |
-| `authConfigId` | UUID | Optional | External auth configuration ID used when RingCX calls the receiver. The auth configuration is provisioned through the [External Auth Configurations](./remote-http-services.md#external-auth-configurations) endpoints. |
+| `authConfigId` | UUID | Optional | External auth configuration ID used when RingCX calls the receiver. Provision this with the Remote HTTP Services external auth configuration endpoints. |
 | `active` | Boolean | Optional | Whether the subscription is created in an active state. Defaults to active. |
 | `customHeaders` | Object | Optional | Additional headers to send to the receiver. Values are arbitrary JSON (`additionalProperties: object`); strings are the safest choice. |
 | `expiresAt` | Integer | Optional | Future epoch timestamp (`int64`) after which the subscription expires. Use `0` or omit for no configured expiration. |
