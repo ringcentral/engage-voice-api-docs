@@ -89,7 +89,7 @@ Article permissions are tied to Scripting because knowledge articles can be used
 
 | Parameter | Type | Requirement | Description |
 | --- | --- | --- | --- |
-| `accountId` | Integer | **Required** | RingCX account that owns the knowledge base. |
+| `accountId` | String | **Required** | RingCX account that owns the knowledge base. |
 | `knowledgeBaseGroupId` | Integer | **Required** | Group that contains categories. |
 | `knowledgeBaseCategoryId` | Integer | **Required for category/article operations** | Category that contains articles. |
 | `knowledgeBaseArticleId` | Integer | **Required for article read/update/delete** | Article identifier. |
