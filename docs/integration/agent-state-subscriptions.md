@@ -62,15 +62,18 @@ A subscription request identifies the target sub-account and the integration end
 
 ### Request Body
 
+The request body matches the `RTASubscriptionRequest` schema.
+
 | Parameter | Type | Requirement | Description |
 | --- | --- | --- | --- |
 | `subscriptionName` | String | **Required** | Unique active subscription name for the sub-account. |
 | `description` | String | Optional | Human-readable description. |
 | `retryCount` | Integer | Optional | Maximum retry count. Defaults to `3` and cannot exceed `10`. |
 | `notificationUrl` | String | **Required** | HTTP or HTTPS endpoint that receives agent-state notifications. |
-| `authConfigId` | UUID | Optional | External auth configuration ID used when RingCX calls the receiver. |
-| `customHeaders` | Object | Optional | Additional headers to send to the receiver. |
-| `expiresAt` | Integer | Optional | Future epoch timestamp after which the subscription expires. Use `0` or omit for no configured expiration. |
+| `authConfigId` | UUID | Optional | External auth configuration ID used when RingCX calls the receiver. The auth configuration is provisioned through the [External Auth Configurations](./remote-http-services.md#external-auth-configurations) endpoints. |
+| `active` | Boolean | Optional | Whether the subscription is created in an active state. Defaults to active. |
+| `customHeaders` | Object | Optional | Additional headers to send to the receiver. Values are arbitrary JSON (`additionalProperties: object`); strings are the safest choice. |
+| `expiresAt` | Integer | Optional | Future epoch timestamp (`int64`) after which the subscription expires. Use `0` or omit for no configured expiration. |
 
 **Example Request:**
 
@@ -114,18 +117,23 @@ A subscription request identifies the target sub-account and the integration end
 
 ### Response Object
 
+The response matches the `RTASubscriptionResponse` schema and also includes the resolved `authConfig` object along with audit fields.
+
 | Field | Type | Description |
 | --- | --- | --- |
 | `subscriptionId` | UUID | Unique subscription identifier. |
 | `mainAccountId` | String | Main account that owns the sub-account. |
 | `subAccountId` | String | RingCX sub-account receiving subscription events. |
 | `subscriptionName` | String | Subscription display name. |
+| `description` | String | Human-readable description. |
 | `notificationUrl` | String | Receiver endpoint. |
 | `authConfigId` | UUID | External auth configuration used for outbound notification authentication. |
+| `authConfig` | Object | Resolved auth configuration (provider name, auth type, etc.). |
 | `active` | Boolean | Whether the subscription is active. |
-| `maxRetryCount` | Integer | Maximum delivery retry count. |
+| `maxRetryCount` | Integer | Maximum delivery retry count (note: the request field is `retryCount`; the response renames it to `maxRetryCount`). |
 | `customHeaders` | Object | Custom headers sent to the receiver. |
 | `expiresAt` | Integer | Expiration epoch timestamp. |
+| `createdBy`, `createdAt`, `updatedBy`, `updatedAt` | String / DateTime | Audit fields tracking who last changed the subscription. |
 
 ## Receiver Payload
 
