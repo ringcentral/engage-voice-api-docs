@@ -93,17 +93,21 @@ Let's test with a [Queue](../../routing/queues/queues.md)(incoming call streams)
 
 Call Streaming operates per **Queue(inbound calls) or Campaign(outbound calls)**. The streaming service will be activated upon the creation of a streaming profile. As shown by the flow chart above, audio streams will be sent to your `{streamingUrl}` where your WebSocket server can do further processing.
 
-To create a streaming profile, do `HTTP POST` request to `{PLATFORM_BASE_URL}/media-distributor/product` (be sure to set [PLATFORM_BASE_URL](../../basics/uris.md#current-host) with `Bearer Auth Token` from [authorizationToken](../../authentication/auth-ringcentral.md)).
+To create a streaming profile, do `HTTP POST` request to `{PLATFORM_BASE_URL}/platform/api/media/product` (be sure to set [PLATFORM_BASE_URL](../../basics/uris.md#current-host) with `Bearer Auth Token` from [authorizationToken](../../authentication/auth-ringcentral.md)).
 
 | API Property | Description |
 |-|-|
 | **`productType`** | QUEUE or CAMPAIGN |
+| **`productId`** | Id of above product |
+| **`mainAccountId`** | Main account id. Refer to above on how to get it |
+| **`subAccountId`** | Sub account id. Refer to above on how to get it |
+| **`rcAccountId`** | RingCentral account id for admin user |
 | **`streamingUrl`** | The url for your WSS server which should start with `wss:` **NOT** `ws:` |
 | **`secret`** | Optional. You can use it for your server side validation for incoming websocket messages. |
 
 Sample request:
 
-`POST https://{PLATFORM_ENDPOINT_PATH}/platform/api/media/product`
+`POST {PLATFORM_BASE_URL}/platform/api/media/product`
 
 `Authorization: bearer {authorizationToken}`
 
