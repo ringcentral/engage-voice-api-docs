@@ -3,7 +3,7 @@
 The Dialer Result Download provides data on all calls matching the search criteria. Administrators use this report to get information on specific agents and call/chat activities including agent notes.
 
 !!! alert "Please Note"
-    Calls will appear in this report a few minutes after a call ends or agent dispositions, whichever comes last. Live calls are not included in this report. If you wish to retrieve information on live calls, see the [Active Calls API](../../dialing/active-calls/index.md).
+    Calls will appear in this report a few minutes after a call ends or agent dispositions, whichever comes last. Live calls are not included in this report. If you wish to retrieve information on live calls, see the [Active Calls API](../active-calls/index.md).
 
 ### Primary Parameters
 
