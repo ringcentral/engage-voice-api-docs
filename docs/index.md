@@ -8,8 +8,8 @@ no_breadcrumb: true
   <p>The following Quick Start Guides have been created to assist developers in getting started in each of our major APIs:</p>
   <ul>
     <li><a href="./dialing/leads/bulk-import/">Bulk Import and Sync Leads</a> using our <strong>Leads API</strong>.</li>
-    <li><a href="./integration/reports-orig/#interaction-metadata--media">Download Call Details and Recordings</a> using our <strong>Reports API</strong>.</li>
-    <li><a href="./dialing/active-calls/">Get a List of Active Calls</a> using our <strong>Active Calls API</strong>.</li>
+    <li><a href="./analytics/reports/global-call-type-detail-report">Download Call Details and Recordings</a> using our <strong>Reports API</strong>.</li>
+    <li><a href="./analytics/active-calls/">Get a List of Active Calls</a> using our <strong>Active Calls API</strong>.</li>
     <li><a href="./users/agents/">Provision and Sync Agents</a> using our <strong>Agent API</strong>.</li>
   </ul>
   <!--<p>Not a programmer? <a href="./basics/explorer/">Try out the API with no programming</a>.</p>-->
@@ -86,9 +86,9 @@ Welcome RingCentral RingCX Developer! Here you have access to all the resources 
       <h6 class="card-subtitle mb-2 text-muted">Integration & Reports API</h6>
       <p class="card-text">Monitor agent activity and download recordings for agent optimization, analysis, compliance and archival.</p>
       <ul class="pl-0 ml-4">
-      <li><a href="./integration/reports-orig/#agent-extended-statistics-agg-agent-extended-stats" class="card-link">Agent Extended Statistics Report</a></li>
-      <li><a href="./integration/reports-orig/#agent-segment-metadata" class="card-link">Agent Segment Metadata Report</a></li>
-      <li><a href="./integration/reports-orig/#queue-statistics-agg-queue-stats" class="card-link">Queue Statistics Report</a></li>
+      <li><a href="./integration#agent-extended-statistics-report" class="card-link">Agent Extended Statistics Report</a></li>
+      <li><a href="./integration#agent-segment-metadata-report" class="card-link">Agent Segment Metadata Report</a></li>
+      <li><a href="./integration#queue-statistics-report" class="card-link">Queue Statistics Report</a></li>
       </ul>
     </div>
   </div>
