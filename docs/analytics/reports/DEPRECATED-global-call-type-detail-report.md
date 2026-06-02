@@ -3,7 +3,7 @@
 Call detail records (CDRs) and recordings are available via the Global Call Type Detail (GCTD) Report which provides complete real-time data for all calls in RingCX. When recordings are available, a media URL is provided in the call detail record.
 
 !!! alert "Please Note"
-    Calls will appear in this report a few minutes after a call ends or agent dispositions, whichever comes last. Live calls are not included in this report. If you wish to retrieve information on live calls, see the [Active Calls API](../../dialing/active-calls/index.md).
+    Calls will appear in this report a few minutes after a call ends or agent dispositions, whichever comes last. Live calls are not included in this report. If you wish to retrieve information on live calls, see the [Active Calls API](../active-calls/index.md).
 
 ### Primary Parameters
 
