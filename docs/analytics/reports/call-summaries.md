@@ -50,10 +50,10 @@ To generate and retrieve summaries, AI summaries must be enabled for the queue o
     ```
 
 !!! important "Special Authentication Requirement"
-    Most RingCX APIs use the `Authorization: Bearer <token>` header. The Summary API is different. Send the RingCX access token as an HTTP cookie named `access_token`.
+    Most RingCX APIs use the `Authorization: Bearer <token>` header. The Summary API is different. For these endpoints, send the RingCX access token as the value of the `access_token` cookie, and send the header name in lowercase as `cookie`.
 
     ```http
-    Cookie: access_token=<rcRingCXAccessToken>
+    cookie: access_token=<token>
     ```
 
     Do not send the token as the `Authorization` header when calling the summary endpoints.
@@ -87,8 +87,8 @@ For more details on interaction metadata, see the [Reports API](../../integratio
 ## Get Agent Summary
 
 ```http
-GET https://ringcx.ringcentral.com/voice/api/v1/summary/accounts/{subAccountId}/segments/{segmentId}/agent
-Cookie: access_token=<rcRingCXAccessToken>
+GET https://engage.ringcentral.com/voice/api/v1/summary/accounts/{subAccountId}/segments/{segmentId}/agent
+cookie: access_token=<token>
 ```
 
 The Agent Summary endpoint returns the summary filled in or edited by the agent for a completed interaction segment.
@@ -103,8 +103,8 @@ The Agent Summary endpoint returns the summary filled in or edited by the agent 
 ### Example Request
 
 ```bash
-curl --location 'https://ringcx.ringcentral.com/voice/api/v1/summary/accounts/21630001/segments/p-v-0b338efb877e48f0a3a321c73fcd4634-1772456952229-50caeaadd482c/agent' \
-  --header 'Cookie: access_token=<rcRingCXAccessToken>'
+curl --location 'https://engage.ringcentral.com/voice/api/v1/summary/accounts/21630001/segments/p-v-0b338efb877e48f0a3a321c73fcd4634-1772456952229-50caeaadd482c/agent' \
+  --header 'cookie: access_token=<token>'
 ```
 
 ### Response Details
@@ -120,8 +120,8 @@ Customer requested a billing adjustment. Agent confirmed the account details and
 ## Get Auto Summary
 
 ```http
-GET https://ringcx.ringcentral.com/voice/api/v1/summary/accounts/{subAccountId}/segments/{segmentId}/auto
-Cookie: access_token=<rcRingCXAccessToken>
+GET https://engage.ringcentral.com/voice/api/v1/summary/accounts/{subAccountId}/segments/{segmentId}/auto
+cookie: access_token=<token>
 ```
 
 The Auto Summary endpoint returns the AI-generated summary for a completed interaction segment.
@@ -136,8 +136,8 @@ The Auto Summary endpoint returns the AI-generated summary for a completed inter
 ### Example Request
 
 ```bash
-curl --location 'https://ringcx.ringcentral.com/voice/api/v1/summary/accounts/21630001/segments/p-v-0b338efb877e48f0a3a321c73fcd4634-1772456952229-50caeaadd482c/auto' \
-  --header 'Cookie: access_token=<rcRingCXAccessToken>'
+curl --location 'https://engage.ringcentral.com/voice/api/v1/summary/accounts/21630001/segments/p-v-0b338efb877e48f0a3a321c73fcd4634-1772456952229-50caeaadd482c/auto' \
+  --header 'cookie: access_token=<token>'
 ```
 
 ### Response Details
@@ -157,7 +157,7 @@ Both summary endpoints use the same response behavior.
 | Status | Meaning |
 | --- | --- |
 | `200 OK` | The request succeeded. If the response body is empty, the requested summary field is not populated for that segment. |
-| `401 Unauthorized` | The request did not include a valid `access_token` cookie, or the token is expired. |
+| `401 Unauthorized` | The request did not include a valid `cookie: access_token=<token>` header, or the token is expired. |
 | `404 Not Found` | The segment was not found or the summary is not available. |
 | `500 Internal Server Error` | The summary service could not complete the request. |
 
@@ -183,7 +183,7 @@ Use interaction metadata as the source of truth for which segments to request. S
 ```python
 import requests
 
-BASE_URL = "https://ringcx.ringcentral.com/voice/api/v1"
+BASE_URL = "https://engage.ringcentral.com/voice/api/v1"
 SUB_ACCOUNT_ID = "21630001"
 
 def get_summary(segment_id, token, summary_type="auto"):
@@ -191,7 +191,7 @@ def get_summary(segment_id, token, summary_type="auto"):
     url = f"{BASE_URL}/summary/accounts/{SUB_ACCOUNT_ID}/segments/{segment_id}/{summary_type}"
 
     headers = {
-        "Cookie": f"access_token={token}",
+        "cookie": f"access_token={token}",
         "Accept": "application/json",
     }
 
@@ -205,7 +205,7 @@ def get_summary(segment_id, token, summary_type="auto"):
     response.raise_for_status()
 
 segment_id = "p-v-0b338efb877e48f0a3a321c73fcd4634-1772456952229-50caeaadd482c"
-summary = get_summary(segment_id, "<rcRingCXAccessToken>", "auto")
+summary = get_summary(segment_id, "<token>", "auto")
 
 if summary:
     print(summary)
