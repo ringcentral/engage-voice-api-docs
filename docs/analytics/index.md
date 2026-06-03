@@ -35,6 +35,7 @@ You can also use analytics to help identify the high or low points in customer a
       <p class="card-text">The Cloud Reports category provides cloud routing data for your cloud-based unified queues. The reports in this category include:</p>
       <ul class="pl-0 ml-4">
       <li><a href="./reports/call-detail-report" class="card-link">Call Detail</a></li>
+      <li><a href="./reports/call-summaries" class="card-link">Call Summaries</a></li>
       </ul>
     </div>
   </div>
