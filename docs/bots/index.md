@@ -13,6 +13,50 @@ Limitations:
 
 * Potential issues with the size of the custom data
 
+## RingCX Configuration
+
+Before implementing this SIP-based integration, you'll need to register your IVA and add it to a workflow in the RingCX admin console. This includes providing your IVA's SIP URI, selecting a transport type (UDP, TCP, or TLS), and placing the IVA node in Workflow Studio.
+
+For full setup instructions, see [Integrating a SIP-based IVA in RingCX](https://support.ringcentral.com/article-v2/Integrating-a-SIP-based-IVA-in-RingCX.html?brand=RingCentral&product=RingCX&language=en_US) on the RingCentral Support site.
+
+### IVA connection results
+
+When the IVA session ends, the call returns to the workflow and follows one of three configured paths:
+
+| Result | Description |
+|--------|-------------|
+| **Success** | The IVA session completed and returned a result. The customer is still connected and the workflow continues. |
+| **Failed** | The IVA session did not complete successfully. The customer is still connected and the workflow continues via the error handling path. |
+| **Disconnected** | The customer disconnected before or during the IVA session. The workflow does not continue and no further connections are executed. |
+
+### Passing context to your IVA
+
+RingCX can pass session context to your IVA at the start of the session. Context is set on the `sessionData` property in a JavaScript node placed before the IVA node in Workflow Studio:
+
+```js
+// Set sessionData with an embedded object
+sessionData = { date: "Fri Feb 16 11:54", botData: { username: "jsmith@ringcentral.com", ani: "+16058779330" } };
+```
+
+A **context filter** can be configured on the IVA node to send only a subset of `sessionData` to your IVA. For example, if the filter is set to `botData`, the IVA receives only:
+
+```json
+{ "username": "jsmith@ringcentral.com", "ani": "+16058779330" }
+```
+
+After the IVA session completes, any metadata returned by the IVA is available in `sessionData` and can be read in a subsequent JavaScript node:
+
+```js
+// Metadata sent by the AI Bot = { "intent" : "Technical Support" }
+ivr.debug(sessionData.intent);
+
+if (sessionData.intent == "Technical Support") {
+    ivr.setConnection("transfer_support");
+}
+```
+
+For more detail on sessionData and context filters, see [Providing context for the IVA integration](https://support.ringcentral.com/article-v2/Integrating-a-SIP-based-IVA-in-RingCX.html?brand=RingCentral&product=RingCX&language=en_US#context) in the RingCentral Support documentation.
+
 ## Implementation
 
 The following guide for developers helps developer connect, update, and disconnect a bot from the interaction.
@@ -25,11 +69,11 @@ SIP transport between RingCentral and Partner can be:
 
 * UDP
 * TCP 
-* TLS (recoommended)
+* TLS (recommended)
 
 !!! Note
     Recommended transport is TLS.
-    When using TLS, RingCentral will try negotiating encrypted media (RTP/SAVP). 
+    When using TLS, RingCentral will try negotiating encrypted media (RTP/SAVP).
 
 Currently, bot selection is based on the Request-URI user part (aka DID).
 
