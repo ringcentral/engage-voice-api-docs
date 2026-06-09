@@ -10,13 +10,9 @@ Tracking your agents in real time is important for workforce management, but kno
 
 When a call is ended, a call event is triggered so you can know that a call is ready for processing. Follow the guide for [Configuring Workforce Management](../../notifications/wfm/configure-wfm.md) and make sure to select `End Call Events`. See the details of an [End Call Event](../../notifications/wfm/payload-wfm.md#end-call-events) payload that is sent to your endpoint.
 
-## Call Details and Recordings
-
-Sometimes, you may miss an event due to server issues or connection issues.  In these cases, you can reconcile your call events with the [Call Details and Recordings](../../integration/reports-orig.md#interaction-metadata-media) report. All the call details are available in this historical report including the [single channel call recording](../../integration/reports-orig.md#retrieving-agent-segment-recordings-transcripts).
-
 ## Agent Reports
 
-Not all agent performance can be tracked via events. Some details like ring time, hold time, and talk time are all captured and report on after the call. You can find these report details in the [Agent Segment Metadata Report](../../integration/reports-orig.md#agent-segment-metadata). This report also includes the call recording, stored as a `WAV` file and can be retrieved 1-2 minutes after the call ends. To determine when a call ends, use the [Configuring Workforce Management](../../notifications/wfm/configure-wfm.md) to listen for End Call Events.
+Not all agent performance can be tracked via events. Some details like ring time, hold time, and talk time are all captured and report on after the call. You can find these report details in the [Agent Segment Metadata Report](../../analytics/reports/agent-segment-metadata-report.md). This report also includes the call recording, stored as a `WAV` file and can be retrieved 1-2 minutes after the call ends. To determine when a call ends, use the [Configuring Workforce Management](../../notifications/wfm/configure-wfm.md) to listen for End Call Events.
 
 ## Call Recordings
 
