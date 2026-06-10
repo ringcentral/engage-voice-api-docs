@@ -26715,9 +26715,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/tracGroups/withChildren": {
             "get": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Numbers"
                 ],
-                "summary": "Returns a listing of trac groups with related data for an account",
+                "summary": "List tracking number groups with numbers",
                 "description": "Permissions: READ on Account, Post Filtered Results",
                 "operationId": "getTracGroupListWithChildren",
                 "parameters": [
@@ -26776,9 +26776,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}": {
             "get": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Numbers"
                 ],
-                "summary": "Returns a trac group for an account",
+                "summary": "Get tracking number group",
                 "description": "Permissions: READ on Trac Group",
                 "operationId": "getTracGroup",
                 "parameters": [
@@ -26833,9 +26833,9 @@
             },
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Numbers"
                 ],
-                "summary": "Updates a trac group for an account",
+                "summary": "Update tracking number group",
                 "description": "Permissions: Update on Trac Group",
                 "operationId": "updateTracGroup",
                 "parameters": [
@@ -26900,9 +26900,9 @@
             },
             "delete": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Numbers"
                 ],
-                "summary": "Updates a trac group for an account",
+                "summary": "Delete tracking number group",
                 "description": "Permissions: Delete on Trac Group",
                 "operationId": "deleteTracGroup",
                 "parameters": [
@@ -26959,9 +26959,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers": {
             "get": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Numbers"
                 ],
-                "summary": "Returns a listing of trac numbers for an account",
+                "summary": "List tracking numbers",
                 "description": "Permissions: READ on Trac Group, Post Filtered Results",
                 "operationId": "getTracNumberList",
                 "parameters": [
@@ -27019,9 +27019,9 @@
             },
             "post": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Numbers"
                 ],
-                "summary": "Creates a trac number for an account",
+                "summary": "Create tracking number",
                 "description": "Permissions: Create on Trac Group",
                 "operationId": "createTracNumber",
                 "parameters": [
@@ -27088,9 +27088,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers/{tracId}": {
             "get": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Numbers"
                 ],
-                "summary": "Returns a trac number for an account",
+                "summary": "Get tracking number",
                 "description": "Permissions: READ on Trac Number",
                 "operationId": "getTracNumber",
                 "parameters": [
@@ -27156,9 +27156,9 @@
             },
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Numbers"
                 ],
-                "summary": "Updates a trac number for an account",
+                "summary": "Update tracking number",
                 "description": "Permissions: Update on Trac Group",
                 "operationId": "updateTracNumber",
                 "parameters": [
@@ -27236,9 +27236,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers/{tracId}/routingRules": {
             "get": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Number Routing Rules"
                 ],
-                "summary": "Returns a list of routing rules for a trac number",
+                "summary": "List tracking number routing rules",
                 "description": "Permissions: READ on Trac Number",
                 "operationId": "getTracRoutingRuleByNumber",
                 "parameters": [
@@ -27307,9 +27307,9 @@
             },
             "post": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Number Routing Rules"
                 ],
-                "summary": "Creates a routing rule for a trac number",
+                "summary": "Create tracking number routing rule",
                 "description": "Permissions: UPDATE on Trac Number",
                 "operationId": "createTracRoutingRule",
                 "parameters": [
@@ -27380,9 +27380,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers/{tracId}/routingRules/{ruleId}": {
             "get": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Number Routing Rules"
                 ],
-                "summary": "Returns a trac number routing rule for a trac number",
+                "summary": "Get tracking number routing rule",
                 "description": "Permissions: READ on Trac Number",
                 "operationId": "getTracRoutingRule",
                 "parameters": [
@@ -27452,9 +27452,9 @@
             },
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Number Routing Rules"
                 ],
-                "summary": "Updates a routing rule for a trac number",
+                "summary": "Update tracking number routing rule",
                 "description": "Permissions: UPDATE on Trac Number",
                 "operationId": "updateTracRoutingRule",
                 "parameters": [
@@ -27534,9 +27534,9 @@
             },
             "delete": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Number Routing Rules"
                 ],
-                "summary": "Deletes a routing rule for a trac number",
+                "summary": "Delete tracking number routing rule",
                 "description": "Permissions: UPDATE on Trac Number",
                 "operationId": "deleteTracRoutingRule",
                 "parameters": [
@@ -27615,9 +27615,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers/{tracId}/scheduleOverrides": {
             "get": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Number Schedules"
                 ],
-                "summary": "Returns a list of schedule overrides for a trac number",
+                "summary": "List tracking number schedule overrides",
                 "description": "Permissions: READ on Trac Number",
                 "operationId": "getTracScheduleOverridesByNumber",
                 "parameters": [
@@ -27686,9 +27686,9 @@
             },
             "post": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Number Schedules"
                 ],
-                "summary": "Creates a schedule override for a trac number",
+                "summary": "Create tracking number schedule override",
                 "description": "Permissions: UPDATE on Trac Number (Permission Override)",
                 "operationId": "createTracScheduleOverridesByNumber",
                 "parameters": [
@@ -27769,9 +27769,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/tracGroups/{tracGroupId}/tracNumbers/{tracId}/scheduleOverrides/{overrideId}": {
             "get": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Number Schedules"
                 ],
-                "summary": "Returns a schedule override for a trac number",
+                "summary": "Get tracking number schedule override",
                 "description": "Permissions: READ on Trac Number",
                 "operationId": "getTracScheduleOverride",
                 "parameters": [
@@ -27848,9 +27848,9 @@
             },
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Number Schedules"
                 ],
-                "summary": "Updates a schedule override for a trac number",
+                "summary": "Update tracking number schedule override",
                 "description": "Permissions: UPDATE on Trac Number",
                 "operationId": "updateTracScheduleOverridesByNumber",
                 "parameters": [
@@ -27940,9 +27940,9 @@
             },
             "delete": {
                 "tags": [
-                    "Phone Number Management"
+                    "Tracking Number Schedules"
                 ],
-                "summary": "Deletes a schedule override for a trac number",
+                "summary": "Delete tracking number schedule override",
                 "description": "Permissions: UPDATE on Trac Number (Permission Override)",
                 "operationId": "deleteTracScheduleOverridesByNumber",
                 "parameters": [
@@ -28021,9 +28021,9 @@
         "/voice/api/v1/admin/utilities/tnManager/accounts": {
             "get": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Returns all available Media Values that a user has access to",
+                "summary": "List telephone number manager accounts",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "getAccounts",
                 "responses": {
@@ -28063,9 +28063,9 @@
         "/voice/api/v1/admin/utilities/tnManager/assignedDnis": {
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "DNIS Assignments"
                 ],
-                "summary": "Updates an assigned dnis, will not assign a product to an assigned dnis",
+                "summary": "Update DNIS assignment",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "updateDnisAssignment",
                 "requestBody": {
@@ -28113,9 +28113,9 @@
             },
             "delete": {
                 "tags": [
-                    "Phone Number Management"
+                    "DNIS Assignments"
                 ],
-                "summary": "Deletes the assignment between a product and a dnis pool",
+                "summary": "Delete DNIS assignment",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "deleteDnisAssignment",
                 "requestBody": {
@@ -28159,9 +28159,9 @@
         "/voice/api/v1/admin/utilities/tnManager/assignedDnis/cloudRouteProfiles/{cloudRouteProfileId}": {
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "DNIS Assignments"
                 ],
-                "summary": "If assigned dnis doesn't exist, this endpoint will create a new assigned dnis and assigns a cloud profile to it.If the assigned dnis already exists, this endpoint will assign a cloud profile to it",
+                "summary": "Assign DNIS to cloud route profile",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "updateAssignedDnisForCloudRouteProfile",
                 "parameters": [
@@ -28223,9 +28223,9 @@
         "/voice/api/v1/admin/utilities/tnManager/assignedDnis/gates/{gateId}": {
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "DNIS Assignments"
                 ],
-                "summary": "If assigned dnis doesn't exist, this endpoint will create a new assigned dnis and assigns a gate to it.If assigned dnis already exists, this endpoint will assign a gate to it",
+                "summary": "Assign DNIS to queue",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "updateAssignedDnisForGate",
                 "parameters": [
@@ -28287,9 +28287,9 @@
         "/voice/api/v1/admin/utilities/tnManager/assignedDnis/visualIvrs/{visualIvrId}": {
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "DNIS Assignments"
                 ],
-                "summary": "If assigned dnis doesn't exist, this endpoint will create a new assigned dnis and assigns a visual ivr to it.If assigned dnis already exists, this endpoint will assign a visualIvr to it",
+                "summary": "Assign DNIS to visual IVR",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "updateAssignedDnisForVisualIvr",
                 "parameters": [
@@ -28351,9 +28351,9 @@
         "/voice/api/v1/admin/utilities/tnManager/assignedDnis/{dnis}": {
             "get": {
                 "tags": [
-                    "Phone Number Management"
+                    "DNIS Assignments"
                 ],
-                "summary": "Gets the assignment between a product and a dnis pool",
+                "summary": "Get DNIS assignment",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "getAssignedDnis",
                 "parameters": [
@@ -28396,9 +28396,9 @@
             },
             "delete": {
                 "tags": [
-                    "Phone Number Management"
+                    "DNIS Assignments"
                 ],
-                "summary": "Deletes the assignment between a product and a dnis pool",
+                "summary": "Delete DNIS assignment",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "deleteAssignedDnis",
                 "parameters": [
@@ -28443,9 +28443,9 @@
         "/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis": {
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "SMS DNIS Assignments"
                 ],
-                "summary": "Updates an assigned sms dnis, will not assign a chat queue to an assigned sms dnis",
+                "summary": "Update SMS DNIS assignment",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "updateSmsDnisAssignment",
                 "requestBody": {
@@ -28498,9 +28498,9 @@
         "/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/chatQueues/{chatQueueId}": {
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "SMS DNIS Assignments"
                 ],
-                "summary": "If it doesn't exist, this endpoint will create a new assigned sms dnis and assigns a chat to an assigned sms dnis.If it already exists, this endpoint will assign a chat queue to an assigned sms dnis",
+                "summary": "Assign SMS DNIS to chat queue",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "updateAssignedSmsDnisForChatQueue",
                 "parameters": [
@@ -28562,9 +28562,9 @@
         "/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/{dnis}": {
             "get": {
                 "tags": [
-                    "Phone Number Management"
+                    "SMS DNIS Assignments"
                 ],
-                "summary": "Gets the assignment between a chat queue and a dnis pool",
+                "summary": "Get SMS DNIS assignment",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "getSmsDnisAssignment",
                 "parameters": [
@@ -28610,9 +28610,9 @@
             },
             "delete": {
                 "tags": [
-                    "Phone Number Management"
+                    "SMS DNIS Assignments"
                 ],
-                "summary": "Deletes the assignment between a chat queue and a dnis pool",
+                "summary": "Delete SMS DNIS assignment",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "deleteSmsDnisAssignment",
                 "parameters": [
@@ -28660,9 +28660,9 @@
         "/voice/api/v1/admin/utilities/tnManager/checkNewDnisList": {
             "post": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Returns a list of dnis pools that already exist",
+                "summary": "Check DNIS pool records",
                 "description": "Permissions: UPDATE on TN_MANAGER, filter out restricted accounts",
                 "operationId": "validateNewDnisList",
                 "parameters": [
@@ -28724,9 +28724,9 @@
         "/voice/api/v1/admin/utilities/tnManager/dnisPool": {
             "post": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Creates a list of dnis pools, will not save any assignments",
+                "summary": "Create DNIS pool records",
                 "description": "Has Role: SUPER_USER",
                 "operationId": "createDnisPool",
                 "requestBody": {
@@ -28777,9 +28777,9 @@
             },
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Updates a single dnis pool, will not save or update any assignments",
+                "summary": "Update DNIS pool record",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "updateDnisPool",
                 "requestBody": {
@@ -28832,9 +28832,9 @@
         "/voice/api/v1/admin/utilities/tnManager/dnisPool/bulkDelete": {
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Deletes a dnis list, will also delete associated assignments",
+                "summary": "Bulk delete DNIS pools",
                 "description": "Has Role: SUPER_USER",
                 "operationId": "deleteDnisList",
                 "parameters": [
@@ -28893,9 +28893,9 @@
         "/voice/api/v1/admin/utilities/tnManager/dnisPool/{dnis}": {
             "get": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Returns a single dnis pool without assignments",
+                "summary": "Get DNIS pool record",
                 "description": "Permissions: READ on TN_MANAGER",
                 "operationId": "getUtilitiesTnManagerDnisPoolDnis",
                 "parameters": [
@@ -28948,9 +28948,9 @@
             },
             "delete": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Deletes a single dnis pool, will also delete associated assignments",
+                "summary": "Delete DNIS pool record",
                 "description": "Has Role: SUPER_USER",
                 "operationId": "deleteDnis",
                 "parameters": [
@@ -28995,9 +28995,9 @@
         "/voice/api/v1/admin/utilities/tnManager/mediaValues": {
             "get": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Returns all available Media Values that a user has access to",
+                "summary": "List telephone number media values",
                 "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "getMediaValues",
                 "responses": {
@@ -29034,9 +29034,9 @@
         "/voice/api/v1/admin/utilities/tnManager/report": {
             "post": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Returns all dnis pools",
+                "summary": "Create DNIS pool report",
                 "description": "Permissions: READ on Account, READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "getDnisPoolListAsReport",
                 "requestBody": {
@@ -29073,9 +29073,9 @@
         "/voice/api/v1/admin/utilities/tnManager/search": {
             "post": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Returns all dnis pools or count of dnis pools if 'count' param is provided",
+                "summary": "Search DNIS pools",
                 "description": "Permissions: READ on Account, READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "search",
                 "parameters": [
@@ -29154,9 +29154,9 @@
         "/voice/api/v1/admin/utilities/tnManager/searchDnis": {
             "post": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Returns all dnis pools for Customer",
+                "summary": "Search customer DNIS pools",
                 "description": "Permissions: READ on Account, READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "searchDnis",
                 "requestBody": {
@@ -29203,9 +29203,9 @@
         "/voice/api/v1/admin/utilities/tnManager/updateBulkDnisPool": {
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Updates for bulk csv data dnis pool, will update assignments too",
+                "summary": "Bulk update DNIS pools",
                 "description": "Permissions: READ/WRITE on TN_MANAGER, filter out restricted accounts",
                 "operationId": "updateBulkDnisPool",
                 "requestBody": {
@@ -29255,9 +29255,9 @@
         "/voice/api/v1/admin/utilities/tnManager/updateCustomerDnisBulk": {
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Update Dnis Records in Bulk",
+                "summary": "Bulk update customer DNIS records",
                 "description": "",
                 "operationId": "updateCustomerDnisBulk",
                 "requestBody": {
@@ -29304,9 +29304,9 @@
         "/voice/api/v1/admin/utilities/tnManager/updatePoolAndAssignment": {
             "put": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Takes a single update request for pools/assignments and smsAssignments",
+                "summary": "Update DNIS pool and assignments",
                 "description": "",
                 "operationId": "UpdateDnisPoolAndAssignments",
                 "requestBody": {
@@ -29356,9 +29356,9 @@
         "/voice/api/v1/admin/utilities/tnManager/uploadDnisPool": {
             "post": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Creates a list of dnis pools from upload file",
+                "summary": "Upload DNIS pool records",
                 "description": "Has Role: USER",
                 "operationId": "uploadDnisPool",
                 "parameters": [
@@ -29446,9 +29446,9 @@
         "/voice/api/v2/admin/utilities/tnManager/searchDnis": {
             "post": {
                 "tags": [
-                    "Phone Number Management"
+                    "Number Management"
                 ],
-                "summary": "Returns all dnis pools for Customer",
+                "summary": "Search customer DNIS pools",
                 "description": "Permissions: READ on Account, READ on TN_MANAGER, filter out restricted accounts",
                 "operationId": "getCustomerDnisPoolList2",
                 "requestBody": {
@@ -29570,6 +29570,21 @@
         },
         {
             "name": "Users"
+        },
+        {
+            "name": "DNIS Assignments"
+        },
+        {
+            "name": "SMS DNIS Assignments"
+        },
+        {
+            "name": "Tracking Numbers"
+        },
+        {
+            "name": "Tracking Number Routing Rules"
+        },
+        {
+            "name": "Tracking Number Schedules"
         }
     ],
     "x-tag-groups": [
@@ -29605,7 +29620,12 @@
                 "Requeue Shortcuts",
                 "Queue Schedule",
                 "Queue Special ANI",
-                "Number Management"
+                "Number Management",
+                "DNIS Assignments",
+                "SMS DNIS Assignments",
+                "Tracking Numbers",
+                "Tracking Number Routing Rules",
+                "Tracking Number Schedules"
             ]
         },
         {
