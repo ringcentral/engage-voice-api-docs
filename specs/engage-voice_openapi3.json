@@ -26715,9 +26715,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs": {
             "get": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "External Auth Configurations"
                 ],
-                "summary": "getExternalAuthConfigsList",
+                "summary": "List external auth configurations",
                 "description": "",
                 "operationId": "getExternalAuthConfigsList",
                 "parameters": [
@@ -26783,9 +26783,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/oauth/info": {
             "get": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "External Auth Configurations"
                 ],
-                "summary": "getExternalAccountAuthConfigOauthInfo",
+                "summary": "Get external auth OAuth metadata",
                 "description": "",
                 "operationId": "getExternalAccountAuthConfigOauthInfo",
                 "parameters": [
@@ -26840,9 +26840,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}": {
             "get": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "External Auth Configurations"
                 ],
-                "summary": "getExternalAuthConfigById",
+                "summary": "Get external auth configuration",
                 "description": "",
                 "operationId": "getExternalAuthConfigById",
                 "parameters": [
@@ -26896,9 +26896,9 @@
             },
             "delete": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "External Auth Configurations"
                 ],
-                "summary": "deleteExternalAuthConfigById",
+                "summary": "Delete external auth configuration",
                 "description": "",
                 "operationId": "deleteExternalAuthConfigById",
                 "parameters": [
@@ -26947,9 +26947,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/apiKey": {
             "post": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "External Auth Configurations"
                 ],
-                "summary": "createExternalAccountAuthConfigApiKey",
+                "summary": "Create API key external auth configuration",
                 "description": "",
                 "operationId": "createExternalAccountAuthConfigApiKey",
                 "parameters": [
@@ -27013,9 +27013,9 @@
             },
             "patch": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "External Auth Configurations"
                 ],
-                "summary": "patchExternalAuthConfigApiKey",
+                "summary": "Update API key external auth configuration",
                 "description": "",
                 "operationId": "patchExternalAuthConfigApiKey",
                 "parameters": [
@@ -27081,9 +27081,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/basic": {
             "post": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "External Auth Configurations"
                 ],
-                "summary": "createExternalAccountAuthConfigBasic",
+                "summary": "Create basic external auth configuration",
                 "description": "",
                 "operationId": "createExternalAccountAuthConfigBasic",
                 "parameters": [
@@ -27147,9 +27147,9 @@
             },
             "patch": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "External Auth Configurations"
                 ],
-                "summary": "patchExternalAuthConfigBasic",
+                "summary": "Update basic external auth configuration",
                 "description": "",
                 "operationId": "patchExternalAuthConfigBasic",
                 "parameters": [
@@ -27215,9 +27215,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/customAuth": {
             "post": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "External Auth Configurations"
                 ],
-                "summary": "createExternalAccountAuthConfigCustomAuth",
+                "summary": "Create custom external auth configuration",
                 "description": "",
                 "operationId": "createExternalAccountAuthConfigCustomAuth",
                 "parameters": [
@@ -27281,9 +27281,9 @@
             },
             "patch": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "External Auth Configurations"
                 ],
-                "summary": "patchExternalAuthConfigCustomAuth",
+                "summary": "Update custom external auth configuration",
                 "description": "",
                 "operationId": "patchExternalAuthConfigCustomAuth",
                 "parameters": [
@@ -27349,9 +27349,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/jwt": {
             "post": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "External Auth Configurations"
                 ],
-                "summary": "createExternalAccountAuthConfigJwt",
+                "summary": "Create JWT external auth configuration",
                 "description": "",
                 "operationId": "createExternalAccountAuthConfigJwt",
                 "parameters": [
@@ -27415,9 +27415,9 @@
             },
             "patch": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "External Auth Configurations"
                 ],
-                "summary": "patchExternalAuthConfigJwt",
+                "summary": "Update JWT external auth configuration",
                 "description": "",
                 "operationId": "patchExternalAuthConfigJwt",
                 "parameters": [
@@ -27483,9 +27483,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/external/authConfigs/{authConfigId}/oauth": {
             "post": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "External Auth Configurations"
                 ],
-                "summary": "createExternalAccountAuthConfigOAuth",
+                "summary": "Create OAuth external auth configuration",
                 "description": "",
                 "operationId": "createExternalAccountAuthConfigOAuth",
                 "parameters": [
@@ -27549,9 +27549,9 @@
             },
             "patch": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "External Auth Configurations"
                 ],
-                "summary": "patchExternalAuthConfigOAuth",
+                "summary": "Update OAuth external auth configuration",
                 "description": "",
                 "operationId": "patchExternalAuthConfigOAuth",
                 "parameters": [
@@ -27617,9 +27617,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups": {
             "get": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "Remote HTTP Service Groups"
                 ],
-                "summary": "Returns a listing of remote http service groups for an account",
+                "summary": "List remote HTTP service groups",
                 "description": "Permissions: READ on Account",
                 "operationId": "getHttpServiceGroupList",
                 "parameters": [
@@ -27686,9 +27686,9 @@
             },
             "post": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "Remote HTTP Service Groups"
                 ],
-                "summary": "Creates a remote http service group for an account",
+                "summary": "Create remote HTTP service group",
                 "description": "Permissions: CREATE on Account",
                 "operationId": "createHttpServiceGroup",
                 "parameters": [
@@ -27744,9 +27744,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/withChildren": {
             "get": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "Remote HTTP Service Groups"
                 ],
-                "summary": "Returns a listing of remote http service groups with related data",
+                "summary": "List remote HTTP service groups with services",
                 "description": "Permissions: READ on Account",
                 "operationId": "getHttpServiceGroupListWithChildren",
                 "parameters": [
@@ -27805,9 +27805,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}": {
             "get": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "Remote HTTP Service Groups"
                 ],
-                "summary": "Returns a remote http service group for an account",
+                "summary": "Get remote HTTP service group",
                 "description": "Permissions: READ on HTTP Service Group",
                 "operationId": "getHttpServiceGroup",
                 "parameters": [
@@ -27862,9 +27862,9 @@
             },
             "put": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "Remote HTTP Service Groups"
                 ],
-                "summary": "Updates a remote http service group",
+                "summary": "Update remote HTTP service group",
                 "description": "Permissions: UPDATE on HTTP Service Group",
                 "operationId": "updateHttpServiceGroup",
                 "parameters": [
@@ -27933,7 +27933,7 @@
                 "tags": [
                     "Remote HTTP Services"
                 ],
-                "summary": "Returns a listing of remote http services",
+                "summary": "List remote HTTP services",
                 "description": "Permissions: READ on Web Service Group",
                 "operationId": "getHttpServiceList",
                 "parameters": [
@@ -28013,7 +28013,7 @@
                 "tags": [
                     "Remote HTTP Services"
                 ],
-                "summary": "Returns a remote http service",
+                "summary": "Create remote HTTP service",
                 "description": "Permissions: CREATE on Web Service Group",
                 "operationId": "createHttpService",
                 "parameters": [
@@ -28082,7 +28082,7 @@
                 "tags": [
                     "Remote HTTP Services"
                 ],
-                "summary": "Returns a remote http service",
+                "summary": "Get remote HTTP service",
                 "description": "Permissions: READ on Web Service",
                 "operationId": "getHttpService",
                 "parameters": [
@@ -28150,7 +28150,7 @@
                 "tags": [
                     "Remote HTTP Services"
                 ],
-                "summary": "Returns a remote http service",
+                "summary": "Update remote HTTP service",
                 "description": "Permissions: UPDATE on Web Service",
                 "operationId": "updateHttpService",
                 "parameters": [
@@ -28230,7 +28230,7 @@
                 "tags": [
                     "Remote HTTP Services"
                 ],
-                "summary": "Clones a remote http service",
+                "summary": "Clone remote HTTP service",
                 "description": "Permissions: READ on Web Service (Permission Override), CREATE on Web Service Group",
                 "operationId": "cloneHttpService",
                 "parameters": [
@@ -28307,9 +28307,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/inputs": {
             "get": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "Remote HTTP Service Inputs"
                 ],
-                "summary": "Returns a listing of remote http service inputs for an account",
+                "summary": "List remote HTTP service inputs",
                 "description": "Permissions: READ on HTTP Service",
                 "operationId": "getHttpServiceInputList",
                 "parameters": [
@@ -28378,9 +28378,9 @@
             },
             "post": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "Remote HTTP Service Inputs"
                 ],
-                "summary": "Returns a remote http service input for an account",
+                "summary": "Create remote HTTP service input",
                 "description": "Permissions: UPDATE on HTTP Service",
                 "operationId": "createHttpServiceInput",
                 "parameters": [
@@ -28464,9 +28464,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/httpServiceGroups/{serviceGroupId}/httpServices/{serviceId}/inputs/{inputId}": {
             "get": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "Remote HTTP Service Inputs"
                 ],
-                "summary": "Returns a remote http service input for an account",
+                "summary": "Get remote HTTP service input",
                 "description": "Permissions: READ on HTTP Service",
                 "operationId": "getHttpServiceInput",
                 "parameters": [
@@ -28543,9 +28543,9 @@
             },
             "delete": {
                 "tags": [
-                    "Remote HTTP Services"
+                    "Remote HTTP Service Inputs"
                 ],
-                "summary": "Returns a remote http service input for an account",
+                "summary": "Delete remote HTTP service input",
                 "description": "Permissions: UPDATE on HTTP Service",
                 "operationId": "deleteHttpServiceInput",
                 "parameters": [
@@ -28706,7 +28706,7 @@
                 "tags": [
                     "Remote HTTP Services"
                 ],
-                "summary": "Returns a listing of remote http services",
+                "summary": "List remote HTTP services",
                 "description": "Permissions: READ on Web Service Group",
                 "operationId": "getRemoteHttpServiceListUsingGET",
                 "parameters": [
@@ -28784,7 +28784,7 @@
                 "tags": [
                     "Remote HTTP Services"
                 ],
-                "summary": "createRemoteHttpServiceUsingPOST",
+                "summary": "Create remote HTTP service",
                 "description": "",
                 "operationId": "createRemoteHttpServiceUsingPOST",
                 "parameters": [
@@ -28851,7 +28851,7 @@
                 "tags": [
                     "Remote HTTP Services"
                 ],
-                "summary": "Returns a remote http service",
+                "summary": "Get remote HTTP service",
                 "description": "Permissions: READ on Web Service",
                 "operationId": "getRemoteHttpServiceUsingGET",
                 "parameters": [
@@ -28916,7 +28916,7 @@
                 "tags": [
                     "Remote HTTP Services"
                 ],
-                "summary": "updateRemoteHttpServiceUsingPUT",
+                "summary": "Update remote HTTP service",
                 "description": "",
                 "operationId": "updateRemoteHttpServiceUsingPUT",
                 "parameters": [
@@ -28991,7 +28991,7 @@
                 "tags": [
                     "Remote HTTP Services"
                 ],
-                "summary": "deleteRemoteHttpServiceUsingDELETE",
+                "summary": "Delete remote HTTP service",
                 "description": "",
                 "operationId": "deleteRemoteHttpServiceUsingDELETE",
                 "parameters": [
@@ -29124,6 +29124,18 @@
         },
         {
             "name": "Users"
+        },
+        {
+            "name": "Remote HTTP Service Groups"
+        },
+        {
+            "name": "Remote HTTP Services"
+        },
+        {
+            "name": "Remote HTTP Service Inputs"
+        },
+        {
+            "name": "External Auth Configurations"
         }
     ],
     "x-tag-groups": [
@@ -29209,7 +29221,11 @@
                 "Integration Agent Controller",
                 "Integration Agent Group Controller",
                 "Integration Gate Group Controller",
-                "Public Integration API"
+                "Public Integration API",
+                "Remote HTTP Service Groups",
+                "Remote HTTP Services",
+                "Remote HTTP Service Inputs",
+                "External Auth Configurations"
             ]
         }
     ]
