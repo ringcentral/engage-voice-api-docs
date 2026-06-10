@@ -26965,7 +26965,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/chatGroups/withChildren": {
             "get": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Groups"
                 ],
                 "summary": "Returns a listing of Chat Groups with related data for an Account",
                 "description": "Permissions: READ on Account and READ on CHAT_QUEUE, Post Filtered Results",
@@ -27046,7 +27046,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}": {
             "get": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Groups"
                 ],
                 "summary": "Returns a single Chat Group",
                 "description": "Permissions: READ on Chat Group",
@@ -27103,7 +27103,7 @@
             },
             "put": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Groups"
                 ],
                 "summary": "Updates a single Chat Group",
                 "description": "Permissions: UPDATE on Chat Group",
@@ -27651,7 +27651,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/dispositions": {
             "get": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Dispositions"
                 ],
                 "summary": "Returns a listing of dispositions for a Chat Queue",
                 "description": "Permissions: READ on Chat Queue",
@@ -27722,7 +27722,7 @@
             },
             "post": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Dispositions"
                 ],
                 "summary": "Creates a new disposition",
                 "description": "Permissions: UPDATE on Chat Queue (Permission Override)",
@@ -27802,7 +27802,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/dispositions/{dispositionId}": {
             "get": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Dispositions"
                 ],
                 "summary": "Returns a disposition for a Chat Queue",
                 "description": "Permissions: READ on Chat Queue",
@@ -27881,7 +27881,7 @@
             },
             "put": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Dispositions"
                 ],
                 "summary": "Updates a disposition for a Chat Queue",
                 "description": "Permissions: UPDATE on Chat Queue",
@@ -27970,7 +27970,7 @@
             },
             "delete": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Dispositions"
                 ],
                 "summary": "Deletes a disposition",
                 "description": "Permissions: UPDATE on Chat Queue (Permission Override)",
@@ -28051,7 +28051,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/events": {
             "get": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Events"
                 ],
                 "summary": "Returns a listing of events for a Chat Queue",
                 "description": "Permissions: READ on Chat Queue",
@@ -28122,7 +28122,7 @@
             },
             "post": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Events"
                 ],
                 "summary": "Creates a new event",
                 "description": "Permissions: UPDATE on Chat Queue (Permission Override)",
@@ -28202,7 +28202,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/events/{eventId}": {
             "get": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Events"
                 ],
                 "summary": "Returns a event for a Chat Queue",
                 "description": "Permissions: READ on Chat Queue",
@@ -28281,7 +28281,7 @@
             },
             "put": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Events"
                 ],
                 "summary": "Updates an event for a Chat Queue",
                 "description": "Permissions: Update on Chat Queue",
@@ -28370,7 +28370,7 @@
             },
             "delete": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Events"
                 ],
                 "summary": "Deletes an event",
                 "description": "Permissions: UPDATE on Chat Queue (Perimssion Override)",
@@ -28451,7 +28451,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/scheduleOverrides": {
             "get": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Schedules"
                 ],
                 "summary": "Returns a listing of Schedule Overrides for a Chat Queue",
                 "description": "Permissions: READ on Chat Queue",
@@ -28521,7 +28521,7 @@
             },
             "post": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Schedules"
                 ],
                 "summary": "Creates a new Schedule Override",
                 "description": "Permissions: UPDATE on Chat Queue (Permission Override)",
@@ -28598,7 +28598,7 @@
             },
             "put": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Schedules"
                 ],
                 "summary": "Saves a listing of Schedule Overrides",
                 "description": "Permissions: UPDATE on Chat Queue",
@@ -28683,7 +28683,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/chatGroups/{chatGroupId}/chatQueues/{chatQueueId}/scheduleOverrides/{scheduleOverrideId}": {
             "put": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Schedules"
                 ],
                 "summary": "Updates a single Schedule Override",
                 "description": "Permissions: UPDATE on Chat Queue",
@@ -28770,7 +28770,7 @@
             },
             "delete": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Queue Schedules"
                 ],
                 "summary": "Deletes a Schedule Override",
                 "description": "Permissions: UPDATE on Chat Queue (Permission Override)",
@@ -29010,7 +29010,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/utilities/assignChatQueueChatWidget": {
             "post": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Widgets"
                 ],
                 "summary": "Assigns a Queue to a Widget",
                 "description": "Permissions: READ on Account (Permission Override), CREATE on Utilities",
@@ -29068,7 +29068,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/utilities/assignChatQueueChatWidget/{guid}": {
             "get": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Widgets"
                 ],
                 "summary": "Returns a single assignment",
                 "description": "Permissions: READ on Account, READ on Utilities",
@@ -29123,7 +29123,7 @@
             },
             "put": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Widgets"
                 ],
                 "summary": "Updates an Assignment of a Queue to a Widget",
                 "description": "Permissions: READ on Account (Permission Override), UPDATE on Utilities",
@@ -29188,7 +29188,7 @@
             },
             "delete": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Widgets"
                 ],
                 "summary": "Deletes an Assignment of a Queue to a Widget",
                 "description": "Permissions: READ on Account, DELETE on Utilities",
@@ -29245,7 +29245,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/utilities/chatQueues/{chatQueueId}/chatWidgets": {
             "get": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Widgets"
                 ],
                 "summary": "Returns a listing of Chat Widgets for an Account",
                 "description": "Permissions: READ on Account, READ on Utilities",
@@ -29307,7 +29307,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/utilities/chatWidgets": {
             "get": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Widgets"
                 ],
                 "summary": "Returns a listing of Chat Widgets for an Account",
                 "description": "Permissions: READ on Account, READ on Utilities",
@@ -29356,7 +29356,7 @@
             },
             "post": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Widgets"
                 ],
                 "summary": "Create a single Chat Widget",
                 "description": "Permissions: READ on Account (Permission Override), CREATE on Utilities",
@@ -29417,7 +29417,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/utilities/chatWidgets/{widgetId}": {
             "get": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Widgets"
                 ],
                 "summary": "Returns a single Chat Widget",
                 "description": "Permissions: READ on Account, READ on Utilities",
@@ -29474,7 +29474,7 @@
             },
             "put": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Widgets"
                 ],
                 "summary": "Updates a single Chat Widget",
                 "description": "Permissions: READ on Account (Permission Override), UPDATE on Utilities",
@@ -29541,7 +29541,7 @@
             },
             "delete": {
                 "tags": [
-                    "Chat Queues"
+                    "Chat Widgets"
                 ],
                 "summary": "Deletes a single Chat Widget",
                 "description": "Permissions: Read on Account (Permission Override), DELETE on Utilities",
@@ -29675,6 +29675,24 @@
         },
         {
             "name": "Users"
+        },
+        {
+            "name": "Chat Groups"
+        },
+        {
+            "name": "Chat Queues"
+        },
+        {
+            "name": "Chat Queue Dispositions"
+        },
+        {
+            "name": "Chat Queue Events"
+        },
+        {
+            "name": "Chat Queue Schedules"
+        },
+        {
+            "name": "Chat Widgets"
         }
     ],
     "x-tag-groups": [
@@ -29710,7 +29728,13 @@
                 "Requeue Shortcuts",
                 "Queue Schedule",
                 "Queue Special ANI",
-                "Number Management"
+                "Number Management",
+                "Chat Groups",
+                "Chat Queues",
+                "Chat Queue Dispositions",
+                "Chat Queue Events",
+                "Chat Queue Schedules",
+                "Chat Widgets"
             ]
         },
         {
