@@ -26715,9 +26715,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/withChildren": {
             "get": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Groups"
                 ],
-                "summary": "Returns a listing of knowledge base groups with related data for an account",
+                "summary": "List knowledge base groups with children",
                 "description": "Permissions: READ on Account, Post Filtered Results",
                 "operationId": "getKnowledgeBaseGroupListWithChildren",
                 "parameters": [
@@ -26776,9 +26776,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}": {
             "get": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Groups"
                 ],
-                "summary": "Returns a knowledge base group for an account",
+                "summary": "Get knowledge base group",
                 "description": "Permissions: READ on Knowledge Base Group",
                 "operationId": "getKnowledgeBaseGroup",
                 "parameters": [
@@ -26833,9 +26833,9 @@
             },
             "put": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Groups"
                 ],
-                "summary": "Updates a knowledge base group for an account",
+                "summary": "Update knowledge base group",
                 "description": "Permissions: UPDATE on Knowledge Base Group",
                 "operationId": "updateKnowledgeBaseGroup",
                 "parameters": [
@@ -26900,9 +26900,9 @@
             },
             "delete": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Groups"
                 ],
-                "summary": "Deletes a knowledge base group for an account",
+                "summary": "Delete knowledge base group",
                 "description": "Permissions: DELETE on Knowledge Base Group",
                 "operationId": "deleteKnowledgeBaseGroup",
                 "parameters": [
@@ -26959,9 +26959,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories": {
             "get": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Categories"
                 ],
-                "summary": "Returns a listing of knowledge base categories for a knowledge base group",
+                "summary": "List knowledge base categories",
                 "description": "Permissions: READ on Knowledge Base, Post Filtered Results",
                 "operationId": "getKnowledgeBaseCategoryList",
                 "parameters": [
@@ -27019,9 +27019,9 @@
             },
             "post": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Categories"
                 ],
-                "summary": "Creates a knowledge base category for a knowledge base group",
+                "summary": "Create knowledge base category",
                 "description": "Permissions: CREATE on Knowledge Base Group",
                 "operationId": "createKnowledgeBaseCategory",
                 "parameters": [
@@ -27088,9 +27088,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/withChildren": {
             "get": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Categories"
                 ],
-                "summary": "Returns a listing of knowledge base categories with related data for a knowledge base group",
+                "summary": "List knowledge base categories with articles",
                 "description": "Permissions: READ on Knowledge Base, Post Filtered Results",
                 "operationId": "getKnowledgeBaseCategoryListWithChildren",
                 "parameters": [
@@ -27150,9 +27150,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}": {
             "get": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Categories"
                 ],
-                "summary": "Returns a knowledge base category for a knowledge base group",
+                "summary": "Get knowledge base category",
                 "description": "Permissions: READ on Knowledge Base Category",
                 "operationId": "getKnowledgeBaseCategory",
                 "parameters": [
@@ -27218,9 +27218,9 @@
             },
             "put": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Categories"
                 ],
-                "summary": "Updates a knowledge base category for a knowledge base group",
+                "summary": "Update knowledge base category",
                 "description": "Permissions: UPDATE on Knowledge Base Category",
                 "operationId": "updateKnowledgeBaseCategory",
                 "parameters": [
@@ -27296,9 +27296,9 @@
             },
             "delete": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Categories"
                 ],
-                "summary": "Deletes a knowledge base category for a knowledge base group",
+                "summary": "Delete knowledge base category",
                 "description": "Permissions: DELETE on Knowledge Base Category",
                 "operationId": "deleteKnowledgeBaseCategory",
                 "parameters": [
@@ -27366,9 +27366,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}/knowledgeBaseArticles": {
             "get": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Articles"
                 ],
-                "summary": "Returns a listing of knowledge base articles for a knowledge base category",
+                "summary": "List knowledge base articles",
                 "description": "Permissions: READ on Scripting",
                 "operationId": "getKnowledgeBaseArticleList",
                 "parameters": [
@@ -27437,9 +27437,9 @@
             },
             "post": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Articles"
                 ],
-                "summary": "Creates a knowledge base articles for a knowledge base category",
+                "summary": "Create knowledge base article",
                 "description": "Permissions: CREATE on Scripting",
                 "operationId": "createKnowledgeBaseArticle",
                 "parameters": [
@@ -27517,9 +27517,9 @@
         "/voice/api/v1/admin/accounts/{accountId}/knowledgeBaseGroups/{knowledgeBaseGroupId}/knowledgeBaseCategories/{knowledgeBaseCategoryId}/knowledgeBaseArticles/{knowledgeBaseArticleId}": {
             "get": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Articles"
                 ],
-                "summary": "Returns a knowledge base articles for a knowledge base category",
+                "summary": "Get knowledge base article",
                 "description": "Permissions: READ on Scripting",
                 "operationId": "getKnowledgeBaseArticle",
                 "parameters": [
@@ -27596,9 +27596,9 @@
             },
             "put": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Articles"
                 ],
-                "summary": "Updates a knowledge base articles for a knowledge base category",
+                "summary": "Update knowledge base article",
                 "description": "Permissions: UPDATE on Scripting",
                 "operationId": "updateKnowledgeBaseArticle",
                 "parameters": [
@@ -27685,9 +27685,9 @@
             },
             "delete": {
                 "tags": [
-                    "Knowledge Base"
+                    "Knowledge Base Articles"
                 ],
-                "summary": "Deletes a knowledge base articles for a knowledge base category",
+                "summary": "Delete knowledge base article",
                 "description": "Permissions: DELETE on Scripting",
                 "operationId": "deleteKnowledgeBaseArticle",
                 "parameters": [
@@ -27841,6 +27841,15 @@
         },
         {
             "name": "Users"
+        },
+        {
+            "name": "Knowledge Base Groups"
+        },
+        {
+            "name": "Knowledge Base Categories"
+        },
+        {
+            "name": "Knowledge Base Articles"
         }
     ],
     "x-tag-groups": [
@@ -27876,7 +27885,10 @@
                 "Requeue Shortcuts",
                 "Queue Schedule",
                 "Queue Special ANI",
-                "Number Management"
+                "Number Management",
+                "Knowledge Base Groups",
+                "Knowledge Base Categories",
+                "Knowledge Base Articles"
             ]
         },
         {
