@@ -26715,7 +26715,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destination Groups"
                 ],
                 "summary": "Returns a listing of cloud route groups for an account",
                 "description": "Permissions: READ on Account, Post Filtered Results",
@@ -26764,7 +26764,7 @@
             },
             "post": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destination Groups"
                 ],
                 "summary": "Create a cloud route group for an account",
                 "description": "Permissions: CREATE on Account",
@@ -26825,7 +26825,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/withChildren": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destination Groups"
                 ],
                 "summary": "Returns a listing of cloud route groups with related data for an account",
                 "description": "Permissions: READ on Account, Post Filtered Results",
@@ -26886,7 +26886,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destination Groups"
                 ],
                 "summary": "Returns a cloud route group for an account",
                 "description": "Permissions: READ on Cloud Route Group",
@@ -26943,7 +26943,7 @@
             },
             "put": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destination Groups"
                 ],
                 "summary": "Updates a cloud route group for an account",
                 "description": "Permissions: UPDATE on Cloud Route Group",
@@ -27010,7 +27010,7 @@
             },
             "delete": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destination Groups"
                 ],
                 "summary": "Deletes a cloud route group for an account",
                 "description": "Permissions: DELETE on Cloud Route Group",
@@ -27069,7 +27069,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destinations"
                 ],
                 "summary": "Returns a listing of cloud destinations for a cloud route group",
                 "description": "Permissions: READ on Cloud Destination, Post Filtered Results",
@@ -27129,7 +27129,7 @@
             },
             "post": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destinations"
                 ],
                 "summary": "Create a cloud destination for a cloud route group",
                 "description": "Permissions: CREATE on Cloud Destination",
@@ -27201,7 +27201,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/withChildren": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destinations"
                 ],
                 "summary": "Returns a listing of cloud destinations with related data for a cloud route group",
                 "description": "Permissions: READ on Cloud Destinations, Post Filtered Results",
@@ -27273,7 +27273,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destinations"
                 ],
                 "summary": "Returns a cloud destination for a cloud route group",
                 "description": "Permissions: READ on Cloud Destination",
@@ -27341,7 +27341,7 @@
             },
             "put": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destinations"
                 ],
                 "summary": "Updates a cloud destination for a cloud route group",
                 "description": "Permissions: UPDATE on Cloud Destination",
@@ -27421,7 +27421,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/assignedProfiles": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Assignments"
                 ],
                 "summary": "Returns a listing of assigned profiles for a cloud route destination",
                 "description": "Permissions: READ on Cloud Destination",
@@ -27492,7 +27492,7 @@
             },
             "post": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Assignments"
                 ],
                 "summary": "Creates an assigned profile for a cloud route destination",
                 "description": "Permissions: UPDATE on Cloud Destination (Permissions Override)",
@@ -27575,7 +27575,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/assignedProfiles/{cloudAssignedDestinationId}": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Assignments"
                 ],
                 "summary": "Returns an assigned profile for a cloud route destination",
                 "description": "Permissions: READ on Cloud Destination",
@@ -27654,7 +27654,7 @@
             },
             "put": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Assignments"
                 ],
                 "summary": "Updates an assigned profile for a cloud route destination",
                 "description": "Permissions: UPDATE on Cloud Destination",
@@ -27743,7 +27743,7 @@
             },
             "delete": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Assignments"
                 ],
                 "summary": "Deletes an assigned profile for a cloud route destination",
                 "description": "Permissions: UPDATE on Cloud Destination (Permissions Override)",
@@ -27814,7 +27814,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/clone": {
             "post": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destinations"
                 ],
                 "summary": "Creates a clone of the cloud route destination for a cloud group",
                 "description": "Permissions: READ on existing Cloud Route Destination and CREATE on Cloud Group (Permission Override)",
@@ -27896,7 +27896,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/dnisOverrides": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DNIS Overrides"
                 ],
                 "summary": "Returns a listing of dnis overrides for a cloud route destination",
                 "description": "Permissions: READ on Cloud Destination",
@@ -27956,7 +27956,7 @@
             },
             "post": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DNIS Overrides"
                 ],
                 "summary": "Create a dnis override for a cloud route destination",
                 "description": "Permissions: UPDATE on Cloud Destination (Permission Override)",
@@ -28057,7 +28057,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/dnisOverrides/batch": {
             "post": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DNIS Overrides"
                 ],
                 "summary": "Create a list dnis overrides for a cloud route destination",
                 "description": "Permissions: UPDATE on Cloud Destination (Permission Override)",
@@ -28173,7 +28173,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/dnisOverrides/{cloudRouteDestinationOverrideId}": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DNIS Overrides"
                 ],
                 "summary": "Returns a dnis override for a cloud route destination",
                 "description": "Permissions: READ on Cloud Destination",
@@ -28241,7 +28241,7 @@
             },
             "put": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DNIS Overrides"
                 ],
                 "summary": "Updates a dnis override for a cloud route destination",
                 "description": "Permissions: UPDATE on Cloud Destination",
@@ -28348,7 +28348,7 @@
             },
             "delete": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DNIS Overrides"
                 ],
                 "summary": "Deletes a dnis override for a cloud route destination",
                 "description": "Permissions: UPDATE on Cloud Destination (Permission Override)",
@@ -28418,7 +28418,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteDestinationGroups/{cloudRouteGroupId}/cloudRouteDestinations/{cloudRouteDestinationId}/setIsActive": {
             "put": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destinations"
                 ],
                 "summary": "Set active state for a cloud route destination",
                 "description": "Permissions: UPDATE on Cloud Destination",
@@ -28498,7 +28498,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/withChildren": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Profile Groups"
                 ],
                 "summary": "Returns a listing of Cloud Route Groups with children for an Account",
                 "description": "Permissions: READ on Account, Post Filtered Results",
@@ -28559,7 +28559,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Profile Groups"
                 ],
                 "summary": "Returns a single Cloud Route Group",
                 "description": "Permissions: READ on Cloud Route Group",
@@ -28616,7 +28616,7 @@
             },
             "put": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Profile Groups"
                 ],
                 "summary": "Updates a single Cloud Route Group",
                 "description": "Permissions: UPDATE on Cloud Route Group",
@@ -28683,7 +28683,7 @@
             },
             "delete": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Profile Groups"
                 ],
                 "summary": "Deletes a specific Cloud Route Group",
                 "description": "Permissions: DELETE on Cloud Route Group",
@@ -28742,7 +28742,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Profiles"
                 ],
                 "summary": "Returns a listing of cloud route profiles for a cloud group",
                 "description": "Permissions: READ on Cloud Group, Post Filtered Results",
@@ -28802,7 +28802,7 @@
             },
             "post": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Profiles"
                 ],
                 "summary": "Create a cloud route profile for a cloud group",
                 "description": "Permissions: CREATE on Cloud Group",
@@ -28874,7 +28874,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudProfileId}": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Profiles"
                 ],
                 "summary": "Returns a cloud route profile for a cloud group",
                 "description": "Permissions: READ on Cloud Group",
@@ -28944,7 +28944,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}": {
             "put": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Profiles"
                 ],
                 "summary": "Updates a cloud route profile for a cloud group",
                 "description": "Permissions: UPDATE on Cloud Profile",
@@ -29024,7 +29024,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Assignments"
                 ],
                 "summary": "Returns a listing of assigned destinations for a cloud route profile",
                 "description": "Permissions: READ on Cloud Profile",
@@ -29095,7 +29095,7 @@
             },
             "post": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Assignments"
                 ],
                 "summary": "Creates an assigned destination for a cloud route profile",
                 "description": "Permissions: CREATE on Cloud Profile",
@@ -29178,7 +29178,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/batch": {
             "put": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Assignments"
                 ],
                 "summary": "Updates a list of assigned destinations for a cloud route profile",
                 "description": "Permissions: UPDATE on Cloud Profile",
@@ -29264,7 +29264,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/percentAllocationHours/export": {
             "post": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Assignments"
                 ],
                 "summary": "Exports the percent allocations for a list of assigned destinations for a cloud route profile",
                 "description": "Permissions: READ on Cloud Profile (Permission Override)",
@@ -29327,7 +29327,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/percentAllocationHours/import": {
             "post": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Assignments"
                 ],
                 "summary": "Updates the percent allocations for a list of assigned destinations for a cloud route profile",
                 "description": "Permissions: UPDATE on Cloud Profile (Permission Override)",
@@ -29435,7 +29435,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/{cloudAssignedDestinationId}": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Assignments"
                 ],
                 "summary": "Returns an assigned destination for a cloud route profile",
                 "description": "Permissions: READ on Cloud Profile",
@@ -29514,7 +29514,7 @@
             },
             "put": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Assignments"
                 ],
                 "summary": "Updates an assigned destination for a cloud route profile",
                 "description": "Permissions: UPDATE on Cloud Profile",
@@ -29603,7 +29603,7 @@
             },
             "delete": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Assignments"
                 ],
                 "summary": "Deletes an assigned destination for a cloud route profile",
                 "description": "Permissions: DELETE on Cloud Profile",
@@ -29674,7 +29674,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/{cloudAssignedDestinationId}/dnisOverrides": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DNIS Overrides"
                 ],
                 "summary": "Returns a listing of dnis overrides for a cloud route profile assigned destination",
                 "description": "Permissions: READ on Cloud Profile",
@@ -29745,7 +29745,7 @@
             },
             "post": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DNIS Overrides"
                 ],
                 "summary": "Creates a dnis override for a cloud route profile assigned destination",
                 "description": "Permissions: UPDATE on Cloud Profile (Permission Override)",
@@ -29857,7 +29857,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/{cloudAssignedDestinationId}/dnisOverrides/batch": {
             "post": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DNIS Overrides"
                 ],
                 "summary": "Create a list of dnis overrides for a cloud route profile assigned destination",
                 "description": "Permissions: UPDATE on Cloud Profile (Permission Override) ",
@@ -29984,7 +29984,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/assignedDestinations/{cloudAssignedDestinationId}/dnisOverrides/{cloudAssignedOverrideId}": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DNIS Overrides"
                 ],
                 "summary": "Returns a dnis override for a cloud route profile assigned destination",
                 "description": "Permissions: READ on Cloud Profile",
@@ -30063,7 +30063,7 @@
             },
             "put": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DNIS Overrides"
                 ],
                 "summary": "Updates a dnis override for a cloud route profile assigned destination",
                 "description": "Permissions: UPDATE on Cloud Profile",
@@ -30181,7 +30181,7 @@
             },
             "delete": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DNIS Overrides"
                 ],
                 "summary": "Deletes a dnis override for a cloud route profile assigned destination",
                 "description": "Permissions: UPDATE on Cloud Profile (Permission Override)",
@@ -30262,7 +30262,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/clone": {
             "post": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Profiles"
                 ],
                 "summary": "Creates a clone of the cloud route profile for a cloud group",
                 "description": "Permissions: READ on cloned Cloud Route Profile and CREATE on Cloud Group (Permission Override)",
@@ -30344,7 +30344,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/dtmfEvents": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DTMF Events"
                 ],
                 "summary": "Returns a listing of dtmf events for a cloud route profile",
                 "description": "Permissions: READ Cloud Profile",
@@ -30415,7 +30415,7 @@
             },
             "post": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DTMF Events"
                 ],
                 "summary": "Creates a dtmf event for a cloud profile",
                 "description": "Permissions: UPDATE on Cloud Profile (Permission Override)",
@@ -30495,7 +30495,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/dtmfEvents/{dtmfEventId}": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DTMF Events"
                 ],
                 "summary": "Returns a dtmf event for a cloud profile",
                 "description": "Permissions: READ on Cloud Profile",
@@ -30574,7 +30574,7 @@
             },
             "put": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DTMF Events"
                 ],
                 "summary": "Updates a dtmf event for a cloud route profile",
                 "description": "Permissions: UPDATE on Cloud Profile",
@@ -30663,7 +30663,7 @@
             },
             "delete": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route DTMF Events"
                 ],
                 "summary": "Deletes a dtmf event for a cloud route profile",
                 "description": "Permissions: UPDATE on Cloud Profile (Permission Override) ",
@@ -30744,7 +30744,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/setIsActive": {
             "put": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Profiles"
                 ],
                 "summary": "Set active state for a cloud route profile",
                 "description": "Permissions: UPDATE on Cloud Profile",
@@ -30824,7 +30824,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/stickyDestinations/searchByAnis": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Sticky Destinations"
                 ],
                 "summary": "Returns a listing of sticky destinations by ani for a cloud route profile",
                 "description": "Permissions: READ on Cloud Profile",
@@ -30954,7 +30954,7 @@
         "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}/stickyDestinations/{ani}": {
             "delete": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Sticky Destinations"
                 ],
                 "summary": "Deletes a sticky destination by ani for a cloud route profile",
                 "description": "Permissions: UPDATE on Cloud Profile (Permission Override)",
@@ -31033,7 +31033,7 @@
         "/voice/api/v2-skinny/admin/accounts/{accountId}/cloudRouteDestinationGroups": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destination Groups"
                 ],
                 "summary": "Returns a listing of cloud route groups by account. This will not return the destinations under a group. Pass in the account id you'd like to search by as a parameter.",
                 "description": "Permissions: READ on Account, Post Filtered Results",
@@ -31084,7 +31084,7 @@
         "/voice/api/v2-skinny/admin/accounts/{accountId}/cloudRouteDestinationGroups/withChildren": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Destination Groups"
                 ],
                 "summary": "Returns a listing of cloud route groups, and the individual cloud destinations underneath each group, by account. Pass in the account id you'd like to search by as a parameter.",
                 "description": "Permissions: READ on Account, Post Filtered Results",
@@ -31135,7 +31135,7 @@
         "/voice/api/v2-skinny/admin/accounts/{accountId}/cloudRouteProfileGroups": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Profile Groups"
                 ],
                 "summary": "Returns a listing of cloud route groups by account. This will not return the cloud route profiles under a group.Pass in the account id you'd like to search by as a parameter.",
                 "description": "Permissions: READ on Account, Post Filtered Results",
@@ -31186,7 +31186,7 @@
         "/voice/api/v2-skinny/admin/accounts/{accountId}/cloudRouteProfileGroups/withChildren": {
             "get": {
                 "tags": [
-                    "Cloud Routing"
+                    "Cloud Route Profile Groups"
                 ],
                 "summary": "Returns a listing of cloud route groups, and the individual cloud profiles underneath each group, by account. Pass in the account id you'd like to search by as a parameter.",
                 "description": "Permissions: READ on Account, Post Filtered Results",
@@ -31312,6 +31312,30 @@
         },
         {
             "name": "Users"
+        },
+        {
+            "name": "Cloud Route Destination Groups"
+        },
+        {
+            "name": "Cloud Route Destinations"
+        },
+        {
+            "name": "Cloud Route Profile Groups"
+        },
+        {
+            "name": "Cloud Route Profiles"
+        },
+        {
+            "name": "Cloud Route Assignments"
+        },
+        {
+            "name": "Cloud Route DNIS Overrides"
+        },
+        {
+            "name": "Cloud Route DTMF Events"
+        },
+        {
+            "name": "Cloud Route Sticky Destinations"
         }
     ],
     "x-tag-groups": [
@@ -31347,7 +31371,15 @@
                 "Requeue Shortcuts",
                 "Queue Schedule",
                 "Queue Special ANI",
-                "Number Management"
+                "Number Management",
+                "Cloud Route Destination Groups",
+                "Cloud Route Destinations",
+                "Cloud Route Profile Groups",
+                "Cloud Route Profiles",
+                "Cloud Route Assignments",
+                "Cloud Route DNIS Overrides",
+                "Cloud Route DTMF Events",
+                "Cloud Route Sticky Destinations"
             ]
         },
         {
