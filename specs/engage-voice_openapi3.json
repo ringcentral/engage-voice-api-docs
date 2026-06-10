@@ -24088,7 +24088,7 @@
                 ],
                 "summary": "Retrieves all Api Tokens for AuthenticatedUser",
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Legacy Auth"
                 ]
             },
             "post": {
@@ -24131,7 +24131,7 @@
                 ],
                 "summary": "Creates a new 'Api Token' based AuthenticatedUser that does not expire",
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Legacy Auth"
                 ]
             }
         },
@@ -24184,14 +24184,14 @@
                 ],
                 "summary": "Removes an api token",
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Legacy Auth"
                 ]
             }
         },
         "/voice/api/v1/admin/users": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Users"
                 ],
                 "summary": "Returns a listing of all users that a user has access to",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER role",
@@ -24250,7 +24250,7 @@
             },
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Users"
                 ],
                 "summary": "Creates a single new user",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER role",
@@ -24331,7 +24331,7 @@
         "/voice/api/v1/auth/login": {
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Legacy Auth"
                 ],
                 "summary": "Application login to authenticate and receive an X-Auth-Token",
                 "description": "Permissions: Anonymous User",
@@ -26710,7 +26710,7 @@
         "/voice/api/v1/admin/auth": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Auth Utilities"
                 ],
                 "summary": "Returns information provided by /v1/auth/login for users who are already authenticated. Additionally, we return the host name of this platform.",
                 "description": "",
@@ -26746,7 +26746,7 @@
         "/voice/api/v1/admin/rightsDocs/assignments/{userId}": {
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Assigns a user to a rights document",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -26812,7 +26812,7 @@
         "/voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Returns a listing of users assigned to a rights document",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -26861,7 +26861,7 @@
             },
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Assigns a rights document to a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -26927,7 +26927,7 @@
         "/voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments/{assignedUserId}": {
             "delete": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Deletes a rights document from a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -26978,7 +26978,7 @@
         "/voice/api/v1/admin/users/availableUserNames": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Users"
                 ],
                 "summary": "Checks if username is available",
                 "description": "Permissions: Authenticated User",
@@ -27025,7 +27025,7 @@
         "/voice/api/v1/admin/users/duplicateAuthenticatedUser": {
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Auth Utilities"
                 ],
                 "summary": "Duplicates this authenticated user's session and returns a new auth token",
                 "description": "Permissions: Authenticated User",
@@ -27061,7 +27061,7 @@
         "/voice/api/v1/admin/users/passwordReset": {
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Auth Utilities"
                 ],
                 "summary": "Resets a user's password",
                 "description": "Permissions: Authenticated User",
@@ -27117,7 +27117,7 @@
         "/voice/api/v1/admin/users/reassign": {
             "put": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Users"
                 ],
                 "summary": "Reassigns all existing child users to a new parent user",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER role",
@@ -27168,7 +27168,7 @@
         "/voice/api/v1/admin/users/root": {
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Users"
                 ],
                 "summary": "Creates a single root user",
                 "description": "Permissions: SUPER_USER role",
@@ -27239,7 +27239,7 @@
         "/voice/api/v1/admin/users/root/{userId}/assignAccount": {
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Users"
                 ],
                 "summary": "Assigns an account to a root user",
                 "description": "Permissions: SUPER_USER role",
@@ -27309,7 +27309,7 @@
         "/voice/api/v1/admin/users/{targetUpdateUserId}": {
             "put": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Users"
                 ],
                 "summary": "Updates a user",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER role",
@@ -27367,7 +27367,7 @@
         "/voice/api/v1/admin/users/{userId}": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Users"
                 ],
                 "summary": "Returns a user",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER role",
@@ -27413,7 +27413,7 @@
             },
             "delete": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Users"
                 ],
                 "summary": "Deletes a user",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER role",
@@ -27474,7 +27474,7 @@
         "/voice/api/v1/admin/users/{userId}/aggregatedRightsDocs": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Returns a map of aggregated rights documents for a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -27525,7 +27525,7 @@
         "/voice/api/v1/admin/users/{userId}/assignAccountToAnyUser": {
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Users"
                 ],
                 "summary": "Assigns an account to any user",
                 "description": "Permissions: hasRole('MANAGE_RIGHTS') or hasRole('SUPER_USER')",
@@ -27595,7 +27595,7 @@
         "/voice/api/v1/admin/users/{userId}/assignedMasterRightsDocs": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Returns a map of assigned master rights documents for a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -27649,7 +27649,7 @@
         "/voice/api/v1/admin/users/{userId}/assignedRightsDocs": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Returns a map of assigned rights documents for a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -27703,7 +27703,7 @@
         "/voice/api/v1/admin/users/{userId}/bulkAssignAccountToAnyUser": {
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Users"
                 ],
                 "summary": "Assigns an account to any user",
                 "description": "Permissions: hasRole('MANAGE_RIGHTS') or hasRole('SUPER_USER')",
@@ -27770,7 +27770,7 @@
         "/voice/api/v1/admin/users/{userId}/children": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Users"
                 ],
                 "summary": "Returns a hierarchical listing of all users that a user has access to",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER role",
@@ -27821,7 +27821,7 @@
         "/voice/api/v1/admin/users/{userId}/dashboards": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Dashboards"
                 ],
                 "summary": "Returns a listing of a dashboards for a user",
                 "description": "Permissions: Authenticated User",
@@ -27870,7 +27870,7 @@
             },
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Dashboards"
                 ],
                 "summary": "Creates a new dashboard for a user",
                 "description": "Permissions: Authenticated User",
@@ -27928,7 +27928,7 @@
         "/voice/api/v1/admin/users/{userId}/dashboards/{dashboardId}": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Dashboards"
                 ],
                 "summary": "Returns a dashboard for a user",
                 "description": "Permissions: Authenticated User",
@@ -27984,7 +27984,7 @@
             },
             "put": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Dashboards"
                 ],
                 "summary": "Updates an existing dashboard for a user",
                 "description": "Permissions: Authenticated User",
@@ -28050,7 +28050,7 @@
             },
             "delete": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Dashboards"
                 ],
                 "summary": "Deletes a dashboard for a user",
                 "description": "Permissions: Authenticated User",
@@ -28108,7 +28108,7 @@
         "/voice/api/v1/admin/users/{userId}/dashboards/{dashboardId}/share": {
             "put": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Dashboards"
                 ],
                 "summary": "Creates a copy of the dashboard for each admin id supplied",
                 "description": "Permissions: Authenticated User",
@@ -28185,7 +28185,7 @@
         "/voice/api/v1/admin/users/{userId}/effectiveAssignedRightsDocs": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Returns a map of merged (master and regular) and aggregated assigned rights documents for a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -28236,7 +28236,7 @@
         "/voice/api/v1/admin/users/{userId}/masterRightsDocs": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Returns a map of master rights documents for a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -28288,7 +28288,7 @@
             },
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Creates a new master rights document for a user",
                 "description": "Permissions: SUPER_USER roles",
@@ -28349,7 +28349,7 @@
         "/voice/api/v1/admin/users/{userId}/masterRightsDocs/{rightsDocId}": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Returns a single master rights document for a user",
                 "description": "Permissions: SUPER_USER roles",
@@ -28405,7 +28405,7 @@
             },
             "put": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Updates an existing master rights document for a user",
                 "description": "Permissions: SUPER_USER roles",
@@ -28471,7 +28471,7 @@
             },
             "delete": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Deletes an existing master rights document for a user",
                 "description": "Permissions: SUPER_USER roles",
@@ -28522,7 +28522,7 @@
         "/voice/api/v1/admin/users/{userId}/ownedMasterRightsDocs": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Returns a map of owned master rights documents for a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -28576,7 +28576,7 @@
         "/voice/api/v1/admin/users/{userId}/ownedRightsDocs": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Returns a map of owned rights documents for a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -28630,7 +28630,7 @@
         "/voice/api/v1/admin/users/{userId}/passwordReset": {
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Auth Utilities"
                 ],
                 "summary": "Resets a user's password and sends reset password email",
                 "description": "Permissions: Authenticated User",
@@ -28697,7 +28697,7 @@
         "/voice/api/v1/admin/users/{userId}/rightsDocs": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Returns a map of rights documents for a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -28749,7 +28749,7 @@
             },
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Creates a new rights document for a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -28810,7 +28810,7 @@
         "/voice/api/v1/admin/users/{userId}/rightsDocs/{rightsDocId}": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Returns a single rights document for a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -28866,7 +28866,7 @@
             },
             "put": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Updates an existing rights document for a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -28932,7 +28932,7 @@
             },
             "delete": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Deletes an existing rights document for a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -28983,7 +28983,7 @@
         "/voice/api/v1/admin/users/{userId}/rightsDocsWithSubAccounts": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Rights Documents"
                 ],
                 "summary": "Returns a map of rights documents for a user",
                 "description": "Permissions: MANAGE_RIGHTS or SUPER_USER roles",
@@ -29047,7 +29047,7 @@
         "/voice/api/v1/admin/users/{userId}/roles": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Roles"
                 ],
                 "summary": "Returns a listing of roles for a user",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER roles",
@@ -29113,7 +29113,7 @@
         "/voice/api/v1/admin/users/{userId}/roles/{roleType}": {
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Roles"
                 ],
                 "summary": "Adds a role to a user",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER roles",
@@ -29171,7 +29171,7 @@
             },
             "delete": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Roles"
                 ],
                 "summary": "Removes a role from a user",
                 "description": "Permissions: MANAGE_USERS or SUPER_USER roles",
@@ -29228,7 +29228,7 @@
         "/voice/api/v1/admin/users/{userId}/setIsActive": {
             "put": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "Users"
                 ],
                 "summary": "Set user is active",
                 "description": "Permissions: Authenticated User",
@@ -29286,7 +29286,7 @@
         "/voice/api/v1/auth/isTokenValid": {
             "get": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Auth Utilities"
                 ],
                 "summary": "Checks to see if a given token is valid",
                 "description": "Permissions: NONE",
@@ -29333,7 +29333,7 @@
         "/voice/api/v1/auth/passwordReset": {
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Auth Utilities"
                 ],
                 "summary": "Used to reset a users password",
                 "description": "Permissions: NONE",
@@ -29389,7 +29389,7 @@
         "/voice/api/v1/auth/passwordResetRequest": {
             "post": {
                 "tags": [
-                    "Admin Users and Permissions"
+                    "User Auth Utilities"
                 ],
                 "summary": "Resets a password if a user is locked out, an email will be sent to the user",
                 "description": "Permissions: NONE",
@@ -29520,6 +29520,18 @@
         },
         {
             "name": "Users"
+        },
+        {
+            "name": "User Roles"
+        },
+        {
+            "name": "Rights Documents"
+        },
+        {
+            "name": "User Dashboards"
+        },
+        {
+            "name": "User Auth Utilities"
         }
     ],
     "x-tag-groups": [
@@ -29538,7 +29550,11 @@
             "tags": [
                 "Agents",
                 "Agent Groups",
-                "Users"
+                "Users",
+                "User Roles",
+                "Rights Documents",
+                "User Dashboards",
+                "User Auth Utilities"
             ]
         },
         {
