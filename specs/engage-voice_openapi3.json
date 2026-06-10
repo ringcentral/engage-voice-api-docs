@@ -26717,7 +26717,7 @@
                 "tags": [
                     "Agent State Subscriptions"
                 ],
-                "summary": "Get all subscription for sub-account",
+                "summary": "List agent state subscriptions",
                 "description": "Permissions: WFO_ACCESS role",
                 "operationId": "getAllSubscriptions",
                 "parameters": [
@@ -26774,7 +26774,7 @@
                 "tags": [
                     "Agent State Subscriptions"
                 ],
-                "summary": "Subscribe wfm for sub-accounts",
+                "summary": "Create agent state subscription",
                 "description": "Permissions: WFO_ACCESS role",
                 "operationId": "subscribe",
                 "parameters": [
@@ -26840,7 +26840,7 @@
                 "tags": [
                     "Agent State Subscriptions"
                 ],
-                "summary": "Update a subscription for sub-account",
+                "summary": "Update agent state subscription",
                 "description": "Permissions: WFO_ACCESS role",
                 "operationId": "updateSubscription",
                 "parameters": [
@@ -26913,7 +26913,7 @@
                 "tags": [
                     "Agent State Subscriptions"
                 ],
-                "summary": "Update a subscription for sub-account",
+                "summary": "Delete agent state subscription",
                 "description": "Permissions: WFO_ACCESS role",
                 "operationId": "deleteSubscription",
                 "parameters": [
@@ -27044,6 +27044,9 @@
         },
         {
             "name": "Users"
+        },
+        {
+            "name": "Agent State Subscriptions"
         }
     ],
     "x-tag-groups": [
@@ -27129,7 +27132,8 @@
                 "Integration Agent Controller",
                 "Integration Agent Group Controller",
                 "Integration Gate Group Controller",
-                "Public Integration API"
+                "Public Integration API",
+                "Agent State Subscriptions"
             ]
         }
     ]
