@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="280" viewBox="0 0 760 280" role="img" aria-labelledby="title desc">
+  <title id="title">Workflow Studio Start Stream placement</title>
+  <desc id="desc">A Workflow Studio example showing the On_Agent_Connected node connected to the Start Stream node.</desc>
+  <defs>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="6" cy="6" r="2" fill="#e7ebf0" />
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#1f2933" flood-opacity="0.16" />
+    </filter>
+  </defs>
+
+  <rect width="760" height="280" fill="#f7f9fb" />
+  <rect width="760" height="280" fill="url(#grid)" />
+
+  <g transform="translate(72 48)">
+    <rect width="240" height="184" rx="22" fill="#fff" stroke="#e1e6ed" stroke-width="2" filter="url(#shadow)" />
+    <g transform="translate(96 42)" fill="none" stroke="#0073cf" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 47v-12c0-25 16-35 32-35s32 10 32 35v12" />
+      <path d="M7 47c0 12 6 21 15 21h7v-30h-12c-6 0-10 4-10 9z" />
+      <path d="M71 47c0 12-6 21-15 21h-7v-30h12c6 0 10 4 10 9z" />
+      <path d="M50 71h15" stroke-width="5" />
+    </g>
+    <text x="120" y="138" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#29313d">
+      <tspan x="120">On_Agent_</tspan>
+      <tspan x="120" dy="26">Connected</tspan>
+    </text>
+  </g>
+
+  <g transform="translate(448 48)">
+    <rect width="240" height="184" rx="22" fill="#fff" stroke="#e1e6ed" stroke-width="2" filter="url(#shadow)" />
+    <g transform="translate(101 35)" fill="none" stroke="#0073cf" stroke-width="6" stroke-linecap="round">
+      <path d="M26 22c12 12 12 31 0 43" />
+      <path d="M14 34c5 6 5 13 0 19" />
+      <path d="M49 10c19 19 19 49 0 68" />
+      <path d="M75 22c-12 12-12 31 0 43" />
+      <path d="M87 34c-5 6-5 13 0 19" />
+    </g>
+    <text x="120" y="143" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#29313d">
+      <tspan x="120">Start Stream</tspan>
+    </text>
+  </g>
+
+  <g fill="none" stroke="#0073cf" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M312 140h108" />
+    <path d="M410 130l18 10-18 10z" fill="#0073cf" />
+    <circle cx="312" cy="140" r="12" fill="#fff" />
+    <circle cx="448" cy="140" r="12" fill="#fff" />
+  </g>
+</svg>

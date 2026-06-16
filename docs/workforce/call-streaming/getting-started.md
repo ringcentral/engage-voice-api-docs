@@ -56,6 +56,8 @@ Insert a **Start Stream** node after the workflow's agent-connected event. The r
 On_Agent_Connected -> Start Stream
 ```
 
+<img class="img-fluid" width="520" src="../../images/ringcx-audio-streaming-agent-connected.svg" alt="Workflow Studio example showing On_Agent_Connected connected to Start Stream">
+
 Triggering Start Stream after `On_Agent_Connected` helps ensure the agent participant is present before RingCX opens the gRPC stream. Do not start streaming in parallel with the agent-connected event.
 
 Configure the Start Stream node with these fields:
