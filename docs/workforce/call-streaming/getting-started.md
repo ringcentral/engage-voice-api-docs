@@ -48,13 +48,15 @@ Before configuring streaming, confirm the following:
 
 In the RingCX admin console, open Workflow Studio and either edit an existing workflow or create a new workflow for the queue or campaign you want to stream.
 
-### Step 2: Add a Start Stream node
+### Step 2: Add a Start Stream node after the agent connects
 
-Insert a **Start Stream** node at the point in the workflow where you want streaming to begin. Common trigger points include:
+Insert a **Start Stream** node after the workflow's agent-connected event. The recommended pattern is:
 
-* `On_Interaction_Start`: stream the entire call from start to finish.
-* `On_Agent_Connected`: stream from the moment an agent joins.
-* `On_Segment_Start`: stream when a specific participant segment is added.
+```text
+On_Agent_Connected -> Start Stream
+```
+
+Triggering Start Stream after `On_Agent_Connected` helps ensure the agent participant is present before RingCX opens the gRPC stream. Do not start streaming in parallel with the agent-connected event.
 
 Configure the Start Stream node with these fields:
 
@@ -126,7 +128,7 @@ Use dialog streaming for full call recording, transcription, or analytics. Use s
 | Stream never starts | Verify the endpoint uses port `443` or `10443`, resolves publicly, presents a trusted TLS certificate, and is reachable from RingCX. |
 | Auth error in logs | Confirm the credential type and value match what the vendor expects. The token is sent in the gRPC `authorization` metadata header. |
 | Stream stops immediately | The third-party server may be rejecting the connection. Confirm that it accepts your account, token, TLS connection, and codec. |
-| No audio at the partner | Confirm the call actually has audio, an agent is connected, and the caller is not on hold. Streaming can pause while a caller is on hold. |
+| No audio at the partner | Confirm the Start Stream node runs after `On_Agent_Connected`, the call actually has audio, and the caller is not on hold. Streaming can pause while a caller is on hold. |
 
 ## Part 2: Implementing a gRPC server to receive audio
 
@@ -372,7 +374,7 @@ Multiple participants can be active simultaneously. Disambiguate them using the 
 Putting it together, here is what happens when a streamed call takes place:
 
 1. A call arrives at RingCX, either inbound or outbound.
-2. The configured workflow runs and reaches the Start Stream node.
+2. The configured workflow runs, the agent connects, and the workflow reaches the Start Stream node after `On_Agent_Connected`.
 3. RingCX opens a TLS gRPC connection to the third-party server endpoint and sends a `DialogInit` message.
 4. Each participant joining the call triggers a `SegmentStart` message.
 5. During the call, audio is delivered as a continuous flow of `SegmentMedia` messages.
