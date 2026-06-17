@@ -24842,7 +24842,15 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK"
+                        "description": "OK. The response body contains the WAV recording audio stream.",
+                        "content": {
+                            "audio/wav": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
                     },
                     "400": {
                         "description": "Bad request",
