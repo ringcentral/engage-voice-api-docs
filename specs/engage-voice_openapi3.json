@@ -4851,6 +4851,13 @@
                     "quotaTargets": {
                         "$ref": "#/components/schemas/CollectionQuotaTarget"
                     },
+                    "reserveAgent": {
+                        "description": "Agent ID to reserve this lead for during direct lead loading. If the value is blank, null, omitted, invalid, or refers to an agent without access to the account, the lead is still accepted. Invalid or inaccessible assignments are counted in failedAgentAssignment.",
+                        "example": "980",
+                        "nullable": true,
+                        "type": "string",
+                        "writeOnly": true
+                    },
                     "sortCol": {
                         "type": "string"
                     },
@@ -9855,6 +9862,11 @@
                         "type": "integer"
                     },
                     "dncUploadCount": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "failedAgentAssignment": {
+                        "description": "Number of accepted leads whose reserveAgent value could not be assigned because the agent ID was invalid or the agent does not have access to the account.",
                         "format": "int32",
                         "type": "integer"
                     },
