@@ -1,35 +1,53 @@
-# Obtaining a Engage access token without a RingEX Login
+# Obtaining an Engage access token without a RingCentral login
 
-To access RingCX APIs without a corresponding RingEX account, you can directly login to the Engage platform by specifying the platform you reside on.
+Use this authentication method only when your RingCX account is not linked to a RingCentral / RingEX login and you must sign in directly to the Engage platform.
 
-!!! important "All new accounts start with RingEX"
-    For accounts with single-sign-on to RingEX, the method to [exchange access tokens](auth-ringcentral.md#retrieve-ringcentral-access-token) is the default.
+!!! important "Use RingCentral authentication when available"
+    For accounts with single sign-on to RingEX, use the default [RingCentral token exchange flow](auth-ringcentral.md). New integrations should use that flow whenever possible.
 
-!!! note "If you do not know which platform your account resides on, please contact your Customer Success Manager (CSM) and ask for your Platform ID."
+!!! note "If you do not know which platform your account resides on, contact your Customer Success Manager (CSM) and ask for your Platform ID."
 
-## Generate an Engage Access Token
+## Generate an Engage access token
 
-!!! warning "Engage endpoints are deprecated"
-    This Engage endpoint is deprecated and will stop working in the future.
-
-The first step to login to RingCX without a RingEX login is to provide your `username`, `password` and `platformId`.
+To sign in directly to Engage, provide your `username`, `password`, and `platformId`.
 
 ### Request
+
 ```http
-POST https://engage.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platform ID}
+POST https://engage.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platformId}
 ```
 
 Here is an example using cURL:
 
-`curl -X POST 'https://engage.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platform ID}'`
+```bash
+curl -X POST 'https://engage.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platformId}'
+```
 
-In the response, you will see a very long string for an `accessToken`. You'll want to copy and save this for your next call.  You will also see a shorter string for a `refreshToken`. Save this token as well to [refresh your access token](#refresh-ringcentral-engage-access-token) when the access token expires.
+The response contains an `accessToken` and a `refreshToken`. Use the `accessToken` for RingCX Voice API calls. Save the `refreshToken` so you can refresh the access token when it expires.
 
-## Generate a Permanent API Token
+## Token lifetime and renewal
 
-In specific instances, a permanent API token is desired (for example, calling an API from the IVR). You can create permanent API tokens for this instance. Every time you run the method below, a new API token will be created and returned. You can also [retrieve a list](#list-all-personal-api-tokens) of permanent API tokens to see which tokens are still working.
+Engage access tokens used with the current RingCX Voice API expire after 5 minutes. RingCX does not automatically refresh the token for you.
+
+Cache and reuse the access token until it is close to expiration. If an API call returns `401 Unauthorized` because the token expired, refresh the token before retrying the request.
+
+### Refresh an Engage access token
+
+```http
+POST https://engage.ringcentral.com/api/auth/token/refresh
+Content-Type: application/x-www-form-urlencoded
+
+refresh_token=<engageRefreshToken>
+```
+
+The response contains a new `accessToken` and a new `refreshToken`. Save the new refresh token for the next refresh request.
+
+## Generate a permanent API token
+
+In specific cases, a permanent API token is useful, such as calling an API from an IVR flow. Every time you run the method below, a new API token is created and returned. You can also [retrieve a list](#list-all-personal-api-tokens) of permanent API tokens to see which tokens are still available.
 
 ### Request
+
 ```http
 POST https://engage.ringcentral.com/voice/api/v1/admin/token
 
@@ -38,17 +56,23 @@ Authorization: Bearer {accessToken}
 
 Here is an example using cURL:
 
-`curl -X POST https://engage.ringcentral.com/voice/api/v1/admin/token -H "Authorization: Bearer <accessToken>"`
+```bash
+curl -X POST 'https://engage.ringcentral.com/voice/api/v1/admin/token' \
+  -H 'Authorization: Bearer <accessToken>'
+```
 
-The response will be an API token that looks something like:
+The response is an API token that looks similar to:
 
-`aws80:c2353445-bc74-af1a-2850-1d55a371c0a9`
+```text
+aws80:c2353445-bc74-af1a-2850-1d55a371c0a9
+```
 
-## List all Personal API Tokens
+## List all personal API tokens
 
-As you create new API tokens, those permanent API tokens will persist and you can see a list of your personal API tokens using the following command.
+As you create new API tokens, those permanent API tokens persist. You can retrieve the list of personal API tokens using the following request.
 
 ### Request
+
 ```http
 GET https://engage.ringcentral.com/voice/api/v1/admin/token
 
@@ -59,24 +83,25 @@ Authorization: Bearer <accessToken>
 
 Here is an example using cURL:
 
-`curl -X GET https://engage.ringcentral.com/voice/api/v1/admin/token -H "X-Auth-Token: {apiToken}"`
-
-The `apiToken` in the `X-Auth-Token` header can be a token generated using the user credentials in the [step above](#generate-a-permanent-api-token) or an existing API token for the user, or even a new access token from just logging in.
-
-The response will be an API token list that looks something like:
-
-### JSON
-
-```json
-{
-  "aws80:c2353445-bc74-af1a-2850-1d55a371c0a9",
-  "aws80:dab26445-53ca-12c2-0185-4c33b642a023"
-}
+```bash
+curl -X GET 'https://engage.ringcentral.com/voice/api/v1/admin/token' \
+  -H 'X-Auth-Token: {apiToken}'
 ```
 
-## Delete an API Token
+You can authenticate this request with `X-Auth-Token` using a generated API token, or with `Authorization: Bearer <accessToken>` using a current Engage access token.
 
-If you are done with an API Token and no longer need it, or you feel it may have been compromised, you can delete an existing token as follows.
+The response is an API token list that looks similar to:
+
+```json
+[
+  "aws80:c2353445-bc74-af1a-2850-1d55a371c0a9",
+  "aws80:dab26445-53ca-12c2-0185-4c33b642a023"
+]
+```
+
+## Delete an API token
+
+If you no longer need an API token, or you believe it may have been compromised, delete it.
 
 === "X-Auth-Token"
 
@@ -94,14 +119,16 @@ If you are done with an API Token and no longer need it, or you feel it may have
     Authorization: Bearer <accessToken>
     ```
 
-
 Here is an example cURL command:
 
-`curl -X DELETE https://engage.ringcentral.com/voice/api/v1/admin/token/{API-TOKEN-FOR-DELETE} -H "X-Auth-Token: {apiToken}"`
+```bash
+curl -X DELETE 'https://engage.ringcentral.com/voice/api/v1/admin/token/{apiTokenForDelete}' \
+  -H 'X-Auth-Token: {apiToken}'
+```
 
-## Get Accounts
+## Get accounts
 
-A method to try is to retrieve the accounts this user has access to. The main account is the top level account and is considered a container for the sub-accounts that most operations are performed on.
+You can retrieve the accounts available to the authenticated user. The main account is the top-level account. Most operational API calls are performed against a sub-account.
 
 ```http
 GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts
@@ -110,4 +137,7 @@ Authorization: Bearer <accessToken>
 
 Here is an example cURL command:
 
-`curl -X GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts -H "Authorization: Bearer {accessToken}"`
+```bash
+curl -X GET 'https://ringcx.ringcentral.com/voice/api/v1/admin/accounts' \
+  -H 'Authorization: Bearer {accessToken}'
+```
