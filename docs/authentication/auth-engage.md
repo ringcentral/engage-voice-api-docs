@@ -25,16 +25,6 @@ Here is an example using cURL:
 
 In the response, you will see a very long string for an `accessToken`. You'll want to copy and save this for your next call.  You will also see a shorter string for a `refreshToken`. Save this token as well to [refresh your access token](#refresh-ringcentral-engage-access-token) when the access token expires.
 
-## Refresh RingCentral Engage Access Token
-
-Use the `refreshToken` returned by the Engage login response to renew the Engage access token when it expires.
-
-```http
-POST https://engage.ringcentral.com/api/auth/token/refresh?refresh_token={refreshToken}
-```
-
-The response returns a new `accessToken` and `refreshToken`. Save the new refresh token for the next refresh request.
-
 ## Generate a Permanent API Token
 
 In specific instances, a permanent API token is desired (for example, calling an API from the IVR). You can create permanent API tokens for this instance. Every time you run the method below, a new API token will be created and returned. You can also [retrieve a list](#list-all-personal-api-tokens) of permanent API tokens to see which tokens are still working.
