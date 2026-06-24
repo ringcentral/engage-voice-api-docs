@@ -143,7 +143,7 @@ Persona call schedules use the following fields:
 | `phoneId` | The configured persona phone ID. |
 | `priority` | Dial order within the window. Lower values are attempted first. |
 
-Each schedule must include at least one call preference. For each configured day, schedule windows must fit inside the campaign's business hours and should cover that calling period without overlaps or gaps.
+Each schedule must include at least one call preference. For each configured day, schedule windows must fit inside and fully cover the campaign's business hours for that day. Windows cannot overlap. When you split a day into multiple windows, start each next window exactly one minute after the previous window ends, such as `08:00` to `12:00` followed by `12:01` to `17:00`.
 
 ## Load Leads With Persona Phones
 
@@ -151,7 +151,9 @@ You can load persona phone numbers through direct lead loading or through the fi
 
 ### Direct Lead Loading
 
-For direct lead loading, keep the lead's primary phone number in `leadPhone`. Add extra phone numbers in `personaPhoneConfig`. The keys in `personaPhoneConfig` are the configured `phoneLabel` values, and the values are that lead's phone numbers.
+For direct lead loading, keep the lead's primary phone number in `leadPhone`. If the account is enabled for E.164 or international phone-number handling, also provide the primary number in `leadPhoneE164`; RingCX uses `leadPhoneE164` as the primary number for that account mode.
+
+Add extra phone numbers in `personaPhoneConfig`. The keys in `personaPhoneConfig` are the configured `phoneLabel` values, and the values are that lead's phone numbers. The primary number must be a single number, not a pipe-delimited list, because strategic campaigns use persona configuration to manage additional numbers.
 
 ```http
 POST {BASE_URL}/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct
@@ -168,11 +170,12 @@ Content-Type: application/json
     {
       "externId": "lead-1001",
       "leadPhone": "4155550100",
+      "leadPhoneE164": "+14155550100",
       "firstName": "Ada",
       "lastName": "Lovelace",
       "personaPhoneConfig": {
-        "Mobile Phone": "4155550101",
-        "Work Phone": "4155550102"
+        "Mobile Phone": "+14155550101",
+        "Work Phone": "+14155550102"
       }
     }
   ]
@@ -251,13 +254,13 @@ In this example, phone ID `2` is loaded from column `5`, and phone ID `3` is loa
 1. Create account-level phone personas with `/persona-phone-config`.
 2. Create the campaign with `callingConfiguration` set to `STRATEGIC`.
 3. Add `personaCallSchedules` to the campaign so each calling window has phone IDs and priorities.
-4. Load leads with `leadPhone` plus either per-lead `personaPhoneConfig` values for direct load or `additionalPhoneMappings` for file processing.
+4. Load leads with a single primary phone number, using `leadPhoneE164` when the account is enabled for E.164 phone numbers, plus either per-lead `personaPhoneConfig` values for direct load or `additionalPhoneMappings` for file processing.
 5. Let the dialer evaluate the current campaign calling window and dial the eligible phone personas in priority order.
 
 ## Troubleshooting
 
 If the preview response does not include `personaPhoneConfig`, confirm that the campaign uses `callingConfiguration: "STRATEGIC"` and that persona phone configurations exist for the account.
 
-If direct lead loading accepts the lead but does not map an additional phone, confirm that each `personaPhoneConfig` key exactly matches a configured `phoneLabel`.
+If direct lead loading accepts the request but a lead is not loaded or does not map an additional phone, confirm that the primary phone is populated in the field used by the account mode. Accounts enabled for E.164 phone numbers must provide `leadPhoneE164`. Also confirm that the primary phone is not pipe-delimited and that each `personaPhoneConfig` key exactly matches a configured `phoneLabel`.
 
-If campaign creation or update fails for persona schedules, verify that each schedule has at least one `callPreferences` entry, that the phone IDs exist, and that schedule windows fit within the campaign's business hours.
+If campaign creation or update fails for persona schedules, verify that each schedule has at least one `callPreferences` entry, that the phone IDs exist, that schedule windows fully cover the campaign's business hours for that day, and that consecutive windows use the one-minute handoff rule.

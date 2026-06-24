@@ -4802,6 +4802,11 @@
                         "type": "integer"
                     },
                     "leadPhone": {
+                        "description": "Primary lead phone number. For accounts enabled for E.164 or international phone-number handling, provide the primary phone in leadPhoneE164.",
+                        "type": "string"
+                    },
+                    "leadPhoneE164": {
+                        "description": "Primary lead phone number in E.164 format. Required for direct lead loading when the account uses E.164 or international phone-number handling.",
                         "type": "string"
                     },
                     "leadPriority": {
@@ -4896,7 +4901,7 @@
                         "additionalProperties": {
                             "type": "string"
                         },
-                        "description": "Additional phone numbers for direct lead loading. Keys are configured persona phone labels and values are phone numbers for that lead.",
+                        "description": "Additional phone numbers for direct lead loading. Keys must exactly match configured persona phone labels, and values are phone numbers for that lead.",
                         "type": "object"
                     }
                 },
