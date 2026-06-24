@@ -63,6 +63,7 @@ nav:
       - 'DNC': dialing/dnc/dnc-list.md
     - 'Leads':
       - 'Bulk Import Leads': dialing/leads/bulk-import.md
+      - 'Lead Phone Persona Management': dialing/leads/phone-persona-management.md
       - 'Searching Leads': dialing/leads/search.md
       - 'Lead Actions': dialing/leads/actions.md
       - 'Web2Campaign': dialing/leads/web2campaign.md
