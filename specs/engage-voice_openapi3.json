@@ -15043,6 +15043,45 @@
                 ]
             }
         },
+        "/voice/api/v1/admin/accounts": {
+            "get": {
+                "description": "Returns the RingCX accounts available to the authenticated user.",
+                "operationId": "getAllAccounts",
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "items": {
+                                        "$ref": "#/components/schemas/Account"
+                                    },
+                                    "type": "array"
+                                }
+                            }
+                        },
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "summary": "Returns RingCX accounts available to the authenticated user",
+                "tags": [
+                    "RingCentral Auth"
+                ]
+            }
+        },
         "/voice/api/v1/admin/accounts/{accountId}/activeCalls/createManualAgentCall": {
             "post": {
                 "description": "Permissions: READ on Account (Permission Override)",
