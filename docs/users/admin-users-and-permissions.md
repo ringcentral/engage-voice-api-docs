@@ -69,7 +69,6 @@ Rights documents provide detailed administrative permissions. Use these endpoint
 | List assigned rights docs | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/assignedRightsDocs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getUsersAssignedRightsDocs2) |
 | List assigned master rights docs | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/users/{userId}/assignedMasterRightsDocs` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/getUsersAssignedRightsDocs) |
 | Assign rights doc | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/assignRightsDoc) |
-| Assign user to rights docs | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/rightsDocs/assignments/{userId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/assignUserToRightsDocs) |
 | Delete assignment | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/rightsDocs/{rightsDocId}/assignments/{assignedUserId}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Admin-Users-and-Permissions/deleteRightsDocAssignment) |
 
 ## API Tokens and Auth Utilities
@@ -150,7 +149,7 @@ The `RightsDocument` schema does not have `description` or `active`. Use `cascad
 
 The assignment endpoint takes one or more `userIds` query parameters. It does not accept a JSON request body.
 
-To assign multiple rights documents to one user, call `POST https://ringcx.ringcentral.com/voice/api/v1/admin/rightsDocs/assignments/{userId}?rightsDocIds=4567&rightsDocIds=4568`.
+To assign multiple rights documents to one user, call the assignment endpoint once for each rights document ID with the same `userIds` value.
 
 ### Example User Response
 
