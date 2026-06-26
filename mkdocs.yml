@@ -37,6 +37,7 @@ nav:
       - 'Active Calls': analytics/active-calls/index.md
     - 'Cloud Reports':
       - 'Call Transcripts': analytics/reports/call-transcripts.md
+      - 'Call Summaries': analytics/reports/call-summaries.md
     - 'Realtime Reports':
       - 'Campaign Operations' : analytics/reports/realtime-campaign-ops.md
       - 'Supervisor Overview' : analytics/reports/realtime-supervisor-view.md
