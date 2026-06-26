@@ -10,6 +10,8 @@ Campaigns are created for a specific period of time so a start and end date must
 
 Caller ID must be an accurate number for this account. This should be the number that leads can call to reach a customer service representative. The customer service representative must be able to put the caller on your internal DNC list. If the Caller ID number goes to an automatic responder, the responder must also provide the lead with a way to request placement on your DNC list, either by leaving a voicemail or via a touchtone entry.
 
+For campaigns that need to dial labeled lead phone types, such as mobile, home, or work, create the campaign with `callingConfiguration` set to `STRATEGIC` and configure persona call schedules. See [Lead Phone Persona Management](../leads/phone-persona-management.md).
+
 ## Prerequisite
 Once you’ve created and configured your [dial group](dial-groups.md), you can begin creating campaigns within that group to segment and configure your outgoing calls. Remember that all the campaigns within any given dial group will use the dialing mode you selected in your dial group configuration settings.
 
