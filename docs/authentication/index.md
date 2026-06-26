@@ -6,15 +6,15 @@ RingCX Voice APIs support several authentication methods. For most current RingC
 
 | Auth method | Use when | API host | Authorization header |
 | --- | --- | --- | --- |
-| [RingCX with RingCentral Token](auth-ringcentral.md) | Your RingCX user is linked to RingEX / RingCentral login. This is the default for current integrations. | `https://ringcx.ringcentral.com/voice/api/` | `Authorization: Bearer <ringcxAccessToken>` |
-| [Engage Access Token](auth-engage.md) | Your account does not use a linked RingCentral login and must sign in directly to the Engage platform. | `https://ringcx.ringcentral.com/voice/api/` | `Authorization: Bearer <engageAccessToken>` |
+| [RingCX with RingCentral Token](auth-ringcentral.md) | Your RingCX user is linked to RingEX / RingCentral login. This is the default for current integrations. | `https://engage.ringcentral.com/voice/api/` | `Authorization: Bearer <ringcxAccessToken>` |
+| [Engage Access Token](auth-engage.md) | Your account does not use a linked RingCentral login and must sign in directly to the Engage platform. | `https://engage.ringcentral.com/voice/api/` | `Authorization: Bearer <engageAccessToken>` |
 | [Legacy](auth-legacy.md) | Your deployment uses the legacy portal hosts. | `https://portal.vacd.biz/api/` or `https://portal.virtualacd.biz/api/` | `X-Auth-Token: <authTokenOrApiToken>` |
 
 ## Current RingCX API
 
 The current RingCX Voice API is rooted at:
 
-* `https://ringcx.ringcentral.com/voice/api/`
+* `https://engage.ringcentral.com/voice/api/`
 
 Current API calls use an OAuth 2.0 bearer-style authorization header:
 

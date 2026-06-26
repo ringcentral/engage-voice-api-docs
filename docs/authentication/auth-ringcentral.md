@@ -9,7 +9,7 @@ The flow has two steps:
 
 Use the RingCX access token, not the original RingCentral access token, when you call RingCX Voice APIs.
 
-!!! info "RingCX Voice APIs are rooted at: https://ringcx.ringcentral.com/voice/api/"
+!!! info "RingCX Voice APIs are rooted at: https://engage.ringcentral.com/voice/api/"
 
 ## Create an app
 
@@ -134,25 +134,39 @@ RingCX does not automatically refresh the token for you. If an API call returns 
 Use the RingCX access token in the `Authorization` header.
 
 ```http
-GET https://ringcx.ringcentral.com/voice/api/v1/admin/users
+GET https://engage.ringcentral.com/voice/api/v1/admin/users
 Authorization: Bearer <ringcxAccessToken>
 ```
 
 ## Get accounts
 
-You can retrieve the accounts available to the authenticated user. The main account is the top-level account. Most operational API calls are performed against a sub-account.
+You can retrieve the RingCX accounts available to the authenticated user. This request uses the RingCX access token returned by the token exchange.
 
 ```http
-GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts
+GET https://engage.ringcentral.com/voice/api/v1/admin/accounts
 Authorization: Bearer <ringcxAccessToken>
 ```
 
 Here is an example cURL command:
 
 ```bash
-curl -X GET 'https://ringcx.ringcentral.com/voice/api/v1/admin/accounts' \
+curl -X GET 'https://engage.ringcentral.com/voice/api/v1/admin/accounts' \
   -H 'Authorization: Bearer <ringcxAccessToken>'
 ```
+
+The response includes the RingCX account IDs you need for RingCX Voice API requests:
+
+* **`accountId`** is the RingCX sub-account ID. Most operational API calls are performed against a sub-account.
+* **`mainAccountId`** is the RingCX main account ID. The main account is the top-level account.
+
+Some RingCX APIs also require the RingCentral account UID. To retrieve that value, call the RingCentral account endpoint with the RingCentral/RingEX access token from [Retrieve a RingCentral access token](#retrieve-a-ringcentral-access-token).
+
+```http
+GET https://platform.ringcentral.com/restapi/v1.0/account/~
+Authorization: Bearer <ringCentralAccessToken>
+```
+
+In that response, the `id` value is the RingCentral account UID. Use the RingCentral/RingEX access token for this request, not the RingCX access token.
 
 ## Refresh a RingCX access token
 

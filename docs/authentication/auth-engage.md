@@ -131,13 +131,13 @@ curl -X DELETE 'https://engage.ringcentral.com/voice/api/v1/admin/token/{apiToke
 You can retrieve the accounts available to the authenticated user. The main account is the top-level account. Most operational API calls are performed against a sub-account.
 
 ```http
-GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts
+GET https://engage.ringcentral.com/voice/api/v1/admin/accounts
 Authorization: Bearer <accessToken>
 ```
 
 Here is an example cURL command:
 
 ```bash
-curl -X GET 'https://ringcx.ringcentral.com/voice/api/v1/admin/accounts' \
+curl -X GET 'https://engage.ringcentral.com/voice/api/v1/admin/accounts' \
   -H 'Authorization: Bearer {accessToken}'
 ```
