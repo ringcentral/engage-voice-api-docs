@@ -51,7 +51,7 @@ The authenticating user must have the `WFO_ACCESS` role for the target RingCX su
 
 `POST https://ringcx.ringcentral.com/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/agent-states/subscriptions`
 
-A subscription request identifies the target sub-account and the integration endpoint that should receive agent-state updates. Use a durable middleware endpoint that can authenticate incoming requests, retry safely, and tolerate duplicate delivery.
+A subscription request identifies the target sub-account and the integration endpoint that should receive agent-state updates. Use a stable HTTPS endpoint and configure authentication or custom headers when the receiving system requires them.
 
 ### Path Parameters
 
@@ -68,11 +68,11 @@ The request body matches the `RTASubscriptionRequest` schema.
 | --- | --- | --- | --- |
 | `subscriptionName` | String | **Required** | Unique active subscription name for the sub-account. |
 | `description` | String | Optional | Human-readable description. |
-| `retryCount` | Integer | Optional | Maximum retry count. Defaults to `3` and cannot exceed `10`. |
+| `retryCount` | Integer | Optional | Maximum delivery retry count. Defaults to `3` and cannot exceed `10`. |
 | `notificationUrl` | String | **Required** | HTTP or HTTPS endpoint that receives agent-state notifications. |
-| `authConfigId` | UUID | Optional | External auth configuration ID used when RingCX calls the receiver. Provision this with the Remote HTTP Services external auth configuration endpoints. |
+| `authConfigId` | UUID | Optional | Auth configuration ID used when RingCX sends notification requests to the receiver. |
 | `active` | Boolean | Optional | Whether the subscription is created in an active state. Defaults to active. |
-| `customHeaders` | Object | Optional | Additional headers to send to the receiver. Values are arbitrary JSON (`additionalProperties: object`); strings are the safest choice. |
+| `customHeaders` | Object | Optional | Additional headers to send with notification requests. Values are arbitrary JSON (`additionalProperties: object`); strings are the safest choice. |
 | `expiresAt` | Integer | Optional | Future epoch timestamp (`int64`) after which the subscription expires. Use `0` or omit for no configured expiration. |
 
 **Example Request:**
@@ -118,7 +118,7 @@ The request body matches the `RTASubscriptionRequest` schema.
 
 ### Response Object
 
-The response matches the `RTASubscriptionResponse` schema and also includes the resolved `authConfig` object along with audit fields.
+The response matches the `RTASubscriptionResponse` schema and includes audit fields that show who last changed the subscription.
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -128,29 +128,19 @@ The response matches the `RTASubscriptionResponse` schema and also includes the 
 | `subscriptionName` | String | Subscription display name. |
 | `description` | String | Human-readable description. |
 | `notificationUrl` | String | Receiver endpoint. |
-| `authConfigId` | UUID | External auth configuration used for outbound notification authentication. |
-| `authConfig` | Object | Resolved auth configuration (provider name, auth type, etc.). |
+| `authConfigId` | UUID | Auth configuration used for notification authentication, if configured. |
+| `authConfig` | Object | Resolved auth configuration metadata, when returned. |
 | `active` | Boolean | Whether the subscription is active. |
-| `maxRetryCount` | Integer | Maximum delivery retry count (note: the request field is `retryCount`; the response renames it to `maxRetryCount`). |
+| `maxRetryCount` | Integer | Maximum delivery retry count. The request field is `retryCount`; the response field is `maxRetryCount`. |
 | `customHeaders` | Object | Custom headers sent to the receiver. |
 | `expiresAt` | Integer | Expiration epoch timestamp. |
 | `createdBy`, `createdAt`, `updatedBy`, `updatedAt` | String / DateTime | Audit fields tracking who last changed the subscription. |
 
-## Receiver Payload
+## Receiver Endpoint
 
-The subscription resource defines where RingCX sends agent-state events, but the event payload shape, signing/auth header behavior, retry backoff timing, and expected receiver response semantics were not discoverable in the public swagger or the accessible controller/service code. Confirm these details with RingCX engineering before publishing a receiver contract.
+The `notificationUrl` is the destination for the agent-state notification feed. This page covers how to manage the subscription resource. For examples of Workforce Management agent-state notification fields, see [Understanding the Event Payload](../notifications/wfm/payload-wfm.md#agent-state-events).
 
-!!! info "Needs Engineering Confirmation"
-    Before using this article as a public receiver implementation guide, confirm:
-
-    * The HTTP method RingCX uses when calling `notificationUrl`.
-    * The exact JSON payload for an agent-state change event.
-    * Whether `authConfigId` controls outbound authentication, and how it is applied.
-    * Whether `customHeaders` are sent with each event.
-    * Which receiver status codes are treated as success.
-    * Retry backoff timing and duplicate-delivery behavior.
-
-Until those details are confirmed, design receivers to accept duplicate events and to log unknown fields rather than failing the whole request.
+When implementing a receiver, validate the authentication method and custom headers configured for the subscription, respond quickly after accepting the notification, and process events idempotently. The `retryCount` setting controls how many delivery retries RingCX can attempt after a delivery failure.
 
 ## Common Errors
 
@@ -161,29 +151,6 @@ Until those details are confirmed, design receivers to accept duplicate events a
 | `404 Not Found` | Invalid `authConfigId` or subscription ID. | Confirm the external auth configuration and subscription belong to the same sub-account. |
 | `409 Conflict` | Active subscription name already exists for the sub-account. | List subscriptions first and update the existing subscription. |
 
-## Sample Receiver (Python)
-
-```python
-from flask import Flask, request
-
-app = Flask(__name__)
-seen_events = set()
-
-@app.post("/ringcx/agent-states")
-def receive_agent_state():
-    payload = request.get_json(force=True)
-    event_id = payload.get("eventId") or payload.get("id")
-
-    if event_id and event_id in seen_events:
-        return ("", 204)
-    if event_id:
-        seen_events.add(event_id)
-
-    # Store the raw event until the confirmed payload contract is published.
-    print("received agent-state event", payload)
-    return ("", 204)
-```
-
 ## Operational Guidance
 
 1. List subscriptions before creating a new one to avoid duplicate feeds.
@@ -193,4 +160,4 @@ def receive_agent_state():
 5. Monitor receiver health and compare delivery against [Real-Time Supervisor View](../analytics/reports/realtime-supervisor-view.md) snapshots when troubleshooting.
 
 !!! important "Reliability"
-    Design the receiving service to be idempotent. Network retries or downstream recovery can result in repeated state updates for the same agent transition.
+    Design the receiving service to be idempotent. Delivery retries can occur after receiver or network failures.

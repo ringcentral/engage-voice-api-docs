@@ -3928,6 +3928,24 @@
                 },
                 "type": "object"
             },
+            "AuthConfig": {
+                "properties": {
+                    "authType": {
+                        "enum": [
+                            "APIKEY",
+                            "JWT",
+                            "BASIC",
+                            "OAUTH",
+                            "CUSTOM_AUTH"
+                        ],
+                        "type": "string"
+                    },
+                    "apiKey": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "AuthenticatedUser": {
                 "properties": {
                     "authToken": {
@@ -11019,6 +11037,115 @@
                     "targetCount": {
                         "format": "int32",
                         "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "RTASubscriptionRequest": {
+                "required": [
+                    "subscriptionName",
+                    "notificationUrl"
+                ],
+                "properties": {
+                    "subscriptionName": {
+                        "description": "Subscription name.",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Human-readable description.",
+                        "type": "string"
+                    },
+                    "retryCount": {
+                        "description": "Maximum delivery retry count. Maximum allowed value is 10. Default is 3.",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "notificationUrl": {
+                        "description": "HTTP or HTTPS endpoint that receives agent-state notifications.",
+                        "type": "string"
+                    },
+                    "authConfigId": {
+                        "description": "Auth configuration ID used when RingCX sends notification requests to the receiver.",
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "active": {
+                        "description": "Whether the subscription is active.",
+                        "type": "boolean"
+                    },
+                    "customHeaders": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "description": "Additional headers to send with notification requests.",
+                        "type": "object"
+                    },
+                    "expiresAt": {
+                        "description": "Expiration time as epoch seconds. Use 0 for no configured expiration.",
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "RTASubscriptionResponse": {
+                "properties": {
+                    "subscriptionId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "mainAccountId": {
+                        "type": "string"
+                    },
+                    "subAccountId": {
+                        "type": "string"
+                    },
+                    "subscriptionName": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "notificationUrl": {
+                        "type": "string"
+                    },
+                    "authConfigId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "maxRetryCount": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "customHeaders": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    },
+                    "expiresAt": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "createdBy": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedBy": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "authConfig": {
+                        "$ref": "#/components/schemas/AuthConfig"
                     }
                 },
                 "type": "object"
@@ -27046,7 +27173,8 @@
             "name": "Users"
         },
         {
-            "name": "Agent State Subscriptions"
+            "name": "Agent State Subscriptions",
+            "description": "Manage subscriptions that deliver RingCX agent-state notifications to external workforce management or monitoring systems."
         }
     ],
     "x-tag-groups": [
