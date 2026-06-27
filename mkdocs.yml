@@ -2,6 +2,9 @@ site_name: RingCentral RingCX Developer Guide
 site_url: https://engage-voice-api-docs.rtfd.org
 repo_url: https://github.com/ringcentral/engage-voice-api-docs
 docs_dir: docs
+exclude_docs: |
+  integration/reports.md
+
 theme:
   name: ringcentral
   product_section: engage
@@ -70,6 +73,7 @@ nav:
       - 'Web2Campaign': dialing/leads/web2campaign.md
   - 'Users':
     - 'Overview': users/agents/index.md
+    - 'Admin Users and Permissions': users/admin-users-and-permissions.md
     - 'Agents':
       - 'Agents': users/agents/agents.md
       - 'Agent Groups': users/agents/agent-groups.md
