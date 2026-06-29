@@ -26962,8 +26962,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27019,8 +27018,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27086,8 +27084,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27145,8 +27142,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27205,8 +27201,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27277,8 +27272,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27349,8 +27343,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27360,8 +27353,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27417,8 +27409,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27428,8 +27419,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27497,8 +27487,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27508,8 +27497,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27568,8 +27556,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27579,8 +27566,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27651,8 +27637,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27662,8 +27647,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27673,8 +27657,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27730,8 +27713,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27741,8 +27723,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27752,8 +27733,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27819,8 +27799,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27830,8 +27809,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27841,8 +27819,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27900,8 +27877,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27911,8 +27887,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27982,8 +27957,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27993,8 +27967,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -28053,8 +28026,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28064,8 +28036,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28154,8 +28125,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28165,8 +28135,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28270,8 +28239,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28281,8 +28249,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28292,8 +28259,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -28349,8 +28315,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28360,8 +28325,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28371,8 +28335,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28456,8 +28419,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28467,8 +28429,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28478,8 +28439,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -28537,8 +28497,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28548,8 +28507,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -28678,8 +28636,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -28735,8 +28692,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -28802,8 +28758,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -28861,8 +28816,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -28921,8 +28875,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -28993,8 +28946,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29004,8 +28956,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -29063,8 +29014,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29074,8 +29024,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -29143,8 +29092,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29154,8 +29102,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -29214,8 +29161,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29225,8 +29171,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -29297,8 +29242,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29308,8 +29252,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -29383,8 +29326,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29394,8 +29336,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -29446,8 +29387,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29457,8 +29397,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29554,8 +29493,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29565,8 +29503,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29576,8 +29513,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -29633,8 +29569,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29644,8 +29579,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29655,8 +29589,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -29722,8 +29655,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29733,8 +29665,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29744,8 +29675,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -29803,8 +29733,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29814,8 +29743,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29825,8 +29753,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -29885,8 +29812,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29896,8 +29822,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29907,8 +29832,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -29997,8 +29921,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30008,8 +29931,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30019,8 +29941,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30124,8 +30045,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30135,8 +30055,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30146,8 +30065,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30157,8 +30075,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -30214,8 +30131,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30225,8 +30141,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30236,8 +30151,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30247,8 +30161,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30332,8 +30245,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30343,8 +30255,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30354,8 +30265,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30365,8 +30275,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -30424,8 +30333,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30435,8 +30343,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30506,8 +30413,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30517,8 +30423,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -30577,8 +30482,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30588,8 +30492,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -30657,8 +30560,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30668,8 +30570,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30679,8 +30580,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -30736,8 +30636,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30747,8 +30646,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30758,8 +30656,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -30825,8 +30722,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30836,8 +30732,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30847,8 +30742,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -30906,8 +30800,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30917,8 +30810,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -30986,8 +30878,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -30997,8 +30888,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -31116,8 +31006,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -31127,8 +31016,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -31384,7 +31272,8 @@
             "name": "Active Calls"
         },
         {
-            "name": "Audio Streaming"
+            "name": "Audio Streaming",
+            "description": "Manage audio streaming resources for RingCX call streaming workflows."
         },
         {
             "name": "Agent Access"
@@ -31453,28 +31342,36 @@
             "name": "Users"
         },
         {
-            "name": "Cloud Route Destination Groups"
+            "name": "Cloud Route Destination Groups",
+            "description": "Manage groups that organize cloud route destinations for an account."
         },
         {
-            "name": "Cloud Route Destinations"
+            "name": "Cloud Route Destinations",
+            "description": "Manage cloud route destinations used as routing targets."
         },
         {
-            "name": "Cloud Route Profile Groups"
+            "name": "Cloud Route Profile Groups",
+            "description": "Manage groups that organize cloud route profiles for an account."
         },
         {
-            "name": "Cloud Route Profiles"
+            "name": "Cloud Route Profiles",
+            "description": "Manage cloud route profiles that define routing behavior."
         },
         {
-            "name": "Cloud Route Assignments"
+            "name": "Cloud Route Assignments",
+            "description": "Manage assignments between cloud route profiles and destinations."
         },
         {
-            "name": "Cloud Route DNIS Overrides"
+            "name": "Cloud Route DNIS Overrides",
+            "description": "Manage DNIS-specific routing overrides for cloud route destinations and assignments."
         },
         {
-            "name": "Cloud Route DTMF Events"
+            "name": "Cloud Route DTMF Events",
+            "description": "Manage DTMF event configuration for cloud route profiles."
         },
         {
-            "name": "Cloud Route Sticky Destinations"
+            "name": "Cloud Route Sticky Destinations",
+            "description": "Manage sticky destination lookups and routing state for cloud route profiles."
         }
     ],
     "x-tag-groups": [
