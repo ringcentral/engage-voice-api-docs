@@ -188,7 +188,9 @@ A DNIS override (`CloudRouteDestinationOverride`) attaches an alternate `routeDe
 
 ### Percent Allocation Import/Export
 
-The export endpoint returns the current percent-allocation-hours file for the profile. Edit the returned file offline, then POST it back to the import endpoint as a `multipart/form-data` upload. The `extension` query parameter (`PIPE`, `COMMA`, or `TAB`) tells the platform how to parse the delimited file. Keep the export format intact; the file schema is controlled by the generator and should not be reconstructed from scratch.
+Percent allocation profiles can route different portions of traffic to different assigned destinations. The import and export endpoints support bulk updates to those allocation schedules.
+
+Start by exporting the profile's current percent-allocation-hours file. Edit the exported file without changing its columns or delimiter, then upload the updated file to the import endpoint as `multipart/form-data`. The `extension` query parameter (`PIPE`, `COMMA`, or `TAB`) tells RingCX which delimiter format the uploaded file uses.
 
 ```bash
 curl -X POST \

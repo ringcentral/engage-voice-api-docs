@@ -14894,6 +14894,59 @@
                         "example": "VOICE"
                     }
                 }
+            },
+            "ActiveStateBoolean": {
+                "properties": {
+                    "isActive": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "CloudRouteDestinationSkinny": {
+                "properties": {
+                    "cloudDestinationId": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "destinationName": {
+                        "type": "string"
+                    },
+                    "cloudGroupId": {
+                        "type": "string"
+                    },
+                    "isActive": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "CloudRouteGroupSkinny": {
+                "properties": {
+                    "cloudGroupId": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "groupName": {
+                        "type": "string"
+                    },
+                    "accountId": {
+                        "type": "string"
+                    },
+                    "cloudRouteDestinations": {
+                        "items": {
+                            "$ref": "#/components/schemas/CloudRouteDestinationSkinny"
+                        },
+                        "type": "array"
+                    },
+                    "cloudRouteProfiles": {
+                        "items": {
+                            "$ref": "#/components/schemas/CloudRouteProfileSkinny"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
             }
         },
         "securitySchemes": {
@@ -27750,6 +27803,16 @@
                 "operationId": "deleteCloudAssignedDestination",
                 "parameters": [
                     {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
                         "name": "cloudRouteGroupId",
                         "in": "path",
                         "description": "cloudRouteGroupId",
@@ -27909,6 +27972,17 @@
                         "required": true,
                         "schema": {
                             "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
                             "pattern": "[0-9]+"
                         }
                     },
@@ -28190,6 +28264,17 @@
                         }
                     },
                     {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
                         "name": "cloudRouteDestinationId",
                         "in": "path",
                         "description": "cloudRouteDestinationId",
@@ -28361,6 +28446,17 @@
                         "required": true,
                         "schema": {
                             "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
                             "pattern": "[0-9]+"
                         }
                     },
@@ -29610,6 +29706,16 @@
                 "operationId": "deleteCloudAssignedDestination2",
                 "parameters": [
                     {
+                        "name": "accountId",
+                        "in": "path",
+                        "description": "accountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
                         "name": "cloudRouteGroupId",
                         "in": "path",
                         "description": "cloudRouteGroupId",
@@ -29687,6 +29793,17 @@
                         "required": true,
                         "schema": {
                             "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
                             "pattern": "[0-9]+"
                         }
                     },
@@ -30001,6 +30118,17 @@
                         }
                     },
                     {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
                         "name": "cloudRouteProfileId",
                         "in": "path",
                         "description": "cloudRouteProfileId",
@@ -30194,6 +30322,17 @@
                         "required": true,
                         "schema": {
                             "type": "string",
+                            "pattern": "[0-9]+"
+                        }
+                    },
+                    {
+                        "name": "cloudRouteGroupId",
+                        "in": "path",
+                        "description": "cloudRouteGroupId",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32",
                             "pattern": "[0-9]+"
                         }
                     },
