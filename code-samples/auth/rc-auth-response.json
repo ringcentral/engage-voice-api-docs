@@ -2,6 +2,7 @@
   "refreshToken":"<rcRingCXRefreshToken>",
   "accessToken":"<rcRingCXAccessToken>",
   "tokenType":"Bearer",
+  "mainAccountId":"333333",
   "agentDetails":[
     {
       "agentId":111111,

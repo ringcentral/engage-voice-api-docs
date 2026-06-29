@@ -1,248 +1,389 @@
-# Getting Started with Call Streaming
+# RingCX Audio Streaming
 
-!!!important
-    Please work with your RingCentral representative to activate Call Streaming service for your organization.
+## Overview
 
-**Call Streaming** runs alongside [Call Recording](../call-recording/index.md). It streams real-time stereo audio to your WebSocket Secure(WSS) server, which can then be used for services like Speech Analysis etc.
+RingCX can stream real-time call audio from a contact center conference to a third-party gRPC server. This is useful for integrations such as real-time agent assist tools, transcription engines, and analytics platforms.
 
-**Call Streaming** requires a WSS server built and hosted by you. The server is to receive audio streams for further processing. [Quick start guide](#quick-start-guide) is provided below.
+!!! important "Transport"
+    RingCX audio streaming uses gRPC over TLS only. Plaintext gRPC and WebSocket/WSS transports are not supported.
 
-## Workflow Overview
+This guide covers two audiences:
 
-<img class="img-fluid" width="100%" src="../../../images/call-streaming.png">
+* RingCX administrators configuring a workflow that starts and stops streaming during a call. See [Part 1](#part-1-configuring-streaming-as-a-ringcx-administrator).
+* Third-party developers implementing the gRPC server that receives streamed audio. See [Part 2](#part-2-implementing-a-grpc-server-to-receive-audio).
 
-## Quick Start Guide
+Both parts can be read independently; choose the section that matches your role.
 
-The following guide helps you quickly setup your local WebSocket server to try out Call Streaming by doing live transcription.
+### How streaming works at a glance
 
-Overall, we want to:
+When streaming is started for a call, RingCX opens a single TLS-encrypted gRPC stream to the third-party server. Each call participant, such as a contact, agent, or bot, is delivered as a separate audio segment over that one stream. The server only receives data; RingCX does not expect audio or events streamed back.
 
-- <img class="img-fluid" width="18px" src="../../../images/icons/new_file_icon.svg"> Create a streaming profile so we know where to stream call audio data to
-- <img class="img-fluid" width="18px" src="../../../images/icons/computer_icon.svg"> Host a WebSocket server locally
-- <img class="img-fluid" width="18px" src="../../../images/icons/phone_icon.svg"> Test it with an actual call
+A streaming session goes through this message sequence:
 
-### Prerequisites
+| Message | When it is sent |
+| - | - |
+| `DialogInit` | Once when the stream opens. Identifies the call dialog and account context. |
+| `SegmentStart` | Each time a participant joins the stream. Identifies the participant and audio format. |
+| `SegmentMedia` | Repeated during the call. Carries audio payload chunks. |
+| `SegmentInfo` | When optional segment metadata is available, such as a hold or unhold event. |
+| `SegmentStop` | When a participant leaves the stream. |
 
-There are many live transcribe service providers. Here we use [Google Cloud Speech To Text](https://cloud.google.com/speech-to-text/docs) service as an example.
+Current audio streaming uses PCMU (G.711 mu-law) at 8000 Hz with 100 ms chunks. Receivers should still generate code from the full proto and handle the other enum values so they are ready for future codec support.
 
-- [Google Cloud Account](https://cloud.google.com/)
-- [Enable Google Speech To Text Service](https://console.cloud.google.com/speech/overview)
-- [Google Service Account](https://cloud.google.com/docs/authentication/getting-started)
+## Part 1: Configuring streaming as a RingCX administrator
 
-### Step.1 Start local server
+This part is for RingCX administrators who want to send call audio to a third-party tool that already exposes a compatible gRPC endpoint. You configure streaming in Workflow Studio; no code is required.
 
-After above setup, you will get a JSON key file in your local drive. Copy the path(including file name) as `keyFilePath`.
+### Before you begin
 
-#### Nodejs(recommended)
+Before configuring streaming, confirm the following:
 
-- Create a new folder and do `npm init`
-- Install a simple test package `npm i ev-audio-streaming-transcription`
-- Create a new file `server.js` as below
+* RingCX audio streaming is enabled for the account and the queues or campaigns where the workflow will run.
+* The third-party vendor's gRPC endpoint hostname and port, such as `partner.example.com:443`. The endpoint must be reachable over TLS on port `443` or `10443`.
+* Whether the third-party server requires authentication, and if so, the credential type and value, such as an API key or JWT.
+* The audio codec the third-party server supports. PCMU is the default and recommended for the initial release.
+* Whether the vendor supports dialog streaming, segment streaming, or both.
 
-```
-const { default: runServer } = require('ev-audio-streaming-transcription');
+### Step 1: Open or create a workflow
 
-const port = 3333;
-// fill in value with your keyFilePath
-const keyFilePath = ;
-runServer(port, keyFilePath);
-```
+In the RingCX admin console, open Workflow Studio and either edit an existing workflow or create a new workflow for the queue or campaign you want to stream.
 
-- `node server.js`
+### Step 2: Add a Start Stream node after the agent connects
 
-You will get a WSS address "Server URI" which will be used later as `{streamingUrl}` and a HTTPS address "Client URI" which we can configure now.
+Insert a **Start Stream** node after the workflow's agent-connected event. The recommended pattern is:
 
-- Go to RingCX Admin
-- Go to Agent tools -> Script designer
-- Create a new group to include your Queue/Campaign
-- Go to Script Studio -> drag a `Page` component to the middle -> connect Start - Page - End
-- Edit `Page` -> Add Element -> Add `iFrame`
-- Edit `iFrame` -> In Resource Url, input 'xxxxx.ap.ngrok.io/client?callId={{model.call.uii}}' (xxxxx.ap.ngrok.io/client is the "Client URI" above)
-- Save it (may need to re-open it) and it should show a simple web page as below
-
-<img class="img-fluid" width="50%" src="../../../images/call-streaming-client-iframe.png">
-
-#### Python
-
-- Create a new folder and install a simple test package `pip install ev_audio_streaming_transcription_py`
-- Create a new file `server.py` as below
-
-```
-from ev_audio_streaming_transcription_py import server
-import asyncio
-
-port=3333
-if __name__ == "__main__":  
-    asyncio.run(server.main(port))
+```text
+On_Agent_Connected -> start_streaming
 ```
 
-- `python server.py`
-- Open another terminal and run `ngrok http 3333`. You will get a HTTPS address. Replace 'HTTPS' with 'WSS' and that is the address which will be used later as `{streamingUrl}`.
+<img class="img-fluid" width="464" src="../../../images/start_streaming_gRPC.png" alt="Workflow Studio example showing On_Agent_Connected connected to start_streaming">
 
-### Step.2 Create a streaming profile
+Triggering Start Stream after `On_Agent_Connected` helps ensure the agent participant is present before RingCX opens the gRPC stream. Do not start streaming in parallel with the agent-connected event.
 
-For our server to know where to send audio streams to, we will need a streaming profile.
+Configure the Start Stream node with these fields:
 
-Let's test with a [Queue](../../routing/queues/queues.md)(incoming call streams). Here we will need:
+| Field | Required | Description |
+| - | - | - |
+| **URL** | Yes | The third-party gRPC endpoint hostname and port, for example `partner.example.com:443` or `partner.example.com:10443`. RingCX always connects with TLS; do not enter a plaintext `grpc://` endpoint. |
+| **Segment Streaming** | No | Leave unchecked to stream the entire dialog. Check it to stream only a specific participant segment. |
+| **External Credentials** | No | Required only if the third-party server enforces authentication. See [Step 3](#step-3-configure-authentication-if-required). |
+| **Audio Encoding** | No | Codec for the stream. Defaults to `PCMU`. Other proto values are `PCMA`, `OPUS`, `L16`, and `FLAC`. |
+| **Packet Duration** | No | Size of audio chunks in milliseconds, such as `100`. Use the default unless the vendor specifies otherwise. |
 
-- `productId`: the id for your `Queue`
-- `mainAccountId`: get it from RingCX Admin Console -> Settings -> Accounts -> main account id
-- `subAccountId`: get it from RingCX Admin Console -> Settings -> Accounts -> expand main account -> sub account id
-- `rcAccountId`: `RingCentral User ID` for admin user
+!!! note
+    Audio encoding and packet duration may be fixed to PCMU, 8000 Hz, and 100 ms for the initial release. Confirm supported values with your RingCX representative if your integration depends on a specific codec or chunk size.
 
+### Step 3: Configure authentication, if required
 
-Call Streaming operates per **Queue(inbound calls) or Campaign(outbound calls)**. The streaming service will be activated upon the creation of a streaming profile. As shown by the flow chart above, audio streams will be sent to your `{streamingUrl}` where your WebSocket server can do further processing.
+If the third-party server requires a token to accept the stream:
 
-To create a streaming profile, do `HTTP POST` request to `{PLATFORM_BASE_URL}/platform/api/media/product` (be sure to set [PLATFORM_BASE_URL](../../basics/uris.md#current-host) with `Bearer Auth Token` from [authorizationToken](../../authentication/auth-ringcentral.md)).
+1. In the Start Stream node, click **New Credential** next to the **External Credentials** field.
+2. Give the credential a recognizable name, such as `Acme Voice AI Key`.
+3. Choose the authentication type provided by the vendor, such as API key or JWT.
+4. Paste the secret value in the **Key** field.
+5. Click **Save**.
 
-| API Property | Description |
-|-|-|
-| **`productType`** | QUEUE or CAMPAIGN |
-| **`productId`** | Id of above product |
-| **`mainAccountId`** | Main account id. Refer to above on how to get it |
-| **`subAccountId`** | Sub account id. Refer to above on how to get it |
-| **`rcAccountId`** | RingCentral account id for admin user |
-| **`streamingUrl`** | The url for your WSS server which should start with `wss:` **NOT** `ws:` |
-| **`secret`** | Optional. You can use it for your server side validation for incoming websocket messages. |
+The credential appears in the **External Credentials** dropdown. Select it. RingCX passes the resulting token in the gRPC `authorization` metadata header on every streaming session.
 
-Sample request:
+### Step 4: Capture the stream ID with a JavaScript node
 
-`POST {PLATFORM_BASE_URL}/platform/api/media/product`
+After the Start Stream node, add a JavaScript node to save the returned stream ID into session data so you can reference it later, such as when stopping the stream.
 
-`Authorization: bearer {authorizationToken}`
+```javascript
+sessionData.startStreamResponse = localData.Start_streaming_0.responseCode;
+sessionData.responseMessage = localData.Start_streaming_0.responseMessage;
+sessionData.startStreamId = localData.Start_streaming_0.streamId;
+```
 
-```json
-{
-    "productType": "QUEUE",
-    "productId": 1234,
-    "subAccountId": "99990001",
-    "mainAccountId": "99990000",
-    "rcAccountId": "123456789",
-    "streamingUrl": "wss://sample.com",
-    "secret": "sampleSecret"
+Adjust `Start_streaming_0` if your Start Stream node has a different name.
+
+### Step 5: Add a Stop Stream node
+
+Add a **Stop Stream** node where you want streaming to end, such as `On_Interaction_End` or `On_Agent_Disconnected`. In the **Stream ID** field, reference the value captured in Step 4:
+
+```text
+${sessionData.startStreamId}
+```
+
+If you do not add an explicit Stop Stream node, the stream ends automatically when the call ends.
+
+### Step 6: Save and assign the workflow
+
+Save the workflow, then assign it where it should run:
+
+* **Inbound calls:** Assign the workflow to the appropriate voice queue.
+* **Manual outbound:** Go to **Users** > **Agents** > **[Agent]** > **General** > **Login Settings** > **Manual Outbound Default Workflow**.
+* **Campaign outbound:** Go to **Dialing** > **Campaigns** > **[Campaign]** > **General** > **Campaign Settings** > **Campaign Workflow**.
+
+### Optional: Segment streaming vs. dialog streaming
+
+By default, a stream covers the entire dialog: every participant audio segment, including callers, agents, and transferred participants, flows over the same gRPC stream until the call ends or the workflow stops the stream.
+
+If you check **Segment Streaming** on the Start Stream node, the stream is anchored to a specific participant. When that participant leaves the call, the stream ends even if the call continues.
+
+Use dialog streaming for full call recording, transcription, or analytics. Use segment streaming when you only care about one participant, such as a single agent's interaction.
+
+### Troubleshooting
+
+| Symptom | What to check |
+| - | - |
+| Stream never starts | Verify the endpoint uses port `443` or `10443`, resolves publicly, presents a trusted TLS certificate, and is reachable from RingCX. |
+| Auth error in logs | Confirm the credential type and value match what the vendor expects. The token is sent in the gRPC `authorization` metadata header. |
+| Stream stops immediately | The third-party server may be rejecting the connection. Confirm that it accepts your account, token, TLS connection, and codec. |
+| No audio at the partner | Confirm the Start Stream node runs after `On_Agent_Connected`, the call actually has audio, and the caller is not on hold. Streaming can pause while a caller is on hold. |
+
+## Part 2: Implementing a gRPC server to receive audio
+
+This part is for developers building the third-party gRPC server that RingCX streams audio to. RingCX is the gRPC client; your server is the listener. Your server only receives; it does not send a response stream back.
+
+### Requirements
+
+* **Transport:** gRPC over TLS. Plaintext gRPC is rejected.
+* **Port:** Listen on `443` or `10443`. Other ports are not accepted.
+* **RPC shape:** Implement the client-streaming `Streaming.Stream` RPC defined below.
+* **Authentication:** If the customer configures credentials in their workflow, the token arrives in the gRPC `authorization` metadata header. Validate it when the stream opens and abort with `UNAUTHENTICATED` if invalid.
+* **Codec support:** At minimum, support PCMU at 8000 Hz. Other codecs in the proto (`OPUS`, `PCMA`, `L16`, and `FLAC`) may appear in future releases.
+* **Receiver behavior:** Read messages continuously, keep per-segment buffers bounded, and handle stream close or cancellation by flushing or discarding any segment state you own.
+
+### Step 1: Get the proto file
+
+Save the proto definition below as `ringcx_streaming.proto`. This is the contract your server must implement.
+
+```proto
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+package ringcentral.ringcx.streaming.v1beta2;
+
+enum Codec {
+  CODEC_UNSPECIFIED = 0;
+  OPUS = 1;
+  PCMA = 2;
+  PCMU = 3;
+  L16 = 4;
+  FLAC = 5;
+}
+
+enum ProductType {
+  PRODUCT_TYPE_UNSPECIFIED = 0;
+  QUEUE = 1;
+  CAMPAIGN = 2;
+  IVR = 3;
+}
+
+enum DialogType {
+  DIALOG_TYPE_UNSPECIFIED = 0;
+  INBOUND = 1;
+  OUTBOUND = 2;
+}
+
+enum ParticipantType {
+  PARTICIPANT_TYPE_UNSPECIFIED = 0;
+  CONTACT = 1;
+  AGENT = 2;
+  BOT = 5;
+}
+
+message Account {
+  string id = 1;
+  string sub_account_id = 2;
+  string rc_account_id = 3;
+}
+
+message Product {
+  string id = 1;
+  ProductType type = 2;
+}
+
+message Dialog {
+  string id = 1;
+  DialogType type = 2;
+  optional string ani = 3;
+  optional string dnis = 4;
+  optional string language = 5;
+  map<string, string> attributes = 6;
+}
+
+message Participant {
+  string id = 1;
+  ParticipantType type = 2;
+  optional string name = 3;
+}
+
+message AudioFormat {
+  Codec codec = 1;
+  uint32 rate = 2;
+  uint32 ptime = 3;
+}
+
+message AudioContent {
+  bytes payload = 1;
+  uint32 seq = 2;
+  uint32 duration = 3;
+}
+
+service Streaming {
+  rpc Stream(stream StreamEvent) returns (google.protobuf.Empty);
+}
+
+message StreamEvent {
+  string session_id = 1;
+  oneof event {
+    DialogInitEvent dialog_init = 2;
+    SegmentStartEvent segment_start = 3;
+    SegmentMediaEvent segment_media = 4;
+    SegmentInfoEvent segment_info = 5;
+    SegmentStopEvent segment_stop = 6;
+  }
+}
+
+message DialogInitEvent {
+  Account account = 1;
+  Dialog dialog = 2;
+}
+
+message SegmentStartEvent {
+  string segment_id = 1;
+  optional Product product = 2;
+  Participant participant = 3;
+  optional AudioFormat audio_format = 4;
+}
+
+message SegmentMediaEvent {
+  string segment_id = 1;
+  AudioContent audio_content = 2;
+}
+
+message SegmentInfoEvent {
+  string segment_id = 1;
+  string event = 2;
+  optional string data = 3;
+}
+
+message SegmentStopEvent {
+  string segment_id = 1;
 }
 ```
 
-Sample response:
+### Step 2: Generate server stubs
 
-```json
-{
-    "productType": "QUEUE",
-    "productId": 1234,
-    "subAccountId": "99990001",
-    "mainAccountId": "99990000",
-    "rcAccountId": "123456789",
-    "streamingUrl": "wss://sample.com",
-    "secret": "sampleSecret"
-}
+Run the `protoc` compiler for your language. Examples:
+
+=== "Python"
+
+    ```bash
+    python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. ringcx_streaming.proto
+    ```
+
+=== "Node.js"
+
+    ```bash
+    grpc_tools_node_protoc --js_out=import_style=commonjs:. --grpc_out=grpc_js:. -I. ringcx_streaming.proto
+    ```
+
+=== "Go"
+
+    ```bash
+    protoc --go_out=. --go-grpc_out=. ringcx_streaming.proto
+    ```
+
+=== "Java"
+
+    Use the protobuf Gradle plugin or Maven equivalent with the grpc-java code generator.
+
+### Step 3: Implement the Streaming service
+
+Implement the single `Stream` RPC. RingCX opens a client-streaming call and sends `StreamEvent` messages. Your server returns `google.protobuf.Empty` when the stream closes.
+
+```text
+function Stream(stream):
+  token = stream.metadata["authorization"]
+  if auth_required and not is_valid(token):
+    abort(UNAUTHENTICATED, "Invalid token")
+
+  for event in stream:
+    match event.event:
+      case dialog_init:
+        # First message; record account and dialog metadata.
+      case segment_start:
+        # A participant joined; record segment_id, participant, and codec.
+      case segment_media:
+        # Append audio_content.payload to the buffer or sink for segment_id.
+      case segment_info:
+        # Optional metadata event, such as hold or unhold.
+      case segment_stop:
+        # A participant left; flush or finalize that segment.
+
+  return Empty()
 ```
 
-!!!warning
-    We don't validate your WebSocket server connectivity upon the creation or update of a streaming profile. Please make sure the uploaded `streamingUrl` is correct and the server is working.
+### Step 4: Configure TLS and listen
 
-#### Enable Streaming for Queue/Campaign
+Bind your gRPC server to port `443` or `10443` and provide a valid TLS certificate. The hostname configured in the RingCX workflow must match the certificate. Self-signed certificates are not supported for production traffic.
 
-**Go to [RingCX admin console](https://ringcx.ringcentral.com/).**
+During development, you can stand up a minimal receiver that validates TLS and authentication, logs `DialogInit` and `SegmentStart`, and discards audio bytes. This confirms connectivity before you wire up your production audio processing.
 
-- **For Queue: Go to Routing -> Voice queues & skills -> Select your Queue -> Recording settings**
-- **For Campaign: Go to Dialing -> Campaigns -> Select your Campaign -> Recording settings**
+### Step 5: Validate authentication
 
-<img class="img-fluid" width="997px" src="../../../images/agent-segment-streaming.png">
+If the customer configures credentials in the workflow, every stream arrives with a token in the gRPC `authorization` metadata key. Your server should:
 
-### Step.3 Make a call
+1. Read the `authorization` key from the incoming call metadata.
+2. Validate it against the credential the customer registered with you.
+3. If invalid, immediately abort the stream with status `UNAUTHENTICATED`.
+4. If valid, proceed to read `StreamEvent` messages.
 
-Have an agent available in the `Queue` that you've created a streaming profile with and call the number of the `Queue`. Check local server's log. There should be logging for different types of messages. Upon the hangup of the call, the local server will wrap up audio file writing and you should be able to play the audio.
+### Step 6: Decode audio
 
-Call streaming will work alongside call recording.
+The first `SegmentStartEvent` for each participant carries an `AudioFormat` specifying the codec, sample rate, and packet duration. Use this to decode the payload bytes in subsequent `SegmentMediaEvent` messages.
 
-<img class="img-fluid" width="300px" src="../../../images/call-streaming-agent-call.png">
+For the initial release:
 
+* Codec: `PCMU` (G.711 mu-law) by default.
+* Sample rate: `8000` Hz.
+* Packet duration: typically `100` ms per chunk.
 
-## Audio Streaming Message Data
+Each `SegmentMediaEvent` also includes a sequence number (`seq`) and chunk duration in milliseconds. Use these fields for ordering, duplicate detection, and gap detection.
 
-Let's have a quick review on what the WebSocket messages look like.
+### Expected message ordering
 
-When an agent in the Queue/Campaign is connected to a call, RingCX server will start to send websocket messages to `streamingUrl`. There are 4 types of messages:
+A typical session looks like this on the wire:
 
-- [Connect](#connect-message)
-- [Start](#start-message)
-- [Media](#media-message)
-- [Stop](#stop-message)
-
-!!!note
-    If the websocket initiation request is accepted, we will begin sending messages. If the websocket initiation is denied, we will receive a 4xx error and not proceed. If the websocket initiation fails with a 5xx error, we will attempt to retry up to 3 attempts.
-
-#### Connect Message
-
-!!!note
-    Before sending Connect Message, there will be a HTTP request for websocket upgrade handshake, with the following query parameters that can be parsed and stored on your system as needed: `Call ID`, `Session ID`, `Caller ANI`, `DNIS`, `EV Account ID`, `EV Subaccount ID`, `RingCentral Office Account ID`, `Agent ID`, `Product Type(Queue|Campaign|Manual)`, `Product ID`
-
-Connect Message will be sent once websocket connection is established.
-
-```json
-{ 
- "event": "Connected", 
- "protocol": "AgentSession", 
- "version": "1.0.0" 
-}
+```text
+DialogInit              (once, at stream open)
+SegmentStart  (caller)  (caller joins)
+SegmentMedia  (caller)  (audio chunks, repeated)
+SegmentStart  (agent)   (agent joins)
+SegmentMedia  (caller)  (chunks continue, interleaved)
+SegmentMedia  (agent)
+SegmentStop   (agent)   (agent leaves)
+SegmentMedia  (caller)
+SegmentStop   (caller)  (call ends)
+(stream closes)
 ```
 
-#### Start Message
+Multiple participants can be active simultaneously. Disambiguate them using the `segment_id` field carried on each segment event.
 
-Start Message will be sent right after Connect Message. It contains the metadata of your stream.
+### Reference: enum values to handle
 
-```json
-{ 
- "event": "Start", 
- "metadata": {
-    "callId": "12345", 
-    "sessionId": 2, 
-    "ani": "2223334444", 
-    "dnis": "2223334444", 
-    "accountId": "99990000", 
-    "subaccountId": "99990001", 
-    "rcAccountId": "123456789", 
-    "agentId": 123, 
-    "productType": "Queue", 
-    "productId": 1234, 
-    "contentType": "audio/x-mulaw", 
-    "sampleRateHertz": 8000, 
-    }
-}
-```
+| Enum | Values |
+| - | - |
+| `DialogType` | `INBOUND` (1), `OUTBOUND` (2) |
+| `ParticipantType` | `CONTACT` (1), `AGENT` (2), `BOT` (5). `BOT` is 5, not 3. |
+| `ProductType` | `QUEUE` (1), `CAMPAIGN` (2), `IVR` (3, reserved for future use) |
+| `Codec` | `OPUS` (1), `PCMA` (2), `PCMU` (3), `L16` (4), `FLAC` (5) |
 
-#### Media Message
+## Reference: end-to-end flow
 
-Media Message is the primary message type you will receive and it will sent continuously. It contains the audio data of your stream.
+Putting it together, here is what happens when a streamed call takes place:
 
-!!!note
-    Media stream is encoded with ulaw algorithm, with sample rate 8000Hz and depth 8-bit
+1. A call arrives at RingCX, either inbound or outbound.
+2. The configured workflow runs, the agent connects, and the workflow reaches the Start Stream node after `On_Agent_Connected`.
+3. RingCX opens a TLS gRPC connection to the third-party server endpoint and sends a `DialogInit` message.
+4. Each participant joining the call triggers a `SegmentStart` message.
+5. During the call, audio is delivered as a continuous flow of `SegmentMedia` messages.
+6. Optional segment metadata is delivered with `SegmentInfo`.
+7. As participants leave, `SegmentStop` messages are sent for each participant.
+8. When the workflow reaches the Stop Stream node, or when the call ends, the gRPC stream closes.
 
-```json
-{ 
-    "event": "Media", 
-    "perspective": "Participant" | "Conference", 
-    "sequenceId": "1",   
-    "media": "{base64_encoded_binary_data}" // media field will contain the binary data for about 20ms of audio.
-}
-```
+## Support and feedback
 
-!!!note
-    Media Messages are generally in-sequence, hence you could simply ignore not-in-sequence message. However, to ensure all messages are in-sequence, you could also write additional logic to pause on not-in-sequence messages and wait for the in-sequence one, then continue.
-
-!!!note
-    In stereo channels, the left channel will be agent's audio, and the right channel will have audio for caller and all other existing legs from transfers/requeues.
-
-#### Stop Message
-
-Stop Message is sent at the end of the call and contains relevant metadata. We will send a stop message for each perspective of the call.
-
-```json
-{ 
-    "event": "Stop", 
-    "metadata": {
-        "duration": 120, 
-        "end_time": "2021-01-14T00:00:00Z" //RFC-3339 format timestamp 
-    }
-} 
-```
+If you need help enabling or troubleshooting RingCX audio streaming, contact your RingCentral representative. Include the workflow name, approximate call time, configured endpoint hostname, stream ID if available, codec settings, and any gRPC status code returned by the receiver.
