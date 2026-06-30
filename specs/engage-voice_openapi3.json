@@ -41356,7 +41356,8 @@
       "name": "RingCentral Auth"
     },
     {
-      "name": "Number Management"
+      "name": "Number Management",
+      "description": "Manage DNIS pools, tracking numbers, and related phone-number assignment utilities."
     },
     {
       "name": "Users"
