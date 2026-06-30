@@ -26923,8 +26923,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -26980,8 +26979,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27047,8 +27045,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27106,8 +27103,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27166,8 +27162,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27235,8 +27230,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27246,8 +27240,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27303,8 +27296,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27314,8 +27306,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27383,8 +27374,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27394,8 +27384,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27454,8 +27443,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27465,8 +27453,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27481,6 +27468,16 @@
                     "required": false
                 },
                 "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TracRoutingRule"
+                                }
+                            }
+                        }
+                    },
                     "default": {
                         "description": "successful operation"
                     },
@@ -27527,8 +27524,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27538,8 +27534,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27549,12 +27544,21 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TracRoutingRule"
+                                }
+                            }
+                        }
+                    },
                     "default": {
                         "description": "successful operation"
                     },
@@ -27599,8 +27603,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27610,8 +27613,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27621,8 +27623,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27637,6 +27638,16 @@
                     "required": false
                 },
                 "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TracRoutingRule"
+                                }
+                            }
+                        }
+                    },
                     "default": {
                         "description": "successful operation"
                     },
@@ -27681,8 +27692,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27692,8 +27702,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27703,8 +27712,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27762,8 +27770,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27773,8 +27780,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27833,8 +27839,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27844,8 +27849,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27916,8 +27920,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27927,8 +27930,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -27938,8 +27940,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -27995,8 +27996,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28006,8 +28006,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28017,8 +28016,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -28087,8 +28085,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28098,8 +28095,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     },
                     {
@@ -28109,8 +28105,7 @@
                         "required": true,
                         "schema": {
                             "type": "integer",
-                            "format": "int32",
-                            "pattern": "[0-9]+"
+                            "format": "int32"
                         }
                     }
                 ],
@@ -28957,6 +28952,9 @@
                     "required": false
                 },
                 "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
                     "500": {
                         "description": "Internal Server Error"
                     },
@@ -29479,16 +29477,20 @@
             "name": "Users"
         },
         {
-            "name": "DNIS Assignments"
+            "name": "DNIS Assignments",
+            "description": "Manage voice DNIS assignments for queues, Visual IVRs, and cloud route profiles."
         },
         {
-            "name": "Tracking Numbers"
+            "name": "Tracking Numbers",
+            "description": "Manage tracking-number groups and numbers used for attribution and routing."
         },
         {
-            "name": "Tracking Number Routing Rules"
+            "name": "Tracking Number Routing Rules",
+            "description": "Manage routing rules associated with tracking numbers."
         },
         {
-            "name": "Tracking Number Schedules"
+            "name": "Tracking Number Schedules",
+            "description": "Manage schedule overrides associated with tracking numbers."
         }
     ],
     "x-tag-groups": [
