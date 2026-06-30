@@ -1,7 +1,8 @@
 {
-  "refreshToken":"<rcRingCXRefreshToken>", //Save this as it will be new.
+  "refreshToken":"<newRcRingCXRefreshToken>",
   "accessToken":"<rcRingCXAccessToken>",
   "tokenType":"Bearer",
+  "mainAccountId":"333333",
   "agentDetails":[
     {
       "agentId":111111,

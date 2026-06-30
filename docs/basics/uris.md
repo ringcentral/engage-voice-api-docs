@@ -1,97 +1,158 @@
 # Methods, Endpoints and Parameters of the RingCX API
 
-This guide describes the fundamentals of the RingCX API and is a useful to developers wishing to understand its conventions and usage guidelines.
+This guide explains how RingCX API URLs are structured, which base URLs to use, and how HTTP methods, path parameters, query parameters, request bodies, and headers work across the API.
 
 ## Resources and Parameters
 
-Every entity in the RingCX API is represented with a certain resource identified by a specific URI. The structure of a URI is similar to that of a web page's URL. The URI syntax is represented by the following scheme:
-
-`<protocol> :// <hostname> [: <port>] / <path> [? <query>] [# <fragment>]`
-
-| Name | Description |
-|------|-------------|
-| **protocol** | The networking protocol (http or https protocols are generally used in REST). |
-| **hostname** | The server network address information. |
-| **port** |  The TCP port where the server listens for incoming requests. If omitted, the default value is used for a given protocol. |
-| **path** | A resource identification, typically hierarchical by nature, e.g. foo/bar/baz. |
-| **query** | An optional part separated by a question mark (?) and contains additional identification information that is not hierarchical in nature. The query string syntax is organized as a sequence of key-value pairs separated by an ampersand. Not all API resources allow query parameters. |
-| **fragment** | An optional part separated from the rest by a hash (`#`) and that contains additional information redirecting to a secondary resource; for example, a section heading of an article identified by the URI. The RingCX REST API does not use fragments. |
-
-Protocol, host and port together constitute the main entry point to access the API.
-
-### Protocol
-There are two types or networking protocols typically available in REST: HTTP and HTTPS.  Note that for security reasons, connection is allowed using only HTTPS protocol to the default HTTPS port 443, so the port can be omitted in the URI.
+RingCX API requests are made to a base URL plus a resource path. Most current public examples should use `https://ringcx.ringcentral.com` as the host.
 
 ### Current Host
 
-RingCX is using the host server, and is accessible on `https://ringcx.ringcentral.com`.
+Use the following base URLs for current RingCX APIs.
 
-* Authentication path
-  `/api/auth/login`
-* API endpoint path
-  `/voice/api/v1`
-* Platform base url including [Integration APIs](../integration/index.md)
-  `/platform/api`
+| API area | Base URL | Use for |
+| --- | --- | --- |
+| Current Voice API | `https://ringcx.ringcentral.com/voice/api` | General RingCX Voice API requests. |
+| Versioned admin API | `https://ringcx.ringcentral.com/voice/api/v1` | Most admin, routing, dialing, user, and real-time voice resources. |
+| CX integration APIs | `https://ringcx.ringcentral.com/voice/api/cx/integration/v1` | CX integration-style endpoints that use RingCentral account and sub-account context. |
+| Platform/media APIs | `https://ringcx.ringcentral.com/platform/api` | Platform-level media resources, such as streaming profile configuration. |
+| Authentication APIs | See [Authentication](../authentication/index.md) | Token generation, token exchange, refresh, and legacy authentication. |
+
+The base URL depends on the API family. Each API guide and API Reference entry includes the endpoint path for that resource. Use the table above as a map of the common base paths, and follow the specific endpoint shown in the documentation for the API you are calling.
+
+Some older specs and examples may show `https://engage.ringcentral.com` for current API paths. For new public documentation and integrations, use `https://ringcx.ringcentral.com` unless a specific authentication article or endpoint example says otherwise.
 
 ### Legacy Host
-RingCX legacy host servers are also still accessible on `https://portal.vacd.biz` and `https://portal.virtualacd.biz`.
 
-* Authentication path
-  `/api/auth/login`
-* API endpoint path
-  `/api/v1`
+Legacy RingCX deployments use one of the following hosts:
 
+* `https://portal.vacd.biz/api/`
+* `https://portal.virtualacd.biz/api/`
 
-All of RingCX's API resources are organized by either an authentication path or a API endpoint path. All API endpoint paths start with either `/voice/api` or just the legacy method of `/api` followed by the version number of the API you are accessing.  Currently only `/v1` is publicly available. Let's consider a typical API resource URI:
+Legacy APIs use `X-Auth-Token` authentication instead of the current bearer-token flow. See [Legacy authentication](../authentication/auth-legacy.md) for details.
 
-<code>https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/<strong>15300002</strong>/agentGroups/<strong>2025</strong>/agents/<strong>1369310</strong></code>
+## URL Structure
 
-Path parameters are commonly used in the RingCX's API to identify a particular entity belonging to a given type by its unique key. Most of the API resources represent some objects (i.e. agent) which are owned by a particular RingCX account (company) and a subsequent group (i.e. agent group). Three example path parameters are `accountId`, `agentGroupId`, and `agentId`. As you might expect, they identify the account, the group, and the object ID. In this example, the account, agent group, and specific agent, and are bolded in the example above.
+A full API URL follows the same structure as a standard web URL:
 
-!!! info "FYI"
-    RingCentral users associate an account with the company main phone number and an extension with the short extension number, but users (agents) are uniquely identified by their account, agent group, and unique agent ID.
+```text
+<protocol>://<hostname>[:<port>]/<path>[?<query>][#<fragment>]
+```
 
-### Query Parameters
+| Name | Description |
+| --- | --- |
+| `protocol` | The network protocol. RingCX APIs require HTTPS. |
+| `hostname` | The server host, such as `ringcx.ringcentral.com`. |
+| `port` | The TCP port. For HTTPS, omit the port and use the default port `443`. |
+| `path` | The resource path that identifies the API operation. |
+| `query` | Optional key-value parameters after `?`, separated by `&`. |
+| `fragment` | Optional browser fragment after `#`. RingCX REST APIs do not use fragments. |
 
-Another kind of parameter you will come across in the RingCX API is a *query parameter*. Query parameters are generally used in object retrieval operations and let the consumer specify the filtering criteria, the desired level of details, etc. Query parameter values in the URL have to be encoded according to [RFC-1738: Uniform Resource Locators](https://tools.ietf.org/html/rfc1738). Query parameters support setting multiple values. It is possible to specify several values for a single query parameter, and filtering results will cover all of them. For example, this functionality is applied to retrieve or remove lists of messages and records.
+For example:
 
-### Examples
+```http
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}
+```
 
-Let's consider the examples below to illustrate the API resources and parameters. For simplicity reasons, we will exclude protocol and host values from the URIs in the examples.
+In this URL:
 
-* Get call details for an agent under a specific account (accountId and userId must be predetermined):
+* `https://ringcx.ringcentral.com` is the host.
+* `/voice/api/v1` is the versioned Voice API base path.
+* `/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}` is the resource path.
+* `{accountId}`, `{agentGroupId}`, and `{agentId}` are path parameters.
 
-    `/{accountId}/users/{userId}/reports/inputControls?accountIds={accountId}&products=CLOUD_PROFILE`
+## Path Parameters
 
-* Get a list of *active* **calls** under a specific account:
+Path parameters are required values embedded in the resource path. They identify the resource being read, changed, or deleted.
 
-    `/api/v1/admin/accounts/{accountId}/activeCalls/list?product=ACCOUNT&productId=12440001`
+For example:
 
-* Get a list of *active* **agents** under a specific account:
+```http
+GET /voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}
+```
 
-    `/api/v1/admin/accounts/{accountId}/auxStates/?activeOnly=true`
+| Parameter | Meaning |
+| --- | --- |
+| `accountId` | The RingCX sub-account that owns the resource. |
+| `agentGroupId` | The agent group that contains the agent. |
+| `agentId` | The individual agent resource. |
+
+Path parameter values must be URL-safe. If a value contains reserved URL characters, encode it before sending the request.
+
+## Account Identifiers
+
+RingCX APIs use more than one account identifier, depending on the API area.
+
+| Identifier | Where it appears | Meaning |
+| --- | --- | --- |
+| `accountId` | `/voice/api/v1/admin/accounts/{accountId}/...` | The RingCX sub-account ID. Most versioned admin APIs use this value. |
+| `subAccountId` | `/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/...` | The RingCX sub-account ID in CX integration APIs. |
+| `rcAccountId` | `/voice/api/cx/integration/v1/accounts/{rcAccountId}/...` | The RingCentral account context used by CX integration APIs. |
+
+Use the [Get accounts](../authentication/auth-ringcentral.md#get-accounts) request, or account details returned during authentication, to identify the account IDs available to the authenticated user.
+
+## Query Parameters
+
+Query parameters appear after `?` and are commonly used to filter, page, or otherwise modify a request.
+
+```http
+GET /voice/api/v1/admin/accounts/{accountId}/activeCalls/list?product=ACCOUNT&productId={accountId}&maxRows=50
+```
+
+In this example:
+
+* `product=ACCOUNT` scopes the request to account-level calls.
+* `productId={accountId}` identifies the account product.
+* `maxRows=50` limits the number of returned rows.
+
+Always URL-encode query parameter values. For example, spaces should be encoded as `%20` or `+`, depending on the client library and endpoint requirements.
+
+Some endpoints allow repeated query parameters or comma-separated values. Follow the endpoint-specific reference when a parameter accepts multiple values.
+
+## Request Bodies
+
+Request bodies are used mainly with `POST` and `PUT` requests. Unless an endpoint says otherwise, send request bodies as JSON.
+
+```http
+POST /voice/api/v1/admin/accounts/{accountId}/activeCalls/createManualAgentCall
+Content-Type: application/json
+Authorization: Bearer <ringcxAccessToken>
+```
+
+Some authentication endpoints use `application/x-www-form-urlencoded` instead of JSON. Follow the request format shown in the endpoint documentation.
+
+## Examples
+
+The examples below omit the host for readability. Add the appropriate base URL from [Current Host](#current-host).
+
+| Task | Example path |
+| --- | --- |
+| List active calls for a sub-account | `GET /voice/api/v1/admin/accounts/{accountId}/activeCalls/list?product=ACCOUNT&productId={accountId}` |
+| Get a transcript segment | `GET /voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/transcripts/dialogs/{dialogId}/segments/{segmentId}` |
+| Create a streaming profile | `POST /platform/api/media/product` |
+| Get a user list | `GET /voice/api/v1/admin/users` |
 
 ## Methods
 
-In the RingCX API, as in any REST API, the resources are accessible by standard HTTP methods: GET, POST, PUT and DELETE. These methods form a uniform CRUD interface expanded as "create, retrieve, update and delete".
+RingCX APIs use standard HTTP methods. Not every resource supports every method; check the endpoint-specific documentation before assuming that a related create, read, update, or delete operation exists.
 
 | Method | Description |
-|--------|-------------|
-| `GET` | Retrieves the object represented by the resource that is specified in the request body. It may be the call log information for an extension, the address book with contacts, etc. |
-| `POST` | Creates a new object represented by the resource that is specified in the request. In the response body the server sends the representation of the created object, as if there is an immediate `GET` request for it.
-| `PUT` | Modifies the already existing object represented by the resource that is specified in the request body. If the object was successfully modified, the server responds with the representation of the changed resource in the response body. The request body may contain only the modified properties of the resource. The response returns the entire resource representation with all of the properties, as in case of the `GET` request. |
-| `DELETE` | Removes the object represented by the resource that is specified in the request body. |
+| --- | --- |
+| `GET` | Retrieves a resource or list of resources. GET requests normally use path and query parameters, not a request body. |
+| `POST` | Creates a resource or starts an action. POST requests often include a JSON request body. |
+| `PUT` | Updates an existing resource. PUT requests usually include the changed resource fields in the request body. |
+| `DELETE` | Deletes or removes a resource identified by the request path. |
 
 ### Example
 
-Let's consider a simple example of a `GET` method — retrieving details of the user you are currently logged in as from the RingCX REST API.
+The following request retrieves the accounts available to the authenticated user:
 
 === "Request"
 
     ```http
-    GET /api/v1/userDetail/self
+    GET /voice/api/v1/admin/accounts
     Accept: application/json
-    Authorization: Bearer {authToken}
+    Authorization: Bearer <ringcxAccessToken>
     ```
 
 === "Response"
@@ -100,82 +161,35 @@ Let's consider a simple example of a `GET` method — retrieving details of the 
     HTTP/1.1 200 OK
     Content-Type: application/json
 
-    {
-        "adminId": 2537,
-        "rcUserId": 3361292020,
-        "rcAccountId": "3058829020",
-        "evMainAccountId": null,
-        "digitalAccountId": null,
-        "digitalAccountApiUrl": null,
-        "digitalAccountEmbedUrl": null,
-        "agentDetails": [
-            {
-                "agentId": 1369310,
-                "firstName": "John",
-                "lastName": "Smith",
-                "email": "rc.guest@gmail.com",
-                "username": "rc.guest+15300002_1791@gmail.com",
-                "agentType": "AGENT",
-                "rcUserId": 3361292020,
-                "accountId": "15300002",
-                "accountName": "RC Platform Internal",
-                "agentGroupId": null,
-                "externalAgentId": null,
-                "location": null,
-                "team": null,
-                "allowLoginControl": true,
-                "allowLoginUpdates": true,
-                "password": null,
-                "agentRank": null,
-                "initLoginBaseState": null,
-                "ghostRnaAction": null,
-                "enableSoftphone": null,
-                "altDefaultLoginDest": null,
-                "phoneLoginPin": null,
-                "manualOutboundDefaultCallerId": null,
-                "directAgentExtension": null,
-                "maxChats": null
-            }
-        ],
-        "inboxModeEnabled": false,
-        "taskModeEnabled": false,
-        "digitalAdminEnabled": false,
-        "digitalAnalyticsEnabled": false
-    }
+    [
+      {
+        "accountId": "99990001",
+        "accountName": "Example Sub-Account",
+        "mainAccountId": "99990000"
+      }
+    ]
     ```
-
-!!! alert "FYI"
-    Not all RingCX API resources support all of the four methods. In order to find out which resources support a particular method, please refer to the API Reference.
 
 ## Object Representation
 
-Whenever you need to send or retrieve a particular piece of data — for example, a call log record, information on an extension, etc. — it will be embedded in the HTTP request or response.
+RingCX APIs generally send and receive JSON objects.
 
-The RingCentral API allows you to explicitly define a representation format by using the following HTTP headers:
+Use these headers when sending JSON:
 
-* The `Content-Type` header defines the MIME type of the request body. The server will expect the request body to contain data in the specified format.
+* `Content-Type: application/json` tells the server that the request body is JSON.
+* `Accept: application/json` tells the server that the client expects a JSON response.
+* `Authorization: Bearer <ringcxAccessToken>` authenticates current RingCX API calls. See [Authentication](../authentication/index.md) for token details.
 
-* The `Accept` header indicates the desired MIME type of the response body. The server will return response data in this format (if possible) and will set the `Content-Type` response header accordingly.
-
-!!! info "FYI"
-    The API server accepts and returns all string values in UTF-8 encoding and does not support other character sets. It is not required to explicitly specify charset in Content-Type and Accept HTTP headers. But a client has to implement proper encoding/decoding of character strings passed in HTTP requests/responses.
+The API accepts and returns string values in UTF-8 encoding.
 
 ## User Agent Identification
 
-It is strongly recommended that client applications provide the `User-Agent` HTTP header with every request, which should contain the key information about the requesting application, including application name, version, OS/platform name and version, etc. For browser-based (JavaScript) applications it is usually not possible to override the user agent string which is sent by browser. But other types of applications (desktop, mobile and server-side) can easily follow this recommendation.
+For server-side, desktop, and mobile integrations, include a stable `User-Agent` header with each request. A useful value includes the application name and version, and optionally the platform.
 
-There are three primary rules when setting the User Agent:
+Examples:
 
-1. Clients should send the `User-Agent` header and value with each request.
-2. A particular application instance should send the exact same user agent string in all API requests.
-3. The format of user agent value should follow the convention described below.
-
-We recommend using a short application name and version delimited by forward slash character and optionally followed by additional details about this client instance in parentheses (e.g. operating system name, version, revision number, etc.).
-
-For example:
-
-* `RCMobile/3.6.1 (OfficeAtHand; iOS/6.0; rev.987654)`
+* `MyRingCXIntegration/1.0`
 * `PostmanRuntime/7.25.0`
-* `Softphone/6.2.0.11632`
+* `CustomerSync/2.4 (Linux)`
 
-The `User-Agent` string format is described in <a target="_new" href="https://tools.ietf.org/html/rfc1945">RFC 1945</a> and <a target="_new" href="https://tools.ietf.org/html/rfc2068">RFC 2068</a>.
+Browser-based JavaScript applications may not be able to override the browser's default user-agent string.

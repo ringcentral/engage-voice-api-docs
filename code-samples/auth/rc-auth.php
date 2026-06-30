@@ -1,8 +1,11 @@
 <?php
 $RC_ACCESS_TOKEN = "VALID-RINGCENTRAL-ACCESS-TOKEN";
 
-$url = "https://ringcx.ringcentral.com/api/auth/login/rc/accesstoken";
-$body = 'rcAccessToken=' . $RC_ACCESS_TOKEN . "&rcTokenType=Bearer";
+$url = "https://engage.ringcentral.com/api/auth/login/rc/accesstoken?includeRefresh=true";
+$body = http_build_query(array(
+    'rcAccessToken' => $RC_ACCESS_TOKEN,
+    'rcTokenType' => 'Bearer'
+));
 $headers = array ('Content-Type: application/x-www-form-urlencoded');
 
 try{
@@ -10,7 +13,6 @@ try{
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($ch, CURLOPT_POST, TRUE);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     curl_setopt($ch, CURLOPT_TIMEOUT, 600);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $body);
     $strResponse = curl_exec($ch);
