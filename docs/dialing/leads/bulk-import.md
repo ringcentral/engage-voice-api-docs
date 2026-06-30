@@ -25,6 +25,9 @@ Each load in the `uploadLeads` array consists of a lead with the following notab
 | **externId** | this is a required string property. |
 | **leadPhone** | this can be a single phone number or a pipe-deliminted field of multiple phone numbers. For US numbers, this is a 10 digit format including area code. |
 
+!!! info "Persona-based multiple phone numbers"
+    For strategic campaigns that need labeled phone types, such as mobile, home, or work, use [Lead Phone Persona Management](phone-persona-management.md). Persona-based lead loading keeps the primary number in `leadPhone` and maps additional phone numbers to configured phone personas.
+
 ## Enumerating Campaigns
 
 Leads are uploaded per Campaign which requires a `campaignId`. The following two API calls will enable enumerating the account's campaign list.
