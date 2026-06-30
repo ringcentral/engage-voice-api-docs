@@ -107,6 +107,7 @@ nav:
     - 'Overview': integration/index.md
     - 'Reports': integration/reports-orig.md
     - 'Administration': integration/admin.md
+    - 'Agent State Subscriptions': integration/agent-state-subscriptions.md
     - 'Routing': integration/agent-avail.md
   - 'SDKs': sdks.md
   - 'Embeddable': embeddable.md

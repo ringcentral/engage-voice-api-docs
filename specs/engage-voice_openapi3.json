@@ -3936,6 +3936,24 @@
                 },
                 "type": "object"
             },
+            "AuthConfig": {
+                "properties": {
+                    "authType": {
+                        "enum": [
+                            "APIKEY",
+                            "JWT",
+                            "BASIC",
+                            "OAUTH",
+                            "CUSTOM_AUTH"
+                        ],
+                        "type": "string"
+                    },
+                    "apiKey": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
             "AuthenticatedUser": {
                 "properties": {
                     "authToken": {
@@ -11102,6 +11120,115 @@
                     "targetCount": {
                         "format": "int32",
                         "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "RTASubscriptionRequest": {
+                "required": [
+                    "subscriptionName",
+                    "notificationUrl"
+                ],
+                "properties": {
+                    "subscriptionName": {
+                        "description": "Subscription name.",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Human-readable description.",
+                        "type": "string"
+                    },
+                    "retryCount": {
+                        "description": "Maximum delivery retry count. Maximum allowed value is 10. Default is 3.",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "notificationUrl": {
+                        "description": "HTTP or HTTPS endpoint that receives agent-state notifications.",
+                        "type": "string"
+                    },
+                    "authConfigId": {
+                        "description": "Auth configuration ID used when RingCX sends notification requests to the receiver.",
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "active": {
+                        "description": "Whether the subscription is active.",
+                        "type": "boolean"
+                    },
+                    "customHeaders": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "description": "Additional headers to send with notification requests.",
+                        "type": "object"
+                    },
+                    "expiresAt": {
+                        "description": "Expiration time as epoch seconds. Use 0 for no configured expiration.",
+                        "format": "int64",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            },
+            "RTASubscriptionResponse": {
+                "properties": {
+                    "subscriptionId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "mainAccountId": {
+                        "type": "string"
+                    },
+                    "subAccountId": {
+                        "type": "string"
+                    },
+                    "subscriptionName": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "notificationUrl": {
+                        "type": "string"
+                    },
+                    "authConfigId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "maxRetryCount": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "customHeaders": {
+                        "additionalProperties": {
+                            "type": "object"
+                        },
+                        "type": "object"
+                    },
+                    "expiresAt": {
+                        "format": "int64",
+                        "type": "integer"
+                    },
+                    "createdBy": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "updatedBy": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "authConfig": {
+                        "$ref": "#/components/schemas/AuthConfig"
                     }
                 },
                 "type": "object"
@@ -29762,6 +29889,260 @@
                     }
                 ]
             }
+        },
+        "/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/agent-states/subscriptions": {
+            "get": {
+                "tags": [
+                    "Agent State Subscriptions"
+                ],
+                "summary": "List agent state subscriptions",
+                "description": "Permissions: WFO_ACCESS role",
+                "operationId": "getAllSubscriptions",
+                "parameters": [
+                    {
+                        "name": "rcAccountId",
+                        "in": "path",
+                        "description": "rcAccountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "subAccountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/RTASubscriptionResponse"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Agent State Subscriptions"
+                ],
+                "summary": "Create agent state subscription",
+                "description": "Permissions: WFO_ACCESS role",
+                "operationId": "subscribe",
+                "parameters": [
+                    {
+                        "name": "rcAccountId",
+                        "in": "path",
+                        "description": "rcAccountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "subAccountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RTASubscriptionRequest"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RTASubscriptionResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/agent-states/subscriptions/{subscriptionId}": {
+            "put": {
+                "tags": [
+                    "Agent State Subscriptions"
+                ],
+                "summary": "Update agent state subscription",
+                "description": "Permissions: WFO_ACCESS role",
+                "operationId": "updateSubscription",
+                "parameters": [
+                    {
+                        "name": "rcAccountId",
+                        "in": "path",
+                        "description": "rcAccountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "subAccountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "subscriptionId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RTASubscriptionRequest"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RTASubscriptionResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Agent State Subscriptions"
+                ],
+                "summary": "Delete agent state subscription",
+                "description": "Permissions: WFO_ACCESS role",
+                "operationId": "deleteSubscription",
+                "parameters": [
+                    {
+                        "name": "rcAccountId",
+                        "in": "path",
+                        "description": "rcAccountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "subAccountId",
+                        "in": "path",
+                        "description": "subAccountId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "subscriptionId",
+                        "in": "path",
+                        "description": "subscriptionId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "servers": [
@@ -29854,6 +30235,10 @@
         {
             "name": "User Auth Utilities",
             "description": "Validate tokens and support administrative authentication utility workflows."
+        },
+        {
+            "name": "Agent State Subscriptions",
+            "description": "Manage subscriptions that deliver RingCX agent-state notifications to external workforce management or monitoring systems."
         }
     ],
     "x-tag-groups": [
@@ -29936,7 +30321,8 @@
                 "Integration Agent Controller",
                 "Integration Agent Group Controller",
                 "Integration Gate Group Controller",
-                "Public Integration API"
+                "Public Integration API",
+                "Agent State Subscriptions"
             ]
         }
     ]
