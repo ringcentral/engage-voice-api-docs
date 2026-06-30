@@ -3677,6 +3677,14 @@
                 "title": "ApplicationContext",
                 "type": "object"
             },
+            "ActiveStateBoolean": {
+                "properties": {
+                    "isActive": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
             "AssignedDnis": {
                 "properties": {
                     "cloudRouteProfile": {
@@ -3755,6 +3763,318 @@
                     },
                     "startDate": {
                         "$ref": "#/components/schemas/DateTime"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthConfigApiKey": {
+                "required": [
+                    "apiKey",
+                    "providerName"
+                ],
+                "properties": {
+                    "apiKey": {
+                        "type": "string"
+                    },
+                    "authConfigId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "authType": {
+                        "enum": [
+                            "APIKEY",
+                            "JWT",
+                            "BASIC",
+                            "OAUTH",
+                            "CUSTOM_AUTH"
+                        ],
+                        "type": "string"
+                    },
+                    "createdTime": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "providerName": {
+                        "type": "string"
+                    },
+                    "updatedTime": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthConfigBasic": {
+                "required": [
+                    "password",
+                    "providerName",
+                    "username"
+                ],
+                "properties": {
+                    "authConfigId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "authType": {
+                        "enum": [
+                            "APIKEY",
+                            "JWT",
+                            "BASIC",
+                            "OAUTH",
+                            "CUSTOM_AUTH"
+                        ],
+                        "type": "string"
+                    },
+                    "createdTime": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "providerName": {
+                        "type": "string"
+                    },
+                    "updatedTime": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthConfigCustomAuth": {
+                "properties": {
+                    "allowedBaseUrl": {
+                        "type": "string"
+                    },
+                    "authConfigId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "authType": {
+                        "enum": [
+                            "APIKEY",
+                            "JWT",
+                            "BASIC",
+                            "OAUTH",
+                            "CUSTOM_AUTH"
+                        ],
+                        "type": "string"
+                    },
+                    "createdTime": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "inputParams": {
+                        "items": {
+                            "additionalProperties": true,
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "providerName": {
+                        "type": "string"
+                    },
+                    "updatedTime": {
+                        "type": "string"
+                    },
+                    "wcgFunctionId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthConfigJwt": {
+                "required": [
+                    "addTokenTo",
+                    "algorithm",
+                    "payload",
+                    "providerName"
+                ],
+                "properties": {
+                    "addTokenTo": {
+                        "enum": [
+                            "REQUEST_HEADER",
+                            "QUERY_PARAM"
+                        ],
+                        "type": "string"
+                    },
+                    "algorithm": {
+                        "type": "string"
+                    },
+                    "authConfigId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "authType": {
+                        "enum": [
+                            "APIKEY",
+                            "JWT",
+                            "BASIC",
+                            "OAUTH",
+                            "CUSTOM_AUTH"
+                        ],
+                        "type": "string"
+                    },
+                    "createdTime": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "expirationTime": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "headerPrefix": {
+                        "type": "string"
+                    },
+                    "isIncludeIssueAt": {
+                        "type": "boolean"
+                    },
+                    "isSecretEncoded": {
+                        "type": "boolean"
+                    },
+                    "jwtHeaders": {
+                        "type": "string"
+                    },
+                    "payload": {
+                        "type": "string"
+                    },
+                    "privateKey": {
+                        "type": "string"
+                    },
+                    "providerName": {
+                        "type": "string"
+                    },
+                    "queryParamName": {
+                        "type": "string"
+                    },
+                    "secret": {
+                        "type": "string"
+                    },
+                    "updatedTime": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthConfigList": {
+                "properties": {
+                    "records": {
+                        "items": {
+                            "$ref": "#/components/schemas/GetExternalAuthConfigById200Response"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthConfigOAuth": {
+                "required": [
+                    "clientId",
+                    "grantType",
+                    "providerName",
+                    "secret",
+                    "tokenUrl"
+                ],
+                "properties": {
+                    "assertion": {
+                        "type": "string"
+                    },
+                    "authConfigId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "authType": {
+                        "enum": [
+                            "APIKEY",
+                            "JWT",
+                            "BASIC",
+                            "OAUTH",
+                            "CUSTOM_AUTH"
+                        ],
+                        "type": "string"
+                    },
+                    "clientCredentialsSupplyIn": {
+                        "enum": [
+                            "BODY",
+                            "QUERY_PARAM",
+                            "HEADER"
+                        ],
+                        "type": "string"
+                    },
+                    "clientId": {
+                        "type": "string"
+                    },
+                    "createdTime": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "grantType": {
+                        "enum": [
+                            "CLIENT_CREDENTIALS",
+                            "PASSWORD",
+                            "REFRESH_TOKEN",
+                            "JWT_BEARER"
+                        ],
+                        "type": "string"
+                    },
+                    "oauthProvider": {
+                        "enum": [
+                            "ADMIN_POPULATED",
+                            "SFDC_WEBFLOW"
+                        ],
+                        "type": "string"
+                    },
+                    "otherParameters": {
+                        "items": {
+                            "additionalProperties": true,
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "providerName": {
+                        "type": "string"
+                    },
+                    "scope": {
+                        "type": "string"
+                    },
+                    "secret": {
+                        "type": "string"
+                    },
+                    "tokenResponse": {
+                        "additionalProperties": true,
+                        "type": "object"
+                    },
+                    "tokenUrl": {
+                        "type": "string"
+                    },
+                    "updatedTime": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "AuthConfigOAuthUrl": {
+                "properties": {
+                    "location": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -11341,6 +11661,264 @@
                             "type": "string"
                         },
                         "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "ExternalHttpService": {
+                "description": "External HTTP Service",
+                "properties": {
+                    "accountId": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "action": {
+                        "type": "string"
+                    },
+                    "authConfigId": {
+                        "type": "string"
+                    },
+                    "enableMappings": {
+                        "type": "boolean"
+                    },
+                    "endpoint": {
+                        "type": "string"
+                    },
+                    "httpServiceConfig": {
+                        "properties": {
+                            "content_type": {
+                                "type": "string"
+                            },
+                            "form_data": {
+                                "items": {
+                                    "additionalProperties": true,
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "headers": {
+                                "items": {
+                                    "additionalProperties": true,
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "json_data": {
+                                "type": "string"
+                            },
+                            "method": {
+                                "enum": [
+                                    "GET",
+                                    "POST",
+                                    "PUT",
+                                    "DELETE",
+                                    "PATCH"
+                                ],
+                                "type": "string"
+                            },
+                            "query_params": {
+                                "items": {
+                                    "additionalProperties": true,
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "soap_inputs": {
+                                "items": {
+                                    "additionalProperties": true,
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "text_data": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "enum": [
+                                    "HTTP",
+                                    "SOAP"
+                                ],
+                                "type": "string"
+                            },
+                            "xml_data": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "isDebug": {
+                        "type": "boolean"
+                    },
+                    "isEnabled": {
+                        "type": "boolean"
+                    },
+                    "operationName": {
+                        "type": "string"
+                    },
+                    "permissions": {
+                        "items": {
+                            "enum": [
+                                "CREATE",
+                                "READ",
+                                "UPDATE",
+                                "DELETE",
+                                "REPORT"
+                            ],
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "portname": {
+                        "type": "string"
+                    },
+                    "returnType": {
+                        "type": "string"
+                    },
+                    "sendAllSurveyData": {
+                        "type": "boolean"
+                    },
+                    "serviceDescription": {
+                        "type": "string"
+                    },
+                    "serviceId": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "serviceType": {
+                        "enum": [
+                            "SOAP",
+                            "HTTP_POST",
+                            "HTTP_GET",
+                            "HTTP"
+                        ],
+                        "type": "string"
+                    },
+                    "servicename": {
+                        "type": "string"
+                    },
+                    "targetNamespace": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "GetExternalAuthConfigById200Response": {
+                "properties": {
+                    "addTokenTo": {
+                        "enum": [
+                            "REQUEST_HEADER",
+                            "QUERY_PARAM"
+                        ],
+                        "type": "string"
+                    },
+                    "algorithm": {
+                        "type": "string"
+                    },
+                    "apiKey": {
+                        "type": "string"
+                    },
+                    "assertion": {
+                        "type": "string"
+                    },
+                    "authConfigId": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "authType": {
+                        "enum": [
+                            "APIKEY",
+                            "JWT",
+                            "BASIC",
+                            "OAUTH",
+                            "CUSTOM_AUTH"
+                        ],
+                        "type": "string"
+                    },
+                    "clientCredentialsSupplyIn": {
+                        "enum": [
+                            "BODY",
+                            "QUERY_PARAM",
+                            "HEADER"
+                        ],
+                        "type": "string"
+                    },
+                    "clientId": {
+                        "type": "string"
+                    },
+                    "createdTime": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "expirationTime": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "grantType": {
+                        "enum": [
+                            "CLIENT_CREDENTIALS",
+                            "PASSWORD",
+                            "REFRESH_TOKEN",
+                            "JWT_BEARER"
+                        ],
+                        "type": "string"
+                    },
+                    "headerPrefix": {
+                        "type": "string"
+                    },
+                    "isIncludeIssueAt": {
+                        "type": "boolean"
+                    },
+                    "isSecretEncoded": {
+                        "type": "boolean"
+                    },
+                    "jwtHeaders": {
+                        "type": "string"
+                    },
+                    "oauthProvider": {
+                        "enum": [
+                            "ADMIN_POPULATED",
+                            "SFDC_WEBFLOW"
+                        ],
+                        "type": "string"
+                    },
+                    "otherParameters": {
+                        "items": {
+                            "additionalProperties": true,
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "payload": {
+                        "type": "string"
+                    },
+                    "privateKey": {
+                        "type": "string"
+                    },
+                    "providerName": {
+                        "type": "string"
+                    },
+                    "queryParamName": {
+                        "type": "string"
+                    },
+                    "scope": {
+                        "type": "string"
+                    },
+                    "secret": {
+                        "type": "string"
+                    },
+                    "tokenUrl": {
+                        "type": "string"
+                    },
+                    "updatedTime": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -29126,16 +29704,20 @@
             "name": "Users"
         },
         {
-            "name": "Remote HTTP Service Groups"
+            "name": "Remote HTTP Service Groups",
+            "description": "Manage groups that organize reusable remote HTTP service definitions for an account."
         },
         {
-            "name": "Remote HTTP Services"
+            "name": "Remote HTTP Services",
+            "description": "Manage reusable external HTTP and SOAP service definitions used by RingCX workflows."
         },
         {
-            "name": "Remote HTTP Service Inputs"
+            "name": "Remote HTTP Service Inputs",
+            "description": "Manage input mappings that pass RingCX runtime values into remote HTTP services."
         },
         {
-            "name": "External Auth Configurations"
+            "name": "External Auth Configurations",
+            "description": "Manage reusable authentication configurations for outbound remote HTTP service calls."
         }
     ],
     "x-tag-groups": [
