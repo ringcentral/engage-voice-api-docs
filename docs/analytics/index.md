@@ -35,6 +35,7 @@ You can also use analytics to help identify the high or low points in customer a
       <p class="card-text">The Cloud Reports category provides post-interaction data for cloud-based unified queues. The reports in this category include:</p>
       <ul class="pl-0 ml-4">
       <li><a href="./reports/call-transcripts" class="card-link">Call Transcripts</a></li>
+      <li><a href="./reports/call-summaries" class="card-link">Call Summaries</a></li>
       </ul>
     </div>
   </div>

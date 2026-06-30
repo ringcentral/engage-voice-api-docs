@@ -2,6 +2,9 @@ site_name: RingCentral RingCX Developer Guide
 site_url: https://engage-voice-api-docs.rtfd.org
 repo_url: https://github.com/ringcentral/engage-voice-api-docs
 docs_dir: docs
+exclude_docs: |
+  integration/reports.md
+
 theme:
   name: ringcentral
   product_section: engage
@@ -37,6 +40,7 @@ nav:
       - 'Active Calls': analytics/active-calls/index.md
     - 'Cloud Reports':
       - 'Call Transcripts': analytics/reports/call-transcripts.md
+      - 'Call Summaries': analytics/reports/call-summaries.md
     - 'Realtime Reports':
       - 'Campaign Operations' : analytics/reports/realtime-campaign-ops.md
       - 'Supervisor Overview' : analytics/reports/realtime-supervisor-view.md
@@ -49,6 +53,7 @@ nav:
       - 'Queue Groups': routing/queues/queue-groups.md
       - 'Group Skills': routing/queues/group-skills.md
     - 'Phone Number Management': routing/phone-number-management.md
+    - 'Cloud Routing': routing/cloud-routing.md
     - 'IVR':
       - 'Overview': routing/ivr/index.md
       - 'WWW Node': routing/ivr/www-node.md
@@ -64,11 +69,13 @@ nav:
       - 'DNC': dialing/dnc/dnc-list.md
     - 'Leads':
       - 'Bulk Import Leads': dialing/leads/bulk-import.md
+      - 'Lead Phone Persona Management': dialing/leads/phone-persona-management.md
       - 'Searching Leads': dialing/leads/search.md
       - 'Lead Actions': dialing/leads/actions.md
       - 'Web2Campaign': dialing/leads/web2campaign.md
   - 'Users':
     - 'Overview': users/agents/index.md
+    - 'Admin Users and Permissions': users/admin-users-and-permissions.md
     - 'Agents':
       - 'Agents': users/agents/agents.md
       - 'Agent Groups': users/agents/agent-groups.md
@@ -79,10 +86,7 @@ nav:
     - 'Workforce Management':
       - 'Creating an Event': notifications/wfm/configure-wfm.md
       - 'Event Payload': notifications/wfm/payload-wfm.md
-    - 'Call Streaming': 
-      - 'Getting Started': workforce/call-streaming/getting-started.md
-      - 'Live Transcribe': workforce/call-streaming/live-transcribe.md
-      - 'Save To Files': workforce/call-streaming/save-to-files.md
+    - 'Audio Streaming': workforce/call-streaming/getting-started.md
     - 'Quality Management': workforce/qm/index.md
     - 'Call Recordings': workforce/call-recording/index.md
   - 'Bots/IVAs': bots/index.md
@@ -105,6 +109,7 @@ nav:
     - 'Overview': integration/index.md
     - 'Reports': integration/reports-orig.md
     - 'Administration': integration/admin.md
+    - 'Agent State Subscriptions': integration/agent-state-subscriptions.md
     - 'Routing': integration/agent-avail.md
   - 'SDKs': sdks.md
   - 'Embeddable': embeddable.md

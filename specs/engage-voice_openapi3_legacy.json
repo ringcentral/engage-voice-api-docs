@@ -4541,6 +4541,21 @@
                     },
                     "whisperMsg": {
                         "type": "string"
+                    },
+                    "callingConfiguration": {
+                        "description": "Calling preference mode for the campaign. Use SIMPLE for standard lead-phone dialing or STRATEGIC for persona-based phone selection. This setting is selected when the campaign is created and cannot be changed later.",
+                        "enum": [
+                            "SIMPLE",
+                            "STRATEGIC"
+                        ],
+                        "type": "string"
+                    },
+                    "personaCallSchedules": {
+                        "description": "Persona-based calling windows and phone-priority rules for STRATEGIC campaigns.",
+                        "items": {
+                            "$ref": "#/components/schemas/PersonaCallSchedule"
+                        },
+                        "type": "array"
                     }
                 },
                 "type": "object"
@@ -4802,6 +4817,11 @@
                         "type": "integer"
                     },
                     "leadPhone": {
+                        "description": "Primary lead phone number. For accounts enabled for E.164 or international phone-number handling, provide the primary phone in leadPhoneE164.",
+                        "type": "string"
+                    },
+                    "leadPhoneE164": {
+                        "description": "Primary lead phone number in E.164 format. Required for direct lead loading when the account uses E.164 or international phone-number handling.",
                         "type": "string"
                     },
                     "leadPriority": {
@@ -4886,6 +4906,18 @@
                     },
                     "zip": {
                         "type": "string"
+                    },
+                    "personaMapping": {
+                        "description": "Stored mapping of lead phone values to persona phone IDs.",
+                        "readOnly": true,
+                        "type": "string"
+                    },
+                    "personaPhoneConfig": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "description": "Additional phone numbers for direct lead loading. Keys must exactly match configured persona phone labels, and values are phone numbers for that lead.",
+                        "type": "object"
                     }
                 },
                 "type": "object"
@@ -9718,7 +9750,8 @@
                                 "LIVE_ANSWER_MESSAGE",
                                 "MACH_ANSWER_MESSAGE",
                                 "CALLER_ID",
-                                "LEAD_PRIORITY"
+                                "LEAD_PRIORITY",
+                                "COUNTRY"
                             ],
                             "type": "string"
                         },
@@ -9732,6 +9765,13 @@
                     },
                     "transactionId": {
                         "type": "string"
+                    },
+                    "personaPhoneConfig": {
+                        "description": "Configured additional persona phone fields available for mapping when the campaign uses strategic calling configuration.",
+                        "items": {
+                            "$ref": "#/components/schemas/PersonaPhoneConfigFields"
+                        },
+                        "type": "array"
                     }
                 },
                 "type": "object"
@@ -9792,7 +9832,8 @@
                             "CALLBACKS",
                             "CALLBACKS_AGENT",
                             "DUPLICATES_NOT_MERGED",
-                            "DUPLICATES_NOT_MOVED"
+                            "DUPLICATES_NOT_MOVED",
+                            "ARCHIVED"
                         ],
                         "type": "string"
                     },
@@ -9815,6 +9856,7 @@
                             "NPA_NXX",
                             "ZIPCODE",
                             "EXPLICIT",
+                            "COUNTRY",
                             "NOT_APPLICABLE"
                         ],
                         "type": "string"
@@ -9827,6 +9869,27 @@
                             "$ref": "#/components/schemas/CampaignLead"
                         },
                         "type": "array"
+                    },
+                    "additionalPhoneMappings": {
+                        "additionalProperties": {
+                            "format": "int32",
+                            "type": "integer"
+                        },
+                        "description": "Maps persona phone IDs to the source column indexes used by leadLoader/process. JSON object keys are persona phone IDs, and values are column indexes from the uploaded file preview.",
+                        "type": "object"
+                    },
+                    "phoneNumbersI18nEnabled": {
+                        "type": "boolean"
+                    },
+                    "internationalNumberFormat": {
+                        "type": "boolean"
+                    },
+                    "numberOriginCountry": {
+                        "type": "string"
+                    },
+                    "scheduleArchiveDts": {
+                        "format": "date-time",
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -13628,6 +13691,99 @@
                     },
                     "serviceName": {
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PersonaPhoneConfig": {
+                "properties": {
+                    "accountId": {
+                        "description": "RingCX account ID for the persona phone configuration.",
+                        "type": "string"
+                    },
+                    "phoneId": {
+                        "description": "Persona phone identifier. Use 1 for the primary lead phone and 2 through 7 for additional configured phone personas.",
+                        "format": "int32",
+                        "maximum": 7,
+                        "type": "integer"
+                    },
+                    "phoneLabel": {
+                        "description": "Display label for this phone persona.",
+                        "maxLength": 30,
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PersonaPhoneConfigFields": {
+                "properties": {
+                    "phoneId": {
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "phoneLabel": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PersonaCallPreference": {
+                "properties": {
+                    "phoneId": {
+                        "description": "Persona phone ID to dial during this schedule window.",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "priority": {
+                        "description": "Dialing order for this phone persona within the schedule window. Lower numbers are attempted first.",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "phoneLabel": {
+                        "description": "Configured label for the persona phone ID.",
+                        "readOnly": true,
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "PersonaCallSchedule": {
+                "properties": {
+                    "scheduleId": {
+                        "format": "int32",
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "day": {
+                        "enum": [
+                            "SUNDAY",
+                            "MONDAY",
+                            "TUESDAY",
+                            "WEDNESDAY",
+                            "THURSDAY",
+                            "FRIDAY",
+                            "SATURDAY"
+                        ],
+                        "type": "string"
+                    },
+                    "campaignId": {
+                        "format": "int32",
+                        "readOnly": true,
+                        "type": "integer"
+                    },
+                    "start": {
+                        "description": "Start time for the persona calling window, in HH:mm format.",
+                        "type": "string"
+                    },
+                    "end": {
+                        "description": "End time for the persona calling window, in HH:mm format.",
+                        "type": "string"
+                    },
+                    "callPreferences": {
+                        "items": {
+                            "$ref": "#/components/schemas/PersonaCallPreference"
+                        },
+                        "type": "array"
                     }
                 },
                 "type": "object"
@@ -23298,6 +23454,291 @@
                 "summary": "Application login to authenticate and receive an X-Auth-Token",
                 "tags": [
                     "Legacy Auth"
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/persona-phone-config": {
+            "get": {
+                "description": "Permissions: Read on Account (Permission Override), READ on Outbound",
+                "operationId": "fetchPersonaPhoneConfig",
+                "parameters": [
+                    {
+                        "description": "accountId",
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "schema": {
+                            "pattern": "[0-9]+",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PersonaPhoneConfig"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "summary": "Fetches persona phone configurations",
+                "tags": [
+                    "Outbound"
+                ]
+            },
+            "post": {
+                "description": "Permissions: Read on Account (Permission Override), CREATE on Outbound",
+                "operationId": "createPersonaPhoneConfig",
+                "parameters": [
+                    {
+                        "description": "accountId",
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "schema": {
+                            "pattern": "[0-9]+",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PersonaPhoneConfig"
+                            }
+                        }
+                    },
+                    "description": "personaPhoneConfig",
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PersonaPhoneConfig"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "summary": "Creates persona phone configuration",
+                "tags": [
+                    "Outbound"
+                ],
+                "x-codegen-request-body-name": "personaPhoneConfig"
+            },
+            "put": {
+                "description": "Permissions: Read on Account (Permission Override), UPDATE on Outbound",
+                "operationId": "updatePersonaPhoneConfig",
+                "parameters": [
+                    {
+                        "description": "accountId",
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "schema": {
+                            "pattern": "[0-9]+",
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/PersonaPhoneConfig"
+                            }
+                        }
+                    },
+                    "description": "personaPhoneConfig",
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/PersonaPhoneConfig"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "summary": "Updates persona phone configuration",
+                "tags": [
+                    "Outbound"
+                ],
+                "x-codegen-request-body-name": "personaPhoneConfig"
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/persona-phone-config/active-campaigns/{phoneId}": {
+            "get": {
+                "description": "Returns campaign names that currently use the specified persona phone ID in calling preferences.",
+                "operationId": "getCampaignsUsingPhoneId",
+                "parameters": [
+                    {
+                        "description": "accountId",
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "schema": {
+                            "pattern": "[0-9]+",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "phoneId",
+                        "in": "path",
+                        "name": "phoneId",
+                        "required": true,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "summary": "Fetches campaigns using a persona phone ID",
+                "tags": [
+                    "Outbound"
+                ]
+            }
+        },
+        "/voice/api/v1/admin/accounts/{accountId}/persona-phone-config/{phoneId}": {
+            "delete": {
+                "description": "Permissions: Read on Account (Permission Override), DELETE on Outbound",
+                "operationId": "deletePersonaPhoneConfig",
+                "parameters": [
+                    {
+                        "description": "accountId",
+                        "in": "path",
+                        "name": "accountId",
+                        "required": true,
+                        "schema": {
+                            "pattern": "[0-9]+",
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "description": "phoneId",
+                        "in": "path",
+                        "name": "phoneId",
+                        "required": true,
+                        "schema": {
+                            "format": "int32",
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Deleted"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "summary": "Deletes persona phone configuration",
+                "tags": [
+                    "Outbound"
                 ]
             }
         }
