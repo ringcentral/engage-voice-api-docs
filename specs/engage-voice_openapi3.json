@@ -452,6 +452,20 @@
                 },
                 "type": "object"
             },
+            "AccountDTO": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "records": {
+                        "items": {
+                            "$ref": "#/components/schemas/DnisRecordDTO"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
             "AccountAuxState": {
                 "properties": {
                     "agentAuxState": {
@@ -7735,6 +7749,116 @@
                     },
                     "searchText": {
                         "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "DnisRecordDTO": {
+                "properties": {
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "assignedDnis": {
+                        "$ref": "#/components/schemas/AssignedDnis"
+                    },
+                    "carrier": {
+                        "type": "string"
+                    },
+                    "customAppString": {
+                        "type": "string"
+                    },
+                    "dateCreated": {
+                        "type": "string"
+                    },
+                    "dnis": {
+                        "type": "string"
+                    },
+                    "dnisCategory": {
+                        "type": "string"
+                    },
+                    "dnisDescription": {
+                        "type": "string"
+                    },
+                    "dnisE164": {
+                        "type": "string"
+                    },
+                    "dnisManagedByRC": {
+                        "type": "boolean"
+                    },
+                    "dnisState": {
+                        "type": "string"
+                    },
+                    "inboundContext": {
+                        "type": "string"
+                    },
+                    "lastModified": {
+                        "type": "string"
+                    },
+                    "lastModifiedBy": {
+                        "type": "string"
+                    },
+                    "mediaCode": {
+                        "type": "string"
+                    },
+                    "mediaFormat": {
+                        "type": "string"
+                    },
+                    "mediaIsci": {
+                        "type": "string"
+                    },
+                    "mediaLength": {
+                        "type": "string"
+                    },
+                    "mediaMarket": {
+                        "type": "string"
+                    },
+                    "mediaNetwork": {
+                        "type": "string"
+                    },
+                    "mediaUrl": {
+                        "type": "string"
+                    },
+                    "mediaVersion": {
+                        "type": "string"
+                    },
+                    "mediaWebSourcecode": {
+                        "type": "string"
+                    },
+                    "notes": {
+                        "type": "string"
+                    },
+                    "originatingDnis": {
+                        "type": "string"
+                    },
+                    "platformId": {
+                        "type": "string"
+                    },
+                    "resporg": {
+                        "type": "string"
+                    },
+                    "smsEnabled": {
+                        "type": "boolean"
+                    },
+                    "twilioApiKey": {
+                        "type": "string"
+                    },
+                    "vendorId": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "DnisSearchResultDTO": {
+                "properties": {
+                    "entries": {
+                        "additionalProperties": {
+                            "$ref": "#/components/schemas/AccountDTO"
+                        },
+                        "type": "object"
+                    },
+                    "totalCount": {
+                        "format": "int64",
+                        "type": "integer"
                     }
                 },
                 "type": "object"
@@ -28440,223 +28564,6 @@
                 ]
             }
         },
-        "/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis": {
-            "put": {
-                "tags": [
-                    "SMS DNIS Assignments"
-                ],
-                "summary": "Update SMS DNIS assignment",
-                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
-                "operationId": "updateSmsDnisAssignment",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/components/schemas/AssignedSmsDnis"
-                                }
-                            }
-                        }
-                    },
-                    "required": false
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/AssignedSmsDnis"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/chatQueues/{chatQueueId}": {
-            "put": {
-                "tags": [
-                    "SMS DNIS Assignments"
-                ],
-                "summary": "Assign SMS DNIS to chat queue",
-                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
-                "operationId": "updateAssignedSmsDnisForChatQueue",
-                "parameters": [
-                    {
-                        "name": "chatQueueId",
-                        "in": "path",
-                        "description": "chatQueueId",
-                        "required": true,
-                        "schema": {
-                            "type": "integer",
-                            "format": "int32"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/components/schemas/AssignedSmsDnis"
-                                }
-                            }
-                        }
-                    },
-                    "required": false
-                },
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/AssignedSmsDnis"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/{dnis}": {
-            "get": {
-                "tags": [
-                    "SMS DNIS Assignments"
-                ],
-                "summary": "Get SMS DNIS assignment",
-                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
-                "operationId": "getSmsDnisAssignment",
-                "parameters": [
-                    {
-                        "name": "dnis",
-                        "in": "path",
-                        "description": "dnis",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/AssignedSmsDnis"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ]
-            },
-            "delete": {
-                "tags": [
-                    "SMS DNIS Assignments"
-                ],
-                "summary": "Delete SMS DNIS assignment",
-                "description": "Permissions: READ on TN_MANAGER, filter out restricted accounts",
-                "operationId": "deleteSmsDnisAssignment",
-                "parameters": [
-                    {
-                        "name": "dnis",
-                        "in": "path",
-                        "description": "dnis",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "boolean"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Internal Server Error"
-                    },
-                    "401": {
-                        "description": "Unauthorized"
-                    },
-                    "403": {
-                        "description": "Forbidden"
-                    },
-                    "404": {
-                        "description": "Not Found"
-                    }
-                },
-                "security": [
-                    {
-                        "BearerAuth": []
-                    }
-                ]
-            }
-        },
         "/voice/api/v1/admin/utilities/tnManager/checkNewDnisList": {
             "post": {
                 "tags": [
@@ -29575,9 +29482,6 @@
             "name": "DNIS Assignments"
         },
         {
-            "name": "SMS DNIS Assignments"
-        },
-        {
             "name": "Tracking Numbers"
         },
         {
@@ -29622,7 +29526,6 @@
                 "Queue Special ANI",
                 "Number Management",
                 "DNIS Assignments",
-                "SMS DNIS Assignments",
                 "Tracking Numbers",
                 "Tracking Number Routing Rules",
                 "Tracking Number Schedules"

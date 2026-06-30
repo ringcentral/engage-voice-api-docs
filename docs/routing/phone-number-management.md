@@ -1,16 +1,15 @@
 # Phone Number Management APIs
 
-The Phone Number Management APIs let you manage DNIS pools, SMS DNIS assignments, product assignments, and tracking numbers used by RingCX routing. Use these APIs when phone-number inventory is managed outside the Admin portal or must be synchronized across environments.
+The Phone Number Management APIs let you manage DNIS pools, product assignments, and tracking numbers used by RingCX routing. Use these APIs when phone-number inventory is managed outside the Admin portal or must be synchronized across environments.
 
 ## Strategic Overview
 
-Phone numbers are shared by many RingCX features. Voice DNIS can be assigned to queues, IVRs, and cloud route profiles; SMS DNIS can be assigned to chat queues. Tracking numbers add another routing layer for campaigns or attribution workflows.
+Phone numbers are shared by many RingCX features. Voice DNIS can be assigned to queues, IVRs, and cloud route profiles. Tracking numbers add another routing layer for campaigns or attribution workflows.
 
 ### Key Use Cases
 
 * **Bulk Number Provisioning:** Upload or update large DNIS inventories without manual entry.
 * **Routing Assignment:** Assign voice numbers to queues, IVRs, or cloud route profiles.
-* **Digital Assignment:** Assign SMS-enabled numbers to chat queues.
 * **Inventory Search:** Search pools and identify existing assignments before making changes.
 * **Tracking Number Maintenance:** Maintain tracking-number groups and schedule overrides.
 
@@ -24,7 +23,7 @@ To authenticate, your application must be configured with the following permissi
 
 #### 2. Enable RingCX Admin Access
 
-In the RingCX Admin portal, the authenticating user must have permission to read and update telephone-number inventory and the destination product being assigned, such as queues, Visual IVRs, cloud route profiles, or chat queues.
+In the RingCX Admin portal, the authenticating user must have permission to read and update telephone-number inventory and the destination product being assigned, such as queues, Visual IVRs, or cloud route profiles.
 
 !!! warning "Common Authorization Errors"
     If the user can authenticate but cannot manage the target number or destination product, the API returns an error similar to:
@@ -61,16 +60,6 @@ Use assigned DNIS endpoints to connect numbers to voice routing products.
 | Existing assignment | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedDnis/{dnis}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/getAssignedDnis) |
 | Remove assignment | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedDnis/{dnis}` | [Reference](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/deleteAssignedDnis) |
 
-## Assign SMS DNIS
-
-SMS DNIS assignments connect digital numbers to chat queues.
-
-`PUT https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/chatQueues/{chatQueueId}`
-
-**API Reference:** [Assign SMS DNIS to chat queue](https://developers.ringcentral.com/engage/voice/api-reference/Phone-Number-Management/updateAssignedSmsDnisForChatQueue)
-
-Use `GET https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/{dnis}` to inspect an existing SMS assignment and `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/{dnis}` to remove it.
-
 ## Tracking Numbers
 
 Tracking numbers are managed under tracking-number groups.
@@ -89,9 +78,8 @@ Tracking numbers are managed under tracking-number groups.
 1. Search existing DNIS inventory before adding new records.
 2. Create or upload missing DNIS pool records.
 3. Assign voice DNIS to the correct queue, IVR, or cloud route profile.
-4. Assign SMS DNIS to chat queues when digital routing is needed.
-5. For tracking-number workflows, update tracking groups and schedule overrides separately.
-6. Verify assignments before deleting or reassigning numbers.
+4. For tracking-number workflows, update tracking groups and schedule overrides separately.
+5. Verify assignments before deleting or reassigning numbers.
 
 !!! warning
     Reassigning or deleting a phone number can immediately affect customer routing. Confirm the target product and maintenance window before applying bulk changes.
@@ -107,7 +95,6 @@ Tracking numbers are managed under tracking-number groups.
 | `gateId` | Integer | Required for queue assignment | Voice queue identifier. |
 | `visualIvrId` | Integer | Required for Visual IVR assignment | Visual IVR identifier. |
 | `cloudRouteProfileId` | Integer | Required for cloud routing assignment | Cloud route profile identifier. |
-| `chatQueueId` | Integer | Required for SMS assignment | Chat queue that should receive SMS traffic for the number. |
 | `page`, `size`, `sort` | Integer/String | Optional | Search controls for paginated inventory lookups. |
 | `file` | File | Required for `uploadDnisPool` | Bulk DNIS pool upload payload (sent as `multipart/form-data`, not a query string). |
 | `fileType` | String enum | Required for `uploadDnisPool` | Delimiter format. Currently `COMMA`. |
@@ -161,22 +148,6 @@ The body is an **array** of `AssignedDnis` objects. Each entry must use `dnisDes
 ]
 ```
 
-### Assign SMS DNIS to a Chat Queue
-
-`PUT https://ringcx.ringcentral.com/voice/api/v1/admin/utilities/tnManager/assignedSmsDnis/chatQueues/{chatQueueId}`
-
-The body is an **array** of `AssignedSmsDnis` objects.
-
-```json
-[
-  {
-    "dnis": "15557654321",
-    "isActive": true,
-    "dnisDescription": "Support SMS line"
-  }
-]
-```
-
 ### Search Result (`searchDnis`)
 
 The shape returned by `getCustomerDnisPoolList` is `DnisSearchResultDTO`. Fields below are illustrative; refer to the API reference for the full set returned for a given account.
@@ -218,7 +189,6 @@ Returns a single `AssignedDnis`. The product is signalled by which of `gate`, `v
 | --- | --- | --- |
 | DNIS pool record (`DnisPool`) | `dnis`, `dnisE164`, `reservedAccountId`, `dnisDescription`, `dnisCategory`, `notes`, `active` | Inventory record for a phone number before or after assignment. |
 | Voice assignment (`AssignedDnis`) | `dnis`, `isActive`, `dnisDescription`, plus one of `gate` / `visualIvr` / `cloudRouteProfile` / `tracNumber` | The destination object embedded on the response tells you which product owns the assignment. |
-| SMS assignment (`AssignedSmsDnis`) | `dnis`, `isActive`, `dnisDescription`, `chatQueue` | Maps an SMS-enabled number to a chat queue. |
 | Tracking number (`TracNumber`) | `tracId`, `tracGroupId`, `dnis`, `dnisDescription`, `active` | Tracking-number configuration used for attribution or routing. |
 
 ## Common Errors
