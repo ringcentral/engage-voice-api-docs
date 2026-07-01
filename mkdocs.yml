@@ -52,6 +52,8 @@ nav:
       - 'Queue Events': routing/queues/queue-events.md
       - 'Queue Groups': routing/queues/queue-groups.md
       - 'Group Skills': routing/queues/group-skills.md
+    - 'Knowledge Base': routing/knowledge-base.md
+    - 'Phone Number Management': routing/phone-number-management.md
     - 'Cloud Routing': routing/cloud-routing.md
     - 'IVR':
       - 'Overview': routing/ivr/index.md
@@ -108,6 +110,7 @@ nav:
     - 'Overview': integration/index.md
     - 'Reports': integration/reports-orig.md
     - 'Administration': integration/admin.md
+    - 'Remote HTTP Services': integration/remote-http-services.md
     - 'Agent State Subscriptions': integration/agent-state-subscriptions.md
     - 'Routing': integration/agent-avail.md
   - 'SDKs': sdks.md
