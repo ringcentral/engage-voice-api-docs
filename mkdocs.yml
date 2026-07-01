@@ -52,6 +52,7 @@ nav:
       - 'Queue Events': routing/queues/queue-events.md
       - 'Queue Groups': routing/queues/queue-groups.md
       - 'Group Skills': routing/queues/group-skills.md
+    - 'Phone Number Management': routing/phone-number-management.md
     - 'Cloud Routing': routing/cloud-routing.md
     - 'IVR':
       - 'Overview': routing/ivr/index.md
