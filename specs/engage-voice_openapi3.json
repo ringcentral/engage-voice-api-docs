@@ -15821,6 +15821,39 @@
           }
         },
         "type": "object"
+      },
+      "AudioStreamProperties": {
+        "properties": {
+          "encoding": {
+            "type": "string"
+          },
+          "ptime": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "rate": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "StartStreamRequestDTO": {
+        "properties": {
+          "properties": {
+            "$ref": "#/components/schemas/AudioStreamProperties"
+          },
+          "streamId": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "type": "object"
       }
     },
     "securitySchemes": {
@@ -40254,6 +40287,306 @@
           }
         ]
       }
+    },
+    "/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/dialogs/{dialogId}/segments/{segmentId}/streams": {
+      "post": {
+        "tags": [
+          "Media Control"
+        ],
+        "summary": "Start segment media stream",
+        "description": "",
+        "operationId": "startSegmentStream",
+        "parameters": [
+          {
+            "name": "rcAccountId",
+            "in": "path",
+            "description": "rcAccountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subAccountId",
+            "in": "path",
+            "description": "subAccountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dialogId",
+            "in": "path",
+            "description": "dialogId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "segmentId",
+            "in": "path",
+            "description": "segmentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartStreamRequestDTO"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "successful operation"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/dialogs/{dialogId}/segments/{segmentId}/streams/{streamId}": {
+      "delete": {
+        "tags": [
+          "Media Control"
+        ],
+        "summary": "Stop segment media stream",
+        "description": "",
+        "operationId": "stopSegmentStream",
+        "parameters": [
+          {
+            "name": "rcAccountId",
+            "in": "path",
+            "description": "rcAccountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subAccountId",
+            "in": "path",
+            "description": "subAccountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dialogId",
+            "in": "path",
+            "description": "dialogId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "segmentId",
+            "in": "path",
+            "description": "segmentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "streamId",
+            "in": "path",
+            "description": "streamId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "successful operation"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/dialogs/{dialogId}/streams": {
+      "post": {
+        "tags": [
+          "Media Control"
+        ],
+        "summary": "Start dialog media stream",
+        "description": "",
+        "operationId": "startDialogStream",
+        "parameters": [
+          {
+            "name": "rcAccountId",
+            "in": "path",
+            "description": "rcAccountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subAccountId",
+            "in": "path",
+            "description": "subAccountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dialogId",
+            "in": "path",
+            "description": "dialogId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartStreamRequestDTO"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "successful operation"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/dialogs/{dialogId}/streams/{streamId}": {
+      "delete": {
+        "tags": [
+          "Media Control"
+        ],
+        "summary": "Stop dialog media stream",
+        "description": "",
+        "operationId": "stopDialogStream",
+        "parameters": [
+          {
+            "name": "rcAccountId",
+            "in": "path",
+            "description": "rcAccountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subAccountId",
+            "in": "path",
+            "description": "subAccountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dialogId",
+            "in": "path",
+            "description": "dialogId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "streamId",
+            "in": "path",
+            "description": "streamId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "successful operation"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
     }
   },
   "servers": [
@@ -40419,6 +40752,10 @@
     {
       "name": "External Auth Configurations",
       "description": "Manage reusable authentication configurations for outbound remote HTTP service calls."
+    },
+    {
+      "name": "Media Control",
+      "description": "Start and stop live audio streams for RingCX dialogs and dialog segments."
     }
   ],
   "x-tag-groups": [
@@ -40525,7 +40862,8 @@
       "name": "Workforce",
       "popular": true,
       "tags": [
-        "Audio Streaming"
+        "Audio Streaming",
+        "Media Control"
       ]
     }
   ]
