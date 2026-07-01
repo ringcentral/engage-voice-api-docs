@@ -11,7 +11,7 @@ Call streaming profiles define where audio can be streamed. Media control endpoi
 * **Selective Live Analytics:** Start a stream only when a workflow determines that live analysis is needed.
 * **Compliance Control:** Stop streaming before sensitive information is discussed.
 * **Targeted Recording Pipelines:** Stream only selected segments to external storage or AI services.
-* **Troubleshooting:** Start a temporary stream for a specific dialog during an investigation.
+* **Transfer-Aware Processing:** Stream only the dialog or agent segment that needs downstream analysis, storage, or compliance handling.
 
 ### Real-Time vs. Configuration APIs
 
@@ -48,12 +48,18 @@ The user authenticating the app must also have access to the RingCX sub-account 
 
 Media control requires interaction identifiers from another workflow.
 
+### Dialog vs. Segment
+
+A dialog represents the overall interaction. A segment represents one participant leg or portion of that interaction. For example, if a customer speaks with Agent 1 and is then transferred to Agent 2, both agent conversations belong to the same dialog, but each agent leg has its own segment.
+
+Use dialog-level streaming when the receiver needs media for the full interaction. Use segment-level streaming when the receiver only needs one specific leg, such as a single agent's portion of a transferred call.
+
 | Identifier | Type | Requirement | Description |
 | --- | --- | --- | --- |
 | `rcAccountId` | String | **Required** | RingCentral account ID. |
 | `subAccountId` | String | **Required** | RingCX sub-account ID that owns the dialog. |
-| `dialogId` | String | **Required** | Conversation-level identifier. Capture it from the live interaction workflow that decides to start streaming, or from interaction metadata once the interaction is available to your integration. |
-| `segmentId` | String | Optional | Segment identifier when you only want to stream one segment within the dialog. Capture it from the same interaction metadata source as the dialog when segment-level routing is required. |
+| `dialogId` | String | **Required** | Identifier for the overall interaction. Capture it from the live interaction workflow that decides to start streaming, or from interaction metadata once the interaction is available to your integration. |
+| `segmentId` | String | Optional | Identifier for one participant leg or portion of the dialog. Capture it from the same interaction metadata source as the dialog when segment-level routing is required. |
 | `streamId` | String | **Required** | Caller-provided stream identifier. You choose this value when starting the stream and reuse it to stop the same stream. |
 
 !!! info
