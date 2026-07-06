@@ -14,13 +14,13 @@ To sign in directly to Engage, provide your `username`, `password`, and `platfor
 ### Request
 
 ```http
-POST https://engage.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platformId}
+POST https://ringcx.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platformId}
 ```
 
 Here is an example using cURL:
 
 ```bash
-curl -X POST 'https://engage.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platformId}'
+curl -X POST 'https://ringcx.ringcentral.com/api/auth/login/admin?username={email}&password={password}&platformId={platformId}'
 ```
 
 The response contains an `accessToken` and a `refreshToken`. Use the `accessToken` for RingCX Voice API calls. Save the `refreshToken` so you can refresh the access token when it expires.
@@ -34,7 +34,7 @@ Cache and reuse the access token until it is close to expiration. If an API call
 ### Refresh an Engage access token
 
 ```http
-POST https://engage.ringcentral.com/api/auth/token/refresh
+POST https://ringcx.ringcentral.com/api/auth/token/refresh
 Content-Type: application/x-www-form-urlencoded
 
 refresh_token=<engageRefreshToken>
@@ -49,7 +49,7 @@ In specific cases, a permanent API token is useful, such as calling an API from 
 ### Request
 
 ```http
-POST https://engage.ringcentral.com/voice/api/v1/admin/token
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/token
 
 Authorization: Bearer {accessToken}
 ```
@@ -57,7 +57,7 @@ Authorization: Bearer {accessToken}
 Here is an example using cURL:
 
 ```bash
-curl -X POST 'https://engage.ringcentral.com/voice/api/v1/admin/token' \
+curl -X POST 'https://ringcx.ringcentral.com/voice/api/v1/admin/token' \
   -H 'Authorization: Bearer <accessToken>'
 ```
 
@@ -74,7 +74,7 @@ As you create new API tokens, those permanent API tokens persist. You can retrie
 ### Request
 
 ```http
-GET https://engage.ringcentral.com/voice/api/v1/admin/token
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/token
 
 X-Auth-Token: {apiToken}
 or
@@ -84,7 +84,7 @@ Authorization: Bearer <accessToken>
 Here is an example using cURL:
 
 ```bash
-curl -X GET 'https://engage.ringcentral.com/voice/api/v1/admin/token' \
+curl -X GET 'https://ringcx.ringcentral.com/voice/api/v1/admin/token' \
   -H 'X-Auth-Token: {apiToken}'
 ```
 
@@ -106,7 +106,7 @@ If you no longer need an API token, or you believe it may have been compromised,
 === "X-Auth-Token"
 
     ```http
-    DELETE https://engage.ringcentral.com/voice/api/v1/admin/token/{apiToken}
+    DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/token/{apiToken}
 
     X-Auth-Token: {apiToken}
     ```
@@ -114,7 +114,7 @@ If you no longer need an API token, or you believe it may have been compromised,
 === "Authorization header"
 
     ```http
-    DELETE https://engage.ringcentral.com/voice/api/v1/admin/token/{apiToken}
+    DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/token/{apiToken}
 
     Authorization: Bearer <accessToken>
     ```
@@ -122,7 +122,7 @@ If you no longer need an API token, or you believe it may have been compromised,
 Here is an example cURL command:
 
 ```bash
-curl -X DELETE 'https://engage.ringcentral.com/voice/api/v1/admin/token/{apiTokenForDelete}' \
+curl -X DELETE 'https://ringcx.ringcentral.com/voice/api/v1/admin/token/{apiTokenForDelete}' \
   -H 'X-Auth-Token: {apiToken}'
 ```
 
@@ -131,13 +131,13 @@ curl -X DELETE 'https://engage.ringcentral.com/voice/api/v1/admin/token/{apiToke
 You can retrieve the accounts available to the authenticated user. The main account is the top-level account. Most operational API calls are performed against a sub-account.
 
 ```http
-GET https://engage.ringcentral.com/voice/api/v1/admin/accounts
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts
 Authorization: Bearer <accessToken>
 ```
 
 Here is an example cURL command:
 
 ```bash
-curl -X GET 'https://engage.ringcentral.com/voice/api/v1/admin/accounts' \
+curl -X GET 'https://ringcx.ringcentral.com/voice/api/v1/admin/accounts' \
   -H 'Authorization: Bearer {accessToken}'
 ```

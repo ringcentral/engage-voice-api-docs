@@ -9,7 +9,7 @@ The flow has two steps:
 
 Use the RingCX access token, not the original RingCentral access token, when you call RingCX Voice APIs.
 
-!!! info "RingCX Voice APIs are rooted at: https://engage.ringcentral.com/voice/api/"
+!!! info "RingCX Voice APIs are rooted at: https://ringcx.ringcentral.com/voice/api/"
 
 ## Create an app
 
@@ -60,7 +60,7 @@ The token exchange and refresh endpoints are authentication endpoints. The examp
 ### Request
 
 ```http
-POST https://engage.ringcentral.com/api/auth/login/rc/accesstoken?includeRefresh=true
+POST https://ringcx.ringcentral.com/api/auth/login/rc/accesstoken?includeRefresh=true
 Content-Type: application/x-www-form-urlencoded
 
 rcAccessToken=<ringCentralAccessToken>&rcTokenType=Bearer
@@ -75,7 +75,7 @@ Where:
 === "cURL"
 
     ```bash
-    curl -X POST 'https://engage.ringcentral.com/api/auth/login/rc/accesstoken?includeRefresh=true' \
+    curl -X POST 'https://ringcx.ringcentral.com/api/auth/login/rc/accesstoken?includeRefresh=true' \
       -H 'Content-Type: application/x-www-form-urlencoded' \
       -d 'rcAccessToken=<ringCentralAccessToken>' \
       -d 'rcTokenType=Bearer'
@@ -134,7 +134,7 @@ RingCX does not automatically refresh the token for you. If an API call returns 
 Use the RingCX access token in the `Authorization` header.
 
 ```http
-GET https://engage.ringcentral.com/voice/api/v1/admin/users
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/users
 Authorization: Bearer <ringcxAccessToken>
 ```
 
@@ -143,14 +143,14 @@ Authorization: Bearer <ringcxAccessToken>
 You can retrieve the RingCX accounts available to the authenticated user. This request uses the RingCX access token returned by the token exchange.
 
 ```http
-GET https://engage.ringcentral.com/voice/api/v1/admin/accounts
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts
 Authorization: Bearer <ringcxAccessToken>
 ```
 
 Here is an example cURL command:
 
 ```bash
-curl -X GET 'https://engage.ringcentral.com/voice/api/v1/admin/accounts' \
+curl -X GET 'https://ringcx.ringcentral.com/voice/api/v1/admin/accounts' \
   -H 'Authorization: Bearer <ringcxAccessToken>'
 ```
 
@@ -175,7 +175,7 @@ If you requested a refresh token with `includeRefresh=true`, call the refresh en
 ### Request
 
 ```http
-POST https://engage.ringcentral.com/api/auth/token/refresh
+POST https://ringcx.ringcentral.com/api/auth/token/refresh
 Content-Type: application/x-www-form-urlencoded
 
 refresh_token=<ringcxRefreshToken>
