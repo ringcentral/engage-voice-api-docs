@@ -1,209 +1,80 @@
-# About Queue Groups
+# Queue Groups
 
-Queue Groups are containers for one or more groups. Queue Groups must be created before creating a queue for routing.  Once a Queue Group is created, and you set the Group Skill, create your [Queues](queues.md) in the Queue Group.
+Queue groups are containers for inbound voice queues. Create a queue group before creating queues, queue skills, queue events, or queue-specific routing configuration.
 
-## Core Concepts
+## Queue Group and Gate Group Terminology
 
-### Group Skills
-Group skills are short descriptions that help you map Queue Groups to Agents.  First create the Queue Group and then define the Group Skill.  Later, you will assign this Group Skill to a Agent.
+The API uses the historical `gateGroups` path name. In the RingCX Admin UI, these resources are commonly presented as queue groups. In these docs, **queue group** and **gate group** refer to the same resource.
 
-### Queue Group vs Gate Group
+## Manage Queue Groups
 
-The original terminology for a Queue Group was Gate Group. In this way, Gates and Queues are synonymous. For backward compatibility, `gate` will continue to be supported.
+Use the following endpoints to create, list, retrieve, update, and delete queue groups.
 
-## Create Queue Group
+| Operation | Method and path |
+| --- | --- |
+| List queue groups with child queues | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/withChildren` |
+| Get queue group details | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}` |
+| Create queue group | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups` |
+| Update queue group | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}` |
+| Delete queue group | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}` |
 
-Creating a new Queue Group using the `gateGroups` endpoint. Only the Queue Group name is required.
+## Create a Queue Group
 
-### Primary Parameters
-
-Only `groupName` is a required parameter to create a Queue Group. All other parameters are optional.
-
-| API Property | | UI Display | UI Default | Description |
-|-|-|-|-|-|
-| **`groupName`** | Required | Name | *empty* | Name for this new Queue Group |
-| **`billingKey`** | Optional | *hidden* | *null* | If you use an external billing system, you can provide the billing code from that system in the queue to easily keep track of which customers (represented by the queue) are tied to which billing code.  This setting is for reporting purposes only |
-| **`gateGroupId`** | Optional | *hidden* | 0 | You can specify your gateGroupId, but by default, the next available ID is chosen for you. |
-
-### Code samples
-
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-=== "Javascript"
-
-    ```javascript
-    {!> code-samples/routing/queue-group-create.js !}
-    ```
-
-=== "Python"
-
-    ```python
-    {!> code-samples/routing/queue-group-create.py !}
-    ```
-
-=== "PHP"
-
-    ```php
-    {!> code-samples/routing/queue-group-create.php !}
-    ```
-
-### Sample request
+Only `groupName` is required when creating a queue group.
 
 ```http
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups
+Authorization: Bearer <ringcxAccessToken>
 Content-Type: application/json
+```
 
+```json
 {
-    "groupName": "My New Queue Group"
+  "groupName": "Support Queues"
 }
 ```
 
-### Sample response
+### Common Fields
 
-```json
-{!> code-samples/routing/queue-group-create-response.json !}
-```
+| Field | Required | Description |
+| --- | --- | --- |
+| `groupName` | Yes | Display name for the queue group. |
+| `billingKey` | No | Optional external billing or reporting key. |
+| `gateGroupId` | No | Queue group ID. If omitted during create, RingCX assigns the next available ID. |
 
 ## Retrieve Queue Groups
 
-Retrieve a list of Queue Groups using the `gateGroups` endpoint.
-
-### Optional Parameters
-
-The following parameters are optional.
-
-| API Property | Type | UI Display | UI Default | Description |
-|-|-|-|-|-|
-| **`page`** | Integer | Hidden | 1 | A way to specify which page to show for a long number of Queue Groups |
-| **`maxRows`** | Integer | Hidden | ?? | You can specify the maximum number of Queue Groups to return in a single call. |
-
-### Code samples
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-=== "Javascript"
-
-    ```javascript
-    {!> code-samples/routing/queue-group-retrieve.js !}
-    ```
-	
-=== "Python"
-
-    ```python
-    {!> code-samples/routing/queue-group-retrieve.py !}
-    ```
-	
-=== "PHP"
-
-    ```php
-    {!> code-samples/routing/queue-group-retrieve.php !}
-    ```
-
-### Sample request
-
-=== "HTTP"
-
-```html
-GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups
+```http
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/withChildren
+Authorization: Bearer <ringcxAccessToken>
+Accept: application/json
 ```
 
-### Sample response
+Use `withChildren` when you need the group and its queues in one response. Use `GET /gateGroups/{gateGroupId}` when you already know the queue group ID and only need one group.
 
-```json
-{!> code-samples/routing/queue-group-retrieve-response.json !}
-```
+## Update a Queue Group
 
-## Retrieve a Single Queue Group
-
-Retrieve details for a single Queue Group using the `gateGroups` endpoint.
-
-### Code samples
-
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-=== "Javascript"
-
-    ```javascript
-    {!> code-samples/routing/queue-group-retrieve-single.js !}
-    ```
-
-=== "Python"
-
-    ```python
-    {!> code-samples/routing/queue-group-retrieve-single.py !}
-    ```
-
-### Sample request 
-
-```html
-GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}
-```
-
-
-### Sample response
-
-```json
-{!> code-samples/routing/queue-group-retrieve-single-response.json !}
-```
-
-## Update a Single Queue Group
-
-Update the details for a single Queue Group using the `gateGroups` endpoint. Several details need to be updated with a single `PUT` command so make sure to `GET` all details, modify the relevant fields, and then submit the entire object to update the Queue Group
-
-### Code samples
-
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-	
-=== "Javascript"
-
-    ```javascript
-    {!> code-samples/routing/queue-group-update.js !}    
-    ```
-	
-=== "Python"
-
-    ```python
-    {!> code-samples/routing/queue-group-update.py !}    
-    ```
-	
-=== "PHP"
-
-    ```php
-    {!> code-samples/routing/queue-group-update.php !}    
-    ```
-
-### Sample request
-
-#### Retrieve the entire Queue Group JSON object
-
-```http 
-GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}
-```
-
-#### Modify the groupName
+Retrieve the queue group first, update the fields you need to change, and send the updated object back with `PUT`.
 
 ```http
-PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}
+PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}
+Authorization: Bearer <ringcxAccessToken>
 Content-Type: application/json
+```
 
+```json
 {
-  "groupName":"My New Queue Group Name - Updated",
+  "gateGroupId": 12345,
+  "groupName": "Support Queues - Updated",
+  "billingKey": "support"
 }
 ```
 
-### Sample response
+## Delete a Queue Group
 
-```json
-{!> code-samples/routing/queue-group-update-response.json !}    
+```http
+DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}
+Authorization: Bearer <ringcxAccessToken>
 ```
 
-## Delete a Single Queue Group
-
-Delete a single Queue Group using the `gateGroups` endpoint.
-
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-#### Sample request
-
-```html
-DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}
-```
+Delete a queue group only after confirming that queues, skills, schedules, and other routing configuration under the group are no longer needed.

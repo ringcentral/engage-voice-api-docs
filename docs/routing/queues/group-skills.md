@@ -1,296 +1,91 @@
-# About Queue Group Skills
+# Group Skills
 
-Creating group skills is the first step in the process of assigning skills to your agents. After you create group skills, you’ll also need to add these skills (via Queue Events) to any queue that you assign these agents to.  First create the [Queue Group](queue-groups.md) and then define the Group Skill.  Later, you will assign this Group Skill to the desired [Agent](../../users/agents/agents.md).
+Group skills are queue-group-level skills that can be assigned to agents and used by queue routing. Create the [queue group](queue-groups.md) first, then create the group skills that belong to that queue group.
 
-## Create Groups Skills
+## Manage Group Skills
 
-Create a set of new Group Skills using the `skills` endpoint. Only the Queue Group name is required. You can create multiple Group Skills with this command.  To create only a single Group Skill, create an array with only a single entry.
+The API path uses `gateGroups` because queue groups are represented as gate groups in the API.
 
-### Primary Parameters
-Only `gateName` is a required parameter to create a Queue. All other parameters are optional.
+| Operation | Method and path |
+| --- | --- |
+| List group skills | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills` |
+| Get group skill | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}` |
+| Create group skills | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills` |
+| Update group skills | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills` |
+| Update one group skill | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}` |
+| Delete group skill | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}` |
 
-| API Property |  | UI Display | UI Default | Description |
-|-|-|-|-|-|
-| **`skillId`** | Optional | ID | 0 | A Group Skill unique ID. If not provided an available skill ID will be created for you. |
-| **`skillName`** | Required | Name | *empty* | Give this skill a name that will be assigned to this Queue Group. |
-| **`skillDesc`** | Optional | Description | *empty* | Provide a short description of the skill. |
-| **`active`** | Optional | Active | Yes | Set this skill to Active by setting it to `true`. |
-| **`whisperAudio`** | Optional | **None** | *empty* | A link to the short audio file that plays a message to the agent as they connect with a customer. The audio may inform the agent about the incoming call, or prompt the agent to accept the call. |
-| **`createOn`** | Optional | Created | *current date* | A date in Simple Date Format. |
-| **`agentSkillProfiles`** | Optional | **None** | *empty* | Custom skills defined and bound to an Agent to redirect these queues to. |
-| **`requeueShortcut`** | Optional | **None** | *empty* | Allow agents to manually send their current call to a specific inbound queue, or to another agent with a special skill. |
+## Create Group Skills
 
-### Sample request
-
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+Create one or more group skills by sending an array of skill objects. To create a single skill, send an array with one object.
 
 ```http
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
+Authorization: Bearer <ringcxAccessToken>
 Content-Type: application/json
-
-[
-  {
-    "skillName":"Spanish Language",
-    "skillDesc":"A test skill for Spanish",
-    "active":true,
-  },
-  {
-    "skillName":"French Language",
-    "skillDesc":"A test skill for French",
-    "active":true,
-  }
-]
 ```
-
-### Sample response
 
 ```json
 [
   {
-    "skillId":1455,
-    "skillName":"Spanish Language",
-    "skillDesc":"A test skill for Spanish",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T16:53:17.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
+    "skillName": "Spanish Language",
+    "skillDesc": "Spanish-language support",
+    "active": true
   },
   {
-    "skillId":1456,
-    "skillName":"French Language",
-    "skillDesc":"A test skill for French",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T17:25:13.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
+    "skillName": "French Language",
+    "skillDesc": "French-language support",
+    "active": true
   }
 ]
 ```
+
+### Common Fields
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `skillName` | Yes | Display name for the skill. |
+| `skillDesc` | No | Short description of the skill. |
+| `active` | No | Whether the skill is available for routing. |
+| `skillId` | No | Group skill ID. Omit it when creating a new skill. |
+| `whisperAudio` | No | Optional audio prompt played to the agent. |
+| `agentSkillProfiles` | No | Agent skill profile associations. |
+| `requeueShortcut` | No | Requeue shortcut association. |
 
 ## Retrieve Group Skills
 
-Retrieve a list of Group Skills using the `skills` endpoint.
-
-### Sample request
-
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-```html
-GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
+```http
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
+Authorization: Bearer <ringcxAccessToken>
+Accept: application/json
 ```
 
-### Sample response
+Use the returned `skillId` values when retrieving, updating, or deleting a single skill.
 
-```json
-[
-  {
-    "skillId":1455,
-    "skillName":"Spanish Language",
-    "skillDesc":"A test skill for Spanish",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T16:53:17.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  },
-  {
-    "skillId":1456,
-    "skillName":"French Language",
-    "skillDesc":"A test skill for French",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T17:25:13.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  }
-]
-```
+## Update Group Skills
 
-## Update a list of Group Skills
-
-Update a list of Group Skills using the `skills` endpoint.  This `PUT` allows you to update muliple skills for the Queue Group in a single call.
-
-### Sample request
-
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-#### Retrieve the list of current skills as JSON
-
-```http hl_lines="7 17 32 42"
-GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
-
-[
-  {
-    "skillId":1455,
-    "skillName":"Spanish Language",
-    "skillDesc":"A test skill for Spanish",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T16:53:17.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  },
-  {
-    "skillId":1456,
-    "skillName":"French Language",
-    "skillDesc":"A test skill for French",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T17:25:13.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  }
-]
-```
-#### Modify a field like `skillDesc` and send back the entire JSON skill object
+Retrieve the current skill object first, update the fields that should change, and submit the updated object. Use the collection endpoint for batch updates or the `{skillId}` endpoint for one skill.
 
 ```http
-PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
-
-[
-  {
-    "skillId":1455,
-    "skillName":"Spanish Language",
-    "skillDesc":"A *new* skill for Spanish",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T16:53:17.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  },
-  {
-    "skillId":1456,
-    "skillName":"French Language",
-    "skillDesc":"A *new* skill for French",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T17:25:13.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  }
-]
+PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}
+Authorization: Bearer <ringcxAccessToken>
+Content-Type: application/json
 ```
-
-### Sample response
-
-```json
-[
-  {
-    "skillId":1455,
-    "skillName":"Spanish Language",
-    "skillDesc":"A *new* skill for Spanish",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T16:53:17.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  },
-  {
-    "skillId":1456,
-    "skillName":"French Language",
-    "skillDesc":"A *new* skill for French",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T17:25:13.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  }
-]
-```
-
-## Retrieve a Single Group Skill
-
-Retrieve details of a single Group Skill using the `skills` endpoint.
-
-### Sample request
-
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-```html
-GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}
-```
-
-### Sample response
 
 ```json
 {
-  "skillId":1455,
-  "skillName":"Spanish Language",
-  "skillDesc":"A test skill for Spanish",
-  "active":true,
-  "whisperAudio":null,
-  "createdOn":"2020-05-19T16:53:17.000+0000",
-  "agentSkillProfiles":null,
-  "requeueShortcut":null
+  "skillId": 1455,
+  "skillName": "Spanish Language",
+  "skillDesc": "Spanish-language support and billing questions",
+  "active": true
 }
 ```
 
-## Update a Single Group Skill
+## Delete a Group Skill
 
-Update a single Group Skill using the `skills` endpoint.  This `PUT` focuses on just a single skill for the Queue Group.
-
-### Sample request
-
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-#### Retrieve the list of current skills as JSON
-
-```http hl_lines="6"
-GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
-
-{
-  "skillId":1455,
-  "skillName":"Spanish Language",
-  "skillDesc":"A test skill for Spanish",
-  "active":true,
-  "whisperAudio":null,
-  "createdOn":"2020-05-19T16:53:17.000+0000",
-  "agentSkillProfiles":null,
-  "requeueShortcut":null
-}
-```
-#### Modify a field like `skillDesc` and send back the entire JSON skill object
-
-```http hl_lines="6"
-PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
-
-{
-  "skillId":1455,
-  "skillName":"Spanish Language",
-  "skillDesc":"A *new* skill for Spanish",
-  "active":true,
-  "whisperAudio":null,
-  "createdOn":"2020-05-19T16:53:17.000+0000",
-  "agentSkillProfiles":null,
-  "requeueShortcut":null
-}
+```http
+DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}
+Authorization: Bearer <ringcxAccessToken>
 ```
 
-### Sample response
-
-```json
-{
-  "skillId":1455,
-  "skillName":"Spanish Language",
-  "skillDesc":"A *new* skill for Spanish",
-  "active":true,
-  "whisperAudio":null,
-  "createdOn":"2020-05-19T16:53:17.000+0000",
-  "agentSkillProfiles":null,
-  "requeueShortcut":null
-}
-```
-
-## Delete a Single Skill
-
-Delete a single Skill using the `skills` endpoint.  You can only delete a single skill at a time.
-
-### Sample request
-
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-```html
-DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}
-```
+Delete a group skill only after confirming it is no longer referenced by agent skill profiles or queue routing behavior.

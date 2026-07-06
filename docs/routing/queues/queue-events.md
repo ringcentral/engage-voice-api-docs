@@ -1,90 +1,82 @@
-# About Queue Events
+# Queue Events
 
-In Creating an inbound [Queue](queues.md), we discussed that inbound queues can be configured to provide the specific experience you want each caller to have while waiting for an agent to take their call. This experience can be configured by creating [Queue Events](queue-events.md), a series of sequential events that the customer will experience once they are routed to the queue.
-
-You can configure queue events to be as simple or complex as you like, from providing hold music for the caller while they wait to providing DTMF input options that the caller can choose from to determine the destination they’d like to route to.
+Queue events define what callers experience while waiting in a queue. Use them for hold music, announcements, wait-time behavior, DTMF input, and priority handling for special caller scenarios.
 
 ## Core Concepts
 
-### Priority Queue Events
+Queue events belong to a specific queue. The API path uses `gateQueueEvents` because queues are represented as `gates` in the API.
 
-You can create queue events that will typically occur in this queue, but you can also create special queue events — that is, priority queue events — that will occur when specific conditions exist, such as when your queue is closed or when the queue has reached the maximum number of calls.
+Priority queue events can be used when specific conditions apply, such as a queue being closed, a queue reaching capacity, or a caller matching a special ANI rule. DTMF events can be attached to a queue event when callers need keypad options during the queue experience.
 
-### Speical ANI and Velocity ANI
+## Manage Queue Events
 
-You can also configure a priority queue event for specific ANIs (Automatic Number Identification) — that is, the phone number of the incoming caller. These priority events allow you to create special queue events for callers that you would like to give special routing priority.
+| Operation | Method and path |
+| --- | --- |
+| List queue events | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents` |
+| Get queue event | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}` |
+| Create queue events | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents` |
+| Update queue events | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents` |
+| Update one queue event | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}` |
+| Delete queue event | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}` |
 
-You can create a priority queue event for two different types of ANIs: Special ANI and Velocity ANI. Special ANI priority events can be used for callers you would like to prioritize, such as your VIP customers. Velocity ANI priority events can be used to flag certain ANIs that call a specific amount of times in a certain amount of days. Once a caller has been flagged, the system will send them through the Velocity ANI queue event.
+## Create or Update Queue Events
 
-## Create Queue Events
+Create and batch-update queue events by sending an array of event objects.
 
-Queue Events are actually a component of Queues and therefore do not need a `POST` method.  Create the [Queue](queues.md) first and then update the Queue Events details using `PUT` below.
+```http
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
+Authorization: Bearer <ringcxAccessToken>
+Content-Type: application/json
+```
+
+```json
+[
+  {
+    "eventRank": 0,
+    "queueEvent": "PLAY-AUDIO-LOOP:holdmusic",
+    "eventDuration": 120,
+    "enableDtmf": 0
+  },
+  {
+    "eventRank": 1,
+    "queueEvent": "END-CALL:true",
+    "eventDuration": 0,
+    "enableDtmf": 0
+  }
+]
+```
+
+### Common Fields
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `eventId` | No | Queue event ID. Omit it when creating a new event. |
+| `eventRank` | Yes | Order in which queue events are evaluated or played. |
+| `queueEvent` | No | Event action or audio behavior. |
+| `eventDuration` | No | Duration, in seconds, for time-based queue event behavior. |
+| `enableDtmf` | No | Whether the event accepts DTMF input. |
+| `active` | No | Whether the event is active. |
 
 ## Retrieve Queue Events
 
-Retrieve a list of Queue Events set on this [Queue](queues.md).
-
-### Sample request
-
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
 ```http
-GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
+Authorization: Bearer <ringcxAccessToken>
+Accept: application/json
 ```
 
-### Sample response
+Use the returned `eventId` values when updating or deleting a single queue event.
 
-```json
-{!> code-samples/routing/queue-events-response.json !}
-```
+## DTMF Events
 
-## Update Queue Events
+DTMF events belong to a queue event and define keypad behavior for callers.
 
-Modify Queue Events using the `gateQueueEvents` endpoint.  You can modify multiple Queue Events with this command.  To modify only a single Queue Event, use the `gateQueueEvents` with your specific `eventId`.
+| Operation | Method and path |
+| --- | --- |
+| List DTMF events | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}/gateQueueDtmfEvents` |
+| Create DTMF events | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}/gateQueueDtmfEvents` |
+| Update DTMF events | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}/gateQueueDtmfEvents` |
+| Update one DTMF event | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}/gateQueueDtmfEvents/{dtmfEventId}` |
+| Delete DTMF event | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}/gateQueueDtmfEvents/{dtmfEventId}` |
 
-### Primary Parameters
-
-Only `gateName` is a required parameter to create a Queue. All other parameters are optional.
-
-| API Property |  | UI Display | UI Default | Description |
-|-|-|-|-|-|
-| **`eventId`** | Optional | ID | *hidden* | A Queue Event unique ID. If not provided an available event ID will be created for you. |
-| **`eventRank`** | Required | Rank | 0 | A priority ranking for the order in which Queue Events should be executed. |
-| **`queueEvent`** | Optional | Single Play Audio | *empty* | Provide a short description of the skill. |
-| **`active`** | Optional | Active | Yes | Set this skill to Active by setting it to `true`. |
-| **`whisperAudio`** | Optional | **None** | *empty* | A link to the short audio file that plays a message to the agent as they connect with a customer. The audio may inform the agent about the incoming call, or prompt the agent to accept the call. |
-| **`createOn`** | Optional | Created | *current date* | A date in Simple Date Format. |
-| **`agentSkillProfiles`** | Optional | **None** | *empty* | Custom skills defined and bound to an Agent to redirect these queues to. |
-| **`requeueShortcut`** | Optional | **None** | *empty* | Allow agents to manually send their current call to a specific inbound queue, or to another agent with a special skill. |
-
-### Sample request
-
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-```http
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
-Content-Type: application/json
-
-[
-  {
-    "eventId":67882,
-    "eventRank":0,
-    "queueEvent":"PLAY-AUDIO-LOOP:holdmusic",
-    "eventDuration":120,
-    "enableDtmf":0
-  },
-  {
-    "eventId":67883,
-    "eventRank":1,
-    "queueEvent":"END-CALL:true",
-    "eventDuration":0,
-    "enableDtmf":0
-  }
-]    
-```
-
-### Sample response
-
-```json
-{!> code-samples/routing/queue-events-response.json !}
-```
+Configure the parent queue event before adding DTMF options.
