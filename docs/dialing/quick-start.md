@@ -1,112 +1,68 @@
-# RingCX Dial Group Quick Start
+# RingCX Dialing Quick Start
 
-Welcome to the RingCX Platform. In this Quick Start, we are going to create a predictive dial group for an account. Let's get started.
+This quick start creates a dial group, the top-level container for outbound campaigns. After the dial group exists, create campaigns under it and load leads into those campaigns.
 
-## Create an App
+## Prerequisites
 
-The first thing we need to do is create an app in the RingCentral Developer Portal. This can be done quickly by clicking the "Create App" button below. Just click the button, enter a name and description if you choose, and click the "Create" button. If you do not yet have a RingCentral account, you will be prompted to create one.
+Before calling the Dialing APIs:
 
-<a target="_new" href="https://developer.ringcentral.com/new-app?name=RingCX+Quick+Start+App&desc=A+simple+app+to+demo+creating+a+queue+group&grantType=PersonalJWT&public=false&type=ServerOther&carriers=7710,7310,3420&permissions=ReadAccounts&redirectUri=&utm_source=devguide&utm_medium=button&utm_campaign=quickstart" class="btn btn-primary">Create App</a>
-<a class="btn-link btn-collapse" data-toggle="collapse" href="#create-app-instructions" role="button" aria-expanded="false" aria-controls="create-app-instructions">Show detailed instructions</a>
+1. Create a RingCentral app with the `ReadAccounts` permission.
+2. Complete the [RingCentral token exchange flow](../authentication/auth-ringcentral.md) and obtain a RingCX access token.
+3. Get the RingCX sub-account ID from `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts`.
 
-<div class="collapse" id="create-app-instructions">
-<ol>
-<li><a href="https://developer.ringcentral.com/login.html#/">Login or create an account</a> if you have not done so already.</li>
-<li>Go to Console/Apps and click 'Create App' button.</li>
-<li>Select "REST API App" under "What type of app are you creating?" Click "Next."</li>
-<li>Under "Auth" select "JWT auth flow"
-<li>Under "Security" add the following permissions:
-  <ul>
-    <li>SMS</li>
-    <li>ReadAccounts</li>
-  </ul>
-</li>
-<li>Under "Security" select "This app is private and will only be callable using credentials from the same RingCentral account."</li>
-</ol>
-</div>
+## Create a Dial Group
 
-When you are done, you will be taken to the app's dashboard. Make note of the Client ID and Client Secret. We will be using those momentarily.
+```http
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups
+Authorization: Bearer <ringcxAccessToken>
+Content-Type: application/json
+```
 
-## Create a Dial Group for an RingCX Account
+```json
+{
+  "dialGroupName": "Outbound Renewals",
+  "dialGroupDesc": "Renewal outreach campaigns",
+  "dialMode": "PREVIEW",
+  "isActive": true
+}
+```
 
-=== "JavaScript"
+## Verify the Dial Group
 
-    ### Install RingCX SDK Wrapper for Node JS
+```http
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups
+Authorization: Bearer <ringcxAccessToken>
+Accept: application/json
+```
 
-    ```bash
-    $ npm install ringcentral-engage-voice-client
-    ```
+Use the returned `dialGroupId` when creating campaigns.
 
-    ### Create and Edit create-dial-group.js
+## Python Example
 
-    Create a file called <tt>create-dial-group.js</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
+```python
+import requests
 
-    ```javascript
-    {!> code-samples/dialing/quick-start.js !}
-    ```
+BASE_URL = "https://ringcx.ringcentral.com/voice/api"
 
-    ### Run Your Code
+def create_dial_group(token, account_id):
+    response = requests.post(
+        f"{BASE_URL}/v1/admin/accounts/{account_id}/dialGroups",
+        headers={"Authorization": f"Bearer {token}"},
+        json={
+            "dialGroupName": "Outbound Renewals",
+            "dialGroupDesc": "Renewal outreach campaigns",
+            "dialMode": "PREVIEW",
+            "isActive": True,
+        },
+    )
+    response.raise_for_status()
+    return response.json()
+```
 
-    You are almost done. Now run your script.
+## Next Steps
 
-    ```bash
-    $ node create-dial-group.js
-    ```
+After creating a dial group:
 
-=== "PHP"
-
-    ### Install RingCX SDK Wrapper for PHP
-
-    ```bash
-    $ composer require engagevoice-sdk-wrapper
-    ```
-
-    ### Create and Edit create-dial-group.php
-
-    Create a file called <tt>create-dial-group.php</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
-
-    ```php
-    {!> code-samples/dialing/quick-start.php !}
-    ```
-
-    ### Run Your Code
-
-    You are almost done. Now run your script.
-
-    ```bash
-    $ php create-dial-group.php
-    ```
-
-=== "Python"
-
-    ### Install RingCX SDK Wrapper for Python
-
-    ```bash
-    $ pip install ringcentral_engage_voice
-    ```
-
-    ### Create and Edit create-dial-group.py
-
-    Create a file called <tt>create-dial-group.py</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
-
-    ```python
-    {!> code-samples/dialing/quick-start.py !}
-    ```
-
-    ### Run Your Code
-
-    You are almost done. Now run your script.
-
-    ```bash
-    $ python create-dial-group.py
-    ```
-
-## Need Help?
-
-Having difficulty? Feeling frustrated? Receiving an error you don't understand? Our community is here to help and may already have found an answer. Search our community forums, and if you don't find an answer please ask!
-
-<a target="_new" href="https://forums.developers.ringcentral.com/search.html?c=11&includeChildren=false&f=&type=question+OR+kbentry+OR+answer+OR+topic&redirect=search%2Fsearch&sort=relevance&q=call+management">Search the forums &raquo;</a>
-
-## What's Next?
-
-When you have successfully made your first API call, it is time to take your next step towards building a more robust RingCX application.
+1. Create an outbound [campaign](campaigns/campaigns.md).
+2. Load leads into the campaign with [bulk import](leads/bulk-import.md).
+3. Use [lead search](leads/search.md) and [lead actions](leads/actions.md) to manage campaign leads.

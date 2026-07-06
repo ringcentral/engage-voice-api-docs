@@ -1,470 +1,101 @@
-# About Dial Groups
+# Dial Groups
 
-Dial groups are configurable groups of (outbound) campaigns that can be differentiated by the type of dialer you are using. When you assign agents to one or more dial groups, those agents will have the ability to dial on all campaigns associated with those dial groups.
+Dial groups are outbound campaign containers. Agents assigned to a dial group can work campaigns that belong to that group. A dial group also defines dialing behavior such as preview or predictive dialing.
 
-Once you’ve created a dial group, you can choose the appropriate dialer to apply to that group (Preview, Predictive, etc.) and configure a few settings that will apply to all the campaigns that get put into that dial group.
+## Dial Modes
 
-While you can create multiple dial groups — each of which can use a different dialer — please note that agents can only ever be actively logged into one dial group (and thus only using one outbound dialer) at a time.  You’ll notice that when you configure your agent login screens, you can give agents the option to make multiple concurrent choices from a list of inbound queues, but when it comes to outbound dialing, they will only be able to choose one dial group to dial on at any given time.
+Use `PREVIEW` when agents should review lead information before placing a call. Use `PREDICTIVE` when RingCX should place outbound calls automatically and connect answered calls to available agents.
 
-## Core Concepts
+Agents can be assigned to multiple dial groups, but they actively dial from one dial group at a time.
 
-### Campaigns
-Campaigns live within a dial group, which means you must set up and configure a dial group before you create your first campaign.  Dial groups provide a pool of campaigns an agent can log into and dial from.
+## Manage Dial Groups
 
-### Dial Mode
-Dial groups are differentiated by dial mode. Each dial group will only dial via one particular dialing mode at a time. Two dial modes in particular are important here: Predictive dialing and Preview dialing.
+| Operation | Method and path |
+| --- | --- |
+| List dial groups | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups` |
+| List dial groups with campaigns | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/withChildren` |
+| Get dial group | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}` |
+| Create dial group | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups` |
+| Update dial group | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}` |
+| Delete dial group | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}` |
+| List assigned agents | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/assignedAgents` |
+| Assign agents | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/assignAgents` |
 
--   **Predictive Dialing**
+## Create a Dial Group
 
-    Predictive dialing is when an auto dialer does the dialing for you. It automatically dials leads based on the settings configured in a predictive dial group.
+Only `dialGroupName` is required, but most integrations also set `dialMode` and `isActive`.
 
-    In addition to dialing faster and eliminating dialing mistakes due to human error, the predictive dialer lets the system balance the amount of calls an agent gets. It follows an intelligent predictive algorithm that learns and adjusts itself according to the patterns it detects.
-
-    These predictions can then help the system decide a course of action, such as how many numbers it can simultaneously dial based on how many agents are available at any given time.
-
-    As calls and agents fluctuate throughout calling hours, the predictive dialer will also adjust its algorithm continuously to match these changes.
-
--   **Preview Dialing**
-
-    Preview dialing allows you to study lead information like call history, customer preferences, and notes on previous interactions before placing calls.
-
-    Unlike predictive dialing where the system dials multiple numbers and assigns a call to an agent, preview dialing functions on a one-to-one basis where one lead is connected to one agent. This dialing mode ensures that you have time to view important information about each lead before a call is placed.
-
-    Preview dialing is similar to progressive dialing, but the key difference between the two is that in progressive dialing, you can only study the lead info in a set amount of time configured by your administrators.
-
-### Assigning Agents
-If you’d like for your agent to be able to make outbound calls, you’ll need to assign that agent user to an outbound dial group.
-
-!!! alert "Helpful hint"
-    If you’d like your agents to make outbound calls, in addition to assigning your agent to an outbound dial group, you must also enable 'Allow Outbound Calls' via the [Agent](../../users/agents/agents.md).
-
-## Creating Dial Groups
-Let's start with a new dial group to contain all our campaigns.
-
-### Primary Parameters
-Only `gateName` is a required parameter to create a Queue. All other parameters are optional.
-
-| API Property |  | UI Display | UI Default | Description |
-|-|-|-|-|-|
-| **`isActive`** | Optional | Active | *checked* | Set this dial group to active or not. |
-| **`dialGroupId`** | Optional | *hidden* | 0 | A unique dial group ID. By specfying 0, a unique ID will be chosen for you. |
-| **`dialGroupName`** | Required | Name | *empty* | Give this dial group a name. |
-| **`dialGroupDesc`** | Optional | Description | *empty* | Set a short description for the new dial group. |
-| **`dialMode`** | Optional | Dial Mode | *empty* | Dial modes are typically one of two choices; `PREDICTIVE` or `PREVIEW`. |
-| **Predictive Dialing Mode Settings** | | | | |
-| **`enableAbsolutePriority`** | Optional | Enable Absolute Campaign Priority | *unchecked* | When this setting is enabled, the system will dial higher priority campaigns before any others as long as the higher priority campaigns still have active leads. |
-| **Preview Dialing Mode Settings** | | | | |
-| **`requireFetchedLeadsCalled`** | Optional | Require Calling of Fetched Leads | *unchecked* | Select this option to require agents to call all fetched leads before being able to fetch new leads. |
-| **`progressiveEnabled`** | Optional | Enable Progressive Mode | *unchecked* | This mode will dial leads on a one-to-one, lead-to-agent basis where agents will be able to view the leads that will be dialed, but will not be able to choose which leads to dial or the order in which they are dialed. |
-| **`progressiveCallDelay`** | Optional | Progressive Call Delay (seconds) | 0 | This setting is only used when the Enable Progressive Mode setting is enabled. This allows you to choose the time (in seconds) that the dialer will wait (once an agent has finished a call) before dialing the next lead. The maximum number of seconds you can choose is `120`. |
-| **`allowPreviewLeadFilters`** | Optional | Preview Dial Lead Search | *unchecked* | When enabled, this option allows agents to use search filters when fetching leads to dial. Disabling this feature may improve lead fetch times. |
-| **`maxLeadsReturned`** | Optional | Max Leads Returned | 1 | This setting indicates the maximum number of leads an agent can receive at a time (the agent can keep the leads for one hour). The maximum number of leads you can set is `50`. |
-| **Common Mode Settings for both Predictive and Preview Modes** | | | | |
-| **`enableAgentFilter`** | Optional | Enable Agent Filter | *unchecked* | This option is available when you enable Lead Search, or when using the Preview Dial Mode. When this option is enabled, the system will allow a lead with a reserved agent ID to be reserved for dialing only by the specified agent. Please note that this setting must be enabled in order for the Pending Agent ID and Reserve/Unreserve for Agent settings to function. |
-| **`enableListPriority`** | Optional | Enable List Priority | *unchecked* | This option allows you to enable list dialing based on a custom priority. Once enabled, you can use the Priority setting in the Loaded Lists table on a campaign to select the dial list order. |
-| **`allowLeadSearch`** | Optional | Allow Lead Search | *unchecked* | This option controls whether or not agents can search for leads when dialing from any campaign within this dial group. |
-| **`enableCallbacksAfterMaxpass`** | Optional | Allow Scheduled Callbacks After Max Passes | *checked* | When enabled, this setting allows  agents to dial leads past the max pass limit (this limit can be set at the campaign level) as long as the last agent disposition selected was set to Requeue = Yes. If disabled, the lead will obey the max pass limit regardless of a request for a callback. |
-| **`enableCallbacksAfterMaxDailyPass`** | Optional | Allow Scheduled Callbacks After Max Daily Passes | *unchecked* | When enabled, this setting allows agents to dial leads past the max daily pass limit (this limit can be set at the campaign level) as long as the last agent disposition selected was set to Requeue = Yes. If disabled, the lead will obey the max daily pass limit regardless of a request for a callback. |
-
-### Request
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-=== "JavaScript"
-
-    ### Install RingCX SDK Wrapper for Node JS
-
-    ```bash
-    $ npm install ringcentral-engage-voice-client
-    ```
-    ### Create and edit dial-groups.js
-
-    ```javascript 
-    {!> code-samples/dial-groups/quick-start.js !}
-    ```
-	
-=== "Python"
-
-    ### Install RingCX SDK Wrapper for Python
-
-    ```bash
-    $ pip install ringcentral_engage_voice
-    ```
-
-    ### Create and edit dial-group.py
-
-    Create a file called <tt>dial-group.py</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
-
-    ```python
-    {!> code-samples/dial-groups/quick-start.py !}
-    ```
-	
-=== "PHP"
-
-    ### Install RingCX SDK Wrapper for PHP
-
-    ```bash
-    $ composer require engagevoice-sdk-wrapper
-    ```
-
-    ### Create and Edit dial-group.php
-
-    Create a file called <tt>dial-group.php</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
-
-
-    ```php
-    {!> code-samples/dial-groups/quick-start.php !}
-    ```
-
-### Sample response
-
-```json
-{!> code-samples/dial-groups/response.json !}
+```http
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups
+Authorization: Bearer <ringcxAccessToken>
+Content-Type: application/json
 ```
-
-## Retrieve a Single Dial Group
-
-Now let's retrieve details for the Dial Group we just created to make to make sure it was created properly and to see what field were auto-populated with. This call will use the `dialGroups` endpoint.
-
-### Request
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-=== "HTTP"
-    ```html
-    ######################################################
-    The `BASE_URL` for your server is one of the following:
-    # `https://ringcx.ringcentral.com/voice`
-    # `https://portal.vacd.biz/`
-    # `https://portal.virtualacd.biz/`
-    ######################################################
-
-    GET {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}
-    ```
-=== "Node JS"
-    ```javascript
-    /****** Install Node JS SDK wrapper *******
-    $ npm install ringcentral-engage-voice-client
-    *******************************************/
-
-    const RunRequest = async function () {
-        const EngageVoice = require('ringcentral-engage-voice-client').default
-
-        // Instantiate the SDK wrapper object with your RingCentral app credentials
-        const ev = new EngageVoice({
-            clientId: "RINGCENTRAL_CLIENTID",
-            clientSecret: "RINGCENTRAL_CLIENTSECRET"
-        })
-
-        try {
-            // Authorize with your RingCentral Office user credentials
-            await ev.authorize({
-                username: "RINGCENTRAL_USERNAME",
-                extension: "RINGCENTRAL_EXTENSION",
-                password: "RINGCENTRAL_PASSWORD"
-            })
-
-            // Get Dial Groups data
-            const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-            const groupsResponse = await ev.get(groupsEndpoint)
-            for (var group of groupsResponse.data) {
-                // Get every single Dial Group
-                const singleGroupEndpoint = groupsEndpoint + "/" + group.dialGroupId
-                const singleGroupResponse = await ev.get(singleGroupEndpoint)
-                console.log(singleGroupResponse.data)
-                console.log("=========")
-            }
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-    }
-
-    RunRequest();
-    ```
-=== "Python"
-    ```python
-    #### Install Python SDK wrapper ####
-    # $ pip3 install ringcentral_engage_voice
-    #  or
-    # $ pip install ringcentral_engage_voice
-    #####################################
-
-    from ringcentral_engage_voice import RingCentralEngageVoice
-
-    def retrieve_single_dial_group():
-        try:
-            dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-            dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
-            for group in dialGroupsResponse:
-                # Retrieve every single Dial Group
-                singleGroupEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}"    # f         string:https://www.python.org/dev/peps/pep-0498/
-                singleGroupResponse = ev.get(singleGroupEndpoint).json()
-                print(singleGroupResponse)
-                print("=========")
-        except Exception as e:
-            print(e)
-
-
-    # Instantiate the SDK wrapper object with your RingCentral app credentials
-    ev = RingCentralEngageVoice(
-        "RINGCENTRAL_CLIENTID",
-        "RINGCENTRAL_CLIENTSECRET")
-
-    try:
-        # Authorize with your RingCentral Office user credentials
-        ev.authorize(
-            username="RINGCENTRAL_USERNAME",
-            password="RINGCENTRAL_PASSWORD",
-            extension="RINGCENTRAL_EXTENSION"
-        )
-
-        retrieve_single_dial_group()
-    except Exception as e:
-        print(e)
-
-    ```
-=== "PHP"
-    ```php
-    /************ Install PHP SDK wrapper **************
-    $ composer require engagevoice-sdk-wrapper:dev-master
-    *****************************************************/
-
-    <?php
-    require('vendor/autoload.php');
-
-    // Instantiate the SDK wrapper object with your RingCentral app credentials
-    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-    try{
-      // Login your account with your RingCentral Office user credentials
-      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-      $endpoint = 'admin/accounts/~/dialGroups';
-      $response = $ev->get($endpoint);
-      $jsonObj = json_decode($response);
-      foreach ($jsonObj as $group){
-          if ($group->dialGroupName == "My Dial Group - Predictive"){
-              $endpoint .= '/' . $group->dialGroupId;
-              $response = $ev->get($endpoint);
-              print ($response."\r\n");
-              break;
-          }
-      }
-    }catch (Exception $e) {
-      print $e->getMessage();
-    }
-    ```
-
-### Response
 
 ```json
 {
-    "permissions": [],
-    "dialGroupId": 115793,
-    "dialGroupName": "My Dial Group - Predictive",
-    "dialGroupDesc": "A test dial group with predictive dial mode",
-    "dialMode": "PREDICTIVE",
-    "minPredictiveAgents": 1,
-    "enableAgentFilter": false,
-    "maxPorts": 1,
-    "isActive": true,
-    "agentsReady": 0,
-    "billingKey": null,
-    "outdialServerGroupId": 0,
-    "realTimeAgentData": false,
-    "allowLeadSearch": "NO",
-    "maxLeadsReturned": 1,
-    "enableListPriority": false,
-    "requireFetchedLeadsCalled": false,
-    "allowPreviewLeadFilters": false,
-    "progressiveEnabled": false,
-    "progressiveCallDelay": 0,
-    "enableCallbacksAfterMaxpass": true,
-    "enableAbsolutePriority": false,
-    "hciEnabled": "DISABLED",
-    "enableCallbacksAfterMaxDailyPass": false,
-    "agentDialGroupMembers": null
+  "dialGroupName": "Outbound Renewals",
+  "dialGroupDesc": "Renewal outreach campaigns",
+  "dialMode": "PREVIEW",
+  "isActive": true
 }
 ```
 
-## Update a Single Dial Group
+### Common Fields
 
-Note the `dialGroupId`. We will use that ID to update the Dial Group we created.  Let's say we want to now enable all the settings for the Predictive Dial Group using the `dialGroups` endpoint.
+| Field | Required | Description |
+| --- | --- | --- |
+| `dialGroupName` | Yes | Display name for the dial group. |
+| `dialGroupDesc` | No | Short description of the dial group. |
+| `dialMode` | No | Dialing mode, such as `PREVIEW` or `PREDICTIVE`. |
+| `isActive` | No | Whether agents can actively use the dial group. |
+| `enableAgentFilter` | No | Allows leads reserved for a specific agent to be dialed by that agent. |
+| `allowLeadSearch` | No | Allows agents to search campaign leads from the dialer. |
+| `maxLeadsReturned` | No | Maximum number of preview leads returned to an agent. |
 
-### Request
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+## Retrieve Dial Groups
 
-=== "HTTP"
-    ```html
-    ######################################################
-    The `BASE_URL` for your server is one of the following:
-    # `https://ringcx.ringcentral.com/voice`
-    # `https://portal.vacd.biz/`
-    # `https://portal.virtualacd.biz/`
-    ######################################################
+```http
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/withChildren
+Authorization: Bearer <ringcxAccessToken>
+Accept: application/json
+```
 
-    PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}
-    {
-      "permissions": [],
-      "dialGroupId": 115793,
-      "dialGroupName":"My Dial Group - Predictive",
-      "dialGroupDesc":"A test dial group with predictive dial mode",
-      "dialMode": "PREDICTIVE",
-      "isActive": true,
-      "hciEnabled": "DISABLED",
-      "agentDialGroupMembers": null,
-      "enableAbsolutePriority": true,
-      "enableAgentFilter": true,
-      "enableListPriority": true,
-      "allowLeadSearch": "YES",
-      "enableCallbacksAfterMaxpass": true,
-      "enableCallbacksAfterMaxDailyPass": true
-    }
-    ```
-=== "Node JS"
-    ```javascript
-    /****** Install Node JS SDK wrapper *******
-    $ npm install ringcentral-engage-voice-client
-    *******************************************/
+Use `withChildren` when you need campaign IDs along with the dial group. Use `GET /dialGroups/{dialGroupId}` when you already know the dial group ID.
 
-    const EngageVoice = require('engagevoice-sdk-wrapper')
+## Update a Dial Group
 
-    const RunRequest = async function () {
-        const EngageVoice = require('ringcentral-engage-voice-client').default
+Retrieve the dial group first, update the fields you need to change, and submit the updated object with `PUT`.
 
-        // Instantiate the SDK wrapper object with your RingCentral app credentials
-        const ev = new EngageVoice({
-            clientId: "RINGCENTRAL_CLIENTID",
-            clientSecret: "RINGCENTRAL_CLIENTSECRET"
-        })
+```http
+PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}
+Authorization: Bearer <ringcxAccessToken>
+Content-Type: application/json
+```
 
-        try {
-            // Authorize with your RingCentral Office user credentials
-            await ev.authorize({
-                username: "RINGCENTRAL_USERNAME",
-                extension: "RINGCENTRAL_EXTENSION",
-                password: "RINGCENTRAL_PASSWORD"
-            })
-
-            // Get Dial Groups data
-            const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-            const groupsResponse = await ev.get(groupsEndpoint)
-            for (var group of groupsResponse.data) {
-                // Update your Dial Group
-                if (group.dialGroupName == "My New Dial Group") {
-                    const singleGroupEndpoint = groupsEndpoint + "/" + group.dialGroupId
-                    group.enableAbsolutePriority = true
-                    group.enableAgentFilter = true
-                    group.enableListPriority = true
-                    group.allowLeadSearch = "YES"
-                    group.enableCallbacksAfterMaxpass = true
-                    group.enableCallbacksAfterMaxDailyPass = true
-                    const singleGroupResponse = await ev.put(singleGroupEndpoint, group)
-                    console.log(singleGroupResponse.data)
-                    break
-                }
-            }
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-    }
-
-    RunRequest();
-    ```
-=== "Python"
-    ```python
-    #### Install Python SDK wrapper ####
-    # $ pip3 install ringcentral_engage_voice
-    #  or
-    # $ pip install ringcentral_engage_voice
-    #####################################
-
-    from ringcentral_engage_voice import RingCentralEngageVoice
-
-    def update_single_dial_group():
-        try:
-            dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-            dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
-            for group in dialGroupsResponse:
-                # Update your Dial Group
-                if group['dialGroupName'] == "My New Dial Group":
-                    singleGroupEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}"    # f         string:https://www.python.org/dev/peps/pep-0498/
-                    group['enableAbsolutePriority'] = True
-                    group['enableAgentFilter'] = True
-                    group['enableListPriority'] = True
-                    group['allowLeadSearch'] = "YES"
-                    group['enableCallbacksAfterMaxpass'] = True
-                    group['enableCallbacksAfterMaxDailyPass'] = True
-                    singleGroupResponse = ev.put(singleGroupEndpoint, group).json()
-                    print(singleGroupResponse)
-                    break
-        except Exception as e:
-            print(e)
-    ```
-=== "PHP"
-    ```php
-    /************ Install PHP SDK wrapper **************
-    $ composer require engagevoice-sdk-wrapper:dev-master
-    *****************************************************/
-
-    <?php
-    require('vendor/autoload.php');
-
-    // Instantiate the SDK wrapper object with your RingCentral app credentials
-    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-    try{
-      // Login your account with your RingCentral Office user credentials
-      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-      $endpoint = 'admin/accounts/~/dialGroups';
-      $response = $ev->get($endpoint);
-      $jsonObj = json_decode($response);
-      foreach ($jsonObj as $group){
-          if ($group->dialGroupName == "My Dial Group - Predictive"){
-              $endpoint .= '/' . $group->dialGroupId;
-              $group->enableAbsolutePriority = true;
-              $group->enableAgentFilter = true;
-              $group->enableListPriority = true;
-              $group->allowLeadSearch = "YES";
-              $group->enableCallbacksAfterMaxpass = true;
-              $group->enableCallbacksAfterMaxDailyPass = true;
-              $response = $ev->put($endpoint, $group);
-              print ($response."\r\n");
-              break;
-          }
-      }
-    }catch (Exception $e) {
-      print $e->getMessage();
-    }
-    ```
-
-### Response
-
-```json hl_lines="8-13"
+```json
 {
-    "permissions": [],
-    "dialGroupId": 115793,
-    "dialGroupName": "My Dial Group - Predictive",
-    "dialGroupDesc": "A test dial group with predictive dial mode",
-    "dialMode": "PREDICTIVE",
-    "minPredictiveAgents": 1,
-    "enableAgentFilter": true,
-    "enableListPriority": true,
-    "allowLeadSearch": "YES",
-    "enableCallbacksAfterMaxpass": true,
-    "enableAbsolutePriority": true,
-    "enableCallbacksAfterMaxDailyPass": true,
-    "requireFetchedLeadsCalled": false,
-    "maxPorts": 1,
-    "isActive": false,
-    "agentsReady": 0,
-    "billingKey": null,
-    "outdialServerGroupId": 0,
-    "realTimeAgentData": false,
-    "maxLeadsReturned": 1,
-    "allowPreviewLeadFilters": false,
-    "progressiveEnabled": false,
-    "progressiveCallDelay": 0,
-    "hciEnabled": "DISABLED",
-    "agentDialGroupMembers": null
+  "dialGroupId": 12345,
+  "dialGroupName": "Outbound Renewals",
+  "dialGroupDesc": "Renewal and win-back campaigns",
+  "dialMode": "PREVIEW",
+  "isActive": true
 }
 ```
 
-And now we have a Dial Group configured with all our information settings configured.
+## Assign Agents
+
+Assign agents after creating the dial group and enabling outbound calling for those agents.
+
+```http
+PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/assignAgents
+Authorization: Bearer <ringcxAccessToken>
+Content-Type: application/json
+```
+
+The request body is the agent-assignment payload for the dial group. Use the assigned-agents endpoint to verify the result.
+
+```http
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/assignedAgents
+Authorization: Bearer <ringcxAccessToken>
+Accept: application/json
+```

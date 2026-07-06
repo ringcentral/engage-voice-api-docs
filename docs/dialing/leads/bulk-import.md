@@ -1,382 +1,82 @@
-# About Lead Loader API
+# Bulk Import Leads
 
-The RingCX API allows you to load one or multiple leads at a time. You can also load leads for immediate dialing at the top of the dialer cache or in normal priority.
+Use the lead loader APIs to add leads to an outbound campaign. RingCX supports direct JSON loading and a preview/process flow for uploaded files.
 
-!!! alert "Please Note"
-    To enumerate a list of Campaigns for the `campaignId` path property, please review section [Enumerating Campaigns](#enumerating-campaigns) below.
+## Find the Campaign
 
-The JSON body consists of a set of options along with an array of leads in the `uploadLeads` property
+Before loading leads, identify the target campaign:
 
-## Primary parameters
+```http
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups
+Authorization: Bearer <ringcxAccessToken>
+Accept: application/json
+```
 
-Some key options for the request body include:
+```http
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns
+Authorization: Bearer <ringcxAccessToken>
+Accept: application/json
+```
 
-| Property | | Description |
-|-|-|-|
-| **dialPriority** | Required | set this value to `IMMEDIATE` to add leads to the top of the dialer queue, `NORMAL` otherwise. |
-| **duplicateHandling** | Required | Duplicates are determined by the lead's `leadPhone` property.<ul><li>`REMOVE_ALL_EXISTING` means to remove the new lead in this batch in favor of the existing lead in any list in the campaign (as long as that lead in the existing lead list was already added with this same property). This means that the lead was already loaded into one of the lists within the campaign using `REMOVE_ALL_EXISTING` previously.</li><li>`REMOVE_FROM_LIST` looks for duplicate leads in the list being uploaded. It does not remove duplicates in the lead list that has already been imported previously.</li><li>`RETAIN_ALL` means to keep all duplicates.</li></ul> |
-| **timeZoneOption** | Required | this field tells the Engage how to set the timezone for the user. Use `NPA_NXX` to set the timezone via the lead's phone number. Use `ZIPCODE` to set the timezone via the lead's zipcode. Use `EXPLICIT` to set the timezone via the `CampaignLead` object's `leadTimezone` property. Finally, use `NOT_APPLICABLE` if there is no timezone desired. |
-| **numberOriginCountry** | Required(conditionally) | this is a required field if the international outbound calling feature is enabled for the account. |
+Use the returned `campaignId` in the lead loader path.
 
-Each load in the `uploadLeads` array consists of a lead with the following notable options:
+## Direct Lead Loading
 
-| Property | Description |
-|-|-|
-| **externId** | this is a required string property. |
-| **leadPhone** | this can be a single phone number or a pipe-deliminted field of multiple phone numbers. For US numbers, this is a 10 digit format including area code. |
+Direct loading sends leads as JSON and is the simplest option when your integration already has structured lead data.
 
-!!! info "Persona-based multiple phone numbers"
-    For strategic campaigns that need labeled phone types, such as mobile, home, or work, use [Lead Phone Persona Management](phone-persona-management.md). Persona-based lead loading keeps the primary number in `leadPhone` and maps additional phone numbers to configured phone personas.
+```http
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct
+Authorization: Bearer <ringcxAccessToken>
+Content-Type: application/json
+```
 
-## Enumerating Campaigns
-
-Leads are uploaded per Campaign which requires a `campaignId`. The following two API calls will enable enumerating the account's campaign list.
-
-1. Call the Get Dial Groups API to get a list of dial groups. Each dial group will have a `dialGroupId` property.
-
-     `GET /api/v1/admin/accounts/{accountId}/dialGroups`
-
-2. For the Dial Group of interest, call the Get Dial Group Campaigns API:
-
-     `GET /api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns`
-
-## Upload Leads for a campaign
-
-To upload leads for a campaign, we will need a campaign Id. As campaigns are members of a dialing group.
-
-## Enumerating Campaigns and Uploading Leads
-
-### Request
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-=== "HTTP"
-    ```http
-    POST {baseURL}/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct
-    Authorization: Bearer <yourAccessToken>
-
+```json
+{
+  "description": "Renewal leads",
+  "dialPriority": "NORMAL",
+  "duplicateHandling": "REMOVE_FROM_LIST",
+  "listState": "ACTIVE",
+  "timeZoneOption": "NOT_APPLICABLE",
+  "uploadLeads": [
     {
-        "description": "Prospect customers",
-        "dialPriority": "IMMEDIATE",
-        "duplicateHandling": "REMOVE_FROM_LIST",
-        "listState": "ACTIVE",
-        "timeZoneOption": "NOT_APPLICABLE",
-        "phoneNumbersI18nEnabled": true,
-        "internationalNumberFormat": false,
-        "uploadLeads": [
-          {
-             "leadPhone":"1111111111",
-             "externId":"1",
-             "title":"Dr.",
-             "firstName":"Jeff",
-             "midName":"John",
-             "lastName":"Malfetti",
-             "suffix":"Jr.",
-             "address1":"3101 Fake St.",
-             "address2":"Suite 120",
-             "city":"Rock",
-             "state":"CO",
-             "zip":"80500",
-             "email":"test@test.com",
-             "gateKeeper":"Some one",
-             "auxData1":30,
-             "auxData2":"a",
-             "auxData3":100,
-             "auxData4":"aa",
-             "auxData5":1000,
-             "auxPhone":"1111111110",
-             "extendedLeadData":{
-                "important":"data",
-                "interested":true
-             }
-          },{
-             "leadPhone":"2222222222",
-             "externId":"222",
-             "firstName":"Jason",
-             "midName":"",
-             "lastName":"Black",
-             "address1":"1514 Bernardo Ave",
-             "city":"New York",
-             "state":"NY",
-             "zip":"10001",
-          },{
-             "leadPhone":"3333333333",
-             "externId":"333",
-             "firstName":"Rich",
-             "lastName":"Dunbard"
-          }
-        ],
-       "dncTags":[
-      
-       ]
+      "externId": "lead-1001",
+      "leadPhone": "4155550100",
+      "firstName": "Ada",
+      "lastName": "Lovelace",
+      "state": "CA"
     }
-    ```
-=== "Node JS"
-    ```javascript
-    /****** Install Node JS SDK wrapper *******
-    $ npm install ringcentral-engage-voice-client
-    *******************************************/
+  ]
+}
+```
 
-    const RunRequest = async function () {
-        const EngageVoice = require('ringcentral-engage-voice-client').default
+## File Preview and Process
 
-        // Instantiate the SDK wrapper object with your RingCentral app credentials
-        const ev = new EngageVoice({
-            clientId: "RINGCENTRAL_CLIENTID",
-            clientSecret: "RINGCENTRAL_CLIENTSECRET"
-        })
+For file-based imports, preview the file first so RingCX can identify columns and return mapping information. Then submit the process request with the selected mapping.
 
-        try {
-            // Authorize with your RingCentral Office user credentials
-            await ev.authorize({
-                username: "RINGCENTRAL_USERNAME",
-                extension: "RINGCENTRAL_EXTENSION",
-                password: "RINGCENTRAL_PASSWORD"
-            })
+```http
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/preview?fileType=COMMA
+Authorization: Bearer <ringcxAccessToken>
+Content-Type: multipart/form-data
+```
 
-            // Get Dial Groups data
-            const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-            const groupsResponse = await ev.get(groupsEndpoint)
-            for (var group of groupsResponse.data) {
-                // Select your Dial Group
-                if (group.dialGroupName == "My New Dial Group") {
-                    const campaignsEndpoint = groupsEndpoint + "/" + group.dialGroupId + "/campaigns"
-                    const campaignsResponse = await ev.get(campaignsEndpoint)
-                    for (var campaign of campaignsResponse.data) {
-                        // Select your Campaign and import Leads
-                        if (campaign.campaignName == "My Predictive Campaign") {
-                            const leadsEndpoint = "/api/v1/admin/accounts/{accountId}/campaigns/" +     campaign.campaignId + "/leadLoader/direct"
-                            const postData = {
-                                "listState": "ACTIVE",
-                                "duplicateHandling": "RETAIN_ALL",
-                                "timeZoneOption": "NPA_NXX",
-                                "phoneNumbersI18nEnabled": true,
-                                "internationalNumberFormat": false,
-                                "description": "Lead Search Test",
-                                "dialPriority": "IMMEDIATE",
-                                "uploadLeads": [{
-                                    "leadPhone": "8888888888",
-                                    "externId": "222",
-                                    "firstName": "Jason",
-                                    "midName": "",
-                                    "lastName": "Black",
-                                    "address1": "1514 Bernardo Ave",
-                                    "city": "New York",
-                                    "state": "NY",
-                                    "zip": "10001",
-                                }, {
-                                    "leadPhone": "3323333333",
-                                    "externId": "333",
-                                    "firstName": "Rich",
-                                    "lastName": "Dunbard"
-                                }
-                                ]
-                            }
-                            const leadsResponse = await ev.post(leadsEndpoint, postData)
-                            console.log(leadsResponse.data)
-                        }
-                    }
-                }
-            }
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-    }
+```http
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process
+Authorization: Bearer <ringcxAccessToken>
+Content-Type: application/json
+```
 
-    RunRequest();
-    ```
-=== "Python"  
-    ```python
-    #### Install Python SDK wrapper ####
-    # $ pip3 install ringcentral_engage_voice
-    #  or
-    # $ pip install ringcentral_engage_voice
-    #####################################
+## Common Fields
 
-    from ringcentral_engage_voice import RingCentralEngageVoice
+| Field | Description |
+| --- | --- |
+| `description` | Name or description for the uploaded lead list. |
+| `uploadLeads` | Array of lead records for direct loading. |
+| `externId` | External lead identifier from your source system. |
+| `leadPhone` | Primary lead phone number. |
+| `leadPhoneE164` | E.164 primary phone number, when required for the account mode. |
+| `duplicateHandling` | How RingCX handles duplicate leads during load. |
+| `timeZoneOption` | How RingCX derives or applies lead time zones. |
 
-    def import_leads():
-        try:
-            dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-            dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
-            for group in dialGroupsResponse:
-                # Select your Dial Group
-                if group['dialGroupName'] == "My New Dial Group":
-                    campaignsEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}/campaigns"    #   f   string:https://www.python.org/dev/peps/pep-0498/
-                    campaignsResponse = ev.get(campaignsEndpoint).json()
-                    for campaign in campaignsResponse:
-                        # Select your Campaign and import Leads
-                        if campaign['campaignName'] == "My Predictive Campaign":
-                            leadsEndpoint = f"/api/v1/admin/accounts/{accountId}/campaigns/{campaign    ['campaignId']}/leadLoader/direct"
-                            postBody = {
-                              "description": "Prospect customers",
-                              "dialPriority": "IMMEDIATE",
-                              "duplicateHandling": "REMOVE_FROM_LIST",
-                              "listState": "ACTIVE",
-                              "timeZoneOption": "NPA_NXX",
-                              "phoneNumbersI18nEnabled": true,
-                              "internationalNumberFormat": false,
-                              "uploadLeads": [{
-                                   "leadPhone":"8888888888",
-                                   "externId":"222",
-                                   "firstName":"Jason",
-                                   "midName":"",
-                                   "lastName":"Black",
-                                   "address1":"1514 Bernardo Ave",
-                                   "city":"New York",
-                                   "state":"NY",
-                                   "zip":"10001",
-                                },{
-                                   "leadPhone":"3323333333",
-                                   "externId":"333",
-                                   "firstName":"Rich",
-                                   "lastName":"Dunbard"
-                                }
-                              ]
-                            }
-                            leadsResponse = ev.post(leadsEndpoint, postBody).json()
-                            print(leadsResponse)
-                            break
-        except Exception as e:
-            print(e)
+## Persona Phone Leads
 
-
-    # Instantiate the SDK wrapper object with your RingCentral app credentials
-    ev = RingCentralEngageVoice(
-        "RINGCENTRAL_CLIENTID",
-        "RINGCENTRAL_CLIENTSECRET")
-
-    try:
-        # Authorize with your RingCentral Office user credentials
-        ev.authorize(
-            username="RINGCENTRAL_USERNAME",
-            password="RINGCENTRAL_PASSWORD",
-            extension="RINGCENTRAL_EXTENSION"
-        )
-
-        import_leads()
-    except Exception as e:
-        print(e)
-    ```
-=== "PHP"
-    ```php
-    /************ Install PHP SDK wrapper **************
-    $ composer require engagevoice-sdk-wrapper:dev-master
-    *****************************************************/
-    
-    <?php
-    require('vendor/autoload.php');
-    
-    require('vendor/autoload.php');
-    
-    // Instantiate the SDK wrapper object with your RingCentral app credentials
-    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-    try{
-      // Login your account with your RingCentral Office user credentials
-      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-        read_dial_groups();
-    }catch (Exception $e) {
-        print $e->getMessage();
-    }
-    
-    function read_dial_groups(){
-      global $ev;
-      $endpoint = 'admin/accounts/~/dialGroups';
-      try{
-        $resp = $ev->get($endpoint);
-        $jsonObj = json_decode($resp);
-        foreach ($jsonObj as $group){
-          if ($group->dialGroupName == "My Dial Group - Predictive"){
-            read_group_campaigns($group->dialGroupId);
-            break;
-          }
-        }
-      }catch (Exception $e) {
-          print $e->getMessage();
-      }
-    }
-    
-    function read_group_campaigns($dialGroupId){
-      global $ev;
-      $endpoint = 'admin/accounts/~/dialGroups/' . $dialGroupId . "/campaigns";
-      try{
-        $resp = $ev->get($endpoint);
-        $jsonObj = json_decode($resp);
-        foreach ($jsonObj as $campaign){
-          if ($campaign->campaignName == "API Test"){
-              load_campaign_leads($campaign->campaignId)
-              break;
-          }
-        }
-      }catch(Exception $e) {
-          print $e->getMessage();
-      }
-    }
-    
-    function load_campaign_leads($campaignId){
-      global $ev;
-      $endpoint = 'admin/accounts/~/campaigns/' . $campaignId . "/leadLoader/direct";
-      $params = array (
-        "description" => "Prospect customers",
-        "dialPriority" => "IMMEDIATE",
-        "duplicateHandling" => "REMOVE_FROM_LIST",
-        "listState" => "ACTIVE",
-        "timeZoneOption" => "NOT_APPLICABLE",
-        "phoneNumbersI18nEnabled" => true,
-        "internationalNumberFormat" => false,
-        "uploadLeads" => array (
-          array (
-             "leadPhone" => "1111111111",
-             "externId" => "1",
-             "title" => "Dr.",
-             "firstName" => "Jeff",
-             "midName" => "John",
-             "lastName" => "Malfetti",
-             "suffix" => "Jr.",
-             "address1" => "3101 Fake St.",
-             "address2" => "Suite 120",
-             "city" => "Rock",
-             "state" => "CO",
-             "zip" => "80500",
-             "email" => "test@test.com",
-             "gateKeeper" => "Some one",
-             "auxData1" => 30,
-             "auxData2" => "a",
-             "auxData3" => 100,
-             "auxData4" => "aa",
-             "auxData5" => 1000,
-             "auxPhone" => "1111111110",
-             "extendedLeadData" => array (
-                "important" => "data",
-                "interested" => true
-             )
-          ),
-          array (
-             "leadPhone" => "2222222222",
-             "externId" => "222",
-             "firstName" => "Jason",
-             "midName" => "",
-             "lastName" => "Black",
-             "address1" => "1514 Bernardo Ave",
-             "city" => "New York",
-             "state" => "NY",
-             "zip" => "10001",
-          ),
-          array (
-             "leadPhone" => "3333333333",
-             "externId" => "333",
-             "firstName" => "Rich",
-             "lastName" => "Dunbard"
-          )
-        )
-      );
-      try{
-        $resp = $ev->post($endpoint, $params);
-        print ($resp);
-      }catch(Exception $e) {
-          print $e->getMessage();
-      }
-    }
-    ```
-
-
+For strategic campaigns with multiple phone personas, add extra phone numbers in `personaPhoneConfig`. See [Lead Phone Persona Management](phone-persona-management.md) for the required campaign and phone-persona setup.

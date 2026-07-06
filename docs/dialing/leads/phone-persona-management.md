@@ -34,7 +34,7 @@ Use the persona phone configuration APIs to define the additional phone labels a
 ### Create a Phone Persona
 
 ```http
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/persona-phone-config
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/persona-phone-config
 Authorization: Bearer <accessToken>
 Content-Type: application/json
 
@@ -51,7 +51,7 @@ The response returns the account's current persona phone configuration list:
   {
     "accountId": "15300002",
     "phoneId": 1,
-    "phoneLabel": "Leadphone"
+    "phoneLabel": "Lead Phone"
   },
   {
     "accountId": "15300002",
@@ -65,11 +65,11 @@ The response returns the account's current persona phone configuration list:
 
 | Method | Endpoint | Purpose |
 |-|-|-|
-| `GET` | `/api/v1/admin/accounts/{accountId}/persona-phone-config` | List configured phone personas. |
-| `POST` | `/api/v1/admin/accounts/{accountId}/persona-phone-config` | Create a phone persona. |
-| `PUT` | `/api/v1/admin/accounts/{accountId}/persona-phone-config` | Update a phone persona label. |
-| `GET` | `/api/v1/admin/accounts/{accountId}/persona-phone-config/active-campaigns/{phoneId}` | Check which campaigns currently use a phone persona. |
-| `DELETE` | `/api/v1/admin/accounts/{accountId}/persona-phone-config/{phoneId}` | Delete a phone persona. |
+| `GET` | `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/persona-phone-config` | List configured phone personas. |
+| `POST` | `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/persona-phone-config` | Create a phone persona. |
+| `PUT` | `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/persona-phone-config` | Update a phone persona label. |
+| `GET` | `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/persona-phone-config/active-campaigns/{phoneId}` | Check which campaigns currently use a phone persona. |
+| `DELETE` | `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/persona-phone-config/{phoneId}` | Delete a phone persona. |
 
 Before deleting a phone persona, call the active-campaigns endpoint to see whether the phone ID is still used by campaign calling preferences.
 
@@ -78,7 +78,7 @@ Before deleting a phone persona, call the active-campaigns endpoint to see wheth
 Set `callingConfiguration` to `STRATEGIC` when you create the campaign. Then include `personaCallSchedules` to define which phone IDs should be dialed in each campaign calling window.
 
 ```http
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns
 Authorization: Bearer <accessToken>
 Content-Type: application/json
 
@@ -156,7 +156,7 @@ For direct lead loading, keep the lead's primary phone number in `leadPhone`. If
 Add extra phone numbers in `personaPhoneConfig`. The keys in `personaPhoneConfig` are the configured `phoneLabel` values, and the values are that lead's phone numbers. The primary number must be a single number, not a pipe-delimited list, because strategic campaigns use persona configuration to manage additional numbers.
 
 ```http
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct
 Authorization: Bearer <accessToken>
 Content-Type: application/json
 
@@ -189,7 +189,7 @@ When the campaign uses `STRATEGIC` calling configuration, RingCX stores the pers
 For file-based loading, call the preview endpoint first. The preview response includes the available `personaPhoneConfig` values for strategic campaigns so the client can present the additional phone fields for mapping.
 
 ```http
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/preview?fileType=COMMA
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/preview?fileType=COMMA
 Authorization: Bearer <accessToken>
 Content-Type: multipart/form-data
 ```
@@ -221,7 +221,7 @@ The preview response includes phone IDs and labels:
 When you process the upload, use `additionalPhoneMappings` to map each persona phone ID to the source column index from the uploaded file.
 
 ```http
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process
+POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process
 Authorization: Bearer <accessToken>
 Content-Type: application/json
 
