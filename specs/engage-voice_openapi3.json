@@ -309,7 +309,8 @@
             "type": "boolean"
           },
           "endDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "ftpHost": {
             "type": "string"
@@ -425,7 +426,8 @@
             "type": "string"
           },
           "startDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "tcpaSafeMode": {
             "type": "boolean"
@@ -919,7 +921,8 @@
             "type": "integer"
           },
           "dequeueTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "dialType": {
             "format": "int32",
@@ -935,7 +938,8 @@
             "type": "string"
           },
           "enqueueTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "extraUrlData": {
             "type": "string"
@@ -988,7 +992,8 @@
             "type": "string"
           },
           "safeArchiveDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "skillOverride": {
             "type": "string"
@@ -1025,7 +1030,8 @@
             "type": "string"
           },
           "callEventDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "callEventId": {
             "format": "int32",
@@ -1156,7 +1162,8 @@
             "type": "integer"
           },
           "dequeueTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "dialType": {
             "format": "int32",
@@ -1175,7 +1182,8 @@
             "type": "string"
           },
           "enqueueTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "extraUrlData": {
             "type": "string"
@@ -1229,7 +1237,8 @@
             "type": "string"
           },
           "safeArchiveDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "scriptResult": {
             "type": "string"
@@ -1279,7 +1288,8 @@
             "type": "string"
           },
           "dequeueTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "destinationName": {
             "type": "string"
@@ -1291,7 +1301,8 @@
             "type": "string"
           },
           "enqueueTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "externalId": {
             "type": "string"
@@ -1319,7 +1330,8 @@
             "type": "string"
           },
           "callDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "callerName": {
             "type": "string"
@@ -1335,7 +1347,8 @@
             "type": "string"
           },
           "dialDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "dialDuration": {
             "format": "int32",
@@ -1370,7 +1383,8 @@
             "type": "string"
           },
           "safeArchiveDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "sessionId": {
             "type": "string"
@@ -1414,7 +1428,8 @@
             "type": "string"
           },
           "callDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "callerName": {
             "type": "string"
@@ -1430,7 +1445,8 @@
             "type": "string"
           },
           "dialDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "dialDuration": {
             "format": "int32",
@@ -1465,7 +1481,8 @@
             "type": "string"
           },
           "safeArchiveDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "sessionId": {
             "type": "string"
@@ -1587,7 +1604,8 @@
             "type": "integer"
           },
           "dequeueTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "dnis": {
             "type": "string"
@@ -1596,7 +1614,8 @@
             "type": "string"
           },
           "enqueueTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "jsonBaggage": {
             "type": "string"
@@ -1605,7 +1624,8 @@
             "$ref": "#/components/schemas/DateTime"
           },
           "safeArchiveDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "skillOverride": {
             "type": "string"
@@ -1643,17 +1663,20 @@
             "type": "boolean"
           },
           "safeArchiveDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "sessionEnd": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "sessionId": {
             "format": "int32",
             "type": "integer"
           },
           "sessionStart": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "sessionType": {
             "type": "string"
@@ -1708,7 +1731,8 @@
             "type": "array"
           },
           "creationDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "enabled": {
             "type": "boolean"
@@ -1945,7 +1969,8 @@
             "type": "array"
           },
           "createdOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "defaultAutoAnswerOn": {
             "type": "boolean"
@@ -2006,7 +2031,8 @@
             "type": "boolean"
           },
           "lastLoginDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "lastName": {
             "type": "string"
@@ -2089,7 +2115,8 @@
             "type": "boolean"
           },
           "transientDeleteDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "userManagedByRC": {
             "type": "boolean"
@@ -2151,7 +2178,8 @@
             "type": "integer"
           },
           "endTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "reason": {
             "type": "string"
@@ -2166,7 +2194,8 @@
             "type": "string"
           },
           "startTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "uii": {
             "type": "string"
@@ -2566,23 +2595,27 @@
             "type": "string"
           },
           "lastArchiveStateDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "lastCallDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "loginDialGroupId": {
             "format": "int32",
             "type": "integer"
           },
           "loginDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "loginHashcode": {
             "type": "string"
           },
           "logoutDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "lunchTime": {
             "format": "int32",
@@ -2600,7 +2633,8 @@
             "type": "string"
           },
           "nextCallTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "parentAgentId": {
             "format": "int32",
@@ -2618,7 +2652,8 @@
             "type": "integer"
           },
           "reservedDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "reservedUii": {
             "type": "string"
@@ -2636,7 +2671,8 @@
             "type": "integer"
           },
           "stateDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "trainTime": {
             "format": "int32",
@@ -2754,13 +2790,15 @@
             "type": "string"
           },
           "loginDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "pendingDisposition": {
             "type": "boolean"
           },
           "stateDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "username": {
             "type": "string"
@@ -2820,7 +2858,8 @@
             "type": "string"
           },
           "endDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "iqServerId": {
             "format": "int32",
@@ -2834,10 +2873,12 @@
             "type": "string"
           },
           "safeArchiveDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "startDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "vruSourceKey": {
             "type": "string"
@@ -3033,7 +3074,8 @@
             "type": "array"
           },
           "createdOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "defaultAutoAnswerOn": {
             "type": "boolean"
@@ -3094,7 +3136,8 @@
             "type": "boolean"
           },
           "lastLoginDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "lastName": {
             "type": "string"
@@ -3180,7 +3223,8 @@
             "type": "boolean"
           },
           "transientDeleteDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "userManagedByRC": {
             "type": "boolean"
@@ -3209,7 +3253,8 @@
             "type": "array"
           },
           "createdOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "default": {
             "type": "boolean"
@@ -3337,7 +3382,8 @@
             "type": "string"
           },
           "lastUpdate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "loginDialGroupId": {
             "format": "int32",
@@ -3348,7 +3394,8 @@
             "type": "integer"
           },
           "onHoldDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "pendingDisposition": {
             "format": "int32",
@@ -3557,7 +3604,8 @@
             "type": "string"
           },
           "nextRunTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "productType": {
             "enum": [
@@ -3700,7 +3748,8 @@
             "type": "string"
           },
           "endDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "endPointId": {
             "type": "string"
@@ -3721,7 +3770,8 @@
             "type": "boolean"
           },
           "startDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "tracNumber": {
             "$ref": "#/components/schemas/TracNumberSkinny"
@@ -3750,7 +3800,8 @@
             "$ref": "#/components/schemas/DnisPoolV2"
           },
           "endDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "isActive": {
             "type": "boolean"
@@ -3762,7 +3813,8 @@
             "type": "boolean"
           },
           "startDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           }
         },
         "type": "object"
@@ -3819,7 +3871,8 @@
             "type": "integer"
           },
           "createTimeAsDateTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "description": {
             "type": "string"
@@ -3900,7 +3953,8 @@
             "type": "string"
           },
           "endDateTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "endDateTimeAsUnix": {
             "format": "int64",
@@ -3916,7 +3970,8 @@
             "type": "array"
           },
           "startDateTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "startDateTimeAsUnix": {
             "format": "int64",
@@ -4067,7 +4122,8 @@
             "type": "string"
           },
           "dateCreated": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "notes": {
             "type": "string"
@@ -4101,7 +4157,8 @@
             "type": "string"
           },
           "dateCreated": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "ipAddress": {
             "type": "string"
@@ -4143,7 +4200,8 @@
             "type": "string"
           },
           "createDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "excludedStates": {
             "items": {
@@ -4330,7 +4388,8 @@
             "type": "string"
           },
           "endDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "exportFlag": {
             "type": "boolean"
@@ -4362,7 +4421,8 @@
             "type": "integer"
           },
           "lastPassDts": {
-            "$ref": "#/components/schemas/Timestamp"
+            "format": "date-time",
+            "type": "string"
           },
           "liveAnswerMsg": {
             "type": "string"
@@ -4509,7 +4569,8 @@
             "type": "boolean"
           },
           "startDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "stopRecordingOnTransfer": {
             "type": "boolean"
@@ -4817,7 +4878,8 @@
             "type": "string"
           },
           "lastPassDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "leadId": {
             "format": "int32",
@@ -4869,7 +4931,8 @@
             "type": "string"
           },
           "loadedDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "machAnswerMessage": {
             "type": "string"
@@ -4885,7 +4948,8 @@
             "type": "string"
           },
           "nextDialTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "quotaTargetIds": {
             "items": {
@@ -4911,7 +4975,8 @@
             "type": "string"
           },
           "stateDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "suffix": {
             "type": "string"
@@ -4946,7 +5011,8 @@
             "type": "boolean"
           },
           "deletedDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "dncTagList": {
             "type": "string"
@@ -4955,7 +5021,8 @@
             "type": "boolean"
           },
           "lastDncScrubDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "leadsAccepted": {
             "format": "int32",
@@ -5016,7 +5083,8 @@
             "type": "string"
           },
           "uploadDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "uploadedBy": {
             "type": "string"
@@ -5147,10 +5215,12 @@
             "type": "array"
           },
           "loadedDtsEnd": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "loadedDtsStart": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "nextDialTimeCriteria": {
             "$ref": "#/components/schemas/DateTimeComparableSearchField"
@@ -5288,7 +5358,8 @@
             "type": "string"
           },
           "lastPassDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "lastPassDispo": {
             "type": "string"
@@ -5297,7 +5368,8 @@
             "type": "string"
           },
           "lastPassDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "leadId": {
             "format": "int32",
@@ -5327,7 +5399,8 @@
             "type": "string"
           },
           "loadedDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "machAnswerMessage": {
             "type": "string"
@@ -5340,7 +5413,8 @@
             "type": "string"
           },
           "nextDialTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "pendingAgentName": {
             "type": "string"
@@ -5360,7 +5434,8 @@
             "type": "string"
           },
           "stateDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "suffix": {
             "type": "string"
@@ -5372,7 +5447,8 @@
             "type": "string"
           },
           "uploadDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "uploadedBy": {
             "type": "string"
@@ -5395,7 +5471,8 @@
             "type": "string"
           },
           "callStart": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "campaignRedials": {
             "items": {
@@ -5424,7 +5501,8 @@
             "type": "string"
           },
           "passDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "passDisposition": {
             "enum": [
@@ -5511,7 +5589,8 @@
             "type": "integer"
           },
           "callBackDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "callBackPhone": {
             "type": "string"
@@ -5554,7 +5633,8 @@
             "type": "integer"
           },
           "endDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "maxPasses": {
             "format": "int32",
@@ -5577,7 +5657,8 @@
             "type": "integer"
           },
           "startDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "suppressed": {
             "format": "int32",
@@ -5637,7 +5718,8 @@
             "type": "string"
           },
           "endDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "leadData": {
             "items": {
@@ -5654,7 +5736,8 @@
             "type": "integer"
           },
           "startDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           }
         },
         "type": "object"
@@ -5708,7 +5791,8 @@
             "type": "array"
           },
           "createdOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "groupName": {
             "type": "string"
@@ -5744,7 +5828,8 @@
             "type": "array"
           },
           "createdOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "permissions": {
             "items": {
@@ -5853,7 +5938,8 @@
             "$ref": "#/components/schemas/Blob"
           },
           "createdOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "dequeueHttpService": {
             "$ref": "#/components/schemas/RemoteHttpService"
@@ -6003,7 +6089,8 @@
             "type": "integer"
           },
           "dateAdded": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "recordType": {
             "type": "string"
@@ -6059,7 +6146,8 @@
             "type": "string"
           },
           "timeStamp": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           }
         },
         "type": "object"
@@ -6149,7 +6237,8 @@
             "type": "string"
           },
           "overrideDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "overrideLabel": {
             "type": "string"
@@ -6192,7 +6281,8 @@
             "type": "string"
           },
           "dateAdded": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "id": {
             "type": "object"
@@ -6328,7 +6418,8 @@
             "type": "integer"
           },
           "lastUpdate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "longestInQueue": {
             "format": "int32",
@@ -6381,7 +6472,8 @@
             "type": "integer"
           },
           "createdDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "json": {
             "type": "string"
@@ -6400,7 +6492,8 @@
             "type": "array"
           },
           "updatedDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "widgetDesc": {
             "type": "string"
@@ -6589,7 +6682,8 @@
             "type": "string"
           },
           "endDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "forceAcdQueue": {
             "type": "boolean"
@@ -6651,7 +6745,8 @@
             "type": "string"
           },
           "startDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "state": {
             "type": "string"
@@ -7186,7 +7281,8 @@
             "type": "string"
           },
           "endDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "planId": {
             "format": "int32",
@@ -7196,7 +7292,8 @@
             "type": "string"
           },
           "startDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           }
         },
         "type": "object"
@@ -7267,7 +7364,8 @@
       "Dashboard": {
         "properties": {
           "creationDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "data": {
             "$ref": "#/components/schemas/JsonNode"
@@ -7420,7 +7518,8 @@
             "type": "string"
           },
           "value": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           }
         },
         "type": "object"
@@ -7720,7 +7819,8 @@
             "type": "string"
           },
           "addedDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "countryCode": {
             "$ref": "#/components/schemas/CountryCode"
@@ -7885,7 +7985,8 @@
             "type": "string"
           },
           "dateCreated": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "dnis": {
             "type": "string"
@@ -7906,7 +8007,8 @@
             "type": "string"
           },
           "lastModified": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "lastModifiedBy": {
             "type": "string"
@@ -7985,7 +8087,8 @@
             "$ref": "#/components/schemas/DnisPoolV2"
           },
           "endDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "product": {
             "enum": [
@@ -8014,13 +8117,16 @@
             "type": "integer"
           },
           "smsEndDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "smsStartDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "startDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "unassignProduct": {
             "type": "boolean"
@@ -8049,7 +8155,8 @@
             "type": "string"
           },
           "dateCreated": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "dnis": {
             "type": "string"
@@ -8067,7 +8174,8 @@
             "type": "string"
           },
           "lastModified": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "lastModifiedBy": {
             "type": "string"
@@ -8497,7 +8605,8 @@
             "$ref": "#/components/schemas/Campaign"
           },
           "createdOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "dequeueDelay": {
             "format": "int32",
@@ -8826,10 +8935,12 @@
             "type": "string"
           },
           "createdOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "endDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "gateGroupId": {
             "format": "int32",
@@ -8864,7 +8975,8 @@
             "type": "array"
           },
           "startDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           }
         },
         "type": "object"
@@ -8878,7 +8990,8 @@
             "$ref": "#/components/schemas/CollectionAgentSkillProfile"
           },
           "createdOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "requeueShortcut": {
             "items": {
@@ -8999,7 +9112,8 @@
             "type": "string"
           },
           "overrideDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "overrideLabel": {
             "type": "string"
@@ -9071,7 +9185,8 @@
             "type": "string"
           },
           "dateAdded": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "phoneNumbersI18nEnabled": {
             "type": "boolean"
@@ -9331,7 +9446,8 @@
             "type": "string"
           },
           "lastUpdate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "presented": {
             "format": "int32",
@@ -9520,7 +9636,8 @@
             "type": "string"
           },
           "createdOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "knowledgeBaseArticleId": {
             "format": "int32",
@@ -9543,7 +9660,8 @@
             "type": "string"
           },
           "updatedOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           }
         },
         "type": "object"
@@ -9554,7 +9672,8 @@
             "type": "boolean"
           },
           "createdOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "description": {
             "type": "string"
@@ -9597,7 +9716,8 @@
             "type": "string"
           },
           "updatedOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           }
         },
         "type": "object"
@@ -10215,10 +10335,12 @@
             "type": "integer"
           },
           "dateCreated": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "lastUpdated": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "mappingData": {
             "type": "string"
@@ -10363,7 +10485,8 @@
             "type": "string"
           },
           "time": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "type": {
             "enum": [
@@ -10553,7 +10676,8 @@
             "type": "integer"
           },
           "lastUpdate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "machine": {
             "format": "int32",
@@ -10685,7 +10809,8 @@
             "type": "string"
           },
           "dateCreated": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "destName": {
             "type": "string"
@@ -11075,7 +11200,8 @@
             "$ref": "#/components/schemas/QuotaGroup"
           },
           "quotaMetOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "quotaTargetId": {
             "format": "int32",
@@ -11108,7 +11234,8 @@
             "type": "integer"
           },
           "quotaMetOn": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "quotaTargetId": {
             "format": "int32",
@@ -11412,19 +11539,24 @@
             "type": "string"
           },
           "lastDaySync": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "lastPushTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "lastQueryTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "nextPushTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "nextQueryTime": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "pushStatusDesc": {
             "type": "string"
@@ -11449,7 +11581,8 @@
             "type": "string"
           },
           "taskStart": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "taskState": {
             "enum": [
@@ -11717,7 +11850,8 @@
             "type": "string"
           },
           "endDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "endDateRange": {
             "$ref": "#/components/schemas/TimeRange"
@@ -11726,7 +11860,8 @@
             "type": "string"
           },
           "startDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "startDateRange": {
             "$ref": "#/components/schemas/TimeRange"
@@ -12038,7 +12173,8 @@
             "type": "string"
           },
           "creationDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "isMaster": {
             "type": "boolean"
@@ -12235,7 +12371,8 @@
             "$ref": "#/components/schemas/Account"
           },
           "created": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "description": {
             "type": "string"
@@ -12271,7 +12408,8 @@
             "type": "integer"
           },
           "updated": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           }
         },
         "type": "object"
@@ -12295,7 +12433,8 @@
             "type": "string"
           },
           "updated": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           }
         },
         "type": "object"
@@ -12836,7 +12975,8 @@
             "type": "string"
           },
           "endDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "endDateRange": {
             "$ref": "#/components/schemas/TimeRange"
@@ -12884,7 +13024,8 @@
             "type": "string"
           },
           "startDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "startDateRange": {
             "$ref": "#/components/schemas/TimeRange"
@@ -13244,7 +13385,8 @@
             "type": "string"
           },
           "overrideDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "overrideLabel": {
             "type": "string"
@@ -13456,7 +13598,8 @@
             "type": "array"
           },
           "creationDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "enabled": {
             "type": "boolean"
@@ -13762,10 +13905,12 @@
             "type": "string"
           },
           "addedDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "expireDate": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "isIntl": {
             "type": "boolean"
@@ -13795,7 +13940,8 @@
             "type": "string"
           },
           "addedDts": {
-            "$ref": "#/components/schemas/DateTime"
+            "format": "date-time",
+            "type": "string"
           },
           "tag": {
             "type": "string"
