@@ -26456,7 +26456,7 @@
           "Reporting"
         ],
         "summary": "Returns the agent-edited summary for an interaction segment",
-        "description": "Returns the summary filled in or edited by the agent for the specified interaction segment. This endpoint requires the RingCX access token in a lowercase `cookie` header formatted as `access_token=<token>`.",
+        "description": "Permissions: READ on Account. Returns the summary filled in or edited by the agent for the specified interaction segment. This endpoint requires the RingCX access token in a lowercase `cookie` header formatted as `access_token=<token>`.",
         "operationId": "getAgentSummaryBySegment",
         "parameters": [
           {
@@ -26535,7 +26535,7 @@
           "Reporting"
         ],
         "summary": "Returns the AI-generated summary for an interaction segment",
-        "description": "Returns the auto-generated summary for the specified interaction segment. This endpoint requires the RingCX access token in a lowercase `cookie` header formatted as `access_token=<token>`.",
+        "description": "Permissions: READ on Account. Returns the auto-generated summary for the specified interaction segment. This endpoint requires the RingCX access token in a lowercase `cookie` header formatted as `access_token=<token>`.",
         "operationId": "getAutoSummaryBySegment",
         "parameters": [
           {
