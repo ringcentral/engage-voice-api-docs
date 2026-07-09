@@ -69,7 +69,7 @@ The request body matches the `RTASubscriptionRequest` schema.
 | `subscriptionName` | String | **Required** | Unique active subscription name for the sub-account. |
 | `description` | String | Optional | Human-readable description. |
 | `retryCount` | Integer | Optional | Maximum delivery retry count. Defaults to `3` and cannot exceed `10`. |
-| `notificationUrl` | String | **Required** | HTTP or HTTPS endpoint that receives agent-state notifications. |
+| `notificationUrl` | String | **Required** | Publicly accessible endpoint that receives agent-state notifications. See [Receiver Endpoint](#receiver-endpoint) requirements. |
 | `authConfigId` | UUID | Optional | Auth configuration ID used when RingCX sends notification requests to the receiver. |
 | `active` | Boolean | Optional | Whether the subscription is created in an active state. Defaults to active. |
 | `customHeaders` | Object | Optional | Additional headers to send with notification requests. Values are arbitrary JSON (`additionalProperties: object`); strings are the safest choice. |
@@ -139,6 +139,17 @@ The response matches the `RTASubscriptionResponse` schema and includes audit fie
 ## Receiver Endpoint
 
 The `notificationUrl` is the destination for the agent-state notification feed. This page covers how to manage the subscription resource. For examples of Workforce Management agent-state notification fields, see [Understanding the Event Payload](../notifications/wfm/payload-wfm.md#agent-state-events).
+
+The receiver URL must meet the following requirements:
+
+| Requirement | Details |
+| --- | --- |
+| Public accessibility | The URL must be accessible by RingCentral and must not be blocked by a firewall or private network rule. |
+| TLS support | The receiving web server must support TLS 1.2 or higher. |
+| Response time | The receiving web server must respond within `3000` milliseconds. |
+| Status code | The receiving web server must respond with `200 OK`. |
+| Validation token | During endpoint validation, echo the validation request's `Validation-Token` header value in the response `Validation-Token` header. |
+| Response size | The response must be no larger than `1024` bytes, including both headers and body. If the response exceeds this limit, subscription setup can fail with `{"errorCode":"SUB-525","message":"WebHook server response is invalid"}`. |
 
 When implementing a receiver, validate the authentication method and custom headers configured for the subscription, respond quickly after accepting the notification, and process events idempotently. The `retryCount` setting controls how many delivery retries RingCX can attempt after a delivery failure.
 
