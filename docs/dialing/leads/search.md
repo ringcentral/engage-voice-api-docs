@@ -123,6 +123,9 @@ Get a list of states from the United States and all provinces and territories of
 ## Request
 Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
+!!! important "Rate Limiting & Stability"
+    Lead search requests are throttled per RingCX sub-account. Standard `leadSearch` requests are limited to **15 requests per 10 seconds** and **60 requests per 30 seconds**. Requests with `count=true` are limited to **90 requests per 10 seconds** and **180 requests per 30 seconds**. Search-by-exact-number requests are limited to **30 requests per 10 seconds** and **120 requests per 60 seconds**. Use narrow filters and pagination, and implement exponential backoff on `429 Too Many Requests` responses.
+
 === "HTTP"
     ```http
         POST {BASE_URL}/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch

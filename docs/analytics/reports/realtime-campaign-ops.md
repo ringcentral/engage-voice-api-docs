@@ -44,8 +44,8 @@ The authenticating user must have reporting access enabled in the RingCX Admin p
     ```
 
 !!! important "Rate Limiting & Stability"
-    * **Limit:** Standard platform rate limiting applies at 120 requests per minute across all real-time endpoints.
-    * **Strategy:** Poll at a **10–30 second interval** for live operations dashboards. Polling faster than 5 seconds is not recommended and may result in `429 Too Many Requests` errors. Implement exponential backoff on 429 responses.
+    * **Limit:** Standard platform rate limiting applies at **120 requests per minute** across real-time endpoints unless a lower endpoint-specific limit is documented.
+    * **Strategy:** Poll at a **10-30 second interval** for live operations dashboards, use `lastUpdate` to skip unnecessary UI refreshes, and implement exponential backoff on `429 Too Many Requests` responses.
 
 ---
 
@@ -180,8 +180,8 @@ For campaign operations dashboards, poll both endpoints on the same cycle to cor
 Poll both endpoints on a consistent interval and use `lastUpdate` on each record to detect whether data has changed before refreshing display elements.
 
 !!! important "Rate Limiting & Stability"
-    * **Limit:** 120 requests per minute across all real-time endpoints combined.
-    * **Strategy:** A 15-second polling interval across both endpoints consumes 8 requests per minute. Do not poll faster than 5 seconds. Implement exponential backoff on `429 Too Many Requests` responses.
+    * **Limit:** Budget polling across both endpoints under the standard **120 requests per minute** planning ceiling.
+    * **Strategy:** A 15-second polling interval across both endpoints consumes 8 requests per minute. Treat that as a starting point, increase the interval when data does not change, and implement exponential backoff on `429 Too Many Requests` responses.
 
 ### Sample Implementation (Python)
 

@@ -17714,7 +17714,7 @@
     },
     "/voice/api/v1/admin/accounts/{accountId}/campaignLeads/actions": {
       "put": {
-        "description": "Permissions: READ on Account (Permission Override), UPDATE on Campaign",
+        "description": "Permissions: READ on Account (Permission Override), UPDATE on Campaign\n\nRate limit: This operation is throttled per RingCX sub-account at 30 requests per 10 seconds and 120 requests per 60 seconds.",
         "operationId": "performLeadAction",
         "parameters": [
           {
@@ -17806,7 +17806,7 @@
     },
     "/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch": {
       "post": {
-        "description": "Permissions: READ on Account (Permission Override)",
+        "description": "Permissions: READ on Account (Permission Override)\n\nRate limit: Standard searches are throttled per RingCX sub-account at 15 requests per 10 seconds and 60 requests per 30 seconds. Requests with count=true are throttled at 90 requests per 10 seconds and 180 requests per 30 seconds.",
         "operationId": "searchForCampaignLeads",
         "parameters": [
           {
@@ -18148,7 +18148,7 @@
     },
     "/voice/api/v1/admin/accounts/{accountId}/campaignLeads/{leadId}": {
       "patch": {
-        "description": "Permissions: READ on Account (Permission Override), UPDATE on Campaign",
+        "description": "Permissions: READ on Account (Permission Override), UPDATE on Campaign\n\nRate limit: This operation is throttled per RingCX sub-account at 12 requests per 3 seconds and 150 requests per 60 seconds.",
         "operationId": "patchCampaignLead",
         "parameters": [
           {
@@ -18268,7 +18268,7 @@
         "x-codegen-request-body-name": "campaignLead"
       },
       "put": {
-        "description": "Permissions: READ on Account (Permission Override), UPDATE on Campaign",
+        "description": "Permissions: READ on Account (Permission Override), UPDATE on Campaign\n\nRate limit: This operation is throttled per RingCX sub-account at 12 requests per 3 seconds and 150 requests per 60 seconds.",
         "operationId": "updateCampaignLead",
         "parameters": [
           {
@@ -18393,7 +18393,7 @@
     },
     "/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct": {
       "post": {
-        "description": "Permissions: Update on Campaign (Permission Override)",
+        "description": "Permissions: Update on Campaign (Permission Override)\n\nRate limit: This operation is throttled per RingCX sub-account at 30 requests per 10 seconds and 120 requests per 60 seconds.",
         "operationId": "loadDirectLeads",
         "parameters": [
           {
@@ -18471,7 +18471,7 @@
     },
     "/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/preview": {
       "post": {
-        "description": "Permissions: UPDATE on Campaign (Permission Override)",
+        "description": "Permissions: UPDATE on Campaign (Permission Override)\n\nRate limit: This operation is throttled per RingCX sub-account at 12 requests per 30 seconds and 18 requests per 60 seconds.",
         "operationId": "previewLeadList",
         "parameters": [
           {
@@ -18576,7 +18576,7 @@
     },
     "/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process": {
       "post": {
-        "description": "Permissions: UPDATE on Campaign (Permission Override)",
+        "description": "Permissions: UPDATE on Campaign (Permission Override)\n\nRate limit: This operation is throttled per RingCX sub-account at 9 requests per 3 seconds and 30 requests per 30 seconds.",
         "operationId": "loadList",
         "parameters": [
           {
@@ -26117,7 +26117,7 @@
           "Public Integration API"
         ],
         "summary": "Returns Interaction Segment Metadata",
-        "description": "This API is used to fetch interaction metadata for VOICE/DIGITAL for all segments under provided time duration.",
+        "description": "This API is used to fetch interaction metadata for VOICE/DIGITAL for all segments under provided time duration.\n\nRate limit: This operation is throttled per RingCX sub-account at 3 requests per 60 seconds and 9 requests per 15 minutes.",
         "operationId": "getInteractionMetadata",
         "parameters": [
           {
@@ -26259,7 +26259,7 @@
           "Public Integration API"
         ],
         "summary": "Fetches Transcript data for both voice and digital",
-        "description": "This API fetches interaction transcript data for provided dialogId and segmentId. This is a streaming API, it will return an audio stream for given request.",
+        "description": "This API returns JSON transcript data for the provided dialogId and segmentId.",
         "operationId": "getTranscriptSegmentData",
         "parameters": [
           {
@@ -26305,7 +26305,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The response body contains transcript data for the requested interaction segment.",
             "content": {
               "application/json": {
                 "schema": {
@@ -26933,7 +26933,7 @@
         ],
         "summary": "Builds queue statistics",
         "operationId": "buildAggQueueStats",
-        "description": "This API returns statistics of all queues for given sub-account and duration.",
+        "description": "This API returns statistics of all queues for given sub-account and duration.\n\nRate limit: This operation is throttled per RingCX sub-account at 3 requests per 60 seconds and 9 requests per 15 minutes.",
         "parameters": [
           {
             "name": "rcAccountId",
@@ -27126,7 +27126,7 @@
         ],
         "summary": "Builds extended agent queue statistics",
         "operationId": "buildExtendedAggAgentStats",
-        "description": "This API returns statistics of all queues along with their agents for given Sub-Account and duration.",
+        "description": "This API returns statistics of all queues along with their agents for given Sub-Account and duration.\n\nRate limit: This operation is throttled per RingCX sub-account at 3 requests per 60 seconds and 9 requests per 15 minutes.",
         "parameters": [
           {
             "name": "rcAccountId",
@@ -27296,7 +27296,7 @@
           "Public Integration API"
         ],
         "summary": "Builds agent statistics",
-        "description": "This API returns statistics of all agents for given sub-account and duration.",
+        "description": "This API returns statistics of all agents for given sub-account and duration.\n\nRate limit: This operation is throttled per RingCX sub-account at 3 requests per 60 seconds and 9 requests per 15 minutes.",
         "operationId": "buildAggAgentStats",
         "parameters": [
           {

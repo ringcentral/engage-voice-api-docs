@@ -149,6 +149,9 @@ Each schedule must include at least one call preference. For each configured day
 
 You can load persona phone numbers through direct lead loading or through the file preview and process flow.
 
+!!! important "Rate Limiting & Stability"
+    Persona lead loading uses the same lead-loader throttles as standard lead loading. Direct lead loading is limited to **30 requests per 10 seconds** and **120 requests per 60 seconds** per RingCX sub-account. File preview is limited to **12 requests per 30 seconds** and **18 requests per 60 seconds**. File processing is limited to **9 requests per 3 seconds** and **30 requests per 30 seconds**. Implement exponential backoff on `429 Too Many Requests` responses.
+
 ### Direct Lead Loading
 
 For direct lead loading, keep the lead's primary phone number in `leadPhone`. If the account is enabled for E.164 or international phone-number handling, also provide the primary number in `leadPhoneE164`; RingCX uses `leadPhoneE164` as the primary number for that account mode.

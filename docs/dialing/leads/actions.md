@@ -20,6 +20,9 @@ Have a lead or multiple leads you want to do something with? Lead actions are a 
 | `SUPPRESS_LEADS` | When you apply this action to your leads, they will not be dialed until you reverse the action. This action does not change a lead’s status from whatever it was prior to the suppressing action. This simply allows you to stop a lead from being dialed while maintaining their current lead status. |
 | `UNSUPPRESS_LEADS` | Apply this action to your leads to reverse the Suppress Leads action discussed above. This action will simply revert a lead’s status back to whatever it was before it was suppressed. |
 
+!!! important "Rate Limiting & Stability"
+    Lead action requests are throttled per RingCX sub-account at **30 requests per 10 seconds** and **120 requests per 60 seconds**. Use lead search criteria to batch work into fewer action requests, and implement exponential backoff on `429 Too Many Requests` responses.
+
 ## Moving Leads to Another Campaign
 
 Let's say we have a list of leads in a campaign and we want to move all those leads to another campaign. We will need to do the following:

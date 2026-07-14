@@ -59,7 +59,7 @@ To generate and retrieve summaries, AI summaries must be enabled for the queue o
     Do not send the token as the `Authorization` header when calling the summary endpoints.
 
 !!! important "Rate Limiting & Stability"
-    * **Limit:** Standard platform rate limiting applies to summary requests.
+    * **Limit:** Standard platform rate limiting applies to summary requests. Use **120 requests per minute** as the planning ceiling unless a lower endpoint-specific limit is documented.
     * **Strategy:** If the API returns a `429 Too Many Requests` status code, implement exponential backoff before retrying.
 
 ---

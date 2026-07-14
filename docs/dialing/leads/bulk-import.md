@@ -28,6 +28,9 @@ Each load in the `uploadLeads` array consists of a lead with the following notab
 !!! info "Persona-based multiple phone numbers"
     For strategic campaigns that need labeled phone types, such as mobile, home, or work, use [Lead Phone Persona Management](phone-persona-management.md). Persona-based lead loading keeps the primary number in `leadPhone` and maps additional phone numbers to configured phone personas.
 
+!!! important "Rate Limiting & Stability"
+    Lead loader requests are throttled per RingCX sub-account. Direct lead loading is limited to **30 requests per 10 seconds** and **120 requests per 60 seconds**. File preview is limited to **12 requests per 30 seconds** and **18 requests per 60 seconds**. File processing is limited to **9 requests per 3 seconds** and **30 requests per 30 seconds**. Batch leads into fewer uploads where practical, and implement exponential backoff on `429 Too Many Requests` responses.
+
 ## Enumerating Campaigns
 
 Leads are uploaded per Campaign which requires a `campaignId`. The following two API calls will enable enumerating the account's campaign list.

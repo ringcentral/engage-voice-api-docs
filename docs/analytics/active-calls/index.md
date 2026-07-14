@@ -266,7 +266,7 @@ The active call APIs are synchronous, but most useful workflows still begin with
 For supervisor consoles, refresh the listing every 5–10 seconds. Avoid sub-second polling; the platform will rate-limit aggressive callers.
 
 !!! important "Rate Limiting & Stability"
-    * **Limit:** 120 requests per minute per token under standard platform rate limiting.
+    * **Limit:** Standard platform rate limiting applies. Use **120 requests per minute** as the planning ceiling unless a lower endpoint-specific limit is documented.
     * **Strategy:** Implement exponential backoff on `429 Too Many Requests` responses. For supervisor dashboards monitoring many calls, prefer a single list call followed by targeted action calls over per-call polling.
 
 !!! warning "Acting on stale UIIs"

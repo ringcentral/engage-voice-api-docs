@@ -96,7 +96,7 @@ API tokens are long-lived authenticated-user tokens. Create and rotate them only
     Permission changes can grant administrative access to customer data and configuration. Apply least privilege and log all automated changes for audit review.
 
 !!! important "Rate Limiting & Stability"
-    User and permission changes should be serialized per user. Avoid parallel role and rights document updates for the same user because the final effective permission set can be difficult to audit.
+    Standard platform rate limiting applies; use **120 requests per minute** as the planning ceiling unless a lower endpoint-specific limit is documented. User and permission changes should be serialized per user. Avoid parallel role and rights document updates for the same user because the final effective permission set can be difficult to audit.
 
 ## Request Examples
 

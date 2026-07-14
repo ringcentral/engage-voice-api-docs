@@ -51,8 +51,8 @@ To enable this:
     > 
     > ```
 
-!!! important "Important - Be Aware of Rate Limits"
-    Standard platform rate limiting applies to audit requests. The limit is 120 requests per minute. For high-volume data uploads, you can include up to 1000 leads per single API call to maximize throughput. If the API returns a 429 Too Many Requests status code, implement an exponential backoff strategy for subsequent retry attempts to ensure system stability.
+!!! important "Rate Limiting & Stability"
+    Standard platform rate limiting applies to audit requests. Use **120 requests per minute** as the planning ceiling unless a lower endpoint-specific limit is documented. Avoid high-frequency polling: query bounded historical windows, persist progress between runs, and implement exponential backoff on `429 Too Many Requests` responses.
 
 
 ### Important Technical Constraints
@@ -408,5 +408,3 @@ def sync_audit_logs():
 if __name__ == "__main__":
     sync_audit_logs()
 ```
-
-
