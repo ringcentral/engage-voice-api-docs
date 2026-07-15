@@ -12,52 +12,125 @@ Before calling the Dialing APIs:
 
 ## Create a Dial Group
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-{
-  "dialGroupName": "Outbound Renewals",
-  "dialGroupDesc": "Renewal outreach campaigns",
-  "dialMode": "PREVIEW",
-  "isActive": true
-}
-```
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "dialGroupName": "Outbound Renewals",
+      "dialGroupDesc": "Renewal outreach campaigns",
+      "dialMode": "PREVIEW",
+      "isActive": true
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "dialGroupName": "Outbound Renewals",
+        "dialGroupDesc": "Renewal outreach campaigns",
+        "dialMode": "PREVIEW",
+        "isActive": True,
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      dialGroupName: "Outbound Renewals",
+      dialGroupDesc: "Renewal outreach campaigns",
+      dialMode: "PREVIEW",
+      isActive: true
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ## Verify the Dial Group
 
-```http
-GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups
-Authorization: Bearer <ringcxAccessToken>
-Accept: application/json
-```
+=== "HTTP"
 
-Use the returned `dialGroupId` when creating campaigns.
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
 
-## Python Example
+=== "Python"
 
-```python
-import requests
+    ```python
+    import requests
 
-BASE_URL = "https://ringcx.ringcentral.com/voice/api"
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
 
-def create_dial_group(token, account_id):
-    response = requests.post(
-        f"{BASE_URL}/v1/admin/accounts/{account_id}/dialGroups",
-        headers={"Authorization": f"Bearer {token}"},
-        json={
-            "dialGroupName": "Outbound Renewals",
-            "dialGroupDesc": "Renewal outreach campaigns",
-            "dialMode": "PREVIEW",
-            "isActive": True,
+    response = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Accept": "application/json",
         },
     )
     response.raise_for_status()
-    return response.json()
-```
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          Accept: "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
+
+Use the returned `dialGroupId` when creating campaigns.
 
 ## Next Steps
 

@@ -4,11 +4,58 @@ Lead actions apply operational changes to one lead or a set of leads. Use them a
 
 ## Endpoint
 
-```http
-PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/actions?leadAction={leadAction}
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
+
+    ```http
+    PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/actions?leadAction={leadAction}
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    lead_action = "<leadAction>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.put(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaignLeads/actions",
+        params={"leadAction": lead_action},
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json={},
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const leadAction = "<leadAction>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaignLeads/actions?leadAction=${leadAction}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({})
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ## Common Lead Actions
 
@@ -29,54 +76,194 @@ Content-Type: application/json
 
 ## Delete Leads
 
-```http
-PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/actions?leadAction=DELETE_LEADS
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-{
-  "campaignLeadSearchCriteria": {
-    "leadIds": [
-      100000,
-      100001
-    ]
-  }
-}
-```
+    ```http
+    PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/actions?leadAction=DELETE_LEADS
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "campaignLeadSearchCriteria": {
+        "leadIds": [
+          100000,
+          100001
+        ]
+      }
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "campaignLeadSearchCriteria": {
+            "leadIds": [
+                100000,
+                100001,
+            ]
+        }
+    }
+
+    response = requests.put(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaignLeads/actions",
+        params={"leadAction": "DELETE_LEADS"},
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      campaignLeadSearchCriteria: {
+        leadIds: [
+          100000,
+          100001
+        ]
+      }
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaignLeads/actions?leadAction=DELETE_LEADS`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ## Move Leads to Another Campaign
 
 Use `MOVE_TO_CAMPAIGN` when leads should be moved from one campaign to another campaign or lead list.
 
-```http
-PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/actions?leadAction=MOVE_TO_CAMPAIGN
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-{
-  "campaignLeadSearchCriteria": {
-    "campaignId": 12345,
-    "campaignIds": [12345],
-    "listIds": [],
-    "leadStates": [],
-    "agentDispositions": [],
-    "systemDispositions": []
-  },
-  "leadActionParams": {
-    "paramMap": {
-      "CAMPAIGN_ID": "67890",
-      "LIST_ID": "0",
-      "LIST_NAME": "Moved Leads",
-      "CREATE_COPY_SETTING": "false",
-      "DUPLICATE_ACTION_SETTING": "MOVE"
+    ```http
+    PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/actions?leadAction=MOVE_TO_CAMPAIGN
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "campaignLeadSearchCriteria": {
+        "campaignId": 12345,
+        "campaignIds": [12345],
+        "listIds": [],
+        "leadStates": [],
+        "agentDispositions": [],
+        "systemDispositions": []
+      },
+      "leadActionParams": {
+        "paramMap": {
+          "CAMPAIGN_ID": "67890",
+          "LIST_ID": "0",
+          "LIST_NAME": "Moved Leads",
+          "CREATE_COPY_SETTING": "false",
+          "DUPLICATE_ACTION_SETTING": "MOVE"
+        }
+      }
     }
-  }
-}
-```
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "campaignLeadSearchCriteria": {
+            "campaignId": 12345,
+            "campaignIds": [12345],
+            "listIds": [],
+            "leadStates": [],
+            "agentDispositions": [],
+            "systemDispositions": [],
+        },
+        "leadActionParams": {
+            "paramMap": {
+                "CAMPAIGN_ID": "67890",
+                "LIST_ID": "0",
+                "LIST_NAME": "Moved Leads",
+                "CREATE_COPY_SETTING": "false",
+                "DUPLICATE_ACTION_SETTING": "MOVE",
+            }
+        },
+    }
+
+    response = requests.put(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaignLeads/actions",
+        params={"leadAction": "MOVE_TO_CAMPAIGN"},
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      campaignLeadSearchCriteria: {
+        campaignId: 12345,
+        campaignIds: [12345],
+        listIds: [],
+        leadStates: [],
+        agentDispositions: [],
+        systemDispositions: []
+      },
+      leadActionParams: {
+        paramMap: {
+          CAMPAIGN_ID: "67890",
+          LIST_ID: "0",
+          LIST_NAME: "Moved Leads",
+          CREATE_COPY_SETTING: "false",
+          DUPLICATE_ACTION_SETTING: "MOVE"
+        }
+      }
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaignLeads/actions?leadAction=MOVE_TO_CAMPAIGN`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ### Move Parameters
 

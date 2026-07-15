@@ -18,20 +18,74 @@ The DNC endpoints use the current RingCX Voice API base URL.
 
 ## Create a DNC Entry
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dncLists
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-{
-  "phone": "4155550100",
-  "countryId": "USA",
-  "dncTagId": 12345,
-  "externId": "lead-1001"
-}
-```
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dncLists
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "phone": "4155550100",
+      "countryId": "USA",
+      "dncTagId": 12345,
+      "externId": "lead-1001"
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "phone": "4155550100",
+        "countryId": "USA",
+        "dncTagId": 12345,
+        "externId": "lead-1001",
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dncLists",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      phone: "4155550100",
+      countryId: "USA",
+      dncTagId: 12345,
+      externId: "lead-1001"
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dncLists`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ## DNC Tags
 

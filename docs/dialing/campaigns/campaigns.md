@@ -19,29 +19,103 @@ Create a [dial group](dial-groups.md) before creating campaigns.
 
 Campaign configuration is broad. At minimum, set the campaign name and the dialing window fields that apply to your workflow.
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-{
-  "campaignName": "Renewal Outreach",
-  "campaignDesc": "Outbound renewal reminders",
-  "isActive": 1,
-  "startDate": "2026-07-01T07:00:00.000+0000",
-  "endDate": "2026-12-31T07:00:00.000+0000",
-  "callerId": "4155550123",
-  "monSched": "08001700",
-  "tueSched": "08001700",
-  "wedSched": "08001700",
-  "thuSched": "08001700",
-  "friSched": "08001700",
-  "satSched": "00000000",
-  "sunSched": "00000000"
-}
-```
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "campaignName": "Renewal Outreach",
+      "campaignDesc": "Outbound renewal reminders",
+      "isActive": 1,
+      "startDate": "2026-07-01T07:00:00.000+0000",
+      "endDate": "2026-12-31T07:00:00.000+0000",
+      "callerId": "4155550123",
+      "monSched": "08001700",
+      "tueSched": "08001700",
+      "wedSched": "08001700",
+      "thuSched": "08001700",
+      "friSched": "08001700",
+      "satSched": "00000000",
+      "sunSched": "00000000"
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    dial_group_id = "<dialGroupId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "campaignName": "Renewal Outreach",
+        "campaignDesc": "Outbound renewal reminders",
+        "isActive": 1,
+        "startDate": "2026-07-01T07:00:00.000+0000",
+        "endDate": "2026-12-31T07:00:00.000+0000",
+        "callerId": "4155550123",
+        "monSched": "08001700",
+        "tueSched": "08001700",
+        "wedSched": "08001700",
+        "thuSched": "08001700",
+        "friSched": "08001700",
+        "satSched": "00000000",
+        "sunSched": "00000000",
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups/{dial_group_id}/campaigns",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const dialGroupId = "<dialGroupId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      campaignName: "Renewal Outreach",
+      campaignDesc: "Outbound renewal reminders",
+      isActive: 1,
+      startDate: "2026-07-01T07:00:00.000+0000",
+      endDate: "2026-12-31T07:00:00.000+0000",
+      callerId: "4155550123",
+      monSched: "08001700",
+      tueSched: "08001700",
+      wedSched: "08001700",
+      thuSched: "08001700",
+      friSched: "08001700",
+      satSched: "00000000",
+      sunSched: "00000000"
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups/${dialGroupId}/campaigns`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ### Common Fields
 
@@ -58,11 +132,54 @@ Content-Type: application/json
 
 ## Retrieve Campaigns
 
-```http
-GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns
-Authorization: Bearer <ringcxAccessToken>
-Accept: application/json
-```
+=== "HTTP"
+
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    dial_group_id = "<dialGroupId>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups/{dial_group_id}/campaigns",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Accept": "application/json",
+        },
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const dialGroupId = "<dialGroupId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups/${dialGroupId}/campaigns`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          Accept: "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 Use the returned `campaignId` for lead loading, lead search, lead actions, and campaign updates.
 
@@ -70,20 +187,78 @@ Use the returned `campaignId` for lead loading, lead search, lead actions, and c
 
 Retrieve the campaign first, update the fields you need to change, and submit the updated object with `PUT`.
 
-```http
-PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-{
-  "campaignId": 67890,
-  "campaignName": "Renewal Outreach",
-  "campaignDesc": "Renewal and win-back reminders",
-  "isActive": 1
-}
-```
+    ```http
+    PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "campaignId": 67890,
+      "campaignName": "Renewal Outreach",
+      "campaignDesc": "Renewal and win-back reminders",
+      "isActive": 1
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    dial_group_id = "<dialGroupId>"
+    campaign_id = "<campaignId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "campaignId": 67890,
+        "campaignName": "Renewal Outreach",
+        "campaignDesc": "Renewal and win-back reminders",
+        "isActive": 1,
+    }
+
+    response = requests.put(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups/{dial_group_id}/campaigns/{campaign_id}",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const dialGroupId = "<dialGroupId>";
+    const campaignId = "<campaignId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      campaignId: 67890,
+      campaignName: "Renewal Outreach",
+      campaignDesc: "Renewal and win-back reminders",
+      isActive: 1
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups/${dialGroupId}/campaigns/${campaignId}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ## Lead Loading
 

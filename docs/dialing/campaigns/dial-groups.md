@@ -25,20 +25,74 @@ Agents can be assigned to multiple dial groups, but they actively dial from one 
 
 Only `dialGroupName` is required, but most integrations also set `dialMode` and `isActive`.
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-{
-  "dialGroupName": "Outbound Renewals",
-  "dialGroupDesc": "Renewal outreach campaigns",
-  "dialMode": "PREVIEW",
-  "isActive": true
-}
-```
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "dialGroupName": "Outbound Renewals",
+      "dialGroupDesc": "Renewal outreach campaigns",
+      "dialMode": "PREVIEW",
+      "isActive": true
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "dialGroupName": "Outbound Renewals",
+        "dialGroupDesc": "Renewal outreach campaigns",
+        "dialMode": "PREVIEW",
+        "isActive": True,
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      dialGroupName: "Outbound Renewals",
+      dialGroupDesc: "Renewal outreach campaigns",
+      dialMode: "PREVIEW",
+      isActive: true
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ### Common Fields
 
@@ -54,11 +108,52 @@ Content-Type: application/json
 
 ## Retrieve Dial Groups
 
-```http
-GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/withChildren
-Authorization: Bearer <ringcxAccessToken>
-Accept: application/json
-```
+=== "HTTP"
+
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/withChildren
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups/withChildren",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Accept": "application/json",
+        },
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups/withChildren`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          Accept: "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 Use `withChildren` when you need campaign IDs along with the dial group. Use `GET /dialGroups/{dialGroupId}` when you already know the dial group ID.
 
@@ -66,36 +161,181 @@ Use `withChildren` when you need campaign IDs along with the dial group. Use `GE
 
 Retrieve the dial group first, update the fields you need to change, and submit the updated object with `PUT`.
 
-```http
-PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-{
-  "dialGroupId": 12345,
-  "dialGroupName": "Outbound Renewals",
-  "dialGroupDesc": "Renewal and win-back campaigns",
-  "dialMode": "PREVIEW",
-  "isActive": true
-}
-```
+    ```http
+    PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "dialGroupId": 12345,
+      "dialGroupName": "Outbound Renewals",
+      "dialGroupDesc": "Renewal and win-back campaigns",
+      "dialMode": "PREVIEW",
+      "isActive": true
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    dial_group_id = "<dialGroupId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "dialGroupId": 12345,
+        "dialGroupName": "Outbound Renewals",
+        "dialGroupDesc": "Renewal and win-back campaigns",
+        "dialMode": "PREVIEW",
+        "isActive": True,
+    }
+
+    response = requests.put(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups/{dial_group_id}",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const dialGroupId = "<dialGroupId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      dialGroupId: 12345,
+      dialGroupName: "Outbound Renewals",
+      dialGroupDesc: "Renewal and win-back campaigns",
+      dialMode: "PREVIEW",
+      isActive: true
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups/${dialGroupId}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ## Assign Agents
 
 Assign agents after creating the dial group and enabling outbound calling for those agents.
 
-```http
-PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/assignAgents
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
+
+    ```http
+    PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/assignAgents
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    dial_group_id = "<dialGroupId>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.put(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups/{dial_group_id}/assignAgents",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const dialGroupId = "<dialGroupId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups/${dialGroupId}/assignAgents`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 The request body is the agent-assignment payload for the dial group. Use the assigned-agents endpoint to verify the result.
 
-```http
-GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/assignedAgents
-Authorization: Bearer <ringcxAccessToken>
-Accept: application/json
-```
+=== "HTTP"
+
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/assignedAgents
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    dial_group_id = "<dialGroupId>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups/{dial_group_id}/assignedAgents",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Accept": "application/json",
+        },
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const dialGroupId = "<dialGroupId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups/${dialGroupId}/assignedAgents`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          Accept: "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```

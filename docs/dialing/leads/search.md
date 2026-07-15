@@ -13,60 +13,234 @@ Use the lead search APIs to find campaign leads by campaign, list, phone number,
 
 ## Search Leads
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-{
-  "campaignId": 12345,
-  "campaignIds": [12345],
-  "listIds": [],
-  "leadStates": ["READY"],
-  "agentDispositions": [],
-  "systemDispositions": [],
-  "physicalStates": ["CA"],
-  "leadTimezones": []
-}
-```
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "campaignId": 12345,
+      "campaignIds": [12345],
+      "listIds": [],
+      "leadStates": ["READY"],
+      "agentDispositions": [],
+      "systemDispositions": [],
+      "physicalStates": ["CA"],
+      "leadTimezones": []
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "campaignId": 12345,
+        "campaignIds": [12345],
+        "listIds": [],
+        "leadStates": ["READY"],
+        "agentDispositions": [],
+        "systemDispositions": [],
+        "physicalStates": ["CA"],
+        "leadTimezones": [],
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaignLeads/leadSearch",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      campaignId: 12345,
+      campaignIds: [12345],
+      listIds: [],
+      leadStates: ["READY"],
+      agentDispositions: [],
+      systemDispositions: [],
+      physicalStates: ["CA"],
+      leadTimezones: []
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaignLeads/leadSearch`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 Use `campaignIds` when searching across more than one campaign. Use `campaignId` when the API operation or action expects a primary campaign context.
 
 ## Search by Phone Number
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearchByPhoneList
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-{
-  "phoneList": [
-    "4155550100",
-    "4155550101"
-  ],
-  "campaignIds": [12345]
-}
-```
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearchByPhoneList
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "phoneList": [
+        "4155550100",
+        "4155550101"
+      ],
+      "campaignIds": [12345]
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "phoneList": [
+            "4155550100",
+            "4155550101",
+        ],
+        "campaignIds": [12345],
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaignLeads/leadSearchByPhoneList",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      phoneList: [
+        "4155550100",
+        "4155550101"
+      ],
+      campaignIds: [12345]
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaignLeads/leadSearchByPhoneList`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ## Search Metadata
 
 Use metadata endpoints to populate filters before building a search request.
 
-```http
-GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadStates
-Authorization: Bearer <ringcxAccessToken>
-Accept: application/json
-```
+=== "HTTP"
 
-```http
-GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/systemDispositions
-Authorization: Bearer <ringcxAccessToken>
-Accept: application/json
-```
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadStates
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/systemDispositions
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Accept": "application/json",
+    }
+
+    lead_states = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaignLeads/leadStates",
+        headers=headers,
+    )
+    lead_states.raise_for_status()
+
+    system_dispositions = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaignLeads/systemDispositions",
+        headers=headers,
+    )
+    system_dispositions.raise_for_status()
+
+    print(lead_states.json())
+    print(system_dispositions.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+      Accept: "application/json"
+    };
+
+    const leadStates = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaignLeads/leadStates`,
+      { headers }
+    );
+    if (!leadStates.ok) throw new Error(await leadStates.text());
+
+    const systemDispositions = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaignLeads/systemDispositions`,
+      { headers }
+    );
+    if (!systemDispositions.ok) throw new Error(await systemDispositions.text());
+
+    console.log(await leadStates.json());
+    console.log(await systemDispositions.json());
+    ```
 
 ## Results
 

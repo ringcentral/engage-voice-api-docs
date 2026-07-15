@@ -33,16 +33,68 @@ Use the persona phone configuration APIs to define the additional phone labels a
 
 ### Create a Phone Persona
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/persona-phone-config
-Authorization: Bearer <accessToken>
-Content-Type: application/json
+=== "HTTP"
 
-{
-  "phoneId": 2,
-  "phoneLabel": "Mobile Phone"
-}
-```
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/persona-phone-config
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "phoneId": 2,
+      "phoneLabel": "Mobile Phone"
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "phoneId": 2,
+        "phoneLabel": "Mobile Phone",
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/persona-phone-config",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      phoneId: 2,
+      phoneLabel: "Mobile Phone"
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/persona-phone-config`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 The response returns the account's current persona phone configuration list:
 
@@ -77,60 +129,178 @@ Before deleting a phone persona, call the active-campaigns endpoint to see wheth
 
 Set `callingConfiguration` to `STRATEGIC` when you create the campaign. Then include `personaCallSchedules` to define which phone IDs should be dialed in each campaign calling window.
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns
-Authorization: Bearer <accessToken>
-Content-Type: application/json
+=== "HTTP"
 
-{
-  "campaignName": "Renewal Outreach",
-  "campaignDesc": "Strategic outbound campaign",
-  "isActive": 1,
-  "startDate": "2026-07-01T07:00:00.000+0000",
-  "endDate": "2026-12-31T07:00:00.000+0000",
-  "callerId": "4155550123",
-  "monSched": "08001700",
-  "tueSched": "08001700",
-  "wedSched": "08001700",
-  "thuSched": "08001700",
-  "friSched": "08001700",
-  "satSched": "00000000",
-  "sunSched": "00000000",
-  "callingConfiguration": "STRATEGIC",
-  "personaCallSchedules": [
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
     {
-      "day": "MONDAY",
-      "start": "08:00",
-      "end": "12:00",
-      "callPreferences": [
+      "campaignName": "Renewal Outreach",
+      "campaignDesc": "Strategic outbound campaign",
+      "isActive": 1,
+      "startDate": "2026-07-01T07:00:00.000+0000",
+      "endDate": "2026-12-31T07:00:00.000+0000",
+      "callerId": "4155550123",
+      "monSched": "08001700",
+      "tueSched": "08001700",
+      "wedSched": "08001700",
+      "thuSched": "08001700",
+      "friSched": "08001700",
+      "satSched": "00000000",
+      "sunSched": "00000000",
+      "callingConfiguration": "STRATEGIC",
+      "personaCallSchedules": [
         {
-          "phoneId": 2,
-          "priority": 1
+          "day": "MONDAY",
+          "start": "08:00",
+          "end": "12:00",
+          "callPreferences": [
+            {
+              "phoneId": 2,
+              "priority": 1
+            },
+            {
+              "phoneId": 1,
+              "priority": 2
+            }
+          ]
         },
         {
-          "phoneId": 1,
-          "priority": 2
-        }
-      ]
-    },
-    {
-      "day": "MONDAY",
-      "start": "12:01",
-      "end": "17:00",
-      "callPreferences": [
-        {
-          "phoneId": 1,
-          "priority": 1
-        },
-        {
-          "phoneId": 2,
-          "priority": 2
+          "day": "MONDAY",
+          "start": "12:01",
+          "end": "17:00",
+          "callPreferences": [
+            {
+              "phoneId": 1,
+              "priority": 1
+            },
+            {
+              "phoneId": 2,
+              "priority": 2
+            }
+          ]
         }
       ]
     }
-  ]
-}
-```
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    dial_group_id = "<dialGroupId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "campaignName": "Renewal Outreach",
+        "campaignDesc": "Strategic outbound campaign",
+        "isActive": 1,
+        "startDate": "2026-07-01T07:00:00.000+0000",
+        "endDate": "2026-12-31T07:00:00.000+0000",
+        "callerId": "4155550123",
+        "monSched": "08001700",
+        "tueSched": "08001700",
+        "wedSched": "08001700",
+        "thuSched": "08001700",
+        "friSched": "08001700",
+        "satSched": "00000000",
+        "sunSched": "00000000",
+        "callingConfiguration": "STRATEGIC",
+        "personaCallSchedules": [
+            {
+                "day": "MONDAY",
+                "start": "08:00",
+                "end": "12:00",
+                "callPreferences": [
+                    {"phoneId": 2, "priority": 1},
+                    {"phoneId": 1, "priority": 2},
+                ],
+            },
+            {
+                "day": "MONDAY",
+                "start": "12:01",
+                "end": "17:00",
+                "callPreferences": [
+                    {"phoneId": 1, "priority": 1},
+                    {"phoneId": 2, "priority": 2},
+                ],
+            },
+        ],
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups/{dial_group_id}/campaigns",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const dialGroupId = "<dialGroupId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      campaignName: "Renewal Outreach",
+      campaignDesc: "Strategic outbound campaign",
+      isActive: 1,
+      startDate: "2026-07-01T07:00:00.000+0000",
+      endDate: "2026-12-31T07:00:00.000+0000",
+      callerId: "4155550123",
+      monSched: "08001700",
+      tueSched: "08001700",
+      wedSched: "08001700",
+      thuSched: "08001700",
+      friSched: "08001700",
+      satSched: "00000000",
+      sunSched: "00000000",
+      callingConfiguration: "STRATEGIC",
+      personaCallSchedules: [
+        {
+          day: "MONDAY",
+          start: "08:00",
+          end: "12:00",
+          callPreferences: [
+            { phoneId: 2, priority: 1 },
+            { phoneId: 1, priority: 2 }
+          ]
+        },
+        {
+          day: "MONDAY",
+          start: "12:01",
+          end: "17:00",
+          callPreferences: [
+            { phoneId: 1, priority: 1 },
+            { phoneId: 2, priority: 2 }
+          ]
+        }
+      ]
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups/${dialGroupId}/campaigns`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 Persona call schedules use the following fields:
 
@@ -155,32 +325,118 @@ For direct lead loading, keep the lead's primary phone number in `leadPhone`. If
 
 Add extra phone numbers in `personaPhoneConfig`. The keys in `personaPhoneConfig` are the configured `phoneLabel` values, and the values are that lead's phone numbers. The primary number must be a single number, not a pipe-delimited list, because strategic campaigns use persona configuration to manage additional numbers.
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct
-Authorization: Bearer <accessToken>
-Content-Type: application/json
+=== "HTTP"
 
-{
-  "description": "Renewal leads",
-  "dialPriority": "NORMAL",
-  "duplicateHandling": "REMOVE_FROM_LIST",
-  "listState": "ACTIVE",
-  "timeZoneOption": "NOT_APPLICABLE",
-  "uploadLeads": [
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
     {
-      "externId": "lead-1001",
-      "leadPhone": "4155550100",
-      "leadPhoneE164": "+14155550100",
-      "firstName": "Ada",
-      "lastName": "Lovelace",
-      "personaPhoneConfig": {
-        "Mobile Phone": "+14155550101",
-        "Work Phone": "+14155550102"
-      }
+      "description": "Renewal leads",
+      "dialPriority": "NORMAL",
+      "duplicateHandling": "REMOVE_FROM_LIST",
+      "listState": "ACTIVE",
+      "timeZoneOption": "NOT_APPLICABLE",
+      "uploadLeads": [
+        {
+          "externId": "lead-1001",
+          "leadPhone": "4155550100",
+          "leadPhoneE164": "+14155550100",
+          "firstName": "Ada",
+          "lastName": "Lovelace",
+          "personaPhoneConfig": {
+            "Mobile Phone": "+14155550101",
+            "Work Phone": "+14155550102"
+          }
+        }
+      ]
     }
-  ]
-}
-```
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    campaign_id = "<campaignId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "description": "Renewal leads",
+        "dialPriority": "NORMAL",
+        "duplicateHandling": "REMOVE_FROM_LIST",
+        "listState": "ACTIVE",
+        "timeZoneOption": "NOT_APPLICABLE",
+        "uploadLeads": [
+            {
+                "externId": "lead-1001",
+                "leadPhone": "4155550100",
+                "leadPhoneE164": "+14155550100",
+                "firstName": "Ada",
+                "lastName": "Lovelace",
+                "personaPhoneConfig": {
+                    "Mobile Phone": "+14155550101",
+                    "Work Phone": "+14155550102",
+                },
+            }
+        ],
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaigns/{campaign_id}/leadLoader/direct",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const campaignId = "<campaignId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      description: "Renewal leads",
+      dialPriority: "NORMAL",
+      duplicateHandling: "REMOVE_FROM_LIST",
+      listState: "ACTIVE",
+      timeZoneOption: "NOT_APPLICABLE",
+      uploadLeads: [
+        {
+          externId: "lead-1001",
+          leadPhone: "4155550100",
+          leadPhoneE164: "+14155550100",
+          firstName: "Ada",
+          lastName: "Lovelace",
+          personaPhoneConfig: {
+            "Mobile Phone": "+14155550101",
+            "Work Phone": "+14155550102"
+          }
+        }
+      ]
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaigns/${campaignId}/leadLoader/direct`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 When the campaign uses `STRATEGIC` calling configuration, RingCX stores the persona phone mapping with the lead and uses the current persona call schedule to choose which phone numbers are eligible to dial.
 
@@ -188,11 +444,58 @@ When the campaign uses `STRATEGIC` calling configuration, RingCX stores the pers
 
 For file-based loading, call the preview endpoint first. The preview response includes the available `personaPhoneConfig` values for strategic campaigns so the client can present the additional phone fields for mapping.
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/preview?fileType=COMMA
-Authorization: Bearer <accessToken>
-Content-Type: multipart/form-data
-```
+=== "HTTP"
+
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/preview?fileType=COMMA
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: multipart/form-data
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    campaign_id = "<campaignId>"
+    access_token = "<ringcxAccessToken>"
+
+    with open("leads.csv", "rb") as leads_file:
+        response = requests.post(
+            f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaigns/{campaign_id}/leadLoader/preview",
+            params={"fileType": "COMMA"},
+            headers={"Authorization": f"Bearer {access_token}"},
+            files={"file": leads_file},
+        )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    import { readFile } from "node:fs/promises";
+
+    const accountId = "<accountId>";
+    const campaignId = "<campaignId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const formData = new FormData();
+    formData.append("file", new Blob([await readFile("leads.csv")]), "leads.csv");
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaigns/${campaignId}/leadLoader/preview?fileType=COMMA`,
+      {
+        method: "POST",
+        headers: { Authorization: `Bearer ${accessToken}` },
+        body: formData
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 The preview response includes phone IDs and labels:
 
@@ -220,32 +523,118 @@ The preview response includes phone IDs and labels:
 
 When you process the upload, use `additionalPhoneMappings` to map each persona phone ID to the source column index from the uploaded file.
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process
-Authorization: Bearer <accessToken>
-Content-Type: application/json
+=== "HTTP"
 
-{
-  "transactionId": "4431e90b-4c26-44d4-9093-2479e789f051",
-  "description": "Renewal leads",
-  "fileType": "COMMA",
-  "fileContainsHeaders": true,
-  "duplicateHandling": "REMOVE_FROM_LIST",
-  "listState": "ACTIVE",
-  "timeZoneOption": "NOT_APPLICABLE",
-  "pageNumber": 1,
-  "pageColumnMappings": {
-    "LEAD_PHONE": 1,
-    "EXTERN_ID": 2,
-    "FIRST_NAME": 3,
-    "LAST_NAME": 4
-  },
-  "additionalPhoneMappings": {
-    "2": 5,
-    "3": 6
-  }
-}
-```
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "transactionId": "4431e90b-4c26-44d4-9093-2479e789f051",
+      "description": "Renewal leads",
+      "fileType": "COMMA",
+      "fileContainsHeaders": true,
+      "duplicateHandling": "REMOVE_FROM_LIST",
+      "listState": "ACTIVE",
+      "timeZoneOption": "NOT_APPLICABLE",
+      "pageNumber": 1,
+      "pageColumnMappings": {
+        "LEAD_PHONE": 1,
+        "EXTERN_ID": 2,
+        "FIRST_NAME": 3,
+        "LAST_NAME": 4
+      },
+      "additionalPhoneMappings": {
+        "2": 5,
+        "3": 6
+      }
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    campaign_id = "<campaignId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "transactionId": "4431e90b-4c26-44d4-9093-2479e789f051",
+        "description": "Renewal leads",
+        "fileType": "COMMA",
+        "fileContainsHeaders": True,
+        "duplicateHandling": "REMOVE_FROM_LIST",
+        "listState": "ACTIVE",
+        "timeZoneOption": "NOT_APPLICABLE",
+        "pageNumber": 1,
+        "pageColumnMappings": {
+            "LEAD_PHONE": 1,
+            "EXTERN_ID": 2,
+            "FIRST_NAME": 3,
+            "LAST_NAME": 4,
+        },
+        "additionalPhoneMappings": {
+            "2": 5,
+            "3": 6,
+        },
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaigns/{campaign_id}/leadLoader/process",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const campaignId = "<campaignId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      transactionId: "4431e90b-4c26-44d4-9093-2479e789f051",
+      description: "Renewal leads",
+      fileType: "COMMA",
+      fileContainsHeaders: true,
+      duplicateHandling: "REMOVE_FROM_LIST",
+      listState: "ACTIVE",
+      timeZoneOption: "NOT_APPLICABLE",
+      pageNumber: 1,
+      pageColumnMappings: {
+        LEAD_PHONE: 1,
+        EXTERN_ID: 2,
+        FIRST_NAME: 3,
+        LAST_NAME: 4
+      },
+      additionalPhoneMappings: {
+        "2": 5,
+        "3": 6
+      }
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaigns/${campaignId}/leadLoader/process`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 In this example, phone ID `2` is loaded from column `5`, and phone ID `3` is loaded from column `6`.
 
