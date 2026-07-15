@@ -28,6 +28,18 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
 
 ## Create a queue group for a RingCX account
 
+=== "HTTP"
+
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "groupName": "My Queue Group"
+    }
+    ```
+
 === "JavaScript"
 
     ### Install RingCX SDK wrapper for Node JS

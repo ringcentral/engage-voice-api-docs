@@ -14,23 +14,51 @@ To generate an API token, use your own login or create an "API User" specificall
 
 Get an auth token for the user that will own the API token. This is a temporary login token.
 
-```http
-POST https://portal.vacd.biz/api/v1/auth/login
-or
-POST https://portal.virtualacd.biz/api/v1/auth/login
+=== "HTTP"
 
-Content-Type: application/x-www-form-urlencoded
+    ```http
+    POST {legacyBaseUrl}/v1/auth/login
+    Content-Type: application/x-www-form-urlencoded
 
-username={email}&password={password}
-```
+    username={email}&password={password}
+    ```
 
-Here is an example using cURL:
+=== "Python"
 
-```bash
-curl -X POST 'https://portal.vacd.biz/api/v1/auth/login' \
-  -d 'username={email}' \
-  -d 'password={password}'
-```
+    ```python
+    import requests
+
+    legacy_base_url = "https://portal.vacd.biz/api"
+
+    response = requests.post(
+        f"{legacy_base_url}/v1/auth/login",
+        data={
+            "username": "{email}",
+            "password": "{password}",
+        },
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const legacyBaseUrl = "https://portal.vacd.biz/api";
+    const body = new URLSearchParams({
+      username: "{email}",
+      password: "{password}"
+    });
+
+    const response = await fetch(`${legacyBaseUrl}/v1/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body
+    });
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 In the result, you will see an `authToken` property. Copy this value for the next step.
 
@@ -40,20 +68,41 @@ The auth token expires after 1 hour. You can use `stayLoggedIn` to extend the au
 
 Generate a permanent API token using the following API call. Every time you run this method, another API token is created and returned.
 
-```http
-POST https://portal.vacd.biz/api/v1/admin/token
-or
-POST https://portal.virtualacd.biz/api/v1/admin/token
+=== "HTTP"
 
-X-Auth-Token: {authTokenOrApiToken}
-```
+    ```http
+    POST {legacyBaseUrl}/v1/admin/token
+    X-Auth-Token: {authTokenOrApiToken}
+    ```
 
-Here is an example cURL command:
+=== "Python"
 
-```bash
-curl -X POST 'https://portal.vacd.biz/api/v1/admin/token' \
-  -H 'X-Auth-Token: {authTokenOrApiToken}'
-```
+    ```python
+    import requests
+
+    legacy_base_url = "https://portal.vacd.biz/api"
+
+    response = requests.post(
+        f"{legacy_base_url}/v1/admin/token",
+        headers={"X-Auth-Token": "{authTokenOrApiToken}"},
+    )
+    response.raise_for_status()
+    print(response.text)
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const legacyBaseUrl = "https://portal.vacd.biz/api";
+
+    const response = await fetch(`${legacyBaseUrl}/v1/admin/token`, {
+      method: "POST",
+      headers: { "X-Auth-Token": "{authTokenOrApiToken}" }
+    });
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.text());
+    ```
 
 The token in the `X-Auth-Token` header can be the temporary auth token generated in the previous step or an existing API token for the same user.
 
@@ -69,32 +118,80 @@ You now have a permanent API token. Use this token in the `X-Auth-Token` header 
 
 To list all existing API tokens for a user:
 
-```http
-GET https://portal.vacd.biz/api/v1/admin/token
-or
-GET https://portal.virtualacd.biz/api/v1/admin/token
+=== "HTTP"
 
-X-Auth-Token: {authTokenOrApiToken}
-```
+    ```http
+    GET {legacyBaseUrl}/v1/admin/token
+    X-Auth-Token: {authTokenOrApiToken}
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    legacy_base_url = "https://portal.vacd.biz/api"
+
+    response = requests.get(
+        f"{legacy_base_url}/v1/admin/token",
+        headers={"X-Auth-Token": "{authTokenOrApiToken}"},
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const legacyBaseUrl = "https://portal.vacd.biz/api";
+
+    const response = await fetch(`${legacyBaseUrl}/v1/admin/token`, {
+      headers: { "X-Auth-Token": "{authTokenOrApiToken}" }
+    });
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ## Delete an API token
 
 If you no longer need an API token, or you believe it may have been compromised, delete it.
 
-```http
-DELETE https://portal.vacd.biz/api/v1/admin/token/{apiToken}
-or
-DELETE https://portal.virtualacd.biz/api/v1/admin/token/{apiToken}
+=== "HTTP"
 
-X-Auth-Token: {authTokenOrApiToken}
-```
+    ```http
+    DELETE {legacyBaseUrl}/v1/admin/token/{apiToken}
+    X-Auth-Token: {authTokenOrApiToken}
+    ```
 
-Here is an example cURL command:
+=== "Python"
 
-```bash
-curl -X DELETE 'https://portal.vacd.biz/api/v1/admin/token/{apiTokenForDelete}' \
-  -H 'X-Auth-Token: {authTokenOrApiToken}'
-```
+    ```python
+    import requests
+
+    legacy_base_url = "https://portal.vacd.biz/api"
+    api_token = "{apiTokenForDelete}"
+
+    response = requests.delete(
+        f"{legacy_base_url}/v1/admin/token/{api_token}",
+        headers={"X-Auth-Token": "{authTokenOrApiToken}"},
+    )
+    response.raise_for_status()
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const legacyBaseUrl = "https://portal.vacd.biz/api";
+    const apiToken = "{apiTokenForDelete}";
+
+    const response = await fetch(`${legacyBaseUrl}/v1/admin/token/${apiToken}`, {
+      method: "DELETE",
+      headers: { "X-Auth-Token": "{authTokenOrApiToken}" }
+    });
+
+    if (!response.ok) throw new Error(await response.text());
+    ```
 
 In the request above, you may use the auth token or API token for the user whose token is being deleted, including the token being deleted itself. A parent user token may also be used when it has permission to manage the user's API tokens.
 
@@ -102,17 +199,37 @@ In the request above, you may use the auth token or API token for the user whose
 
 Test your auth token or API token using the request below.
 
-```http
-GET https://portal.vacd.biz/api/v1/admin/users
-or
-GET https://portal.virtualacd.biz/api/v1/admin/users
+=== "HTTP"
 
-X-Auth-Token: {authTokenOrApiToken}
-```
+    ```http
+    GET {legacyBaseUrl}/v1/admin/users
+    X-Auth-Token: {authTokenOrApiToken}
+    ```
 
-Here is an example cURL command:
+=== "Python"
 
-```bash
-curl -X GET 'https://portal.vacd.biz/api/v1/admin/users' \
-  -H 'X-Auth-Token: {authTokenOrApiToken}'
-```
+    ```python
+    import requests
+
+    legacy_base_url = "https://portal.vacd.biz/api"
+
+    response = requests.get(
+        f"{legacy_base_url}/v1/admin/users",
+        headers={"X-Auth-Token": "{authTokenOrApiToken}"},
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const legacyBaseUrl = "https://portal.vacd.biz/api";
+
+    const response = await fetch(`${legacyBaseUrl}/v1/admin/users`, {
+      headers: { "X-Auth-Token": "{authTokenOrApiToken}" }
+    });
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
