@@ -1,51 +1,51 @@
 # [Feature Name] API
 
-<!-- Lead paragraph: Briefly describe the API, what problem it solves, and the developer benefit. -->
+[Lead Paragraph: Briefly describe the API. What is it? What specific problem does it solve for the developer? Use the "Jobs to be Done" framework: "This API allows [User Role] to [Action] so that they can [Benefit]."]
 
 ## Strategic Overview
 
-<!-- Explain why a customer would use this feature and the business value it provides. -->
+[Question: Why would a customer use this specific feature? What is the business value? Is it for compliance, user experience, automation, or data extraction?]
 
 ### Key Use Cases
-* **[Primary Use Case]:** <!-- Describe the most common scenario. -->
-* **[Secondary Use Case]:** <!-- Describe an edge case or secondary benefit. -->
-* **[Integration Scenario]:** <!-- Describe how this fits into a larger ecosystem. -->
+* **[Primary Use Case]:** [Describe the most common scenario.]
+* **[Secondary Use Case]:** [Describe an edge case or secondary benefit.]
+* **[Integration Scenario]:** [How does this fit into a larger ecosystem?]
 
 ### Real-Time vs. Latency Expectations
-<!-- State whether the API is real time. If there is a delay, such as data propagation or indexing, specify it here. -->
-* **Data Availability:** <!-- Example: Available 5 minutes after event; real-time synchronous response. -->
-* **Retention Policy:** <!-- State how long this data is stored. -->
+[Question: Is this API real-time? If there is a delay (e.g., data propagation, indexing), specify it here.]
+* **Data Availability:** [e.g., "Available 5 minutes after event" or "Real-time synchronous response"]
+* **Retention Policy:** [How long is this data stored?]
 
 ### Required Permissions & Scopes
 
-<!-- Clearly list what the developer needs to enable before their first request. -->
+[Clearly list what the developer needs to enable before their first request.]
 
 #### 1. Configure OAuth Scopes
 To successfully authenticate, your application must be configured with the following permissions in the [Developer Portal](https://developers.ringcentral.com/my-account.html#/applications):
 
-* **`[Scope Name]`**: <!-- Explain why this scope is needed. -->
+* **`[Scope Name]`**: [Explanation of why this scope is needed.]
 
 #### 2. Enable Platform Permissions
-<!-- If the user needs a specific Admin UI toggle enabled, list the path here. -->
+[Question: Does the user need a specific toggle enabled in the Admin UI? List the path here.]
 1. Log in to **[Portal Name]**.
 2. Navigate to **[Menu]** > **[Sub-menu]**.
-3. <!-- Specific action, such as "Check the 'Enable API' box". -->
+3. [Specific Action, e.g., "Check the 'Enable API' box"].
 
 
 
 !!! warning "Common Authorization Errors"
-    <!-- Insert the most common error JSON the user will see if permissions or scopes are missing. -->
+    [Insert the most common error JSON the user will see if permissions/scopes are missing.]
 
 ---
 
 ## API Discovery
-<!-- If there is a discovery or schema endpoint used to find valid values for the main API, document it here. -->
+[If there is a 'Discovery' or 'Schema' endpoint used to find valid values for the main API, document it here.]
 
 `[METHOD] [URL]`
 
 ### Prerequisites & Constraints
-* **[Constraint 1]:** <!-- Example: Account ID is always required in the header. -->
-* **[Constraint 2]:** <!-- Example: Date formats must follow ISO-8601 with an explicit offset. -->
+* **[Constraint 1]:** [e.g., "Account ID is always required in the header"]
+* **[Constraint 2]:** [e.g., "Date formats must follow ISO-8601 with an explicit offset"]
 
 ---
 
@@ -55,44 +55,44 @@ To successfully authenticate, your application must be configured with the follo
 ### Request Body / Parameters
 | Parameter | Type | Requirement | Description |
 | --- | --- | --- | --- |
-| `[param_name]` | [Type] | **Required** | <!-- Describe what this field does. --> |
-| `[param_name]` | [Type] | Optional | <!-- Describe default behavior if omitted. --> |
+| `[param_name]` | [Type] | **Required** | [What does this field do?] |
+| `[param_name]` | [Type] | Optional | [Default behavior if omitted?] |
 
 **Example Request:**
 ```json
-<!-- JSON request example goes here. -->
+[JSON_REQUEST_EXAMPLE_GOES_HERE]
 
 ```
 
 ### Response Details
 
-<!-- Break down the response object, focusing on fields that are not self-explanatory. -->
+[Break down the response object, focusing on fields that aren't self-explanatory.]
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `[field_name]` | [Type] | <!-- Brief description of the data returned. --> |
+| `[field_name]` | [Type] | [Brief description of the data returned.] |
 
 #### [Nested Object Name] Structure
 
-<!-- If the response contains a complex nested object or array, break it down in a subsection here. -->
+[If the response contains a complex nested object or array, break it down in a sub-section here.]
 
 ---
 
 ## Implementation Strategy
 
-<!-- Provide a high-level strategy for how this API should be integrated into a production system. -->
+[Provide a high-level strategy for how this API should be integrated into a production system.]
 
 ### Recommended Pattern
 
-<!-- State whether there is a specific polling frequency or webhook strategy recommended for this data. -->
+[Question: Is there a specific polling frequency or webhook strategy recommended for this data?]
 
 !!! important "Rate Limiting & Stability"
-* **Limit:** <!-- X requests per time unit. -->
-* **Strategy:** <!-- Example: Implement exponential backoff on 429 errors. -->
+* **Limit:** [X] requests per [Time Unit].
+* **Strategy:** [e.g., "Implement exponential backoff on 429 errors."]
 
 ### Sample Implementation ([Language])
 
-<!-- Provide a clean, well-commented code snippet showing a real-world use of the API. -->
+[Provide a clean, well-commented code snippet showing a real-world use of the API.]
 
 ```[language]
 # [Language] Example: [Action Being Performed]
