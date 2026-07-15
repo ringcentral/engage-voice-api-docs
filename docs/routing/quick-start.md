@@ -102,7 +102,7 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
 
 ## Need Help?
 
-Having difficulty? Feeling frustrated? Receiving an error you don't understand? Our community is here to help and may already have found an answer. Search our community forums, and if you don't find an answer please ask!
+If you need help or receive an unexpected error, search the community forums. If you do not find an answer, post a question for the developer community.
 
 <a target="_new" href="https://forums.developers.ringcentral.com/search.html?c=11&includeChildren=false&f=&type=question+OR+kbentry+OR+answer+OR+topic&redirect=search%2Fsearch&sort=relevance&q=call+management">Search the forums &raquo;</a>
 

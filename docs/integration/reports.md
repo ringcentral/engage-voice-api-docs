@@ -80,7 +80,7 @@ To retrieve the agent call recording you must first ensure the agent segment rec
 
 To retrieve the call recording you will need your account information including your [RingEX account ID](https://developers.ringcentral.com/api-reference/Company/readAccountInfo) and [RingCX subaccount ID](https://developers.ringcentral.com/engage/voice/api-reference/Integration-Account-Controller/getSubAccountsByMainAccountId).
 
-Then you will need two fields from the interaction metadata report including the `dialogId` and the `segmentId`. With these four parameters, you can retriee the call recording in `audio/wav` format
+Then you need two fields from the interaction metadata report: `dialogId` and `segmentId`. With these four parameters, you can retrieve the call recording in `audio/wav` format.
 
 Be sure to set the proper [BASE_URL](../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
 
@@ -90,7 +90,7 @@ Be sure to set the proper [BASE_URL](../basics/uris.md#resources-and-parameters)
 
 #### Special Note About Call Recording Formats
 
-Call recordings are normally returned as a WAV file with PCM 16 bit encoding when using the API. If using the API via a browswer interface, a compressed MP3 file is returned instead. If you need the compressed audio file, you can set a browser like type as the `User-Agent`:
+Call recordings are normally returned as a WAV file with PCM 16-bit encoding when using the API. If using the API through a browser interface, a compressed MP3 file is returned instead. If you need the compressed audio file, set a browser-like value as the `User-Agent`:
 
 | Key | Value |
 |-|-|

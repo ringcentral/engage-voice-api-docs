@@ -42,7 +42,7 @@ This means your WWW tool should be configured as below:
 
 #### That Special AWS Lambda Function
 
-Notice that GET request goes to an AWS server? This is our Lambda function to proxy the request to HubSpot. This example is more about how to use RingCX, but to make sure you are successful with the complete solution, I've included the code below.  Just make sure to set your environment variables in AWS Lambda.
+The GET request goes to an AWS Lambda function that proxies the request to HubSpot. This example focuses on the RingCX workflow, but the Lambda configuration below shows the supporting proxy setup. Set the required environment variables in AWS Lambda before testing the workflow.
 
 | Key | Value|
 |-|-|
@@ -241,8 +241,8 @@ Now we are ready to bring up the page to display to the agent. To do this we nee
 
 <img class="img-fluid" width="964" src="../../../images/agent-scripting-page-config.png">
 
-Ready to test it out? You can use the "Render" to try it out, but since you don't have a real number, it will just return all the contacts in your HubSpot instance. It would be better to test just one number that you know so pick one contact's number and go all the way back up to our first step, the WWW tool. Replace `{{model.lead.leadPhone}}` with a real 10 digit number.
+To test the workflow, use the "Render" option with a known contact phone number from the HubSpot instance. In the WWW tool from the first step, replace `{{model.lead.leadPhone}}` with a real 10-digit phone number.
 
-You may notice that I added some other contact details into our model object including first name, last name, email, and phone. This is used to create a richer agent view of the contact record when a contact calls the agent. There's a lot you can do with the [page tool](https://support.ringcentral.com/engagevoice/admin/voice-admin-page-tool-elements-overview.html) so go ahead and try it out.
+The example also stores contact details in the model object, including first name, last name, email, and phone. These fields create a richer agent view of the contact record when a contact calls the agent. The [page tool](https://support.ringcentral.com/engagevoice/admin/voice-admin-page-tool-elements-overview.html) can display additional context from the model object as needed.
 
 <img class="img-fluid" width="960" src="../../../images/agent-scripting-hubspot.png">
