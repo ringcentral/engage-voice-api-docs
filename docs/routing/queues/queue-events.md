@@ -23,28 +23,102 @@ Priority queue events can be used when specific conditions apply, such as a queu
 
 Create and batch-update queue events by sending an array of event objects.
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-[
-  {
-    "eventRank": 0,
-    "queueEvent": "PLAY-AUDIO-LOOP:holdmusic",
-    "eventDuration": 120,
-    "enableDtmf": 0
-  },
-  {
-    "eventRank": 1,
-    "queueEvent": "END-CALL:true",
-    "eventDuration": 0,
-    "enableDtmf": 0
-  }
-]
-```
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    [
+      {
+        "eventRank": 0,
+        "queueEvent": "PLAY-AUDIO-LOOP:holdmusic",
+        "eventDuration": 120,
+        "enableDtmf": 0
+      },
+      {
+        "eventRank": 1,
+        "queueEvent": "END-CALL:true",
+        "eventDuration": 0,
+        "enableDtmf": 0
+      }
+    ]
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    gate_group_id = "<gateGroupId>"
+    gate_id = "<gateId>"
+    access_token = "<ringcxAccessToken>"
+    payload = [
+        {
+            "eventRank": 0,
+            "queueEvent": "PLAY-AUDIO-LOOP:holdmusic",
+            "eventDuration": 120,
+            "enableDtmf": 0,
+        },
+        {
+            "eventRank": 1,
+            "queueEvent": "END-CALL:true",
+            "eventDuration": 0,
+            "enableDtmf": 0,
+        },
+    ]
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/gates/{gate_id}/gateQueueEvents",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const gateGroupId = "<gateGroupId>";
+    const gateId = "<gateId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = [
+      {
+        eventRank: 0,
+        queueEvent: "PLAY-AUDIO-LOOP:holdmusic",
+        eventDuration: 120,
+        enableDtmf: 0
+      },
+      {
+        eventRank: 1,
+        queueEvent: "END-CALL:true",
+        eventDuration: 0,
+        enableDtmf: 0
+      }
+    ];
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/gates/${gateId}/gateQueueEvents`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ### Common Fields
 
@@ -59,11 +133,56 @@ Content-Type: application/json
 
 ## Retrieve Queue Events
 
-```http
-GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
-Authorization: Bearer <ringcxAccessToken>
-Accept: application/json
-```
+=== "HTTP"
+
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    gate_group_id = "<gateGroupId>"
+    gate_id = "<gateId>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/gates/{gate_id}/gateQueueEvents",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Accept": "application/json",
+        },
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const gateGroupId = "<gateGroupId>";
+    const gateId = "<gateId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/gates/${gateId}/gateQueueEvents`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          Accept: "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 Use the returned `eventId` values when updating or deleting a single queue event.
 

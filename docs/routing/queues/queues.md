@@ -27,21 +27,79 @@ Use the following endpoints to create, list, retrieve, update, and delete queues
 
 Only `gateName` is required to create a queue. Most other queue settings can be added during create or updated later.
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-{
-  "isActive": true,
-  "gateName": "Support Queue",
-  "gateDesc": "Inbound support calls",
-  "gatePriority": 0,
-  "outboundCallerId": "ani"
-}
-```
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "isActive": true,
+      "gateName": "Support Queue",
+      "gateDesc": "Inbound support calls",
+      "gatePriority": 0,
+      "outboundCallerId": "ani"
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    gate_group_id = "<gateGroupId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "isActive": True,
+        "gateName": "Support Queue",
+        "gateDesc": "Inbound support calls",
+        "gatePriority": 0,
+        "outboundCallerId": "ani",
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/gates",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const gateGroupId = "<gateGroupId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      isActive: true,
+      gateName: "Support Queue",
+      gateDesc: "Inbound support calls",
+      gatePriority: 0,
+      outboundCallerId: "ani"
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/gates`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ### Common Fields
 
@@ -60,39 +118,159 @@ Content-Type: application/json
 
 ## Retrieve Queues
 
-```http
-GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates
-Authorization: Bearer <ringcxAccessToken>
-Accept: application/json
-```
+Use the list response to discover queue IDs before retrieving or updating a specific queue.
 
-Use this response to discover queue IDs before retrieving or updating a specific queue.
+=== "HTTP"
 
-```http
-GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
-Authorization: Bearer <ringcxAccessToken>
-Accept: application/json
-```
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    gate_group_id = "<gateGroupId>"
+    gate_id = "<gateId>"
+    access_token = "<ringcxAccessToken>"
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Accept": "application/json",
+    }
+
+    queues = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/gates",
+        headers=headers,
+    )
+    queues.raise_for_status()
+
+    queue = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/gates/{gate_id}",
+        headers=headers,
+    )
+    queue.raise_for_status()
+
+    print(queues.json())
+    print(queue.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const gateGroupId = "<gateGroupId>";
+    const gateId = "<gateId>";
+    const accessToken = "<ringcxAccessToken>";
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+      Accept: "application/json"
+    };
+
+    const queues = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/gates`,
+      { headers }
+    );
+    if (!queues.ok) throw new Error(await queues.text());
+
+    const queue = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/gates/${gateId}`,
+      { headers }
+    );
+    if (!queue.ok) throw new Error(await queue.text());
+
+    console.log(await queues.json());
+    console.log(await queue.json());
+    ```
 
 ## Update a Queue
 
 Retrieve the queue first, update the fields you need to change, and submit the updated object with `PUT`.
 
-```http
-PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-{
-  "gateId": 72992,
-  "gateName": "Support Queue",
-  "gateDesc": "Inbound support and account questions",
-  "isActive": true,
-  "gatePriority": 0
-}
-```
+    ```http
+    PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "gateId": 72992,
+      "gateName": "Support Queue",
+      "gateDesc": "Inbound support and account questions",
+      "isActive": true,
+      "gatePriority": 0
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    gate_group_id = "<gateGroupId>"
+    gate_id = "<gateId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "gateId": 72992,
+        "gateName": "Support Queue",
+        "gateDesc": "Inbound support and account questions",
+        "isActive": True,
+        "gatePriority": 0,
+    }
+
+    response = requests.put(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/gates/{gate_id}",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const gateGroupId = "<gateGroupId>";
+    const gateId = "<gateId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      gateId: 72992,
+      gateName: "Support Queue",
+      gateDesc: "Inbound support and account questions",
+      isActive: true,
+      gatePriority: 0
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/gates/${gateId}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ## Related Queue Configuration
 
@@ -119,9 +297,47 @@ Use these endpoints when configuring queue fields that reference other resources
 
 ## Delete a Queue
 
-```http
-DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
-Authorization: Bearer <ringcxAccessToken>
-```
+=== "HTTP"
+
+    ```http
+    DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}
+    Authorization: Bearer <ringcxAccessToken>
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    gate_group_id = "<gateGroupId>"
+    gate_id = "<gateId>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.delete(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/gates/{gate_id}",
+        headers={"Authorization": f"Bearer {access_token}"},
+    )
+    response.raise_for_status()
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const gateGroupId = "<gateGroupId>";
+    const gateId = "<gateId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/gates/${gateId}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${accessToken}` }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    ```
 
 Delete a queue only after confirming that DNIS assignments, schedules, events, and agent access rules no longer depend on it.
