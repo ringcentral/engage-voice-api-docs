@@ -15,21 +15,79 @@ The agent must also have access to the queue where the skill is used.
 
 Group skills are managed under queue groups.
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-[
-  {
-    "skillName": "Spanish Language",
-    "skillDesc": "Spanish-language support",
-    "active": true
-  }
-]
-```
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    [
+      {
+        "skillName": "Spanish Language",
+        "skillDesc": "Spanish-language support",
+        "active": true
+      }
+    ]
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    gate_group_id = "<gateGroupId>"
+    access_token = "<ringcxAccessToken>"
+    payload = [
+        {
+            "skillName": "Spanish Language",
+            "skillDesc": "Spanish-language support",
+            "active": True,
+        }
+    ]
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/skills",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const gateGroupId = "<gateGroupId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = [
+      {
+        skillName: "Spanish Language",
+        skillDesc: "Spanish-language support",
+        active: true
+      }
+    ];
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/skills`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 See [Group Skills](../../routing/queues/group-skills.md) for the full group-skill workflow.
 
@@ -37,21 +95,83 @@ See [Group Skills](../../routing/queues/group-skills.md) for the full group-skil
 
 Queue events can reference a group skill with a `SKILL-ROUTE:{skillId}` token in the event behavior.
 
-```http
-PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-{
-  "eventId": 67882,
-  "eventRank": 10,
-  "queueEvent": "PLAY-AUDIO:holdmusic;SKILL-ROUTE:1455;",
-  "eventDuration": 120,
-  "enableDtmf": 0
-}
-```
+    ```http
+    PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "eventId": 67882,
+      "eventRank": 10,
+      "queueEvent": "PLAY-AUDIO:holdmusic;SKILL-ROUTE:1455;",
+      "eventDuration": 120,
+      "enableDtmf": 0
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    gate_group_id = "<gateGroupId>"
+    gate_id = "<gateId>"
+    event_id = "<eventId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "eventId": 67882,
+        "eventRank": 10,
+        "queueEvent": "PLAY-AUDIO:holdmusic;SKILL-ROUTE:1455;",
+        "eventDuration": 120,
+        "enableDtmf": 0,
+    }
+
+    response = requests.put(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/gates/{gate_id}/gateQueueEvents/{event_id}",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const gateGroupId = "<gateGroupId>";
+    const gateId = "<gateId>";
+    const eventId = "<eventId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      eventId: 67882,
+      eventRank: 10,
+      queueEvent: "PLAY-AUDIO:holdmusic;SKILL-ROUTE:1455;",
+      eventDuration: 120,
+      enableDtmf: 0
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/gates/${gateId}/gateQueueEvents/${eventId}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ## Manage Agent Skill Profiles
 
@@ -69,27 +189,99 @@ Content-Type: application/json
 
 ## Create a Skill Profile
 
-```http
-POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/skillProfiles
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
 
-```json
-{
-  "profileName": "Spanish Speaker",
-  "profileDesc": "Routes Spanish-language calls to this agent",
-  "isDefault": false,
-  "gateGroupSkills": [
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/skillProfiles
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
     {
-      "skillId": 1455,
-      "skillName": "Spanish Language",
-      "active": true
+      "profileName": "Spanish Speaker",
+      "profileDesc": "Routes Spanish-language calls to this agent",
+      "isDefault": false,
+      "gateGroupSkills": [
+        {
+          "skillId": 1455,
+          "skillName": "Spanish Language",
+          "active": true
+        }
+      ],
+      "chatGroupSkills": []
     }
-  ],
-  "chatGroupSkills": []
-}
-```
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    agent_group_id = "<agentGroupId>"
+    agent_id = "<agentId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "profileName": "Spanish Speaker",
+        "profileDesc": "Routes Spanish-language calls to this agent",
+        "isDefault": False,
+        "gateGroupSkills": [
+            {
+                "skillId": 1455,
+                "skillName": "Spanish Language",
+                "active": True,
+            }
+        ],
+        "chatGroupSkills": [],
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/agentGroups/{agent_group_id}/agents/{agent_id}/skillProfiles",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const agentGroupId = "<agentGroupId>";
+    const agentId = "<agentId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      profileName: "Spanish Speaker",
+      profileDesc: "Routes Spanish-language calls to this agent",
+      isDefault: false,
+      gateGroupSkills: [
+        {
+          skillId: 1455,
+          skillName: "Spanish Language",
+          active: true
+        }
+      ],
+      chatGroupSkills: []
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/agentGroups/${agentGroupId}/agents/${agentId}/skillProfiles`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ### Common Fields
 
@@ -103,10 +295,60 @@ Content-Type: application/json
 
 ## Assign Skills to an Existing Profile
 
-```http
-PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/skillProfiles/{skillProfileId}/skills/{skillId}
-Authorization: Bearer <ringcxAccessToken>
-Content-Type: application/json
-```
+=== "HTTP"
+
+    ```http
+    PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/skillProfiles/{skillProfileId}/skills/{skillId}
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    agent_group_id = "<agentGroupId>"
+    agent_id = "<agentId>"
+    skill_profile_id = "<skillProfileId>"
+    skill_id = "<skillId>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.put(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/agentGroups/{agent_group_id}/agents/{agent_id}/skillProfiles/{skill_profile_id}/skills/{skill_id}",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const agentGroupId = "<agentGroupId>";
+    const agentId = "<agentId>";
+    const skillProfileId = "<skillProfileId>";
+    const skillId = "<skillId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/agentGroups/${agentGroupId}/agents/${agentId}/skillProfiles/${skillProfileId}/skills/${skillId}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 Retrieve the profile after assignment to verify that the expected skills are present.
