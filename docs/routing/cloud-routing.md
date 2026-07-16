@@ -102,7 +102,7 @@ DNIS overrides let a cloud route destination apply number-specific routing behav
 6. Activate the destination or profile after the configuration has been verified.
 
 !!! important "Rate Limiting & Stability"
-    Standard platform rate limiting applies; use **120 requests per minute** as the planning ceiling unless a lower endpoint-specific limit is documented. Make provisioning changes in batches and use exponential backoff on `429 Too Many Requests` responses.
+    The rate limit is **120 requests per minute**. Make provisioning changes in batches and use exponential backoff on `429 Too Many Requests` responses.
 
 ## Request Examples
 

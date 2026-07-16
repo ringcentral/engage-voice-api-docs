@@ -52,7 +52,7 @@ To enable this:
     > ```
 
 !!! important "Rate Limiting & Stability"
-    Standard platform rate limiting applies to audit requests. Use **120 requests per minute** as the planning ceiling unless a lower endpoint-specific limit is documented. Avoid high-frequency polling: query bounded historical windows, persist progress between runs, and implement exponential backoff on `429 Too Many Requests` responses.
+    Audit requests are limited to **120 requests per minute**. Avoid high-frequency polling: query bounded historical windows, persist progress between runs, and implement exponential backoff on `429 Too Many Requests` responses.
 
 
 ### Important Technical Constraints

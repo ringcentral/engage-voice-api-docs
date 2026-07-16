@@ -44,7 +44,7 @@ The authenticating user must have reporting access enabled in the RingCX Admin p
     ```
 
 !!! important "Rate Limiting & Stability"
-    * **Limit:** Standard platform rate limiting applies at **120 requests per minute** across real-time endpoints unless a lower endpoint-specific limit is documented.
+    * **Limit:** Real-time endpoints are limited to **120 requests per minute**.
     * **Strategy:** Poll at a **10-30 second interval** for wallboard use cases, use `lastUpdate` to skip unnecessary UI refreshes, and implement exponential backoff on `429 Too Many Requests` responses.
 
 ---
@@ -263,7 +263,7 @@ For most supervisor dashboards, a single polling loop fetches all three endpoint
 Poll all three endpoints on a consistent interval and use `lastUpdate` on each record to detect whether an entity's state has actually changed before triggering a UI update.
 
 !!! important "Rate Limiting & Stability"
-    * **Limit:** Budget polling across all three endpoints under the standard **120 requests per minute** planning ceiling.
+    * **Limit:** Keep polling across all three endpoints within the **120 requests per minute** rate limit.
     * **Strategy:** A 15-second polling interval across three endpoints consumes 12 requests per minute. Treat that as a starting point, increase the interval when data does not change, and implement exponential backoff on `429 Too Many Requests` responses.
 
 !!! warning "SLA Threshold Alerting"

@@ -91,7 +91,7 @@ The API returns a binary stream of the recording.
 3.  **Stream Media:** Call the Download Recording endpoint using the path parameters to retrieve the `.WAV` file.
 
 !!! important "Rate Limiting"
-    **Rate Limiting:** Recording downloads use standard platform rate limiting; use **120 requests per minute** as the planning ceiling unless a lower endpoint-specific limit is documented. The `interaction-metadata` discovery request is throttled per RingCX sub-account at **3 requests per 60 seconds** and **9 requests per 15 minutes**. Use exponential backoff on `429 Too Many Requests` responses and avoid retrying media downloads in tight loops.
+    **Rate Limiting:** Recording downloads are limited to **120 requests per minute**. The `interaction-metadata` discovery request is throttled per RingCX sub-account at **3 requests per 60 seconds** and **9 requests per 15 minutes**. Use exponential backoff on `429 Too Many Requests` responses and avoid retrying media downloads in tight loops.
 
 ### Sample Implementation (Python)
 

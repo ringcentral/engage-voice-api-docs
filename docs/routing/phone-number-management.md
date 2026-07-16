@@ -85,7 +85,7 @@ Tracking numbers are managed under tracking-number groups.
     Reassigning or deleting a phone number can immediately affect customer routing. Confirm the target product and maintenance window before applying bulk changes.
 
 !!! important "Rate Limiting & Stability"
-    Standard platform rate limiting applies; use **120 requests per minute** as the planning ceiling unless a lower endpoint-specific limit is documented. Treat number inventory changes as provisioning operations. Search first, update only changed records, and batch bulk uploads so retries do not duplicate or reassign numbers unexpectedly.
+    The rate limit is **120 requests per minute**. Treat number inventory changes as provisioning operations. Search first, update only changed records, and batch bulk uploads so retries do not duplicate or reassign numbers unexpectedly.
 
 ## Primary Parameters
 

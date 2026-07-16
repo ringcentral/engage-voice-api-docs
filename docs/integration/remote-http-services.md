@@ -99,7 +99,7 @@ External auth configurations store reusable authentication settings for remote s
     Treat remote service changes like production integration changes. Validate the external endpoint, authentication, and expected response shape before activating the service in a live routing flow.
 
 !!! important "Rate Limiting & Stability"
-    Standard platform rate limiting applies; use **120 requests per minute** as the planning ceiling unless a lower endpoint-specific limit is documented. Remote HTTP service changes can affect live IVR and scripting flows. Batch provisioning updates, activate services only after validation, and use exponential backoff on `429 Too Many Requests` responses.
+    The rate limit is **120 requests per minute**. Remote HTTP service changes can affect live IVR and scripting flows. Batch provisioning updates, activate services only after validation, and use exponential backoff on `429 Too Many Requests` responses.
 
 ## Request Examples
 

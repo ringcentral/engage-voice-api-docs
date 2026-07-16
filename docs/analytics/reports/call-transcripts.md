@@ -109,7 +109,7 @@ We recommend a **"Sliding Window"** polling strategy to account for the generati
 3. **Handle Latency:** If you receive a 404 error, implement an exponential backoff strategy for subsequent retry attempts.
 
 !!! important "Rate Limiting & Stability"
-    * **Limit:** Transcript retrieval uses standard platform rate limiting; use **120 requests per minute** as the planning ceiling unless a lower endpoint-specific limit is documented. The `interaction-metadata` discovery request is throttled per RingCX sub-account at **3 requests per 60 seconds** and **9 requests per 15 minutes**.
+    * **Limit:** Transcript retrieval is limited to **120 requests per minute**. The `interaction-metadata` discovery request is throttled per RingCX sub-account at **3 requests per 60 seconds** and **9 requests per 15 minutes**.
     * **Strategy:** Query completed time windows, fetch transcripts only for matching segments, and implement exponential backoff when hitting `429 Too Many Requests` errors.
 
 ### Sample Implementation (Python)

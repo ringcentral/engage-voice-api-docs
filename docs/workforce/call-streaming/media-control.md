@@ -42,7 +42,7 @@ The user authenticating the app must also have access to the RingCX sub-account 
     ```
 
 !!! important "Rate Limiting & Stability"
-    Standard platform rate limiting applies; use **120 requests per minute** as the planning ceiling unless a lower endpoint-specific limit is documented. Media control requests publish start/stop events to the media-control service. Do not retry blindly after network timeouts because duplicate start events with the same `streamId` can create ambiguous state. Use a deterministic `streamId`, check your receiver logs, and retry with exponential backoff only when you know the previous request did not reach the platform.
+    The rate limit is **120 requests per minute**. Media control requests publish start/stop events to the media-control service. Do not retry blindly after network timeouts because duplicate start events with the same `streamId` can create ambiguous state. Use a deterministic `streamId`, check your receiver logs, and retry with exponential backoff only when you know the previous request did not reach the platform.
 
 ## Identifiers
 
