@@ -12,9 +12,9 @@ The integration reports are special reports for integration purposes to assist w
 !!! tip "Be aware of rate limits"
     The following report APIs are rate limited. This means you can only call the API a certain number of times before having to wait to call the report API again.
 
-    The rate limit is currently set per RingCX sub-account. Stay within both limits: 3 requests per 60 seconds and 9 requests per 15 minutes.
+    The rate limit is currently set at 2 calls per minute (per node)
 
-    The best way to handle this rate limit is to cache report results, avoid high-frequency polling, and implement a backoff mechanism if you receive a `429 Too Many Requests` status code. You should also log rate limit errors and adjust request strategies accordingly.
+    What this means is you may call the report API up to 2 times per node, but your request may be distributed to another node where your API call will succeed. The best way to handle this rate limit is to make an API call and if you receive a rate limit warning `429 Too Many Requests` status code, implement a backoff mechanism (e.g. exponential backoff) to space out retry attempts. You should also log rate limit errors and adjust request strategies accordingly.
 
 * **Agent Segment Metadata Report** - Also known as the interaction metadata report, this detailed agent interaction report has a record for each segment of a call
 * **Queue Statistics Report** - A specific report that lists all the queues in a queue group and the agents within each queue.
