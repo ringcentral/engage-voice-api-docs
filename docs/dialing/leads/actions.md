@@ -2,6 +2,8 @@
 
 Lead actions apply operational changes to one lead or a set of leads. Use them after locating the target leads with [lead search](search.md).
 
+SDK examples in this article use JWT authentication. Set `RC_CLIENT_ID`, `RC_CLIENT_SECRET`, and `RC_JWT` in your environment; the SDK wrapper handles the RingCentral login and RingCX token exchange. For JavaScript, install `ringcentral-engage-voice-client` and `dotenv`. For Python, install `ringcentral_engage_voice` and `python-dotenv`.
+
 ## Endpoint
 
 === "HTTP"
@@ -263,6 +265,92 @@ Use `MOVE_TO_CAMPAIGN` when leads should be moved from one campaign to another c
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        campaignLeadSearchCriteria: {
+          campaignId: 12345,
+          campaignIds: [12345],
+          listIds: [],
+          leadStates: [],
+          agentDispositions: [],
+          systemDispositions: []
+        },
+        leadActionParams: {
+          paramMap: {
+            CAMPAIGN_ID: "67890",
+            LIST_ID: "0",
+            LIST_NAME: "Moved Leads",
+            CREATE_COPY_SETTING: "false",
+            DUPLICATE_ACTION_SETTING: "MOVE"
+          }
+        }
+      };
+
+      const response = await ev.put(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/actions?leadAction=MOVE_TO_CAMPAIGN",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "campaignLeadSearchCriteria": {
+            "campaignId": 12345,
+            "campaignIds": [12345],
+            "listIds": [],
+            "leadStates": [],
+            "agentDispositions": [],
+            "systemDispositions": [],
+        },
+        "leadActionParams": {
+            "paramMap": {
+                "CAMPAIGN_ID": "67890",
+                "LIST_ID": "0",
+                "LIST_NAME": "Moved Leads",
+                "CREATE_COPY_SETTING": "false",
+                "DUPLICATE_ACTION_SETTING": "MOVE",
+            }
+        },
+    }
+
+    response = ev.put(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/actions?leadAction=MOVE_TO_CAMPAIGN",
+        payload,
+    ).json()
+    print(response)
     ```
 
 ### Move Parameters

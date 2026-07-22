@@ -11,6 +11,8 @@ Use the lead search APIs to find campaign leads by campaign, list, phone number,
 | List lead states | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadStates` |
 | List system dispositions | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/systemDispositions` |
 
+SDK examples in this article use JWT authentication. Set `RC_CLIENT_ID`, `RC_CLIENT_SECRET`, and `RC_JWT` in your environment; the SDK wrapper handles the RingCentral login and RingCX token exchange. For JavaScript, install `ringcentral-engage-voice-client` and `dotenv`. For Python, install `ringcentral_engage_voice` and `python-dotenv`.
+
 ## Search Leads
 
 === "HTTP"
@@ -92,6 +94,74 @@ Use the lead search APIs to find campaign leads by campaign, list, phone number,
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        campaignId: 12345,
+        campaignIds: [12345],
+        listIds: [],
+        leadStates: ["READY"],
+        agentDispositions: [],
+        systemDispositions: [],
+        physicalStates: ["CA"],
+        leadTimezones: []
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "campaignId": 12345,
+        "campaignIds": [12345],
+        "listIds": [],
+        "leadStates": ["READY"],
+        "agentDispositions": [],
+        "systemDispositions": [],
+        "physicalStates": ["CA"],
+        "leadTimezones": [],
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch",
+        payload,
+    ).json()
+    print(response)
     ```
 
 Use `campaignIds` when searching across more than one campaign. Use `campaignId` when the API operation or action expects a primary campaign context.

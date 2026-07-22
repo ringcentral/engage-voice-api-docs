@@ -15,6 +15,8 @@ Create a [dial group](dial-groups.md) before creating campaigns.
 | Delete campaign | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}` |
 | Clear campaign cache | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}/clearCache` |
 
+SDK examples in this article use JWT authentication. Set `RC_CLIENT_ID`, `RC_CLIENT_SECRET`, and `RC_JWT` in your environment; the SDK wrapper handles the RingCentral login and RingCX token exchange. For JavaScript, install `ringcentral-engage-voice-client` and `dotenv`. For Python, install `ringcentral_engage_voice` and `python-dotenv`.
+
 ## Create a Campaign
 
 Campaign configuration is broad. At minimum, set the campaign name and the dialing window fields that apply to your workflow.
@@ -117,6 +119,84 @@ Campaign configuration is broad. At minimum, set the campaign name and the diali
     console.log(await response.json());
     ```
 
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        campaignName: "Renewal Outreach",
+        campaignDesc: "Outbound renewal reminders",
+        isActive: 1,
+        startDate: "2026-07-01T07:00:00.000+0000",
+        endDate: "2026-12-31T07:00:00.000+0000",
+        callerId: "4155550123",
+        monSched: "08001700",
+        tueSched: "08001700",
+        wedSched: "08001700",
+        thuSched: "08001700",
+        friSched: "08001700",
+        satSched: "00000000",
+        sunSched: "00000000"
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "campaignName": "Renewal Outreach",
+        "campaignDesc": "Outbound renewal reminders",
+        "isActive": 1,
+        "startDate": "2026-07-01T07:00:00.000+0000",
+        "endDate": "2026-12-31T07:00:00.000+0000",
+        "callerId": "4155550123",
+        "monSched": "08001700",
+        "tueSched": "08001700",
+        "wedSched": "08001700",
+        "thuSched": "08001700",
+        "friSched": "08001700",
+        "satSched": "00000000",
+        "sunSched": "00000000",
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns",
+        payload,
+    ).json()
+    print(response)
+    ```
+
 ??? example "Response example"
 
     ```json
@@ -198,6 +278,50 @@ Campaign configuration is broad. At minimum, set the campaign name and the diali
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const response = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns"
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    response = ev.get(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns"
+    ).json()
+    print(response)
     ```
 
 Use the returned `campaignId` for lead loading, lead search, lead actions, and campaign updates.
@@ -296,6 +420,66 @@ Retrieve the campaign first, update the fields you need to change, and submit th
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        campaignId: 67890,
+        campaignName: "Renewal Outreach",
+        campaignDesc: "Renewal and win-back reminders",
+        isActive: 1
+      };
+
+      const response = await ev.put(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "campaignId": 67890,
+        "campaignName": "Renewal Outreach",
+        "campaignDesc": "Renewal and win-back reminders",
+        "isActive": 1,
+    }
+
+    response = ev.put(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}",
+        payload,
+    ).json()
+    print(response)
     ```
 
 ??? example "Response example"

@@ -10,6 +10,8 @@ Before calling the Dialing APIs:
 2. Complete the [RingCentral token exchange flow](../authentication/auth-ringcentral.md) and obtain a RingCX access token.
 3. Get the RingCX sub-account ID from `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts`.
 
+SDK examples in this quick start use JWT authentication. Set `RC_CLIENT_ID`, `RC_CLIENT_SECRET`, and `RC_JWT` in your environment; the SDK wrapper handles the RingCentral login and RingCX token exchange. For JavaScript, install `ringcentral-engage-voice-client` and `dotenv`. For Python, install `ringcentral_engage_voice` and `python-dotenv`.
+
 ## Create a Dial Group
 
 === "HTTP"
@@ -81,6 +83,66 @@ Before calling the Dialing APIs:
     console.log(await response.json());
     ```
 
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        dialGroupName: "Outbound Renewals",
+        dialGroupDesc: "Renewal outreach campaigns",
+        dialMode: "PREVIEW",
+        isActive: true
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/dialGroups",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "dialGroupName": "Outbound Renewals",
+        "dialGroupDesc": "Renewal outreach campaigns",
+        "dialMode": "PREVIEW",
+        "isActive": True,
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/dialGroups",
+        payload,
+    ).json()
+    print(response)
+    ```
+
 ## Verify the Dial Group
 
 === "HTTP"
@@ -128,6 +190,46 @@ Before calling the Dialing APIs:
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const response = await ev.get("/api/v1/admin/accounts/{accountId}/dialGroups");
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    response = ev.get("/api/v1/admin/accounts/{accountId}/dialGroups").json()
+    print(response)
     ```
 
 Use the returned `dialGroupId` when creating campaigns.

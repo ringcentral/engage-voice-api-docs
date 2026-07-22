@@ -2,6 +2,8 @@
 
 Use the lead loader APIs to add leads to an outbound campaign. RingCX supports direct JSON loading and a preview/process flow for uploaded files.
 
+SDK examples in this article use JWT authentication. Set `RC_CLIENT_ID`, `RC_CLIENT_SECRET`, and `RC_JWT` in your environment; the SDK wrapper handles the RingCentral login and RingCX token exchange. For JavaScript, install `ringcentral-engage-voice-client` and `dotenv`. For Python, install `ringcentral_engage_voice` and `python-dotenv`.
+
 ## Find the Campaign
 
 Before loading leads, identify the target campaign:
@@ -181,6 +183,86 @@ Direct loading sends leads as JSON and is the simplest option when your integrat
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        description: "Renewal leads",
+        dialPriority: "NORMAL",
+        duplicateHandling: "REMOVE_FROM_LIST",
+        listState: "ACTIVE",
+        timeZoneOption: "NOT_APPLICABLE",
+        uploadLeads: [
+          {
+            externId: "lead-1001",
+            leadPhone: "4155550100",
+            firstName: "Ada",
+            lastName: "Lovelace",
+            state: "CA"
+          }
+        ]
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "description": "Renewal leads",
+        "dialPriority": "NORMAL",
+        "duplicateHandling": "REMOVE_FROM_LIST",
+        "listState": "ACTIVE",
+        "timeZoneOption": "NOT_APPLICABLE",
+        "uploadLeads": [
+            {
+                "externId": "lead-1001",
+                "leadPhone": "4155550100",
+                "firstName": "Ada",
+                "lastName": "Lovelace",
+                "state": "CA",
+            }
+        ],
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct",
+        payload,
+    ).json()
+    print(response)
     ```
 
 ## File Preview and Process
