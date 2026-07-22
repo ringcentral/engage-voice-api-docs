@@ -32,6 +32,9 @@ Create the agent under the agent group that should own the agent record.
       "password": "<temporaryPassword>",
       "agentType": "AGENT",
       "agentRank": 12,
+      "initLoginBaseState": "AVAILABLE",
+      "initLoginBaseStateId": 11786,
+      "ghostRnaAction": "AVAILABLE",
       "allowInbound": true,
       "allowOutbound": true,
       "enableSoftphone": true,
@@ -55,6 +58,9 @@ Create the agent under the agent group that should own the agent record.
         "password": "<temporaryPassword>",
         "agentType": "AGENT",
         "agentRank": 12,
+        "initLoginBaseState": "AVAILABLE",
+        "initLoginBaseStateId": 11786,
+        "ghostRnaAction": "AVAILABLE",
         "allowInbound": True,
         "allowOutbound": True,
         "enableSoftphone": True,
@@ -87,6 +93,9 @@ Create the agent under the agent group that should own the agent record.
       password: "<temporaryPassword>",
       agentType: "AGENT",
       agentRank: 12,
+      initLoginBaseState: "AVAILABLE",
+      initLoginBaseStateId: 11786,
+      ghostRnaAction: "AVAILABLE",
       allowInbound: true,
       allowOutbound: true,
       enableSoftphone: true,
@@ -109,6 +118,26 @@ Create the agent under the agent group that should own the agent record.
     console.log(await response.json());
     ```
 
+??? example "Response example"
+
+    ```json
+    {
+      "agentId": 1234567,
+      "firstName": "Ada",
+      "lastName": "Lovelace",
+      "username": "ada.lovelace",
+      "agentType": "AGENT",
+      "agentRank": 12,
+      "initLoginBaseState": "AVAILABLE",
+      "initLoginBaseStateId": 11786,
+      "allowInbound": true,
+      "allowOutbound": true,
+      "enableSoftphone": true,
+      "maxChats": 0,
+      "isActive": true
+    }
+    ```
+
 ### Common Fields
 
 | Field | Required | Description |
@@ -120,11 +149,16 @@ Create the agent under the agent group that should own the agent record.
 | `externalAgentId` | No | External identifier used by your user-management system. |
 | `agentType` | No | `AGENT` or `SUPERVISOR`. |
 | `agentRank` | No | Routing rank. Higher rank values can receive higher priority. |
+| `initLoginBaseState` | No | Initial base state used when the agent logs in, such as `AVAILABLE`. |
+| `initLoginBaseStateId` | No | Account aux-state ID for the agent's initial login state. |
+| `ghostRnaAction` | No | State action used after a ghost RNA event. |
 | `allowInbound` | No | Whether the agent can receive inbound calls. |
 | `allowOutbound` | No | Whether the agent can make outbound calls. |
 | `enableSoftphone` | No | Whether softphone login is enabled. |
 | `defaultLoginDest` | No | Default login destination. |
 | `phoneLoginPin` | No | PIN for phone login workflows. |
+
+Use the account aux-states endpoint to find valid initial-state values. The response includes `stateId` and `agentAuxState`; use those values for `initLoginBaseStateId` and `initLoginBaseState`.
 
 ## Retrieve Agents
 
@@ -179,6 +213,25 @@ Create the agent under the agent group that should own the agent record.
 
 Use the returned `agentId` when retrieving, updating, or deleting one agent.
 
+??? example "Response example"
+
+    ```json
+    [
+      {
+        "agentId": 1234567,
+        "firstName": "Ada",
+        "lastName": "Lovelace",
+        "username": "ada.lovelace",
+        "agentType": "AGENT",
+        "initLoginBaseState": "AVAILABLE",
+        "initLoginBaseStateId": 11786,
+        "allowInbound": true,
+        "allowOutbound": true,
+        "isActive": true
+      }
+    ]
+    ```
+
 === "HTTP"
 
     ```http
@@ -228,6 +281,26 @@ Use the returned `agentId` when retrieving, updating, or deleting one agent.
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+??? example "Response example"
+
+    ```json
+    {
+      "agentId": 1234567,
+      "firstName": "Ada",
+      "lastName": "Lovelace",
+      "username": "ada.lovelace",
+      "agentType": "AGENT",
+      "agentRank": 12,
+      "initLoginBaseState": "AVAILABLE",
+      "initLoginBaseStateId": 11786,
+      "allowInbound": true,
+      "allowOutbound": true,
+      "enableSoftphone": true,
+      "maxChats": 0,
+      "isActive": true
+    }
     ```
 
 ## Update an Agent
@@ -319,6 +392,21 @@ Retrieve the agent first, update the fields you need to change, and submit the u
     console.log(await response.json());
     ```
 
+??? example "Response example"
+
+    ```json
+    {
+      "agentId": 1234567,
+      "firstName": "Ada",
+      "lastName": "Lovelace",
+      "username": "ada.lovelace",
+      "agentType": "SUPERVISOR",
+      "allowInbound": true,
+      "allowOutbound": true,
+      "isActive": true
+    }
+    ```
+
 ## Supporting Lookup APIs
 
 Use these endpoints to find IDs referenced by agent configuration.
@@ -326,9 +414,25 @@ Use these endpoints to find IDs referenced by agent configuration.
 | Lookup | Method and path |
 | --- | --- |
 | Agent groups | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups` |
+| Initial state and aux-state IDs | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/auxStates?activeOnly=true` |
 | Dial groups | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/withChildren` |
 | Queue groups and queues | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/withChildren` |
 | Agent access to a queue | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/gateGroups/{gateGroupId}/gates/{gateId}` |
+
+??? example "Aux-state response example"
+
+    ```json
+    [
+      {
+        "stateId": 11786,
+        "agentAuxState": "AVAILABLE",
+        "baseAgentState": {
+          "colKey": "AVAILABLE"
+        },
+        "isActive": true
+      }
+    ]
+    ```
 
 ## Delete an Agent
 

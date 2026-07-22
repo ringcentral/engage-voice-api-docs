@@ -89,6 +89,19 @@ Group skills are managed under queue groups.
     console.log(await response.json());
     ```
 
+??? example "Response example"
+
+    ```json
+    [
+      {
+        "skillId": 1455,
+        "skillName": "Spanish Language",
+        "skillDesc": "Spanish-language support",
+        "active": true
+      }
+    ]
+    ```
+
 See [Group Skills](../../routing/queues/group-skills.md) for the full group-skill workflow.
 
 ## Add the Skill to Queue Routing
@@ -171,6 +184,18 @@ Queue events can reference a group skill with a `SKILL-ROUTE:{skillId}` token in
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+??? example "Response example"
+
+    ```json
+    {
+      "eventId": 67882,
+      "eventRank": 10,
+      "queueEvent": "PLAY-AUDIO:holdmusic;SKILL-ROUTE:1455;",
+      "eventDuration": 120,
+      "enableDtmf": 0
+    }
     ```
 
 ## Manage Agent Skill Profiles
@@ -283,6 +308,25 @@ Queue events can reference a group skill with a `SKILL-ROUTE:{skillId}` token in
     console.log(await response.json());
     ```
 
+??? example "Response example"
+
+    ```json
+    {
+      "profileId": 215271,
+      "profileName": "Spanish Speaker",
+      "profileDesc": "Routes Spanish-language calls to this agent",
+      "isDefault": false,
+      "gateGroupSkills": [
+        {
+          "skillId": 1455,
+          "skillName": "Spanish Language",
+          "active": true
+        }
+      ],
+      "chatGroupSkills": []
+    }
+    ```
+
 ### Common Fields
 
 | Field | Required | Description |
@@ -352,3 +396,20 @@ Queue events can reference a group skill with a `SKILL-ROUTE:{skillId}` token in
     ```
 
 Retrieve the profile after assignment to verify that the expected skills are present.
+
+??? example "Assigned profile response example"
+
+    ```json
+    {
+      "profileId": 215271,
+      "profileName": "Spanish Speaker",
+      "gateGroupSkills": [
+        {
+          "skillId": 1455,
+          "skillName": "Spanish Language",
+          "active": true
+        }
+      ],
+      "chatGroupSkills": []
+    }
+    ```

@@ -70,6 +70,16 @@ Only `groupName` is required when creating an agent group.
     console.log(await response.json());
     ```
 
+??? example "Response example"
+
+    ```json
+    {
+      "agentGroupId": 1950,
+      "groupName": "Support Agents",
+      "isDefault": false
+    }
+    ```
+
 ### Common Fields
 
 | Field | Required | Description |
@@ -128,6 +138,23 @@ Only `groupName` is required when creating an agent group.
     ```
 
 Use the returned `agentGroupId` when creating agents.
+
+??? example "Response example"
+
+    ```json
+    [
+      {
+        "agentGroupId": 1950,
+        "groupName": "Support Agents",
+        "isDefault": false
+      },
+      {
+        "agentGroupId": 1951,
+        "groupName": "Supervisors",
+        "isDefault": false
+      }
+    ]
+    ```
 
 ## Update an Agent Group
 
@@ -199,6 +226,16 @@ Retrieve the agent group first, update the fields you need to change, and submit
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+??? example "Response example"
+
+    ```json
+    {
+      "agentGroupId": 1950,
+      "groupName": "Support Agents - Updated",
+      "isDefault": false
+    }
     ```
 
 ## Delete an Agent Group
