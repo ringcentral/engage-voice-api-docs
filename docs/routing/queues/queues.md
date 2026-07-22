@@ -101,6 +101,24 @@ Only `gateName` is required to create a queue. Most other queue settings can be 
     console.log(await response.json());
     ```
 
+??? example "Response example"
+
+    ```json
+    {
+      "gateId": 72992,
+      "gateName": "Support Queue",
+      "gateDesc": "Inbound support calls",
+      "gatePriority": 0,
+      "outboundCallerId": "ani",
+      "isActive": true,
+      "gateGroup": {
+        "id": 52653,
+        "description": "Support Queues"
+      },
+      "permissions": []
+    }
+    ```
+
 ### Common Fields
 
 | Field | Required | Description |
@@ -192,6 +210,46 @@ Use the list response to discover queue IDs before retrieving or updating a spec
     console.log(await queue.json());
     ```
 
+??? example "List response example"
+
+    ```json
+    [
+      {
+        "gateId": 72992,
+        "gateName": "Support Queue",
+        "gateDesc": "Inbound support calls",
+        "isActive": true,
+        "gateGroup": {
+          "id": 52653,
+          "description": "Support Queues"
+        },
+        "permissions": []
+      }
+    ]
+    ```
+
+??? example "Queue response example"
+
+    ```json
+    {
+      "gateId": 72992,
+      "gateName": "Support Queue",
+      "gateDesc": "Inbound support calls",
+      "gatePriority": 0,
+      "recordCall": 1,
+      "shortAbandonTime": 30,
+      "slaTime": 30,
+      "wrapTime": 8,
+      "acceptTime": 30,
+      "isActive": true,
+      "gateGroup": {
+        "id": 52653,
+        "description": "Support Queues"
+      },
+      "permissions": []
+    }
+    ```
+
 ## Update a Queue
 
 Retrieve the queue first, update the fields you need to change, and submit the updated object with `PUT`.
@@ -270,6 +328,23 @@ Retrieve the queue first, update the fields you need to change, and submit the u
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+??? example "Response example"
+
+    ```json
+    {
+      "gateId": 72992,
+      "gateName": "Support Queue",
+      "gateDesc": "Inbound support and account questions",
+      "gatePriority": 0,
+      "isActive": true,
+      "gateGroup": {
+        "id": 52653,
+        "description": "Support Queues"
+      },
+      "permissions": []
+    }
     ```
 
 ## Related Queue Configuration

@@ -108,6 +108,25 @@ Create one or more group skills by sending an array of skill objects. To create 
     console.log(await response.json());
     ```
 
+??? example "Response example"
+
+    ```json
+    [
+      {
+        "skillId": 1455,
+        "skillName": "Spanish Language",
+        "skillDesc": "Spanish-language support",
+        "active": true
+      },
+      {
+        "skillId": 1456,
+        "skillName": "French Language",
+        "skillDesc": "French-language support",
+        "active": true
+      }
+    ]
+    ```
+
 ### Common Fields
 
 | Field | Required | Description |
@@ -172,6 +191,19 @@ Create one or more group skills by sending an array of skill objects. To create 
     ```
 
 Use the returned `skillId` values when retrieving, updating, or deleting a single skill.
+
+??? example "Response example"
+
+    ```json
+    [
+      {
+        "skillId": 1455,
+        "skillName": "Spanish Language",
+        "skillDesc": "Spanish-language support",
+        "active": true
+      }
+    ]
+    ```
 
 ## Update Group Skills
 
@@ -248,6 +280,17 @@ Retrieve the current skill object first, update the fields that should change, a
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+??? example "Response example"
+
+    ```json
+    {
+      "skillId": 1455,
+      "skillName": "Spanish Language",
+      "skillDesc": "Spanish-language support and billing questions",
+      "active": true
+    }
     ```
 
 ## Delete a Group Skill

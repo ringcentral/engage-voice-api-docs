@@ -120,6 +120,27 @@ Create and batch-update queue events by sending an array of event objects.
     console.log(await response.json());
     ```
 
+??? example "Response example"
+
+    ```json
+    [
+      {
+        "eventId": 67882,
+        "eventRank": 0,
+        "queueEvent": "PLAY-AUDIO-LOOP:holdmusic",
+        "eventDuration": 120,
+        "enableDtmf": 0
+      },
+      {
+        "eventId": 67883,
+        "eventRank": 1,
+        "queueEvent": "END-CALL:true",
+        "eventDuration": 0,
+        "enableDtmf": 0
+      }
+    ]
+    ```
+
 ### Common Fields
 
 | Field | Required | Description |
@@ -185,6 +206,20 @@ Create and batch-update queue events by sending an array of event objects.
     ```
 
 Use the returned `eventId` values when updating or deleting a single queue event.
+
+??? example "Response example"
+
+    ```json
+    [
+      {
+        "eventId": 67882,
+        "eventRank": 0,
+        "queueEvent": "PLAY-AUDIO-LOOP:holdmusic",
+        "eventDuration": 120,
+        "enableDtmf": 0
+      }
+    ]
+    ```
 
 ## DTMF Events
 

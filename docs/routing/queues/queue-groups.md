@@ -76,6 +76,18 @@ Only `groupName` is required when creating a queue group.
     console.log(await response.json());
     ```
 
+??? example "Response example"
+
+    ```json
+    {
+      "gateGroupId": 52653,
+      "groupName": "Support Queues",
+      "billingKey": null,
+      "groupSkills": null,
+      "permissions": []
+    }
+    ```
+
 ### Common Fields
 
 | Field | Required | Description |
@@ -134,6 +146,25 @@ Only `groupName` is required when creating a queue group.
     ```
 
 Use `withChildren` when you need the group and its queues in one response. Use `GET /gateGroups/{gateGroupId}` when you already know the queue group ID and only need one group.
+
+??? example "Response example"
+
+    ```json
+    [
+      {
+        "gateGroupId": 52653,
+        "groupName": "Support Queues",
+        "groupSkills": null,
+        "permissions": []
+      },
+      {
+        "gateGroupId": 52658,
+        "groupName": "Escalation Queues",
+        "groupSkills": null,
+        "permissions": []
+      }
+    ]
+    ```
 
 ## Update a Queue Group
 
@@ -205,6 +236,18 @@ Retrieve the queue group first, update the fields you need to change, and send t
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+??? example "Response example"
+
+    ```json
+    {
+      "gateGroupId": 52653,
+      "groupName": "Support Queues - Updated",
+      "billingKey": "support",
+      "groupSkills": null,
+      "permissions": []
+    }
     ```
 
 ## Delete a Queue Group
