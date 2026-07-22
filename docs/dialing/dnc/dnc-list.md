@@ -87,6 +87,23 @@ The DNC endpoints use the current RingCX Voice API base URL.
     console.log(await response.json());
     ```
 
+??? example "Response example"
+
+    ```json
+    {
+      "phone": "4155550100",
+      "tag": "GLOBAL",
+      "countryCode": {
+        "id": "USA",
+        "description": null
+      },
+      "addedDate": "2026-07-22T18:10:11.740+0000",
+      "addedBy": "Admin User",
+      "reason": "Do not call",
+      "dncTagId": 12345
+    }
+    ```
+
 ## DNC Tags
 
 Use DNC tags to group DNC entries for management and deletion.

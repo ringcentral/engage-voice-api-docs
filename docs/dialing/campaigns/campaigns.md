@@ -117,6 +117,25 @@ Campaign configuration is broad. At minimum, set the campaign name and the diali
     console.log(await response.json());
     ```
 
+??? example "Response example"
+
+    ```json
+    {
+      "campaignId": 136785,
+      "campaignName": "Renewal Outreach",
+      "campaignDesc": "Outbound renewal reminders",
+      "isActive": 1,
+      "callerId": "4155550123",
+      "startDate": "2026-07-01T07:00:00.000+0000",
+      "endDate": "2026-12-31T07:00:00.000+0000",
+      "dialGroup": {
+        "id": 115793,
+        "description": "Outbound Renewals"
+      },
+      "permissions": []
+    }
+    ```
+
 ### Common Fields
 
 | Field | Description |
@@ -182,6 +201,25 @@ Campaign configuration is broad. At minimum, set the campaign name and the diali
     ```
 
 Use the returned `campaignId` for lead loading, lead search, lead actions, and campaign updates.
+
+??? example "Response example"
+
+    ```json
+    [
+      {
+        "campaignId": 136785,
+        "campaignName": "Renewal Outreach",
+        "campaignDesc": "Outbound renewal reminders",
+        "isActive": 1,
+        "callerId": "4155550123",
+        "dialGroup": {
+          "id": 115793,
+          "description": "Outbound Renewals"
+        },
+        "permissions": []
+      }
+    ]
+    ```
 
 ## Update a Campaign
 
@@ -258,6 +296,22 @@ Retrieve the campaign first, update the fields you need to change, and submit th
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+??? example "Response example"
+
+    ```json
+    {
+      "campaignId": 67890,
+      "campaignName": "Renewal Outreach",
+      "campaignDesc": "Renewal and win-back reminders",
+      "isActive": 1,
+      "dialGroup": {
+        "id": 115793,
+        "description": "Outbound Renewals"
+      },
+      "permissions": []
+    }
     ```
 
 ## Lead Loading

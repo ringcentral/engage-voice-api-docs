@@ -94,6 +94,21 @@ Only `dialGroupName` is required, but most integrations also set `dialMode` and 
     console.log(await response.json());
     ```
 
+??? example "Response example"
+
+    ```json
+    {
+      "dialGroupId": 115793,
+      "dialGroupName": "Outbound Renewals",
+      "dialGroupDesc": "Renewal outreach campaigns",
+      "dialMode": "PREVIEW",
+      "isActive": true,
+      "maxLeadsReturned": 1,
+      "agentDialGroupMembers": [],
+      "permissions": []
+    }
+    ```
+
 ### Common Fields
 
 | Field | Required | Description |
@@ -156,6 +171,28 @@ Only `dialGroupName` is required, but most integrations also set `dialMode` and 
     ```
 
 Use `withChildren` when you need campaign IDs along with the dial group. Use `GET /dialGroups/{dialGroupId}` when you already know the dial group ID.
+
+??? example "Response example"
+
+    ```json
+    [
+      {
+        "dialGroupId": 115793,
+        "dialGroupName": "Outbound Renewals",
+        "dialGroupDesc": "Renewal outreach campaigns",
+        "dialMode": "PREVIEW",
+        "isActive": true,
+        "campaigns": [
+          {
+            "campaignId": 136785,
+            "campaignName": "Renewal Outreach",
+            "isActive": 1
+          }
+        ],
+        "permissions": []
+      }
+    ]
+    ```
 
 ## Update a Dial Group
 
@@ -233,6 +270,22 @@ Retrieve the dial group first, update the fields you need to change, and submit 
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+??? example "Response example"
+
+    ```json
+    {
+      "dialGroupId": 115793,
+      "dialGroupName": "Outbound Renewals",
+      "dialGroupDesc": "Renewal and win-back campaigns",
+      "dialMode": "PREVIEW",
+      "isActive": true,
+      "allowLeadSearch": "YES",
+      "maxLeadsReturned": 1,
+      "agentDialGroupMembers": [],
+      "permissions": []
+    }
     ```
 
 ## Assign Agents
