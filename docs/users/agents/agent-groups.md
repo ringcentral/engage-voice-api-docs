@@ -12,6 +12,8 @@ Agent groups organize agents into administrative groups. An agent must belong to
 | Update agent group | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}` |
 | Delete agent group | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}` |
 
+SDK examples in this article use JWT authentication. Set `RC_CLIENT_ID`, `RC_CLIENT_SECRET`, and `RC_JWT` in your environment; the SDK wrapper handles the RingCentral login and RingCX token exchange. For JavaScript, install `ringcentral-engage-voice-client` and `dotenv`. For Python, install `ringcentral_engage_voice` and `python-dotenv`.
+
 ## Create an Agent Group
 
 Only `groupName` is required when creating an agent group.
@@ -68,6 +70,52 @@ Only `groupName` is required when creating an agent group.
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/agentGroups",
+        { groupName: "Support Agents" }
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/agentGroups",
+        {"groupName": "Support Agents"},
+    ).json()
+    print(response)
     ```
 
 ??? example "Response example"
@@ -135,6 +183,46 @@ Only `groupName` is required when creating an agent group.
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const response = await ev.get("/api/v1/admin/accounts/{accountId}/agentGroups");
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    response = ev.get("/api/v1/admin/accounts/{accountId}/agentGroups").json()
+    print(response)
     ```
 
 Use the returned `agentGroupId` when creating agents.
@@ -226,6 +314,64 @@ Retrieve the agent group first, update the fields you need to change, and submit
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        agentGroupId: 1950,
+        groupName: "Support Agents - Updated",
+        isDefault: false
+      };
+
+      const response = await ev.put(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "agentGroupId": 1950,
+        "groupName": "Support Agents - Updated",
+        "isDefault": False,
+    }
+
+    response = ev.put(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}",
+        payload,
+    ).json()
+    print(response)
     ```
 
 ??? example "Response example"

@@ -13,6 +13,8 @@ Agents are RingCX users who can log in to handle inbound queues, outbound campai
 | Update one agent | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}` |
 | Delete agent | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}` |
 
+SDK examples in this article use JWT authentication. Set `RC_CLIENT_ID`, `RC_CLIENT_SECRET`, and `RC_JWT` in your environment; the SDK wrapper handles the RingCentral login and RingCX token exchange. For JavaScript, install `ringcentral-engage-voice-client` and `dotenv`. For Python, install `ringcentral_engage_voice` and `python-dotenv`.
+
 ## Create an Agent
 
 Create the agent under the agent group that should own the agent record.
@@ -118,6 +120,86 @@ Create the agent under the agent group that should own the agent record.
     console.log(await response.json());
     ```
 
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        firstName: "Ada",
+        lastName: "Lovelace",
+        email: "ada@example.com",
+        username: "ada.lovelace",
+        password: "<temporaryPassword>",
+        agentType: "AGENT",
+        agentRank: 12,
+        initLoginBaseState: "AVAILABLE",
+        initLoginBaseStateId: 11786,
+        ghostRnaAction: "AVAILABLE",
+        allowInbound: true,
+        allowOutbound: true,
+        enableSoftphone: true,
+        maxChats: 0
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "firstName": "Ada",
+        "lastName": "Lovelace",
+        "email": "ada@example.com",
+        "username": "ada.lovelace",
+        "password": "<temporaryPassword>",
+        "agentType": "AGENT",
+        "agentRank": 12,
+        "initLoginBaseState": "AVAILABLE",
+        "initLoginBaseStateId": 11786,
+        "ghostRnaAction": "AVAILABLE",
+        "allowInbound": True,
+        "allowOutbound": True,
+        "enableSoftphone": True,
+        "maxChats": 0,
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents",
+        payload,
+    ).json()
+    print(response)
+    ```
+
 ??? example "Response example"
 
     ```json
@@ -211,6 +293,50 @@ Use the account aux-states endpoint to find valid initial-state values. The resp
     console.log(await response.json());
     ```
 
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const response = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents"
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    response = ev.get(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents"
+    ).json()
+    print(response)
+    ```
+
 Use the returned `agentId` when retrieving, updating, or deleting one agent.
 
 ??? example "Response example"
@@ -281,6 +407,50 @@ Use the returned `agentId` when retrieving, updating, or deleting one agent.
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const response = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}"
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    response = ev.get(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}"
+    ).json()
+    print(response)
     ```
 
 ??? example "Response example"
@@ -390,6 +560,74 @@ Retrieve the agent first, update the fields you need to change, and submit the u
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        agentId: 1234567,
+        firstName: "Ada",
+        lastName: "Lovelace",
+        username: "ada.lovelace",
+        agentType: "SUPERVISOR",
+        allowInbound: true,
+        allowOutbound: true,
+        isActive: true
+      };
+
+      const response = await ev.put(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "agentId": 1234567,
+        "firstName": "Ada",
+        "lastName": "Lovelace",
+        "username": "ada.lovelace",
+        "agentType": "SUPERVISOR",
+        "allowInbound": True,
+        "allowOutbound": True,
+        "isActive": True,
+    }
+
+    response = ev.put(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}",
+        payload,
+    ).json()
+    print(response)
     ```
 
 ??? example "Response example"
