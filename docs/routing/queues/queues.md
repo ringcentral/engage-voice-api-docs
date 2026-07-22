@@ -23,6 +23,8 @@ Use the following endpoints to create, list, retrieve, update, and delete queues
 | Delete queue | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}` |
 | Set active state | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/setIsActive` |
 
+SDK examples in this article use JWT authentication. Set `RC_CLIENT_ID`, `RC_CLIENT_SECRET`, and `RC_JWT` in your environment; the SDK wrapper handles the RingCentral login and RingCX token exchange. For JavaScript, install `ringcentral-engage-voice-client` and `dotenv`. For Python, install `ringcentral_engage_voice` and `python-dotenv`.
+
 ## Create a Queue
 
 Only `gateName` is required to create a queue. Most other queue settings can be added during create or updated later.
@@ -99,6 +101,68 @@ Only `gateName` is required to create a queue. Most other queue settings can be 
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        isActive: true,
+        gateName: "Support Queue",
+        gateDesc: "Inbound support calls",
+        gatePriority: 0,
+        outboundCallerId: "ani"
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "isActive": True,
+        "gateName": "Support Queue",
+        "gateDesc": "Inbound support calls",
+        "gatePriority": 0,
+        "outboundCallerId": "ani",
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates",
+        payload,
+    ).json()
+    print(response)
     ```
 
 ??? example "Response example"
@@ -208,6 +272,60 @@ Use the list response to discover queue IDs before retrieving or updating a spec
 
     console.log(await queues.json());
     console.log(await queue.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const queues = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates"
+      );
+      console.log(queues.data);
+
+      const queue = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}"
+      );
+      console.log(queue.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    queues = ev.get(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates"
+    ).json()
+    print(queues)
+
+    queue = ev.get(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}"
+    ).json()
+    print(queue)
     ```
 
 ??? example "List response example"
@@ -328,6 +446,68 @@ Retrieve the queue first, update the fields you need to change, and submit the u
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        gateId: 72992,
+        gateName: "Support Queue",
+        gateDesc: "Inbound support and account questions",
+        isActive: true,
+        gatePriority: 0
+      };
+
+      const response = await ev.put(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "gateId": 72992,
+        "gateName": "Support Queue",
+        "gateDesc": "Inbound support and account questions",
+        "isActive": True,
+        "gatePriority": 0,
+    }
+
+    response = ev.put(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}",
+        payload,
+    ).json()
+    print(response)
     ```
 
 ??? example "Response example"
