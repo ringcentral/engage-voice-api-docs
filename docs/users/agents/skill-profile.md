@@ -4,12 +4,48 @@ Skill profiles assign queue-group skills to agents. Use them when calls should r
 
 ## Workflow
 
-1. Create the group skill under a queue group.
-2. Reference the skill from a queue event, such as a route-to-agent event.
-3. Create a skill profile for the agent.
-4. Assign one or more group skills to the agent's skill profile.
+1. Identify the queue group, queue, agent group, and agent.
+2. Confirm that the agent is assigned to the queue that will receive the call.
+3. Create the group skill under the same queue group as the queue.
+4. Find or create the queue's Route to Agent event.
+5. Add the group skill to that Route to Agent event.
+6. Create a skill profile for the agent.
+7. Assign the same group skill to the agent's skill profile.
+8. Place a test call to a DNIS assigned to the queue and confirm that the call routes to an available agent with the matching skill.
 
-The agent must also have access to the queue where the skill is used.
+Skill routing only works when the queue event and the agent skill profile reference the same group skill. The agent must also have access to the queue where the skill is used.
+
+## Before You Start
+
+Before configuring skill routing, collect the following identifiers:
+
+| Identifier | Description |
+| --- | --- |
+| `accountId` | RingCX account ID. |
+| `gateGroupId` | Queue group ID. Group skills are created under this queue group. |
+| `gateId` | Queue ID for the inbound queue that should use skill routing. |
+| `agentGroupId` | Agent group ID for the target agent. |
+| `agentId` | Agent ID for the user who should receive matching calls. |
+
+Use these queue assignment endpoints to verify that the target agent can receive calls from the queue:
+
+| Operation | Method and path |
+| --- | --- |
+| List agents assigned to a queue | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/assignedAgents` |
+| Assign agents to a queue | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/assignAgents` |
+
+## Queue Event Basics
+
+Queue events define what happens after a call enters a queue. Each event has a `queueEvent` value that stores one or more semicolon-delimited event tokens.
+
+For skill routing, update the queue's Route to Agent event:
+
+| Token | Purpose |
+| --- | --- |
+| `ROUTE-TO-AGENT:TRUE;` | Routes the caller to an available agent. |
+| `SKILL-ROUTE:{skillId};` | Limits that route to agents whose skill profile includes the specified group skill. |
+
+Retrieve the queue events for the queue and look for the event whose `queueEvent` value contains `ROUTE-TO-AGENT`. When you update an existing event, preserve any existing event settings that are still needed for the queue and add the `SKILL-ROUTE:{skillId};` token.
 
 ## Create a Group Skill
 
@@ -106,7 +142,14 @@ See [Group Skills](../../routing/queues/group-skills.md) for the full group-skil
 
 ## Add the Skill to Queue Routing
 
-Queue events can reference a group skill with a `SKILL-ROUTE:{skillId}` token in the event behavior.
+First, retrieve the queue events for the queue:
+
+```http
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
+Authorization: Bearer <ringcxAccessToken>
+```
+
+Find the Route to Agent event, then update that event so its `queueEvent` value includes both `ROUTE-TO-AGENT:TRUE;` and `SKILL-ROUTE:{skillId};`.
 
 === "HTTP"
 
@@ -118,7 +161,7 @@ Queue events can reference a group skill with a `SKILL-ROUTE:{skillId}` token in
     {
       "eventId": 67882,
       "eventRank": 10,
-      "queueEvent": "PLAY-AUDIO:holdmusic;SKILL-ROUTE:1455;",
+      "queueEvent": "ROUTE-TO-AGENT:TRUE;SKILL-ROUTE:1455;",
       "eventDuration": 120,
       "enableDtmf": 0
     }
@@ -137,7 +180,7 @@ Queue events can reference a group skill with a `SKILL-ROUTE:{skillId}` token in
     payload = {
         "eventId": 67882,
         "eventRank": 10,
-        "queueEvent": "PLAY-AUDIO:holdmusic;SKILL-ROUTE:1455;",
+        "queueEvent": "ROUTE-TO-AGENT:TRUE;SKILL-ROUTE:1455;",
         "eventDuration": 120,
         "enableDtmf": 0,
     }
@@ -165,7 +208,7 @@ Queue events can reference a group skill with a `SKILL-ROUTE:{skillId}` token in
     const payload = {
       eventId: 67882,
       eventRank: 10,
-      queueEvent: "PLAY-AUDIO:holdmusic;SKILL-ROUTE:1455;",
+      queueEvent: "ROUTE-TO-AGENT:TRUE;SKILL-ROUTE:1455;",
       eventDuration: 120,
       enableDtmf: 0
     };
@@ -192,7 +235,7 @@ Queue events can reference a group skill with a `SKILL-ROUTE:{skillId}` token in
     {
       "eventId": 67882,
       "eventRank": 10,
-      "queueEvent": "PLAY-AUDIO:holdmusic;SKILL-ROUTE:1455;",
+      "queueEvent": "ROUTE-TO-AGENT:TRUE;SKILL-ROUTE:1455;",
       "eventDuration": 120,
       "enableDtmf": 0
     }
@@ -413,3 +456,16 @@ Retrieve the profile after assignment to verify that the expected skills are pre
       "chatGroupSkills": []
     }
     ```
+
+## Validate Skill Routing
+
+Before sending production traffic to the queue, verify the complete route:
+
+| Check | How to verify |
+| --- | --- |
+| Agent queue access | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/assignedAgents` includes the target `agentId`. |
+| Queue routing event | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}` returns a Route to Agent event whose `queueEvent` includes `ROUTE-TO-AGENT:TRUE;SKILL-ROUTE:{skillId};`. |
+| Agent skill profile | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/skillProfiles/{skillProfileId}` includes the same `skillId` in `gateGroupSkills`. |
+| Agent state | The agent is logged in, available, and able to receive inbound queue calls. |
+
+Place a test call to a DNIS assigned to the queue. If the call does not route to the expected agent, review the queue event rank, the agent's queue assignment, the agent's skill profile, the agent's availability state, and any other available agents that share the same skill.
