@@ -26,6 +26,16 @@ The first thing we need to do is create an app in the RingCentral Developer Port
 
 When you are done, you will be taken to the app's dashboard. Make note of the Client ID and Client Secret. We will be using those momentarily.
 
+## Configure SDK credentials
+
+The JavaScript and Python samples use JWT authentication and load credentials from a `.env` file. Create a `.env` file in the directory where you run the sample, or update the dotenv path in the sample:
+
+```text
+RC_CLIENT_ID=<clientId>
+RC_CLIENT_SECRET=<clientSecret>
+RC_JWT=<jwt>
+```
+
 ## Create a queue group for a RingCX account
 
 === "HTTP"
@@ -45,12 +55,12 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
     ### Install RingCX SDK wrapper for Node JS
 
     ```bash
-    $ npm install ringcentral-engage-voice-client
+    $ npm install ringcentral-engage-voice-client dotenv
     ```
 
     ### Create and edit create-queue-group.js
 
-    Create a file called <tt>create-queue-group.js</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
+    Create a file called <tt>create-queue-group.js</tt>. The sample reads `RC_CLIENT_ID`, `RC_CLIENT_SECRET`, and `RC_JWT` from your `.env` file.
 
     ```javascript
     {!> code-samples/routing/quick-start.js !}
@@ -74,7 +84,7 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
 
     ### Create and Edit create-queue-group.php
 
-    Create a file called <tt>create-queue-group.php</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
+    Create a file called <tt>create-queue-group.php</tt>. The sample reads `RC_CLIENT_ID`, `RC_CLIENT_SECRET`, and `RC_JWT` from your `.env` file.
 
     ```php
     {!> code-samples/routing/quick-start.php !}
@@ -85,7 +95,7 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
     You are almost done. Now run your script.
 
     ```bash
-    $ php create-dial-group.php
+    $ php create-queue-group.php
     ```
 
 === "Python"
@@ -93,12 +103,12 @@ When you are done, you will be taken to the app's dashboard. Make note of the Cl
     ### Install RingCX SDK Wrapper for Python
 
     ```bash
-    pip install ringcentral_engage_voice
+    pip3 install ringcentral_engage_voice python-dotenv
     ```
 
     ### Create and Edit create-queue-group.py
 
-    Create a file called <tt>create-queue-group.py</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
+    Create a file called <tt>create-queue-group.py</tt>. The sample reads `RC_CLIENT_ID`, `RC_CLIENT_SECRET`, and `RC_JWT` from your `.env` file.
 
     ```python
     {!> code-samples/routing/quick-start.py !}
