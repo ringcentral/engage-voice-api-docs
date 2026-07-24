@@ -34,6 +34,32 @@ Use these queue assignment endpoints to verify that the target agent can receive
 | List agents assigned to a queue | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/assignedAgents` |
 | Assign agents to a queue | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/assignAgents` |
 
+## SDK Setup
+
+SDK examples in this article use JWT authentication and load credentials from environment variables.
+
+=== "JavaScript"
+
+    ```bash
+    npm install ringcentral-engage-voice-client dotenv
+    ```
+
+=== "Python"
+
+    ```bash
+    pip3 install ringcentral_engage_voice python-dotenv
+    ```
+
+Create a `.env` file in the directory where you run the sample:
+
+```text
+RC_CLIENT_ID=<clientId>
+RC_CLIENT_SECRET=<clientSecret>
+RC_JWT=<jwt>
+```
+
+The SDK wrapper reads these values, signs in with RingCentral, and exchanges the RingCentral access token for a RingCX access token before calling RingCX APIs.
+
 ## Queue Event Basics
 
 Queue events define what happens after a call enters a queue. Each event has a `queueEvent` value that stores one or more semicolon-delimited event tokens.
@@ -58,13 +84,11 @@ Group skills are managed under queue groups.
     Authorization: Bearer <ringcxAccessToken>
     Content-Type: application/json
 
-    [
-      {
-        "skillName": "Spanish Language",
-        "skillDesc": "Spanish-language support",
-        "active": true
-      }
-    ]
+    {
+      "skillName": "Spanish Language",
+      "skillDesc": "Spanish-language support",
+      "active": true
+    }
     ```
 
 === "Python"
@@ -75,13 +99,11 @@ Group skills are managed under queue groups.
     account_id = "<accountId>"
     gate_group_id = "<gateGroupId>"
     access_token = "<ringcxAccessToken>"
-    payload = [
-        {
-            "skillName": "Spanish Language",
-            "skillDesc": "Spanish-language support",
-            "active": True,
-        }
-    ]
+    payload = {
+        "skillName": "Spanish Language",
+        "skillDesc": "Spanish-language support",
+        "active": True,
+    }
 
     response = requests.post(
         f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/skills",
@@ -101,13 +123,11 @@ Group skills are managed under queue groups.
     const accountId = "<accountId>";
     const gateGroupId = "<gateGroupId>";
     const accessToken = "<ringcxAccessToken>";
-    const payload = [
-      {
-        skillName: "Spanish Language",
-        skillDesc: "Spanish-language support",
-        active: true
-      }
-    ];
+    const payload = {
+      skillName: "Spanish Language",
+      skillDesc: "Spanish-language support",
+      active: true
+    };
 
     const response = await fetch(
       `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/skills`,
@@ -125,17 +145,73 @@ Group skills are managed under queue groups.
     console.log(await response.json());
     ```
 
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        skillName: "Spanish Language",
+        skillDesc: "Spanish-language support",
+        active: true
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "skillName": "Spanish Language",
+        "skillDesc": "Spanish-language support",
+        "active": True,
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills",
+        payload,
+    ).json()
+    print(response)
+    ```
+
 ??? example "Response example"
 
     ```json
-    [
-      {
-        "skillId": 1455,
-        "skillName": "Spanish Language",
-        "skillDesc": "Spanish-language support",
-        "active": true
-      }
-    ]
+    {
+      "skillId": 1455,
+      "skillName": "Spanish Language",
+      "skillDesc": "Spanish-language support",
+      "active": true
+    }
     ```
 
 See [Group Skills](../../routing/queues/group-skills.md) for the full group-skill workflow.
@@ -227,6 +303,68 @@ Find the Route to Agent event, then update that event so its `queueEvent` value 
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        eventId: 67882,
+        eventRank: 10,
+        queueEvent: "ROUTE-TO-AGENT:TRUE;SKILL-ROUTE:1455;",
+        eventDuration: 120,
+        enableDtmf: 0
+      };
+
+      const response = await ev.put(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "eventId": 67882,
+        "eventRank": 10,
+        "queueEvent": "ROUTE-TO-AGENT:TRUE;SKILL-ROUTE:1455;",
+        "eventDuration": 120,
+        "enableDtmf": 0,
+    }
+
+    response = ev.put(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}",
+        payload,
+    ).json()
+    print(response)
     ```
 
 ??? example "Response example"
@@ -351,6 +489,80 @@ Find the Route to Agent event, then update that event so its `queueEvent` value 
     console.log(await response.json());
     ```
 
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        profileName: "Spanish Speaker",
+        profileDesc: "Routes Spanish-language calls to this agent",
+        isDefault: false,
+        gateGroupSkills: [
+          {
+            skillId: 1455,
+            skillName: "Spanish Language",
+            active: true
+          }
+        ],
+        chatGroupSkills: []
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/skillProfiles",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "profileName": "Spanish Speaker",
+        "profileDesc": "Routes Spanish-language calls to this agent",
+        "isDefault": False,
+        "gateGroupSkills": [
+            {
+                "skillId": 1455,
+                "skillName": "Spanish Language",
+                "active": True,
+            }
+        ],
+        "chatGroupSkills": [],
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/skillProfiles",
+        payload,
+    ).json()
+    print(response)
+    ```
+
 ??? example "Response example"
 
     ```json
@@ -436,6 +648,50 @@ Find the Route to Agent event, then update that event so its `queueEvent` value 
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const response = await ev.put(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/skillProfiles/{skillProfileId}/skills/{skillId}"
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    response = ev.put(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/skillProfiles/{skillProfileId}/skills/{skillId}"
+    ).json()
+    print(response)
     ```
 
 Retrieve the profile after assignment to verify that the expected skills are present.
