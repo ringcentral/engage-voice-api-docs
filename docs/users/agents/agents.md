@@ -266,6 +266,30 @@ Create the agent under the agent group that should own the agent record.
 
 Use the account aux-states endpoint to find valid initial-state values. The response includes `stateId` and `agentAuxState`; use those values for `initLoginBaseStateId` and `initLoginBaseState`.
 
+### Initial State Values
+
+Use `active=1` to return active aux states for the account.
+
+```http
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/auxStates?active=1
+Authorization: Bearer <ringcxAccessToken>
+Accept: application/json
+```
+
+```json
+[
+  {
+    "stateId": 11786,
+    "agentAuxState": "AVAILABLE",
+    "baseAgentState": {
+      "colKey": "AVAILABLE"
+    },
+    "isActive": true,
+    "isAgentSelectable": true
+  }
+]
+```
+
 ## Retrieve Agents
 
 === "HTTP"
@@ -676,25 +700,10 @@ Use these endpoints to find IDs referenced by agent configuration.
 | Lookup | Method and path |
 | --- | --- |
 | Agent groups | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups` |
-| Initial state and aux-state IDs | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/auxStates?activeOnly=true` |
+| Initial state and aux-state IDs | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/auxStates?active=1` |
 | Dial groups | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/withChildren` |
 | Queue groups and queues | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/withChildren` |
 | Agent access to a queue | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/gateGroups/{gateGroupId}/gates/{gateId}` |
-
-??? example "Aux-state response example"
-
-    ```json
-    [
-      {
-        "stateId": 11786,
-        "agentAuxState": "AVAILABLE",
-        "baseAgentState": {
-          "colKey": "AVAILABLE"
-        },
-        "isActive": true
-      }
-    ]
-    ```
 
 ## Delete an Agent
 
