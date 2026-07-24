@@ -12,7 +12,31 @@ Agent groups organize agents into administrative groups. An agent must belong to
 | Update agent group | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}` |
 | Delete agent group | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}` |
 
-SDK examples in this article use JWT authentication. Set `RC_CLIENT_ID`, `RC_CLIENT_SECRET`, and `RC_JWT` in your environment; the SDK wrapper handles the RingCentral login and RingCX token exchange. For JavaScript, install `ringcentral-engage-voice-client` and `dotenv`. For Python, install `ringcentral_engage_voice` and `python-dotenv`.
+## SDK Setup
+
+SDK examples in this article use JWT authentication and load credentials from environment variables.
+
+=== "JavaScript"
+
+    ```bash
+    npm install ringcentral-engage-voice-client dotenv
+    ```
+
+=== "Python"
+
+    ```bash
+    pip3 install ringcentral_engage_voice python-dotenv
+    ```
+
+Create a `.env` file in the directory where you run the sample:
+
+```text
+RC_CLIENT_ID=<clientId>
+RC_CLIENT_SECRET=<clientSecret>
+RC_JWT=<jwt>
+```
+
+The SDK wrapper reads these values, signs in with RingCentral, and exchanges the RingCentral access token for a RingCX access token before calling RingCX APIs.
 
 ## Create an Agent Group
 
