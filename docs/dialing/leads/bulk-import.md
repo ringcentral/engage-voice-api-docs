@@ -2,7 +2,31 @@
 
 Use the lead loader APIs to add leads to an outbound campaign. RingCX supports direct JSON loading and a preview/process flow for uploaded files.
 
-SDK examples in this article use JWT authentication. Set `RC_CLIENT_ID`, `RC_CLIENT_SECRET`, and `RC_JWT` in your environment; the SDK wrapper handles the RingCentral login and RingCX token exchange. For JavaScript, install `ringcentral-engage-voice-client` and `dotenv`. For Python, install `ringcentral_engage_voice` and `python-dotenv`.
+## SDK Setup
+
+SDK examples in this article use JWT authentication and load credentials from environment variables.
+
+=== "JavaScript"
+
+    ```bash
+    npm install ringcentral-engage-voice-client dotenv
+    ```
+
+=== "Python"
+
+    ```bash
+    pip3 install ringcentral_engage_voice python-dotenv
+    ```
+
+Create a `.env` file in the directory where you run the sample:
+
+```text
+RC_CLIENT_ID=<clientId>
+RC_CLIENT_SECRET=<clientSecret>
+RC_JWT=<jwt>
+```
+
+The SDK wrapper reads these values, signs in with RingCentral, and exchanges the RingCentral access token for a RingCX access token before calling RingCX APIs.
 
 ## Find the Campaign
 
@@ -80,6 +104,13 @@ Before loading leads, identify the target campaign:
 
 Use the returned `campaignId` in the lead loader path.
 
+## Choose an Import Method
+
+| Method | Use when | Endpoint |
+| --- | --- | --- |
+| Direct lead loading | Your integration already has structured lead records and can send them as JSON. | `POST /voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct` |
+| File preview and process | Users upload a CSV, Excel, pipe-delimited, or tab-delimited file and need to map file columns before loading. | `POST /voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/preview`, then `POST /voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process` |
+
 ## Direct Lead Loading
 
 Direct loading sends leads as JSON and is the simplest option when your integration already has structured lead data.
@@ -101,9 +132,16 @@ Direct loading sends leads as JSON and is the simplest option when your integrat
         {
           "externId": "lead-1001",
           "leadPhone": "4155550100",
+          "leadPhoneE164": "+14155550100",
           "firstName": "Ada",
           "lastName": "Lovelace",
-          "state": "CA"
+          "email": "ada@example.com",
+          "state": "CA",
+          "zip": "94105",
+          "leadPriority": 5,
+          "maxPasses": 3,
+          "callerId": "4155550199",
+          "auxData1": "renewal"
         }
       ]
     }
@@ -127,9 +165,16 @@ Direct loading sends leads as JSON and is the simplest option when your integrat
             {
                 "externId": "lead-1001",
                 "leadPhone": "4155550100",
+                "leadPhoneE164": "+14155550100",
                 "firstName": "Ada",
                 "lastName": "Lovelace",
+                "email": "ada@example.com",
                 "state": "CA",
+                "zip": "94105",
+                "leadPriority": 5,
+                "maxPasses": 3,
+                "callerId": "4155550199",
+                "auxData1": "renewal",
             }
         ],
     }
@@ -162,9 +207,16 @@ Direct loading sends leads as JSON and is the simplest option when your integrat
         {
           externId: "lead-1001",
           leadPhone: "4155550100",
+          leadPhoneE164: "+14155550100",
           firstName: "Ada",
           lastName: "Lovelace",
-          state: "CA"
+          email: "ada@example.com",
+          state: "CA",
+          zip: "94105",
+          leadPriority: 5,
+          maxPasses: 3,
+          callerId: "4155550199",
+          auxData1: "renewal"
         }
       ]
     };
@@ -209,9 +261,16 @@ Direct loading sends leads as JSON and is the simplest option when your integrat
           {
             externId: "lead-1001",
             leadPhone: "4155550100",
+            leadPhoneE164: "+14155550100",
             firstName: "Ada",
             lastName: "Lovelace",
-            state: "CA"
+            email: "ada@example.com",
+            state: "CA",
+            zip: "94105",
+            leadPriority: 5,
+            maxPasses: 3,
+            callerId: "4155550199",
+            auxData1: "renewal"
           }
         ]
       };
@@ -251,9 +310,16 @@ Direct loading sends leads as JSON and is the simplest option when your integrat
             {
                 "externId": "lead-1001",
                 "leadPhone": "4155550100",
+                "leadPhoneE164": "+14155550100",
                 "firstName": "Ada",
                 "lastName": "Lovelace",
+                "email": "ada@example.com",
                 "state": "CA",
+                "zip": "94105",
+                "leadPriority": 5,
+                "maxPasses": 3,
+                "callerId": "4155550199",
+                "auxData1": "renewal",
             }
         ],
     }
@@ -265,9 +331,30 @@ Direct loading sends leads as JSON and is the simplest option when your integrat
     print(response)
     ```
 
+### Direct Load Response
+
+The direct load response summarizes accepted, inserted, converted, rejected, and DNC-affected leads.
+
+```json
+{
+  "leadsSupplied": 1,
+  "leadsAccepted": 1,
+  "leadsInserted": 1,
+  "leadsConverted": 1,
+  "dncReturnedCount": 0,
+  "failedAgentAssignment": 0,
+  "listState": "ACTIVE",
+  "timeZoneOption": "NOT_APPLICABLE",
+  "processingResult": "OK",
+  "rejectedRows": []
+}
+```
+
 ## File Preview and Process
 
 For file-based imports, preview the file first so RingCX can identify columns and return mapping information. Then submit the process request with the selected mapping.
+
+The `pageColumnMappings` values are zero-based column indexes from the selected preview page. For example, if the preview shows `LEAD_PHONE` in the first column, map `LEAD_PHONE` to `0`.
 
 === "HTTP"
 
@@ -275,12 +362,31 @@ For file-based imports, preview the file first so RingCX can identify columns an
     POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/preview?fileType=COMMA
     Authorization: Bearer <ringcxAccessToken>
     Content-Type: multipart/form-data
+
+    file=@leads.csv
     ```
 
     ```http
     POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process
     Authorization: Bearer <ringcxAccessToken>
     Content-Type: application/json
+
+    {
+      "transactionId": "<transactionId>",
+      "description": "Renewal leads",
+      "fileType": "COMMA",
+      "fileContainsHeaders": true,
+      "duplicateHandling": "REMOVE_FROM_LIST",
+      "listState": "ACTIVE",
+      "timeZoneOption": "NOT_APPLICABLE",
+      "pageNumber": 1,
+      "pageColumnMappings": {
+        "LEAD_PHONE": 0,
+        "EXTERN_ID": 1,
+        "FIRST_NAME": 2,
+        "LAST_NAME": 3
+      }
+    }
     ```
 
 === "Python"
@@ -301,9 +407,10 @@ For file-based imports, preview the file first so RingCX can identify columns an
             files={"file": leads_file},
         )
     preview.raise_for_status()
+    preview_body = preview.json()
 
     process_payload = {
-        "transactionId": "<transactionId>",
+        "transactionId": preview_body["transactionId"],
         "description": "Renewal leads",
         "fileType": "COMMA",
         "fileContainsHeaders": True,
@@ -312,10 +419,10 @@ For file-based imports, preview the file first so RingCX can identify columns an
         "timeZoneOption": "NOT_APPLICABLE",
         "pageNumber": 1,
         "pageColumnMappings": {
-            "LEAD_PHONE": 1,
-            "EXTERN_ID": 2,
-            "FIRST_NAME": 3,
-            "LAST_NAME": 4,
+            "LEAD_PHONE": 0,
+            "EXTERN_ID": 1,
+            "FIRST_NAME": 2,
+            "LAST_NAME": 3,
         },
     }
 
@@ -328,7 +435,7 @@ For file-based imports, preview the file first so RingCX can identify columns an
         json=process_payload,
     )
     process.raise_for_status()
-    print(process.json())
+    print(f"Lead file processing accepted: {process.status_code}")
     ```
 
 === "JavaScript"
@@ -352,9 +459,10 @@ For file-based imports, preview the file first so RingCX can identify columns an
       }
     );
     if (!preview.ok) throw new Error(await preview.text());
+    const previewBody = await preview.json();
 
     const processPayload = {
-      transactionId: "<transactionId>",
+      transactionId: previewBody.transactionId,
       description: "Renewal leads",
       fileType: "COMMA",
       fileContainsHeaders: true,
@@ -363,10 +471,10 @@ For file-based imports, preview the file first so RingCX can identify columns an
       timeZoneOption: "NOT_APPLICABLE",
       pageNumber: 1,
       pageColumnMappings: {
-        LEAD_PHONE: 1,
-        EXTERN_ID: 2,
-        FIRST_NAME: 3,
-        LAST_NAME: 4
+        LEAD_PHONE: 0,
+        EXTERN_ID: 1,
+        FIRST_NAME: 2,
+        LAST_NAME: 3
       }
     };
 
@@ -382,8 +490,36 @@ For file-based imports, preview the file first so RingCX can identify columns an
       }
     );
     if (!process.ok) throw new Error(await process.text());
-    console.log(await process.json());
+    console.log(`Lead file processing accepted: ${process.status}`);
     ```
+
+### Preview Response
+
+The preview response includes the `transactionId` required by the process request, the mapping columns supported by the loader, and sample rows for each preview page.
+
+```json
+{
+  "transactionId": "8c7406f8-31cf-4f6a-a5a4-7a6b25e35f52",
+  "mappingColumns": [
+    "LEAD_PHONE",
+    "EXTERN_ID",
+    "FIRST_NAME",
+    "LAST_NAME"
+  ],
+  "pagePreviews": [
+    {
+      "pageNumber": 1,
+      "pageName": "leads.csv",
+      "rowData": [
+        ["phone", "external_id", "first_name", "last_name"],
+        ["4155550100", "lead-1001", "Ada", "Lovelace"]
+      ]
+    }
+  ]
+}
+```
+
+The process request returns an accepted or created status after RingCX accepts the file for processing.
 
 ## Common Fields
 
@@ -394,8 +530,15 @@ For file-based imports, preview the file first so RingCX can identify columns an
 | `externId` | External lead identifier from your source system. |
 | `leadPhone` | Primary lead phone number. |
 | `leadPhoneE164` | E.164 primary phone number, when required for the account mode. |
-| `duplicateHandling` | How RingCX handles duplicate leads during load. |
-| `timeZoneOption` | How RingCX derives or applies lead time zones. |
+| `email`, `firstName`, `lastName`, `state`, `zip` | Standard contact fields that can be stored with each lead. |
+| `leadPriority` | Numeric priority used by outbound dialing when prioritization is enabled. |
+| `maxPasses` | Maximum number of dialing passes for the lead. |
+| `callerId` | Caller ID to use for the lead when the campaign supports lead-level caller ID. |
+| `auxData1` through `auxData5` | Custom fields for campaign- or integration-specific lead data. |
+| `duplicateHandling` | Duplicate behavior during load. Values include `RETAIN_ALL`, `REMOVE_ALL_EXISTING`, and `REMOVE_FROM_LIST`. |
+| `timeZoneOption` | How RingCX derives or applies lead time zones. Values include `NPA_NXX`, `ZIPCODE`, `EXPLICIT`, `COUNTRY`, and `NOT_APPLICABLE`. |
+| `fileType` | File format for preview/process imports. Values are `EXCEL`, `PIPE`, `COMMA`, and `TAB`. |
+| `pageColumnMappings` | Map of RingCX lead fields to zero-based column indexes from the preview response. |
 
 ## Persona Phone Leads
 

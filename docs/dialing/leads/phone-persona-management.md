@@ -521,7 +521,7 @@ The preview response includes phone IDs and labels:
 }
 ```
 
-When you process the upload, use `additionalPhoneMappings` to map each persona phone ID to the source column index from the uploaded file.
+When you process the upload, use `additionalPhoneMappings` to map each persona phone ID to the source column index from the uploaded file. The `pageColumnMappings` and `additionalPhoneMappings` values are zero-based column indexes from the selected preview page.
 
 === "HTTP"
 
@@ -540,14 +540,14 @@ When you process the upload, use `additionalPhoneMappings` to map each persona p
       "timeZoneOption": "NOT_APPLICABLE",
       "pageNumber": 1,
       "pageColumnMappings": {
-        "LEAD_PHONE": 1,
-        "EXTERN_ID": 2,
-        "FIRST_NAME": 3,
-        "LAST_NAME": 4
+        "LEAD_PHONE": 0,
+        "EXTERN_ID": 1,
+        "FIRST_NAME": 2,
+        "LAST_NAME": 3
       },
       "additionalPhoneMappings": {
-        "2": 5,
-        "3": 6
+        "2": 4,
+        "3": 5
       }
     }
     ```
@@ -570,14 +570,14 @@ When you process the upload, use `additionalPhoneMappings` to map each persona p
         "timeZoneOption": "NOT_APPLICABLE",
         "pageNumber": 1,
         "pageColumnMappings": {
-            "LEAD_PHONE": 1,
-            "EXTERN_ID": 2,
-            "FIRST_NAME": 3,
-            "LAST_NAME": 4,
+            "LEAD_PHONE": 0,
+            "EXTERN_ID": 1,
+            "FIRST_NAME": 2,
+            "LAST_NAME": 3,
         },
         "additionalPhoneMappings": {
-            "2": 5,
-            "3": 6,
+            "2": 4,
+            "3": 5,
         },
     }
 
@@ -590,7 +590,7 @@ When you process the upload, use `additionalPhoneMappings` to map each persona p
         json=payload,
     )
     response.raise_for_status()
-    print(response.json())
+    print(f"Lead file processing accepted: {response.status_code}")
     ```
 
 === "JavaScript"
@@ -609,14 +609,14 @@ When you process the upload, use `additionalPhoneMappings` to map each persona p
       timeZoneOption: "NOT_APPLICABLE",
       pageNumber: 1,
       pageColumnMappings: {
-        LEAD_PHONE: 1,
-        EXTERN_ID: 2,
-        FIRST_NAME: 3,
-        LAST_NAME: 4
+        LEAD_PHONE: 0,
+        EXTERN_ID: 1,
+        FIRST_NAME: 2,
+        LAST_NAME: 3
       },
       additionalPhoneMappings: {
-        "2": 5,
-        "3": 6
+        "2": 4,
+        "3": 5
       }
     };
 
@@ -633,10 +633,10 @@ When you process the upload, use `additionalPhoneMappings` to map each persona p
     );
 
     if (!response.ok) throw new Error(await response.text());
-    console.log(await response.json());
+    console.log(`Lead file processing accepted: ${response.status}`);
     ```
 
-In this example, phone ID `2` is loaded from column `5`, and phone ID `3` is loaded from column `6`.
+In this example, phone ID `2` is loaded from the fifth column, and phone ID `3` is loaded from the sixth column.
 
 ## End-to-End Flow
 
