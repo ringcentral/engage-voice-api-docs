@@ -264,6 +264,68 @@ Use `campaignIds` when searching across more than one campaign. Use `campaignId`
     console.log(await response.json());
     ```
 
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        phoneList: [
+          "4155550100",
+          "4155550101"
+        ],
+        campaignIds: [12345]
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearchByPhoneList",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "phoneList": [
+            "4155550100",
+            "4155550101",
+        ],
+        "campaignIds": [12345],
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearchByPhoneList",
+        payload,
+    ).json()
+    print(response)
+    ```
+
 ## Search Metadata
 
 Use metadata endpoints to populate filters before building a search request.
@@ -334,6 +396,60 @@ Use metadata endpoints to populate filters before building a search request.
 
     console.log(await leadStates.json());
     console.log(await systemDispositions.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const leadStates = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/leadStates"
+      );
+      const systemDispositions = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/systemDispositions"
+      );
+
+      console.log(leadStates.data);
+      console.log(systemDispositions.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    lead_states = ev.get(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/leadStates"
+    ).json()
+    system_dispositions = ev.get(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/systemDispositions"
+    ).json()
+
+    print(lead_states)
+    print(system_dispositions)
     ```
 
 ## Results

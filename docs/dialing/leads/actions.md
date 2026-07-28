@@ -540,6 +540,31 @@ Use `MOVE_TO_CAMPAIGN` when leads should be moved from one campaign to another c
 | `CREATE_COPY_SETTING` | Use `false` to move the original lead, `true` to create a standard copy, or `TRANSITION` to create a transition copy. |
 | `DUPLICATE_ACTION_SETTING` | Use `MOVE` to allow duplicates in the target list or `IGNORE` to leave duplicates in the original list. |
 
+### Move Leads to an Existing List
+
+To move leads into an existing lead list, first retrieve the target campaign's lists and identify the `listId` to use.
+
+```http
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}/lists
+Authorization: Bearer <ringcxAccessToken>
+Accept: application/json
+```
+
+Then use that `listId` as `LIST_ID` in the `MOVE_TO_CAMPAIGN` action. Omit `LIST_NAME` because RingCX should use the existing list instead of creating a new one.
+
+```json
+{
+  "leadActionParams": {
+    "paramMap": {
+      "CAMPAIGN_ID": 67890,
+      "LIST_ID": 3333,
+      "CREATE_COPY_SETTING": "false",
+      "DUPLICATE_ACTION_SETTING": "MOVE"
+    }
+  }
+}
+```
+
 ## Safety
 
 Actions such as `DELETE_LEADS`, `CANCEL_LEADS`, and `MOVE_TO_CAMPAIGN` can affect live dialing. Test search criteria first and confirm the selected leads before applying an action.

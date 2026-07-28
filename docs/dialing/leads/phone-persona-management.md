@@ -27,6 +27,32 @@ Before you load persona-based phone numbers:
 
 The campaign calling configuration is selected when the campaign is created. Do not plan to switch an existing campaign between `SIMPLE` and `STRATEGIC` later.
 
+## SDK Setup
+
+SDK examples in this article use JWT authentication and load credentials from environment variables.
+
+=== "JavaScript"
+
+    ```bash
+    npm install ringcentral-engage-voice-client dotenv
+    ```
+
+=== "Python"
+
+    ```bash
+    pip3 install ringcentral_engage_voice python-dotenv
+    ```
+
+Create a `.env` file in the directory where you run the sample:
+
+```text
+RC_CLIENT_ID=<clientId>
+RC_CLIENT_SECRET=<clientSecret>
+RC_JWT=<jwt>
+```
+
+The SDK wrapper reads these values, signs in with RingCentral, and exchanges the RingCentral access token for a RingCX access token before calling RingCX APIs.
+
 ## Configure Phone Personas
 
 Use the persona phone configuration APIs to define the additional phone labels available for an account.
@@ -94,6 +120,62 @@ Use the persona phone configuration APIs to define the additional phone labels a
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        phoneId: 2,
+        phoneLabel: "Mobile Phone"
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/persona-phone-config",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "phoneId": 2,
+        "phoneLabel": "Mobile Phone",
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/persona-phone-config",
+        payload,
+    ).json()
+    print(response)
     ```
 
 The response returns the account's current persona phone configuration list:
@@ -302,6 +384,126 @@ Set `callingConfiguration` to `STRATEGIC` when you create the campaign. Then inc
     console.log(await response.json());
     ```
 
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        campaignName: "Renewal Outreach",
+        campaignDesc: "Strategic outbound campaign",
+        isActive: 1,
+        startDate: "2026-07-01T07:00:00.000+0000",
+        endDate: "2026-12-31T07:00:00.000+0000",
+        callerId: "4155550123",
+        monSched: "08001700",
+        tueSched: "08001700",
+        wedSched: "08001700",
+        thuSched: "08001700",
+        friSched: "08001700",
+        satSched: "00000000",
+        sunSched: "00000000",
+        callingConfiguration: "STRATEGIC",
+        personaCallSchedules: [
+          {
+            day: "MONDAY",
+            start: "08:00",
+            end: "12:00",
+            callPreferences: [
+              { phoneId: 2, priority: 1 },
+              { phoneId: 1, priority: 2 }
+            ]
+          },
+          {
+            day: "MONDAY",
+            start: "12:01",
+            end: "17:00",
+            callPreferences: [
+              { phoneId: 1, priority: 1 },
+              { phoneId: 2, priority: 2 }
+            ]
+          }
+        ]
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "campaignName": "Renewal Outreach",
+        "campaignDesc": "Strategic outbound campaign",
+        "isActive": 1,
+        "startDate": "2026-07-01T07:00:00.000+0000",
+        "endDate": "2026-12-31T07:00:00.000+0000",
+        "callerId": "4155550123",
+        "monSched": "08001700",
+        "tueSched": "08001700",
+        "wedSched": "08001700",
+        "thuSched": "08001700",
+        "friSched": "08001700",
+        "satSched": "00000000",
+        "sunSched": "00000000",
+        "callingConfiguration": "STRATEGIC",
+        "personaCallSchedules": [
+            {
+                "day": "MONDAY",
+                "start": "08:00",
+                "end": "12:00",
+                "callPreferences": [
+                    {"phoneId": 2, "priority": 1},
+                    {"phoneId": 1, "priority": 2},
+                ],
+            },
+            {
+                "day": "MONDAY",
+                "start": "12:01",
+                "end": "17:00",
+                "callPreferences": [
+                    {"phoneId": 1, "priority": 1},
+                    {"phoneId": 2, "priority": 2},
+                ],
+            },
+        ],
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns",
+        payload,
+    ).json()
+    print(response)
+    ```
+
 Persona call schedules use the following fields:
 
 | Field | Description |
@@ -436,6 +638,94 @@ Add extra phone numbers in `personaPhoneConfig`. The keys in `personaPhoneConfig
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        description: "Renewal leads",
+        dialPriority: "NORMAL",
+        duplicateHandling: "REMOVE_FROM_LIST",
+        listState: "ACTIVE",
+        timeZoneOption: "NOT_APPLICABLE",
+        uploadLeads: [
+          {
+            externId: "lead-1001",
+            leadPhone: "4155550100",
+            leadPhoneE164: "+14155550100",
+            firstName: "Ada",
+            lastName: "Lovelace",
+            personaPhoneConfig: {
+              "Mobile Phone": "+14155550101",
+              "Work Phone": "+14155550102"
+            }
+          }
+        ]
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "description": "Renewal leads",
+        "dialPriority": "NORMAL",
+        "duplicateHandling": "REMOVE_FROM_LIST",
+        "listState": "ACTIVE",
+        "timeZoneOption": "NOT_APPLICABLE",
+        "uploadLeads": [
+            {
+                "externId": "lead-1001",
+                "leadPhone": "4155550100",
+                "leadPhoneE164": "+14155550100",
+                "firstName": "Ada",
+                "lastName": "Lovelace",
+                "personaPhoneConfig": {
+                    "Mobile Phone": "+14155550101",
+                    "Work Phone": "+14155550102",
+                },
+            }
+        ],
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct",
+        payload,
+    ).json()
+    print(response)
     ```
 
 When the campaign uses `STRATEGIC` calling configuration, RingCX stores the persona phone mapping with the lead and uses the current persona call schedule to choose which phone numbers are eligible to dial.
@@ -634,6 +924,96 @@ When you process the upload, use `additionalPhoneMappings` to map each persona p
 
     if (!response.ok) throw new Error(await response.text());
     console.log(`Lead file processing accepted: ${response.status}`);
+    ```
+
+After the preview response returns a `transactionId`, you can submit the process request with the SDK:
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        transactionId: "<transactionId>",
+        description: "Renewal leads",
+        fileType: "COMMA",
+        fileContainsHeaders: true,
+        duplicateHandling: "REMOVE_FROM_LIST",
+        listState: "ACTIVE",
+        timeZoneOption: "NOT_APPLICABLE",
+        pageNumber: 1,
+        pageColumnMappings: {
+          LEAD_PHONE: 0,
+          EXTERN_ID: 1,
+          FIRST_NAME: 2,
+          LAST_NAME: 3
+        },
+        additionalPhoneMappings: {
+          "2": 4,
+          "3": 5
+        }
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "transactionId": "<transactionId>",
+        "description": "Renewal leads",
+        "fileType": "COMMA",
+        "fileContainsHeaders": True,
+        "duplicateHandling": "REMOVE_FROM_LIST",
+        "listState": "ACTIVE",
+        "timeZoneOption": "NOT_APPLICABLE",
+        "pageNumber": 1,
+        "pageColumnMappings": {
+            "LEAD_PHONE": 0,
+            "EXTERN_ID": 1,
+            "FIRST_NAME": 2,
+            "LAST_NAME": 3,
+        },
+        "additionalPhoneMappings": {
+            "2": 4,
+            "3": 5,
+        },
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process",
+        payload,
+    ).json()
+    print(response)
     ```
 
 In this example, phone ID `2` is loaded from the fifth column, and phone ID `3` is loaded from the sixth column.
