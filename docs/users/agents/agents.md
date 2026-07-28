@@ -750,4 +750,46 @@ Use these endpoints to find IDs referenced by agent configuration.
     if (!response.ok) throw new Error(await response.text());
     ```
 
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      await ev.delete(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}"
+      );
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    ev.delete(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}"
+    )
+    ```
+
 Delete an agent only after confirming that the agent is no longer needed for queues, campaigns, reports, or supervisor workflows.
