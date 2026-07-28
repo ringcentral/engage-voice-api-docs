@@ -619,4 +619,46 @@ Use these endpoints when configuring queue fields that reference other resources
     if (!response.ok) throw new Error(await response.text());
     ```
 
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      await ev.delete(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}"
+      );
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    ev.delete(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}"
+    )
+    ```
+
 Delete a queue only after confirming that DNIS assignments, schedules, events, and agent access rules no longer depend on it.
