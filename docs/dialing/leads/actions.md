@@ -336,6 +336,72 @@ Use `DIALER_REFRESH` when campaign lead changes need to be reflected by the dial
     console.log(await response.json());
     ```
 
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        campaignLeadSearchCriteria: {
+          campaignIds: [12345],
+          leadIds: [
+            100000,
+            100001
+          ]
+        }
+      };
+
+      const response = await ev.put(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/actions?leadAction=DELETE_LEADS",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "campaignLeadSearchCriteria": {
+            "campaignIds": [12345],
+            "leadIds": [
+                100000,
+                100001,
+            ]
+        }
+    }
+
+    response = ev.put(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/actions?leadAction=DELETE_LEADS",
+        payload,
+    ).json()
+    print(response)
+    ```
+
 ## Move Leads to Another Campaign
 
 Use `MOVE_TO_CAMPAIGN` when leads should be moved from one campaign to another campaign or lead list.

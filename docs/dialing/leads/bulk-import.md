@@ -102,6 +102,60 @@ Before loading leads, identify the target campaign:
     console.log(await campaigns.json());
     ```
 
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const dialGroups = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/dialGroups"
+      );
+      const campaigns = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns"
+      );
+
+      console.log(dialGroups.data);
+      console.log(campaigns.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    dial_groups = ev.get(
+        "/api/v1/admin/accounts/{accountId}/dialGroups"
+    ).json()
+    campaigns = ev.get(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns"
+    ).json()
+
+    print(dial_groups)
+    print(campaigns)
+    ```
+
 Use the returned `campaignId` in the lead loader path.
 
 ## Choose an Import Method
@@ -491,6 +545,88 @@ The `pageColumnMappings` values are zero-based column indexes from the selected 
     );
     if (!process.ok) throw new Error(await process.text());
     console.log(`Lead file processing accepted: ${process.status}`);
+    ```
+
+After the preview response returns a `transactionId`, you can submit the process request with the SDK:
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        transactionId: "<transactionId>",
+        description: "Renewal leads",
+        fileType: "COMMA",
+        fileContainsHeaders: true,
+        duplicateHandling: "REMOVE_FROM_LIST",
+        listState: "ACTIVE",
+        timeZoneOption: "NOT_APPLICABLE",
+        pageNumber: 1,
+        pageColumnMappings: {
+          LEAD_PHONE: 0,
+          EXTERN_ID: 1,
+          FIRST_NAME: 2,
+          LAST_NAME: 3
+        }
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "transactionId": "<transactionId>",
+        "description": "Renewal leads",
+        "fileType": "COMMA",
+        "fileContainsHeaders": True,
+        "duplicateHandling": "REMOVE_FROM_LIST",
+        "listState": "ACTIVE",
+        "timeZoneOption": "NOT_APPLICABLE",
+        "pageNumber": 1,
+        "pageColumnMappings": {
+            "LEAD_PHONE": 0,
+            "EXTERN_ID": 1,
+            "FIRST_NAME": 2,
+            "LAST_NAME": 3,
+        },
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process",
+        payload,
+    ).json()
+    print(response)
     ```
 
 ### Preview Response

@@ -530,6 +530,50 @@ Assign agents after creating the dial group and enabling outbound calling for th
     console.log(await response.json());
     ```
 
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const response = await ev.put(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/assignAgents"
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    response = ev.put(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/assignAgents"
+    ).json()
+    print(response)
+    ```
+
 The request body is the agent-assignment payload for the dial group. Use the assigned-agents endpoint to verify the result.
 
 === "HTTP"
@@ -579,4 +623,48 @@ The request body is the agent-assignment payload for the dial group. Use the ass
 
     if (!response.ok) throw new Error(await response.text());
     console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const response = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/assignedAgents"
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    response = ev.get(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/assignedAgents"
+    ).json()
+    print(response)
     ```
