@@ -6,141 +6,161 @@ As you get deeper into Agent Scripting, you'll want to customize the agent exper
 
 ## Example
 
-In this example we are going to look up the caller in HubSpot and bring up their HubSpot contact record in the agent script area within an iFrame element. This way, the agent doesn't have to leave the page to view information or update the contact record.
+In this example we are going to look up the caller in HubSpot and bring up their HubSpot contact record in the agent script area within an iframe element. This way, the agent doesn't have to leave the page to view information or update the contact record.
 
 <img class="img-fluid" width="110" src="../../../images/agent-scripting-workflow.png">
 
 As you can see from the workflow, our steps are:
 
-* Retreive Contact - Lookup the contact by telephone number (ANI)
-* Process Response - Find the profile-url in the response body
-* Display HubSpot Page - Using the profile-url in an iFrame, load the contact page.
+* Retrieve Contact - Lookup the contact by telephone number (ANI)
+* Process Response - Build the HubSpot embed URL from the response body
+* Display HubSpot Page - Use the embed URL in an iframe to load the contact page.
 
 Let's go through them one-by-one.
 
 ### Retrieve Contact
 
-The first step is to lookup the contact by telephone number. In this case, we record the incoming number as the ANI (Automatic Number Identification). We will retrieve this contact using the HubSpot API, but we are going to use a proxy through an AWS Lambda function to communicate with HubSpot.
+The first step is to lookup the contact by telephone number. In this case, we record the incoming number as the ANI (Automatic Number Identification). We will retrieve this contact using the HubSpot API, but we are going to use a server-side middleware endpoint, such as an AWS Lambda function, to communicate with HubSpot.
 
 !!! Note
-    While the HubSpot API is CORS-enabled and does support the OPTIONS HTTP method type, the response does not include the Access-Control-Allow_Origin so we can not confirm that HubSpot is CORS enabled.
+    Third-party APIs must allow browser-based cross-origin requests before they can be called directly from an agent script. For APIs that do not support the required CORS headers, or for APIs that require private credentials, call customer-controlled middleware from the WWW tool. The middleware can store credentials securely, call the third-party API server-side, and return only the fields the script needs.
 
-To make this request, we make a GET request to an AWS Lambda function. It should look something like this.
+To make this request, make a GET request to your middleware endpoint. It should look something like this.
 
-`https://herkfsds9a.execute-api.us-west-1.amazonaws.com/default/hubspotRequestRepeater?q=:phone`
+`https://{apiGatewayHost}/{stage}/hubspot-contact?q=:phone`
 
 !!! Note
-    The AWS server above is not the same as the one you create. You need to create your own AWS Lambda function and have your own AWS server to run it from.  
+    The URL above is a placeholder. Use the HTTPS endpoint for the middleware service you create.
 
 Notice the `q=:phone`. We are defining `phone` as a URL Parameter and this is how we put it into the query string. The caller's phone is automatically discovered by RingCX and put into the tool's [model object](https://support.ringcentral.com/engagevoice/admin/voice-admin-use-javascript-tool.html#modelobject). To retrieve it, we access the model like so:
 
 `{{model.lead.leadPhone}}`
 
-This means your WWW tool should be configured as below:
+Configure the WWW tool to call your middleware endpoint with a `phone` URL parameter. Set the `phone` value to `{{model.lead.leadPhone}}`.
 
-<img class="img-fluid" width="967" src="../../../images/agent-scripting-www-config.png">
+#### AWS Lambda Middleware
 
-#### That Special AWS Lambda Function
-
-The GET request goes to an AWS Lambda function that proxies the request to HubSpot. This example focuses on the RingCX workflow, but the Lambda configuration below shows the supporting proxy setup. Set the required environment variables in AWS Lambda before testing the workflow.
+The GET request goes to an AWS Lambda function that looks up the contact in HubSpot. This example focuses on the RingCX workflow, but the Lambda configuration below shows the supporting middleware setup. Set the required environment variables in AWS Lambda before testing the workflow.
 
 | Key | Value|
 |-|-|
-| ACCESS_CONTROL_ALLOW_ORIGIN | * |
-| API_KEY | {yourHubSpotApiKey} |
-| HOST | api.hubapi.com |
-| PATH | /contacts/v1/search/query |
+| ACCESS_CONTROL_ALLOW_ORIGIN | Your RingCX origin, or `*` for initial testing |
+| ACCESS_CONTROL_ALLOW_HEADERS | Content-Type |
+| HUBSPOT_ACCESS_TOKEN | Your HubSpot private app or OAuth access token |
+| HUBSPOT_HUB_ID | Your HubSpot account Hub ID |
 
-```JavaScript
+```javascript
 const https = require('https');
-const querystring = require('querystring');
 
 /* ========Config Section======== */
-const host = process.env.HOST;
-const path = process.env.PATH;
 const accessControlAllowOriginValue = process.env.ACCESS_CONTROL_ALLOW_ORIGIN;
 const accessControlAllowHeadersValue = process.env.ACCESS_CONTROL_ALLOW_HEADERS;
-
-// API KEY
-const apiKey = process.env.API_KEY;
+const hubspotAccessToken = process.env.HUBSPOT_ACCESS_TOKEN;
+const hubspotHubId = process.env.HUBSPOT_HUB_ID;
 /* ========Config Section======== */
 
-const request = (queryStringParameters, headers) => {
+const searchContacts = (phone) => {
+    const body = JSON.stringify({
+        filterGroups: [
+            {
+                filters: [
+                    {
+                        propertyName: 'phone',
+                        operator: 'EQ',
+                        value: phone
+                    }
+                ]
+            }
+        ],
+        properties: [
+            'firstname',
+            'lastname',
+            'jobtitle',
+            'phone',
+            'email',
+            'notes_last_contacted'
+        ],
+        limit: 1
+    });
 
     const requestOptions = {
-       host: host,
-       path: path,
+       host: 'api.hubapi.com',
+       path: '/crm/v3/objects/contacts/search',
        port: 443,
-       method: 'GET',
+       method: 'POST',
+       headers: {
+           'Authorization': `Bearer ${hubspotAccessToken}`,
+           'Content-Type': 'application/json',
+           'Content-Length': Buffer.byteLength(body)
+       }
     };
 
-    if (queryStringParameters) {
-        requestOptions.path = `${requestOptions.path}?${querystring.stringify(queryStringParameters)}&hapikey=${apiKey}`;
-    }
-
-    headers['Accept'] = 'application/json';
-    headers['accept-encoding'] = 'identity';
-    headers['Host'] = host;
-
-    requestOptions.headers = headers;
-
     return new Promise((resolve, reject) => {
-        https.request(requestOptions, response => {
+        const req = https.request(requestOptions, response => {
             let data = '';
             response.on('data', chunk => {
                 data += chunk;
             });
             response.on('end', () => {
-                const dataObject = JSON.parse(data);
-                response.data = dataObject;
-                resolve(response);
+                try {
+                    resolve({
+                        statusCode: response.statusCode,
+                        body: data ? JSON.parse(data) : {}
+                    });
+                } catch (error) {
+                    reject(error);
+                }
             });
         })
             .on('error', error => {
                 reject(error);
-            })
-            .end();
+            });
+
+        req.write(body);
+        req.end();
     });
 };
 
 exports.handler = (event, context, callback) => {
 
     const corsHeaders = {
-        'Access-Control-Allow-Origin': accessControlAllowOriginValue,
-        'Access-Control-Allow-Headers': accessControlAllowHeadersValue
+        'Access-Control-Allow-Origin': accessControlAllowOriginValue || '*',
+        'Access-Control-Allow-Headers': accessControlAllowHeadersValue || 'Content-Type',
+        'Access-Control-Allow-Methods': 'OPTIONS,GET'
     };
 
-    const repeatResponse = (response) => {
-        let multiValueHeaders = {};
-
-        for (const headerName in response.headers) {
-            if (Array.isArray(response.headers[headerName])) {
-                multiValueHeaders[headerName] = response.headers[headerName];
-                delete response.headers[headerName];
-            }
-        }
-
+    const sendResponse = (statusCode, body) => {
         callback(null, {
-            statusCode: response.statusCode,
-            body: JSON.stringify(response.data),
-            headers: { ...response.headers, ...corsHeaders },
-            multiValueHeaders: multiValueHeaders,
+            statusCode,
+            body: JSON.stringify(body),
+            headers: corsHeaders
         });
     };
 
     const sendError = (error) => {
-        callback(null, {
-            statusCode: '400',
-            body: JSON.stringify(error),
-            headers: corsHeaders,
+        sendResponse(400, {
+            message: error.message
         });
     };
 
+    const phone = event.queryStringParameters && event.queryStringParameters.q;
+
     switch (event.httpMethod) {
+        case 'OPTIONS':
+            sendResponse(204, {});
+            break;
         case 'GET':
-            request(event.queryStringParameters, event.headers)
-                .then((response) => {
-                    repeatResponse(response);
+            if (!phone) {
+                sendError(new Error('Missing q query parameter'));
+                return;
+            }
+
+            searchContacts(phone)
+                .then((hubspotResponse) => {
+                    sendResponse(hubspotResponse.statusCode, {
+                        contacts: hubspotResponse.body.results || [],
+                        hubspotHubId: hubspotHubId
+                    });
                 })
                 .catch(error => {
                     sendError(error);
@@ -155,39 +175,48 @@ exports.handler = (event, context, callback) => {
 ### Process Response
 
 At this point, HubSpot should have looked up the contact by our ANI. We now need to process this
-response using our Scripting tool. The Scripting tool is just a part of the workflow that has JavaScript in it to perform more powerful actions like parsing the response for the profile-url.  
+response using our Scripting tool. The Scripting tool is just a part of the workflow that has JavaScript in it to perform more powerful actions like parsing the response and preparing the embed URL.
 
-```JavaScript
+```javascript
 var wwwResponse = getData('model.model.RetrieveContact');
 
 // Find the first contact in the search results
-var firstContact = wwwResponse.contacts[0];
-var hubspotUrl = firstContact["profile-url"];
+var contacts = wwwResponse.contacts || [];
+var firstContact = contacts[0];
 
-// Capture the contact ID
-var vId = firstContact.vid;
+if (!firstContact) {
+    putData("lookupMessage", "No matching HubSpot contact found.");
+    return;
+}
 
-// Capture the Hub ID of the portal in question
-var portalId = firstContact["portal-id"];
+// Capture the contact ID and returned properties
+var contactId = firstContact.id;
+var properties = firstContact.properties || {};
+
+// Capture the HubSpot Hub ID returned by the middleware
+var hubspotHubId = wwwResponse.hubspotHubId;
 
 // Let's get details about this contact
 // Store the first name
-putData("firstName", firstContact.properties.firstname.value);
+putData("firstName", properties.firstname || "");
 // Store the last name
-putData("lastName", firstContact.properties.lastname.value);
+putData("lastName", properties.lastname || "");
 // Store the job title
-putData("jobTitle", firstContact.properties.jobtitle.value);
+putData("jobTitle", properties.jobtitle || "");
 // Store the phone
-putData("phone", firstContact.properties.phone.value);
+putData("phone", properties.phone || "");
 // Store the email
-putData("email", firstContact.properties.email.value);
+putData("email", properties.email || "");
 // Store last contacted date
-var rawLastContactDate = firstContact.properties.notes_last_contacted.value;
-var lastContactedDate = new Date(rawLastContactDate*1);
-putData("lastContacted", lastContactedDate.toLocaleString("en-US", {timeZoneName: "short"}));
+if (properties.notes_last_contacted) {
+    var rawLastContactDate = properties.notes_last_contacted;
+    var lastContactedDate = new Date(rawLastContactDate*1);
+    putData("lastContacted", lastContactedDate.toLocaleString("en-US", {timeZoneName: "short"}));
+}
 
-// Put together the URL for Contact Timeline Embed
-var hubspotUrl = "app.hubspot.com/contact-timeline-embed/"+portalId+"/login?id="+vId;
+// Put together the host and path for the HubSpot contact timeline embed.
+// The Page tool configuration supplies the https:// prefix.
+var hubspotUrl = "app.hubspot.com/embed/"+hubspotHubId+"/0-1/"+contactId+"/timeline";
 putData("hubspotURL", hubspotUrl);
 
 return goTo("Hubspot_Page");
@@ -201,36 +230,37 @@ When you use the WWW tool, the response is stored in a local model object in the
     var wwwResponse = getData('model.model.RetrieveContact');
 ```
 
-What we just retrieved is a JSON object, which is exactly what we want. Now when using this API from HubSpot, we are basically "searching" for a contact with that phone number and since the number is unique in our HubSpot, the first entry will be the one we are looking for.
+What we just retrieved is a JSON object, which is exactly what we want. The middleware returns matching HubSpot contacts in the `contacts` array. For this example, we use the first returned contact.
 
 ``` JavaScript
-    var firstContact = wwwResponse.contacts[0];
+    var contacts = wwwResponse.contacts || [];
+    var firstContact = contacts[0];
 ```
 
-With this contact, we want to construct a "Contact Timeline Embed", which is a URL to bring up an activity timeline for the contact.
+With this contact, we want to construct a HubSpot contact timeline embed URL so the contact timeline can open inside the Page tool.
 
-First we need the contact ID which is the `vid` in the JSON response.
+First we need the contact ID, which is returned as `id` in the HubSpot contact search response.
 
 ``` JavaScript
-    var vId = firstContact.vid;
+    var contactId = firstContact.id;
 ```
 
-Then we capture the Hub ID of the portal. Notice we use bracket notation here because using dot notation would have issue with the dash (`-`) in the name of the field.
+Then we capture the HubSpot Hub ID returned by the middleware.
 
 ``` JavaScript
-    var portalId = firstContact["portal-id"];
+    var hubspotHubId = wwwResponse.hubspotHubId;
 ```
 
-We can then construct the "Contact Timeline Embed" using these two IDs.
+We can then construct the embed host and path using the Hub ID, the HubSpot object type ID for contacts, and the contact ID. In this example, the Page tool supplies the `https://` prefix, so the model value does not include the protocol.
 
 ``` JavaScript
-    var hubspotUrl = "app.hubspot.com/contact-timeline-embed/"+portalId+"/login?id="+vId;
+    var hubspotUrl = "app.hubspot.com/embed/"+hubspotHubId+"/0-1/"+contactId+"/timeline";
 ```
 
 Now we can store that HubSpot URL into our model object so we can use it in the Page tool.
 
 ``` JavaScript
-    putData("hubspotURL", newUrl);
+    putData("hubspotURL", hubspotUrl);
 ```
 
 ### Display HubSpot Page
