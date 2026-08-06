@@ -41,7 +41,7 @@ The **Interaction Metadata** API is used to reconstruct the complete "story" of 
 
 A user would use this to perform forensic tracking or quality assurance. For example, if a customer was transferred three times, this API provides the metadata for all three segments, including specific timestamps for when each agent joined or left, and the direct URL to the audio recording for that specific portion of the call.
 
-Metadata availability follows the account's configured data retention period. Each request searches a completed lookup window beginning at `segmentEndTime` and continuing forward for `timeInterval` seconds, up to 3600 seconds (1 hour).
+Metadata availability follows the account's configured data retention period. Each request searches a completed lookup window beginning at `segmentEndTime` and continuing forward for `timeInterval` seconds, up to 10800 seconds (3 hours).
 
 * **Reference:** [Interaction Metadata API Details](https://developers.ringcentral.com/engage/voice/api-reference/Public-Integration-API/getInteractionMetadata)
 

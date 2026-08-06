@@ -13988,8 +13988,8 @@
             "type": "integer",
             "format": "int32",
             "minimum": 1,
-            "maximum": 3600,
-            "description": "Length of the lookup window in seconds, measured forward from segmentEndTime. Maximum allowed length is 3600 (1 hour). Query completed intervals; results for recent interactions can change while metadata and recording URLs are still processing.",
+            "maximum": 10800,
+            "description": "Length of the lookup window in seconds, measured forward from segmentEndTime. Maximum allowed length is 10800 (3 hours). Query completed intervals; results for recent interactions can change while metadata and recording URLs are still processing.",
             "example": 1800
           },
           "timeZone": {
@@ -14262,8 +14262,8 @@
             "type": "integer",
             "format": "int32",
             "minimum": 1,
-            "maximum": 3600,
-            "description": "Length of the lookup window in seconds, measured forward from segmentEndTime. Maximum allowed length is 3600 (1 hour). Query completed intervals; results for recent interactions can change while metadata and recording URLs are still processing.",
+            "maximum": 10800,
+            "description": "Length of the lookup window in seconds, measured forward from segmentEndTime. Maximum allowed length is 10800 (3 hours). Query completed intervals; results for recent interactions can change while metadata and recording URLs are still processing.",
             "example": 1800
           },
           "timeZone": {

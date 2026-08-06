@@ -57,7 +57,7 @@ To retrieve a transcript, you must first obtain the unique `dialogId` and `segme
 
 * **Account Context:** You must provide both the `rcAccountId` and the `subAccountId` in the path.
 * **Data Retention:** Metadata can only be returned for interactions that remain within your account's configured data retention period.
-* **Time Windows:** Set `segmentEndTime` to the beginning of the lookup window. RingCX searches forward by `timeInterval`; the window cannot exceed 3600 seconds (1 hour).
+* **Time Windows:** Set `segmentEndTime` to the beginning of the lookup window. RingCX searches forward by `timeInterval`; the window cannot exceed 10800 seconds (3 hours).
 
 ---
 
