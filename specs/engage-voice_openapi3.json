@@ -13981,13 +13981,15 @@
         "properties": {
           "segmentEndTime": {
             "type": "string",
-            "description": "Start date and time for the logging interval",
+            "description": "Beginning of the lookup window in 'YYYY-MM-DD HH:mm:ss' format. The API searches forward from this value for the number of seconds specified by timeInterval.",
             "example": "2021-02-28 08:27:15"
           },
           "timeInterval": {
             "type": "integer",
             "format": "int32",
-            "description": "Interval length in seconds. Maximum allowed length is 3600 (1 hour). Note: if your time interval start or end in the future consecutive requests may return different list of segment. Idempotent results only guaranteed for the completed intervals. Segment recording URL may be added after delay. Allow 1-2min for processing.",
+            "minimum": 1,
+            "maximum": 3600,
+            "description": "Length of the lookup window in seconds, measured forward from segmentEndTime. Maximum allowed length is 3600 (1 hour). Query completed intervals; results for recent interactions can change while metadata and recording URLs are still processing.",
             "example": 1800
           },
           "timeZone": {
@@ -14253,13 +14255,15 @@
         "properties": {
           "segmentEndTime": {
             "type": "string",
-            "description": "Start date and time for the logging interval",
+            "description": "Beginning of the lookup window in 'YYYY-MM-DD HH:mm:ss' format. The API searches forward from this value for the number of seconds specified by timeInterval.",
             "example": "2021-02-28 08:27:15"
           },
           "timeInterval": {
             "type": "integer",
             "format": "int32",
-            "description": "Interval length in seconds. Maximum allowed length is 3600 (1 hour). Note: if your time interval start or end in the future consecutive requests may return different list of segment. Idempotent results only guaranteed for the completed intervals. Segment recording URL may be added after delay. Allow 1-2min for processing.",
+            "minimum": 1,
+            "maximum": 3600,
+            "description": "Length of the lookup window in seconds, measured forward from segmentEndTime. Maximum allowed length is 3600 (1 hour). Query completed intervals; results for recent interactions can change while metadata and recording URLs are still processing.",
             "example": 1800
           },
           "timeZone": {

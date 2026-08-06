@@ -46,6 +46,8 @@ To retrieve a recording, you must first identify the unique identifiers for the 
 
 `POST https://ringcx.ringcentral.com/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/interaction-metadata`
 
+Metadata availability follows the account's configured data retention period. Each metadata request searches a completed lookup window beginning at `segmentEndTime` and continuing forward for `timeInterval` seconds, up to 3600 seconds (1 hour).
+
 For a detailed walkthrough on discovering metadata, please refer to the [Agent Segment Metadata API Guide](../../integration/reports-orig.md#agent-segment-metadata).
 
 
