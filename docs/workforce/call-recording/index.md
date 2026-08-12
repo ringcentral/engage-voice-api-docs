@@ -44,7 +44,9 @@ To authenticate, your application must be configured with the following permissi
 
 To retrieve a recording, you must first identify the unique identifiers for the call. Unlike legacy systems that provided a direct URL, the current API requires a **Dialog ID** and a **Segment ID**, which are discovered via the `interaction-metadata` report.
 
-`POST https://engage.ringcentral.com/voice/api/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/interaction-metadata`
+`POST https://ringcx.ringcentral.com/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/interaction-metadata`
+
+Metadata availability follows the account's configured data retention period. Each metadata request searches a completed lookup window beginning at `segmentEndTime` and continuing forward for `timeInterval` seconds, up to 10800 seconds (3 hours).
 
 For a detailed walkthrough on discovering metadata, please refer to the [Agent Segment Metadata API Guide](../../integration/reports-orig.md#agent-segment-metadata).
 
@@ -60,7 +62,7 @@ The response will contain a list of interaction segments. For each segment you w
 
 Once you have the necessary IDs from the metadata report, use the following endpoint to stream the `.WAV` audio file.
 
-`GET https://engage.ringcentral.com/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/recordings/dialogs/{dialogId}/segments/{segmentId}`
+`GET https://ringcx.ringcentral.com/voice/api/cx/integration/v1/accounts/{rcAccountId}/sub-accounts/{subAccountId}/recordings/dialogs/{dialogId}/segments/{segmentId}`
 
 ### Path Parameters
 
@@ -91,7 +93,7 @@ The API returns a binary stream of the recording.
 3.  **Stream Media:** Call the Download Recording endpoint using the path parameters to retrieve the `.WAV` file.
 
 !!! important "Rate Limiting"
-    **Rate Limiting:** Metadata and reporting endpoints are typically limited to **2 calls per minute**. To maintain stability, implement **exponential backoff** when encountering `429` (Too Many Requests) errors.
+    **Rate Limiting:** Recording downloads are limited to **120 requests per minute**. The `interaction-metadata` discovery request is throttled per RingCX sub-account at **3 requests per 60 seconds** and **9 requests per 15 minutes**. Use exponential backoff on `429 Too Many Requests` responses and avoid retrying media downloads in tight loops.
 
 ### Sample Implementation (Python)
 
@@ -126,5 +128,3 @@ def download_recording(rc_account_id, sub_account_id, dialog_id, segment_id):
 ```
 
 ---
-
-

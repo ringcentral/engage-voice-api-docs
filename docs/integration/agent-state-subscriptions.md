@@ -36,7 +36,7 @@ The authenticating user must have the `WFO_ACCESS` role for the target RingCX su
     ```
 
 !!! important "Rate Limiting & Stability"
-    Subscription management calls are configuration operations. Avoid repeatedly creating and deleting subscriptions in a tight loop; list existing subscriptions first, then update the existing subscription when possible.
+    The rate limit is **120 requests per minute**. Subscription management calls are configuration operations, so avoid repeatedly creating and deleting subscriptions in a tight loop. List existing subscriptions first, then update the existing subscription when possible.
 
 ## Subscription Lifecycle
 

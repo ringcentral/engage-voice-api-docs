@@ -11,6 +11,9 @@ Use the lead search APIs to find campaign leads by campaign, list, phone number,
 | List lead states | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadStates` |
 | List system dispositions | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/systemDispositions` |
 
+!!! important "Rate Limiting & Stability"
+    Lead search requests are throttled per RingCX sub-account. Standard `leadSearch` requests are limited to **15 requests per 10 seconds** and **60 requests per 30 seconds**. Requests with `count=true` are limited to **90 requests per 10 seconds** and **180 requests per 30 seconds**. Search-by-exact-number requests are limited to **30 requests per 10 seconds** and **120 requests per 60 seconds**. Use narrow filters and pagination, and implement exponential backoff on `429 Too Many Requests` responses.
+
 ## SDK Setup
 
 SDK examples in this article use JWT authentication and load credentials from environment variables.

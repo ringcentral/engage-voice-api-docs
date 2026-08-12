@@ -2,6 +2,9 @@
 
 Lead actions apply operational changes to one lead or a set of leads. Use them after locating the target leads with [lead search](search.md).
 
+!!! important "Rate Limiting & Stability"
+    Lead action requests are throttled per RingCX sub-account at **30 requests per 10 seconds** and **120 requests per 60 seconds**. Use lead search criteria to batch work into fewer action requests, and implement exponential backoff on `429 Too Many Requests` responses.
+
 ## SDK Setup
 
 SDK examples in this article use JWT authentication and load credentials from environment variables.

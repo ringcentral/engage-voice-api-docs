@@ -2,6 +2,9 @@
 
 Use the lead loader APIs to add leads to an outbound campaign. RingCX supports direct JSON loading and a preview/process flow for uploaded files.
 
+!!! important "Rate Limiting & Stability"
+    Lead loader requests are throttled per RingCX sub-account. Direct lead loading is limited to **30 requests per 10 seconds** and **120 requests per 60 seconds**. File preview is limited to **12 requests per 30 seconds** and **18 requests per 60 seconds**. File processing is limited to **9 requests per 3 seconds** and **30 requests per 30 seconds**. Batch leads into fewer uploads where practical, and implement exponential backoff on `429 Too Many Requests` responses.
+
 ## SDK Setup
 
 SDK examples in this article use JWT authentication and load credentials from environment variables.
