@@ -19,6 +19,14 @@ These endpoints are not real-time event feeds. They are intended for retrieving 
 * **Data Availability:** Summary data is available after the segment is finalized and processed. Allow a short post-call processing window before polling.
 * **Empty Summaries:** A successful response can have an empty body when the requested summary type has not been populated for that segment.
 
+### Choosing Agent Summary or Auto Summary
+
+Use the Agent Summary endpoint when your workflow depends on the final text reviewed, entered, or edited by the agent. This is the better fit for CRM notes, follow-up workflows, and records where the agent's final disposition or correction should be treated as the source of truth.
+
+Use the Auto Summary endpoint when your workflow needs the AI-generated summary as soon as post-interaction processing has completed. This is the better fit for analytics enrichment, QA triage, and workflows that compare the generated summary with other interaction data.
+
+Some integrations retrieve both values. In that pattern, store them as separate fields so downstream systems can distinguish agent-confirmed content from generated content.
+
 ### Required Permissions & Scopes
 
 #### 1. Configure OAuth Scopes
@@ -30,6 +38,8 @@ To authenticate, your application must be configured with the following permissi
 For a detailed walkthrough on exchanging your RingCentral token for a RingCX access token, see the [RingCentral Authentication Guide](../../authentication/auth-ringcentral.md).
 
 #### 2. Enable Platform Permissions
+
+The authenticated user must have `READ` permission on the RingCX account that owns the segment.
 
 To generate and retrieve summaries, AI summaries must be enabled for the queue or campaign that handled the interaction.
 
@@ -89,7 +99,7 @@ For more details on interaction metadata, see the [Reports API](../../integratio
 ## Get Agent Summary
 
 ```http
-GET https://engage.ringcentral.com/voice/api/v1/summary/accounts/{subAccountId}/segments/{segmentId}/agent
+GET https://ringcx.ringcentral.com/voice/api/v1/summary/accounts/{subAccountId}/segments/{segmentId}/agent
 cookie: access_token=<token>
 ```
 
@@ -105,7 +115,7 @@ The Agent Summary endpoint returns the summary filled in or edited by the agent 
 ### Example Request
 
 ```bash
-curl --location 'https://engage.ringcentral.com/voice/api/v1/summary/accounts/21630001/segments/p-v-0b338efb877e48f0a3a321c73fcd4634-1772456952229-50caeaadd482c/agent' \
+curl --location 'https://ringcx.ringcentral.com/voice/api/v1/summary/accounts/21630001/segments/p-v-0b338efb877e48f0a3a321c73fcd4634-1772456952229-50caeaadd482c/agent' \
   --header 'cookie: access_token=<token>'
 ```
 
@@ -122,7 +132,7 @@ Customer requested a billing adjustment. Agent confirmed the account details and
 ## Get Auto Summary
 
 ```http
-GET https://engage.ringcentral.com/voice/api/v1/summary/accounts/{subAccountId}/segments/{segmentId}/auto
+GET https://ringcx.ringcentral.com/voice/api/v1/summary/accounts/{subAccountId}/segments/{segmentId}/auto
 cookie: access_token=<token>
 ```
 
@@ -138,7 +148,7 @@ The Auto Summary endpoint returns the AI-generated summary for a completed inter
 ### Example Request
 
 ```bash
-curl --location 'https://engage.ringcentral.com/voice/api/v1/summary/accounts/21630001/segments/p-v-0b338efb877e48f0a3a321c73fcd4634-1772456952229-50caeaadd482c/auto' \
+curl --location 'https://ringcx.ringcentral.com/voice/api/v1/summary/accounts/21630001/segments/p-v-0b338efb877e48f0a3a321c73fcd4634-1772456952229-50caeaadd482c/auto' \
   --header 'cookie: access_token=<token>'
 ```
 
@@ -185,7 +195,7 @@ Use interaction metadata as the source of truth for which segments to request. S
 ```python
 import requests
 
-BASE_URL = "https://engage.ringcentral.com/voice/api/v1"
+BASE_URL = "https://ringcx.ringcentral.com/voice/api/v1"
 SUB_ACCOUNT_ID = "21630001"
 
 def get_summary(segment_id, token, summary_type="auto"):
