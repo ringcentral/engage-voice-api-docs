@@ -47,7 +47,7 @@ This data is all the data including headers, and all we need is the response bod
 var responseBody = JSON.parse(authResponseData.response_body);
 ```
 
-Then we'll take the access token and store that access token in our IVR key/value store. Remember that IVR methods are prefixed wiht `ivr.`, but this time instead of getting the data, we are using `putData` to put the data into the IVR key/value store.
+Next, store the access token in the IVR key/value store. IVR methods are prefixed with `ivr.`. In this case, use `putData` to put the data into the IVR key/value store.
 
 ```javascript
 ivr.putData('$rcAccessToken', responseBody.access_token);
@@ -60,4 +60,4 @@ var rcAuthorization = responseBody.token_type + ' ' + responseBody.access_token;
 ivr.putData('$rcAuthorization', rcAuthorization);
 ```
 
-Now we are ready to start invoking RingCentral Office APIs with our valid authorization header. Give it a try!
+The IVR can now invoke RingCentral Office APIs with the valid authorization header.

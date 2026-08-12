@@ -48,7 +48,7 @@ The user authenticating the app must hold the appropriate supervisor permissions
         "errorCode": "access.denied.exception",
         "generalMessage": "You do not have permission to access this resource",
         "details": "",
-        "requestUri": "/api/v1/admin/accounts/{accountId}/activeCalls/list - GET",
+        "requestUri": "/voice/api/v1/admin/accounts/{accountId}/activeCalls/list - GET",
         "timestamp": <TIMESTAMP>
     }
     ```

@@ -12,7 +12,7 @@ When a call is ended, a call event is triggered so you can know that a call is r
 
 ## Agent Reports
 
-Not all agent performance can be tracked via events. Some details like ring time, hold time, and talk time are all captured and report on after the call. You can find these report details in the [Agent Segment Metadata Report](../../analytics/reports/agent-segment-metadata-report.md). This report also includes the call recording, stored as a `WAV` file and can be retrieved 1-2 minutes after the call ends. To determine when a call ends, use the [Configuring Workforce Management](../../notifications/wfm/configure-wfm.md) to listen for End Call Events.
+Not all agent performance can be tracked via events. Some details like ring time, hold time, and talk time are captured and reported after the call. You can find these details in the [Reports API](../../integration/reports-orig.md#agent-segment-metadata). This report also includes the call recording, stored as a `WAV` file and available 1-2 minutes after the call ends. To determine when a call ends, use [Configuring Workforce Management](../../notifications/wfm/configure-wfm.md) to listen for End Call Events.
 
 ## Call Recordings
 

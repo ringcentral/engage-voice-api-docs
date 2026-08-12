@@ -2,17 +2,17 @@
 
 <img class="img-fluid" width="100%" src="../images/dialing-components.png">
 
-Outbound calling activities can be planned and managed effectively using RingCX dialing components. They are not only helping a business determine objectives of outbound calls, but also ensure high agent performance, great customer service and deliver quality reports.
+Outbound calling activities can be planned and managed effectively with RingCX dialing components. These components help define outbound calling objectives, support agent performance, improve customer service, and provide quality reporting.
 
--   Dialing groups determine the dialing mode - this is the "How" a call will be made.
+-   Dialing groups determine the dialing mode, or how a call will be made.
 
--   Campaigns are nested within the dialing groups, and are the reasons for calling - this is the "Why" we are calling.
+-   Campaigns are nested within dialing groups and define the purpose of the outbound call.
 
--   Leads are the contacts, the people or the customers we are dialing - this is the "Who" we are calling.
+-   Leads are the contacts or customers that the campaign will dial.
 
--   Dispositions allows agents to mark the outcomes of a call - this describes "What" happened on that call.
+-   Dispositions allow agents to mark the outcome of a call.
 
-As you can see dialing components are comprised of several different components that need configuration. To create them via UI interfaces will take a lot of time and navigation. The Campaigns, Leads and other related APIs provide useful functionality to fully or partially automate the creation of outbound dialing components programmatically. This is even more important to automate, when it comes to importing data from other data sources, e.g. importing leads information from your own CRM system.
+Dialing components require several related configuration steps. The Campaigns, Leads, and related APIs can fully or partially automate outbound dialing setup, which is especially useful when importing lead data from external systems such as a CRM.
 
 ## Popular Use Cases and Documentation
 

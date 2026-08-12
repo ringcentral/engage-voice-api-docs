@@ -115,4 +115,3 @@ To successfully authenticate, your application must be configured with the follo
 | `[Value B]` | [Explanation] |
 
 ```
-

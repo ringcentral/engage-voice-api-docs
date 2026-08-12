@@ -45,7 +45,7 @@ To enable this:
     >     "errorCode": "access.denied.exception",
     >     "generalMessage": "You do not have permission to access this resource",
     >     "details": "",
-    >     "requestUri": "/api/v1/admin/auditLogs/search - PUT",
+    >     "requestUri": "/voice/api/v1/admin/auditLogs/search - PUT",
     >     "timestamp": <TIMESTAMP>
     > }
     > 

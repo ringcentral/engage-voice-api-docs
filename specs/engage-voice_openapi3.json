@@ -11144,7 +11144,7 @@
             "type": "integer"
           },
           "notificationUrl": {
-            "description": "HTTP or HTTPS endpoint that receives agent-state notifications.",
+            "description": "Publicly accessible endpoint that receives agent-state notifications. The URL must be reachable by RingCentral, must not be blocked by a firewall, and HTTPS receivers must support TLS 1.2 or higher. During endpoint validation, the receiver must return 200 OK within 3000 milliseconds, echo the validation request's Validation-Token header value in the response Validation-Token header, and keep the complete response, including headers and body, no larger than 1024 bytes. Responses larger than this can fail setup with {\"errorCode\":\"SUB-525\",\"message\":\"WebHook server response is invalid\"}.",
             "type": "string"
           },
           "authConfigId": {
