@@ -15654,8 +15654,14 @@
           "timeInterval": {
             "type": "integer",
             "format": "int32",
-            "description": "Interval length in seconds (e.g., 1800 for 30 minutes).",
-            "example": 1800
+            "enum": [
+              15,
+              30,
+              45,
+              60
+            ],
+            "description": "Aggregation interval length in minutes. Allowed values are 15, 30, 45, or 60.",
+            "example": 15
           },
           "timeZone": {
             "type": "string",
@@ -15678,7 +15684,8 @@
         "properties": {
           "interval": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "description": "Aggregation interval length in minutes."
           },
           "dateTimeFrom": {
             "type": "string",
@@ -15739,7 +15746,8 @@
           },
           "interval": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "description": "Aggregation interval length in minutes."
           },
           "queue": {
             "type": "integer",
@@ -15829,7 +15837,8 @@
         "properties": {
           "interval": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "description": "Aggregation interval length in minutes."
           },
           "dateTimeFrom": {
             "type": "string",
