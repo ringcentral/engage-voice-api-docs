@@ -5,10 +5,12 @@ Use this authentication method only for legacy deployments that use the legacy p
 To generate an API token, use your own login or create an "API User" specifically to own the API tokens your integration needs. If multiple integrations require different rights, create separate API users with the correct permissions. If multiple integrations require the same rights, you can create one or more API tokens for the same user and distribute a unique token to each service.
 
 !!! info "What URLs to use when accessing the legacy RingCX API"
-    Legacy RingCX APIs are rooted at either:
+    In the examples below, replace `{legacyBaseUrl}` with the legacy root URL for your deployment:
     
-    * `https://portal.vacd.biz/api/`
-    * `https://portal.virtualacd.biz/api/`
+    * `https://portal.vacd.biz/api`
+    * `https://portal.virtualacd.biz/api`
+
+    Do not include a trailing slash when substituting `{legacyBaseUrl}` before paths such as `/v1/auth/login`.
 
 ## Generate an auth token
 
