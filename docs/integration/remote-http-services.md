@@ -15,6 +15,12 @@ IVR WWW nodes, scripting nodes, and other workflow steps reference these service
 * **Environment Promotion:** Clone or update service definitions as configurations move from test to production.
 * **Operational Control:** Activate or deactivate a remote service during outages or endpoint migrations.
 
+### Assisted Service Automation Use Case
+
+Remote HTTP services are commonly used when an IVR, routing flow, or agent script needs to call an external system while an interaction is in progress. For example, a support queue might look up a customer profile by ANI, return account status and entitlement details, and pass those values into the agent script before the agent accepts the call.
+
+In that workflow, the remote HTTP service stores the external endpoint, request method, headers, credentials, and input mappings in one reusable configuration. Scripts and routing flows can reference the service without duplicating URLs or secrets, and administrators can update the integration centrally when the external API changes.
+
 ### Required Permissions & Scopes
 
 #### 1. Configure OAuth Scopes
@@ -99,7 +105,7 @@ External auth configurations store reusable authentication settings for remote s
     Treat remote service changes like production integration changes. Validate the external endpoint, authentication, and expected response shape before activating the service in a live routing flow.
 
 !!! important "Rate Limiting & Stability"
-    Remote HTTP service changes can affect live IVR and scripting flows. Batch provisioning updates, activate services only after validation, and use exponential backoff on `429 Too Many Requests` responses.
+    The rate limit is **120 requests per minute**. Remote HTTP service changes can affect live IVR and scripting flows. Batch provisioning updates, activate services only after validation, and use exponential backoff on `429 Too Many Requests` responses.
 
 ## Request Examples
 

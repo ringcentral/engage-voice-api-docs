@@ -1,487 +1,795 @@
-# About Agents
+# Agents
 
-Managing agents and automatically syncing them with your user management tools can be automated via the API. This article covers the basics of creating, reading, updating deleting Agents.
+Agents are RingCX users who can log in to handle inbound queues, outbound campaigns, or supervisor workflows. Agents must belong to an [agent group](agent-groups.md).
 
-Of note, Agents must be associated with an Agent Group so you need to have at least one Agent Group configured before managing Agents. See [Agent Groups](./agent-groups.md) for more.
+## Manage Agents
 
-## Create Agent
+| Operation | Method and path |
+| --- | --- |
+| List agents in an agent group | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents` |
+| Get agent | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}` |
+| Create agent | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents` |
+| Update agents in an agent group | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents` |
+| Update one agent | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}` |
+| Delete agent | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}` |
 
-Before starting, make sure you have an Agent Group created and the `agentGroupId` of the group you wish to assign the Agent to.
+## SDK Setup
 
-### Primary Parameters
+SDK examples in this article use JWT authentication and load credentials from environment variables.
 
-The following API properties are primary properties to create an agent and are also displayed in the Create Agent form in the RingCX Admin Console. The UI category section and property name is provided in the table below for easy mapping. Some supporting properties that are not visible in the UI are provided as well.
+=== "JavaScript"
 
-| API Property | | UI Category | UI Property | Description |
-|-|-|-|-|-|
-| **`firstName`** | Optional | Agent Information | First Name | Agent’s first name |
-| **`lastName`** | Optional | Agent Information | Last Name | Agent's last name |
-| **`email`** | Optional | Agent Information | Email | Agent's email address |
-| **`externalAgentId`** | Optional | Agent Information | External Agent ID | If you have external systems that reference agents by their own unique identifiers, enter that unique identifier in this setting |
-| **`location`** | Optional | Agent Information | Location | Agent's location |
-| **`team`** | Optional | Agent Information | Team | Agent's team name |
-| **`rcUserId`** | Optional | Agent Information | RC Office extension | Office extensionId. Sync a RingCentral Office user to the new agent user. This will link the agent’s basic information from RingCentral Office to their information in RingCX, such as their first and last name, their email address, and username and password. Retrieve a list of [Extensions](#extensions) and use the `id` value. |
-| **`userManagedByRC`** | Optional | Agent Information | RC Office extension  | `false` |
-| **`allowLoginControl`** | Optional | Login Settings | Allow Login | `true` |
-| **`allowLoginUpdates`** | Optional | Login Settings | Allow Login | `true` |
-| **`username`** | Required | Login Settings | Username | |
-| **`password`** | Required | Login Settings | Password | |
-| **`agentType`** | Optional | Login Settings | Agent Type | Select what type this agent is `AGENT` or `SUPERVISOR`. Use values from [Agent Type](#agent-type) |
-| **`agentRank`** | Optional | Login Settings | Agent Rank | `0` - `24` with `0` being the lowest, `12` being medium and `24` being high. |
-| **`initLoginBaseState`** | Optional | Login Settings | Initial State | Example: `AVAILABLE`. Retrieve a list of valid states using [Initial State](#initial-state) and use the values in `baseAgentState.colKey`. |
-| **`initLoginBaseStateId`** | Optional | Login Settings | Initial State | Example: `11786` Retrieve a list of valid states using [Initial State](#initial-state) and use the values in `stateId`. |
-| **`ghostRnaAction`** | Optional | Login Settings | Ghost RNA Action | Example: `AVAILABLE` |
-| **`dialGroupAssignments`** | Optional | Login Settings | Default Dial Group | Enter the dial group you wish to show to be preselected when the agent first logs in. Example: `{"id":111111}`. Retrieve a list of valid values using [Dial Groups](#dial-groups) and use a `dialGroupId` value as the `dialGroupAssignments.id`. |
-| **`manualOutboundDefaultGate`** | Optional | Login Settings | Manual Outbound Default Queue Assignment | Example: `{id: 222222}`. Retrieve a list of valid values using [Queue Groups](#queue-groups). Each `gateGroup` will contain a list of queues with a `gateId` and can be used as the `manualOutboundDefaultGate.id` value in this request. |
-| **`enableSoftphone`** | Optional | Phone Settings | Enable Softphone | `true` |
-| **`defaultLoginDest`** | Optional | Phone Settings | Default Route | |
-| **`altDefaultLoginDest`** | Optional | Phone Settings | Alt. Default Route | |
-| **`phoneLoginPin`** | Optional | Phone Settings | Phone Login PIN | |
-| **`directAgentExtension`** | Optional | Phone Settings | Direct Dial Extension | |
-| **`manualOutboundDefaultCallerId`** | Optional | Phone Settings | Manual Outbound Default Caller ID | |
-| **`maxChats`** | Optional | Chat Settings | Max Number of Concurrent Chats | |
-
-### Supporting APIs
-
-The following APIs can be used to retrieve information to populate various properties in the requests.
-
-#### Initial State
-
-The default agent state is `AVAILABLE` (that is, ready to take or make a call or chat). Any other state will require the agent to manually set themselves to an Available base state after login in order to take calls The options presented here will depend on the agent states created via the Agent States configuration panel option at the account level
-
-  `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/auxStates/?activeOnly=true`
-
-#### Dial Groups
-
-Get a list of dial groups.
-
-  `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroup`
-
-#### Queue Groups
-
-Get a list of queue groups and corresponding queues in this account.
-
-  `GET api/v1/admin/accounts/{accountId}/gateGroups/withChildren`
-
-#### Extensions
-
-Gets a list agents and their corresponding extensions.
-
-  `GET {BASE_URL}/api/v1/admin/accounts/{accountId}/ringcentral/extensions`
-
-#### Agent Type
-
-The parameter `agentType` can take on the following values:
-
-| Value | Description |
-|-|-|
-| **`AGENT`** | If you don’t want the agent to monitor other agents, select this option |
-| **`SUPERVISOR`** | If you want the agent to listen in and monitor other agent calls, select this option |
-
-### Request
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-```
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents
-
-{
-  "firstName":"John",
-  "lastName":"Wang",
-  "username":"johnwang",
-  "password":"<myPassword>",
-  "agentType":"AGENT",
-  "initLoginBaseState":"AVAILABLE",
-  "initLoginBaseStateId":11786,
-  "ghostRnaAction":"AVAILABLE",
-  "maxChats":5,
-  "allowInbound":true,
-  "allowOutbound":true
-}
-```
-
-## Read Agents
-To get a list of agents in this agent group, but with only basic information about each agent.
-
-### Request
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
-
-=== "HTTP"
-    ```html
-    GET {BASE_URL}api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents
+    ```bash
+    npm install ringcentral-engage-voice-client dotenv
     ```
-=== "Node JS"
-    ```javascript
-    /****** Install Node JS SDK wrapper *******
-    $ npm install ringcentral-engage-voice-client
-    *******************************************/
 
-    const RunRequest = async function () {
-        const EngageVoice = require('ringcentral-engage-voice-client').default
-
-        // Instantiate the SDK wrapper object with your RingCentral app credentials
-        const ev = new EngageVoice({
-            clientId: "RINGCENTRAL_CLIENTID",
-            clientSecret: "RINGCENTRAL_CLIENTSECRET"
-        })
-
-        try {
-            // Authorize with your RingCentral Office user credentials
-            await ev.authorize({
-                username: "RINGCENTRAL_USERNAME",
-                extension: "RINGCENTRAL_EXTENSION",
-                password: "RINGCENTRAL_PASSWORD"
-            })
-
-            // Get Agent Groups data
-            const agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
-            const agentGroupsResponse = await ev.get(agentGroupsEndpoint)
-            for (var group of agentGroupsResponse.data) {
-                // Get Agents under your Agent Group
-                if (group.groupName == "My New Agent Group") {
-                    const agentEndpoint = agentGroupsEndpoint + "/" + group.agentGroupId + "/agents"
-                    const agentResponse = await ev.get(agentEndpoint)
-                    console.log(agentResponse.data)
-                    break
-                }
-            }
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-    }
-
-    RunRequest();
-    ```
 === "Python"
-    ```python
-    #### Install Python SDK wrapper ####
-    # $ pip3 install ringcentral_engage_voice
-    #  or
-    # $ pip install ringcentral_engage_voice
-    #####################################
 
-    from ringcentral_engage_voice import RingCentralEngageVoice
-
-    def retrieve_agents():
-        try:
-            agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
-            agentGroupsResponse = ev.get(agentGroupsEndpoint).json()
-            for group in agentGroupsResponse:
-                # Retrieve Agents
-                if group['groupName'] == "My New Agent Group":
-                    agentsEndpoint = f"{agentGroupsEndpoint}/{group['agentGroupId']}/agents"    # f         string:https://www.python.org/dev/peps/pep-0498/
-                    agentsResponse = ev.get(agentsEndpoint).json()
-                    print(agentsResponse)
-                    break
-        except Exception as e:
-            print(e)
-
-
-    # Instantiate the SDK wrapper object with your RingCentral app credentials
-    ev = RingCentralEngageVoice(
-        "RINGCENTRAL_CLIENTID",
-        "RINGCENTRAL_CLIENTSECRET")
-
-    try:
-        # Authorize with your RingCentral Office user credentials
-        ev.authorize(
-            username="RINGCENTRAL_USERNAME",
-            password="RINGCENTRAL_PASSWORD",
-            extension="RINGCENTRAL_EXTENSION"
-        )
-
-        retrieve_agents()
-    except Exception as e:
-        print(e)
+    ```bash
+    pip3 install ringcentral_engage_voice python-dotenv
     ```
 
-### Response
-Some sample response data shown below.
+Create a `.env` file in the directory where you run the sample:
 
-```json
-[
-    {
-        "agentId": 1234567,
-        "permissions": [],
-        "firstName": "Mike",
-        "lastName": "Stowe",
-        "username": "mstowe",
-        "defaultLoginDest": "",
-        "agentType": "AGENT",
-        "allowDirectAgentTransfer": "DIRECT_TRANSFER_DISABLED",
-        "isActive": true,
-        "loadBalanceEnabled": false,
-        "location": null,
-        "team": null,
-        "agentAccountAccess": null,
-        "agentGateAccess": null,
-        "agentGateGroupAccess": null,
-        "agentChatGroupAccess": null,
-        "agentDialGroupMembers": null,
-        "agentChatQueueAccesses": null
-    },
-    {
-        "agentId": 7654321,
-        "permissions": [],
-        "firstName": "John",
-        "lastName": "Wang",
-        "username": "jwang",
-        "defaultLoginDest": "",
-        "agentType": "AGENT",
-        "allowDirectAgentTransfer": "DIRECT_TRANSFER_DISABLED",
-        "isActive": true,
-        "loadBalanceEnabled": false,
-        "location": null,
-        "team": null,
-        "agentAccountAccess": null,
-        "agentGateAccess": null,
-        "agentGateGroupAccess": null,
-        "agentChatGroupAccess": null,
-        "agentDialGroupMembers": null,
-        "agentChatQueueAccesses": null
-    }
-]
+```text
+RC_CLIENT_ID=<clientId>
+RC_CLIENT_SECRET=<clientSecret>
+RC_JWT=<jwt>
 ```
 
-## Read Agent
-To retrieve a single agent, you can specify the agent ID and get more details about the agent.
+The SDK wrapper reads these values, signs in with RingCentral, and exchanges the RingCentral access token for a RingCX access token before calling RingCX APIs.
 
-### Request
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+## Create an Agent
 
-=== "HTTP"
-    ```html
-    GET {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}
-    ```
-
-### Response
-Some sample response data shown below.
-
-```json
-{
-    "agentId": 7654321,
-    "permissions": [],
-    "firstName": "John",
-    "lastName": "Wang",
-    "email": null,
-    "username": "jwang",
-    "password": "password",
-    "defaultLoginDest": "",
-    "altDefaultLoginDest": null,
-    "lastLoginDate": null,
-    "agentRank": 0,
-    "createdOn": "2020-05-06T20:57:43.000+0000",
-    "agentType": "AGENT",
-    "maxChats": 5,
-    "externalAgentId": "jw001",
-    "directAgentExtension": null,
-    "allowInbound": true,
-    "allowOutbound": false,
-    "allowExternalChat": false,
-    "allowChat": false,
-    "allowBlended": false,
-    "allowChatVoiceConcurrent": false,
-    "allowOffHook": false,
-    "allowCallControl": true,
-    "allowHold": true,
-    "allowTransfer": true,
-    "allowManualIntlTransfer": false,
-    "allowDirectAgentTransfer": "DIRECT_TRANSFER_DISABLED",
-    "allowHangup": true,
-    "allowRequeue": true,
-    "allowLoginControl": true,
-    "allowLoginUpdates": true,
-    "allowCrossGateRequeue": true,
-    "gatesControlAgentVisibility": false,
-    "allowCampStats": true,
-    "allowGateStats": true,
-    "allowAgentStats": true,
-    "allowSelfAgentStats": false,
-    "allowChatStats": true,
-    "disableSupervisorMonitoring": false,
-    "allowAgentReports": false,
-    "allowManualCalls": true,
-    "allowManualIntlCalls": false,
-    "allowInboundIntlTransfer": false,
-    "allowLeadInserts": false,
-    "allowAutoAnswer": false,
-    "defaultAutoAnswerOn": true,
-    "isActive": true,
-    "ghostRnaAction": "AVAILABLE",
-    "loadBalanceEnabled": false,
-    "transientAgent": false,
-    "parentAgentId": null,
-    "transientDelete": false,
-    "transientDeleteDate": null,
-    "phoneLoginPin": null,
-    "multiAccountAgent": false,
-    "initLoginBaseState": "AVAILABLE",
-    "initLoginBaseStateId": 11786,
-    "enableSoftphone": false,
-    "softphoneId": 0,
-    "allowFromIpAddresses": null,
-    "location": null,
-    "team": null,
-    "showLeadHistory": true,
-    "manualOutboundDefaultCallerId": "",
-    "allowManualOutboundGates": false,
-    "allowManualPass": true,
-    "allowEndcallforeveryone": true,
-    "allowHistoricalDialing": true,
-    "rcUserId": null,
-    "userManagedByRC": false,
-    "gateAssignments": null,
-    "chatQueueAssignments": null,
-    "dialGroupAssignments": null,
-    "agentAccountAccess": null,
-    "agentGateAccess": null,
-    "agentGateGroupAccess": null,
-    "agentChatGroupAccess": null,
-    "agentGroup": {
-        "id": 1234,
-        "description": "Platform Team"
-    },
-    "manualOutboundDefaultGate": null,
-    "phoneLoginDialGroup": null,
-    "agentSkillProfiles": null,
-    "agentDialGroupMembers": null,
-    "agentChatQueueAccesses": null,
-    "agentLoadBalanceMembers": null,
-    "groupId": 1234,
-    "agentLoadBalance": null,
-    "sipSafeUsername": "jwang",
-    "accountAccess": null,
-    "whereSupervisor": null,
-    "whereSupervisee": [],
-    "active": true
-}
-```
-
-## Update Agent
-
-To Update an Agent Group's name, get the Agent Group's JSON object, modify the `groupName` and then `PUT` the JSON to back the the Agent Group's endpoint:
-
-### Request
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+Create the agent under the agent group that should own the agent record.
 
 === "HTTP"
-    ```html
-    # Retrieve Agent Group JSON object
-    GET {BASE_URL}api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}
 
-    # Modify `groupName` and `PUT` JSON object
-    PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents
+    Authorization: Bearer <ringcxAccessToken>
     Content-Type: application/json
 
     {
-        "firstName":"My New First Name"
-        ...
+      "firstName": "Ada",
+      "lastName": "Lovelace",
+      "email": "ada@example.com",
+      "username": "ada.lovelace",
+      "password": "<temporaryPassword>",
+      "agentType": "AGENT",
+      "agentRank": 12,
+      "initLoginBaseState": "AVAILABLE",
+      "initLoginBaseStateId": 11786,
+      "ghostRnaAction": "AVAILABLE",
+      "allowInbound": true,
+      "allowOutbound": true,
+      "enableSoftphone": true,
+      "maxChats": 0
     }
     ```
-=== "Node JS"
-    ```javascript
-    /****** Install Node JS SDK wrapper *******
-    $ npm install ringcentral-engage-voice-client
-    *******************************************/
 
-    const RunRequest = async function () {
-        const EngageVoice = require('ringcentral-engage-voice-client').default
-
-        // Instantiate the SDK wrapper object with your RingCentral app credentials
-        const ev = new EngageVoice({
-            clientId: "RINGCENTRAL_CLIENTID",
-            clientSecret: "RINGCENTRAL_CLIENTSECRET"
-        })
-
-        try {
-            // Authorize with your RingCentral Office user credentials
-            await ev.authorize({
-                username: "RINGCENTRAL_USERNAME",
-                extension: "RINGCENTRAL_EXTENSION",
-                password: "RINGCENTRAL_PASSWORD"
-            })
-
-            // Get Agent Groups data
-            const agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
-            const agentGroupsResponse = await ev.get(agentGroupsEndpoint)
-            for (var group of agentGroupsResponse.data) {
-                // Update the Agent
-                if (group.groupName == "My New Agent Group") {
-                    const agentsEndpoint = agentGroupsEndpoint + "/" + group.agentGroupId + "/agents"
-                    const agentsResponse = await ev.get(agentsEndpoint)
-                    for (var agent of agentsResponse.data) {
-                        if (agent.username == "{existingAgentUsername}") {
-                            const singleAgentEndpoint = agentsEndpoint + "/" + agent.agentId
-                            agent.firstName = "{agentNewUsername}"
-                            const singleAgentResponse = await ev.put(singleAgentEndpoint, agent)
-                            console.log(singleAgentResponse.data)
-                        }
-                    }
-                }
-            }
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-    }
-
-    RunRequest();
-    ```
 === "Python"
+
     ```python
-    #### Install Python SDK wrapper ####
-    # $ pip3 install ringcentral_engage_voice
-    #  or
-    # $ pip install ringcentral_engage_voice
-    #####################################
+    import requests
 
-    ffrom ringcentral_engage_voice import RingCentralEngageVoice
+    account_id = "<accountId>"
+    agent_group_id = "<agentGroupId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "firstName": "Ada",
+        "lastName": "Lovelace",
+        "email": "ada@example.com",
+        "username": "ada.lovelace",
+        "password": "<temporaryPassword>",
+        "agentType": "AGENT",
+        "agentRank": 12,
+        "initLoginBaseState": "AVAILABLE",
+        "initLoginBaseStateId": 11786,
+        "ghostRnaAction": "AVAILABLE",
+        "allowInbound": True,
+        "allowOutbound": True,
+        "enableSoftphone": True,
+        "maxChats": 0,
+    }
 
-    def update_agent():
-        try:
-            agentGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/agentGroups"
-            agentGroupsResponse = ev.get(agentGroupsEndpoint).json()
-            for group in agentGroupsResponse:
-                # Find your Agent Group
-                if group['groupName'] == "My New Agent Group":
-                    agentsEndpoint = f"{agentGroupsEndpoint}/{group['agentGroupId']}/agents"    # f         string:https://www.python.org/dev/peps/pep-0498/
-                    agentsResponse = ev.get(agentsEndpoint).json()
-                    for agent in agentsResponse:
-                        # Update your Agent
-                        if agent['username'] == "{existingAgentUsername}":
-                            singleAgentEndpoint = f"{agentsEndpoint}/{agent['agentId']}"
-                            agent['firstName'] = "{agentNewUsername}"
-                            singleAgentResponse = ev.put(singleAgentEndpoint, agent).json()
-                            print(singleAgentResponse)
-                            break
-        except Exception as e:
-            print(e)
-
-
-    # Instantiate the SDK wrapper object with your RingCentral app credentials
-    ev = RingCentralEngageVoice(
-        "RINGCENTRAL_CLIENTID",
-        "RINGCENTRAL_CLIENTSECRET")
-
-    try:
-        # Authorize with your RingCentral Office user credentials
-        ev.authorize(
-            username="RINGCENTRAL_USERNAME",
-            password="RINGCENTRAL_PASSWORD",
-            extension="RINGCENTRAL_EXTENSION"
-        )
-
-        update_agent()
-    except Exception as e:
-        print(e)
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/agentGroups/{agent_group_id}/agents",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
     ```
 
-## Delete Agent
+=== "JavaScript"
 
-### Request
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+    ```javascript
+    const accountId = "<accountId>";
+    const agentGroupId = "<agentGroupId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      firstName: "Ada",
+      lastName: "Lovelace",
+      email: "ada@example.com",
+      username: "ada.lovelace",
+      password: "<temporaryPassword>",
+      agentType: "AGENT",
+      agentRank: 12,
+      initLoginBaseState: "AVAILABLE",
+      initLoginBaseStateId: 11786,
+      ghostRnaAction: "AVAILABLE",
+      allowInbound: true,
+      allowOutbound: true,
+      enableSoftphone: true,
+      maxChats: 0
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/agentGroups/${agentGroupId}/agents`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        firstName: "Ada",
+        lastName: "Lovelace",
+        email: "ada@example.com",
+        username: "ada.lovelace",
+        password: "<temporaryPassword>",
+        agentType: "AGENT",
+        agentRank: 12,
+        initLoginBaseState: "AVAILABLE",
+        initLoginBaseStateId: 11786,
+        ghostRnaAction: "AVAILABLE",
+        allowInbound: true,
+        allowOutbound: true,
+        enableSoftphone: true,
+        maxChats: 0
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "firstName": "Ada",
+        "lastName": "Lovelace",
+        "email": "ada@example.com",
+        "username": "ada.lovelace",
+        "password": "<temporaryPassword>",
+        "agentType": "AGENT",
+        "agentRank": 12,
+        "initLoginBaseState": "AVAILABLE",
+        "initLoginBaseStateId": 11786,
+        "ghostRnaAction": "AVAILABLE",
+        "allowInbound": True,
+        "allowOutbound": True,
+        "enableSoftphone": True,
+        "maxChats": 0,
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents",
+        payload,
+    ).json()
+    print(response)
+    ```
+
+??? example "Response example"
+
+    ```json
+    {
+      "agentId": 1234567,
+      "firstName": "Ada",
+      "lastName": "Lovelace",
+      "username": "ada.lovelace",
+      "agentType": "AGENT",
+      "agentRank": 12,
+      "initLoginBaseState": "AVAILABLE",
+      "initLoginBaseStateId": 11786,
+      "allowInbound": true,
+      "allowOutbound": true,
+      "enableSoftphone": true,
+      "maxChats": 0,
+      "isActive": true
+    }
+    ```
+
+### Common Fields
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `username` | Yes | Agent login username. |
+| `password` | Yes | Initial password when creating a direct-login agent. |
+| `firstName` / `lastName` | No | Agent name. |
+| `email` | No | Agent email address. |
+| `externalAgentId` | No | External identifier used by your user-management system. |
+| `agentType` | No | `AGENT` or `SUPERVISOR`. |
+| `agentRank` | No | Routing rank. Higher rank values can receive higher priority. |
+| `initLoginBaseState` | No | Initial base state used when the agent logs in, such as `AVAILABLE`. |
+| `initLoginBaseStateId` | No | Account aux-state ID for the agent's initial login state. |
+| `ghostRnaAction` | No | State action used after a ghost RNA event. |
+| `allowInbound` | No | Whether the agent can receive inbound calls. |
+| `allowOutbound` | No | Whether the agent can make outbound calls. |
+| `enableSoftphone` | No | Whether softphone login is enabled. |
+| `defaultLoginDest` | No | Default login destination. |
+| `phoneLoginPin` | No | PIN for phone login workflows. |
+
+Use the account aux-states endpoint to find valid initial-state values. The response includes `stateId` and `agentAuxState`; use those values for `initLoginBaseStateId` and `initLoginBaseState`.
+
+### Initial State Values
+
+Use `active=1` to return active aux states for the account.
+
+```http
+GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/auxStates?active=1
+Authorization: Bearer <ringcxAccessToken>
+Accept: application/json
+```
+
+```json
+[
+  {
+    "stateId": 11786,
+    "agentAuxState": "AVAILABLE",
+    "baseAgentState": {
+      "colKey": "AVAILABLE"
+    },
+    "isActive": true,
+    "isAgentSelectable": true
+  }
+]
+```
+
+## Retrieve Agents
 
 === "HTTP"
-    ```html
-    DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}`
+
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
     ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    agent_group_id = "<agentGroupId>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/agentGroups/{agent_group_id}/agents",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Accept": "application/json",
+        },
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const agentGroupId = "<agentGroupId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/agentGroups/${agentGroupId}/agents`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          Accept: "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const response = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents"
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    response = ev.get(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents"
+    ).json()
+    print(response)
+    ```
+
+Use the returned `agentId` when retrieving, updating, or deleting one agent.
+
+??? example "Response example"
+
+    ```json
+    [
+      {
+        "agentId": 1234567,
+        "firstName": "Ada",
+        "lastName": "Lovelace",
+        "username": "ada.lovelace",
+        "agentType": "AGENT",
+        "initLoginBaseState": "AVAILABLE",
+        "initLoginBaseStateId": 11786,
+        "allowInbound": true,
+        "allowOutbound": true,
+        "isActive": true
+      }
+    ]
+    ```
+
+=== "HTTP"
+
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    agent_group_id = "<agentGroupId>"
+    agent_id = "<agentId>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/agentGroups/{agent_group_id}/agents/{agent_id}",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Accept": "application/json",
+        },
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const agentGroupId = "<agentGroupId>";
+    const agentId = "<agentId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/agentGroups/${agentGroupId}/agents/${agentId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          Accept: "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const response = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}"
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    response = ev.get(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}"
+    ).json()
+    print(response)
+    ```
+
+??? example "Response example"
+
+    ```json
+    {
+      "agentId": 1234567,
+      "firstName": "Ada",
+      "lastName": "Lovelace",
+      "username": "ada.lovelace",
+      "agentType": "AGENT",
+      "agentRank": 12,
+      "initLoginBaseState": "AVAILABLE",
+      "initLoginBaseStateId": 11786,
+      "allowInbound": true,
+      "allowOutbound": true,
+      "enableSoftphone": true,
+      "maxChats": 0,
+      "isActive": true
+    }
+    ```
+
+## Update an Agent
+
+Retrieve the agent first, update the fields you need to change, and submit the updated object with `PUT`.
+
+=== "HTTP"
+
+    ```http
+    PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "agentId": 1234567,
+      "firstName": "Ada",
+      "lastName": "Lovelace",
+      "username": "ada.lovelace",
+      "agentType": "SUPERVISOR",
+      "allowInbound": true,
+      "allowOutbound": true,
+      "isActive": true
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    agent_group_id = "<agentGroupId>"
+    agent_id = "<agentId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "agentId": 1234567,
+        "firstName": "Ada",
+        "lastName": "Lovelace",
+        "username": "ada.lovelace",
+        "agentType": "SUPERVISOR",
+        "allowInbound": True,
+        "allowOutbound": True,
+        "isActive": True,
+    }
+
+    response = requests.put(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/agentGroups/{agent_group_id}/agents/{agent_id}",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const agentGroupId = "<agentGroupId>";
+    const agentId = "<agentId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      agentId: 1234567,
+      firstName: "Ada",
+      lastName: "Lovelace",
+      username: "ada.lovelace",
+      agentType: "SUPERVISOR",
+      allowInbound: true,
+      allowOutbound: true,
+      isActive: true
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/agentGroups/${agentGroupId}/agents/${agentId}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        agentId: 1234567,
+        firstName: "Ada",
+        lastName: "Lovelace",
+        username: "ada.lovelace",
+        agentType: "SUPERVISOR",
+        allowInbound: true,
+        allowOutbound: true,
+        isActive: true
+      };
+
+      const response = await ev.put(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "agentId": 1234567,
+        "firstName": "Ada",
+        "lastName": "Lovelace",
+        "username": "ada.lovelace",
+        "agentType": "SUPERVISOR",
+        "allowInbound": True,
+        "allowOutbound": True,
+        "isActive": True,
+    }
+
+    response = ev.put(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}",
+        payload,
+    ).json()
+    print(response)
+    ```
+
+??? example "Response example"
+
+    ```json
+    {
+      "agentId": 1234567,
+      "firstName": "Ada",
+      "lastName": "Lovelace",
+      "username": "ada.lovelace",
+      "agentType": "SUPERVISOR",
+      "allowInbound": true,
+      "allowOutbound": true,
+      "isActive": true
+    }
+    ```
+
+## Supporting Lookup APIs
+
+Use these endpoints to find IDs referenced by agent configuration.
+
+| Lookup | Method and path |
+| --- | --- |
+| Agent groups | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups` |
+| Initial state and aux-state IDs | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/auxStates?active=1` |
+| Dial groups | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/withChildren` |
+| Queue groups and queues | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/withChildren` |
+| Agent access to a queue | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/gateGroups/{gateGroupId}/gates/{gateId}` |
+
+## Delete an Agent
+
+=== "HTTP"
+
+    ```http
+    DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}
+    Authorization: Bearer <ringcxAccessToken>
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    agent_group_id = "<agentGroupId>"
+    agent_id = "<agentId>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.delete(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/agentGroups/{agent_group_id}/agents/{agent_id}",
+        headers={"Authorization": f"Bearer {access_token}"},
+    )
+    response.raise_for_status()
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const agentGroupId = "<agentGroupId>";
+    const agentId = "<agentId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/agentGroups/${agentGroupId}/agents/${agentId}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${accessToken}` }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      await ev.delete(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}"
+      );
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    ev.delete(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}"
+    )
+    ```
+
+Delete an agent only after confirming that the agent is no longer needed for queues, campaigns, reports, or supervisor workflows.

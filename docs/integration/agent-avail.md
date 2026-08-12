@@ -9,9 +9,57 @@ Supervisors want to have clear and reliable metrics to assess agent availability
 
 Be sure to set the proper [BASE_URL](../basics/uris.md#resources-and-parameters) and [authorization header](../authentication/auth-ringcentral.md) for your deployment.
 
-```http
-GET {BASE_URL}/cx/routing/v1/sub-accounts/{subAccountId}/queues/{queueId}/availability?queueType=Voice
-```
+=== "HTTP"
+
+    ```http
+    GET {BASE_URL}/cx/routing/v1/sub-accounts/{subAccountId}/queues/{queueId}/availability?queueType=Voice
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    base_url = "{BASE_URL}"
+    sub_account_id = "<subAccountId>"
+    queue_id = "<queueId>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.get(
+        f"{base_url}/cx/routing/v1/sub-accounts/{sub_account_id}/queues/{queue_id}/availability",
+        params={"queueType": "Voice"},
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Accept": "application/json",
+        },
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const baseUrl = "{BASE_URL}";
+    const subAccountId = "<subAccountId>";
+    const queueId = "<queueId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `${baseUrl}/cx/routing/v1/sub-accounts/${subAccountId}/queues/${queueId}/availability?queueType=Voice`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          Accept: "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
 ## Parameters
 

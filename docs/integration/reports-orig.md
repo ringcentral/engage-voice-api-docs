@@ -20,8 +20,8 @@ Data availability is subject to a propagation delay while interactions are final
 * **Processing Buffer:** For interaction metadata and recordings, it is recommended to allow a 15-minute window for all media processing to complete.
 
 !!! important "Rate Limiting & Stability"
-    * **Limit:** Requests are limited to **2 calls per minute**.
-    * **Strategy:** If the API returns a `429 Too Many Requests` status code, implement an **exponential backoff** strategy for subsequent retry attempts. This strategy involves doubling the delay after each consecutive 429 error (e.g., 1s, 2s, 4s...) rather than retrying at fixed intervals.
+    * **Limit:** Integration reporting and aggregate-statistics requests are throttled per RingCX sub-account. Stay within both limits: **3 requests per 60 seconds** and **9 requests per 15 minutes**.
+    * **Strategy:** Treat these as low-frequency reporting exports, not high-frequency polling endpoints. Cache results, request completed time windows, and use exponential backoff on `429 Too Many Requests` responses.
 
 ### Required Permissions & Scopes
 
@@ -40,6 +40,8 @@ To successfully call the API, your RingCX account must be configured with **WEM 
 The **Interaction Metadata** API is used to reconstruct the complete "story" of a customer journey. While a standard report might show a single call, this API breaks that call down into specific **Segments**, representing every participant (Agent, IVR, or Bot) involved.
 
 A user would use this to perform forensic tracking or quality assurance. For example, if a customer was transferred three times, this API provides the metadata for all three segments, including specific timestamps for when each agent joined or left, and the direct URL to the audio recording for that specific portion of the call.
+
+Metadata availability follows the account's configured data retention period. Each request searches a completed lookup window beginning at `segmentEndTime` and continuing forward for `timeInterval` seconds, up to 10800 seconds (3 hours).
 
 * **Reference:** [Interaction Metadata API Details](https://developers.ringcentral.com/engage/voice/api-reference/Public-Integration-API/getInteractionMetadata)
 

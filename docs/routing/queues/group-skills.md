@@ -1,296 +1,542 @@
-# About Queue Group Skills
+# Group Skills
 
-Creating group skills is the first step in the process of assigning skills to your agents. After you create group skills, you’ll also need to add these skills (via Queue Events) to any queue that you assign these agents to.  First create the [Queue Group](queue-groups.md) and then define the Group Skill.  Later, you will assign this Group Skill to the desired [Agent](../../users/agents/agents.md).
+Group skills are queue-group-level skills that can be assigned to agents and used by queue routing. Create the [queue group](queue-groups.md) first, then create the group skills that belong to that queue group.
 
-## Create Groups Skills
+## Manage Group Skills
 
-Create a set of new Group Skills using the `skills` endpoint. Only the Queue Group name is required. You can create multiple Group Skills with this command.  To create only a single Group Skill, create an array with only a single entry.
+The API path uses `gateGroups` because queue groups are represented as gate groups in the API.
 
-### Primary Parameters
-Only `gateName` is a required parameter to create a Queue. All other parameters are optional.
+| Operation | Method and path |
+| --- | --- |
+| List group skills | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills` |
+| Get group skill | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}` |
+| Create group skill | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills` |
+| Update group skills | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills` |
+| Update one group skill | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}` |
+| Delete group skill | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}` |
 
-| API Property |  | UI Display | UI Default | Description |
-|-|-|-|-|-|
-| **`skillId`** | Optional | ID | 0 | A Group Skill unique ID. If not provided an available skill ID will be created for you. |
-| **`skillName`** | Required | Name | *empty* | Give this skill a name that will be assigned to this Queue Group. |
-| **`skillDesc`** | Optional | Description | *empty* | Provide a short description of the skill. |
-| **`active`** | Optional | Active | Yes | Set this skill to Active by setting it to `true`. |
-| **`whisperAudio`** | Optional | **None** | *empty* | A link to the short audio file that plays a message to the agent as they connect with a customer. The audio may inform the agent about the incoming call, or prompt the agent to accept the call. |
-| **`createOn`** | Optional | Created | *current date* | A date in Simple Date Format. |
-| **`agentSkillProfiles`** | Optional | **None** | *empty* | Custom skills defined and bound to an Agent to redirect these queues to. |
-| **`requeueShortcut`** | Optional | **None** | *empty* | Allow agents to manually send their current call to a specific inbound queue, or to another agent with a special skill. |
+## SDK Setup
 
-### Sample request
+SDK examples in this article use JWT authentication and load credentials from environment variables.
 
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+=== "JavaScript"
 
-```http
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
-Content-Type: application/json
+    ```bash
+    npm install ringcentral-engage-voice-client dotenv
+    ```
 
-[
-  {
-    "skillName":"Spanish Language",
-    "skillDesc":"A test skill for Spanish",
-    "active":true,
-  },
-  {
-    "skillName":"French Language",
-    "skillDesc":"A test skill for French",
-    "active":true,
-  }
-]
+=== "Python"
+
+    ```bash
+    pip3 install ringcentral_engage_voice python-dotenv
+    ```
+
+Create a `.env` file in the directory where you run the sample:
+
+```text
+RC_CLIENT_ID=<clientId>
+RC_CLIENT_SECRET=<clientSecret>
+RC_JWT=<jwt>
 ```
 
-### Sample response
+The SDK wrapper reads these values, signs in with RingCentral, and exchanges the RingCentral access token for a RingCX access token before calling RingCX APIs.
 
-```json
-[
-  {
-    "skillId":1455,
-    "skillName":"Spanish Language",
-    "skillDesc":"A test skill for Spanish",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T16:53:17.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  },
-  {
-    "skillId":1456,
-    "skillName":"French Language",
-    "skillDesc":"A test skill for French",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T17:25:13.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  }
-]
-```
+## Create a Group Skill
+
+Create one group skill by sending a skill object.
+
+=== "HTTP"
+
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "skillName": "Spanish Language",
+      "skillDesc": "Spanish-language support",
+      "active": true
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    gate_group_id = "<gateGroupId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "skillName": "Spanish Language",
+        "skillDesc": "Spanish-language support",
+        "active": True,
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/skills",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const gateGroupId = "<gateGroupId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      skillName: "Spanish Language",
+      skillDesc: "Spanish-language support",
+      active: true
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/skills`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        skillName: "Spanish Language",
+        skillDesc: "Spanish-language support",
+        active: true
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "skillName": "Spanish Language",
+        "skillDesc": "Spanish-language support",
+        "active": True,
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills",
+        payload,
+    ).json()
+    print(response)
+    ```
+
+??? example "Response example"
+
+    ```json
+    {
+      "skillId": 1455,
+      "skillName": "Spanish Language",
+      "skillDesc": "Spanish-language support",
+      "active": true
+    }
+    ```
+
+### Common Fields
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `skillName` | Yes | Display name for the skill. |
+| `skillDesc` | No | Short description of the skill. |
+| `active` | No | Whether the skill is available for routing. |
+| `skillId` | No | Group skill ID. Omit it when creating a new skill. |
+| `whisperAudio` | No | Optional audio prompt played to the agent. |
+| `agentSkillProfiles` | No | Agent skill profile associations. |
+| `requeueShortcut` | No | Requeue shortcut association. |
 
 ## Retrieve Group Skills
 
-Retrieve a list of Group Skills using the `skills` endpoint.
+=== "HTTP"
 
-### Sample request
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
 
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+=== "Python"
 
-```html
-GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
-```
+    ```python
+    import requests
 
-### Sample response
+    account_id = "<accountId>"
+    gate_group_id = "<gateGroupId>"
+    access_token = "<ringcxAccessToken>"
 
-```json
-[
-  {
-    "skillId":1455,
-    "skillName":"Spanish Language",
-    "skillDesc":"A test skill for Spanish",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T16:53:17.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  },
-  {
-    "skillId":1456,
-    "skillName":"French Language",
-    "skillDesc":"A test skill for French",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T17:25:13.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  }
-]
-```
+    response = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/skills",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Accept": "application/json",
+        },
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
 
-## Update a list of Group Skills
+=== "JavaScript"
 
-Update a list of Group Skills using the `skills` endpoint.  This `PUT` allows you to update muliple skills for the Queue Group in a single call.
+    ```javascript
+    const accountId = "<accountId>";
+    const gateGroupId = "<gateGroupId>";
+    const accessToken = "<ringcxAccessToken>";
 
-### Sample request
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/skills`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          Accept: "application/json"
+        }
+      }
+    );
 
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
-#### Retrieve the list of current skills as JSON
+=== "JavaScript SDK"
 
-```http hl_lines="7 17 32 42"
-GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
 
-[
-  {
-    "skillId":1455,
-    "skillName":"Spanish Language",
-    "skillDesc":"A test skill for Spanish",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T16:53:17.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  },
-  {
-    "skillId":1456,
-    "skillName":"French Language",
-    "skillDesc":"A test skill for French",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T17:25:13.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  }
-]
-```
-#### Modify a field like `skillDesc` and send back the entire JSON skill object
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
 
-```http
-PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
+      await ev.authorize({ jwt: process.env.RC_JWT });
 
-[
-  {
-    "skillId":1455,
-    "skillName":"Spanish Language",
-    "skillDesc":"A *new* skill for Spanish",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T16:53:17.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  },
-  {
-    "skillId":1456,
-    "skillName":"French Language",
-    "skillDesc":"A *new* skill for French",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T17:25:13.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  }
-]
-```
+      const response = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills"
+      );
+      console.log(response.data);
+    }
 
-### Sample response
+    main().catch(console.error);
+    ```
 
-```json
-[
-  {
-    "skillId":1455,
-    "skillName":"Spanish Language",
-    "skillDesc":"A *new* skill for Spanish",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T16:53:17.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  },
-  {
-    "skillId":1456,
-    "skillName":"French Language",
-    "skillDesc":"A *new* skill for French",
-    "active":true,
-    "whisperAudio":null,
-    "createdOn":"2020-05-19T17:25:13.000+0000",
-    "agentSkillProfiles":null,
-    "requeueShortcut":null
-  }
-]
-```
+=== "Python SDK"
 
-## Retrieve a Single Group Skill
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
 
-Retrieve details of a single Group Skill using the `skills` endpoint.
+    load_dotenv()
 
-### Sample request
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
 
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+    response = ev.get(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills"
+    ).json()
+    print(response)
+    ```
 
-```html
-GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}
-```
+Use the returned `skillId` values when retrieving, updating, or deleting a single skill.
 
-### Sample response
+??? example "Response example"
 
-```json
-{
-  "skillId":1455,
-  "skillName":"Spanish Language",
-  "skillDesc":"A test skill for Spanish",
-  "active":true,
-  "whisperAudio":null,
-  "createdOn":"2020-05-19T16:53:17.000+0000",
-  "agentSkillProfiles":null,
-  "requeueShortcut":null
-}
-```
+    ```json
+    [
+      {
+        "skillId": 1455,
+        "skillName": "Spanish Language",
+        "skillDesc": "Spanish-language support",
+        "active": true
+      }
+    ]
+    ```
 
-## Update a Single Group Skill
+## Update Group Skills
 
-Update a single Group Skill using the `skills` endpoint.  This `PUT` focuses on just a single skill for the Queue Group.
+Retrieve the current skill object first, update the fields that should change, and submit the updated object. Use the collection endpoint for batch updates or the `{skillId}` endpoint for one skill.
 
-### Sample request
+=== "HTTP"
 
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+    ```http
+    PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
 
-#### Retrieve the list of current skills as JSON
+    {
+      "skillId": 1455,
+      "skillName": "Spanish Language",
+      "skillDesc": "Spanish-language support and billing questions",
+      "active": true
+    }
+    ```
 
-```http hl_lines="6"
-GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
+=== "Python"
 
-{
-  "skillId":1455,
-  "skillName":"Spanish Language",
-  "skillDesc":"A test skill for Spanish",
-  "active":true,
-  "whisperAudio":null,
-  "createdOn":"2020-05-19T16:53:17.000+0000",
-  "agentSkillProfiles":null,
-  "requeueShortcut":null
-}
-```
-#### Modify a field like `skillDesc` and send back the entire JSON skill object
+    ```python
+    import requests
 
-```http hl_lines="6"
-PUT {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills
+    account_id = "<accountId>"
+    gate_group_id = "<gateGroupId>"
+    skill_id = "<skillId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "skillId": 1455,
+        "skillName": "Spanish Language",
+        "skillDesc": "Spanish-language support and billing questions",
+        "active": True,
+    }
 
-{
-  "skillId":1455,
-  "skillName":"Spanish Language",
-  "skillDesc":"A *new* skill for Spanish",
-  "active":true,
-  "whisperAudio":null,
-  "createdOn":"2020-05-19T16:53:17.000+0000",
-  "agentSkillProfiles":null,
-  "requeueShortcut":null
-}
-```
+    response = requests.put(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/skills/{skill_id}",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
 
-### Sample response
+=== "JavaScript"
 
-```json
-{
-  "skillId":1455,
-  "skillName":"Spanish Language",
-  "skillDesc":"A *new* skill for Spanish",
-  "active":true,
-  "whisperAudio":null,
-  "createdOn":"2020-05-19T16:53:17.000+0000",
-  "agentSkillProfiles":null,
-  "requeueShortcut":null
-}
-```
+    ```javascript
+    const accountId = "<accountId>";
+    const gateGroupId = "<gateGroupId>";
+    const skillId = "<skillId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      skillId: 1455,
+      skillName: "Spanish Language",
+      skillDesc: "Spanish-language support and billing questions",
+      active: true
+    };
 
-## Delete a Single Skill
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/skills/${skillId}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
 
-Delete a single Skill using the `skills` endpoint.  You can only delete a single skill at a time.
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
-### Sample request
+=== "JavaScript SDK"
 
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
 
-```html
-DELETE {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}
-```
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        skillId: 1455,
+        skillName: "Spanish Language",
+        skillDesc: "Spanish-language support and billing questions",
+        active: true
+      };
+
+      const response = await ev.put(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "skillId": 1455,
+        "skillName": "Spanish Language",
+        "skillDesc": "Spanish-language support and billing questions",
+        "active": True,
+    }
+
+    response = ev.put(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}",
+        payload,
+    ).json()
+    print(response)
+    ```
+
+??? example "Response example"
+
+    ```json
+    {
+      "skillId": 1455,
+      "skillName": "Spanish Language",
+      "skillDesc": "Spanish-language support and billing questions",
+      "active": true
+    }
+    ```
+
+## Delete a Group Skill
+
+=== "HTTP"
+
+    ```http
+    DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}
+    Authorization: Bearer <ringcxAccessToken>
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    gate_group_id = "<gateGroupId>"
+    skill_id = "<skillId>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.delete(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/skills/{skill_id}",
+        headers={"Authorization": f"Bearer {access_token}"},
+    )
+    response.raise_for_status()
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const gateGroupId = "<gateGroupId>";
+    const skillId = "<skillId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/skills/${skillId}`,
+      {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${accessToken}` }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      await ev.delete(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}"
+      );
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    ev.delete(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/skills/{skillId}"
+    )
+    ```
+
+Delete a group skill only after confirming it is no longer referenced by agent skill profiles or queue routing behavior.

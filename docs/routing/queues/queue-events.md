@@ -1,90 +1,381 @@
-# About Queue Events
+# Queue Events
 
-In Creating an inbound [Queue](queues.md), we discussed that inbound queues can be configured to provide the specific experience you want each caller to have while waiting for an agent to take their call. This experience can be configured by creating [Queue Events](queue-events.md), a series of sequential events that the customer will experience once they are routed to the queue.
-
-You can configure queue events to be as simple or complex as you like, from providing hold music for the caller while they wait to providing DTMF input options that the caller can choose from to determine the destination they’d like to route to.
+Queue events define what callers experience while waiting in a queue. Use them for hold music, announcements, wait-time behavior, DTMF input, and priority handling for special caller scenarios.
 
 ## Core Concepts
 
-### Priority Queue Events
+Queue events belong to a specific queue. The API path uses `gateQueueEvents` because queues are represented as `gates` in the API.
 
-You can create queue events that will typically occur in this queue, but you can also create special queue events — that is, priority queue events — that will occur when specific conditions exist, such as when your queue is closed or when the queue has reached the maximum number of calls.
+Priority queue events can be used when specific conditions apply, such as a queue being closed, a queue reaching capacity, or a caller matching a special ANI rule. DTMF events can be attached to a queue event when callers need keypad options during the queue experience.
 
-### Speical ANI and Velocity ANI
+## Manage Queue Events
 
-You can also configure a priority queue event for specific ANIs (Automatic Number Identification) — that is, the phone number of the incoming caller. These priority events allow you to create special queue events for callers that you would like to give special routing priority.
+| Operation | Method and path |
+| --- | --- |
+| List queue events | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents` |
+| Get queue event | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}` |
+| Save queue events | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents` |
+| Update one queue event | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}` |
+| Delete queue event | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}` |
 
-You can create a priority queue event for two different types of ANIs: Special ANI and Velocity ANI. Special ANI priority events can be used for callers you would like to prioritize, such as your VIP customers. Velocity ANI priority events can be used to flag certain ANIs that call a specific amount of times in a certain amount of days. Once a caller has been flagged, the system will send them through the Velocity ANI queue event.
+## SDK Setup
 
-## Create Queue Events
+SDK examples in this article use JWT authentication and load credentials from environment variables.
 
-Queue Events are actually a component of Queues and therefore do not need a `POST` method.  Create the [Queue](queues.md) first and then update the Queue Events details using `PUT` below.
+=== "JavaScript"
+
+    ```bash
+    npm install ringcentral-engage-voice-client dotenv
+    ```
+
+=== "Python"
+
+    ```bash
+    pip3 install ringcentral_engage_voice python-dotenv
+    ```
+
+Create a `.env` file in the directory where you run the sample:
+
+```text
+RC_CLIENT_ID=<clientId>
+RC_CLIENT_SECRET=<clientSecret>
+RC_JWT=<jwt>
+```
+
+The SDK wrapper reads these values, signs in with RingCentral, and exchanges the RingCentral access token for a RingCX access token before calling RingCX APIs.
+
+## Save Queue Events
+
+Create and batch-update queue events by saving the queue's event list.
+
+=== "HTTP"
+
+    ```http
+    PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    [
+      {
+        "eventRank": 0,
+        "queueEvent": "PLAY-AUDIO-LOOP:holdmusic",
+        "eventDuration": 120,
+        "enableDtmf": 0
+      },
+      {
+        "eventRank": 1,
+        "queueEvent": "END-CALL:true",
+        "eventDuration": 0,
+        "enableDtmf": 0
+      }
+    ]
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    gate_group_id = "<gateGroupId>"
+    gate_id = "<gateId>"
+    access_token = "<ringcxAccessToken>"
+    payload = [
+        {
+            "eventRank": 0,
+            "queueEvent": "PLAY-AUDIO-LOOP:holdmusic",
+            "eventDuration": 120,
+            "enableDtmf": 0,
+        },
+        {
+            "eventRank": 1,
+            "queueEvent": "END-CALL:true",
+            "eventDuration": 0,
+            "enableDtmf": 0,
+        },
+    ]
+
+    response = requests.put(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/gates/{gate_id}/gateQueueEvents",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const gateGroupId = "<gateGroupId>";
+    const gateId = "<gateId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = [
+      {
+        eventRank: 0,
+        queueEvent: "PLAY-AUDIO-LOOP:holdmusic",
+        eventDuration: 120,
+        enableDtmf: 0
+      },
+      {
+        eventRank: 1,
+        queueEvent: "END-CALL:true",
+        eventDuration: 0,
+        enableDtmf: 0
+      }
+    ];
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/gates/${gateId}/gateQueueEvents`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = [
+        {
+          eventRank: 0,
+          queueEvent: "PLAY-AUDIO-LOOP:holdmusic",
+          eventDuration: 120,
+          enableDtmf: 0
+        },
+        {
+          eventRank: 1,
+          queueEvent: "END-CALL:true",
+          eventDuration: 0,
+          enableDtmf: 0
+        }
+      ];
+
+      const response = await ev.put(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = [
+        {
+            "eventRank": 0,
+            "queueEvent": "PLAY-AUDIO-LOOP:holdmusic",
+            "eventDuration": 120,
+            "enableDtmf": 0,
+        },
+        {
+            "eventRank": 1,
+            "queueEvent": "END-CALL:true",
+            "eventDuration": 0,
+            "enableDtmf": 0,
+        },
+    ]
+
+    response = ev.put(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents",
+        payload,
+    ).json()
+    print(response)
+    ```
+
+??? example "Response example"
+
+    ```json
+    [
+      {
+        "eventId": 67882,
+        "eventRank": 0,
+        "queueEvent": "PLAY-AUDIO-LOOP:holdmusic",
+        "eventDuration": 120,
+        "enableDtmf": 0
+      },
+      {
+        "eventId": 67883,
+        "eventRank": 1,
+        "queueEvent": "END-CALL:true",
+        "eventDuration": 0,
+        "enableDtmf": 0
+      }
+    ]
+    ```
+
+### Common Fields
+
+| Field | Required | Description |
+| --- | --- | --- |
+| `eventId` | No | Queue event ID. Omit it when creating a new event. |
+| `eventRank` | Yes | Order in which queue events are evaluated or played. |
+| `queueEvent` | No | Event action or audio behavior. |
+| `eventDuration` | No | Duration, in seconds, for time-based queue event behavior. |
+| `enableDtmf` | No | Whether the event accepts DTMF input. |
+| `active` | No | Whether the event is active. |
 
 ## Retrieve Queue Events
 
-Retrieve a list of Queue Events set on this [Queue](queues.md).
+=== "HTTP"
 
-### Sample request
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
 
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+=== "Python"
 
-```http
-GET {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
-```
+    ```python
+    import requests
 
-### Sample response
+    account_id = "<accountId>"
+    gate_group_id = "<gateGroupId>"
+    gate_id = "<gateId>"
+    access_token = "<ringcxAccessToken>"
 
-```json
-{!> code-samples/routing/queue-events-response.json !}
-```
+    response = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/gateGroups/{gate_group_id}/gates/{gate_id}/gateQueueEvents",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Accept": "application/json",
+        },
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
 
-## Update Queue Events
+=== "JavaScript"
 
-Modify Queue Events using the `gateQueueEvents` endpoint.  You can modify multiple Queue Events with this command.  To modify only a single Queue Event, use the `gateQueueEvents` with your specific `eventId`.
+    ```javascript
+    const accountId = "<accountId>";
+    const gateGroupId = "<gateGroupId>";
+    const gateId = "<gateId>";
+    const accessToken = "<ringcxAccessToken>";
 
-### Primary Parameters
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/gateGroups/${gateGroupId}/gates/${gateId}/gateQueueEvents`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          Accept: "application/json"
+        }
+      }
+    );
 
-Only `gateName` is a required parameter to create a Queue. All other parameters are optional.
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
 
-| API Property |  | UI Display | UI Default | Description |
-|-|-|-|-|-|
-| **`eventId`** | Optional | ID | *hidden* | A Queue Event unique ID. If not provided an available event ID will be created for you. |
-| **`eventRank`** | Required | Rank | 0 | A priority ranking for the order in which Queue Events should be executed. |
-| **`queueEvent`** | Optional | Single Play Audio | *empty* | Provide a short description of the skill. |
-| **`active`** | Optional | Active | Yes | Set this skill to Active by setting it to `true`. |
-| **`whisperAudio`** | Optional | **None** | *empty* | A link to the short audio file that plays a message to the agent as they connect with a customer. The audio may inform the agent about the incoming call, or prompt the agent to accept the call. |
-| **`createOn`** | Optional | Created | *current date* | A date in Simple Date Format. |
-| **`agentSkillProfiles`** | Optional | **None** | *empty* | Custom skills defined and bound to an Agent to redirect these queues to. |
-| **`requeueShortcut`** | Optional | **None** | *empty* | Allow agents to manually send their current call to a specific inbound queue, or to another agent with a special skill. |
+=== "JavaScript SDK"
 
-### Sample request
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
 
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
 
-```http
-POST {BASE_URL}/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents
-Content-Type: application/json
+      await ev.authorize({ jwt: process.env.RC_JWT });
 
-[
-  {
-    "eventId":67882,
-    "eventRank":0,
-    "queueEvent":"PLAY-AUDIO-LOOP:holdmusic",
-    "eventDuration":120,
-    "enableDtmf":0
-  },
-  {
-    "eventId":67883,
-    "eventRank":1,
-    "queueEvent":"END-CALL:true",
-    "eventDuration":0,
-    "enableDtmf":0
-  }
-]    
-```
+      const response = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents"
+      );
+      console.log(response.data);
+    }
 
-### Sample response
+    main().catch(console.error);
+    ```
 
-```json
-{!> code-samples/routing/queue-events-response.json !}
-```
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    response = ev.get(
+        "/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents"
+    ).json()
+    print(response)
+    ```
+
+Use the returned `eventId` values when updating or deleting a single queue event.
+
+??? example "Response example"
+
+    ```json
+    [
+      {
+        "eventId": 67882,
+        "eventRank": 0,
+        "queueEvent": "PLAY-AUDIO-LOOP:holdmusic",
+        "eventDuration": 120,
+        "enableDtmf": 0
+      }
+    ]
+    ```
+
+## DTMF Events
+
+DTMF events belong to a queue event and define keypad behavior for callers.
+
+| Operation | Method and path |
+| --- | --- |
+| List DTMF events | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}/gateQueueDtmfEvents` |
+| Create DTMF events | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}/gateQueueDtmfEvents` |
+| Update DTMF events | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}/gateQueueDtmfEvents` |
+| Update one DTMF event | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}/gateQueueDtmfEvents/{dtmfEventId}` |
+| Delete DTMF event | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/{gateGroupId}/gates/{gateId}/gateQueueEvents/{eventId}/gateQueueDtmfEvents/{dtmfEventId}` |
+
+Configure the parent queue event before adding DTMF options.
