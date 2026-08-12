@@ -64,7 +64,7 @@ A Webhook is triggered as an event for a certain condition. For details in [sett
     Some calls may have multiple agent sessions (legs or segments). For example, when an agent transfers a call, the agent's segment may end prior to the end of a call. In these instances, a call can be comprised of multiple agent segments. Since there is a recording per agent segment, it's better to receive each recording separately to know which agent segment the recording belongs to.<br>
     <img class="img-fluid" width="738" src="../../images/web-services-agent-sessions.png">
 
-That's all! Go ahead and test your web service and webhook out by making a call to your queue. Once you hang up the call, the event will trigger and the message is sent to your endpoint.
+Test the web service and webhook by making a call to the queue. After the call ends, the event triggers and sends the message to your endpoint.
 
 ### Special Case of Agent Recordings (Dual Channel)
 
