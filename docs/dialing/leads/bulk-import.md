@@ -1,382 +1,681 @@
-# About Lead Loader API
+# Bulk Import Leads
 
-The RingCX API allows you to load one or multiple leads at a time. You can also load leads for immediate dialing at the top of the dialer cache or in normal priority.
+Use the lead loader APIs to add leads to an outbound campaign. RingCX supports direct JSON loading and a preview/process flow for uploaded files.
 
-!!! alert "Please Note"
-    To enumerate a list of Campaigns for the `campaignId` path property, please review section [Enumerating Campaigns](#enumerating-campaigns) below.
+## SDK Setup
 
-The JSON body consists of a set of options along with an array of leads in the `uploadLeads` property
+SDK examples in this article use JWT authentication and load credentials from environment variables.
 
-## Primary parameters
+=== "JavaScript"
 
-Some key options for the request body include:
+    ```bash
+    npm install ringcentral-engage-voice-client dotenv
+    ```
 
-| Property | | Description |
-|-|-|-|
-| **dialPriority** | Required | set this value to `IMMEDIATE` to add leads to the top of the dialer queue, `NORMAL` otherwise. |
-| **duplicateHandling** | Required | Duplicates are determined by the lead's `leadPhone` property.<ul><li>`REMOVE_ALL_EXISTING` means to remove the new lead in this batch in favor of the existing lead in any list in the campaign (as long as that lead in the existing lead list was already added with this same property). This means that the lead was already loaded into one of the lists within the campaign using `REMOVE_ALL_EXISTING` previously.</li><li>`REMOVE_FROM_LIST` looks for duplicate leads in the list being uploaded. It does not remove duplicates in the lead list that has already been imported previously.</li><li>`RETAIN_ALL` means to keep all duplicates.</li></ul> |
-| **timeZoneOption** | Required | this field tells the Engage how to set the timezone for the user. Use `NPA_NXX` to set the timezone via the lead's phone number. Use `ZIPCODE` to set the timezone via the lead's zipcode. Use `EXPLICIT` to set the timezone via the `CampaignLead` object's `leadTimezone` property. Finally, use `NOT_APPLICABLE` if there is no timezone desired. |
-| **numberOriginCountry** | Required(conditionally) | this is a required field if the international outbound calling feature is enabled for the account. |
+=== "Python"
 
-Each load in the `uploadLeads` array consists of a lead with the following notable options:
+    ```bash
+    pip3 install ringcentral_engage_voice python-dotenv
+    ```
 
-| Property | Description |
-|-|-|
-| **externId** | this is a required string property. |
-| **leadPhone** | this can be a single phone number or a pipe-deliminted field of multiple phone numbers. For US numbers, this is a 10 digit format including area code. |
+Create a `.env` file in the directory where you run the sample:
 
-!!! info "Persona-based multiple phone numbers"
-    For strategic campaigns that need labeled phone types, such as mobile, home, or work, use [Lead Phone Persona Management](phone-persona-management.md). Persona-based lead loading keeps the primary number in `leadPhone` and maps additional phone numbers to configured phone personas.
+```text
+RC_CLIENT_ID=<clientId>
+RC_CLIENT_SECRET=<clientSecret>
+RC_JWT=<jwt>
+```
 
-## Enumerating Campaigns
+The SDK wrapper reads these values, signs in with RingCentral, and exchanges the RingCentral access token for a RingCX access token before calling RingCX APIs.
 
-Leads are uploaded per Campaign which requires a `campaignId`. The following two API calls will enable enumerating the account's campaign list.
+## Find the Campaign
 
-1. Call the Get Dial Groups API to get a list of dial groups. Each dial group will have a `dialGroupId` property.
-
-     `GET /api/v1/admin/accounts/{accountId}/dialGroups`
-
-2. For the Dial Group of interest, call the Get Dial Group Campaigns API:
-
-     `GET /api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns`
-
-## Upload Leads for a campaign
-
-To upload leads for a campaign, we will need a campaign Id. As campaigns are members of a dialing group.
-
-## Enumerating Campaigns and Uploading Leads
-
-### Request
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+Before loading leads, identify the target campaign:
 
 === "HTTP"
+
     ```http
-    POST {baseURL}/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct
-    Authorization: Bearer <yourAccessToken>
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    dial_group_id = "<dialGroupId>"
+    access_token = "<ringcxAccessToken>"
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Accept": "application/json",
+    }
+
+    dial_groups = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups",
+        headers=headers,
+    )
+    dial_groups.raise_for_status()
+
+    campaigns = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups/{dial_group_id}/campaigns",
+        headers=headers,
+    )
+    campaigns.raise_for_status()
+
+    print(dial_groups.json())
+    print(campaigns.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const dialGroupId = "<dialGroupId>";
+    const accessToken = "<ringcxAccessToken>";
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+      Accept: "application/json"
+    };
+
+    const dialGroups = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups`,
+      { headers }
+    );
+    if (!dialGroups.ok) throw new Error(await dialGroups.text());
+
+    const campaigns = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups/${dialGroupId}/campaigns`,
+      { headers }
+    );
+    if (!campaigns.ok) throw new Error(await campaigns.text());
+
+    console.log(await dialGroups.json());
+    console.log(await campaigns.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const dialGroups = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/dialGroups"
+      );
+      const campaigns = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns"
+      );
+
+      console.log(dialGroups.data);
+      console.log(campaigns.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    dial_groups = ev.get(
+        "/api/v1/admin/accounts/{accountId}/dialGroups"
+    ).json()
+    campaigns = ev.get(
+        "/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns"
+    ).json()
+
+    print(dial_groups)
+    print(campaigns)
+    ```
+
+Use the returned `campaignId` in the lead loader path.
+
+## Choose an Import Method
+
+| Method | Use when | Endpoint |
+| --- | --- | --- |
+| Direct lead loading | Your integration already has structured lead records and can send them as JSON. | `POST /voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct` |
+| File preview and process | Users upload a CSV, Excel, pipe-delimited, or tab-delimited file and need to map file columns before loading. | `POST /voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/preview`, then `POST /voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process` |
+
+## Direct Lead Loading
+
+Direct loading sends leads as JSON and is the simplest option when your integration already has structured lead data.
+
+=== "HTTP"
+
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
 
     {
-        "description": "Prospect customers",
-        "dialPriority": "IMMEDIATE",
+      "description": "Renewal leads",
+      "dialPriority": "NORMAL",
+      "duplicateHandling": "REMOVE_FROM_LIST",
+      "listState": "ACTIVE",
+      "timeZoneOption": "NOT_APPLICABLE",
+      "uploadLeads": [
+        {
+          "externId": "lead-1001",
+          "leadPhone": "4155550100",
+          "leadPhoneE164": "+14155550100",
+          "firstName": "Ada",
+          "lastName": "Lovelace",
+          "email": "ada@example.com",
+          "state": "CA",
+          "zip": "94105",
+          "leadPriority": 5,
+          "maxPasses": 3,
+          "callerId": "4155550199",
+          "auxData1": "renewal"
+        }
+      ]
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    campaign_id = "<campaignId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "description": "Renewal leads",
+        "dialPriority": "NORMAL",
         "duplicateHandling": "REMOVE_FROM_LIST",
         "listState": "ACTIVE",
         "timeZoneOption": "NOT_APPLICABLE",
-        "phoneNumbersI18nEnabled": true,
-        "internationalNumberFormat": false,
         "uploadLeads": [
-          {
-             "leadPhone":"1111111111",
-             "externId":"1",
-             "title":"Dr.",
-             "firstName":"Jeff",
-             "midName":"John",
-             "lastName":"Malfetti",
-             "suffix":"Jr.",
-             "address1":"3101 Fake St.",
-             "address2":"Suite 120",
-             "city":"Rock",
-             "state":"CO",
-             "zip":"80500",
-             "email":"test@test.com",
-             "gateKeeper":"Some one",
-             "auxData1":30,
-             "auxData2":"a",
-             "auxData3":100,
-             "auxData4":"aa",
-             "auxData5":1000,
-             "auxPhone":"1111111110",
-             "extendedLeadData":{
-                "important":"data",
-                "interested":true
-             }
-          },{
-             "leadPhone":"2222222222",
-             "externId":"222",
-             "firstName":"Jason",
-             "midName":"",
-             "lastName":"Black",
-             "address1":"1514 Bernardo Ave",
-             "city":"New York",
-             "state":"NY",
-             "zip":"10001",
-          },{
-             "leadPhone":"3333333333",
-             "externId":"333",
-             "firstName":"Rich",
-             "lastName":"Dunbard"
-          }
-        ],
-       "dncTags":[
-      
-       ]
-    }
-    ```
-=== "Node JS"
-    ```javascript
-    /****** Install Node JS SDK wrapper *******
-    $ npm install ringcentral-engage-voice-client
-    *******************************************/
-
-    const RunRequest = async function () {
-        const EngageVoice = require('ringcentral-engage-voice-client').default
-
-        // Instantiate the SDK wrapper object with your RingCentral app credentials
-        const ev = new EngageVoice({
-            clientId: "RINGCENTRAL_CLIENTID",
-            clientSecret: "RINGCENTRAL_CLIENTSECRET"
-        })
-
-        try {
-            // Authorize with your RingCentral Office user credentials
-            await ev.authorize({
-                username: "RINGCENTRAL_USERNAME",
-                extension: "RINGCENTRAL_EXTENSION",
-                password: "RINGCENTRAL_PASSWORD"
-            })
-
-            // Get Dial Groups data
-            const groupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-            const groupsResponse = await ev.get(groupsEndpoint)
-            for (var group of groupsResponse.data) {
-                // Select your Dial Group
-                if (group.dialGroupName == "My New Dial Group") {
-                    const campaignsEndpoint = groupsEndpoint + "/" + group.dialGroupId + "/campaigns"
-                    const campaignsResponse = await ev.get(campaignsEndpoint)
-                    for (var campaign of campaignsResponse.data) {
-                        // Select your Campaign and import Leads
-                        if (campaign.campaignName == "My Predictive Campaign") {
-                            const leadsEndpoint = "/api/v1/admin/accounts/{accountId}/campaigns/" +     campaign.campaignId + "/leadLoader/direct"
-                            const postData = {
-                                "listState": "ACTIVE",
-                                "duplicateHandling": "RETAIN_ALL",
-                                "timeZoneOption": "NPA_NXX",
-                                "phoneNumbersI18nEnabled": true,
-                                "internationalNumberFormat": false,
-                                "description": "Lead Search Test",
-                                "dialPriority": "IMMEDIATE",
-                                "uploadLeads": [{
-                                    "leadPhone": "8888888888",
-                                    "externId": "222",
-                                    "firstName": "Jason",
-                                    "midName": "",
-                                    "lastName": "Black",
-                                    "address1": "1514 Bernardo Ave",
-                                    "city": "New York",
-                                    "state": "NY",
-                                    "zip": "10001",
-                                }, {
-                                    "leadPhone": "3323333333",
-                                    "externId": "333",
-                                    "firstName": "Rich",
-                                    "lastName": "Dunbard"
-                                }
-                                ]
-                            }
-                            const leadsResponse = await ev.post(leadsEndpoint, postData)
-                            console.log(leadsResponse.data)
-                        }
-                    }
-                }
+            {
+                "externId": "lead-1001",
+                "leadPhone": "4155550100",
+                "leadPhoneE164": "+14155550100",
+                "firstName": "Ada",
+                "lastName": "Lovelace",
+                "email": "ada@example.com",
+                "state": "CA",
+                "zip": "94105",
+                "leadPriority": 5,
+                "maxPasses": 3,
+                "callerId": "4155550199",
+                "auxData1": "renewal",
             }
-        }
-        catch (err) {
-            console.log(err.message)
-        }
+        ],
     }
 
-    RunRequest();
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaigns/{campaign_id}/leadLoader/direct",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
     ```
-=== "Python"  
-    ```python
-    #### Install Python SDK wrapper ####
-    # $ pip3 install ringcentral_engage_voice
-    #  or
-    # $ pip install ringcentral_engage_voice
-    #####################################
 
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const campaignId = "<campaignId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      description: "Renewal leads",
+      dialPriority: "NORMAL",
+      duplicateHandling: "REMOVE_FROM_LIST",
+      listState: "ACTIVE",
+      timeZoneOption: "NOT_APPLICABLE",
+      uploadLeads: [
+        {
+          externId: "lead-1001",
+          leadPhone: "4155550100",
+          leadPhoneE164: "+14155550100",
+          firstName: "Ada",
+          lastName: "Lovelace",
+          email: "ada@example.com",
+          state: "CA",
+          zip: "94105",
+          leadPriority: 5,
+          maxPasses: 3,
+          callerId: "4155550199",
+          auxData1: "renewal"
+        }
+      ]
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaigns/${campaignId}/leadLoader/direct`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        description: "Renewal leads",
+        dialPriority: "NORMAL",
+        duplicateHandling: "REMOVE_FROM_LIST",
+        listState: "ACTIVE",
+        timeZoneOption: "NOT_APPLICABLE",
+        uploadLeads: [
+          {
+            externId: "lead-1001",
+            leadPhone: "4155550100",
+            leadPhoneE164: "+14155550100",
+            firstName: "Ada",
+            lastName: "Lovelace",
+            email: "ada@example.com",
+            state: "CA",
+            zip: "94105",
+            leadPriority: 5,
+            maxPasses: 3,
+            callerId: "4155550199",
+            auxData1: "renewal"
+          }
+        ]
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
     from ringcentral_engage_voice import RingCentralEngageVoice
 
-    def import_leads():
-        try:
-            dialGroupsEndpoint = "/api/v1/admin/accounts/{accountId}/dialGroups"
-            dialGroupsResponse = ev.get(dialGroupsEndpoint).json()
-            for group in dialGroupsResponse:
-                # Select your Dial Group
-                if group['dialGroupName'] == "My New Dial Group":
-                    campaignsEndpoint = f"{dialGroupsEndpoint}/{group['dialGroupId']}/campaigns"    #   f   string:https://www.python.org/dev/peps/pep-0498/
-                    campaignsResponse = ev.get(campaignsEndpoint).json()
-                    for campaign in campaignsResponse:
-                        # Select your Campaign and import Leads
-                        if campaign['campaignName'] == "My Predictive Campaign":
-                            leadsEndpoint = f"/api/v1/admin/accounts/{accountId}/campaigns/{campaign    ['campaignId']}/leadLoader/direct"
-                            postBody = {
-                              "description": "Prospect customers",
-                              "dialPriority": "IMMEDIATE",
-                              "duplicateHandling": "REMOVE_FROM_LIST",
-                              "listState": "ACTIVE",
-                              "timeZoneOption": "NPA_NXX",
-                              "phoneNumbersI18nEnabled": true,
-                              "internationalNumberFormat": false,
-                              "uploadLeads": [{
-                                   "leadPhone":"8888888888",
-                                   "externId":"222",
-                                   "firstName":"Jason",
-                                   "midName":"",
-                                   "lastName":"Black",
-                                   "address1":"1514 Bernardo Ave",
-                                   "city":"New York",
-                                   "state":"NY",
-                                   "zip":"10001",
-                                },{
-                                   "leadPhone":"3323333333",
-                                   "externId":"333",
-                                   "firstName":"Rich",
-                                   "lastName":"Dunbard"
-                                }
-                              ]
-                            }
-                            leadsResponse = ev.post(leadsEndpoint, postBody).json()
-                            print(leadsResponse)
-                            break
-        except Exception as e:
-            print(e)
+    load_dotenv()
 
-
-    # Instantiate the SDK wrapper object with your RingCentral app credentials
     ev = RingCentralEngageVoice(
-        "RINGCENTRAL_CLIENTID",
-        "RINGCENTRAL_CLIENTSECRET")
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
 
-    try:
-        # Authorize with your RingCentral Office user credentials
-        ev.authorize(
-            username="RINGCENTRAL_USERNAME",
-            password="RINGCENTRAL_PASSWORD",
-            extension="RINGCENTRAL_EXTENSION"
-        )
+    payload = {
+        "description": "Renewal leads",
+        "dialPriority": "NORMAL",
+        "duplicateHandling": "REMOVE_FROM_LIST",
+        "listState": "ACTIVE",
+        "timeZoneOption": "NOT_APPLICABLE",
+        "uploadLeads": [
+            {
+                "externId": "lead-1001",
+                "leadPhone": "4155550100",
+                "leadPhoneE164": "+14155550100",
+                "firstName": "Ada",
+                "lastName": "Lovelace",
+                "email": "ada@example.com",
+                "state": "CA",
+                "zip": "94105",
+                "leadPriority": 5,
+                "maxPasses": 3,
+                "callerId": "4155550199",
+                "auxData1": "renewal",
+            }
+        ],
+    }
 
-        import_leads()
-    except Exception as e:
-        print(e)
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/direct",
+        payload,
+    ).json()
+    print(response)
     ```
-=== "PHP"
-    ```php
-    /************ Install PHP SDK wrapper **************
-    $ composer require engagevoice-sdk-wrapper:dev-master
-    *****************************************************/
-    
-    <?php
-    require('vendor/autoload.php');
-    
-    require('vendor/autoload.php');
-    
-    // Instantiate the SDK wrapper object with your RingCentral app credentials
-    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-    try{
-      // Login your account with your RingCentral Office user credentials
-      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-        read_dial_groups();
-    }catch (Exception $e) {
-        print $e->getMessage();
-    }
-    
-    function read_dial_groups(){
-      global $ev;
-      $endpoint = 'admin/accounts/~/dialGroups';
-      try{
-        $resp = $ev->get($endpoint);
-        $jsonObj = json_decode($resp);
-        foreach ($jsonObj as $group){
-          if ($group->dialGroupName == "My Dial Group - Predictive"){
-            read_group_campaigns($group->dialGroupId);
-            break;
-          }
-        }
-      }catch (Exception $e) {
-          print $e->getMessage();
+
+### Direct Load Response
+
+The direct load response summarizes accepted, inserted, converted, rejected, and DNC-affected leads.
+
+```json
+{
+  "leadsSupplied": 1,
+  "leadsAccepted": 1,
+  "leadsInserted": 1,
+  "leadsConverted": 1,
+  "dncReturnedCount": 0,
+  "failedAgentAssignment": 0,
+  "listState": "ACTIVE",
+  "timeZoneOption": "NOT_APPLICABLE",
+  "processingResult": "OK",
+  "rejectedRows": []
+}
+```
+
+## File Preview and Process
+
+For file-based imports, preview the file first so RingCX can identify columns and return mapping information. Then submit the process request with the selected mapping.
+
+The `pageColumnMappings` values are zero-based column indexes from the selected preview page. For example, if the preview shows `LEAD_PHONE` in the first column, map `LEAD_PHONE` to `0`.
+
+=== "HTTP"
+
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/preview?fileType=COMMA
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: multipart/form-data
+
+    file=@leads.csv
+    ```
+
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "transactionId": "<transactionId>",
+      "description": "Renewal leads",
+      "fileType": "COMMA",
+      "fileContainsHeaders": true,
+      "duplicateHandling": "REMOVE_FROM_LIST",
+      "listState": "ACTIVE",
+      "timeZoneOption": "NOT_APPLICABLE",
+      "pageNumber": 1,
+      "pageColumnMappings": {
+        "LEAD_PHONE": 0,
+        "EXTERN_ID": 1,
+        "FIRST_NAME": 2,
+        "LAST_NAME": 3
       }
     }
-    
-    function read_group_campaigns($dialGroupId){
-      global $ev;
-      $endpoint = 'admin/accounts/~/dialGroups/' . $dialGroupId . "/campaigns";
-      try{
-        $resp = $ev->get($endpoint);
-        $jsonObj = json_decode($resp);
-        foreach ($jsonObj as $campaign){
-          if ($campaign->campaignName == "API Test"){
-              load_campaign_leads($campaign->campaignId)
-              break;
-          }
-        }
-      }catch(Exception $e) {
-          print $e->getMessage();
-      }
-    }
-    
-    function load_campaign_leads($campaignId){
-      global $ev;
-      $endpoint = 'admin/accounts/~/campaigns/' . $campaignId . "/leadLoader/direct";
-      $params = array (
-        "description" => "Prospect customers",
-        "dialPriority" => "IMMEDIATE",
-        "duplicateHandling" => "REMOVE_FROM_LIST",
-        "listState" => "ACTIVE",
-        "timeZoneOption" => "NOT_APPLICABLE",
-        "phoneNumbersI18nEnabled" => true,
-        "internationalNumberFormat" => false,
-        "uploadLeads" => array (
-          array (
-             "leadPhone" => "1111111111",
-             "externId" => "1",
-             "title" => "Dr.",
-             "firstName" => "Jeff",
-             "midName" => "John",
-             "lastName" => "Malfetti",
-             "suffix" => "Jr.",
-             "address1" => "3101 Fake St.",
-             "address2" => "Suite 120",
-             "city" => "Rock",
-             "state" => "CO",
-             "zip" => "80500",
-             "email" => "test@test.com",
-             "gateKeeper" => "Some one",
-             "auxData1" => 30,
-             "auxData2" => "a",
-             "auxData3" => 100,
-             "auxData4" => "aa",
-             "auxData5" => 1000,
-             "auxPhone" => "1111111110",
-             "extendedLeadData" => array (
-                "important" => "data",
-                "interested" => true
-             )
-          ),
-          array (
-             "leadPhone" => "2222222222",
-             "externId" => "222",
-             "firstName" => "Jason",
-             "midName" => "",
-             "lastName" => "Black",
-             "address1" => "1514 Bernardo Ave",
-             "city" => "New York",
-             "state" => "NY",
-             "zip" => "10001",
-          ),
-          array (
-             "leadPhone" => "3333333333",
-             "externId" => "333",
-             "firstName" => "Rich",
-             "lastName" => "Dunbard"
-          )
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    campaign_id = "<campaignId>"
+    access_token = "<ringcxAccessToken>"
+    headers = {"Authorization": f"Bearer {access_token}"}
+
+    with open("leads.csv", "rb") as leads_file:
+        preview = requests.post(
+            f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaigns/{campaign_id}/leadLoader/preview",
+            params={"fileType": "COMMA"},
+            headers=headers,
+            files={"file": leads_file},
         )
+    preview.raise_for_status()
+    preview_body = preview.json()
+
+    process_payload = {
+        "transactionId": preview_body["transactionId"],
+        "description": "Renewal leads",
+        "fileType": "COMMA",
+        "fileContainsHeaders": True,
+        "duplicateHandling": "REMOVE_FROM_LIST",
+        "listState": "ACTIVE",
+        "timeZoneOption": "NOT_APPLICABLE",
+        "pageNumber": 1,
+        "pageColumnMappings": {
+            "LEAD_PHONE": 0,
+            "EXTERN_ID": 1,
+            "FIRST_NAME": 2,
+            "LAST_NAME": 3,
+        },
+    }
+
+    process = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaigns/{campaign_id}/leadLoader/process",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=process_payload,
+    )
+    process.raise_for_status()
+    print(f"Lead file processing accepted: {process.status_code}")
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    import { readFile } from "node:fs/promises";
+
+    const accountId = "<accountId>";
+    const campaignId = "<campaignId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const formData = new FormData();
+    formData.append("file", new Blob([await readFile("leads.csv")]), "leads.csv");
+
+    const preview = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaigns/${campaignId}/leadLoader/preview?fileType=COMMA`,
+      {
+        method: "POST",
+        headers: { Authorization: `Bearer ${accessToken}` },
+        body: formData
+      }
+    );
+    if (!preview.ok) throw new Error(await preview.text());
+    const previewBody = await preview.json();
+
+    const processPayload = {
+      transactionId: previewBody.transactionId,
+      description: "Renewal leads",
+      fileType: "COMMA",
+      fileContainsHeaders: true,
+      duplicateHandling: "REMOVE_FROM_LIST",
+      listState: "ACTIVE",
+      timeZoneOption: "NOT_APPLICABLE",
+      pageNumber: 1,
+      pageColumnMappings: {
+        LEAD_PHONE: 0,
+        EXTERN_ID: 1,
+        FIRST_NAME: 2,
+        LAST_NAME: 3
+      }
+    };
+
+    const process = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaigns/${campaignId}/leadLoader/process`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(processPayload)
+      }
+    );
+    if (!process.ok) throw new Error(await process.text());
+    console.log(`Lead file processing accepted: ${process.status}`);
+    ```
+
+After the preview response returns a `transactionId`, you can submit the process request with the SDK:
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        transactionId: "<transactionId>",
+        description: "Renewal leads",
+        fileType: "COMMA",
+        fileContainsHeaders: true,
+        duplicateHandling: "REMOVE_FROM_LIST",
+        listState: "ACTIVE",
+        timeZoneOption: "NOT_APPLICABLE",
+        pageNumber: 1,
+        pageColumnMappings: {
+          LEAD_PHONE: 0,
+          EXTERN_ID: 1,
+          FIRST_NAME: 2,
+          LAST_NAME: 3
+        }
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process",
+        payload
       );
-      try{
-        $resp = $ev->post($endpoint, $params);
-        print ($resp);
-      }catch(Exception $e) {
-          print $e->getMessage();
-      }
+      console.log(response.data);
     }
+
+    main().catch(console.error);
     ```
 
+=== "Python SDK"
 
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "transactionId": "<transactionId>",
+        "description": "Renewal leads",
+        "fileType": "COMMA",
+        "fileContainsHeaders": True,
+        "duplicateHandling": "REMOVE_FROM_LIST",
+        "listState": "ACTIVE",
+        "timeZoneOption": "NOT_APPLICABLE",
+        "pageNumber": 1,
+        "pageColumnMappings": {
+            "LEAD_PHONE": 0,
+            "EXTERN_ID": 1,
+            "FIRST_NAME": 2,
+            "LAST_NAME": 3,
+        },
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaigns/{campaignId}/leadLoader/process",
+        payload,
+    ).json()
+    print(response)
+    ```
+
+### Preview Response
+
+The preview response includes the `transactionId` required by the process request, the mapping columns supported by the loader, and sample rows for each preview page.
+
+```json
+{
+  "transactionId": "8c7406f8-31cf-4f6a-a5a4-7a6b25e35f52",
+  "mappingColumns": [
+    "LEAD_PHONE",
+    "EXTERN_ID",
+    "FIRST_NAME",
+    "LAST_NAME"
+  ],
+  "pagePreviews": [
+    {
+      "pageNumber": 1,
+      "pageName": "leads.csv",
+      "rowData": [
+        ["phone", "external_id", "first_name", "last_name"],
+        ["4155550100", "lead-1001", "Ada", "Lovelace"]
+      ]
+    }
+  ]
+}
+```
+
+The process request returns an accepted or created status after RingCX accepts the file for processing.
+
+## Common Fields
+
+| Field | Description |
+| --- | --- |
+| `description` | Name or description for the uploaded lead list. |
+| `uploadLeads` | Array of lead records for direct loading. |
+| `externId` | External lead identifier from your source system. |
+| `leadPhone` | Primary lead phone number. |
+| `leadPhoneE164` | E.164 primary phone number, when required for the account mode. |
+| `email`, `firstName`, `lastName`, `state`, `zip` | Standard contact fields that can be stored with each lead. |
+| `leadPriority` | Numeric priority used by outbound dialing when prioritization is enabled. |
+| `maxPasses` | Maximum number of dialing passes for the lead. |
+| `callerId` | Caller ID to use for the lead when the campaign supports lead-level caller ID. |
+| `auxData1` through `auxData5` | Custom fields for campaign- or integration-specific lead data. |
+| `duplicateHandling` | Duplicate behavior during load. Values include `RETAIN_ALL`, `REMOVE_ALL_EXISTING`, and `REMOVE_FROM_LIST`. |
+| `timeZoneOption` | How RingCX derives or applies lead time zones. Values include `NPA_NXX`, `ZIPCODE`, `EXPLICIT`, `COUNTRY`, and `NOT_APPLICABLE`. |
+| `fileType` | File format for preview/process imports. Values are `EXCEL`, `PIPE`, `COMMA`, and `TAB`. |
+| `pageColumnMappings` | Map of RingCX lead fields to zero-based column indexes from the preview response. |
+
+## Persona Phone Leads
+
+For strategic campaigns with multiple phone personas, add extra phone numbers in `personaPhoneConfig`. See [Lead Phone Persona Management](phone-persona-management.md) for the required campaign and phone-persona setup.
