@@ -25670,7 +25670,7 @@
         ],
         "summary": "Returns a list of read only agents for an agent group",
         "description": "Permissions: WFO_ACCESS role",
-        "operationId": "getAgentList",
+        "operationId": "getIntegrationAgentList",
         "parameters": [
           {
             "name": "subAccountId",
@@ -28181,6 +28181,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Unauthorized"
           },
@@ -28619,6 +28622,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Unauthorized"
           },
@@ -29723,6 +29729,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Unauthorized"
           },
@@ -30184,6 +30193,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Unauthorized"
           },
@@ -30900,6 +30912,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "default": {
             "description": "successful operation"
           },
@@ -33075,7 +33090,7 @@
         ]
       }
     },
-    "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudProfileId}": {
+    "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}": {
       "get": {
         "tags": [
           "Cloud Route Profiles"
@@ -33105,9 +33120,9 @@
             }
           },
           {
-            "name": "cloudProfileId",
+            "name": "cloudRouteProfileId",
             "in": "path",
-            "description": "cloudProfileId",
+            "description": "cloudRouteProfileId",
             "required": true,
             "schema": {
               "type": "integer",
@@ -33141,9 +33156,7 @@
             "BearerAuth": []
           }
         ]
-      }
-    },
-    "/voice/api/v1/admin/accounts/{accountId}/cloudRouteProfileGroups/{cloudRouteGroupId}/cloudRouteProfiles/{cloudRouteProfileId}": {
+      },
       "put": {
         "tags": [
           "Cloud Route Profiles"
@@ -33496,6 +33509,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Unauthorized"
           },
@@ -40600,78 +40616,100 @@
   ],
   "tags": [
     {
-      "name": "Active Calls"
+      "name": "Active Calls",
+      "description": "Monitor and control active RingCX calls."
     },
     {
       "name": "Audio Streaming",
       "description": "Manage audio streaming resources for RingCX call streaming workflows."
     },
     {
-      "name": "Agent Access"
+      "name": "Agent Access",
+      "description": "Manage agent access to queues and queue groups."
     },
     {
-      "name": "Agent Groups"
+      "name": "Agent Groups",
+      "description": "Manage RingCX agent groups."
     },
     {
-      "name": "Agents"
+      "name": "Agents",
+      "description": "Manage RingCX agent records and assignments."
     },
     {
-      "name": "Campaigns"
+      "name": "Campaigns",
+      "description": "Manage outbound dialing campaigns."
     },
     {
-      "name": "Countries"
+      "name": "Countries",
+      "description": "Retrieve country, state, and regional dialing metadata."
     },
     {
-      "name": "Dial Groups"
+      "name": "Dial Groups",
+      "description": "Manage dial groups and their campaign membership."
     },
     {
-      "name": "Leads"
+      "name": "Leads",
+      "description": "Manage campaign leads, lead search, and lead actions."
     },
     {
-      "name": "Legacy Auth"
+      "name": "Legacy Auth",
+      "description": "Authenticate against legacy RingCX deployments."
     },
     {
-      "name": "Outbound"
+      "name": "Outbound",
+      "description": "Retrieve outbound dialing metadata and status."
     },
     {
-      "name": "Queue Dispositions"
+      "name": "Queue Dispositions",
+      "description": "Manage dispositions used by voice queues."
     },
     {
-      "name": "Queue Events"
+      "name": "Queue Events",
+      "description": "Manage events and DTMF actions for voice queues."
     },
     {
-      "name": "Queue Groups"
+      "name": "Queue Groups",
+      "description": "Manage voice queue groups."
     },
     {
-      "name": "Queue Phone Book"
+      "name": "Queue Phone Book",
+      "description": "Manage phone book entries for voice queues."
     },
     {
-      "name": "Queue Schedule"
+      "name": "Queue Schedule",
+      "description": "Manage schedule overrides for voice queues."
     },
     {
-      "name": "Queue Skills"
+      "name": "Queue Skills",
+      "description": "Manage skills associated with voice queue groups."
     },
     {
-      "name": "Queue Special ANI"
+      "name": "Queue Special ANI",
+      "description": "Manage special ANI routing entries for voice queues."
     },
     {
-      "name": "Queues"
+      "name": "Queues",
+      "description": "Manage RingCX voice queues."
     },
     {
-      "name": "Reporting"
+      "name": "Reporting",
+      "description": "Retrieve reports and reporting-related resources."
     },
     {
-      "name": "Requeue Shortcuts"
+      "name": "Requeue Shortcuts",
+      "description": "Manage queue transfer shortcuts."
     },
     {
-      "name": "RingCentral Auth"
+      "name": "RingCentral Auth",
+      "description": "Exchange RingCentral access tokens for RingCX access tokens."
     },
     {
       "name": "Number Management",
       "description": "Manage DNIS pools, tracking numbers, and related phone-number assignment utilities."
     },
     {
-      "name": "Users"
+      "name": "Users",
+      "description": "Manage RingCX administrative users."
     },
     {
       "name": "Cloud Route Destination Groups",
@@ -40760,6 +40798,30 @@
     {
       "name": "Media Control",
       "description": "Start and stop live audio streams for RingCX dialogs and dialog segments."
+    },
+    {
+      "name": "Audit Logs",
+      "description": "Search and discover administrative audit log records."
+    },
+    {
+      "name": "Integration User Controller",
+      "description": "Access user resources through RingCX integration endpoints."
+    },
+    {
+      "name": "Integration Account Controller",
+      "description": "Access account resources through RingCX integration endpoints."
+    },
+    {
+      "name": "Integration Agent Controller",
+      "description": "Access agent resources through RingCX integration endpoints."
+    },
+    {
+      "name": "Integration Agent Group Controller",
+      "description": "Access agent group resources through RingCX integration endpoints."
+    },
+    {
+      "name": "Public Integration API",
+      "description": "Access public RingCX integration reporting and media endpoints."
     }
   ],
   "x-tag-groups": [
