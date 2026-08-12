@@ -77,13 +77,13 @@ SIP transport between RingCentral and Partner can be:
 
 Currently, bot selection is based on the Request-URI user part (aka DID).
 
-Bot selection can also be based on a specific SIP header (header name TBD).
+Bot selection can also be based on a configured SIP header.
 
 In general, SIP headers shall be available from the bot flow engine.
 
 #### Authentication between RingCentral and Bot Partner Platform
 
-There is no authentication mechanism per say. A typical implementation would rely on IP address whitelisting. The required list of RingCentral public IP addresses that are used to establish SIP dialog with bot are documented in the IP Supernets section of the [RingCentral Network Requirements Documentation](https://support.ringcentral.com/article-v2/Network-requirements.html?brand=RingCentral&product=RingEX&language=en_US)
+There is no authentication mechanism per se. A typical implementation relies on IP address allowlisting. The required list of RingCentral public IP addresses used to establish SIP dialogs with the bot is documented in the IP Supernets section of the [RingCentral Network Requirements Documentation](https://support.ringcentral.com/article-v2/Network-requirements.html?brand=RingCentral&product=RingEX&language=en_US).
 
 ### Bot Update
 

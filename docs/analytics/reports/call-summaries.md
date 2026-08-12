@@ -59,7 +59,7 @@ To generate and retrieve summaries, AI summaries must be enabled for the queue o
     Do not send the token as the `Authorization` header when calling the summary endpoints.
 
 !!! important "Rate Limiting & Stability"
-    * **Limit:** Standard platform rate limiting applies to summary requests.
+    * **Limit:** Summary requests are limited to **120 requests per minute**.
     * **Strategy:** If the API returns a `429 Too Many Requests` status code, implement exponential backoff before retrying.
 
 ---
@@ -78,6 +78,8 @@ Content-Type: application/json
 
 * **Sub-Account Context:** Use the RingCX sub-account ID as the `{subAccountId}` path value in the summary URL.
 * **Segment Context:** Use the `segmentId` value returned by interaction metadata. A segment represents one participant's portion of the interaction.
+* **Data Retention:** Metadata can only be returned for interactions that remain within your account's configured data retention period.
+* **Time Windows:** Set `segmentEndTime` to the beginning of the lookup window. RingCX searches forward by `timeInterval`; the window cannot exceed 10800 seconds (3 hours).
 * **Processing Window:** Query completed interactions and allow time for post-interaction processing before requesting summaries.
 
 For more details on interaction metadata, see the [Reports API](../../integration/reports-orig.md#agent-segment-metadata).
