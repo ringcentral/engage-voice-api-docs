@@ -1,258 +1,460 @@
-# About Searching for Leads
+# Search Leads
 
-You can search for leads using Primary Search Fields and Extended Search Fields. The Primary Search Fields can be used for performing basic searches on leads such as the campaign or list they are found in, while the Extended Search Fields provide search parameters that you can use to get more granular with your lead search.
+Use the lead search APIs to find campaign leads by campaign, list, phone number, lead state, disposition, timezone, or custom lead fields.
 
-## Primary Search Fields
-The primary search fields include a selection of basic search parameters. You can search for leads by campaign, or you can search only for leads whose status is SUPPRESSED. You can look for leads that have been orphaned, or you can search for leads by loaded lists, according to disposition, or whether they were inserted by an agent or supplied by the system.
+## Search Endpoints
 
-| API Property | UI Display | UI Default | Description |
-|-|-|-|-|
-| **`campaignId`** | Campaign | *first available campaign* | Search from a list of available dial groups and campaigns. Use [Dial Groups and Campaigns](#dial-groups-and-campaigns) to retrieve valid values. |
-| **`suppressed`** | Suppressed | *first available campaign* | Suppressed leads are leads the system will not dial. They will still maintain their lead status, however, unlike paused or cancelled leads (whose lead status will change once they have been paused or cancelled). Allowed values include `ONLY_SUPPRESSED`, `ONLY_UNSUPPRESSED`, `ALL` |
-| **`listIds`** | Loaded Lists | *Select lists...* | Search from any loaded leads list by their ID. Please note that this parameter depends upon a campaign in the campaignId setting. Use [Leads List](#leads-list) to retrieve valid values. |
-| **`agentDispositions`** | Agent Dispositions | *Select agent dispositions...* | Search for leads from a list of agent dispositions by campaign. This parameters depends upon a campaign in the campaignId Use [Campaign Dispositions](#campaign-dispositions) to retrieve a valid list of values. |
-| **`systemDispositions`** | System Dispositions | *Select system dispositions...* | Search from a list of system dispositions by account. Use [System Dispositions](#system-dispositions) for a list of valid values. |
-| **`leadStates`** | Lead Status | *Select lead status...* | Search from a list of lead status by account. Use [Lead Status](#lead-status) for a list of valid values. |
-| **`physicalStates`** | State | *Select states...* | Search for leads by their (geographical) state. You can select one or more states via the dropdown list. The list includes all of the United States and all provinces and territories of Canada. Use [States](#states) for a list of valid values |
-| **`leadTimezones`** | Timezone | *Select timezones...* | Search for leads by timezone. You need only include the name of the timezone, but the list must be written as an array of objects. Use [Lead Timezones](#lead-timezones) for a list of valid values |
+| Operation | Method and path |
+| --- | --- |
+| Search leads | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch` |
+| Search leads by phone list | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearchByPhoneList` |
+| List lead states | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadStates` |
+| List system dispositions | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/systemDispositions` |
 
-## Supporting Values and APIs
+!!! important "Rate Limiting & Stability"
+    Lead search requests are throttled per RingCX sub-account. Standard `leadSearch` requests are limited to **15 requests per 10 seconds** and **60 requests per 30 seconds**. Requests with `count=true` are limited to **90 requests per 10 seconds** and **180 requests per 30 seconds**. Search-by-exact-number requests are limited to **30 requests per 10 seconds** and **120 requests per 60 seconds**. Use narrow filters and pagination, and implement exponential backoff on `429 Too Many Requests` responses.
 
-The following value lists and APIs are used to retrieve predefined values for certain fields. Use these values to populate the correct parameter values of fields.
+## SDK Setup
 
-The `BASE_DIAL_GROUP_URL` is `{BASE_URL}/api/v1/admin/accounts/{accountId}/dialGroups`
+SDK examples in this article use JWT authentication and load credentials from environment variables.
 
-### Dial Groups and Campaigns
+=== "JavaScript"
 
-Gets a list of dial groups with associated campaigns created under this account. Campaigns are contained within Dial Groups and this call will retrieve both.
+    ```bash
+    npm install ringcentral-engage-voice-client dotenv
+    ```
 
-`GET {BASE_DIAL_GROUP_URL}/withChildren`
+=== "Python"
 
-### Leads List
+    ```bash
+    pip3 install ringcentral_engage_voice python-dotenv
+    ```
 
-Gets a list of leads that are part of this campaign. Multiple lead lists can be linked to a campaign and this command returns list IDs for each lead list.
+Create a `.env` file in the directory where you run the sample:
 
-`GET {BASE_DIAL_GROUP_URL}/{dialGroupId}/campaigns/{campaignId}/lists`
+```text
+RC_CLIENT_ID=<clientId>
+RC_CLIENT_SECRET=<clientSecret>
+RC_JWT=<jwt>
+```
 
-### Campaign Dispositions
+The SDK wrapper reads these values, signs in with RingCentral, and exchanges the RingCentral access token for a RingCX access token before calling RingCX APIs.
 
-Gets a list of the agent dispositions for this campaign
-
-`GET {BASE_DIAL_GROUP_URL}/{dialGroupId}/campaigns/{campaignId}/campaignDispositions`
-
-### System Dispositions
-
-The parameter `systemDispositions` can take on the following values:
-
-| Value | Description |
-|-|-|
-| **`ANSWER`** | Search all calls that were answered by a lead and connected to a live agent |
-| **`NOANSWER`** | Search all calls that rang without being answered by a lead |
-| **`BUSY`** | Search all calls that the system dispositioned as a busy response |
-| **`MACHINE`** | Search all calls that resulted in a machine answer |
-| **`INTERCEPT`** | Search all calls for which the phone number was unreachable |
-| **`DISCONNECT`** | Search all calls that were disconnected |
-| **`ABANDON`** | Search all calls that ended because the system could not find an available agent after dialing the lead |
-| **`CONGESTION`** | Search all calls that ended due to excessive network traffic or insufficient bandwidth |
-| **`MANUAL_PASS`** | Search all calls that calls that had a manual pass applied to them |
-| **`INBOUND_CALLBACK`** | Search all calls designated as (inbound) callbacks |
-| **`APP_DNC`** | Search all calls that have been skipped due to a DNC list verification |
-| **`APP_REQUEUE`** | Search all call legs that have been requeued via IVR (this setting only applies to certain accounts. Please contact your CSM for more information) |
-| **`APP_REQUEUE_COMPLETE`** | Search all call legs that have been requeued via IVR in which the call has been received in the new queue. |
-| **`APP_REQUEUE_ABANDON`** | Search all call legs that have been requeued via IVR in which the call was abandoned before a connection was made |
-| **`INBOUND_ABANDON`** | Search all calls where the caller abandoned the call while waiting in queue |
-
-### Lead Status
-
-The parameter `leadState` can take on the following values:
-
-| Value | Description |
-|-|-|
-| **`ACTIVE`** | Search for all leads currently engaged on an active call |
-| **`AGENT_CALLBACK`** | Search for all leads that have been flagged for an agent-specific callback |
-| **`CALLBACK_CANCELLED`** | Search for all leads that have had a callback flag removed |
-| **`CALLBACK`** | Search for all leads that have been flagged for a callback |
-| **`CANCELLED`** | Search for all leads that have been cancelled from dialing |
-| **`COMPLETE`** | Search for all leads that have been cancelled (and will not be requeued for dialing) |
-| **`DISCONNECTED`** | Search for all leads that have been assigned a DISCONNECTED lead state |
-| **`DO_NOT_CALL`** | Search for all leads whose phone number is on the DNC list |
-| **`INTERCEPT`** | Search for all leads with a disconnected or otherwise unreachable number |
-| **`MAX_DIAL_LIMIT`** | Search for all leads that have been dialed the maximum number of times |
-| **`PAUSED`** | Search for all leads that have been paused from dialing |
-| **`PENDING_CALLBACK`** | Search for all leads that are awaiting a scheduled callback time set by an agent-specific callback disposition |
-| **`PENDING_ERR`** | Search for all leads that have been set to PENDING and remain in that state |
-| **`PENDING_HCI`** | Search for all leads that have not yet been dialed by an HCI agent |
-| **`PENDING`** | Search for all leads that have been fetched by the preview dialer or are actively being dialed by the predictive dialer |
-| **`READY`** | Search for all leads that are ready for dialing (including leads that have reached the maximum number of passes) |
-| **`TRANSITIONED`** | Search for all leads that have been copied in transition mode and sent to another campaign. Please note that when a lead is copied in Transition mode, the original lead retains the original Lead ID, while the copied version gets a new Lead ID |
-| **`WHITELIST`** | Search for all leads that have been whitelisted via the Whitelist Manager |
-
-### Lead Timezones
-
-The parameter `leadTimezones` can take on the following values:
-
-| Value | Description |
-|-|-|
-| **`ADT`** | ADT - Atlantic Daylight Time |
-| **`AKDT`** | AKDT - Alaska Daylight Time |
-| **`AKST`** | AKST - Alaska Standard Time |
-| **`AST`** | AST - Atlantic Standard Time |
-| **`CDT`** | CDT - Central Daylight Time |
-| **`CST`** | CST - Central Standard Time |
-| **`EDT`** | EDT - Eastern Daylight Time |
-| **`EST`** | EST - Eastern Standard Time |
-| **`HADT`** | HADT - Hawaii-Aleutian Daylight Time |
-| **`HAST`** | HAST - Hawaii-Aleutian Standard Time |
-| **`MDT`** | MDT - Mountain Daylight Time |
-| **`MST`** | MST - Mountain Standard Time |
-| **`NDT`** | NDT - Newfoundland Daylight Time |
-| **`NST`** | NST - Newfoundland Standard Time |
-| **`PDT`** | PDT - Pacific Daylight Time |
-| **`PMDT`** | PMDT - Pierre/Miquelon Daylight Time |
-| **`PMST`** | PMST - Pierre/Miquelon Standard Time |
-| **`PST`** | PST - Pacfic Standard Time |
-| **`WSDT`** | WSDT - Samoa Daylight Time |
-| **`WSST`** | WSST - Somoa Standard Time |
-
-### States
-
-Get a list of states from the United States and all provinces and territories of Canada.
-
-`GET {BASE_URL}/api/v1/admin/states`
-
-## Request
-Be sure to set the proper [BASE_URL](../../basics/uris.md#resources-and-parameters) and [authorization header](../../authentication/auth-ringcentral.md) for your deployment.
+## Search Leads
 
 === "HTTP"
-    ```http
-        POST {BASE_URL}/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch
-        Authorization: bearer <myAccessToken>
-        Content-Type: application/json;charset=UTF-8
-        Accept: application/json
-    
-    
-        {
-          "firstName":"Jon",
-          "campaignId":136785,
-          "listIds":[],
-          "agentDispositions":[],
-          "systemDispositions":[],
-          "leadStates":[],
-          "physicalStates":[],
-          "leadTimezones":
-            [
-                {"name":"CST"},
-                {"name":"PST"}
-            ],
-          "suppressed":"ALL",
-          "campaignIds":[136785]
-        }
-    ```
-=== "cURLs"
-    ```bash
-    curl -XPOST 'https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/        campaignLeads/leadSearch' \
-       -H 'Authorization: Bearer {myAccessToken}' \
-       -d '{"firstName":"John"}' \
-       -H 'Content-Type: application/json'
-    ```
-=== "Node JS"
-    ```javascript
-    /****** Install Node JS SDK wrapper *******
-    $ npm install ringcentral-engage-voice-client
-    *******************************************/
-    
-    const RunRequest = async function () {
-        const EngageVoice = require('ringcentral-engage-voice-client').default
-    
-        // Instantiate the SDK wrapper object with your RingCentral app credentials
-        const ev = new EngageVoice({
-            clientId: "RINGCENTRAL_CLIENTID",
-            clientSecret: "RINGCENTRAL_CLIENTSECRET"
-        })
-    
-        try {
-            // Authorize with your RingCentral Office user credentials
-            await ev.authorize({
-                username: "RINGCENTRAL_USERNAME",
-                extension: "RINGCENTRAL_EXTENSION",
-                password: "RINGCENTRAL_PASSWORD"
-            })
-    
-            // Search Leads with first name John
-            const endpoint = "/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch"
-            const postBody = {
-                "firstName": "John"
-            }
-            const response = await ev.post(endpoint, postBody)
-            console.log(response.data);
-        }
-        catch (err) {
-            console.log(err.message)
-        }
-    }
-    
-    RunRequest();
-    ```
-=== "Python"
-    ```python
-    #### Install Python SDK wrapper ####
-    # $ pip3 install ringcentral_engage_voice
-    #  or
-    # $ pip install ringcentral_engage_voice
-    #####################################
-    
-    from ringcentral_engage_voice import RingCentralEngageVoice
-    
-    def search_leads():
-        try:
-            postBody = {
-                "firstName": "John"
-            }
-            response = ev.post("/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch", postBody).        json()
-            print(response)
-        except Exception as e:
-            print(e)
-    
-    
-    # Instantiate the SDK wrapper object with your RingCentral app credentials
-    ev = RingCentralEngageVoice(
-        "RINGCENTRAL_CLIENTID",
-        "RINGCENTRAL_CLIENTSECRET")
-    
-    try:
-        # Authorize with your RingCentral Office user credentials
-        ev.authorize(
-            username="RINGCENTRAL_USERNAME",
-            password="RINGCENTRAL_PASSWORD",
-            extension="RINGCENTRAL_EXTENSION"
-        )
-    
-        search_leads()
-    except Exception as e:
-        print(e)
-    ```
-=== "PHP"
-    ```php
-    /****** Install PHP SDK wrapper **
-    $ composer require engagevoice-sdk-wrapper:dev-master
-    *************************************/
-    
-    <?php
-    require('vendor/autoload.php');
-    
-    // Instantiate the SDK wrapper object with your RingCentral app credentials
-    $ev = new EngageVoiceSDKWrapper\RestClient("RC_APP_CLIENT_ID", "RC_APP_CLIENT_SECRET");
-    try{
-      // Login your account with your RingCentral Office user credentials
-      $ev->login("RC_USERNAME", "RC_PASSWORD", "RC_EXTENSION_NUMBER");
-      $endpoint = "admin/accounts/~/campaignLeads/leadSearch";
-      $params = array ( "firstName" => "John" );
-      $response = $ev->post($endpoint, $params);
-      print ($response."\r\n");
-    }catch (Exception $e) {
-      print $e->getMessage();
-    }
-    ```
-## References
 
-* [Web console documentation: Using the Leads search](https://docs.ringcentral.com/engage/article/voice-admin-use-lead-search)
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "campaignId": 12345,
+      "campaignIds": [12345],
+      "listIds": [],
+      "leadStates": ["READY"],
+      "agentDispositions": [],
+      "systemDispositions": [],
+      "physicalStates": ["CA"],
+      "leadTimezones": []
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "campaignId": 12345,
+        "campaignIds": [12345],
+        "listIds": [],
+        "leadStates": ["READY"],
+        "agentDispositions": [],
+        "systemDispositions": [],
+        "physicalStates": ["CA"],
+        "leadTimezones": [],
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaignLeads/leadSearch",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      campaignId: 12345,
+      campaignIds: [12345],
+      listIds: [],
+      leadStates: ["READY"],
+      agentDispositions: [],
+      systemDispositions: [],
+      physicalStates: ["CA"],
+      leadTimezones: []
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaignLeads/leadSearch`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        campaignId: 12345,
+        campaignIds: [12345],
+        listIds: [],
+        leadStates: ["READY"],
+        agentDispositions: [],
+        systemDispositions: [],
+        physicalStates: ["CA"],
+        leadTimezones: []
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "campaignId": 12345,
+        "campaignIds": [12345],
+        "listIds": [],
+        "leadStates": ["READY"],
+        "agentDispositions": [],
+        "systemDispositions": [],
+        "physicalStates": ["CA"],
+        "leadTimezones": [],
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearch",
+        payload,
+    ).json()
+    print(response)
+    ```
+
+Use `campaignIds` when searching across more than one campaign. Use `campaignId` when the API operation or action expects a primary campaign context.
+
+## Search by Phone Number
+
+=== "HTTP"
+
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearchByPhoneList
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "phoneList": [
+        "4155550100",
+        "4155550101"
+      ],
+      "campaignIds": [12345]
+    }
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "phoneList": [
+            "4155550100",
+            "4155550101",
+        ],
+        "campaignIds": [12345],
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaignLeads/leadSearchByPhoneList",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      phoneList: [
+        "4155550100",
+        "4155550101"
+      ],
+      campaignIds: [12345]
+    };
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaignLeads/leadSearchByPhoneList`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const payload = {
+        phoneList: [
+          "4155550100",
+          "4155550101"
+        ],
+        campaignIds: [12345]
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearchByPhoneList",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "phoneList": [
+            "4155550100",
+            "4155550101",
+        ],
+        "campaignIds": [12345],
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/leadSearchByPhoneList",
+        payload,
+    ).json()
+    print(response)
+    ```
+
+## Search Metadata
+
+Use metadata endpoints to populate filters before building a search request.
+
+=== "HTTP"
+
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/leadStates
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/campaignLeads/systemDispositions
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Accept": "application/json",
+    }
+
+    lead_states = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaignLeads/leadStates",
+        headers=headers,
+    )
+    lead_states.raise_for_status()
+
+    system_dispositions = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/campaignLeads/systemDispositions",
+        headers=headers,
+    )
+    system_dispositions.raise_for_status()
+
+    print(lead_states.json())
+    print(system_dispositions.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+      Accept: "application/json"
+    };
+
+    const leadStates = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaignLeads/leadStates`,
+      { headers }
+    );
+    if (!leadStates.ok) throw new Error(await leadStates.text());
+
+    const systemDispositions = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/campaignLeads/systemDispositions`,
+      { headers }
+    );
+    if (!systemDispositions.ok) throw new Error(await systemDispositions.text());
+
+    console.log(await leadStates.json());
+    console.log(await systemDispositions.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const leadStates = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/leadStates"
+      );
+      const systemDispositions = await ev.get(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/systemDispositions"
+      );
+
+      console.log(leadStates.data);
+      console.log(systemDispositions.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    lead_states = ev.get(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/leadStates"
+    ).json()
+    system_dispositions = ev.get(
+        "/api/v1/admin/accounts/{accountId}/campaignLeads/systemDispositions"
+    ).json()
+
+    print(lead_states)
+    print(system_dispositions)
+    ```
+
+## Results
+
+The search response returns matching lead records and lead metadata. Use the returned lead IDs with [lead actions](actions.md) when you need to reset, suppress, move, email, or delete a set of leads.

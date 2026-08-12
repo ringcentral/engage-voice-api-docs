@@ -56,7 +56,8 @@ To retrieve a transcript, you must first obtain the unique `dialogId` and `segme
 ### Prerequisites & Constraints
 
 * **Account Context:** You must provide both the `rcAccountId` and the `subAccountId` in the path.
-* **Time Windows:** The `timeInterval` for metadata retrieval cannot exceed 3600 seconds (1 hour).
+* **Data Retention:** Metadata can only be returned for interactions that remain within your account's configured data retention period.
+* **Time Windows:** Set `segmentEndTime` to the beginning of the lookup window. RingCX searches forward by `timeInterval`; the window cannot exceed 10800 seconds (3 hours).
 
 ---
 
@@ -109,8 +110,8 @@ We recommend a **"Sliding Window"** polling strategy to account for the generati
 3. **Handle Latency:** If you receive a 404 error, implement an exponential backoff strategy for subsequent retry attempts.
 
 !!! important "Rate Limiting & Stability"
-    * **Limit:** Standard platform rate limiting is 120 requests per minute.
-    * **Strategy:** Implement exponential backoff when hitting 429 "Too Many Requests" errors.
+    * **Limit:** Transcript retrieval is limited to **120 requests per minute**. The `interaction-metadata` discovery request is throttled per RingCX sub-account at **3 requests per 60 seconds** and **9 requests per 15 minutes**.
+    * **Strategy:** Query completed time windows, fetch transcripts only for matching segments, and implement exponential backoff when hitting `429 Too Many Requests` errors.
 
 ### Sample Implementation (Python)
 

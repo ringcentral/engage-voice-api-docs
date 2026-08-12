@@ -1,112 +1,267 @@
-# RingCX Dial Group Quick Start
+# RingCX Dialing Quick Start
 
-Welcome to the RingCX Platform. In this Quick Start, we are going to create a predictive dial group for an account. Let's get started.
+This quick start creates a dial group, the top-level container for outbound campaigns. After the dial group exists, create campaigns under it and load leads into those campaigns.
 
-## Create an App
+## Prerequisites
 
-The first thing we need to do is create an app in the RingCentral Developer Portal. This can be done quickly by clicking the "Create App" button below. Just click the button, enter a name and description if you choose, and click the "Create" button. If you do not yet have a RingCentral account, you will be prompted to create one.
+Before calling the Dialing APIs:
 
-<a target="_new" href="https://developer.ringcentral.com/new-app?name=RingCX+Quick+Start+App&desc=A+simple+app+to+demo+creating+a+queue+group&grantType=PersonalJWT&public=false&type=ServerOther&carriers=7710,7310,3420&permissions=ReadAccounts&redirectUri=&utm_source=devguide&utm_medium=button&utm_campaign=quickstart" class="btn btn-primary">Create App</a>
-<a class="btn-link btn-collapse" data-toggle="collapse" href="#create-app-instructions" role="button" aria-expanded="false" aria-controls="create-app-instructions">Show detailed instructions</a>
+1. Create a RingCentral app with the `ReadAccounts` permission.
+2. Complete the [RingCentral token exchange flow](../authentication/auth-ringcentral.md) and obtain a RingCX access token.
+3. Get the RingCX sub-account ID from `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts`.
 
-<div class="collapse" id="create-app-instructions">
-<ol>
-<li><a href="https://developer.ringcentral.com/login.html#/">Login or create an account</a> if you have not done so already.</li>
-<li>Go to Console/Apps and click 'Create App' button.</li>
-<li>Select "REST API App" under "What type of app are you creating?" Click "Next."</li>
-<li>Under "Auth" select "JWT auth flow"
-<li>Under "Security" add the following permissions:
-  <ul>
-    <li>SMS</li>
-    <li>ReadAccounts</li>
-  </ul>
-</li>
-<li>Under "Security" select "This app is private and will only be callable using credentials from the same RingCentral account."</li>
-</ol>
-</div>
+## SDK Setup
 
-When you are done, you will be taken to the app's dashboard. Make note of the Client ID and Client Secret. We will be using those momentarily.
-
-## Create a Dial Group for an RingCX Account
+SDK examples in this quick start use JWT authentication and load credentials from environment variables.
 
 === "JavaScript"
 
-    ### Install RingCX SDK Wrapper for Node JS
-
     ```bash
-    $ npm install ringcentral-engage-voice-client
-    ```
-
-    ### Create and Edit create-dial-group.js
-
-    Create a file called <tt>create-dial-group.js</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
-
-    ```javascript
-    {!> code-samples/dialing/quick-start.js !}
-    ```
-
-    ### Run Your Code
-
-    You are almost done. Now run your script.
-
-    ```bash
-    $ node create-dial-group.js
-    ```
-
-=== "PHP"
-
-    ### Install RingCX SDK Wrapper for PHP
-
-    ```bash
-    $ composer require engagevoice-sdk-wrapper
-    ```
-
-    ### Create and Edit create-dial-group.php
-
-    Create a file called <tt>create-dial-group.php</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
-
-    ```php
-    {!> code-samples/dialing/quick-start.php !}
-    ```
-
-    ### Run Your Code
-
-    You are almost done. Now run your script.
-
-    ```bash
-    $ php create-dial-group.php
+    npm install ringcentral-engage-voice-client dotenv
     ```
 
 === "Python"
 
-    ### Install RingCX SDK Wrapper for Python
-
     ```bash
-    $ pip install ringcentral_engage_voice
+    pip3 install ringcentral_engage_voice python-dotenv
     ```
 
-    ### Create and Edit create-dial-group.py
+Create a `.env` file in the directory where you run the sample:
 
-    Create a file called <tt>create-dial-group.py</tt>. Be sure to edit the variables in ALL CAPS with your app and user credentials.
+```text
+RC_CLIENT_ID=<clientId>
+RC_CLIENT_SECRET=<clientSecret>
+RC_JWT=<jwt>
+```
+
+The SDK wrapper reads these values, signs in with RingCentral, and exchanges the RingCentral access token for a RingCX access token before calling RingCX APIs.
+
+## Create a Dial Group
+
+=== "HTTP"
+
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups
+    Authorization: Bearer <ringcxAccessToken>
+    Content-Type: application/json
+
+    {
+      "dialGroupName": "Outbound Renewals",
+      "dialGroupDesc": "Renewal outreach campaigns",
+      "dialMode": "PREVIEW",
+      "isActive": true
+    }
+    ```
+
+=== "Python"
 
     ```python
-    {!> code-samples/dialing/quick-start.py !}
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+    payload = {
+        "dialGroupName": "Outbound Renewals",
+        "dialGroupDesc": "Renewal outreach campaigns",
+        "dialMode": "PREVIEW",
+        "isActive": True,
+    }
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Content-Type": "application/json",
+        },
+        json=payload,
+    )
+    response.raise_for_status()
+    print(response.json())
     ```
 
-    ### Run Your Code
+=== "JavaScript"
 
-    You are almost done. Now run your script.
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+    const payload = {
+      dialGroupName: "Outbound Renewals",
+      dialGroupDesc: "Renewal outreach campaigns",
+      dialMode: "PREVIEW",
+      isActive: true
+    };
 
-    ```bash
-    $ python create-dial-group.py
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
     ```
 
-## Need Help?
+=== "JavaScript SDK"
 
-Having difficulty? Feeling frustrated? Receiving an error you don't understand? Our community is here to help and may already have found an answer. Search our community forums, and if you don't find an answer please ask!
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
 
-<a target="_new" href="https://forums.developers.ringcentral.com/search.html?c=11&includeChildren=false&f=&type=question+OR+kbentry+OR+answer+OR+topic&redirect=search%2Fsearch&sort=relevance&q=call+management">Search the forums &raquo;</a>
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
 
-## What's Next?
+      await ev.authorize({ jwt: process.env.RC_JWT });
 
-When you have successfully made your first API call, it is time to take your next step towards building a more robust RingCX application.
+      const payload = {
+        dialGroupName: "Outbound Renewals",
+        dialGroupDesc: "Renewal outreach campaigns",
+        dialMode: "PREVIEW",
+        isActive: true
+      };
+
+      const response = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/dialGroups",
+        payload
+      );
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    payload = {
+        "dialGroupName": "Outbound Renewals",
+        "dialGroupDesc": "Renewal outreach campaigns",
+        "dialMode": "PREVIEW",
+        "isActive": True,
+    }
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/dialGroups",
+        payload,
+    ).json()
+    print(response)
+    ```
+
+## Verify the Dial Group
+
+=== "HTTP"
+
+    ```http
+    GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups
+    Authorization: Bearer <ringcxAccessToken>
+    Accept: application/json
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.get(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/dialGroups",
+        headers={
+            "Authorization": f"Bearer {access_token}",
+            "Accept": "application/json",
+        },
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/dialGroups`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          Accept: "application/json"
+        }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const response = await ev.get("/api/v1/admin/accounts/{accountId}/dialGroups");
+      console.log(response.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    response = ev.get("/api/v1/admin/accounts/{accountId}/dialGroups").json()
+    print(response)
+    ```
+
+Use the returned `dialGroupId` when creating campaigns.
+
+## Next Steps
+
+After creating a dial group:
+
+1. Create an outbound [campaign](campaigns/campaigns.md).
+2. Load leads into the campaign with [bulk import](leads/bulk-import.md).
+3. Use [lead search](leads/search.md) and [lead actions](leads/actions.md) to manage campaign leads.

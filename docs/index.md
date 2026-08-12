@@ -131,7 +131,7 @@ If on your way to building your first RingCentral RingCX application you encount
   <div class="card">
     <div class="card-body">
       <h5 class="h5 card-title">SDKs</h5>
-      <p class="card-text">We offer development libraries in a number of languages (Python, PHP, Javascript and more) to made building apps easier.</p>
+      <p class="card-text">We offer development libraries in a number of languages (Python, PHP, Javascript, and more) to make building apps easier.</p>
       <a href="./sdks" class="btn btn-primary">Learn more</a>
     </div>
   </div>
