@@ -1976,6 +1976,31 @@
         },
         "type": "object"
       },
+      "AudioFileView": {
+        "properties": {
+          "fileName": {
+            "type": "string",
+            "description": "Stored audio file name without the file extension. Use this value when referencing, renaming, downloading, or deleting the file."
+          },
+          "fileSize": {
+            "format": "int64",
+            "type": "integer",
+            "description": "File size in bytes."
+          },
+          "lastModified": {
+            "format": "date-time",
+            "type": "string",
+            "description": "Timestamp when the audio file was last modified."
+          },
+          "auditMetadata": {
+            "type": "object",
+            "nullable": true,
+            "description": "Audit metadata associated with the audio file, when present."
+          }
+        },
+        "type": "object",
+        "description": "Metadata for an account-level RingCX audio file."
+      },
       "AuditLog": {
         "properties": {
           "accountId": {
@@ -31146,6 +31171,338 @@
         ]
       }
     },
+    "/voice/api/v1/admin/accounts/{accountId}/utilities/audioFiles": {
+      "get": {
+        "tags": [
+          "Audio Files"
+        ],
+        "summary": "List account audio files",
+        "description": "Returns the account-level audio files available for routing prompts and workflows. Permissions: READ on Account, READ on Utilities.",
+        "operationId": "getAccountAudioFiles",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "RingCX account ID that owns the audio file.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AudioFileView"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Audio Files"
+        ],
+        "summary": "Upload account audio file",
+        "description": "Uploads an account-level audio file for routing prompts and workflows. Supported audio files are stored as account audio assets and returned as AudioFileView metadata. Permissions: READ on Account (Permission Override), CREATE on Utilities.",
+        "operationId": "uploadAudioFile",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "RingCX account ID that owns the audio file.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "uploadFileName",
+            "in": "query",
+            "description": "Optional uploaded file name override.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "audioName",
+            "in": "query",
+            "description": "Optional audio asset name used for display and multilingual audio matching.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Multipart form data containing the audio file.",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "file"
+                ],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Audio file to upload."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AudioFileView"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AudioFileView"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/voice/api/v1/admin/accounts/{accountId}/utilities/audioFiles/{fileName}/mp3": {
+      "get": {
+        "tags": [
+          "Audio Files"
+        ],
+        "summary": "Download account audio file as MP3",
+        "description": "Converts an account audio file to MP3 and streams the binary audio response. Permissions: READ on Account, READ on Utilities.",
+        "operationId": "listenToAudioFile",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "RingCX account ID that owns the audio file.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "description": "URL-encoded stored audio file name returned by the AudioFileView resource, without the file extension.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The response body contains the MP3 audio stream.",
+            "content": {
+              "audio/mpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/voice/api/v1/admin/accounts/{accountId}/utilities/audioFiles/{fileName}/remove": {
+      "delete": {
+        "tags": [
+          "Audio Files"
+        ],
+        "summary": "Delete account audio file",
+        "description": "Deletes an account-level audio file. Permissions: READ on Account (Permission Override), DELETE on Utilities.",
+        "operationId": "deleteLocalAudioFile",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "RingCX account ID that owns the audio file.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "description": "URL-encoded stored audio file name returned by the AudioFileView resource, without the file extension.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/voice/api/v1/admin/accounts/{accountId}/utilities/audioFiles/{fileName}/rename": {
+      "put": {
+        "tags": [
+          "Audio Files"
+        ],
+        "summary": "Rename account audio file",
+        "description": "Renames an account-level audio file. The new file name is supplied as a query parameter; no request body is required. Permissions: READ on Account (Permission Override), UPDATE on Utilities.",
+        "operationId": "renameLocalAudioFile",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "RingCX account ID that owns the audio file.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "description": "URL-encoded stored audio file name returned by the AudioFileView resource, without the file extension.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "newFileName",
+            "in": "query",
+            "description": "New base file name for the audio asset. Do not include a file extension or path separators.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AudioFileView"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
     "/voice/api/v1/admin/utilities/tnManager/accounts": {
       "get": {
         "tags": [
@@ -35117,6 +35474,10 @@
       "description": "Exchange RingCentral access tokens for RingCX access tokens."
     },
     {
+      "name": "Audio Files",
+      "description": "Manage account-level audio files used by RingCX routing prompts and workflows."
+    },
+    {
       "name": "Number Management",
       "description": "Manage DNIS pools, tracking numbers, and related phone-number assignment utilities."
     },
@@ -35274,6 +35635,7 @@
         "Requeue Shortcuts",
         "Queue Schedule",
         "Queue Special ANI",
+        "Audio Files",
         "Number Management",
         "Cloud Route Destination Groups",
         "Cloud Route Destinations",
