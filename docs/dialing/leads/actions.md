@@ -94,6 +94,8 @@ For bulk actions, run the same criteria against [lead search](search.md) first a
 
 Actions that need extra values use `leadActionParams.paramMap`. The keys in `paramMap` are action-specific and are case-sensitive.
 
+To review or update agent notes on a completed outbound campaign pass, use the campaign pass endpoints. For the full workflow, see [Agent Disposition Notes](../../analytics/agent-disposition-notes.md).
+
 ## Common Lead Actions
 
 | Lead action | Use for | Required `paramMap` values |

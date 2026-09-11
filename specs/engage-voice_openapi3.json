@@ -670,6 +670,118 @@
         },
         "type": "object"
       },
+      "ActiveCallHistory": {
+        "description": "Archived call history record returned for a UII.",
+        "properties": {
+          "accountId": {
+            "type": "string",
+            "description": "RingCX sub-account ID associated with the call."
+          },
+          "uii": {
+            "type": "string",
+            "description": "Unique interaction identifier for the call."
+          },
+          "dialogId": {
+            "type": "string",
+            "description": "Dialog identifier associated with the interaction."
+          },
+          "leadId": {
+            "format": "int32",
+            "type": "integer",
+            "description": "Lead identifier for outbound campaign calls."
+          },
+          "outboundDisposition": {
+            "type": "string",
+            "description": "Outbound disposition stored for the call."
+          },
+          "agentDisposition": {
+            "type": "string",
+            "description": "Agent disposition stored for the call."
+          },
+          "ani": {
+            "type": "string",
+            "description": "Automatic Number Identification (ANI) caller number."
+          },
+          "dnis": {
+            "type": "string",
+            "description": "Dialed Number Identification Service (DNIS) number."
+          },
+          "dnisE164": {
+            "type": "string",
+            "description": "DNIS number in E.164 format."
+          },
+          "callState": {
+            "type": "string",
+            "description": "Final or archived state of the call."
+          },
+          "callType": {
+            "type": "string",
+            "description": "Call direction or call type."
+          },
+          "activeCallSessionHistories": {
+            "items": {
+              "$ref": "#/components/schemas/ActiveCallSessionHistory"
+            },
+            "type": "array",
+            "description": "Session-level history records for the call."
+          }
+        },
+        "type": "object"
+      },
+      "ActiveCallSessionHistory": {
+        "description": "Session-level history record for an archived call.",
+        "properties": {
+          "sessionId": {
+            "type": "string",
+            "description": "Session identifier within the call."
+          },
+          "segmentId": {
+            "type": "string",
+            "description": "Segment identifier associated with the session."
+          },
+          "agentNotes": {
+            "type": "string",
+            "description": "Free-text notes recorded by the agent for this session."
+          },
+          "callDts": {
+            "description": "Date and time in yyyy-MM-dd'T'HH:mm:ss.SSSZ format.",
+            "example": "2026-08-12T22:30:00.000+0000",
+            "type": "string"
+          },
+          "dialDisposition": {
+            "type": "string",
+            "description": "Dial disposition for the session."
+          },
+          "duration": {
+            "format": "int32",
+            "type": "integer",
+            "description": "Session duration in seconds."
+          },
+          "phone": {
+            "type": "string",
+            "description": "Phone number associated with the session."
+          },
+          "sessionType": {
+            "type": "string",
+            "description": "Type of session, such as agent, customer, or monitoring session."
+          },
+          "termParty": {
+            "type": "string",
+            "description": "Party that terminated the session."
+          },
+          "termReason": {
+            "type": "string",
+            "description": "Reason the session ended."
+          },
+          "agentLoginId": {
+            "format": "int32",
+            "readOnly": true,
+            "type": "integer",
+            "description": "Agent login identifier associated with the session."
+          }
+        },
+        "type": "object"
+      },
       "ActiveState_boolean_": {
         "properties": {
           "isActive": {
@@ -10690,11 +10802,11 @@
     },
     "/voice/api/v1/admin/accounts/{accountId}/activeCalls/{uii}/dispositionCall": {
       "post": {
-        "description": "Permissions: READ on Account (Permission Override)",
+        "description": "Sets the disposition and optional notes for an active or pending-disposition call, then releases the agent from pending disposition state. Permissions: READ on Account (Permission Override).",
         "operationId": "dispositionCall",
         "parameters": [
           {
-            "description": "accountId",
+            "description": "RingCX sub-account ID.",
             "in": "path",
             "name": "accountId",
             "required": true,
@@ -10703,7 +10815,7 @@
             }
           },
           {
-            "description": "uii",
+            "description": "Unique interaction identifier for the call.",
             "in": "path",
             "name": "uii",
             "required": true,
@@ -10712,7 +10824,7 @@
             }
           },
           {
-            "description": "disposition",
+            "description": "Preconfigured disposition value to store on the call.",
             "in": "query",
             "name": "disposition",
             "required": true,
@@ -10721,7 +10833,7 @@
             }
           },
           {
-            "description": "callback",
+            "description": "Whether the disposition schedules a callback.",
             "in": "query",
             "name": "callback",
             "required": true,
@@ -10730,7 +10842,7 @@
             }
           },
           {
-            "description": "callBackDTS",
+            "description": "Callback date and time in yyyyMMddHHmmss format. Required when callback is true.",
             "in": "query",
             "name": "callBackDTS",
             "schema": {
@@ -10738,7 +10850,7 @@
             }
           },
           {
-            "description": "notes",
+            "description": "Free-text notes to store with the disposition record.",
             "in": "query",
             "name": "notes",
             "schema": {
@@ -10749,16 +10861,13 @@
         "responses": {
           "200": {
             "content": {
-              "text/plain": {
+              "application/json": {
                 "schema": {
                   "type": "boolean"
                 }
               }
             },
             "description": "OK"
-          },
-          "201": {
-            "description": "Created"
           },
           "401": {
             "description": "Unauthorized"
@@ -10773,15 +10882,9 @@
         "security": [
           {
             "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
           }
         ],
-        "summary": "Sets the call disposition for either INBOUND or OUTBOUND calls and releases the agent from PD state",
+        "summary": "Set call disposition and notes",
         "tags": [
           "Active Calls"
         ]
@@ -11000,6 +11103,63 @@
         ]
       }
     },
+    "/voice/api/v1/admin/accounts/{accountId}/callHistory/{uii}": {
+      "get": {
+        "description": "Permissions: READ on Account",
+        "operationId": "getActiveCallHistory",
+        "parameters": [
+          {
+            "description": "RingCX sub-account ID.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Call unique ID",
+            "in": "path",
+            "name": "uii",
+            "required": true,
+            "schema": {
+              "pattern": "^[0-9]+$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActiveCallHistory"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Returns call history by UII",
+        "tags": [
+          "Reporting"
+        ]
+      }
+    },
     "/voice/api/v1/admin/auditLogs/auditable": {
       "get": {
         "tags": [
@@ -11065,7 +11225,7 @@
         "operationId": "getAgentGroupList",
         "parameters": [
           {
-            "description": "accountId",
+            "description": "RingCX sub-account ID.",
             "in": "path",
             "name": "accountId",
             "required": true,
@@ -13174,7 +13334,7 @@
             }
           },
           {
-            "description": "dialGroupId",
+            "description": "Dial group that owns the campaign.",
             "in": "path",
             "name": "dialGroupId",
             "required": true,
@@ -13707,7 +13867,7 @@
             }
           },
           {
-            "description": "campaignId",
+            "description": "Campaign that owns the lead.",
             "in": "path",
             "name": "campaignId",
             "required": true,
@@ -13910,6 +14070,207 @@
           "Campaigns"
         ],
         "x-codegen-request-body-name": "campaign"
+      }
+    },
+    "/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}/leads/{leadId}/passes": {
+      "get": {
+        "description": "Permissions: READ on Campaign",
+        "operationId": "getCampaignPasses",
+        "parameters": [
+          {
+            "description": "accountId",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "dialGroupId",
+            "in": "path",
+            "name": "dialGroupId",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "campaignId",
+            "in": "path",
+            "name": "campaignId",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Lead whose pass history should be returned.",
+            "in": "path",
+            "name": "leadId",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Page number for paginated results.",
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Maximum number of rows to return per page.",
+            "in": "query",
+            "name": "maxRows",
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CampaignPass"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Returns campaign passes for a lead",
+        "tags": [
+          "Leads"
+        ]
+      }
+    },
+    "/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}/leads/{leadId}/passes/{passUii}/agentNotesAndDisposition": {
+      "put": {
+        "description": "Permissions: UPDATE on Campaign",
+        "operationId": "updateCampaignPassAgentNotesAndDisposition",
+        "parameters": [
+          {
+            "description": "RingCX sub-account ID.",
+            "in": "path",
+            "name": "accountId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Dial group that owns the campaign.",
+            "in": "path",
+            "name": "dialGroupId",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Campaign that owns the lead.",
+            "in": "path",
+            "name": "campaignId",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Lead whose pass should be updated.",
+            "in": "path",
+            "name": "leadId",
+            "required": true,
+            "schema": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Unique identifier for the campaign pass.",
+            "in": "path",
+            "name": "passUii",
+            "required": true,
+            "schema": {
+              "pattern": "^[0-9]+$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Agent disposition to store on the campaign pass.",
+            "in": "query",
+            "name": "agentDisposition",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Free-text agent notes to store on the campaign pass.",
+            "in": "query",
+            "name": "agentNotes",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CampaignPass"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "summary": "Update campaign pass disposition and notes",
+        "tags": [
+          "Leads"
+        ]
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/dialGroups/{dialGroupId}/campaigns/{campaignId}/clearCache": {
