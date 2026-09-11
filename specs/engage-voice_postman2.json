@@ -1,7 +1,7 @@
 {
   "info": {
-    "name": "RingCentral Engage Voice API",
-    "description": "This is a collection of API requests associated with the Basic usage plan in RingCentral Connect Platform for Sandbox Testing.\n\nPlease use a Postman environment with the following variables: RC_SERVER_HOSTNAME, RC_APP_KEY, RC_APP_SECRET, RC_USERNAME, RC_EXTENSION, RC_PASSWORD\n\nTo use these resources, you must ALWAYS start by executing one of the OAuth \"Auth\" Requests first, then you can use any other requests (for the 60 minutes that the access_token you obtained is valid).",
+    "name": "RingCentral RingCX API",
+    "description": "This collection contains requests for the RingCX Voice APIs. Configure a Postman environment with the credentials and account identifiers required by your authentication method, then authenticate before running API requests. See the RingCX authentication guide for the current setup and token requirements.",
     "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
   },
   "item": [
@@ -70,10 +70,10 @@
           ],
           "request": {
             "url": {
-              "raw": "https://engage.ringcentral.com/api/auth/login/rc/accesstoken",
+              "raw": "https://ringcx.ringcentral.com/api/auth/login/rc/accesstoken",
               "protocol": "https",
               "host": [
-                "engage",
+                "ringcx",
                 "ringcentral",
                 "com"
               ],
@@ -139,10 +139,10 @@
               "name": "Returns a listing of agents for an agent group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -175,10 +175,10 @@
               "name": "Creates a single agent for an agent group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -215,10 +215,10 @@
               "name": "Updates a listing of agents for an agent group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -255,10 +255,10 @@
               "name": "Returns a single agent for an agent group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents/:agentId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents/:agentId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -292,10 +292,10 @@
               "name": "Updates a single agent for an agent group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents/:agentId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents/:agentId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -333,10 +333,10 @@
               "name": "Deletes an agent for an agent group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents/:agentId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/agents/:agentId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -366,10 +366,10 @@
               "name": "Assigns a listing of agents to a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/assignAgents",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/assignAgents",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -408,10 +408,10 @@
               "name": "Returns a listing of assigned agents for a queue (AKA gate) ",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/assignedAgents",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/assignedAgents",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -460,10 +460,10 @@
               "name": "Unassigns a single agent from a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/unassignAgent/:agentId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/unassignAgent/:agentId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -504,10 +504,10 @@
               "name": "Returns a listing of agent groups for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -558,10 +558,10 @@
               "name": "Creates a single new agent group for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -596,10 +596,10 @@
               "name": "Returns a listing of agent groups for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -639,10 +639,10 @@
               "name": "Updates an agent group for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -678,10 +678,10 @@
               "name": "Deletes an agent group for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -714,10 +714,10 @@
               "name": "Get Users",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/users",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/users",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -756,10 +756,10 @@
               "name": "Returns a listing of all queues (AKA gates) for a queue group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -806,10 +806,10 @@
               "name": "Creates a new queue (AKA gate) for a queue group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -846,10 +846,10 @@
               "name": "Returns a single queue (AKA gate) for a queue group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -883,10 +883,10 @@
               "name": "Updates a queue (AKA gate) for a queue group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -924,10 +924,10 @@
               "name": "Deletes a queue (AKA gate) for a queue group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -961,10 +961,10 @@
               "name": "Assigns a queue (AKA gate) to a queue priority group for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/assignGateToPriorityGroup",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/assignGateToPriorityGroup",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1013,10 +1013,10 @@
               "name": "Creates a clone of a queue (AKA gate) for a queue group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/clone",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/clone",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1065,10 +1065,10 @@
               "name": "Move an existing queue (AKA gate) to a new existing queue group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/moveToGroup",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/moveToGroup",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1111,10 +1111,10 @@
               "name": "Set queue (AKA gate) active state",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/setIsActive",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/setIsActive",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1158,10 +1158,10 @@
               "name": "Returns a listing of queue groups (AKA gate groups) for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1206,10 +1206,10 @@
               "name": "Create a single queue group (AKA gate group) for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1244,10 +1244,10 @@
               "name": "Returns a listing of queue groups (AKA gate groups) with related data for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/withChildren",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/withChildren",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1299,10 +1299,10 @@
               "name": "Returns a listing of queue groups (AKA gate groups) with related and additional data for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/withChildren/additionalData",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/withChildren/additionalData",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1349,10 +1349,10 @@
               "name": "Returns a single queue group (AKA gate group) for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1384,10 +1384,10 @@
               "name": "Updates a single queue group (AKA gate group) for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1423,10 +1423,10 @@
               "name": "Deletes a single queue group (AKA gate group)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1463,10 +1463,10 @@
               "name": "Returns the count of agents in an agentGroup logged into a Queue ",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/gateGroups/:gateGroupId/gates/:gateId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/agentGroups/:agentGroupId/gateGroups/:gateGroupId/gates/:gateId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1502,10 +1502,10 @@
               "name": "Returns a listing of all agents that have access to the queue (AKA gate) - this includes data to indicate if an agent is currently logged into the queue",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateAgentAccessLogin",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateAgentAccessLogin",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1545,10 +1545,10 @@
               "name": "Returns a listing of dispositions for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1583,10 +1583,10 @@
               "name": "Creates a disposition for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1625,10 +1625,10 @@
               "name": "Saves a list of dispositions for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1667,10 +1667,10 @@
               "name": "Returns a single disposition for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions/:gateDispositionId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions/:gateDispositionId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1706,10 +1706,10 @@
               "name": "Updates a single disposition for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions/:gateDispositionId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions/:gateDispositionId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1749,10 +1749,10 @@
               "name": "Deletes a disposition for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions/:gateDispositionId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/dispositions/:gateDispositionId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1793,10 +1793,10 @@
               "name": "Returns a listing of gate queue events for a queue",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1831,10 +1831,10 @@
               "name": "createGateQueueEvent",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1873,10 +1873,10 @@
               "name": "Saves a list of gate queue events for a queue",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1915,10 +1915,10 @@
               "name": "Returns a single gate queue event for a queue",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1954,10 +1954,10 @@
               "name": "Updates a single gate queue event for a queue",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -1997,10 +1997,10 @@
               "name": "Deletes a gate queue event for a queue",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2032,10 +2032,10 @@
               "name": "Returns a listing of Gate Queue Dtmp Events for a Queue",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2072,10 +2072,10 @@
               "name": "Creates a new Gate Queue Dtmp Event",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2116,10 +2116,10 @@
               "name": "Updates a listing of Gate Queue Dtmp Events",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2160,10 +2160,10 @@
               "name": "Returns a single Gate Queue Dtmp Event",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents/:dtmfEventId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents/:dtmfEventId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2201,10 +2201,10 @@
               "name": "Updates a single Gate Queue Dtmp Event",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents/:dtmfEventId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents/:dtmfEventId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2246,10 +2246,10 @@
               "name": "Deletes a Gate Queue Dtmp Event",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents/:dtmfEventId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/gateQueueEvents/:eventId/gateQueueDtmfEvents/:dtmfEventId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2288,10 +2288,10 @@
               "name": "Returns all phone book entries for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2340,10 +2340,10 @@
               "name": "Creates a phone book entry for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2382,10 +2382,10 @@
               "name": "Updates a listing of phone book entries for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2424,10 +2424,10 @@
               "name": "Updates a phone book entry for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries/:entryId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries/:entryId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2467,10 +2467,10 @@
               "name": "Deletes a single phone book entry for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries/:entryId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/phoneBookEntries/:entryId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2507,10 +2507,10 @@
               "name": "Returns a listing of skills for a queue group (AKA gate group)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2543,10 +2543,10 @@
               "name": "Creates a skill for a queue group (AKA gate group)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2583,10 +2583,10 @@
               "name": "Updates an existing list of skills for a queue group (AKA gate group)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2623,10 +2623,10 @@
               "name": "Returns a skill for a queue group (AKA gate group)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills/:skillId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills/:skillId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2660,10 +2660,10 @@
               "name": "Updates a skill for a queue group (AKA gate group)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills/:skillId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills/:skillId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2701,10 +2701,10 @@
               "name": "Deletes a skill for a queue group (AKA gate group)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills/:skillId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/skills/:skillId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2743,10 +2743,10 @@
               "name": "Returns a listing of requeue shortcuts for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2781,10 +2781,10 @@
               "name": "Updates a requeue shortcut for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2823,10 +2823,10 @@
               "name": "Creates a list of requeue shortcuts for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2865,10 +2865,10 @@
               "name": "Returns a requeue shortcut for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts/:requeueShortcutId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts/:requeueShortcutId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2904,10 +2904,10 @@
               "name": "Updates a requeue shortcut for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts/:requeueShortcutId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts/:requeueShortcutId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2947,10 +2947,10 @@
               "name": "Returns a listing of requeue shortcuts for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts/:requeueShortcutId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/requeueShortcuts/:requeueShortcutId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -2991,10 +2991,10 @@
               "name": "Returns a listing of schedule overrides for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3029,10 +3029,10 @@
               "name": "Creates a schedule override for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3071,10 +3071,10 @@
               "name": "Saves a listing of schedule overrides for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3113,10 +3113,10 @@
               "name": "Updates a schedule override for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides/:scheduleOverrideId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides/:scheduleOverrideId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3156,10 +3156,10 @@
               "name": "Deletes a schedule override for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides/:scheduleOverrideId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/scheduleOverrides/:scheduleOverrideId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3196,10 +3196,10 @@
               "name": "Returns a listing of special anis for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/specialAnis",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/specialAnis",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3260,10 +3260,10 @@
               "name": "Creates a special ani for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/specialAnis",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/specialAnis",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3302,10 +3302,10 @@
               "name": "Deletes a special ani for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/specialAnis",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/specialAnis",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3354,10 +3354,10 @@
               "name": "Uploads a special ani for a queue (AKA gate)",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/specialAnis/upload",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/gateGroups/:gateGroupId/gates/:gateId/specialAnis/upload",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3421,10 +3421,10 @@
               "name": "Creates a manual agent call",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/accounts/:accountId/activeCalls/createManualAgentCall",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/accounts/:accountId/activeCalls/createManualAgentCall",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3476,10 +3476,10 @@
               "name": "Returns a listing of current active calls for a given product on an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/accounts/:accountId/activeCalls/list",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/accounts/:accountId/activeCalls/list",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3535,10 +3535,10 @@
               "name": "Provides support for adding sessions to an active call.",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/addSessionToCall",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/addSessionToCall",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3579,10 +3579,10 @@
               "name": "Sets the call disposition for either INBOUND or OUTBOUND calls and releases the agent from PD state",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/dispositionCall",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/dispositionCall",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3635,10 +3635,10 @@
               "name": "Terminates an active call",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/hangupCall",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/hangupCall",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3665,10 +3665,10 @@
               "name": "Terminates an active session",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/hangupSession",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/hangupSession",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3703,10 +3703,10 @@
               "name": "Provides support for toggling call recording on/off for an active call",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/toggleCallRecording",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/accounts/:accountId/activeCalls/:uii/toggleCallRecording",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3746,10 +3746,10 @@
               "name": "Performs a lead action against the matching campaign leads found for the given the search criteria",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/actions",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/actions",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3793,10 +3793,10 @@
               "name": "Allows searching of campaign leads for a single campaign",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/leadSearchByPhoneList",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/leadSearchByPhoneList",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3846,10 +3846,10 @@
               "name": "Returns a listing of campaigns for a dial group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3896,10 +3896,10 @@
               "name": "Returns a campaign for a dial group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3936,10 +3936,10 @@
               "name": "Returns a campaign for a dial group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns/:campaignId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns/:campaignId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -3973,10 +3973,10 @@
               "name": "Updates a campaign for a dial group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns/:campaignId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns/:campaignId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4014,10 +4014,10 @@
               "name": "Deletes a campaign for a dial group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns/:campaignId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns/:campaignId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4047,10 +4047,10 @@
               "name": "Clear Campaign Cache",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns/:campaignId/clearCache",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/campaigns/:campaignId/clearCache",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4093,10 +4093,10 @@
               "name": "Allows searching of campaign leads for a single campaign",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/leadSearch",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/leadSearch",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4152,10 +4152,10 @@
               "name": "Returns a listing of all lead states for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/leadStates",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/leadStates",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4187,10 +4187,10 @@
               "name": "Returns a listing of all system dispositions for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/systemDispositions",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/systemDispositions",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4222,10 +4222,10 @@
               "name": "Patch Campaign Lead",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/:leadId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/:leadId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4284,10 +4284,10 @@
               "name": "Allows updating of a campaign lead",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/:leadId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaignLeads/:leadId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4349,10 +4349,10 @@
               "name": "Uploads a single lead or list of leads to a new or existing list",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaigns/:campaignId/leadLoader/direct",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaigns/:campaignId/leadLoader/direct",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4395,10 +4395,10 @@
               "name": "Returns a listing of dial groups for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4443,10 +4443,10 @@
               "name": "Creates a dial group for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4481,10 +4481,10 @@
               "name": "Returns a listing of dial groups with associated campaigns for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/withChildren",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/withChildren",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4536,10 +4536,10 @@
               "name": "Returns a dial group for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4571,10 +4571,10 @@
               "name": "Updates a dial group for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4610,10 +4610,10 @@
               "name": "Deletes a dial group for an account",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4641,10 +4641,10 @@
               "name": "Assigns a listing of agents to a dial group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/assignAgents",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/assignAgents",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4681,10 +4681,10 @@
               "name": "Returns a listing of all agents assigned to a dial group",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/assignedAgents",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/dialGroups/:dialGroupId/assignedAgents",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4736,10 +4736,10 @@
               "name": "Upload new leads to a new or existing list",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaigns/:campaignId/leadLoader/preview",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaigns/:campaignId/leadLoader/preview",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4791,10 +4791,10 @@
               "name": "Upload new leads to a new or existing list",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaigns/:campaignId/leadLoader/process",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/campaigns/:campaignId/leadLoader/process",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4850,10 +4850,10 @@
               "name": "Logs in an RC user via their access token issued by the RC API server",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/engage/api/auth/login/rc/accesstoken",
+                  "raw": "https://ringcx.ringcentral.com/engage/api/auth/login/rc/accesstoken",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4902,10 +4902,10 @@
               "name": "Retrieves all Api Tokens for AuthenticatedUser",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/token",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/token",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4934,10 +4934,10 @@
               "name": "Creates a new 'Api Token' based AuthenticatedUser that does not expire",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/token",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/token",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4966,10 +4966,10 @@
               "name": "Removes an api token",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/token/:token",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/token/:token",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -4995,10 +4995,10 @@
               "name": "Application login to authenticate and receive an X-Auth-Token",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/auth/login",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/auth/login",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],
@@ -5057,10 +5057,10 @@
               "name": "Get Available Countries",
               "request": {
                 "url": {
-                  "raw": "https://engage.ringcentral.com/voice/api/v1/admin/accounts/:accountId/countries/available",
+                  "raw": "https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/:accountId/countries/available",
                   "protocol": "https",
                   "host": [
-                    "engage",
+                    "ringcx",
                     "ringcentral",
                     "com"
                   ],

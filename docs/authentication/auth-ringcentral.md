@@ -18,7 +18,7 @@ Create an app in the RingCentral Developer Portal. You can use the "Create RingC
 !!! important
     You need a production RingCentral account that is linked to your RingCX account. A RingCentral account created only in the Developer Portal will not provide access to production RingCX Voice APIs.
 
-<a target="new" href="https://developer.ringcentral.com/new-app?name=Engage+Voice+Quick+Start+App&desc=A+simple+app+to+demo+engage+voice+apis+access&public=false&type=ServerOther&carriers=7710,7310,3420&permissions=ReadAccounts&redirectUri=" class="btn btn-primary">Create RingCX App</a>
+<a target="new" href="https://developer.ringcentral.com/new-app?name=RingCX+Voice+Quick+Start+App&desc=A+simple+app+to+access+RingCX+Voice+APIs&public=false&type=ServerOther&carriers=7710,7310,3420&permissions=ReadAccounts&redirectUri=" class="btn btn-primary">Create RingCX App</a>
 
 <div class="expand" id="create-app-instructions">
 <ol>
@@ -55,7 +55,7 @@ The RingCentral access token proves the RingCentral user/app identity. It is not
 
 Call the RingCX token exchange endpoint with the RingCentral access token.
 
-The token exchange and refresh endpoints are authentication endpoints. The examples below use the Engage auth host. After you have a RingCX access token, use the RingCX Voice API host for API calls.
+The token exchange and refresh endpoints are authentication endpoints. The examples below use the RingCX auth host. After you have a RingCX access token, use the RingCX Voice API host for API calls.
 
 ### Request
 

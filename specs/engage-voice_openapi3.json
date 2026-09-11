@@ -8107,13 +8107,13 @@
         "properties": {
           "subAccountId": {
             "type": "string",
-            "description": "Engage Voice sub-account id",
+            "description": "RingCX sub-account ID",
             "example": "15910001"
           },
           "subAccountName": {
             "type": "string",
-            "description": "Engage Sub-account name",
-            "example": "Cappuccino Engage Development"
+            "description": "RingCX sub-account name",
+            "example": "Cappuccino RingCX Development"
           },
           "isActive": {
             "type": "boolean",
@@ -8606,7 +8606,7 @@
             "segmentAgentGroupId": "79698",
             "systemDisposition": null,
             "agentDisposition": "Success",
-            "agentNotes": "Engage Messaging Notes",
+            "agentNotes": "Agent notes",
             "hasRecording": false,
             "hasTranscript": true,
             "segmentEvents": null
@@ -10061,16 +10061,18 @@
       "AudioStreamProperties": {
         "properties": {
           "encoding": {
-            "type": "string"
+            "type": "string",
+            "description": "Audio encoding requested for the stream, such as PCMU."
           },
           "ptime": {
             "format": "int32",
             "type": "integer",
-            "description": "Packetization time for the audio stream."
+            "description": "Packetization time for the audio stream, in milliseconds."
           },
           "rate": {
             "format": "int32",
-            "type": "integer"
+            "type": "integer",
+            "description": "Audio sample rate requested for the stream, in Hz."
           }
         },
         "type": "object"
@@ -10085,10 +10087,12 @@
             "description": "Stream identifier."
           },
           "token": {
-            "type": "string"
+            "type": "string",
+            "description": "Opaque receiver token passed to the media stream receiver."
           },
           "url": {
-            "type": "string"
+            "type": "string",
+            "description": "Destination gRPC endpoint hostname and port that receives the audio stream, for example partner.example.com:443."
           }
         },
         "type": "object"
@@ -10122,7 +10126,7 @@
         "operationId": "loginWithRcAccessToken",
         "parameters": [
           {
-            "description": "Includes the refresh token along with the Engage Access Token.",
+            "description": "Includes the refresh token along with the RingCX access token.",
             "in": "query",
             "name": "includeRefresh",
             "schema": {
@@ -10130,7 +10134,7 @@
             }
           },
           {
-            "description": "To acquire an Engage Access Token, you will need to first [retrieve a Ring Central Access Token](https://developers.ringcentral.com/engage/voice/guide/authentication/auth-ringcentral#retrieve-ringcentral-access-token).",
+            "description": "To acquire a RingCX access token, first [retrieve a RingCentral access token](https://developers.ringcentral.com/engage/voice/guide/authentication/auth-ringcentral#retrieve-ringcentral-access-token).",
             "in": "query",
             "name": "rcAccessToken",
             "schema": {
@@ -10182,7 +10186,7 @@
             "BearerAuth": []
           }
         ],
-        "summary": "Logs in an RC user via their access token issued by the RC API server. Returns Engage access token and user details",
+        "summary": "Logs in a RingCentral user with a RingCentral access token and returns a RingCX access token and user details",
         "tags": [
           "RingCentral Auth"
         ]
@@ -19771,7 +19775,7 @@
         "tags": [
           "Integration Account Controller"
         ],
-        "summary": "Returns a listing of sub accounts by Engage Voice Main account identifier",
+        "summary": "Returns a listing of sub-accounts by RingCX main account identifier",
         "description": "Permissions: WFO_ACCESS role",
         "operationId": "getSubAccountsByMainAccountId",
         "parameters": [
@@ -19799,12 +19803,12 @@
                   "example": [
                     {
                       "subAccountId": "15910001",
-                      "subAccountName": "Cappuccino Engage Development",
+                      "subAccountName": "Cappuccino RingCX Development",
                       "isActive": true
                     },
                     {
                       "subAccountId": "15910006",
-                      "subAccountName": "Cappuccino Engage Development",
+                      "subAccountName": "Cappuccino RingCX Development",
                       "isActive": true
                     }
                   ]
@@ -19909,7 +19913,7 @@
           {
             "name": "subAccountId",
             "in": "path",
-            "description": "Engage Voice sub-account id",
+            "description": "RingCX sub-account ID",
             "required": true,
             "schema": {
               "type": "string",
@@ -20079,7 +20083,7 @@
           {
             "name": "subAccountId",
             "in": "path",
-            "description": "Engage Voice sub-account id",
+            "description": "RingCX sub-account ID",
             "required": true,
             "schema": {
               "type": "string",
@@ -21047,7 +21051,7 @@
           {
             "name": "subAccountId",
             "in": "path",
-            "description": "Engage Voice sub-account id",
+            "description": "RingCX sub-account ID",
             "required": true,
             "schema": {
               "type": "string",
@@ -21194,7 +21198,7 @@
           {
             "name": "subAccountId",
             "in": "path",
-            "description": "Engage Voice sub-account id",
+            "description": "RingCX sub-account ID",
             "required": true,
             "schema": {
               "type": "string",
@@ -21365,7 +21369,7 @@
           {
             "name": "subAccountId",
             "in": "path",
-            "description": "Engage Voice sub-account id",
+            "description": "RingCX sub-account ID",
             "required": true,
             "schema": {
               "type": "string",
@@ -21558,7 +21562,7 @@
           {
             "name": "subAccountId",
             "in": "path",
-            "description": "Engage Voice sub-account id",
+            "description": "RingCX sub-account ID",
             "required": true,
             "schema": {
               "type": "string",
@@ -21729,7 +21733,7 @@
           {
             "name": "subAccountId",
             "in": "path",
-            "description": "Engage Voice sub-account id",
+            "description": "RingCX sub-account ID",
             "required": true,
             "schema": {
               "type": "string",
@@ -21763,7 +21767,7 @@
                     "interval": 60,
                     "dateTimeFrom": "03-04-2024T08:00:00",
                     "agentId": 33,
-                    "agentName": "test number, aws91-l22-engage",
+                    "agentName": "Test Agent",
                     "availDur": 3376,
                     "totWorkDur": 3376,
                     "pauseDur": 900,
@@ -35024,7 +35028,7 @@
   },
   "servers": [
     {
-      "url": "https://engage.ringcentral.com"
+      "url": "https://ringcx.ringcentral.com"
     }
   ],
   "tags": [

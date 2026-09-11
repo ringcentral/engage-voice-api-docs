@@ -79,24 +79,24 @@ The request body matches the `StartStreamRequestDTO` schema (with a nested `Audi
 
 | Parameter | Type | Requirement | Description |
 | --- | --- | --- | --- |
-| `url` | String | **Required** | Destination URL that will receive the audio stream. |
+| `url` | String | **Required** | Destination gRPC endpoint hostname and port that will receive the audio stream, for example `partner.example.com:443`. RingCX connects over TLS. |
 | `streamId` | String | **Required** | Unique identifier you assign to this stream. Use the same value when stopping the stream. |
 | `token` | String | Optional | Opaque token passed through to the media-control layer for the stream receiver. |
 | `properties.encoding` | String | Optional | Requested audio encoding. The API surface treats this as free-form; use values supported by the configured streaming profile. |
 | `properties.rate` | Integer (`int32`) | Optional | Requested sample rate in Hz. The API surface does not publish an enum; align it with the configured streaming profile. |
-| `properties.ptime` | Integer (`int32`) | Optional | Requested packetization time in milliseconds. The API surface does not publish an enum; align it with the configured streaming profile. |
+| `properties.ptime` | Integer (`int32`) | Optional | Requested packetization time in milliseconds. Use `100` unless the configured streaming profile requires a different value. |
 
 **Example Request:**
 
 ```json
 {
-  "url": "wss://media.example.com/ringcx/audio",
+  "url": "partner.example.com:443",
   "streamId": "crm-case-4472-dialog",
   "token": "receiver-auth-token",
   "properties": {
     "encoding": "PCMU",
     "rate": 8000,
-    "ptime": 20
+    "ptime": 100
   }
 }
 ```
@@ -119,12 +119,12 @@ Use segment-level streaming when only one agent leg or participant segment shoul
 
 ```json
 {
-  "url": "wss://media.example.com/ringcx/audio",
+  "url": "partner.example.com:443",
   "streamId": "qa-review-4472-agent-segment",
   "properties": {
     "encoding": "PCMU",
     "rate": 8000,
-    "ptime": 20
+    "ptime": 100
   }
 }
 ```
@@ -173,12 +173,12 @@ def start_segment_stream(token, rc_account_id, sub_account_id, dialog_id, segmen
         f"/segments/{segment_id}/streams"
     )
     body = {
-        "url": "wss://media.example.com/ringcx/audio",
+        "url": "partner.example.com:443",
         "streamId": stream_id,
         "properties": {
             "encoding": "PCMU",
             "rate": 8000,
-            "ptime": 20,
+            "ptime": 100,
         },
     }
     response = requests.post(url, headers={"Authorization": f"Bearer {token}"}, json=body)
