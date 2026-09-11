@@ -1,0 +1,290 @@
+{
+  "info": {
+    "name": "RingCentral RingCX Legacy Authentication",
+    "description": "Authentication helpers for RingCX deployments that use a legacy portal host and X-Auth-Token. Use the main RingCX Voice API collection for current deployments.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Auth-Token",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{legacy_auth_token}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Legacy authentication",
+      "description": "Choose the legacy portal host in the companion environment, configure the legacy username and password, and run requests individually in order.",
+      "item": [
+        {
+          "name": "1. Get temporary legacy auth token",
+          "id": "2af44dcc-e5a3-5269-8cff-1e03e49ded95",
+          "request": {
+            "method": "POST",
+            "auth": {
+              "type": "noauth"
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "username",
+                  "value": "{{legacy_username}}",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "{{legacy_password}}",
+                  "type": "text"
+                },
+                {
+                  "key": "stayLoggedIn",
+                  "value": "false",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{legacy_base_url}}/v1/auth/login",
+              "host": [
+                "{{legacy_base_url}}"
+              ],
+              "path": [
+                "v1",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Authenticates a user on a legacy RingCX portal and stores the returned temporary authToken as legacy_auth_token. This request does not use bearer authentication."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Legacy login succeeds', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "const body = pm.response.json();",
+                  "pm.expect(body).to.have.property('authToken');",
+                  "pm.environment.set('legacy_auth_token', String(body.authToken));"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "2. Create permanent legacy API token",
+          "id": "97198d72-b385-57b8-8d79-bd118a73c445",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{legacy_base_url}}/v1/admin/token",
+              "host": [
+                "{{legacy_base_url}}"
+              ],
+              "path": [
+                "v1",
+                "admin",
+                "token"
+              ]
+            },
+            "description": "Creates a permanent API token for the authenticated legacy user and stores it as legacy_api_token. Each successful run creates another token."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Legacy API token creation succeeds', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "const token = pm.response.text().trim();",
+                  "pm.expect(token).to.not.equal('');",
+                  "pm.environment.set('legacy_api_token', token);"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "3. List legacy API tokens",
+          "id": "1f62c8fe-4263-5c70-a16f-2f14ce7cb384",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{legacy_base_url}}/v1/admin/token",
+              "host": [
+                "{{legacy_base_url}}"
+              ],
+              "path": [
+                "v1",
+                "admin",
+                "token"
+              ]
+            },
+            "description": "Lists permanent API tokens owned by the authenticated legacy user."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Legacy API token list succeeds', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "4. Test permanent legacy API token",
+          "id": "5b8c98a8-d42a-5bc1-acab-32ef1557879e",
+          "request": {
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-Auth-Token",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{legacy_api_token}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{legacy_base_url}}/v1/admin/users",
+              "host": [
+                "{{legacy_base_url}}"
+              ],
+              "path": [
+                "v1",
+                "admin",
+                "users"
+              ]
+            },
+            "description": "Calls a legacy API with legacy_api_token in the X-Auth-Token header. The user must have permission to retrieve users."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Permanent legacy API token is accepted', function () {",
+                  "  pm.response.to.have.status(200);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        },
+        {
+          "name": "5. Delete selected legacy API token",
+          "id": "76a622f8-6bb0-5b1e-a4a8-4353533f345b",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{legacy_base_url}}/v1/admin/token/{{legacy_api_token_to_delete}}",
+              "host": [
+                "{{legacy_base_url}}"
+              ],
+              "path": [
+                "v1",
+                "admin",
+                "token",
+                "{{legacy_api_token_to_delete}}"
+              ]
+            },
+            "description": "Deletes only the token entered in legacy_api_token_to_delete. The value is blank by default to prevent an unintended deletion."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Legacy API token deletion succeeds', function () {",
+                  "  pm.expect(pm.response.code).to.be.oneOf([200, 204]);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "response": []
+        }
+      ]
+    }
+  ]
+}

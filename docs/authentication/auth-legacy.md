@@ -2,6 +2,8 @@
 
 Use this authentication method only for legacy deployments that use the legacy portal hosts. For current RingCX accounts with RingCentral / RingEX login, use the default [RingCentral token exchange flow](auth-ringcentral.md).
 
+To run this workflow in Postman, import the [Legacy Authentication Collection and environment](../postman.md#legacy-authentication-in-postman). The companion collection uses `X-Auth-Token` and does not inherit the bearer authentication configured by the current RingCX collection.
+
 To generate an API token, use your own login or create an "API User" specifically to own the API tokens your integration needs. If multiple integrations require different rights, create separate API users with the correct permissions. If multiple integrations require the same rights, you can create one or more API tokens for the same user and distribute a unique token to each service.
 
 !!! info "What URLs to use when accessing the legacy RingCX API"

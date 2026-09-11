@@ -10103,6 +10103,11 @@
         "scheme": "bearer",
         "type": "http"
       },
+      "XAuthToken": {
+        "in": "header",
+        "name": "X-Auth-Token",
+        "type": "apiKey"
+      },
       "apiKey": {
         "in": "header",
         "name": "apiKey",
@@ -11025,7 +11030,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/voice/api/v1/admin/auditLogs/search": {
@@ -11060,7 +11070,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/voice/api/v1/admin/accounts/{accountId}/agentGroups": {
@@ -19282,7 +19297,7 @@
     },
     "/voice/api/v1/admin/token": {
       "get": {
-        "description": "Permissions: Authenticated User",
+        "description": "Permissions: Authenticated User. Authenticate with a current RingCX bearer token or a legacy X-Auth-Token.",
         "operationId": "getApiTokensForLoggedInUser",
         "responses": {
           "200": {
@@ -19313,19 +19328,16 @@
             "BearerAuth": []
           },
           {
-            "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
+            "XAuthToken": []
           }
         ],
-        "summary": "Retrieves all Api Tokens for AuthenticatedUser",
+        "summary": "List permanent API tokens",
         "tags": [
-          "Legacy Auth"
+          "API Tokens"
         ]
       },
       "post": {
-        "description": "Permissions: Authenticated User",
+        "description": "Permissions: Authenticated User. Authenticate with a current RingCX bearer token or a legacy X-Auth-Token. Each successful request creates a permanent API token.",
         "operationId": "createApiTokenForLoggedInUser",
         "responses": {
           "200": {
@@ -19356,21 +19368,18 @@
             "BearerAuth": []
           },
           {
-            "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
+            "XAuthToken": []
           }
         ],
-        "summary": "Creates a new 'Api Token' based AuthenticatedUser that does not expire",
+        "summary": "Create a permanent API token",
         "tags": [
-          "Legacy Auth"
+          "API Tokens"
         ]
       }
     },
     "/voice/api/v1/admin/token/{token}": {
       "delete": {
-        "description": "Permissions: Anonymous User",
+        "description": "Permissions: Authenticated User. Authenticate with a current RingCX bearer token or a legacy X-Auth-Token. The token identified in the path is revoked.",
         "operationId": "removeApiToken",
         "parameters": [
           {
@@ -19409,15 +19418,12 @@
             "BearerAuth": []
           },
           {
-            "BearerAuth": []
-          },
-          {
-            "BearerAuth": []
+            "XAuthToken": []
           }
         ],
-        "summary": "Removes an api token",
+        "summary": "Delete a permanent API token",
         "tags": [
-          "Legacy Auth"
+          "API Tokens"
         ]
       }
     },
@@ -19620,11 +19626,7 @@
             "description": "Not Found"
           }
         },
-        "security": [
-          {
-            "BearerAuth": []
-          }
-        ]
+        "security": []
       }
     },
     "/voice/api/integration/v1/admin/users/{mainAccountId}": {
@@ -19662,24 +19664,24 @@
                   {
                     "rcUserId": 1009,
                     "userId": 3289,
-                    "engageUserName": "jane.doe+wfo1@ringcentral.com",
-                    "userName": "jane.doe+wfo1+eo1@ringcentral.com",
-                    "email": "jane.doe@ringcentral.com",
+                    "engageUserName": "jane.doe+ringcx@example.com",
+                    "userName": "jane.doe+ringcx-voice@example.com",
+                    "email": "jane.doe@example.com",
                     "firstName": "Jane",
                     "lastName": "Doe",
                     "parentPath": "2181.2979.2983.3064",
-                    "envID": "eo1"
+                    "envID": "production"
                   },
                   {
                     "rcUserId": 1010,
                     "userId": 3290,
-                    "engageUserName": "joe.doe+wfo1@ringcentral.com",
-                    "userName": "joe.doe+wfo1+eo1@ringcentral.com",
-                    "email": "joe.doe@ringcentral.com",
+                    "engageUserName": "joe.doe+ringcx@example.com",
+                    "userName": "joe.doe+ringcx-voice@example.com",
+                    "email": "joe.doe@example.com",
                     "firstName": "Joe",
                     "lastName": "Doe",
                     "parentPath": "2181.2979.2983.3064",
-                    "envID": "eo1"
+                    "envID": "production"
                   }
                 ]
               }
@@ -19949,9 +19951,9 @@
                       "agentGroupId": 30,
                       "firstName": "Jane",
                       "lastName": "Doe",
-                      "engageUserName": "jane.doe+wfo1@ringcentral.com",
-                      "userName": "jane.doe+wfo1+eo1@ringcentral.com",
-                      "email": "jane.doe@ringcentral.com",
+                      "engageUserName": "jane.doe+ringcx@example.com",
+                      "userName": "jane.doe+ringcx-voice@example.com",
+                      "email": "jane.doe@example.com",
                       "agentType": "SUPERVISOR",
                       "isActive": true,
                       "supervisorAgentIds": [
@@ -19962,7 +19964,7 @@
                         1386804,
                         1386905
                       ],
-                      "envID": "eo1"
+                      "envID": "production"
                     },
                     {
                       "rcUserId": 1010,
@@ -19970,16 +19972,16 @@
                       "agentGroupId": 30,
                       "firstName": "Joe",
                       "lastName": "Doe",
-                      "userName": "Joe.D+15910001_172+eo1@c1.local",
-                      "engageUserName": "Joe.D+15910001_172@c1.local",
-                      "email": "joe.d@ringcentral.com",
+                      "userName": "joe.doe+ringcx-voice@example.com",
+                      "engageUserName": "joe.doe+ringcx@example.com",
+                      "email": "joe.doe@example.com",
                       "agentType": "AGENT",
                       "isActive": true,
                       "supervisorAgentIds": [
                         1386605
                       ],
                       "superviseeAgentIds": [],
-                      "envID": "eo1"
+                      "envID": "production"
                     }
                   ]
                 }
@@ -20559,8 +20561,8 @@
                     "callType": "INBOUND",
                     "channelType": "VOICE",
                     "channelClass": "VOICE",
-                    "ani": "2098886424",
-                    "dnis": "9072901055",
+                    "ani": "12025550100",
+                    "dnis": "12025550101",
                     "agentId": null,
                     "agentFullName": null,
                     "productType": 3,
@@ -20743,14 +20745,14 @@
                           "message": "I cannot transfer number porting",
                           "participantId": "d-6555aa00cd0df30007872d38-6555aa00cd0df30007872d37",
                           "participantType": "contact",
-                          "rcUserId": "665127314",
+                          "rcUserId": "100000001",
                           "timestamp": "1721651880000"
                         },
                         {
                           "message": "Can you provide your RC account? And describe the steps you met?",
                           "participantId": "d-6555b45ccd0df30007872dd2-1700115548459-18bd6d7301135",
                           "participantType": "agent",
-                          "rcUserId": "665127314",
+                          "rcUserId": "100000001",
                           "timestamp": "1721651881000"
                         }
                       ]
@@ -20868,7 +20870,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
       }
     },
     "/voice/api/v1/summary/accounts/{subAccountId}/segments/{segmentId}/agent": {
@@ -21596,7 +21603,7 @@
                     "interval": 60,
                     "dateTimeFrom": "03-04-2024T05:00:00",
                     "agentId": 1,
-                    "agentName": "aws93-l13-las01 test number",
+                    "agentName": "Test Agent",
                     "queue": 5682,
                     "queueName": "Queue",
                     "talkingIxnDur": 56,
@@ -21608,9 +21615,9 @@
                     "interval": 60,
                     "dateTimeFrom": "03-04-2024T06:00:00",
                     "agentId": 10693,
-                    "agentName": "Neringa Norkute",
+                    "agentName": "Sample Agent",
                     "queue": 5688,
-                    "queueName": "Neringa queue 2",
+                    "queueName": "Support Queue 2",
                     "talkingIxnDur": 137,
                     "wrapUpDur": 5,
                     "answIxnCnt": 2,
@@ -21782,7 +21789,7 @@
                     "interval": 60,
                     "dateTimeFrom": "03-04-2024T09:00:00",
                     "agentId": 132598,
-                    "agentName": "kaduk, alena",
+                    "agentName": "Sample Agent 2",
                     "availDur": 117,
                     "totWorkDur": 117,
                     "pauseDur": 0,
@@ -35069,8 +35076,12 @@
       "description": "Manage campaign leads, lead search, and lead actions."
     },
     {
+      "name": "API Tokens",
+      "description": "Create, list, and revoke permanent API tokens."
+    },
+    {
       "name": "Legacy Auth",
-      "description": "Authenticate against legacy RingCX deployments."
+      "description": "Authenticate legacy RingCX portal deployments with X-Auth-Token."
     },
     {
       "name": "Outbound",
@@ -35314,6 +35325,7 @@
         "Token",
         "OAuth",
         "RingCentral Auth",
+        "API Tokens",
         "Legacy Auth"
       ]
     },

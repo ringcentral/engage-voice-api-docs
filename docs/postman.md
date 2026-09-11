@@ -1,70 +1,94 @@
 # Using Postman to test RingCX APIs
 
-For easy testing using [Postman](https://www.getpostman.com/), RingCentral provides a Postman 2.0 Collection for RingCX. It is based on the RingCentral RingCX OpenAPI 3.0 Specification. While Postman can import an OpenAPI 3.0 Specification directly, RingCentral recommends using the Collection as it provides better authorization handling using Postman variables and environments as recommended by Postman.
+RingCentral provides a Postman Collection generated from the public RingCX OpenAPI specification. The collection includes the public API operations, JWT-based authentication requests, account identifier discovery, reusable environment variables, and available response examples.
 
 The files are available here:
 
-* [Postman 2.0 Collection](https://raw.githubusercontent.com/ringcentral/engage-voice-api-docs/master/specs/engage-voice_postman2.json)
-* [OpenAPI 3.0 Specification](https://raw.githubusercontent.com/ringcentral/engage-voice-api-docs/master/specs/engage-voice_openapi3.json)
+* [Postman Collection v2.1](https://raw.githubusercontent.com/ringcentral/engage-voice-api-docs/main/specs/engage-voice_postman2.json)
+* [Postman Environment template](https://raw.githubusercontent.com/ringcentral/engage-voice-api-docs/main/specs/ringcx_postman_environment.json)
+* [Legacy Authentication Collection v2.1](https://raw.githubusercontent.com/ringcentral/engage-voice-api-docs/main/specs/engage-voice_legacy_auth_postman2.json)
+* [Legacy Authentication Environment template](https://raw.githubusercontent.com/ringcentral/engage-voice-api-docs/main/specs/ringcx_legacy_postman_environment.json)
+* [OpenAPI 3.0 Specification](https://raw.githubusercontent.com/ringcentral/engage-voice-api-docs/main/specs/engage-voice_openapi3.json)
 
-This document describes how to install and use the Postman 2.0 Collection.
+## Prerequisites
 
-## Pre-Requisites
+Before using the collection, you need:
 
-!!! primary "Note for Legacy Systems"
-    Legacy systems [described here](authentication/index.md) and legacy password authentication are not supported with
-    this Postman Collection. If you have such a need, please [make a request here](https://github.com/ringcentral/engage-voice-api-docs/issues).
+* A production RingCentral account linked to your RingCX account.
+* A RingCentral application configured for JWT authentication.
+* The application's client ID and client secret.
+* A JWT credential for a user who has access to the required RingCX accounts and APIs.
 
-This Postman spec is designed for following environment:
+See [Authenticating with RingCentral](authentication/auth-ringcentral.md) for application setup and authentication details.
 
-* Current RingCentral RingCX account located at: https://ringcx.ringcentral.com. See [here for more information on current and legacy systems](authentication/index.md).
-* RingCentral RingCX user linked to RingEX user for single sign-on. RingEX users should use RingCentral password authentication, not SAML-based single sign-on.
-* RingCentral app created at https://developers.ringcentral.com with OAuth 2.0 Password Credentials flow enabled.
+!!! primary "Legacy authentication"
+    The main collection uses the current RingCentral JWT and RingCX token exchange flow. Deployments that use a legacy portal host should use the separate [Legacy Authentication Collection](#legacy-authentication-in-postman), which sends `X-Auth-Token` instead of bearer authentication.
 
-## Using Postman
+## Import the collection and environment
 
-Using Postman once you have your pre-requisites consists of a few steps:
+1. In Postman, select **Import**.
+2. Import the [Postman Collection v2.1](https://raw.githubusercontent.com/ringcentral/engage-voice-api-docs/main/specs/engage-voice_postman2.json) from its URL.
+3. Import the [Postman Environment template](https://raw.githubusercontent.com/ringcentral/engage-voice-api-docs/main/specs/ringcx_postman_environment.json) from its URL.
+4. Select **RingCX Voice API Environment** as the active environment.
 
-2. Importing the Postman Collection
-1. Configuring Your Postman Environment
-3. Making an API call
+The environment template does not contain credentials, tokens, or account identifiers.
 
-### Importing the Postman Collection
+## Configure the environment
 
-Use the following steps to import the RingCX Postman collection.
-
-1. In the upper left corner of the Postman application click the "Import" button.
-2. Click the "Import from Link" tab.
-3. Paste in the following URL where it says "Enter a URL and press import": [`https://raw.githubusercontent.com/ringcentral/engage-voice-api-docs/master/specs/engage-voice_postman2.json`](https://raw.githubusercontent.com/ringcentral/engage-voice-api-docs/master/specs/engage-voice_postman2.json)
-4. Click the "Import" button.
-
-## Configuring Your Postman Environment
-
-The Postman Collection uses environment variables for authentication and authorization. Fill out the following for your environment:
-
-1. In Postman, create an environment by clicking the Gear icon for "Management Environments" in the upper right corner. This will bring up a list of existing environments.
-2. Click "Add" to create a new environment.
-3. Choose a name of your choice.
-4. Enter your environment variables as described below.
-5. Click the "Add" button to finish adding this environment.
+Set the following environment values:
 
 | Variable | Description |
-|------|-------------|
-| **`RINGCENTRAL_CLIENT_ID`** | App's OAuth 2.0 Client ID |
-| **`RINGCENTRAL_CLIENT_SECRET`** | App's OAuth 2.0 client secret. |
-| **`RINGCENTRAL_USERNAME`** | RingCentral username |
-| **`RINGCENTRAL_EXTENSION`** | RingCentral user's extension number. |
-| **`RINGCENTRAL_PASSWORD`** | RingCentral user's password. This must use RingCentral password authentication, not SSO, for this Postman spec. |
+| --- | --- |
+| `RINGCENTRAL_CLIENT_ID` | Client ID for the RingCentral application. |
+| `RINGCENTRAL_CLIENT_SECRET` | Client secret for the RingCentral application. |
+| `RINGCENTRAL_JWT` | JWT credential for the RingCentral user. |
 
-### Making an API call
+The base URLs are preconfigured. The authentication and setup requests populate these values:
 
-To test the Postman collection, let's call the "Get Users" API.
+| Variable | Description |
+| --- | --- |
+| `rco_access_token` | RingCentral access token used for the RingCX token exchange and RingCentral account lookup. |
+| `ringcx_bearer_token` | RingCX access token used by the API requests. |
+| `rcx_sub_account_id` | RingCX sub-account ID. |
+| `rcx_main_account_id` | RingCX main account ID. |
+| `rc_account_uid` | RingCentral account UID used by CX integration APIs. |
 
-1. In the Environments pick list in the upper right corner, select the environment you just created.
-1. In the left hand navigation menu, select "Auth" > "Fetch access token"
-1. Click the "Send" button, which loads a token in the window. You do not need to do anything with this token.
-1. Navigate to "Users" > "Users" > "Get users" and click "Send".
+## Authenticate and discover account IDs
+
+Open **Auth and setup** and run the requests in order:
+
+1. **Get RingCentral access token** authenticates with the configured JWT.
+2. **Exchange for RingCX access token** obtains the RingCX token used by the collection.
+3. **Get RingCX account IDs** stores the first available RingCX sub-account and main account IDs.
+4. **Get RingCentral account UID** stores the RingCentral account UID used by CX integration APIs.
+
+The RingCX token exchange is limited to five requests per minute. RingCX access tokens are valid for five minutes and are not refreshed automatically. If an API request returns `401 Unauthorized`, run the first two authentication requests again and retry the API request.
+
+If the accounts response contains multiple RingCX sub-accounts, review the response and set `rcx_sub_account_id` and `rcx_main_account_id` to the account your integration will use.
+
+## Send an API request
+
+API requests are grouped by the same product areas and API tags used in the API Reference. Select an individual request, provide any remaining path variables or request-body values, and select **Send**.
+
+!!! warning
+    Do not use Postman's **Run collection** command against a production account. The collection includes operations that create, update, log out, and delete RingCX resources.
+
+Optional query parameters are included but disabled by default. Enable only the parameters required by your request.
+
+## Legacy authentication in Postman
+
+Legacy deployments use a different base URL, URL structure, and authorization header. Their authentication workflow is kept in a separate collection so its `X-Auth-Token` configuration cannot be confused with the bearer token used by current RingCX APIs.
+
+1. Import the [Legacy Authentication Collection v2.1](https://raw.githubusercontent.com/ringcentral/engage-voice-api-docs/main/specs/engage-voice_legacy_auth_postman2.json).
+2. Import and select the [Legacy Authentication Environment template](https://raw.githubusercontent.com/ringcentral/engage-voice-api-docs/main/specs/ringcx_legacy_postman_environment.json).
+3. Set `legacy_base_url` to the legacy portal root for your deployment, without a trailing slash: `https://portal.vacd.biz/api` or `https://portal.virtualacd.biz/api`.
+4. Set `legacy_username` and `legacy_password`.
+5. Run **Get temporary legacy auth token**. The test script saves the returned `authToken` as `legacy_auth_token`.
+
+The remaining requests let you create and list permanent API tokens, test a permanent API token against the users endpoint, and delete a selected API token. Each successful create request generates another permanent token. The delete request uses the blank `legacy_api_token_to_delete` variable so you must explicitly select the token to revoke.
+
+The companion collection covers legacy authentication and token management only. Use the resulting token in the `X-Auth-Token` header when calling a supported legacy API.
 
 ## Feedback
 
-If you have any feedback on using the Postman collection, please [post to the RingCX docs GitHub repo](https://github.com/ringcentral/engage-voice-api-docs/issues).
+If you have feedback about the collection, [open an issue in the RingCX documentation repository](https://github.com/ringcentral/engage-voice-api-docs/issues).
