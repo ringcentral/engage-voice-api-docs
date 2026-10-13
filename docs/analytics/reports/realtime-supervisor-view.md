@@ -65,6 +65,8 @@ Returns a live snapshot of every agent currently logged in to the account — th
 
 Returns an array of `AgentStats` objects — one per logged-in agent session. Key fields include the agent's current `agentState` (e.g., `AVAILABLE`, `ON_CALL`, `AWAY`, `WRAP_UP`), `stateTime` in seconds, live call identifiers (`callUii`, `callAni`, `callDnis`), and session counters (`callsHandled`, `totalTalkTime`) that reset on logout.
 
+Use `agentId`, `agentGroupId`, and `loginTime` when building supervisor automations that monitor agent session duration. After confirming an agent is not handling an active interaction, use the [Log Out Agent](../../users/agents/agents.md#log-out-an-agent) endpoint to end the session.
+
 ??? info "View Full AgentStats Schema"
 
     **Identity & Assignment**

@@ -11,6 +11,7 @@ Agents are RingCX users who can log in to handle inbound queues, outbound campai
 | Create agent | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents` |
 | Update agents in an agent group | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents` |
 | Update one agent | `PUT https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}` |
+| Log out an agent | `POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/logout` |
 | Delete agent | `DELETE https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}` |
 
 ## SDK Setup
@@ -704,6 +705,108 @@ Use these endpoints to find IDs referenced by agent configuration.
 | Dial groups | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/dialGroups/withChildren` |
 | Queue groups and queues | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/gateGroups/withChildren` |
 | Agent access to a queue | `GET https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/gateGroups/{gateGroupId}/gates/{gateId}` |
+
+## Log Out an Agent
+
+Use this endpoint to log out a currently logged-in agent. Supervisor and workforce automations can use it after identifying stale or overlong sessions.
+
+Before logging out an agent, confirm that the agent is not handling an active interaction. The [Real-Time Supervisor View API](../../analytics/reports/realtime-supervisor-view.md#agent-states) returns each logged-in agent's current state, `loginTime`, `agentGroupId`, and `agentId`.
+
+=== "HTTP"
+
+    ```http
+    POST https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/logout
+    Authorization: Bearer <ringcxAccessToken>
+    ```
+
+=== "Python"
+
+    ```python
+    import requests
+
+    account_id = "<accountId>"
+    agent_group_id = "<agentGroupId>"
+    agent_id = "<agentId>"
+    access_token = "<ringcxAccessToken>"
+
+    response = requests.post(
+        f"https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/{account_id}/agentGroups/{agent_group_id}/agents/{agent_id}/logout",
+        headers={"Authorization": f"Bearer {access_token}"},
+    )
+    response.raise_for_status()
+    print(response.json())
+    ```
+
+=== "JavaScript"
+
+    ```javascript
+    const accountId = "<accountId>";
+    const agentGroupId = "<agentGroupId>";
+    const agentId = "<agentId>";
+    const accessToken = "<ringcxAccessToken>";
+
+    const response = await fetch(
+      `https://ringcx.ringcentral.com/voice/api/v1/admin/accounts/${accountId}/agentGroups/${agentGroupId}/agents/${agentId}/logout`,
+      {
+        method: "POST",
+        headers: { Authorization: `Bearer ${accessToken}` }
+      }
+    );
+
+    if (!response.ok) throw new Error(await response.text());
+    console.log(await response.json());
+    ```
+
+=== "JavaScript SDK"
+
+    ```javascript
+    const EngageVoice = require("ringcentral-engage-voice-client").default;
+    require("dotenv").config();
+
+    async function main() {
+      const ev = new EngageVoice({
+        clientId: process.env.RC_CLIENT_ID,
+        clientSecret: process.env.RC_CLIENT_SECRET
+      });
+
+      await ev.authorize({ jwt: process.env.RC_JWT });
+
+      const result = await ev.post(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/logout"
+      );
+
+      console.log(result.data);
+    }
+
+    main().catch(console.error);
+    ```
+
+=== "Python SDK"
+
+    ```python
+    import os
+    from dotenv import load_dotenv
+    from ringcentral_engage_voice import RingCentralEngageVoice
+
+    load_dotenv()
+
+    ev = RingCentralEngageVoice(
+        os.environ["RC_CLIENT_ID"],
+        os.environ["RC_CLIENT_SECRET"],
+    )
+    ev.authorize(jwt=os.environ["RC_JWT"])
+
+    response = ev.post(
+        "/api/v1/admin/accounts/{accountId}/agentGroups/{agentGroupId}/agents/{agentId}/logout"
+    )
+    print(response.json())
+    ```
+
+??? example "Response example"
+
+    ```json
+    true
+    ```
 
 ## Delete an Agent
 
