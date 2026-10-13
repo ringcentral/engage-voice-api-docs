@@ -61,4 +61,15 @@ Routing components are comprised of a lot of configuration settings. Creating th
       </ul>
     </div>
   </div>
+
+  <div class="card" style="width: 18rem;">
+    <div class="card-body pt-0 pb-0">
+      <h5 class="card-title">Audio Files</h5>
+      <h6 class="card-subtitle mb-2 text-muted">Audio Files API</h6>
+      <p class="card-text">Manage account-level audio files used by queue prompts, IVR audio, hold music, and whisper audio.</p>
+      <ul class="pl-0 ml-4">
+      <li><a href="./audio-files/" class="card-link">Manage Audio Files</a></li>
+      </ul>
+    </div>
+  </div>
 </div>
