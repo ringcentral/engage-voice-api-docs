@@ -200,6 +200,8 @@ Tags a finished or in-progress call with a preconfigured disposition code and re
 | `callBackDTS` | String | Optional | Required when `callback=true`. Callback date and time formatted as `yyyyMMddHHmmss`. |
 | `notes` | String | Optional | Free-text notes attached to the disposition record. |
 
+For archived call notes and outbound campaign pass notes, see [Agent Disposition Notes](../agent-disposition-notes.md).
+
 ---
 
 ## Terminating an Active Call
