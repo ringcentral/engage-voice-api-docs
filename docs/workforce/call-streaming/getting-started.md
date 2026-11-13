@@ -354,6 +354,8 @@ SegmentMedia  (caller)  (audio chunks, repeated)
 SegmentStart  (agent)   (agent joins)
 SegmentMedia  (caller)  (chunks continue, interleaved)
 SegmentMedia  (agent)
+SegmentInfo   (caller)  (caller is placed on hold) 
+SegmentInfo   (caller)  (caller is taken off hold) 
 SegmentStop   (agent)   (agent leaves)
 SegmentMedia  (caller)
 SegmentStop   (caller)  (call ends)
@@ -380,7 +382,7 @@ Putting it together, here is what happens when a streamed call takes place:
 3. RingCX opens a TLS gRPC connection to the third-party server endpoint and sends a `DialogInit` message.
 4. Each participant joining the call triggers a `SegmentStart` message.
 5. During the call, audio is delivered as a continuous flow of `SegmentMedia` messages.
-6. Optional segment metadata is delivered with `SegmentInfo`.
+6. Optional segment metadata is delivered with `SegmentInfo`. Currently `SegmentInfo` supports `event` types of `HOLD` and `UNHOLD`. In future this may be extended with additional `event` types.
 7. As participants leave, `SegmentStop` messages are sent for each participant.
 8. When the workflow reaches the Stop Stream node, or when the call ends, the gRPC stream closes.
 
