@@ -103,7 +103,7 @@ Although a developer may disconnect their bot at any time, it is expected that t
 
 ### Bot Disconnect with Intent
 
-<img class="img-fluid" width="330" src="../images/bot-disconnect-with-intent-diagram.png">
+<img class="img-fluid" width="720" src="../images/bot-disconnect-with-intent-diagram.png">
 
 Some IVA vendors will provide the Intent when IVA disconnects the call.  In such scenarios, BYE sent from IVA has the Intent as X-Bot-Result. The X-Bot-Result header supports JSON encoded payload. The Intent sent in BYE should be the final one and final property is set to true in the JSON payload
 
