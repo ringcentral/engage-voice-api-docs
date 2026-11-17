@@ -101,6 +101,14 @@ When providing a final intent, JSON ‘final’ property is expected to be set t
 
 Although a developer may disconnect their bot at any time, it is expected that the disconnection will be initiated by RingCentral, after final intent is received from bot. A simple BYE request is used to disconnect the bot.
 
+### Bot Disconnect with Intent
+
+<img class="img-fluid" width="330" src="../images/bot-disconnect-with-intent-diagram.png">
+
+Some IVA vendors will provide the Intent when IVA disconnects the call.  In such scenarios, BYE sent from IVA has the Intent as X-Bot-Result. The X-Bot-Result header supports JSON encoded payload. The Intent sent in BYE should be the final one and final property is set to true in the JSON payload
+
+RingCentral handles this case as normal Intent detection and IVA disconnect.
+
 ## Connection Reuse
 
 With TCP or TLS transport, RingCX establishes the connection toward the 3rd-party bot destination, and an INVITE message is sent over that establishes the connection. In this case, RingCX does not expect (and does not support) receiving SIP messages (neither responses to the INVITE nor in-dialog requests) on the provided address specified in Contact header. Instead, any SIP message from the bot is expected to be sent to RingCX over the established TCP/TLS connection.
